@@ -25,7 +25,7 @@
 					<th>Category</th>
 					<th>Views</th>
 					<th>Author</th>
-					{{-- <th>Create Date</th> --}}
+					<th>Create Date</th>
 					<th>Publish Date</th>
 				</tr>
 			</thead>
@@ -36,10 +36,15 @@
 						<td>{{ $archive->category->name }}</td>
 						<td>{{ $archive->views }}</td>
 						<td>
+							{{ $archive->user->profile->first_name }} {{ $archive->user->profile->last_name }}
 							{{-- @include('common.authorFormat', ['model'=>$archive, 'field'=>'user']) --}}
+						</td>
+						<td>
+							{{ $archive->created_at->format('M d, Y') }}
 						</td>
 						{{-- <td>@include('common.dateFormat', ['model'=>$archive, 'field'=>'created_at'])</td> --}}
 						<td>
+							{{ $archive->published_at->format('M d, Y') }}
 							{{-- @include('common.dateFormat', ['model'=>$archive, 'field'=>'published_at']) --}}
 						</td>
 					</tr>

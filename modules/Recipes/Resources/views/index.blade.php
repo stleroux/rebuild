@@ -13,6 +13,7 @@
 @endsection
 
 @section('content')
+Test
 {{-- 	<form style="display:inline;">
 		{!! csrf_field() !!} --}}
 		
