@@ -1,0 +1,1 @@
+SHOW PERMISSION {{ $permission->name }}

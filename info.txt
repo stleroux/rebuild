@@ -1,0 +1,48 @@
+https://packagist.org/packages/artem-schander/l5-modular
+https://github.com/orangehill/iseed
+
+https://laravelcollective.com/docs/master/html
+composer require "laravelcollective/html":"^5.4.0"
+
+// Use migration to rename a column in db
+composer require doctrine/dbal
+
+// Email or Username login
+https://tutsforweb.com/laravel-auth-login-email-username-one-field/
+
+// Sortable table columns
+composer require kyslik/column-sortable:5.7.*
+
+
+Loading helpers:
+==============================================================
+my initial thought was the composer autoload as well, but it didn't feel very Laravel 5ish to me. L5 makes heavy use of Service Providers, they are what bootstraps your application.
+
+To start off I created a folder in my app directory called Helpers. Then within the Helpers folder I added files for functions I wanted to add. Having a folder with multiple files allows us to avoid one big file that gets too long and unmanageable.
+
+Next I created a HelperServiceProvider.php by running the artisan command:
+
+artisan make:provider HelperServiceProvider
+Within the register method I added this snippet
+
+public function register()
+{
+    foreach (glob(app_path().'/Helpers/*.php') as $filename){
+        require_once($filename);
+    }
+}
+lastly register the service provider in your config/app.php in the providers array
+
+'providers' => [
+    'App\Providers\HelperServiceProvider',
+]
+now any file in your Helpers directory is loaded, and ready for use.
+
+
+
+
+Favoritable
+https://github.com/ChristianKuri/laravel-favorite
+
+Cache settings for database table
+https://stackoverflow.com/questions/32824781/laravel-load-settings-from-database

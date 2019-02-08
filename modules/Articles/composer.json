@@ -1,0 +1,25 @@
+{
+    "name": "nwidart/articles",
+    "description": "",
+    "authors": [
+        {
+            "name": "Stephane Leroux",
+            "email": "stleroux@hotmail.ca"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Articles\\Providers\\ArticlesServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Articles\\": ""
+        }
+    }
+}

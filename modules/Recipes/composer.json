@@ -1,0 +1,25 @@
+{
+    "name": "nwidart/recipes",
+    "description": "",
+    "authors": [
+        {
+            "name": "Stephane Leroux",
+            "email": "stleroux@hotmail.ca"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Recipes\\Providers\\RecipesServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Recipes\\": ""
+        }
+    }
+}

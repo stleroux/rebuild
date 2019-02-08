@@ -1,0 +1,90 @@
+body {
+   background-image: url('../images/recipes.jpg');
+   background-repeat: no-repeat;
+   background-size: 100% 100%;
+   background-attachment: fixed;
+}
+
+.navbar_background {
+   background-image: url('../images/6.jpg');
+   background-color: red;
+   background-repeat: no-repeat;
+   background-size: 100% 100%;
+   background-attachment: fixed;
+   font-weight: bold;
+}
+
+/* Card Headers */
+.card_header {
+   /*background-image: url("../images/1.jpg");*/
+   /*background-color: yellow;*/
+   color: white;
+   padding-top: 8px;
+   padding-bottom: 8px;
+   padding-left: 10px;
+   padding-right: 10px;
+}
+
+/* Card Bodies */
+.card_body {
+   /*background-image: url('../images/14.jpg');*/
+   /*background-repeat: no-repeat;*/
+   /*background-color: green;*/
+   background-size: 100% 100%;
+   background-attachment: fixed;
+   color: light;
+   padding-top: 8px;
+   padding-bottom: 8px;
+   padding-left: 10px;
+   padding-right: 10px;
+   /*font-weight: 400;*/
+}
+
+/* Level 2 Card Headers */
+.card_header_2 {
+   /*background-image: url("../images/10.jpg");*/
+   /*background-color: blue;*/
+   color: yellow;
+   padding-top: 8px;
+   padding-bottom: 8px;
+   padding-left: 10px;
+   padding-right: 10px;
+   /*background-repeat: no-repeat;*/
+   background-size: 100% 100%;
+   /*background-attachment: fixed;*/
+}
+
+
+
+/* Block Headers */
+.block_header { 
+   /*background-image: url("../images/birch.jpg");*/
+   background-color: purple;
+   font-weight: bolder;
+   color: white;
+   padding-top: 8px;
+   padding-bottom: 8px;
+   padding-left: 10px;
+   background-repeat: no-repeat;
+   background-size: 100% 100%;
+   background-attachment: fixed;
+}
+
+.table-hover tbody tr:hover, .table-hover tbody tr:hover th {
+   /*background-image: url("../images/9.jpg");*/
+   /*background-color: gray;*/
+   background-repeat: no-repeat;
+   background-size: 100% 100%;
+   /*background-color: #003366;*/
+   color: white;
+}
+
+.table thead {
+   /*background-image: url("../images/11.jpg");*/
+   /*background-color: indigo;*/
+   background-repeat: no-repeat;
+   background-size: 100% 100%;
+   /*background-color: #003366;*/
+   color: white;
+}
+
