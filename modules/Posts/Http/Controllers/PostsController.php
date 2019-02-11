@@ -84,7 +84,7 @@ class PostsController extends Controller
 # ██║  ██║██╔══╝  ██║     ██╔══╝     ██║   ██╔══╝  
 # ██████╔╝███████╗███████╗███████╗   ██║   ███████╗
 # ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝
-// Mass Delete selected rows - all selected records
+// 
 ##################################################################################################################
 	public function delete($id)
 	{
@@ -697,7 +697,6 @@ class PostsController extends Controller
 		Post::destroy($checked);
 
 		Session::flash('success','The posts were trashed successfully.');
-		// return redirect()->route($ref);
 		return redirect()->route('posts.'. Session::get('pageName'));
 	}
 

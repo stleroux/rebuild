@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section ('stylesheets')
-   {{ Html::style('css/woodbarn.css') }}
+   {{-- {{ Html::style('css/woodbarn.css') }} --}}
 @stop 
 
 @section('left_column')
@@ -35,7 +35,7 @@
                                  <div class="col-md-3">
                                     <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
                                        <label for="first_name" class="required">First Name</label>
-                                       <input id="first_name" type="text" class="form-control form-control-sm" name="first_name" value="{{ $user->profile->first_name }}">
+                                       <input id="first_name" type="text" class="form-control form-control-sm" autofocus="autofocus" name="first_name" value="{{ $user->profile->first_name }}">
                                        @if ($errors->has('first_name'))
                                           <span class="text-danger small">
                                              {{ $errors->first('first_name') }}
@@ -66,7 +66,7 @@
                                  <div class="col-sm-3">
                                     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                        {{ Form::label('email', 'Email Address', ['class'=>'required']) }}
-                                       {{ Form::text('email', null, ['class' => 'form-control form-control-sm', 'autofocus']) }}
+                                       {{ Form::text('email', null, ['class' => 'form-control form-control-sm']) }}
                                        @if ($errors->has('email'))
                                           <span class="text-danger small">{{ $errors->first('email') }}</span>
                                        @endif

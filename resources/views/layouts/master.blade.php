@@ -14,7 +14,8 @@
 	{{-- Removed above because it interferes with DataTable --}}
 	{{-- <script src='https:https://cloud.tinymce.com/stable/tinymce.min.js'></script> --}}
 
-	
+	<link rel="stylesheet" href="/css/jquery.datetimepicker.min.css">
+
 	<!-- Font Awesome -->
 	{{-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous"> --}}
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
@@ -64,6 +65,17 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	
 	@yield('scripts')
+
+	<script type="text/javascript" src="/js/jquery.datetimepicker.full.min.js"></script>  
+	<script>
+		$("#datePicker").datetimepicker({
+			step: 30,
+			showOn: 'button',
+			buttonImage: '',
+			buttonImageOnly: true,
+			format:'Y-m-d H:i'+':00'
+		});
+	</script>
 	<script>
 		$(document).ready( function () {
 			$('#datatable').DataTable(
@@ -120,6 +132,7 @@
 	<script>
 		tinymce.init({
 			selector: '.simple',
+			toolbar_items_size : 'small',
 			branding: false,
 			menubar: false,
 			plugins: [

@@ -1,9 +1,8 @@
 {{-- Requires Model name --}}
 
-
 @if (Auth::check())
 
-	@if (Auth::user()->profile->author_format == 1)
+	@if(setting('authorFormat') == "username")
 		@if($field == 'user')
 			<a href="" data-toggle="modal" data-target="#view{{ $field }}Modal{{ $model->id }}">{{ $model->user->username }}</a>
 		@elseif($field == 'modifiedBy')
@@ -11,16 +10,15 @@
 		@elseif($field == 'lastViewedBy')
 			<a href="" data-toggle="modal" data-target="#view{{ $field }}Modal{{ $model->id }}">{{ $model->lastViewedBy->username }}</a>
 		@endif
-	@elseif (Auth::user()->profile->author_format == 2)
+	@elseif (setting('authorFormat') == "last_name, first_name")
 		@if($field == 'user')
 			<a href="" data-toggle="modal" data-target="#view{{ $field }}Modal{{ $model->id }}">{{ $model->user->profile->last_name }}, {{ $model->user->profile->first_name }}</a>
 		@elseif($field == 'modifiedBy')
 			<a href="" data-toggle="modal" data-target="#view{{ $field }}Modal{{ $model->id }}">{{ $model->modifiedBy->profile->last_name }}, {{ $model->user->profile->first_name }}</a>
 		@elseif($field == 'lastViewedBy')
-			<a href="" data-toggle="modal" data-target="#view{{ $field }}Modal{{ $model->id }}">{{ $model->lastViewedBy->username }}profile->last_name }}, {{ $model->user->profile->first_name }}</a>
+			<a href="" data-toggle="modal" data-target="#view{{ $field }}Modal{{ $model->id }}">{{ $model->lastViewedBy->profile->last_name }}, {{ $model->user->profile->first_name }}</a>
 		@endif
-		{{-- <a href="" data-toggle="modal" data-target="#view{{ $field }}Modal{{ $model->id }}">{{ $model->user->profile->last_name }}, {{ $model->user->profile->first_name }}</a> --}}
-	@elseif (Auth::user()->profile->author_format == 3)
+	@elseif (setting('authorFormat') == "first_name last_name")
 		@if($field == 'user')
 			<a href="" data-toggle="modal" data-target="#view{{ $field }}Modal{{ $model->id }}">{{ $model->user->profile->first_name }} {{ $model->user->profile->last_name }}</a>
 		@elseif($field == 'modifiedBy')
@@ -28,10 +26,7 @@
 		@elseif($field == 'lastViewedBy')
 			<a href="" data-toggle="modal" data-target="#view{{ $field }}Modal{{ $model->id }}">{{ $model->lastViewedBy->profile->first_name }} {{ $model->user->profile->last_name }}</a>
 		@endif
-		{{-- <a href="" data-toggle="modal" data-target="#view{{ $field }}Modal{{ $model->id }}">{{ $model->user->profile->first_name }} {{ $model->user->profile->last_name }}</a> --}}
 	@endif
-
-	@include('modals.author')
 
 @else
 	{{-- Username --}}
@@ -42,7 +37,7 @@
 	@elseif($field == 'lastViewedBy')
 		{{ $model->lastViewedBy->username }}
 	@endif
-
 	
 @endif
 
+@include('modals.author')

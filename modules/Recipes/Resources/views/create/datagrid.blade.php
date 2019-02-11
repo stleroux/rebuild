@@ -1,16 +1,17 @@
-<div class="panel panel-primary">
-	<div class="panel-heading">
-		<h3 class="panel-title">
-			<i class="fa fa-plus-square" aria-hidden="true"></i>
-			{{-- <i class="fa fa-file-text-o" aria-hidden="true"></i> --}}
-			Create Recipe
-		</h3>
+<div class="card mb-3">
+	<div class="card-header">
+		<i class="fa fa-plus-square"></i>
+		Create Recipe
+      <span class="float-right">
+         <a href="{{ route('recipes.'. Session::get('pageName')) }}" class="btn btn-sm btn-outline-secondary px-1 py-0">
+            <i class="fas fa-angle-double-left"></i>
+            Cancel
+         </a>
+         {{ Form::submit('Save', ['class'=>'btn btn-sm btn-success px-1 py-0']) }}
+      </span>
 	</div>
-	<div class="panel-body">
-		
-
-<div class="row">
-
+	<div class="card-body">
+		<div class="row">
             <!-- Title -->
             <div class="col-xs-12 col-sm-12 col-md-6">
                <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}" >
@@ -33,7 +34,13 @@
             <div class="col-xs-12 col-sm-6 col-md-3">
                <div class="form-group {{ $errors->has('published_at') ? 'has-error' : '' }}">
                   {{ Form::label('published_at', 'Publish(ed) On') }}
-                  {{ Form::text('published_at', null, ['class'=>'form-control required', 'id'=>'datetime']) }}
+                  {{-- {{ Form::text('published_at', null, ['class'=>'form-control required', 'id'=>'datepicker']) }} --}}
+                  <div class="input-group">
+                     <input type="text" name="published_at" class="form-control required" id="datePicker" />
+                     <div class="input-group-append">
+                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                     </div>
+                  </div>
                   <span class="text-danger">{{ $errors->first('published_at') }}</span>
                </div>
             </div>
@@ -59,7 +66,7 @@
             <!-- Servings -->
             <div class="col-xs-6 col-md-3 col-lg-2">
                <div class="form-group {{ $errors->has('servings') ? 'has-error' : '' }}" >
-                  {!! Form::label("servings", "Servings") !!}
+                  {{ Form::label("servings", "Servings", ['class'=>'required']) }}
                   {{ Form::number ('servings', null, array('class' => 'form-control')) }}
                   <span class="text-danger">{{ $errors->first('servings') }}</span>
                </div>
@@ -68,7 +75,7 @@
             <!-- Prep Time -->
             <div class="col-xs-6 col-md-3 col-lg-2">
                <div class="form-group {{ $errors->has('prep_time') ? 'has-error' : '' }}" >
-                  {!! Form::label("prep_time", "Prep Time") !!}
+                  {{ Form::label("prep_time", "Prep Time", ['class'=>'required']) }}
                   {{ Form::number ('prep_time', null, array('class' => 'form-control', 'placeholder'=>'minutes')) }}
                   <span class="text-danger">{{ $errors->first('prep_time') }}</span>
                </div>
@@ -77,7 +84,7 @@
             <!-- Cook Time -->
             <div class="col-xs-6 col-md-3 col-lg-2">
                <div class="form-group {{ $errors->has('cook_time') ? 'has-error' : '' }}" >
-                  {!! Form::label("cook_time", "Cook Time") !!}
+                  {{ Form::label("cook_time", "Cook Time", ['class'=>'required']) }}
                   {{ Form::number ('cook_time', null, array('class' => 'form-control', 'placeholder'=>'minutes')) }}
                   <span class="text-danger">{{ $errors->first('cook_time') }}</span>
                </div>
@@ -121,8 +128,5 @@
                {{ Form::file('image', ['class'=>'form-control']) }}
             </div>
          </div>
-
-
-		
 	</div>
 </div>

@@ -14,7 +14,10 @@
 
 @section('content')
    {!! Form::open(['route' => 'recipes.store', 'files'=>'true']) !!}
-      <input type="hidden" value="{{ $ref }}" name="ref" size="50"/>
-      @include('recipes::create.datagrid1')
+      @include('recipes::create.datagrid')
    {!! Form::close() !!}
+@endsection
+
+@section('scripts')
+
 @endsection

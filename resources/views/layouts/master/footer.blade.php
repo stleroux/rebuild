@@ -30,9 +30,11 @@
 		</div>
 		<div class="row">
 			<div class="col-sm-12 small">
-				<p class="text-center mb-0"><a href="{{ route('terms') }}">Terms &amp; Conditions</a> | <a href="{{ route('privacy') }}">Privacy Policy</a>
-				<br />
-				Copyright &copy; TheWoodBarn.ca 2018</p>
+				<p class="text-center mb-0">
+					<a href="{{ route('terms') }}">Terms &amp; Conditions</a> | <a href="{{ route('privacy') }}">Privacy Policy</a>
+					<br />
+					Copyright &copy; TheWoodBarn.ca 2018
+				</p>
 			</div>
 		</div>
 	</div>

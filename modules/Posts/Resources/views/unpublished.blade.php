@@ -130,7 +130,7 @@
                         </tbody>
                      </table>
                   @else
-                     NO RECORDS FOUND
+                     {{ setting('no_records_found') }}
                   @endif
                </div>
             </div>

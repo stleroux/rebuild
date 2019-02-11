@@ -6,14 +6,14 @@ namespace Modules\Recipes\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
+// use Illuminate\Routing\Controller;
+use App\Http\Controllers\Controller; // Required for validation
 use Modules\Recipes\Entities\Recipe;
 use Illuminate\Support\Facades\Input;
 
 use App\Category;
 use App\Comment;
 use App\Module;
-// use App\Recipe;
 use App\User;
 use Carbon\Carbon;
 use Auth;
@@ -31,10 +31,9 @@ use Storage;
 use Table;
 use URL;
 
-
-// use App\Http\Requests\CreateRecipeRequest;
-// use App\Http\Requests\UpdateRecipeRequest;
-// use App\Http\Requests\CreateCommentRequest;
+use Modules\Recipes\Http\Requests\CreateRecipeRequest;
+use Modules\Recipes\Http\Requests\UpdateRecipeRequest;
+use App\Http\Requests\CreateCommentRequest;
 
 class RecipesController extends Controller
 {
@@ -76,23 +75,20 @@ class RecipesController extends Controller
 			->where('published_at', '<=', Carbon::now())
 			->groupBy('year')->groupBy('month')->orderBy('year', 'desc')->orderBy('month', 'desc')->get();
 
-		// Save the URL in a varibale so it can be used in the blog.single page to redirect the user to the archives list page
-		//Session::flash('backUrl', Request::fullUrl());
-      // Set the variable so we can use a button in other pages to come back to this page
-      //Session::flash('archiveURL', \Request::fullUrl());
-      Session::put('archiveURL', \Request::fullUrl());
-      //Session::put('archiveURL', Route::currentRouteName());
+		// Set the variable so we can use a button in other pages to come back to this page
+      Session::put('pageName', 'archive');
+
 		return view('recipes::archive', compact('archives','year','month','recipelinks'));
 	}
 
 
 ##################################################################################################################
-#  █████╗ ██████╗ ██████╗     ███████╗ █████╗ ██╗   ██╗ ██████╗ ██████╗ ██╗████████╗███████╗
-# ██╔══██╗██╔══██╗██╔══██╗    ██╔════╝██╔══██╗██║   ██║██╔═══██╗██╔══██╗██║╚══██╔══╝██╔════╝
-# ███████║██║  ██║██║  ██║    █████╗  ███████║██║   ██║██║   ██║██████╔╝██║   ██║   █████╗  
-# ██╔══██║██║  ██║██║  ██║    ██╔══╝  ██╔══██║╚██╗ ██╔╝██║   ██║██╔══██╗██║   ██║   ██╔══╝  
-# ██║  ██║██████╔╝██████╔╝    ██║     ██║  ██║ ╚████╔╝ ╚██████╔╝██║  ██║██║   ██║   ███████╗
-# ╚═╝  ╚═╝╚═════╝ ╚═════╝     ╚═╝     ╚═╝  ╚═╝  ╚═══╝   ╚═════╝ ╚═╝  ╚═╝╚═╝   ╚═╝   ╚══════╝
+# ███████╗ █████╗ ██╗   ██╗ ██████╗ ██████╗ ██╗████████╗███████╗     █████╗ ██████╗ ██████╗ 
+# ██╔════╝██╔══██╗██║   ██║██╔═══██╗██╔══██╗██║╚══██╔══╝██╔════╝    ██╔══██╗██╔══██╗██╔══██╗
+# █████╗  ███████║██║   ██║██║   ██║██████╔╝██║   ██║   █████╗      ███████║██║  ██║██║  ██║
+# ██╔══╝  ██╔══██║╚██╗ ██╔╝██║   ██║██╔══██╗██║   ██║   ██╔══╝      ██╔══██║██║  ██║██║  ██║
+# ██║     ██║  ██║ ╚████╔╝ ╚██████╔╝██║  ██║██║   ██║   ███████╗    ██║  ██║██████╔╝██████╔╝
+# ╚═╝     ╚═╝  ╚═╝  ╚═══╝   ╚═════╝ ╚═╝  ╚═╝╚═╝   ╚═╝   ╚══════╝    ╚═╝  ╚═╝╚═════╝ ╚═════╝ 
 ##################################################################################################################
 	public function addFavorite($id)
 	{
@@ -103,6 +99,31 @@ class RecipesController extends Controller
 		//return redirect()->route('recipes.myFavorites','all');
 		return redirect()->route('recipes.show', $id);
 	}
+
+
+##################################################################################################################
+# ███████╗ █████╗ ██╗   ██╗ ██████╗ ██████╗ ██╗████████╗███████╗    ██████╗ ███████╗███╗   ███╗ ██████╗ ██╗   ██╗███████╗
+# ██╔════╝██╔══██╗██║   ██║██╔═══██╗██╔══██╗██║╚══██╔══╝██╔════╝    ██╔══██╗██╔════╝████╗ ████║██╔═══██╗██║   ██║██╔════╝
+# █████╗  ███████║██║   ██║██║   ██║██████╔╝██║   ██║   █████╗      ██████╔╝█████╗  ██╔████╔██║██║   ██║██║   ██║█████╗  
+# ██╔══╝  ██╔══██║╚██╗ ██╔╝██║   ██║██╔══██╗██║   ██║   ██╔══╝      ██╔══██╗██╔══╝  ██║╚██╔╝██║██║   ██║╚██╗ ██╔╝██╔══╝  
+# ██║     ██║  ██║ ╚████╔╝ ╚██████╔╝██║  ██║██║   ██║   ███████╗    ██║  ██║███████╗██║ ╚═╝ ██║╚██████╔╝ ╚████╔╝ ███████╗
+# ╚═╝     ╚═╝  ╚═╝  ╚═══╝   ╚═════╝ ╚═╝  ╚═╝╚═╝   ╚═╝   ╚══════╝    ╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝ ╚═════╝   ╚═══╝  ╚══════╝
+##################################################################################################################
+   public function removeFavorite($id)
+   {
+      // $user = Auth::user()->id;
+      // $recipe = Recipe::find($id);
+
+      // $recipe->favorites()->detach($user);
+
+      $recipe = Recipe::find($id);
+      $recipe->removeFavorite();
+
+      Session::flash ('success','The recipe was successfully removed to your Favorites list!');
+      // return redirect()->route('recipes.index','all');
+      //return redirect()->route('recipes.myFavorites','all');
+      return redirect()->route('recipes.show', $id);
+   }
 
 
 ##################################################################################################################
@@ -120,9 +141,6 @@ class RecipesController extends Controller
       //     return view('errors.403');
       // }
 
-      // Pass along the ROUTE value of the previous page
-      $ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
-
       // find all categories in the categories table and pass them to the view
       $categories = Category::whereHas('module', function ($query) {
          $query->where('name', '=', 'recipes');
@@ -136,7 +154,7 @@ class RecipesController extends Controller
          $cats[$category->id] = $category->name;
       }
 
-      return view('recipes::create')->withCategories($cats)->withRef($ref);
+      return view('recipes::create')->withCategories($cats);
    }
 
 
@@ -151,8 +169,8 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function deleteAll(Request $request)
    {
-      // Pass along the ROUTE value of the previous page
-      $ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
+      // Set the variable so we can use a button in other pages to come back to this page
+      Session::put('pageName', '');
 
       //dd('TEST_DELETE');
       $this->validate($request, [
@@ -211,8 +229,8 @@ class RecipesController extends Controller
       //     return view('errors.403');
       // }
 
-      // Pass along the ROUTE value of the previous page
-      $ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
+      // Set the variable so we can use a button in other pages to come back to this page
+      Session::put('pageName', '');
 
       $recipe = Recipe::findOrFail($id);
          $recipe->published_at = Null;
@@ -311,8 +329,8 @@ class RecipesController extends Controller
       //  return view('errors.403');
       //}
 
-      // Pass along the ROUTE value of the previous page
-      $ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
+      // Set the variable so we can use a button in other pages to come back to this page
+      Session::put('pageName', '');
 
       $recipe = Recipe::find($id);
         $newRecipe = $recipe->replicate();
@@ -347,10 +365,6 @@ class RecipesController extends Controller
       //     return view('errors.403');
       // }
 
-      // Pass along the ROUTE value of the previous page
-      //$ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
-      //Session::put('fullURL', \Request::fullUrl());
-
       // Find the article to edit
       $recipe = Recipe::findOrFail($id);
 
@@ -367,7 +381,6 @@ class RecipesController extends Controller
       }
 
       return view('recipes.edit', compact('recipe'))->withCategories($cats);
-      //->withRef($ref);
    }
 
 
@@ -385,6 +398,9 @@ class RecipesController extends Controller
       // if(!checkACL('guest')) {
       //     return view('errors.403');
       // }
+
+      // Set the variable so we can use a button in other pages to come back to this page
+      Session::put('pageName', 'future');
 
       //$alphas = range('A', 'Z');
       $alphas = DB::table('recipes')
@@ -515,7 +531,7 @@ class RecipesController extends Controller
 		// }
 
       // Set the variable so we can use a button in other pages to come back to this page
-      Session::put('backURL', Route::currentRouteName());
+      Session::put('pageName', 'index');
 
 		// Get list of recips by year and month
 		$recipelinks = DB::table('recipes')
@@ -529,35 +545,11 @@ class RecipesController extends Controller
 			->where('published_at', '<', Carbon::now())
 			->orderBy('letter')
 			->get();
-			//dd($alphas);
 
 		$letters = [];
 		foreach($alphas as $alpha) {
 			$letters[] = $alpha->letter;
 		}
-		//dd($letters);
-
-		// if ($key == 'all') {
-		// 	// Display all the user's recipes plus the one from other users that are not marked as personal/private
-		// 	$recipes = Recipe::with('user','category')->published()
-		// 	// ->where('personal','!=',1)
-		// 	// ->where('published','>=', $pub)
-		// 	->orderBy('title', 'asc')
-		// 	->get();
-		
-		// 	return view('recipes.index', compact('recipes','letters'));
-		// }
-
-		// if ($key != 'all') {
-		// 	$recipes = Recipe::with('user','category')->published()
-		// 		// ->where('personal', '!=', 1)
-		// 		// ->where('published','>=', $pub)
-		// 		->where('title', 'like', $key . '%')
-		// 		->orderBy('title', 'asc')
-		// 		->get();
-		
-		// 	return view('recipes.index', compact('recipes','letters'));
-		// }
 
 		// If $key value is passed
 		if ($key) {
@@ -565,31 +557,17 @@ class RecipesController extends Controller
 				->published()
 				->where('title', 'like', $key . '%')
 				->orderBy('title', 'asc')
-            // ->get();
 				->paginate(18);
 		} else {
    		// No $key value is passed
    		$recipes = Recipe::with('user','category')
    			->published()
    			->orderBy('title', 'asc')
-   			// ->get();
             ->paginate(18);
       }
 		
       return view('recipes::index', compact('recipes','letters','recipelinks'));
 
-		// } else {
-		//   if ($key == 'all') {
-		//     // Display all the user's recipes that are not marked as personal/private
-		//     $recipes = Recipe::where('personal','!=',1)->orderBy('title', 'asc')->get();
-		//     return view('recipes.index')->withRecipes($recipes);
-		//   }
-
-		//   if ($key != 'all') {
-		//     $recipes = Recipe::where('personal', '!=', 1)->where('title', 'like', $key . '%')->get();
-		//     return view('recipes.index')->withRecipes($recipes);
-		//   }
-		// }
 	}
 
 
@@ -603,12 +581,6 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function makePrivate($id)
    {
-      // Pass along the ROUTE value of the previous page
-      //$ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
-      // Set the variable so we can use a button in other pages to come back to this page
-      //Session::put('backURL', Route::currentRouteName());
-      //Session::put('fullURL', \Request::fullUrl());
-
       $recipe = Recipe::find($id);
          $recipe->personal = 1;
       $recipe->save();
@@ -617,8 +589,31 @@ class RecipesController extends Controller
       //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") MADE recipe (" . $recipe->id . ") PRIVATE \r\n", [json_decode($recipe, true)]);
 
       Session::flash('success','The recipe was successfully made private');
-      //return redirect()->route($ref);
-      return redirect()->route('recipes.show', $id);
+      return redirect()->route('recipes.'. Session::get('pageName'));
+   }
+
+
+##################################################################################################################
+# ███╗   ███╗ █████╗ ██╗  ██╗███████╗    ██████╗ ██╗   ██╗██████╗ ██╗     ██╗ ██████╗
+# ████╗ ████║██╔══██╗██║ ██╔╝██╔════╝    ██╔══██╗██║   ██║██╔══██╗██║     ██║██╔════╝
+# ██╔████╔██║███████║█████╔╝ █████╗      ██████╔╝██║   ██║██████╔╝██║     ██║██║     
+# ██║╚██╔╝██║██╔══██║██╔═██╗ ██╔══╝      ██╔═══╝ ██║   ██║██╔══██╗██║     ██║██║     
+# ██║ ╚═╝ ██║██║  ██║██║  ██╗███████╗    ██║     ╚██████╔╝██████╔╝███████╗██║╚██████╗
+# ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝    ╚═╝      ╚═════╝ ╚═════╝ ╚══════╝╚═╝ ╚═════╝
+##################################################################################################################
+   public function makePublic($id)
+   {
+      $recipe = Recipe::find($id);
+         $recipe->personal = 0;
+      $recipe->save();
+
+      // Save entry to log file using built-in Monolog
+      //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") REMOVE PRIVATE from recipe (" . $recipe->id . ")\r\n", 
+      //    [json_decode($recipe, true)]
+      //);
+
+      Session::flash('success','The recipe was successfully made public');
+      return redirect()->route('recipes.'. Session::get('pageName'));
    }
 
 
@@ -654,7 +649,7 @@ class RecipesController extends Controller
 	public function myRecipes($key=null)
 	{
       // Set the variable so we can use a button in other pages to come back to this page
-      Session::put('backURL', Route::currentRouteName());
+      Session::put('pageName', 'myRecipes');
 
 		if (Auth::check()) {
 			$alphas = DB::table('recipes')
@@ -706,7 +701,7 @@ class RecipesController extends Controller
       // }
 
       // Set the variable so we can use a button in other pages to come back to this page
-      Session::put('backURL', Route::currentRouteName());
+      Session::put('pageName', 'newRecipes');
 
       //$alphas = range('A', 'Z');
       $alphas = DB::table('recipes')
@@ -822,18 +817,12 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function publish($id)
    {
-      // Pass along the ROUTE value of the previous page
-      //$ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
-      Session::put('fullURL', \Request::fullUrl());
-
-
       $recipe = Recipe::find($id);
         $recipe->published_at = Carbon::now();
         $recipe->deleted_at = Null;
       $recipe->save();
 
       Session::flash ('success','The recipe was successfully published.');
-      //return redirect()->route($ref);
       return redirect()->route('recipes.show', $id);
    }
 
@@ -891,6 +880,9 @@ class RecipesController extends Controller
       //     return view('errors.403');
       // }
 
+      // Set the variable so we can use a button in other pages to come back to this page
+      Session::put('pageName', 'published');
+
       //$alphas = range('A', 'Z');
         $alphas = DB::table('recipes')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
@@ -922,60 +914,6 @@ class RecipesController extends Controller
       }
 
       return view('recipes::published', compact('recipes','letters','recipelinks'));
-   }
-
-
-##################################################################################################################
-# ██████╗ ███████╗███╗   ███╗ ██████╗ ██╗   ██╗███████╗    ███████╗ █████╗ ██╗   ██╗ ██████╗ ██████╗ ██╗████████╗███████╗
-# ██╔══██╗██╔════╝████╗ ████║██╔═══██╗██║   ██║██╔════╝    ██╔════╝██╔══██╗██║   ██║██╔═══██╗██╔══██╗██║╚══██╔══╝██╔════╝
-# ██████╔╝█████╗  ██╔████╔██║██║   ██║██║   ██║█████╗      █████╗  ███████║██║   ██║██║   ██║██████╔╝██║   ██║   █████╗  
-# ██╔══██╗██╔══╝  ██║╚██╔╝██║██║   ██║╚██╗ ██╔╝██╔══╝      ██╔══╝  ██╔══██║╚██╗ ██╔╝██║   ██║██╔══██╗██║   ██║   ██╔══╝  
-# ██║  ██║███████╗██║ ╚═╝ ██║╚██████╔╝ ╚████╔╝ ███████╗    ██║     ██║  ██║ ╚████╔╝ ╚██████╔╝██║  ██║██║   ██║   ███████╗
-# ╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝ ╚═════╝   ╚═══╝  ╚══════╝    ╚═╝     ╚═╝  ╚═╝  ╚═══╝   ╚═════╝ ╚═╝  ╚═╝╚═╝   ╚═╝   ╚══════╝
-##################################################################################################################
-	public function removeFavorite($id)
-	{
-		// $user = Auth::user()->id;
-		// $recipe = Recipe::find($id);
-
-		// $recipe->favorites()->detach($user);
-
-      $recipe = Recipe::find($id);
-      $recipe->removeFavorite();
-
-		Session::flash ('success','The recipe was successfully removed to your Favorites list!');
-		// return redirect()->route('recipes.index','all');
-		//return redirect()->route('recipes.myFavorites','all');
-		return redirect()->route('recipes.show', $id);
-	}
-
-
-##################################################################################################################
-# ██████╗ ███████╗███╗   ███╗ ██████╗ ██╗   ██╗███████╗    ██████╗ ██████╗ ██╗██╗   ██╗ █████╗ ████████╗███████╗
-# ██╔══██╗██╔════╝████╗ ████║██╔═══██╗██║   ██║██╔════╝    ██╔══██╗██╔══██╗██║██║   ██║██╔══██╗╚══██╔══╝██╔════╝
-# ██████╔╝█████╗  ██╔████╔██║██║   ██║██║   ██║█████╗      ██████╔╝██████╔╝██║██║   ██║███████║   ██║   █████╗  
-# ██╔══██╗██╔══╝  ██║╚██╔╝██║██║   ██║╚██╗ ██╔╝██╔══╝      ██╔═══╝ ██╔══██╗██║╚██╗ ██╔╝██╔══██║   ██║   ██╔══╝  
-# ██║  ██║███████╗██║ ╚═╝ ██║╚██████╔╝ ╚████╔╝ ███████╗    ██║     ██║  ██║██║ ╚████╔╝ ██║  ██║   ██║   ███████╗
-# ╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝ ╚═════╝   ╚═══╝  ╚══════╝    ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝  ╚═╝  ╚═╝   ╚═╝   ╚══════╝
-##################################################################################################################
-   public function removePrivate($id)
-   {
-      // Pass along the ROUTE value of the previous page
-      //$ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
-      Session::put('fullURL', \Request::fullUrl());
-
-      $recipe = Recipe::find($id);
-         $recipe->personal = 0;
-      $recipe->save();
-
-      // Save entry to log file using built-in Monolog
-      //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") REMOVE PRIVATE from recipe (" . $recipe->id . ")\r\n", 
-      //    [json_decode($recipe, true)]
-      //);
-
-      Session::flash('success','The recipe was successfully removed from private');
-      //return redirect()->route($ref);
-      return redirect()->route('recipes.show', $id);
    }
 
 
@@ -1017,7 +955,6 @@ class RecipesController extends Controller
    public function restore($id)
    {
       $recipe = Recipe::withTrashed()->findOrFail($id);
-
       //$article->deleted_at = NULL;
       //$article->save();
       $recipe->restore();
@@ -1124,8 +1061,8 @@ class RecipesController extends Controller
 # ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝
 // Store a newly created resource in storage
 ##################################################################################################################
-   // public function store(CreateRecipeRequest $request)
-   public function store(Request $request)
+   public function store(CreateRecipeRequest $request)
+   // public function store(Request $request)
    {
       // if(!checkACL('author')) {
       //     return view('errors.403');
@@ -1150,6 +1087,16 @@ class RecipesController extends Controller
          $recipe->last_viewed_by_id = Auth::user()->id;
          $recipe->last_viewed_on = Carbon::Now();
          $recipe->user_id = Auth::user()->id;
+
+         // Save the image if there is one
+         if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('_recipes/' . $filename);
+            Image::make($image)->resize(800, 400)->save($location);
+            $recipe->image = $filename;
+         }
+
       $recipe->save();
 
       // Save entry to log file using built-in Monolog
@@ -1157,7 +1104,7 @@ class RecipesController extends Controller
       //);
 
       Session::flash('success','The article has been created successfully!');
-      return redirect()->route($request->ref);
+      return redirect()->route('recipes.index');
    }
 
 
@@ -1229,19 +1176,20 @@ class RecipesController extends Controller
    public function trashAll(Request $request)
    {
       // Pass along the ROUTE value of the previous page
-      $ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
+      // $ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
 
       $this->validate($request, [
          'checked' => 'required',
       ]);
 
       $checked = $request->input('checked');
-      //dd($checked);
+      // dd($checked);
 
       Recipe::destroy($checked);
 
       Session::flash('success','The recipes were trashed successfully.');
-      return redirect()->route($ref);
+      return redirect()->route('recipes.'. Session::get('pageName'));
+
    }
 
 

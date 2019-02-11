@@ -61,18 +61,19 @@
                            
                            @auth
                               <div class="card-text p-0 m-0">
-                                 <div class="text-center">
-                                    {{-- @if($recipe->user_id === Auth::user()->id) --}}
+                                 <div class="text-center pb-1">
                                     <a href="{{ route('recipes.edit', $recipe->id) }}" class="btn btn-sm btn-outline-secondary p-0 m-0 col-2" title="Edit">
                                        <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="{{ route('recipes.makePrivate', $recipe->id) }}" class="btn btn-sm btn-outline-secondary p-0 m-0 col-2" title="Make Private">
-                                       <i class="far fa-eye-slash"></i>
-                                    </a>
-                                    <a href="{{ route('recipes.removePrivate', $recipe->id) }}" class="btn btn-sm btn-outline-secondary p-0 m-0 col-2" title="Make Public">
-                                       <i class="far fa-eye"></i>
-                                    </a>
-                                    {{-- @endif --}}
+                                    @if($recipe->personal == 0)
+                                       <a href="{{ route('recipes.makePrivate', $recipe->id) }}" class="btn btn-sm btn-outline-secondary p-0 m-0 col-2" title="Make Private">
+                                          <i class="far fa-eye-slash"></i>
+                                       </a>
+                                    @else
+                                       <a href="{{ route('recipes.makePublic', $recipe->id) }}" class="btn btn-sm btn-outline-secondary p-0 m-0 col-2" title="Make Public">
+                                          <i class="far fa-eye"></i>
+                                       </a>
+                                    @endif
                                  </div>
                               </div>
                            @endauth

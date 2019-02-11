@@ -36,23 +36,26 @@
 
 			@if($recipes->count() > 0)
 				<div class="text-center py-2">
-					<a href="{{ route('recipes.published') }}" class="{{ Request::is('recipes/published') ? "btn-secondary": "btn-primary" }} btn btn-sm">All</a>
+					<a href="{{ route('recipes.published') }}" class="{{ Request::is('recipes/published') ? "btn-secondary": "btn-primary" }} btn btn-sm px-1 py-0">All</a>
 					@foreach($letters as $value)
-						<a href="{{ route('recipes.published', $value) }}" class="{{ Request::is('recipes/published/'.$value) ? "btn-secondary": "btn-primary" }} btn btn-sm">{{ strtoupper($value) }}</a>
+						<a href="{{ route('recipes.published', $value) }}" class="{{ Request::is('recipes/published/'.$value) ? "btn-secondary": "btn-primary" }} btn btn-sm px-1 py-0">{{ strtoupper($value) }}</a>
 					@endforeach
 				</div>
 			@endif
 
 			@include('recipes::published.help')
 
-			 <div class="card-body card_body px-1 py-2">
-            @if($recipes->count() > 0)
-               @include('recipes::datagrid')
-            @else
+			@if($recipes->count() > 0)
+				<div class="card-body card_body px-1 py-0">
+					@include('recipes::table')
+				</div>
+			@else
+				<div class="card-body card_body">
                {{ setting('no_records_found') }}
-            @endif
-         </div>
+              </div>
+			@endif
 		</div>
+
 	</form>
 
-@stop
+@endsection

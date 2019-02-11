@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section ('stylesheets')
-   {{ Html::style('css/woodbarn.css') }}
+   {{-- {{ Html::style('css/woodbarn.css') }} --}}
 @stop 
 
 @section('left_column')
@@ -28,7 +28,7 @@
 					<div class="col-xs-12 col-sm-4">
 						<div class="form-group{{ $errors->has('current-password') ? ' has-error' : '' }}">
 							<label for="current-password" class="required">Current Password</label>
-								<input id="current-password" type="password" class="form-control form-control-sm" name="current-password">
+								<input id="current-password" type="password" class="form-control form-control-sm" name="current-password" autofocus="autofocus">
 								{{-- @if ($errors->has('current-password')) --}}
 									{{-- <span class="text-danger">
 										<strong>{{ $errors->first('current-password') }}</strong>

@@ -79,7 +79,7 @@ Route::group(['prefix' => 'recipes'], function()
    Route::post('deleteAll',               'RecipesController@deleteAll')            ->name('recipes.deleteAll');
 
    Route::get('{id}/addFavorite',         'RecipesController@addFavorite')          ->name('recipes.addFavorite');
-   Route::get('{id}/removeFavorite',      'RecipesController@removeFavorite')       ->name('recipes.removeFavorite');
+   Route::get('{id}/makePublic',          'RecipesController@makePublic')           ->name('recipes.makePublic');
    Route::get('{id}/makePrivate',         'RecipesController@makePrivate')          ->name('recipes.makePrivate');
    Route::get('{id}/removePrivate',       'RecipesController@removePrivate')        ->name('recipes.removePrivate');
    Route::get('{id}/duplicate',           'RecipesController@duplicate')            ->name('recipes.duplicate');

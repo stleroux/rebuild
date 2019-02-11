@@ -17,14 +17,14 @@
 					<tbody>
 						@foreach($recipe->comments as $comment)
 							<tr>
-								<td class="col-sm-2">
-									{{-- @include('common.authorFormat', ['model'=>$comment, 'field'=>'user']) --}}
-									{{ $comment->user->profile->first_name }} {{ $comment->user->profile->last_name }}
+								<td>
+									@include('common.authorFormat', ['model'=>$comment, 'field'=>'user'])
+									{{-- {{ $comment->user->profile->first_name }} {{ $comment->user->profile->last_name }} --}}
 								</td>
 								<td>{{ $comment->comment }}</td>
 								<td class="col-sm-2">
-									{{-- @include('common.dateFormat', ['model'=>$comment, 'field'=>'created_at']) --}}
-									{{ $comment->created_at->format('M d, Y') }}
+									@include('common.dateFormat', ['model'=>$comment, 'field'=>'created_at'])
+									{{-- {{ $comment->created_at->format('M d, Y') }} --}}
 								</td>
 							</tr>
 						@endforeach

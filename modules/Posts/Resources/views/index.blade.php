@@ -99,11 +99,11 @@
 											<td>{{ $post->id }}</td>
 											<td>{{ $post->title }}</td>
 											<td>{{ $post->category->name }}</td>
-											<td>{{ $post->user->username }}</td>
-											<td>{{ $post->created_at->format('M d, Y') }}</td>
+											<td>@include('common.authorFormat', ['model'=>$post, 'field'=>'user'])</td>
+											<td>@include('common.dateFormat', ['model'=>$post, 'field'=>'created_at'])</td>
 											<td>
-												{{ $post->published_at ? $post->published_at->format('M d Y') : '' }}
-												{{-- {{ $post->updated_at->format('M d Y') ?? '' }} --}}
+												{{-- {{ $post->published_at ? $post->published_at->format('M d Y') : '' }} --}}
+												@include('common.dateFormat', ['model'=>$post, 'field'=>'published_at'])
 												{{-- {{ date('M d Y', strtotime($post->published_at) ?? 'N/A')  }} --}}
 												{{-- {{ \Carbon\Carbon::parse($post->published_at)->format('M d Y')}} --}}
 											</td>
@@ -139,7 +139,7 @@
 								</tbody>
 							</table>
 						@else
-							NO RECORDS FOUND
+							{{ setting('no_records_found') }}
 						@endif
 					</div>
 				</div>

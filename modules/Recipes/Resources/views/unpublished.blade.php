@@ -40,13 +40,15 @@
 
          @include('recipes::unpublished.help')
          
-         <div class="card-body card_body px-1 py-2">
-            @if($recipes->count() > 0)
-               @include('recipes::datagrid')
-            @else
+         @if($recipes->count() > 0)
+            <div class="card-body card_body px-1 py-0">
+               @include('recipes::table')
+            </div>
+         @else
+            <div class="card-body card_body">
                {{ setting('no_records_found') }}
-            @endif
-         </div>
+              </div>
+         @endif
 
       </div>
    </form>

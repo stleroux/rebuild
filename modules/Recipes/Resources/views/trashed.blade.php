@@ -65,15 +65,15 @@
 			</div>
 	</form>
 			
-			
-			<div class="card-body card_body px-1 py-2">
-            @if($recipes->count() > 0)
-                  @include('recipes::datagrid')
-            @else
-               {{ setting('no_records_found') }}
-            @endif
-         </div>
-			
+			@if($recipes->count() > 0)
+				<div class="card-body card_body px-1 py-0">
+					@include('recipes::table')
+				</div>
+			@else
+				<div class="card-body card_body">
+					{{ setting('no_records_found') }}
+				</div>
+			@endif
 
 			<div class="card-footer px-1 py-0">
 				<table border="0" cellpadding="0" cellspacing="0">
