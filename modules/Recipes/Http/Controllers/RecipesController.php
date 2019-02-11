@@ -61,7 +61,7 @@ class RecipesController extends Controller
 	{
 
       // Set the variable so we can use a button in other pages to come back to this page
-      //Session::put('backURL', Route::currentRouteName());
+      Session::put('pageName', 'archive');
 
 		$archives = Recipe::with('user', 'category')->whereYear('published_at','=', $year)
 			->whereMonth('published_at','=', $month)
@@ -74,9 +74,6 @@ class RecipesController extends Controller
 			->select(DB::raw('YEAR(published_at) year, MONTH(published_at) month, MONTHNAME(published_at) month_name, COUNT(*) recipe_count'))
 			->where('published_at', '<=', Carbon::now())
 			->groupBy('year')->groupBy('month')->orderBy('year', 'desc')->orderBy('month', 'desc')->get();
-
-		// Set the variable so we can use a button in other pages to come back to this page
-      Session::put('pageName', 'archive');
 
 		return view('recipes::archive', compact('archives','year','month','recipelinks'));
 	}
@@ -589,7 +586,7 @@ class RecipesController extends Controller
       //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") MADE recipe (" . $recipe->id . ") PRIVATE \r\n", [json_decode($recipe, true)]);
 
       Session::flash('success','The recipe was successfully made private');
-      return redirect()->route('recipes.'. Session::get('pageName'));
+      return redirect()->route('recipes.'. Session::get('pageName'), $id);
    }
 
 
@@ -613,7 +610,7 @@ class RecipesController extends Controller
       //);
 
       Session::flash('success','The recipe was successfully made public');
-      return redirect()->route('recipes.'. Session::get('pageName'));
+      return redirect()->route('recipes.'. Session::get('pageName'), $id);
    }
 
 
@@ -1008,7 +1005,7 @@ class RecipesController extends Controller
       $recipe = Recipe::find($id);
 
       // Set the variable so we can use a button in other pages to come back to this page
-      Session::put('fullURL', \Request::fullUrl());
+      Session::put('pageName', 'show');
 
       // get previous recipe id
       $previous = Recipe::published()->where('id', '<', $recipe->id)->max('id');

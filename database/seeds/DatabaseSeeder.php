@@ -16,5 +16,10 @@ class DatabaseSeeder extends Seeder
         $this->call(CategoriesTableSeeder::class);
         $this->call(PermissionsTableSeeder::class);
         $this->call(PermissionUserTableSeeder::class);
+        $this->call(CommentsTableSeeder::class);
+        $this->call(FavoritesTableSeeder::class);
+        $this->call(ProfilesTableSeeder::class);
+        $this->call(SettingsTableSeeder::class);
+        $this->call(TagsTableSeeder::class);
     }
 }

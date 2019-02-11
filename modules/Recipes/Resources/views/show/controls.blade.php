@@ -136,8 +136,8 @@
 			<i class="fa fa-trash-o" aria-hidden="true"></i> Make Private
 		</a>
 		@else
-		<a href="{{ route('recipes.removePrivate', $recipe->id) }}" class="list-group-item list-group-item-action py-1 px-1 {{ Request::is('') ? 'menu_active' : '' }}">
-			<i class="fa fa-trash-o" aria-hidden="true"></i> Remove Private
+		<a href="{{ route('recipes.makePublic', $recipe->id) }}" class="list-group-item list-group-item-action py-1 px-1 {{ Request::is('') ? 'menu_active' : '' }}">
+			<i class="fa fa-trash-o" aria-hidden="true"></i> Make Public
 		</a>
 		@endif
 	{{-- @endif --}}
