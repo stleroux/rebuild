@@ -33,7 +33,7 @@
                   </button>
                   <button type="submit" class="btn btn-sm btn-outline-success px-1 py-0" name="submit" value="close">
                      <i class="far fa-save"></i>
-                     Update & Save
+                     Update & Close
                   </button>
                @endif
             </span>

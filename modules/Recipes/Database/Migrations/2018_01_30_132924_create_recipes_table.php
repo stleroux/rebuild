@@ -34,7 +34,7 @@ class CreateRecipesTable extends Migration {
 			$table->integer('last_viewed_by_id')->unsigned()->nullable()->index('last_viewed_by_id');
 			$table->dateTime('last_viewed_on')->nullable();
 			$table->dateTime('published_at')->nullable();
-			$table->datetime('deleted_at')->nullable();
+			$table->softDeletes();
 			$table->timestamps();
 		});
 	}

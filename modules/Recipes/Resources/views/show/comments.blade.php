@@ -1,28 +1,28 @@
-<div class="col-md-12">
-	<div class="card mb-2">
+<div class="col">
+	<div class="card">
 		<div class="card-header card_header_2">
 			<i class="fa fa-comments-o" aria-hidden="true"></i>
 			Comments <small>({{ $recipe->comments()->count() }} total)</small>
 		</div>
-		{{-- <div class="card-body"> --}}
-			<table class="table table-hover table-sm">
+		<div class="card-body p-0">
+			<table class="table table-hover table-sm mb-0">
 				@if($recipe->comments->count())
 					<thead>
-						<tr>
-							<th>Name</th>
-							<th>Comment</th>
-							<th>Posted On</th>
+						<tr class="d-flex">
+							<th class="col-2">Name</th>
+							<th class="col-8">Comment</th>
+							<th class="col-2">Posted On</th>
 						</tr>
 					</thead>
 					<tbody>
 						@foreach($recipe->comments as $comment)
-							<tr>
-								<td>
+							<tr class="d-flex">
+								<td class="col-2">
 									@include('common.authorFormat', ['model'=>$comment, 'field'=>'user'])
 									{{-- {{ $comment->user->profile->first_name }} {{ $comment->user->profile->last_name }} --}}
 								</td>
-								<td>{{ $comment->comment }}</td>
-								<td class="col-sm-2">
+								<td class="col-8">{{ $comment->comment }}</td>
+								<td class="col-2">
 									@include('common.dateFormat', ['model'=>$comment, 'field'=>'created_at'])
 									{{-- {{ $comment->created_at->format('M d, Y') }} --}}
 								</td>
@@ -35,6 +35,6 @@
 					</div>
 				@endif
 			</table>
-		{{-- </div> --}}
+		</div>
 	</div>
 </div>

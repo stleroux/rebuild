@@ -23,7 +23,7 @@ class CommentsTableSeeder extends Seeder
                 'user_id' => 1,
                 'comment' => 'dsds',
                 'approved' => 0,
-                'commentable_type' => 'App\\Post',
+                'commentable_type' => 'Modules\\Posts\\Entities\\Post',
                 'commentable_id' => 1,
                 'created_at' => '2019-01-27 07:50:08',
                 'updated_at' => '2019-01-27 07:50:08',
@@ -34,7 +34,7 @@ class CommentsTableSeeder extends Seeder
                 'user_id' => 2,
                 'comment' => 'dsds',
                 'approved' => 0,
-                'commentable_type' => 'App\\Recipe',
+                'commentable_type' => 'Modules\\Recipes\\Entities\\Recipe',
                 'commentable_id' => 2,
                 'created_at' => '2019-01-27 08:07:33',
                 'updated_at' => '2019-01-27 08:07:33',
@@ -71,6 +71,17 @@ class CommentsTableSeeder extends Seeder
                 'commentable_id' => 11,
                 'created_at' => '2019-02-11 06:25:52',
                 'updated_at' => '2019-02-11 06:25:52',
+            ),
+            5 => 
+            array (
+                'id' => 6,
+                'user_id' => 2,
+                'comment' => 'test test test test',
+                'approved' => 0,
+                'commentable_type' => 'Modules\\Recipes\\Entities\\Recipe',
+                'commentable_id' => 11,
+                'created_at' => '2019-02-12 12:20:40',
+                'updated_at' => '2019-02-12 12:20:40',
             ),
         ));
         

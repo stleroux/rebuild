@@ -25,6 +25,7 @@ class CreatePostsTable extends Migration
             $table->timestamps();
             $table->timestamp('published_at')->nullable();
             $table->timestamp('modified_by_id')->nullable();
+            $table->softDeletes();
 
             // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             // $table->foreign('modified_by_id')->references('id')->on('users')->onDelete('cascade');

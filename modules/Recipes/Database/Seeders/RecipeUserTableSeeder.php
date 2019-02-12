@@ -22,7 +22,7 @@ class RecipeUserTableSeeder extends Seeder
         \DB::table('recipe_user')->insert(array (
             0 => 
             array (
-                'id' => 63,
+                'id' => 1,
                 'user_id' => 2,
                 'recipe_id' => 1,
                 'created_at' => NULL,

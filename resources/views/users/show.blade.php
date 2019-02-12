@@ -35,7 +35,7 @@
          
       <div class="card my-2">
          <div class="card-header card_header">
-            Select the permissions to assign to this user
+            Display the permissions assigned to this user
             <span class="float-right">
                <span class="badge badge-primary">{{ $user->permissions->count() }}</span>
             </span>

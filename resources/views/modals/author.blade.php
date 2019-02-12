@@ -30,22 +30,22 @@
                      @if($model->user->profile->image)
                         <img src="/_profiles/{{ $model->user->profile->image }}" height="100" width="100">
                      @else
-                        <i class="fa fa-user-circle fa-5x"></i>
+                        <img src="/_profiles/no_photo.jpg" height="100" width="100">
                      @endif
                   @elseif($field == 'modifiedBy')
                      @if($model->modifiedBy->profile->image)
                         <img src="/_profiles/{{ $model->modifiedBy->profile->image }}" height="100" width="100">
                      @else
-                        <i class="fa fa-user-circle fa-5x"></i>
+                        <img src="/_profiles/no_photo.jpg" height="100" width="100">
                      @endif
                   @elseif($field == 'lastViewedBy')
                      @if($model->lastViewedBy->profile->image)
                         <img src="/_profiles/{{ $model->lastViewedBy->profile->image }}" height="100" width="100">
                      @else
-                        <i class="fa fa-user-circle fa-5x"></i>
+                        <img src="/_profiles/no_photo.jpg" height="100" width="100">
                      @endif
                   @else
-                     <i class="fa fa-user-circle fa-5x"></i>
+                     <img src="/_profiles/no_photo.jpg" height="100" width="100">
                   @endif
                </div>
             </div>

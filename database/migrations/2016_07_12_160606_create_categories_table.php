@@ -20,9 +20,9 @@ class CreateCategoriesTable extends Migration
             $table->string('value')->nullable();
             $table->text('description')->nullable();
 
-            $table->timestamps();
             $table->softDeletes();
-            
+            $table->timestamps();
+                        
             // Add foreign key in the database manually
             $table->foreign('module_id')->references('id')->on('modules')->onDelete('cascade');
         });
