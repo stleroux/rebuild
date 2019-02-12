@@ -28,20 +28,20 @@
          </div>
          
          @if($recipes->count() > 0)
-            <div class="pt-1 text-center">
-               <a href="{{ route('recipes.myRecipes') }}" class="{{ Request::is('recipes/myRecipes') ? "btn-secondary": "btn-primary" }} btn btn-sm">All</a>
+            <div class="pt-2 pb-0 text-center">
+               <a href="{{ route('recipes.myRecipes') }}" class="{{ Request::is('recipes/myRecipes') ? "btn-secondary": "btn-primary" }} btn btn-sm px-1 py-0">All</a>
                @foreach($letters as $value)
-                  <a href="{{ route('recipes.myRecipes', $value) }}" class="{{ Request::is('recipes/myRecipes/'.$value) ? "btn-secondary": "btn-primary" }} btn btn-sm">{{ strtoupper($value) }}</a>
+                  <a href="{{ route('recipes.myRecipes', $value) }}" class="{{ Request::is('recipes/myRecipes/'.$value) ? "btn-secondary": "btn-primary" }} btn btn-sm px-1 py-0">{{ strtoupper($value) }}</a>
                @endforeach
             </div>
          @endif
 
          @include('recipes::myRecipes.help')
 
-         <div class="card-body card_body px-3 py-0">
-            @if($recipes->count() > 0)
+         @if($recipes->count() > 0)
+            <div class="card-body card_body pt-0 pb-2">
                @foreach($recipes->chunk(6) as $chunk)
-                  <div class="card-deck mb-2 pb-2">
+                  <div class="card-deck mb-0 pb-0">
                      @foreach($chunk as $recipe)
                         <div class="card col-xs-12 col-sm-6 col-md-4 col-lg-2 p-0 m-2">
                            @if($recipe->image)
@@ -70,7 +70,7 @@
                                           <i class="far fa-eye-slash"></i>
                                        </a>
                                     @else
-                                       <a href="{{ route('recipes.makePublic', $recipe->id) }}" class="btn btn-sm btn-outline-secondary p-0 m-0 col-2" title="Make Public">
+                                       <a href="{{ route('recipes.makePublic', $recipe->id) }}" class="btn btn-sm btn-outline-secondary p-0 m-0 col-2 bg-warning" title="Make Public">
                                           <i class="far fa-eye"></i>
                                        </a>
                                     @endif
@@ -92,12 +92,20 @@
                      @endforeach
                   </div>
                @endforeach
-            @else
+            </div>
+
+            <div class="card-footer px-1 py-1">
+               {{-- {{ $recipes->links("pagination::bootstrap-4") }} --}}
+               {{-- {{ $recipes->links("pagination::simple-default") }} --}}
+               {{ $recipes->links() }}
+            </div>
+         @else
+            <div class="card-body card_body">
                {{ setting('no_records_found') }}
-            @endif
-         </div>
-         {!! $recipes->links() !!}
+            </div>
+         @endif
       </div>
+
    </form>
    
 @endsection

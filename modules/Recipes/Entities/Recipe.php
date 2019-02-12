@@ -73,6 +73,11 @@ class Recipe extends Model
    //    }
    // }
 
+   public function scopePublic($query)
+   {
+      return $query->where('personal', '=', 0);
+   }
+
    public function scopePublished($query)
    {
       return $query->where('published_at', '<', Carbon::now());

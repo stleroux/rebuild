@@ -48,7 +48,6 @@ Route::group(['prefix' => 'recipes'], function()
    Route::get('myFavorites/{key?}',       'RecipesController@myFavorites')          ->name('recipes.myFavorites');
    Route::get('newRecipes/{key?}',        'RecipesController@newRecipes')           ->name('recipes.newRecipes');
    Route::get('trashed/{key?}',           'RecipesController@trashed')              ->name('recipes.trashed');
-   
 
    Route::get('import',                   'RecipesController@import')               ->name('recipes.import');
    Route::get('pdfview',                  'RecipesController@pdfview')              ->name('recipes.pdfview');
@@ -78,10 +77,11 @@ Route::group(['prefix' => 'recipes'], function()
    Route::delete('deleteTrashed/{id}',    'RecipesController@deleteTrashed')        ->name('recipes.deleteTrashed');
    Route::post('deleteAll',               'RecipesController@deleteAll')            ->name('recipes.deleteAll');
 
-   Route::get('{id}/addFavorite',         'RecipesController@addFavorite')          ->name('recipes.addFavorite');
+   Route::get('{id}/favoriteAdd',         'RecipesController@favoriteAdd')          ->name('recipes.favoriteAdd');
+   Route::get('{id}/favoriteRemove',      'RecipesController@favoriteRemove')       ->name('recipes.favoriteRemove');
    Route::get('{id}/makePublic',          'RecipesController@makePublic')           ->name('recipes.makePublic');
    Route::get('{id}/makePrivate',         'RecipesController@makePrivate')          ->name('recipes.makePrivate');
-   Route::get('{id}/removePrivate',       'RecipesController@removePrivate')        ->name('recipes.removePrivate');
+   // Route::get('{id}/removePrivate',       'RecipesController@removePrivate')        ->name('recipes.removePrivate');
    Route::get('{id}/duplicate',           'RecipesController@duplicate')            ->name('recipes.duplicate');
    Route::post('{id}/storeComment',       'RecipesController@storeComment')         ->name('recipes.storeComment');
    Route::get('{year}/{month}',           'RecipesController@archive')              ->name('recipes.archive');

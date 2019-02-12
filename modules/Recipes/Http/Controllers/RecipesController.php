@@ -87,14 +87,15 @@ class RecipesController extends Controller
 # ██║     ██║  ██║ ╚████╔╝ ╚██████╔╝██║  ██║██║   ██║   ███████╗    ██║  ██║██████╔╝██████╔╝
 # ╚═╝     ╚═╝  ╚═╝  ╚═══╝   ╚═════╝ ╚═╝  ╚═╝╚═╝   ╚═╝   ╚══════╝    ╚═╝  ╚═╝╚═════╝ ╚═════╝ 
 ##################################################################################################################
-	public function addFavorite($id)
+	public function favoriteAdd($id)
 	{
       $recipe = Recipe::find($id);
       $recipe->addFavorite();
 
 		Session::flash ('success','The recipe was successfully added to your Favorites list!');
 		//return redirect()->route('recipes.myFavorites','all');
-		return redirect()->route('recipes.show', $id);
+		// return redirect()->route('recipes.show', $id);
+      return redirect()->route('recipes.'. Session::get('pageName'));
 	}
 
 
@@ -106,7 +107,7 @@ class RecipesController extends Controller
 # ██║     ██║  ██║ ╚████╔╝ ╚██████╔╝██║  ██║██║   ██║   ███████╗    ██║  ██║███████╗██║ ╚═╝ ██║╚██████╔╝ ╚████╔╝ ███████╗
 # ╚═╝     ╚═╝  ╚═╝  ╚═══╝   ╚═════╝ ╚═╝  ╚═╝╚═╝   ╚═╝   ╚══════╝    ╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝ ╚═════╝   ╚═══╝  ╚══════╝
 ##################################################################################################################
-   public function removeFavorite($id)
+   public function favoriteRemove($id)
    {
       // $user = Auth::user()->id;
       // $recipe = Recipe::find($id);
@@ -119,7 +120,8 @@ class RecipesController extends Controller
       Session::flash ('success','The recipe was successfully removed to your Favorites list!');
       // return redirect()->route('recipes.index','all');
       //return redirect()->route('recipes.myFavorites','all');
-      return redirect()->route('recipes.show', $id);
+      // return redirect()->route('recipes.show', $id);
+      return redirect()->route('recipes.'. Session::get('pageName'));
    }
 
 
@@ -552,6 +554,7 @@ class RecipesController extends Controller
 		if ($key) {
 			$recipes = Recipe::with('user','category')
 				->published()
+            ->public()
 				->where('title', 'like', $key . '%')
 				->orderBy('title', 'asc')
 				->paginate(18);
@@ -559,6 +562,7 @@ class RecipesController extends Controller
    		// No $key value is passed
    		$recipes = Recipe::with('user','category')
    			->published()
+            ->public()
    			->orderBy('title', 'asc')
             ->paginate(18);
       }
@@ -586,7 +590,13 @@ class RecipesController extends Controller
       //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") MADE recipe (" . $recipe->id . ") PRIVATE \r\n", [json_decode($recipe, true)]);
 
       Session::flash('success','The recipe was successfully made private');
+
+      if(Session::get('pageName') == 'myRecipes') {
+         return redirect()->route('recipes.'. Session::get('pageName'));
+      }
+
       return redirect()->route('recipes.'. Session::get('pageName'), $id);
+
    }
 
 
@@ -610,6 +620,10 @@ class RecipesController extends Controller
       //);
 
       Session::flash('success','The recipe was successfully made public');
+      if(Session::get('pageName') == 'myRecipes') {
+         return redirect()->route('recipes.'. Session::get('pageName'));
+      }
+
       return redirect()->route('recipes.'. Session::get('pageName'), $id);
    }
 
@@ -625,6 +639,9 @@ class RecipesController extends Controller
 ##################################################################################################################
 	public function myFavorites(Request $request, $key=null)
 	{
+      // Set the variable so we can use a button in other pages to come back to this page
+      Session::put('pageName', 'myFavorites');
+
       if(Auth::check()) {
          $user = Auth::user();
          $recipes = $user->favorite(Recipe::class)->sortBy('title');
@@ -664,13 +681,15 @@ class RecipesController extends Controller
 
 			// If $key value is passed
 			if ($key) {
-				$recipes = Recipe::with('user','category')->myRecipes()
+				$recipes = Recipe::with('user','category')
+               ->myRecipes()
 					->where('title', 'like', $key . '%')
 					->orderBy('title', 'asc')
 					->paginate(18);
 			} else {
             // No $key value is passed
-            $recipes = Recipe::with('user','category')->myRecipes()
+            $recipes = Recipe::with('user','category')
+               ->myRecipes()
                ->orderBy('title', 'asc')
                ->paginate(18);
          }

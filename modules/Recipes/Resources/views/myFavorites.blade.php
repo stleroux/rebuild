@@ -36,10 +36,10 @@
             </div>
          @endif --}}
 
-         <div class="card-body card_body px-3 py-0">
-            @if($recipes->count() > 0)
+         @if($recipes->count() > 0)
+            <div class="card-body card_body pt-0 pb-2">
                @foreach($recipes->chunk(6) as $chunk)
-                  <div class="card-deck mb-2 pb-2">
+                  <div class="card-deck mb-0 pb-0">
                      @foreach($chunk as $recipe)
                         <div class="card col-xs-12 col-sm-6 col-md-4 col-lg-2 p-0 m-2">
                            @if($recipe->image)
@@ -59,7 +59,7 @@
 
                            <div class="card-text p-0 m-0">
                                  <div class="align-self-end">
-                                    <a href="{{ route('recipes.removeFavorite', $recipe->id) }}" class="btn btn-sm btn-block btn-outline-warning p-0 m-0">Remove Favorite</a>
+                                    <a href="{{ route('recipes.favoriteRemove', $recipe->id) }}" class="btn btn-sm btn-block btn-outline-warning p-0 m-0">Remove Favorite</a>
                                  </div>
                               </div>
 
@@ -77,19 +77,12 @@
                      @endforeach
                   </div>
                @endforeach
-            @else
+            </div>
+         @else
+            <div class="card-body card_body">
                {{ setting('no_records_found') }}
-            @endif
-         </div>
-         {{-- {!! $recipes->links() !!} --}}
-
-{{--          <div class="card-body card_body px-1 py-2">
-            @if($recipes)
-               @include('recipes::datagrid')
-            @else
-               {{ setting('no_records_found') }}
-            @endif
-         </div> --}}
+            </div>
+         @endif
       </div>
    </form>
 
