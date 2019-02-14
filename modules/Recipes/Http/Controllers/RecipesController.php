@@ -1227,8 +1227,9 @@ class RecipesController extends Controller
       // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
 
       $recipe = Recipe::findOrFail($id);
-      dd($recipe);
-
+      // dd($recipe);
+      // $model = "recipe";
+      // dd($model);
       // Set the $page variable so we can come back to the calling page    
       // if (app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'posts.index') {
       //    $page = 'index';
@@ -1241,7 +1242,7 @@ class RecipesController extends Controller
       // Session::put('pageName', 'trashed');
 
       return view('recipes::trash', compact('recipe'));
-      
+      // return view('common.trash', compact('recipe','model'));
    }
 
 
@@ -1299,7 +1300,8 @@ class RecipesController extends Controller
       // );
 
       Session::flash('success', 'The recipe was successfully deleted!');
-      return redirect()->route('recipes.'. Session::get('pageName'));
+      // return redirect()->route('recipes.'. Session::get('pageName'), $id);
+      return redirect()->route('recipes.');
    }
 
 

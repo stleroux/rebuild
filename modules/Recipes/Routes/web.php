@@ -41,7 +41,6 @@
 Route::group(['prefix' => 'recipes'], function()
 {
 
-   Route::get('{id}/trash',                    'RecipesController@trash')               ->name('recipes.trash');
    Route::get('unpublished/{key?}',       'RecipesController@unpublished')          ->name('recipes.unpublished');
    Route::get('published/{key?}',         'RecipesController@published')            ->name('recipes.published');
    Route::get('future/{key?}',            'RecipesController@future')               ->name('recipes.future');
@@ -74,25 +73,28 @@ Route::group(['prefix' => 'recipes'], function()
    Route::get('restore/{id}',             'RecipesController@restore')              ->name('recipes.restore');
    Route::post('restoreAll',              'RecipesController@restoreAll')           ->name('recipes.restoreAll');
    Route::get('showTrashed/{id}',         'RecipesController@showTrashed')          ->name('recipes.showTrashed');
-   Route::post('trashAll',                'RecipesController@trashAll')             ->name('recipes.trashAll');
+   // Route::post('trashAll',                'RecipesController@trashAll')             ->name('recipes.trashAll');
    // Route::delete('deleteTrashed/{id}',    'RecipesController@deleteTrashed')        ->name('recipes.deleteTrashed');
    // Route::post('deleteAll',               'RecipesController@deleteAll')            ->name('recipes.deleteAll');
+
+   Route::get('{id}/trash',                    'RecipesController@trash')               ->name('recipes.trash');   
+   Route::delete('trashDestroy/{id}',          'RecipesController@trashDestroy')        ->name('recipes.trashDestroy');
+   Route::post('trashAll',                     'RecipesController@trashAll')            ->name('recipes.trashAll');
+
+   Route::get('delete/{id}',                   'RecipesController@delete')              ->name('recipes.delete');
+   Route::delete('deleteDestroy/{id}',         'RecipesController@deleteDestroy')       ->name('recipes.deleteDestroy');
+   Route::post('deleteAll',                    'RecipesController@deleteAll')           ->name('recipes.deleteAll');
 
    Route::get('{id}/favoriteAdd',         'RecipesController@favoriteAdd')          ->name('recipes.favoriteAdd');
    Route::get('{id}/favoriteRemove',      'RecipesController@favoriteRemove')       ->name('recipes.favoriteRemove');
    Route::get('{id}/makePublic',          'RecipesController@makePublic')           ->name('recipes.makePublic');
    Route::get('{id}/makePrivate',         'RecipesController@makePrivate')          ->name('recipes.makePrivate');
-   // Route::get('{id}/removePrivate',       'RecipesController@removePrivate')        ->name('recipes.removePrivate');
    Route::get('{id}/duplicate',           'RecipesController@duplicate')            ->name('recipes.duplicate');
    Route::post('{id}/storeComment',       'RecipesController@storeComment')         ->name('recipes.storeComment');
+
+   // Make sure this one stays last as it will catch everything else
    Route::get('{year}/{month}',           'RecipesController@archive')              ->name('recipes.archive');
 
-   
-   Route::delete('{id}/trashDestroy',          'RecipesController@trashDestroy')        ->name('recipes.trashDestroy');
-   Route::post('trashAll',                     'RecipesController@trashAll')            ->name('recipes.trashAll');
 
-   Route::get('{id}/delete',                   'RecipesController@delete')              ->name('recipes.delete');
-   Route::delete('{id}/deleteDestroy',         'RecipesController@deleteDestroy')       ->name('recipes.deleteDestroy');
-   Route::post('deleteAll',                    'RecipesController@deleteAll')           ->name('recipes.deleteAll');
    
 });

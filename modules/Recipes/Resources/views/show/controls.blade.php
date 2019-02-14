@@ -123,22 +123,24 @@
 	{{-- @endif --}}
 
 	{{-- @if(checkACL('manager', $recipe)) --}}
-		<a href="{{ route('recipes.destroy', $recipe->id) }}" class="list-group-item list-group-item-action bg-danger py-1 px-1 {{ Request::is('') ? 'menu_active' : '' }}">
-			<i class="glyphicon glyphicon-list"></i>
+		{{-- <a href="{{ route('recipes.trash', $recipe->id) }}" class="list-group-item list-group-item-action bg-danger py-1 px-1 {{ Request::is('') ? 'menu_active' : '' }}">
 			Trash Recipe
-		</a>
+		</a> --}}
+		@include('common.buttons.trash', ['model'=>'recipe', 'id'=>$recipe->id])
 	{{-- @endif --}}
 
 	{{-- @if(checkACL('author', $recipe)) --}}
 	{{-- @if((checkACL('admin', $recipe)) || checkOwner($recipe)) --}}
 		@if(!$recipe->personal)
-		<a href="{{ route('recipes.makePrivate', $recipe->id) }}" class="list-group-item list-group-item-action py-1 px-1 {{ Request::is('') ? 'menu_active' : '' }}">
+		{{-- <a href="{{ route('recipes.makePrivate', $recipe->id) }}" class="list-group-item list-group-item-action py-1 px-1 {{ Request::is('') ? 'menu_active' : '' }}">
 			<i class="fa fa-trash-o" aria-hidden="true"></i> Make Private
-		</a>
+		</a> --}}
+			@include('common.buttons.makePrivate', ['model'=>'recipe', 'id'=>$recipe->id, 'type'=>'menu'])
 		@else
-		<a href="{{ route('recipes.makePublic', $recipe->id) }}" class="list-group-item list-group-item-action py-1 px-1 {{ Request::is('') ? 'menu_active' : '' }}">
+		{{-- <a href="{{ route('recipes.makePublic', $recipe->id) }}" class="list-group-item list-group-item-action py-1 px-1 {{ Request::is('') ? 'menu_active' : '' }}">
 			<i class="fa fa-trash-o" aria-hidden="true"></i> Make Public
-		</a>
+		</a> --}}
+			@include('common.buttons.makePublic', ['model'=>'recipe', 'id'=>$recipe->id])
 		@endif
 	{{-- @endif --}}
 

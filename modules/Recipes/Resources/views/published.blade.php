@@ -69,6 +69,7 @@
 								<td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'published_at'])</td>
 								<td class="text-right">
 										@include('common.buttons.edit', ['model'=>'recipe', 'id'=>$recipe->id])
+										@include('common.buttons.makePrivate', ['model'=>'recipe', 'id'=>$recipe->id, 'type'=>''])
 										{{-- @if(\Request::is('*/trashed')) --}}
 											{{-- @include('common.buttons.delete', ['model'=>'recipe', 'id'=>$recipe->id]) --}}
 										{{-- @else --}}
