@@ -2,11 +2,8 @@
 
 namespace Modules\Recipes\Http\Controllers;
 
-// use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-// use Illuminate\Routing\Controller;
 use App\Http\Controllers\Controller; // Required for validation
 use Modules\Recipes\Entities\Recipe;
 use Illuminate\Support\Facades\Input;
@@ -80,52 +77,6 @@ class RecipesController extends Controller
 
 
 ##################################################################################################################
-# ███████╗ █████╗ ██╗   ██╗ ██████╗ ██████╗ ██╗████████╗███████╗     █████╗ ██████╗ ██████╗ 
-# ██╔════╝██╔══██╗██║   ██║██╔═══██╗██╔══██╗██║╚══██╔══╝██╔════╝    ██╔══██╗██╔══██╗██╔══██╗
-# █████╗  ███████║██║   ██║██║   ██║██████╔╝██║   ██║   █████╗      ███████║██║  ██║██║  ██║
-# ██╔══╝  ██╔══██║╚██╗ ██╔╝██║   ██║██╔══██╗██║   ██║   ██╔══╝      ██╔══██║██║  ██║██║  ██║
-# ██║     ██║  ██║ ╚████╔╝ ╚██████╔╝██║  ██║██║   ██║   ███████╗    ██║  ██║██████╔╝██████╔╝
-# ╚═╝     ╚═╝  ╚═╝  ╚═══╝   ╚═════╝ ╚═╝  ╚═╝╚═╝   ╚═╝   ╚══════╝    ╚═╝  ╚═╝╚═════╝ ╚═════╝ 
-##################################################################################################################
-	public function favoriteAdd($id)
-	{
-      $recipe = Recipe::find($id);
-      $recipe->addFavorite();
-
-		Session::flash ('success','The recipe was successfully added to your Favorites list!');
-		//return redirect()->route('recipes.myFavorites','all');
-		// return redirect()->route('recipes.show', $id);
-      return redirect()->route('recipes.'. Session::get('pageName'));
-	}
-
-
-##################################################################################################################
-# ███████╗ █████╗ ██╗   ██╗ ██████╗ ██████╗ ██╗████████╗███████╗    ██████╗ ███████╗███╗   ███╗ ██████╗ ██╗   ██╗███████╗
-# ██╔════╝██╔══██╗██║   ██║██╔═══██╗██╔══██╗██║╚══██╔══╝██╔════╝    ██╔══██╗██╔════╝████╗ ████║██╔═══██╗██║   ██║██╔════╝
-# █████╗  ███████║██║   ██║██║   ██║██████╔╝██║   ██║   █████╗      ██████╔╝█████╗  ██╔████╔██║██║   ██║██║   ██║█████╗  
-# ██╔══╝  ██╔══██║╚██╗ ██╔╝██║   ██║██╔══██╗██║   ██║   ██╔══╝      ██╔══██╗██╔══╝  ██║╚██╔╝██║██║   ██║╚██╗ ██╔╝██╔══╝  
-# ██║     ██║  ██║ ╚████╔╝ ╚██████╔╝██║  ██║██║   ██║   ███████╗    ██║  ██║███████╗██║ ╚═╝ ██║╚██████╔╝ ╚████╔╝ ███████╗
-# ╚═╝     ╚═╝  ╚═╝  ╚═══╝   ╚═════╝ ╚═╝  ╚═╝╚═╝   ╚═╝   ╚══════╝    ╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝ ╚═════╝   ╚═══╝  ╚══════╝
-##################################################################################################################
-   public function favoriteRemove($id)
-   {
-      // $user = Auth::user()->id;
-      // $recipe = Recipe::find($id);
-
-      // $recipe->favorites()->detach($user);
-
-      $recipe = Recipe::find($id);
-      $recipe->removeFavorite();
-
-      Session::flash ('success','The recipe was successfully removed to your Favorites list!');
-      // return redirect()->route('recipes.index','all');
-      //return redirect()->route('recipes.myFavorites','all');
-      // return redirect()->route('recipes.show', $id);
-      return redirect()->route('recipes.'. Session::get('pageName'));
-   }
-
-
-##################################################################################################################
 #  ██████╗██████╗ ███████╗ █████╗ ████████╗███████╗
 # ██╔════╝██╔══██╗██╔════╝██╔══██╗╚══██╔══╝██╔════╝
 # ██║     ██████╔╝█████╗  ███████║   ██║   █████╗  
@@ -147,13 +98,34 @@ class RecipesController extends Controller
 
       // Create an empty array to store the categories
       $cats = [];
-
       // Store the category values into the $cats array
       foreach ($categories as $category) {
          $cats[$category->id] = $category->name;
       }
 
       return view('recipes::create')->withCategories($cats);
+   }
+
+
+##################################################################################################################
+# ██████╗ ███████╗██╗     ███████╗████████╗███████╗
+# ██╔══██╗██╔════╝██║     ██╔════╝╚══██╔══╝██╔════╝
+# ██║  ██║█████╗  ██║     █████╗     ██║   █████╗  
+# ██║  ██║██╔══╝  ██║     ██╔══╝     ██║   ██╔══╝  
+# ██████╔╝███████╗███████╗███████╗   ██║   ███████╗
+# ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝
+// 
+##################################################################################################################
+   public function delete($id)
+   {
+      // Check if user has required permission
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+
+      $recipe = Recipe::onlyTrashed()->findOrFail($id);
+
+      Session::put('pageName', 'trashed');
+
+      return view('recipes::delete', compact('recipe'));
    }
 
 
@@ -190,6 +162,42 @@ class RecipesController extends Controller
 
 
 ##################################################################################################################
+# ██████╗ ███████╗██╗     ███████╗████████╗███████╗    ██████╗ ███████╗███████╗████████╗██████╗  ██████╗ ██╗   ██╗
+# ██╔══██╗██╔════╝██║     ██╔════╝╚══██╔══╝██╔════╝    ██╔══██╗██╔════╝██╔════╝╚══██╔══╝██╔══██╗██╔═══██╗╚██╗ ██╔╝
+# ██║  ██║█████╗  ██║     █████╗     ██║   █████╗      ██║  ██║█████╗  ███████╗   ██║   ██████╔╝██║   ██║ ╚████╔╝ 
+# ██║  ██║██╔══╝  ██║     ██╔══╝     ██║   ██╔══╝      ██║  ██║██╔══╝  ╚════██║   ██║   ██╔══██╗██║   ██║  ╚██╔╝  
+# ██████╔╝███████╗███████╗███████╗   ██║   ███████╗    ██████╔╝███████╗███████║   ██║   ██║  ██║╚██████╔╝   ██║   
+# ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝    ╚═════╝ ╚══════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝    ╚═╝  
+// Remove the specified resource from storage
+// Used in the index page and trashAll action to soft delete multiple records
+##################################################################################################################
+   // public function deleteDestroy($id)
+   // {
+   //    // Check if user has required permission
+   //    // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+
+   //    $recipe = Recipe::withTrashed()->find($id);
+
+   //    // remove any references to this post from the post_tag table
+   //    // $post->tags()->detach();
+
+   //    // Delete the associated image if any
+   //    //Storage::delete($post->image_path);
+   //    File::delete('_recipes/' . $recipe->image_path);
+
+   //    $recipe->forceDelete();
+
+   //    // Save entry to log file using built-in Monolog
+   //    // Log::info(Auth::user()->username . " (" . Auth::user()->id . ") DELETED post (" . $post->id . ")\r\n", 
+   //    //    [json_decode($post, true)]
+   //    // );
+
+   //    Session::flash('success', 'The recipe was successfully deleted!');
+   //    return redirect()->route('recipes.trashed');
+   // }
+
+
+##################################################################################################################
 # ██████╗ ███████╗██╗     ███████╗████████╗███████╗    ████████╗██████╗  █████╗ ███████╗██╗  ██╗███████╗██████╗ 
 # ██╔══██╗██╔════╝██║     ██╔════╝╚══██╔══╝██╔════╝    ╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██║  ██║██╔════╝██╔══██╗
 # ██║  ██║█████╗  ██║     █████╗     ██║   █████╗         ██║   ██████╔╝███████║███████╗███████║█████╗  ██║  ██║
@@ -198,18 +206,18 @@ class RecipesController extends Controller
 # ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝       ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚═════╝ 
 // Permanently remove the specified resource from storage - individual record
 ##################################################################################################################
-   public static function deleteTrashed($id)
-   {
-      // if(!checkACL('manager')) {
-         // return view('errors.403');
-      // }
-      //dd($id);
-      $recipe = Recipe::withTrashed()->findOrFail($id);
-      $recipe->forceDelete();
+   // public static function deleteTrashed($id)
+   // {
+   //    // if(!checkACL('manager')) {
+   //       // return view('errors.403');
+   //    // }
+   //    //dd($id);
+   //    $recipe = Recipe::withTrashed()->findOrFail($id);
+   //    $recipe->forceDelete();
 
-      Session::flash ('success','The recipe was deleted successfully.');
-      return redirect()->route('recipes.trashed');
-   }
+   //    Session::flash ('success','The recipe was deleted successfully.');
+   //    return redirect()->route('recipes.trashed');
+   // }
 
 
 ##################################################################################################################
@@ -380,6 +388,52 @@ class RecipesController extends Controller
       }
 
       return view('recipes.edit', compact('recipe'))->withCategories($cats);
+   }
+
+
+##################################################################################################################
+# ███████╗ █████╗ ██╗   ██╗ ██████╗ ██████╗ ██╗████████╗███████╗     █████╗ ██████╗ ██████╗ 
+# ██╔════╝██╔══██╗██║   ██║██╔═══██╗██╔══██╗██║╚══██╔══╝██╔════╝    ██╔══██╗██╔══██╗██╔══██╗
+# █████╗  ███████║██║   ██║██║   ██║██████╔╝██║   ██║   █████╗      ███████║██║  ██║██║  ██║
+# ██╔══╝  ██╔══██║╚██╗ ██╔╝██║   ██║██╔══██╗██║   ██║   ██╔══╝      ██╔══██║██║  ██║██║  ██║
+# ██║     ██║  ██║ ╚████╔╝ ╚██████╔╝██║  ██║██║   ██║   ███████╗    ██║  ██║██████╔╝██████╔╝
+# ╚═╝     ╚═╝  ╚═╝  ╚═══╝   ╚═════╝ ╚═╝  ╚═╝╚═╝   ╚═╝   ╚══════╝    ╚═╝  ╚═╝╚═════╝ ╚═════╝ 
+##################################################################################################################
+   public function favoriteAdd($id)
+   {
+      $recipe = Recipe::find($id);
+      $recipe->addFavorite();
+
+      Session::flash ('success','The recipe was successfully added to your Favorites list!');
+      //return redirect()->route('recipes.myFavorites','all');
+      // return redirect()->route('recipes.show', $id);
+      return redirect()->route('recipes.'. Session::get('pageName'));
+   }
+
+
+##################################################################################################################
+# ███████╗ █████╗ ██╗   ██╗ ██████╗ ██████╗ ██╗████████╗███████╗    ██████╗ ███████╗███╗   ███╗ ██████╗ ██╗   ██╗███████╗
+# ██╔════╝██╔══██╗██║   ██║██╔═══██╗██╔══██╗██║╚══██╔══╝██╔════╝    ██╔══██╗██╔════╝████╗ ████║██╔═══██╗██║   ██║██╔════╝
+# █████╗  ███████║██║   ██║██║   ██║██████╔╝██║   ██║   █████╗      ██████╔╝█████╗  ██╔████╔██║██║   ██║██║   ██║█████╗  
+# ██╔══╝  ██╔══██║╚██╗ ██╔╝██║   ██║██╔══██╗██║   ██║   ██╔══╝      ██╔══██╗██╔══╝  ██║╚██╔╝██║██║   ██║╚██╗ ██╔╝██╔══╝  
+# ██║     ██║  ██║ ╚████╔╝ ╚██████╔╝██║  ██║██║   ██║   ███████╗    ██║  ██║███████╗██║ ╚═╝ ██║╚██████╔╝ ╚████╔╝ ███████╗
+# ╚═╝     ╚═╝  ╚═╝  ╚═══╝   ╚═════╝ ╚═╝  ╚═╝╚═╝   ╚═╝   ╚══════╝    ╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝ ╚═════╝   ╚═══╝  ╚══════╝
+##################################################################################################################
+   public function favoriteRemove($id)
+   {
+      // $user = Auth::user()->id;
+      // $recipe = Recipe::find($id);
+
+      // $recipe->favorites()->detach($user);
+
+      $recipe = Recipe::find($id);
+      $recipe->removeFavorite();
+
+      Session::flash ('success','The recipe was successfully removed to your Favorites list!');
+      // return redirect()->route('recipes.index','all');
+      //return redirect()->route('recipes.myFavorites','all');
+      // return redirect()->route('recipes.show', $id);
+      return redirect()->route('recipes.'. Session::get('pageName'));
    }
 
 
@@ -1160,22 +1214,34 @@ class RecipesController extends Controller
 
 
 ##################################################################################################################
-# ████████╗██████╗  █████╗ ███████╗██╗  ██╗███████╗██████╗ 
-# ╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██║  ██║██╔════╝██╔══██╗
-#    ██║   ██████╔╝███████║███████╗███████║█████╗  ██║  ██║
-#    ██║   ██╔══██╗██╔══██║╚════██║██╔══██║██╔══╝  ██║  ██║
-#    ██║   ██║  ██║██║  ██║███████║██║  ██║███████╗██████╔╝
-#    ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚═════╝ 
-// Display a list of resources that have been trashed (Soft Deleted)
+# ████████╗██████╗  █████╗ ███████╗██╗  ██╗
+# ╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██║  ██║
+#    ██║   ██████╔╝███████║███████╗███████║
+#    ██║   ██╔══██╗██╔══██║╚════██║██╔══██║
+#    ██║   ██║  ██║██║  ██║███████║██║  ██║
+#    ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
 ##################################################################################################################
-   public function trashed(Request $request)
+   public function trash($id)
    {
-      // if(!checkACL('guest')) {
-      //     return view('errors.403');
+      // Check if user has required permission
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+
+      $recipe = Recipe::findOrFail($id);
+      dd($recipe);
+
+      // Set the $page variable so we can come back to the calling page    
+      // if (app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'posts.index') {
+      //    $page = 'index';
+      // }elseif (app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'posts.unpublished') {
+      //    $page = 'unpublished';
+      // }elseif (app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'posts.newPosts') {
+      //    $page = 'newPosts';
       // }
 
-      $recipes = Recipe::with('user','category')->onlyTrashed()->get();
-      return view('recipes::trashed', compact('recipes'));
+      // Session::put('pageName', 'trashed');
+
+      return view('recipes::trash', compact('recipe'));
+      
    }
 
 
@@ -1206,6 +1272,111 @@ class RecipesController extends Controller
       Session::flash('success','The recipes were trashed successfully.');
       return redirect()->route('recipes.'. Session::get('pageName'));
 
+   }
+
+
+##################################################################################################################
+# ████████╗██████╗  █████╗ ███████╗██╗  ██╗    ██████╗ ███████╗███████╗████████╗██████╗  ██████╗ ██╗   ██╗
+# ╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██║  ██║    ██╔══██╗██╔════╝██╔════╝╚══██╔══╝██╔══██╗██╔═══██╗╚██╗ ██╔╝
+#    ██║   ██████╔╝███████║███████╗███████║    ██║  ██║█████╗  ███████╗   ██║   ██████╔╝██║   ██║ ╚████╔╝ 
+#    ██║   ██╔══██╗██╔══██║╚════██║██╔══██║    ██║  ██║██╔══╝  ╚════██║   ██║   ██╔══██╗██║   ██║  ╚██╔╝  
+#    ██║   ██║  ██║██║  ██║███████║██║  ██║    ██████╔╝███████╗███████║   ██║   ██║  ██║╚██████╔╝   ██║   
+#    ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝    ╚═════╝ ╚══════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝    ╚═╝   
+// Remove the specified resource from storage
+// Used in the index page and trashAll action to soft delete multiple records
+##################################################################################################################
+   public function trashDestroy($id)
+   {
+      // Check if user has required permission
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+
+      $recipe = Recipe::find($id);
+      $recipe->delete();
+
+      // Save entry to log file using built-in Monolog
+      // Log::info(Auth::user()->username . " (" . Auth::user()->id . ") DELETED post (" . $post->id . ")\r\n", 
+      //    [json_decode($post, true)]
+      // );
+
+      Session::flash('success', 'The recipe was successfully deleted!');
+      return redirect()->route('recipes.'. Session::get('pageName'));
+   }
+
+
+##################################################################################################################
+# ████████╗██████╗  █████╗ ███████╗██╗  ██╗███████╗██████╗ 
+# ╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██║  ██║██╔════╝██╔══██╗
+#    ██║   ██████╔╝███████║███████╗███████║█████╗  ██║  ██║
+#    ██║   ██╔══██╗██╔══██║╚════██║██╔══██║██╔══╝  ██║  ██║
+#    ██║   ██║  ██║██║  ██║███████║██║  ██║███████╗██████╔╝
+#    ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚═════╝ 
+// Display a list of resources that have been trashed (Soft Deleted)
+##################################################################################################################
+   // public function trashed(Request $request)
+   // {
+   //    // Set the variable so we can use a button in other pages to come back to this page
+   //    Session::put('pageName', 'trashed');
+
+   //    // if(!checkACL('guest')) {
+   //    //     return view('errors.403');
+   //    // }
+
+   //    $recipes = Recipe::with('user','category')->onlyTrashed()->get();
+   //    return view('recipes::trashed', compact('recipes'));
+   // }
+   public function trashed(Request $request, $key=null)
+   {
+      // Check if user has required permission
+      // if(!checkPerm('post_index')) { abort(401, 'Unauthorized Access'); }
+
+      //$alphas = range('A', 'Z');
+      $alphas = DB::table('recipes')
+         ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
+         //->where('published_at','<', Carbon::Now())
+         ->where('deleted_at','!=', Null)
+         ->orderBy('letter')
+         ->get();
+
+      $letters = [];
+      foreach($alphas as $alpha) {
+        $letters[] = $alpha->letter;
+      }
+
+      // Get list of posts by year and month
+      $recipelinks = DB::table('recipes')
+         ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) recipe_count'))
+         ->where('published_at', '<=', Carbon::now())
+         //->where('created_at', '<=', Carbon::now()->subMonth(3))
+         ->groupBy('year')
+         ->groupBy('month')
+         ->orderBy('year', 'desc')
+         ->orderBy('month', 'desc')
+         ->get();
+      // dd($postlinks);
+
+      Session::put('pageName', 'trashed');
+
+      // If $key value is passed
+      if ($key) {
+         $recipes = Recipe::with('user','category')->onlyTrashed()->where('title', 'like', $key . '%')
+            ->orderBy('title', 'asc')
+            ->get();
+      } else {
+         $recipes = Recipe::with('user','category')->onlyTrashed()->orderBy('id','desc')->get();
+      }
+      
+      return view('recipes::trashed', compact('recipes','letters', 'recipelinks'));
+
+
+       //   public function trashed(Request $request)
+   // {
+      // if(!checkACL('guest')) {
+      //     return view('errors.403');
+      // }
+
+   //    $recipes = Recipe::with('user','category')->onlyTrashed()->get();
+   //    return view('recipes.trashed', compact('recipes'));
+   // }
    }
 
 
@@ -1320,8 +1491,8 @@ class RecipesController extends Controller
       }
       
 
-      Session::flash('success','The recipes were published successfully.');
-      return redirect()->route($ref);
+      Session::flash('success','The recipes were unpublished successfully.');
+      return redirect()->route('recipes.'. Session::get('pageName'));
    }
 
 

@@ -5,7 +5,7 @@ namespace Modules\Invoicer\Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-class InvoicerInvoiceitemsTableSeeder extends Seeder
+class InvoicerInvoiceItemsTableSeeder extends Seeder
 {
 
     /**
@@ -17,9 +17,9 @@ class InvoicerInvoiceitemsTableSeeder extends Seeder
     {
         
 
-        \DB::table('invoicer_invoiceitems')->delete();
+        \DB::table('invoicer_invoiceItems')->delete();
         
-        \DB::table('invoicer_invoiceitems')->insert(array (
+        \DB::table('invoicer_invoiceItems')->insert(array (
             0 => 
             array (
                 'created_at' => '2018-10-30 16:54:23',

@@ -41,6 +41,7 @@
 Route::group(['prefix' => 'recipes'], function()
 {
 
+   Route::get('{id}/trash',                    'RecipesController@trash')               ->name('recipes.trash');
    Route::get('unpublished/{key?}',       'RecipesController@unpublished')          ->name('recipes.unpublished');
    Route::get('published/{key?}',         'RecipesController@published')            ->name('recipes.published');
    Route::get('future/{key?}',            'RecipesController@future')               ->name('recipes.future');
@@ -58,7 +59,7 @@ Route::group(['prefix' => 'recipes'], function()
    Route::get('{id?}',                    'RecipesController@index')                ->name('recipes.index');
    Route::get('{id}/edit',                'RecipesController@edit')                 ->name('recipes.edit');
    Route::put('{id}',                     'RecipesController@update')               ->name('recipes.update');
-   Route::delete('{id}',                  'RecipesController@destroy')              ->name('recipes.destroy');
+   // Route::delete('{id}',                  'RecipesController@destroy')              ->name('recipes.destroy');
 
    Route::get('{id}/print',               'RecipesController@print')                ->name('recipes.print');
    Route::get('{id}/publish',             'RecipesController@publish')              ->name('recipes.publish');
@@ -74,8 +75,8 @@ Route::group(['prefix' => 'recipes'], function()
    Route::post('restoreAll',              'RecipesController@restoreAll')           ->name('recipes.restoreAll');
    Route::get('showTrashed/{id}',         'RecipesController@showTrashed')          ->name('recipes.showTrashed');
    Route::post('trashAll',                'RecipesController@trashAll')             ->name('recipes.trashAll');
-   Route::delete('deleteTrashed/{id}',    'RecipesController@deleteTrashed')        ->name('recipes.deleteTrashed');
-   Route::post('deleteAll',               'RecipesController@deleteAll')            ->name('recipes.deleteAll');
+   // Route::delete('deleteTrashed/{id}',    'RecipesController@deleteTrashed')        ->name('recipes.deleteTrashed');
+   // Route::post('deleteAll',               'RecipesController@deleteAll')            ->name('recipes.deleteAll');
 
    Route::get('{id}/favoriteAdd',         'RecipesController@favoriteAdd')          ->name('recipes.favoriteAdd');
    Route::get('{id}/favoriteRemove',      'RecipesController@favoriteRemove')       ->name('recipes.favoriteRemove');
@@ -85,5 +86,13 @@ Route::group(['prefix' => 'recipes'], function()
    Route::get('{id}/duplicate',           'RecipesController@duplicate')            ->name('recipes.duplicate');
    Route::post('{id}/storeComment',       'RecipesController@storeComment')         ->name('recipes.storeComment');
    Route::get('{year}/{month}',           'RecipesController@archive')              ->name('recipes.archive');
+
+   
+   Route::delete('{id}/trashDestroy',          'RecipesController@trashDestroy')        ->name('recipes.trashDestroy');
+   Route::post('trashAll',                     'RecipesController@trashAll')            ->name('recipes.trashAll');
+
+   Route::get('{id}/delete',                   'RecipesController@delete')              ->name('recipes.delete');
+   Route::delete('{id}/deleteDestroy',         'RecipesController@deleteDestroy')       ->name('recipes.deleteDestroy');
+   Route::post('deleteAll',                    'RecipesController@deleteAll')           ->name('recipes.deleteAll');
    
 });

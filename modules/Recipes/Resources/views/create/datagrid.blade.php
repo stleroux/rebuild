@@ -3,11 +3,8 @@
 		<i class="fa fa-plus-square"></i>
 		Create Recipe
       <span class="float-right">
-         <a href="{{ route('recipes.'. Session::get('pageName')) }}" class="btn btn-sm btn-outline-secondary px-1 py-0">
-            <i class="fas fa-angle-double-left"></i>
-            Cancel
-         </a>
-         {{ Form::submit('Save', ['class'=>'btn btn-sm btn-success px-1 py-0']) }}
+         @include('common.buttons.back', ['model'=>'recipe'])
+         @include('common.buttons.save', ['model'=>'recipe'])
       </span>
 	</div>
 	<div class="card-body">

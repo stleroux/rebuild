@@ -19,6 +19,6 @@ class InvoicerDatabaseSeeder extends Seeder
         $this->call(InvoicerClientsTableSeeder::class);
         $this->call(InvoicerProductsTableSeeder::class);
         $this->call(InvoicerInvoicesTableSeeder::class);
-        $this->call(InvoicerInvoiceitemsTableSeeder::class);
+        $this->call(InvoicerInvoiceItemsTableSeeder::class);
     }
 }

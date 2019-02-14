@@ -101,8 +101,8 @@ class SettingsTableSeeder extends Seeder
             array (
                 'id' => 9,
                 'key' => 'authorFormat',
-                'value' => 'username',
-            'description' => 'How the author name will be displayed throughout the website (username - last_name, first_name - first_name last_name)',
+                'value' => 'first_name last_name',
+                'description' => 'How the author name will be displayed throughout the website (username - last_name, first_name - first_name last_name)',
                 'tab' => 'general',
                 'created_at' => '2019-02-09 06:18:53',
                 'updated_at' => '2019-02-10 14:23:32',

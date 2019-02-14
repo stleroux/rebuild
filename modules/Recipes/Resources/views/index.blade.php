@@ -93,7 +93,11 @@
 				<div class="card-footer px-1 py-1">
 					{{-- {{ $recipes->links("pagination::bootstrap-4") }} --}}
 					{{-- {{ $recipes->links("pagination::simple-default") }} --}}
-					{{ $recipes->links() }}
+					@if($recipes->count() > 17)
+						{{ $recipes->links() }}
+					@else
+						&nbsp;
+					@endif
 				</div>
 			@else
 				<div class="card-body card_body">

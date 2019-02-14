@@ -4,7 +4,7 @@ namespace Modules\Posts\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
+use App\Http\Controllers\Controller; // Required for validation // use Illuminate\Routing\Controller;
 use Modules\Posts\Entities\Post;
 use Modules\Posts\Entities\Tag;
 
@@ -110,12 +110,12 @@ class PostsController extends Controller
 ##################################################################################################################
 	public function deleteAll(Request $request)
 	{
-		// Pass along the ROUTE value of the previous page
-		//$ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
+		// Set the variable so we can use a button in other pages to come back to this page
+      Session::put('pageName', '');
 
-		// $this->validate($request, [
-		//    'checked' => 'required',
-		// ]);
+		$this->validate($request, [
+		   'checked' => 'required',
+		]);
 
 		$checked = $request->input('checked');
 
@@ -666,7 +666,7 @@ class PostsController extends Controller
 
 		// Session::put('pageName', 'trashed');
 
-		return view('posts::trash', compact('post', 'page'));
+		return view('posts::trash', compact('post'));
 		
 	}
 
@@ -687,9 +687,9 @@ class PostsController extends Controller
 		// Pass along the ROUTE value of the previous page
 		// $ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
 
-		// $this->validate($request, [
-		//    'checked' => 'required',
-		// ]);
+		$this->validate($request, [
+		   'checked' => 'required',
+		]);
 
 		$checked = $request->input('checked');
 		//dd($checked);

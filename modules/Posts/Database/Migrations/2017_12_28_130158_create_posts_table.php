@@ -13,7 +13,7 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('Posts', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('category_id');
@@ -39,6 +39,6 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Posts');
+        Schema::dropIfExists('posts');
     }
 }
