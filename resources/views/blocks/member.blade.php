@@ -3,13 +3,13 @@
    <div class="list-group pt-0 pb-0">
       
       <a href="{{ route('profile.show', Auth::User()->id) }}"
-         class="list-group-item list-group-item-action px-1 py-1 {{ Request::is('profile*') ? 'menu-active' : '' }}">
+         class="list-group-item list-group-item-action px-1 py-1 {{ Route::is('profile.edit', 'profile.show') ? 'active' : '' }}">
          <i class="fas fa-user-circle pl-2"></i>
          My Profile
       </a>
 
       <a href="{{ route('profile.resetPwd', Auth::user()->id) }}"
-         class="list-group-item list-group-item-action px-1 py-1 {{ Request::is('profile/resetPwd') ? 'menu-active' : '' }}">
+         class="list-group-item list-group-item-action px-1 py-1 {{ Route::is('profile.resetPwd') ? 'active' : '' }}">
          <i class="fas fa-user-lock pl-2"></i>
          Reset My Password
       </a>

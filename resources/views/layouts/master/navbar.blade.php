@@ -20,6 +20,12 @@
 				</li>
 			@endguest
 
+			@auth
+				<li class="nav-item {{ Request::is('dashboard*') ? 'active' : '' }}">
+					<a class="nav-link" href="{{ route('dashboard') }}"><span style="font-weight: normal;">Dashboard</span></a>
+				</li>
+			@endauth
+
 			<li class="nav-item {{ Request::is('about*') ? 'active' : '' }}">
 				<a class="nav-link" href="{{ URL('/about') }}"><span style="font-weight: normal;">About us</span></a>
 			</li>

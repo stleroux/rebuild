@@ -1,7 +1,8 @@
 @extends('layouts.master')
 
 @section('left_column')
-   @include('blocks.admin_menu')
+   {{-- @include('blocks.admin_menu') --}}
+   @include('categories.sidebar')
 @endsection
 
 @section('right_column')
@@ -18,12 +19,12 @@
                <i class="fa fa-sitemap"></i>
                Categories
                <span class="float-right">
-                  @if(checkPerm('user_create'))
+                  {{-- @if(checkPerm('user_create'))
                      <a href="{{ route('categories.create') }}" class="btn btn-sm btn-outline-success px-1 py-0">
                         <i class="fas fa-plus-square"></i>
                         New Category
                      </a>
-                  @endif
+                  @endif --}}
                   <button type="button" class="btn btn-sm btn-outline-secondary px-1 py-0" data-toggle="modal" data-target="#help">
                      <i class="fa fa-question-circle" aria-hidden="true"></i>
                      Help

@@ -45,6 +45,7 @@ Route::group(['prefix' => 'recipes'], function()
    Route::get('published/{key?}',         'RecipesController@published')            ->name('recipes.published');
    Route::get('future/{key?}',            'RecipesController@future')               ->name('recipes.future');
    Route::get('myRecipes/{key?}',         'RecipesController@myRecipes')            ->name('recipes.myRecipes');
+   Route::get('myPrivateRecipes/{key?}',  'RecipesController@myPrivateRecipes')     ->name('recipes.myPrivateRecipes');
    Route::get('myFavorites/{key?}',       'RecipesController@myFavorites')          ->name('recipes.myFavorites');
    Route::get('newRecipes/{key?}',        'RecipesController@newRecipes')           ->name('recipes.newRecipes');
    Route::get('trashed/{key?}',           'RecipesController@trashed')              ->name('recipes.trashed');
@@ -70,19 +71,19 @@ Route::group(['prefix' => 'recipes'], function()
    Route::post('importExcel',             'RecipesController@importExcel')          ->name('recipes.importExport');
    Route::get('downloadExcel/{type}',     'RecipesController@downloadExcel')        ->name('recipes.downloadExcel');
 
-   Route::get('restore/{id}',             'RecipesController@restore')              ->name('recipes.restore');
+   Route::get('{id}/restore',             'RecipesController@restore')              ->name('recipes.restore');
    Route::post('restoreAll',              'RecipesController@restoreAll')           ->name('recipes.restoreAll');
-   Route::get('showTrashed/{id}',         'RecipesController@showTrashed')          ->name('recipes.showTrashed');
+   Route::get('{id}/showTrashed',         'RecipesController@showTrashed')          ->name('recipes.showTrashed');
    // Route::post('trashAll',                'RecipesController@trashAll')             ->name('recipes.trashAll');
    // Route::delete('deleteTrashed/{id}',    'RecipesController@deleteTrashed')        ->name('recipes.deleteTrashed');
    // Route::post('deleteAll',               'RecipesController@deleteAll')            ->name('recipes.deleteAll');
 
    Route::get('{id}/trash',                    'RecipesController@trash')               ->name('recipes.trash');   
-   Route::delete('trashDestroy/{id}',          'RecipesController@trashDestroy')        ->name('recipes.trashDestroy');
+   Route::delete('{id}/trashDestroy',          'RecipesController@trashDestroy')        ->name('recipes.trashDestroy');
    Route::post('trashAll',                     'RecipesController@trashAll')            ->name('recipes.trashAll');
 
-   Route::get('delete/{id}',                   'RecipesController@delete')              ->name('recipes.delete');
-   Route::delete('deleteDestroy/{id}',         'RecipesController@deleteDestroy')       ->name('recipes.deleteDestroy');
+   Route::get('{id}/delete',                   'RecipesController@delete')              ->name('recipes.delete');
+   Route::delete('{id}/deleteDestroy',         'RecipesController@deleteDestroy')       ->name('recipes.deleteDestroy');
    Route::post('deleteAll',                    'RecipesController@deleteAll')           ->name('recipes.deleteAll');
 
    Route::get('{id}/favoriteAdd',         'RecipesController@favoriteAdd')          ->name('recipes.favoriteAdd');

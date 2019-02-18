@@ -77,9 +77,15 @@ class Recipe extends Model
       return $query->where('personal', '=', 0);
    }
 
+   public function scopePrivate($query)
+   {
+      return $query->where('personal', '=', 1);
+   }
+
    public function scopePublished($query)
    {
       return $query->where('published_at', '<', Carbon::now());
+                   // ->where('deleted_at', 'null');
    }
    
    public function scopeUnpublished($query)

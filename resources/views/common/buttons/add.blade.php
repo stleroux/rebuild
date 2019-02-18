@@ -1,4 +1,10 @@
-<a href="{{ route($model.'s'.'.create') }}" class="btn btn-sm btn-outline-success px-1 py-0">
+<button
+   class="btn btn-sm btn-outline-success"
+   type="button"
+   title="Add {{ ucfirst($model) }}"
+   onclick="window.location='{{ route($model.'s'.'.create') }}'">
    <i class="fa fa-plus-square"></i>
-   Add {{ ucfirst($model) }}
-</a>
+   @if($type == 'menu')
+      Add {{ ucfirst($model) }}
+   @endif
+</button>

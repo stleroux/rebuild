@@ -4,6 +4,10 @@
    {{-- {{ Html::style('css/woodbarn.css') }} --}}
 @stop
 
+@section('left_column')
+   @include('blocks.main_menu')
+@endsection
+
 @section ('content')
 
    @include('errors.construction')

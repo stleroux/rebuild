@@ -1,7 +1,8 @@
 @extends('layouts.master')
 
 @section('left_column')
-   @include('blocks.admin_menu')
+   {{-- @include('blocks.admin_menu') --}}
+   @include('users.sidebar')
 @endsection
 
 @section('right_column')

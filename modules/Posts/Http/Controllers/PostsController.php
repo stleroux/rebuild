@@ -275,7 +275,7 @@ class PostsController extends Controller
 		$alphas = DB::table('posts')
 			->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
 			->where('published_at','<', Carbon::Now())
-			//->where('deleted_at','=', Null)
+			->where('deleted_at','=', Null)
 			->orderBy('letter')
 			->get();
 
@@ -335,13 +335,13 @@ class PostsController extends Controller
 		//$alphas = range('A', 'Z');
 		$alphas = DB::table('posts')
 			->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
-			->where('created_at', '<=' , Auth::user()->last_login_date)
+			->where('created_at', '>=' , Auth::user()->last_login_date)
 			//->where('user_id', '=', Auth::user()->id)
 			// ->where('personal', '!=', 1)
 			// ->where('published_at','=', null)
 			->orderBy('letter')
 			->get();
-			//dd($alphas);
+			// dd($alphas);
 
 		$letters = [];
 		foreach($alphas as $alpha) {
@@ -857,7 +857,7 @@ class PostsController extends Controller
 			->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
 			->whereNull('published_at')
 			//->where('published_at','<', Carbon::Now())
-			//->where('deleted_at','=', Null)
+			->where('deleted_at','=', Null)
 			->orderBy('letter')
 			->get();
 

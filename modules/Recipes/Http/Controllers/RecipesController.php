@@ -60,7 +60,8 @@ class RecipesController extends Controller
       // Set the variable so we can use a button in other pages to come back to this page
       Session::put('pageName', 'archive');
 
-		$archives = Recipe::with('user', 'category')->whereYear('published_at','=', $year)
+		$archives = Recipe::with('user', 'category')
+         ->whereYear('published_at','=', $year)
 			->whereMonth('published_at','=', $month)
 			->where('published_at', '<=', Carbon::now())
          ->orderBy('title')
@@ -69,10 +70,15 @@ class RecipesController extends Controller
 		// Get list of recips by year and month
 		$recipelinks = DB::table('recipes')
 			->select(DB::raw('YEAR(published_at) year, MONTH(published_at) month, MONTHNAME(published_at) month_name, COUNT(*) recipe_count'))
-			->where('published_at', '<=', Carbon::now())
-			->groupBy('year')->groupBy('month')->orderBy('year', 'desc')->orderBy('month', 'desc')->get();
+         ->where('published_at', '<=', Carbon::now())
+         ->where('deleted_at', '=', null)
+			->groupBy('year')
+         ->groupBy('month')
+         ->orderBy('year', 'desc')
+         ->orderBy('month', 'desc')
+         ->get();
 
-		return view('recipes::archive', compact('archives','year','month','recipelinks'));
+		return view('recipes::frontend.archive', compact('archives','year','month','recipelinks'));
 	}
 
 
@@ -103,7 +109,7 @@ class RecipesController extends Controller
          $cats[$category->id] = $category->name;
       }
 
-      return view('recipes::create')->withCategories($cats);
+      return view('recipes::backend.create')->withCategories($cats);
    }
 
 
@@ -122,8 +128,9 @@ class RecipesController extends Controller
       // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
 
       $recipe = Recipe::onlyTrashed()->findOrFail($id);
+      // dd($recipe);
 
-      Session::put('pageName', 'trashed');
+      // Session::put('pageName', 'trashed');
 
       return view('recipes::delete', compact('recipe'));
    }
@@ -230,32 +237,25 @@ class RecipesController extends Controller
 // Remove the specified resource from storage
 // Used in the index page and trashAll action to soft delete multiple records
 ##################################################################################################################
-   public function destroy($id)
+   public function deleteDestroy($id)
    {
       // if(!checkACL('author')) {
       //     return view('errors.403');
       // }
 
       // Set the variable so we can use a button in other pages to come back to this page
-      Session::put('pageName', '');
+      // Session::put('pageName', '');
 
-      $recipe = Recipe::findOrFail($id);
-         $recipe->published_at = Null;
-            // Delete related favorites
-            $favorites = DB::select('select * from recipe_user where recipe_id = '. $id, [1]);
-              foreach($favorites as $favorite) {
-               $recipe->favoriteRecipes()->detach($favorite);
-              }
-         $recipe->save();
-      $recipe->delete();
+      $recipe = Recipe::withTrashed()->findOrFail($id);
+      $recipe->forceDelete();
 
       // Save entry to log file using built-in Monolog
       //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") DELETED article (" . $article->id . ")\r\n",
       //    [json_decode($article, true)]
       //);
 
-      Session::flash('success','The recipe was trashed successfully.');
-      return redirect()->route($ref);
+      Session::flash('success','The recipe was deleted successfully.');
+      return redirect()->route('recipes.trashed');
    }
 
 
@@ -471,16 +471,19 @@ class RecipesController extends Controller
 
       // If $key value is passed
       if ($key) {
-         $recipes = Recipe::with('user','category')->future()
+         $recipes = Recipe::with('user','category')
+            ->future()
             ->where('title', 'like', $key . '%')
             ->orderBy('title', 'asc')
             ->get();
       } else {
          // No $key value is passed
-         $recipes = Recipe::with('user','category')->future()->get();
+         $recipes = Recipe::with('user','category')
+            ->future()
+            ->get();
       }
 
-      return view('recipes::future', compact('recipes','letters'));
+      return view('recipes::backend.future', compact('recipes','letters'));
    }
 
 
@@ -596,6 +599,7 @@ class RecipesController extends Controller
 		$alphas = DB::table('recipes')
 			->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
 			->where('published_at', '<', Carbon::now())
+         ->where('deleted_at', '=', null)
 			->orderBy('letter')
 			->get();
 
@@ -621,7 +625,7 @@ class RecipesController extends Controller
             ->paginate(18);
       }
 		
-      return view('recipes::index', compact('recipes','letters','recipelinks'));
+      return view('recipes::frontend.index', compact('recipes','letters','recipelinks'));
 
 	}
 
@@ -645,11 +649,12 @@ class RecipesController extends Controller
 
       Session::flash('success','The recipe was successfully made private');
 
-      if(Session::get('pageName') == 'myRecipes') {
-         return redirect()->route('recipes.'. Session::get('pageName'));
-      }
+      // if(Session::get('pageName') != 'show') {
+      //    return redirect()->route('recipes.'. Session::get('pageName'), $id);
+      // }
 
-      return redirect()->route('recipes.'. Session::get('pageName'), $id);
+      // return redirect()->route('recipes.'. Session::get('pageName'));
+      return redirect()->back();
 
    }
 
@@ -674,11 +679,13 @@ class RecipesController extends Controller
       //);
 
       Session::flash('success','The recipe was successfully made public');
-      if(Session::get('pageName') == 'myRecipes') {
-         return redirect()->route('recipes.'. Session::get('pageName'));
-      }
+      
+      // f(Session::get('pageName') != 'show') {
+      //    return redirect()->route('recipes.'. Session::get('pageName'), $id);
+      // }
 
-      return redirect()->route('recipes.'. Session::get('pageName'), $id);
+      // return redirect()->route('recipes.'. Session::get('pageName'));
+      return redirect()->back();
    }
 
 
@@ -696,12 +703,18 @@ class RecipesController extends Controller
       // Set the variable so we can use a button in other pages to come back to this page
       Session::put('pageName', 'myFavorites');
 
+      // Get list of recips by year and month
+      $recipelinks = DB::table('recipes')
+         ->select(DB::raw('YEAR(published_at) year, MONTH(published_at) month, MONTHNAME(published_at) month_name, COUNT(*) recipe_count'))
+         ->where('published_at', '<=', Carbon::now())
+         ->groupBy('year')->groupBy('month')->orderBy('year', 'desc')->orderBy('month', 'desc')->get();
+
       if(Auth::check()) {
          $user = Auth::user();
          $recipes = $user->favorite(Recipe::class)->sortBy('title');
       }
 
-      return view('recipes::myFavorites', compact('recipes'));
+      return view('recipes::frontend.myFavorites', compact('recipes','recipelinks'));
 	}
 
 
@@ -720,6 +733,12 @@ class RecipesController extends Controller
       Session::put('pageName', 'myRecipes');
 
 		if (Auth::check()) {
+         // Get list of recips by year and month
+         $recipelinks = DB::table('recipes')
+            ->select(DB::raw('YEAR(published_at) year, MONTH(published_at) month, MONTHNAME(published_at) month_name, COUNT(*) recipe_count'))
+            ->where('published_at', '<=', Carbon::now())
+            ->groupBy('year')->groupBy('month')->orderBy('year', 'desc')->orderBy('month', 'desc')->get();
+
 			$alphas = DB::table('recipes')
 				->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
 				->where('user_id','=', Auth::user()->id)
@@ -748,11 +767,77 @@ class RecipesController extends Controller
                ->paginate(18);
          }
 
-			return view('recipes::myRecipes', compact('recipes','letters'));
+			return view('recipes::backend.myRecipes', compact('recipes','letters', 'recipelinks'));
 		} else {
          return ('You need to be logged in');
       }
 	}
+
+
+##################################################################################################################
+# ███╗   ███╗██╗   ██╗    ██████╗ ██████╗ ██╗██╗   ██╗ █████╗ ████████╗███████╗    ██████╗ ███████╗ ██████╗██╗██████╗ ███████╗███████╗
+# ████╗ ████║╚██╗ ██╔╝    ██╔══██╗██╔══██╗██║██║   ██║██╔══██╗╚══██╔══╝██╔════╝    ██╔══██╗██╔════╝██╔════╝██║██╔══██╗██╔════╝██╔════╝
+# ██╔████╔██║ ╚████╔╝     ██████╔╝██████╔╝██║██║   ██║███████║   ██║   █████╗      ██████╔╝█████╗  ██║     ██║██████╔╝█████╗  ███████╗
+# ██║╚██╔╝██║  ╚██╔╝      ██╔═══╝ ██╔══██╗██║╚██╗ ██╔╝██╔══██║   ██║   ██╔══╝      ██╔══██╗██╔══╝  ██║     ██║██╔═══╝ ██╔══╝  ╚════██║
+# ██║ ╚═╝ ██║   ██║       ██║     ██║  ██║██║ ╚████╔╝ ██║  ██║   ██║   ███████╗    ██║  ██║███████╗╚██████╗██║██║     ███████╗███████║
+# ╚═╝     ╚═╝   ╚═╝       ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝  ╚═╝  ╚═╝   ╚═╝   ╚══════╝    ╚═╝  ╚═╝╚══════╝ ╚═════╝╚═╝╚═╝     ╚══════╝╚══════╝
+// Display a listing of the resource that belong to a specific user.
+##################################################################################################################
+   public function myPrivateRecipes($key=null)
+   {
+      // Set the variable so we can use a button in other pages to come back to this page
+      Session::put('pageName', 'myPrivateRecipes');
+
+      if (Auth::check()) {
+         // Get list of recips by year and month
+         $recipelinks = DB::table('recipes')
+            ->select(DB::raw('YEAR(published_at) year, MONTH(published_at) month, MONTHNAME(published_at) month_name, COUNT(*) recipe_count'))
+            ->where('published_at', '<=', Carbon::now())
+            ->where('personal', '=', 1)
+            // ->private()
+            ->groupBy('year')
+            ->groupBy('month')
+            ->orderBy('year', 'desc')
+            ->orderBy('month', 'desc')
+            ->get();
+
+         $alphas = DB::table('recipes')
+            ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
+            ->where('user_id','=', Auth::user()->id)
+            // ->where('published_at', '<', Carbon::now())
+            ->where('personal', '=', 1)
+            // ->private()
+            ->orderBy('letter')
+            ->get();
+         //dd($alphas);
+
+         $letters = [];
+         foreach($alphas as $alpha) {
+            $letters[] = $alpha->letter;
+         }
+
+         // If $key value is passed
+         if ($key) {
+            $recipes = Recipe::with('user','category')
+               ->myRecipes()
+               ->private()
+               ->where('title', 'like', $key . '%')
+               ->orderBy('title', 'asc')
+               ->paginate(18);
+         } else {
+            // No $key value is passed
+            $recipes = Recipe::with('user','category')
+               ->myRecipes()
+               ->private()
+               ->orderBy('title', 'asc')
+               ->paginate(18);
+         }
+
+         return view('recipes::backend.myPrivateRecipes', compact('recipes','letters', 'recipelinks'));
+      } else {
+         return ('You need to be logged in');
+      }
+   }
 
 
 ##################################################################################################################
@@ -801,7 +886,7 @@ class RecipesController extends Controller
             ->paginate(18);
       }
 
-      return view('recipes::newRecipes', compact('recipes','letters'));
+      return view('recipes::backend.newRecipes', compact('recipes','letters'));
    }
 
 
@@ -893,7 +978,8 @@ class RecipesController extends Controller
       $recipe->save();
 
       Session::flash ('success','The recipe was successfully published.');
-      return redirect()->route('recipes.show', $id);
+      // return redirect()->route('recipes.show', $id);
+      return redirect()->back();
    }
 
 
@@ -965,7 +1051,11 @@ class RecipesController extends Controller
       $recipelinks = DB::table('recipes')
          ->select(DB::raw('YEAR(published_at) year, MONTH(published_at) month, MONTHNAME(published_at) month_name, COUNT(*) recipe_count'))
          ->where('published_at', '<=', Carbon::now())
-         ->groupBy('year')->groupBy('month')->orderBy('year', 'desc')->orderBy('month', 'desc')->get();
+         ->groupBy('year')
+         ->groupBy('month')
+         ->orderBy('year', 'desc')
+         ->orderBy('month', 'desc')
+         ->get();
 
       $letters = [];
       foreach($alphas as $alpha) {
@@ -974,16 +1064,19 @@ class RecipesController extends Controller
 
       // If $key value is passed
       if ($key) {
-         $recipes = Recipe::with('user','category')->published()
+         $recipes = Recipe::with('user','category')
+            ->published()
             ->where('title', 'like', $key . '%')
             ->orderBy('title', 'asc')
             ->get();
       } else {
          // No $key value is passed
-         $recipes = Recipe::with('user','category')->published()->get();
+         $recipes = Recipe::with('user','category')
+            ->published()
+            ->get();
       }
 
-      return view('recipes::published', compact('recipes','letters','recipelinks'));
+      return view('recipes::backend.published', compact('recipes','letters','recipelinks'));
    }
 
 
@@ -1078,7 +1171,7 @@ class RecipesController extends Controller
       $recipe = Recipe::find($id);
 
       // Set the variable so we can use a button in other pages to come back to this page
-      Session::put('pageName', 'show');
+      // Session::put('pageName', 'show');
 
       // get previous recipe id
       $previous = Recipe::published()->where('id', '<', $recipe->id)->max('id');
@@ -1118,7 +1211,7 @@ class RecipesController extends Controller
          //Log::info(getClientIP() . " viewed :: Recipe (" . $recipe->id . ")");
       }
 
-      return view('recipes::show', compact('recipe','recipelinks','next','previous'));
+      return view('recipes::frontend.show', compact('recipe','recipelinks','next','previous'));
    }
 
 
@@ -1227,6 +1320,7 @@ class RecipesController extends Controller
       // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
 
       $recipe = Recipe::findOrFail($id);
+
       // dd($recipe);
       // $model = "recipe";
       // dd($model);
@@ -1241,7 +1335,7 @@ class RecipesController extends Controller
 
       // Session::put('pageName', 'trashed');
 
-      return view('recipes::trash', compact('recipe'));
+      return view('recipes::backend.trash', compact('recipe'));
       // return view('common.trash', compact('recipe','model'));
    }
 
@@ -1292,6 +1386,10 @@ class RecipesController extends Controller
       // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
 
       $recipe = Recipe::find($id);
+
+      // Delete this recipe's favorites
+      DB::table('favorites')->where('favoriteable_id', '=', $id)->delete();
+      // Delete the recipe
       $recipe->delete();
 
       // Save entry to log file using built-in Monolog
@@ -1300,8 +1398,7 @@ class RecipesController extends Controller
       // );
 
       Session::flash('success', 'The recipe was successfully deleted!');
-      // return redirect()->route('recipes.'. Session::get('pageName'), $id);
-      return redirect()->route('recipes.');
+      return redirect()->route('recipes.'. Session::get('pageName'));
    }
 
 
@@ -1314,18 +1411,6 @@ class RecipesController extends Controller
 #    ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚═════╝ 
 // Display a list of resources that have been trashed (Soft Deleted)
 ##################################################################################################################
-   // public function trashed(Request $request)
-   // {
-   //    // Set the variable so we can use a button in other pages to come back to this page
-   //    Session::put('pageName', 'trashed');
-
-   //    // if(!checkACL('guest')) {
-   //    //     return view('errors.403');
-   //    // }
-
-   //    $recipes = Recipe::with('user','category')->onlyTrashed()->get();
-   //    return view('recipes::trashed', compact('recipes'));
-   // }
    public function trashed(Request $request, $key=null)
    {
       // Check if user has required permission
@@ -1360,14 +1445,19 @@ class RecipesController extends Controller
 
       // If $key value is passed
       if ($key) {
-         $recipes = Recipe::with('user','category')->onlyTrashed()->where('title', 'like', $key . '%')
+         $recipes = Recipe::with('user','category')
+            ->onlyTrashed()
+            ->where('title', 'like', $key . '%')
             ->orderBy('title', 'asc')
             ->get();
       } else {
-         $recipes = Recipe::with('user','category')->onlyTrashed()->orderBy('id','desc')->get();
+         $recipes = Recipe::with('user','category')
+            ->onlyTrashed()
+            ->orderBy('id','desc')
+            ->get();
       }
       
-      return view('recipes::trashed', compact('recipes','letters', 'recipelinks'));
+      return view('recipes::backend.trashed', compact('recipes','letters', 'recipelinks'));
 
 
        //   public function trashed(Request $request)
@@ -1409,7 +1499,8 @@ class RecipesController extends Controller
 
       Session::flash ('success','The recipe was successfully unpublished.');
       //return redirect()->route($ref);
-      return redirect()->route('recipes.show', $id);
+      // return redirect()->route('recipes.show', $id);
+      return redirect()->back();
    }
 
 
@@ -1447,16 +1538,19 @@ class RecipesController extends Controller
 
       // If $key value is passed
       if ($key) {
-         $recipes = Recipe::with('user','category')->unpublished()
+         $recipes = Recipe::with('user','category')
+            ->unpublished()
             ->where('title', 'like', $key . '%')
             ->orderBy('title', 'asc')
             ->get();
       } else {
          // No $key value is passed
-         $recipes = Recipe::with('user','category')->unpublished()->get();
+         $recipes = Recipe::with('user','category')
+            ->unpublished()
+            ->get();
       }
 
-      return view('recipes::unpublished', compact('recipes','letters'));
+      return view('recipes::backend.unpublished', compact('recipes','letters'));
    }
 
 

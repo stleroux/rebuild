@@ -1,39 +1,46 @@
-<div class="panel panel-primary">
-
-   <div class="panel-heading">
-      <h4 class="panel-title">
-         <i class="fa fa-comments-o" aria-hidden="true"></i>
-         Comments
-      </h4>
+<div class="card mb-2">
+   <div class="card-header block_header">
+      <i class="fa fa-sitemap"></i>
+      Comments
    </div>
-
-   <div class="list-group">
-
-      <a href="{{ route('backend.comments.newComments') }}"
-         class="list-group-item {{ Nav::isRoute('backend.comments.newComments') }}">
-         <i class="fa fa-comments-o" aria-hidden="true"></i>
-         New Comments
+   
+   <div class="list-group pt-0 pb-0">
+{{--       @if(App\Category::newCategories()->count() > 0)
+      <a href="{{ route('categories.newCategories') }}" class="list-group-item {{ Nav::isRoute('categories.newCategories') }}">
+         <i class="fa fa-sitemap"></i>
+         New Categories
          <div class="badge pull-right">
-            {{ App\Comment::newComments()->count() }}
+            {{ App\Category::newCategories()->count() }}
          </div>
       </a>
+      @endif --}}
 
-      <a href="{{ route('backend.comments.index') }}"
-         class="list-group-item
-            {{ Nav::isRoute('backend.comments.index') }}
-            {{ Nav::isRoute('backend.comments.edit') }}
-            {{ Nav::isRoute('backend.comments.show') }}">
-         <i class="fa fa-comments-o" aria-hidden="true"></i>
+      <a href="/"
+         class="list-group-item list-group-item-action p-1">
+         <i class="fas fa-home pl-2"></i>
+         Frontend View
+      </a>
+
+      <a href="/dashboard"
+         class="list-group-item list-group-item-action p-1">
+         <i class="fas fa-cog pl-2"></i>
+         Dashboard
+      </a>
+
+      <a href="{{ route('comments.index') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('comments.index') ? 'active' : '' }}">
+         <i class="fa fa-sitemap pl-2"></i>
          Comments
-         <div class="badge pull-right">
-            {{ App\Comment::count() }}
-         </div>
+         {{-- <div class="badge badge-primary float-right">
+            {{ App\Comments::count() }}
+         </div> --}}
       </a>
 
-{{--       <a href="{{ route('backend.comments.create') }}" class="list-group-item {{ Nav::isRoute('backend.comments.create') }}">
-         <i class="fa fa-plus-square" aria-hidden="true"></i>
-         Add Comment
-      </a> --}}
+{{--       @if(checkPerm('user_create'))
+         <a href="{{ route('comments.create') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('comments.create') ? 'active' : '' }}">
+            <i class="fas fa-plus-square pl-2"></i>
+            New Comment
+         </a>
+      @endif --}}
 
    </div>
 

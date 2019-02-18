@@ -4,9 +4,15 @@
 		
 		<div class="list-group pt-0 pb-0">
 
+		<a href="/"
+			class="list-group-item list-group-item-action p-1 {{ Request::is('/') ? 'active' : '' }}">
+			<i class="fas fa-home pl-2"></i>
+			Home
+		</a>
+
 			@if(checkPerm('category_index'))
 				<a href="{{ route('categories.index') }}"
-					class="list-group-item list-group-item-action py-1 px-1 {{ Request::is('categories*') ? 'menu_active' : '' }}">
+					class="list-group-item list-group-item-action p-1 {{ Request::is('categories*') ? 'active' : '' }}">
 					<i class="fa fa-sitemap pl-2"></i>
 					Categories
 				</a>
@@ -14,7 +20,7 @@
 
 			{{-- @if(checkPerm('component_index')) --}}
 				<a href="{{ route('comments.index') }}"
-					class="list-group-item list-group-item-action py-1 px-1 {{ Request::is('comments*') ? 'menu_active' : '' }}">
+					class="list-group-item list-group-item-action p-1 {{ Request::is('comments*') ? 'active' : '' }}">
 					<i class="fas fa-comments pl-2"></i>
 					Comments
 				</a>
@@ -22,7 +28,7 @@
 
 			@if(checkPerm('component_index'))
 				<a href="{{ route('components.index') }}"
-					class="list-group-item list-group-item-action py-1 px-1 {{ Request::is('components*') ? 'menu_active' : '' }}">
+					class="list-group-item list-group-item-action p-1 {{ Request::is('components*') ? 'active' : '' }}">
 					<i class="fas fa-boxes pl-2"></i>
 					Components
 				</a>
@@ -30,7 +36,7 @@
 
 			@if(checkPerm('module_index'))
 				<a href="{{ route('modules.index') }}"
-					class="list-group-item list-group-item-action py-1 px-1 {{ Request::is('modules*') ? 'menu_active' : '' }}">
+					class="list-group-item list-group-item-action p-1 {{ Request::is('modules*') ? 'active' : '' }}">
 					<i class="fa fa-cubes pl-2"></i>
 					Modules
 				</a>
@@ -38,14 +44,19 @@
 
 			@if(checkPerm('permission_index'))
 				<a href="{{ route('permissions.index') }}"
-					class="list-group-item list-group-item-action py-1 px-1 {{ Request::is('permissions*') ? 'menu_active' : '' }}">
+					class="list-group-item list-group-item-action p-1 {{ Route::is('permissions.*') ? 'active' : '' }}">
 					<i class="fas fa-shield-alt pl-2"></i>
 					Permissions
 				</a>
 			@endif
 
-			@if(\Module::enabled('Posts'))
-				<a class="list-group-item list-group-item-action py-1 px-1 {{ Request::is('posts*') ? 'menu_active' : '' }}"
+			<a href="{{ route('posts.index') }}"
+				class="list-group-item list-group-item-action p-1 {{ Request::is('posts*') ? 'active' : '' }}">
+				<i class="far fa-newspaper pl-2"></i>
+				Posts
+			</a>
+{{-- 			@if(\Module::enabled('Posts'))
+				<a class="list-group-item list-group-item-action p-1 {{ Request::is('posts*') ? 'active' : '' }}"
 					data-remote="true" href="#posts" id="categoria_4" data-toggle="collapse" data-parent="#sub_posts">
 					<i class="far fa-newspaper pl-2"></i>
 					Posts
@@ -57,28 +68,28 @@
 				<div class="collapse list-group-submenu" id="posts">
 					@if(checkPerm('post_index'))
 						<a href="{{ route('posts.newPosts') }}"
-							class="list-group-item list-group-item-action pl-4 py-1 {{ Request::is('posts/newPosts') ? 'menu_active' : '' }}"
+							class="list-group-item list-group-item-action pl-4 py-1 {{ Request::is('posts/newPosts') ? 'active' : '' }}"
 							data-parent="#sub_posts">
 							<i class="fas fa-dot-circle"></i>
 							New Posts
 							<span class="badge badge-secondary border float-right">{{ Modules\Posts\Entities\Post::newPostsCount()->count() }}</span>
 						</a>
 						<a href="{{ route('posts.index') }}"
-							class="list-group-item list-group-item-action pl-4 py-1 {{ Request::is('posts') ? 'menu_active' : '' }}"
+							class="list-group-item list-group-item-action pl-4 py-1 {{ Request::is('posts') ? 'active' : '' }}"
 							data-parent="#sub_posts">
 							<i class="fas fa-upload"></i>
 							Published Posts
 							<span class="badge badge-secondary border float-right">{{ Modules\Posts\Entities\Post::published()->count() }}</span>
 						</a>
 						<a href="{{ route('posts.trashed') }}"
-							class="list-group-item list-group-item-action pl-4 py-1 {{ Request::is('posts/trashed') ? 'menu_active' : '' }}"
+							class="list-group-item list-group-item-action pl-4 py-1 {{ Request::is('posts/trashed') ? 'active' : '' }}"
 							data-parent="#sub_posts">
 							<i class="far fa-trash-alt"></i>
 							Trashed Posts
 							<span class="badge badge-secondary border float-right">{{ Modules\Posts\Entities\Post::trashedCount()->count() }}</span>
 						</a>
 						<a href="{{ route('posts.unpublished') }}"
-							class="list-group-item list-group-item-action pl-4 py-1 {{ Request::is('posts/unpublished') ? 'menu_active' : '' }}"
+							class="list-group-item list-group-item-action pl-4 py-1 {{ Request::is('posts/unpublished') ? 'active' : '' }}"
 							data-parent="#sub_posts">
 							<i class="fas fa-download"></i>
 							Unpublished Posts
@@ -86,13 +97,18 @@
 						</a>
 					@endif
 				</div>
-			@endif
+			@endif --}}
 
 
-			@if(\Module::enabled('Recipes'))
-				<a class="list-group-item list-group-item-action py-1 px-1 {{ Request::is('recipes*') ? 'menu_active' : '' }}"
+			<a href="{{ route('recipes.published') }}"
+				class="list-group-item list-group-item-action p-1 {{ Route::is('recipes.*') ? 'active' : '' }}">
+				<i class="fab fa-apple pl-2"></i>
+				Recipes
+			</a>
+{{-- 			@if(\Module::enabled('Recipes'))
+				<a class="list-group-item list-group-item-action p-1 {{ Route::is('recipes.*') ? 'active' : '' }}"
 					data-remote="true" href="#recipes_admin" id="categoria_5" data-toggle="collapse" data-parent="#sub_recipes_admin">
-					<i class="far fa-newspaper pl-2"></i>
+					<i class="fab fa-apple pl-2"></i>
 					Recipes
 					<span class="menu-ico-collapse float-right pr-2">
 						<i class="fa fa-chevron-down"></i>
@@ -100,7 +116,7 @@
 				</a>
 
 				<div class="collapse list-group-submenu" id="recipes_admin">
-					<a href="{{ route('recipes.published') }}" class="list-group-item list-group-item-action pl-4 py-1 {{ Request::is('recipes/published') ? 'active' : '' }}">
+					<a href="{{ route('recipes.published') }}" class="list-group-item list-group-item-action pl-4 py-1 {{ Route::is('recipes.published') ? 'active' : '' }}">
 			         <i class="fab fa-apple pl-2"></i>
 			         Published Recipes
 			      </a>
@@ -155,24 +171,24 @@
 						Download All to PDF
 					</a>
 				</div>
-			@endif
+			@endif --}}
 
 
 			<a href="{{ route('settings.index') }}"
-				class="list-group-item list-group-item-action py-1 px-1 {{ Request::is('settings') ? 'menu_active' : '' }}">
+				class="list-group-item list-group-item-action p-1 {{ Route::is('settings.*') ? 'active' : '' }}">
 				<i class="fas fa-cog pl-2"></i>
 				Site Settings
 			</a>
 
 			<a href="{{ route('stats') }}"
-				class="list-group-item list-group-item-action py-1 px-1 {{ Request::is('stats') ? 'menu_active' : '' }}">
+				class="list-group-item list-group-item-action p-1 {{ Route::is('stats*') ? 'active' : '' }}">
 				<i class="fas fa-chart-pie pl-2"></i>
 				Site Statistics
 			</a>
 
 			@if(checkPerm('user_index'))
 				<a href="{{ route('users.index') }}"
-					class="list-group-item list-group-item-action py-1 px-1 {{ Request::is('users*') ? 'menu_active' : '' }}">
+					class="list-group-item list-group-item-action p-1 {{ Route::is('users.*') ? 'active' : '' }}">
 					<i class="fas fa-users pl-2"></i>
 					Users
 				</a>

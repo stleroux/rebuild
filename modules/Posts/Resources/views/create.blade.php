@@ -6,7 +6,8 @@
 @stop
 
 @section('left_column')
-   @include('blocks.admin_menu')
+   {{-- @include('blocks.admin_menu') --}}
+   @include('posts::sidebar')
 @endsection
 
 @section('right_column')

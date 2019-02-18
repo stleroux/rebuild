@@ -18,14 +18,14 @@
       @endif
 
       @if(\Module::enabled('Recipes'))
-         @if(!Auth::check())
+         {{-- @if(!Auth::check()) --}}
             <a href="{{ route('recipes.index') }}"
-               class="list-group-item list-group-item-action py-1 px-1 {{ Request::is('recipes*') ? 'active' : '' }}">
+               class="list-group-item list-group-item-action py-1 px-1 {{ Route::is('recipes.index','recipes.myRecipes','recipes.myFavorites') ? 'active' : '' }}">
                   <i class="fab fa-apple pl-2"></i>
                   Recipes
             </a>
-         @else
-            <a class="list-group-item list-group-item-action py-1 px-1 {{ Request::is('recipes*') ? 'active' : '' }}"
+         {{-- @else --}}
+            {{-- <a class="list-group-item list-group-item-action py-1 px-1 {{ Route::is('recipes*') ? 'active' : '' }}"
                data-remote="true" href="#recipes" id="categoria_4" data-toggle="collapse" data-parent="#sub_recipes">
                <i class="fab fa-apple pl-2"></i>
                Recipes
@@ -35,27 +35,23 @@
             </a>
             <div class="collapse list-group-submenu" id="recipes">
                   <a href="{{ route('recipes.index') }}"
-                     class="list-group-item list-group-item-action pl-4 py-1 {{ Request::is('recipes/index') ? 'active' : '' }}"
+                     class="list-group-item list-group-item-action pl-4 py-1 {{ Route::is('recipes.index') ? 'active' : '' }}"
                      data-parent="#sub_recipes">
                      <i class="fab fa-apple"></i>
                      All Recipes
-                     {{-- <span class="badge badge-secondary border float-right">{{ Modules\Posts\Entities\Post::newPostsCount()->count() }}</span> --}}
                   </a>
-               {{-- @if(Auth::check()) --}}
                   <a href="{{ route('recipes.myRecipes') }}"
-                     class="list-group-item list-group-item-action pl-4 py-1 {{ Request::is('recipes/myRecipes') ? 'active' : '' }}"
+                     class="list-group-item list-group-item-action pl-4 py-1 {{ Route::is('recipes.myRecipes') ? 'active' : '' }}"
                      data-parent="#sub_recipes">
                      <i class="fas fa-dot-circle"></i>
                      My Recipes
-                     {{-- <span class="badge badge-secondary border float-right">{{ Modules\Posts\Entities\Post::newPostsCount()->count() }}</span> --}}
                   </a>
                   <a href="{{ route('recipes.myFavorites') }}"
-                     class="list-group-item list-group-item-action pl-4 py-1 {{ Request::is('recipes/myFavorites') ? 'active' : '' }}"
+                     class="list-group-item list-group-item-action pl-4 py-1 {{ Route::is('recipes.myFavorites') ? 'active' : '' }}"
                      data-parent="#sub_recipes">
                      <i class="fab fa-gratipay"></i>
                      My Favorites
-                     {{-- <span class="badge badge-secondary border float-right">{{ Modules\Posts\Entities\Post::published()->count() }}</span> --}}
-                  </a>
+                  </a> --}}
                   {{-- <a href="{{ route('posts.trashed') }}"
                      class="list-group-item list-group-item-action pl-4 py-1 {{ Request::is('posts/trashed') ? 'active' : '' }}"
                      data-parent="#sub_recipes">
@@ -71,8 +67,8 @@
                      <span class="badge badge-secondary border float-right">{{ Modules\Posts\Entities\Post::unpublished()->count() }}</span>
                   </a> --}}
                {{-- @endif --}}
-            </div>
-         @endif
+            {{-- </div> --}}
+         {{-- @endif --}}
       @endif
 
 
@@ -87,7 +83,7 @@
       </a>
 
       <a href="#"
-         class="list-group-item list-group-item-action py-1 px-1 {{ Request::is('projects*') ? 'active' : '' }}">
+         class="list-group-item list-group-item-action py-1 px-1 {{ Route::is('projects.*') ? 'active' : '' }}">
          <i class="text-danger">
             <i class="fab fa-pagelines pl-2"></i>
             Woodshop Projects
@@ -97,7 +93,7 @@
       @if(\Module::enabled('Articles'))
          @if(checkPerm('article_index'))
             <a href="{{ route('articles') }}"
-               class="list-group-item list-group-item-action py-1 px-1 {{ Request::is('articles*') ? 'active' : '' }}">
+               class="list-group-item list-group-item-action py-1 px-1 {{ Route::is('articles.*') ? 'active' : '' }}">
                <i class="text-danger">
                   <i class="far fa-newspaper pl-2"></i>
                   Articles
@@ -109,8 +105,8 @@
       @if(\Module::enabled('Invoicer'))
          @if(checkPerm('invoicer_index'))
             <a href="{{ route('invoicer') }}"
-               target="_blank"
-               class="list-group-item list-group-item-action py-1 px-1">
+               {{-- target="_blank" --}}
+               class="list-group-item list-group-item-action py-1 px-1 {{ Route::is('invoicer.*') ? 'active' : '' }}">
                <i class="fas fa-file-invoice pl-2"></i>
                Invoicer
             </a>
@@ -118,7 +114,7 @@
       @endif
       
       <a href="#"
-         class="list-group-item list-group-item-action py-1 px-1 {{ Request::is('') ? 'active' : '' }}">
+         class="list-group-item list-group-item-action py-1 px-1 {{ Route::is('darts.*') ? 'active' : '' }}">
          <i class="text-danger">
             <i class="fas fa-bullseye pl-2"></i>
             Darts

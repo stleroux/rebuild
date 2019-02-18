@@ -5,7 +5,8 @@
 @stop
 
 @section('left_column')
-   @include('blocks.admin_menu')
+   {{-- @include('blocks.admin_menu') --}}
+   @include('posts::sidebar')
 @endsection
 
 @section('right_column')
@@ -62,7 +63,7 @@
 
 					<div class="card-body card_body">
 						@if($posts->count() > 0)
-							<div class="card mb-2 bg-transparent border-0 pt-0 py-0">
+							{{-- <div class="card mb-2 bg-transparent border-0 pt-0 py-0">
 								<div class="card-body px-0 py-0 text-center">
 									<div class="btn-group" role="group">
 									<a href="{{ route('posts.newPosts') }}" class="{{ Request::is('posts/newPosts') ? "btn-secondary": "btn-primary" }} btn btn-sm">All</a>
@@ -71,7 +72,8 @@
 									@endforeach
 									</div>
 								</div>
-							</div>
+							</div> --}}
+							@include('common.alphabet', ['model'=>'post', 'page'=>'newPosts'])
 							<table id="datatable" class="table table-hover table-sm">
 								<thead>
 									<tr>

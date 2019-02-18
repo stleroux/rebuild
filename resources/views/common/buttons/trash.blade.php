@@ -1,4 +1,8 @@
-<a href="{{ route($model.'s'.'.trash', $id) }}" class="btn btn-sm btn-outline-danger px-1 py-0">
+<a href="{{ route($model.'s'.'.trash', $id) }}"
+   class="btn btn-sm btn-outline-danger"
+   title="Trash">
    <i class="far fa-trash-alt"></i>
-   Trash
+   @if($type == 'menu')
+      Trash
+   @endif
 </a>

@@ -16,7 +16,8 @@
 	<link rel="stylesheet" href="/css/jquery.datetimepicker.min.css">
 
 	<!-- Font Awesome -->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+	{{-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"> --}}
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
 	<!-- Styles -->
 	{{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
@@ -28,6 +29,8 @@
 </head>
 <body>
 	
+	{{ Session::get('pageName') }}
+	
 	@include('layouts.master.navbar')
 	@include('layouts.master.messages')
 
@@ -35,7 +38,7 @@
 		<div id="app" class="py-0 px-0">
 			<div class="row pt-0 pr-2 pl-2 pb-0">
 				<div class="col-sm-3 col-md-2 pt-0 pr-0 pl-0 pb-0">
-					@include('blocks.main_menu')
+{{-- 					@include('blocks.main_menu') --}}
 					@yield('left_column')
 				</div>
 				<div class="col-sm-6 col-md-8 py-0 px-2">

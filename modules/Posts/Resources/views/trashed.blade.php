@@ -5,7 +5,8 @@
 @stop
 
 @section('left_column')
-   @include('blocks.admin_menu')
+   {{-- @include('blocks.admin_menu') --}}
+   @include('posts::sidebar')
 @endsection
 
 @section('right_column')
@@ -59,9 +60,10 @@
                   </div>
                </div>
 
-               <div class="card-body card_body">
+               <div class="card-body card_body p-2">
                   @if($posts->count() > 0)
-                     <div class="card mb-2 bg-transparent border-0 pt-0 py-0">
+                     @include('common.alphabet', ['model'=>'post', 'page'=>'trashed'])
+                     {{-- <div class="card mb-2 bg-transparent border-0 pt-0 py-0">
                         <div class="card-body px-0 py-0 text-center">
                            <div class="btn-group" role="group">
                            <a href="{{ route('posts.trashed') }}" class="{{ Request::is('posts/trashed') ? "btn-secondary": "btn-primary" }} btn btn-sm">All</a>
@@ -70,7 +72,7 @@
                            @endforeach
                            </div>
                         </div>
-                     </div>
+                     </div> --}}
                      <table id="datatable" class="table table-hover table-sm">
                         <thead>
                            <tr>

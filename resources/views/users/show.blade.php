@@ -5,7 +5,8 @@
 @endsection
 
 @section('left_column')
-   @include('blocks.admin_menu')
+   {{-- @include('blocks.admin_menu') --}}
+   @include('users.sidebar')
 @endsection
 
 @section('right_column')
@@ -21,7 +22,7 @@
             <i class="fas fa-user"></i>
             View User
             <span class="float-sm-right">
-               <a href="{{ route('users.index') }}" class="btn btn-sm btn-secondary px-1 py-0">
+               <a href="{{ route('users.index') }}" class="btn btn-sm btn-outline-secondary px-1 py-0">
                   <i class="fas fa-angle-double-left"></i>
                   Cancel
                </a>

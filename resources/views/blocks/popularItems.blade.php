@@ -24,7 +24,7 @@
 
          @if($popularPosts->count() > 0)
             <div class="card mb-2">
-               <div class="card-header">Popular Blog</div>
+               <div class="card-header">POPULAR BLOG</div>
                <div class="card-body p-0 m-0">
                   @foreach ($popularPosts as $b)
                      <a class="list-group-item p-1 m-0" href="{{ route('blog.single', $b->slug) }}" role="button">
@@ -41,7 +41,7 @@
 
          @if($popularRecipes->count() > 0)
             <div class="card mb-2">
-               <div class="card-header">Popular Recipe</div>
+               <div class="card-header">POPULAR RECIPES</div>
                <div class="card-body p-0 m-0">
                   @foreach ($popularRecipes as $r)
                      <a class="list-group-item p-1 m-0" href="{{ route('recipes.show', $r->id) }}" role="button">

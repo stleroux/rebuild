@@ -1,10 +1,12 @@
 <button
-   class="btn btn-sm btn-outline-danger px-1 py-0"
+   class="btn btn-sm btn-outline-danger"
    type="submit"
    formaction="{{ route($model.'s'.'.trashAll') }}"
    formmethod="POST"
    id="bulk-trash"
+   title="Trash Selected"
    style="display:none;"
    onclick="return confirm('Are you sure you want to trash these {{ $model }}s?')">
-      Trash  Selected
+   <i class="far fa-trash-alt"></i>
+   {{-- Trash  Selected --}}
 </button>
