@@ -56,6 +56,8 @@ Route::group(['prefix' => 'recipes'], function()
    Route::get('create',                   'RecipesController@create')               ->name('recipes.create');
    Route::post('store',                   'RecipesController@store')                ->name('recipes.store');
    Route::get('{id}/show',                'RecipesController@show')                 ->name('recipes.show');
+   Route::get('{id}/view',                'RecipesController@view')                 ->name('recipes.view');
+   Route::get('{id}/trashedView',         'RecipesController@trashedView')          ->name('recipes.trashedView');
    Route::get('{id?}',                    'RecipesController@index')                ->name('recipes.index');
    Route::get('{id}/edit',                'RecipesController@edit')                 ->name('recipes.edit');
    Route::put('{id}',                     'RecipesController@update')               ->name('recipes.update');

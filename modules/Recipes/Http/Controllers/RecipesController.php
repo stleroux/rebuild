@@ -1473,6 +1473,65 @@ class RecipesController extends Controller
 
 
 ##################################################################################################################
+# ████████╗██████╗  █████╗ ███████╗██╗  ██╗███████╗██████╗     ██╗   ██╗██╗███████╗██╗    ██╗
+# ╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██║  ██║██╔════╝██╔══██╗    ██║   ██║██║██╔════╝██║    ██║
+#    ██║   ██████╔╝███████║███████╗███████║█████╗  ██║  ██║    ██║   ██║██║█████╗  ██║ █╗ ██║
+#    ██║   ██╔══██╗██╔══██║╚════██║██╔══██║██╔══╝  ██║  ██║    ╚██╗ ██╔╝██║██╔══╝  ██║███╗██║
+#    ██║   ██║  ██║██║  ██║███████║██║  ██║███████╗██████╔╝     ╚████╔╝ ██║███████╗╚███╔███╔╝
+#    ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚═════╝       ╚═══╝  ╚═╝╚══════╝ ╚══╝╚══╝ 
+// Display the specified resource
+##################################################################################################################
+   public function trashedView($id)
+   {
+      $recipe = Recipe::withTrashed()->find($id);
+
+      // Set the variable so we can use a button in other pages to come back to this page
+      // Session::put('pageName', 'show');
+
+      // get previous recipe id
+      // $previous = Recipe::published()->where('id', '<', $recipe->id)->max('id');
+
+      // get next recipe id
+      // $next = Recipe::published()->where('id', '>', $recipe->id)->min('id');
+
+      //$next = Recipe::published()->orderBy("title")->first();
+      // dd($next);
+      //$previous = Recipe::orderBy("title", 'desc')->first();
+
+      // Add 1 to views column
+      // DB::table('recipes')->where('id','=',$recipe->id)->increment('views',1);
+
+      // If user is logged in, update the last_viewed_by_id and last_viewed_on fields in the recipes table
+      // if (Auth::check()) {
+      //    DB::statement("UPDATE recipes SET last_viewed_by_id = " . Auth::user()->id . " where id = " . $id );
+      //    DB::statement("UPDATE recipes SET last_viewed_on = " . DB::raw('NOW()') . " where id = " . $id );
+      // }
+
+      // Get list of recips by year and month
+      // $recipelinks = DB::table('recipes')
+      //    ->select(DB::raw('YEAR(published_at) year, MONTH(published_at) month, MONTHNAME(published_at) month_name, COUNT(*) recipe_count'))
+      //    ->where('published_at', '<=', Carbon::now())
+      //    //->subMonth(3)) --Only show the last 3 months
+      //    //->whereRaw('published = 1') -- field no longer used
+      //    ->groupBy('year')
+      //    ->groupBy('month')
+      //    ->orderBy('year', 'desc')
+      //    ->orderBy('month', 'desc')
+      //    ->get();
+
+      // Save entry to log file using built-in Monolog
+      if (Auth::check()) {
+         //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") viewed :: Recipe (" . $recipe->id . ")");
+      } else {
+         //Log::info(getClientIP() . " viewed :: Recipe (" . $recipe->id . ")");
+      }
+
+      // return view('recipes::backend.view', compact('recipe','recipelinks','next','previous'));
+      return view('recipes::backend.trashedView', compact('recipe'));
+   }
+
+
+##################################################################################################################
 # ██╗   ██╗███╗   ██╗██████╗ ██╗   ██╗██████╗ ██╗     ██╗███████╗██╗  ██╗
 # ██║   ██║████╗  ██║██╔══██╗██║   ██║██╔══██╗██║     ██║██╔════╝██║  ██║
 # ██║   ██║██╔██╗ ██║██████╔╝██║   ██║██████╔╝██║     ██║███████╗███████║
@@ -1654,6 +1713,64 @@ class RecipesController extends Controller
       //return redirect()->route('recipes.index');
       return redirect(Session::get('fullURL'));
   }
+
+
+##################################################################################################################
+# ██╗   ██╗██╗███████╗██╗    ██╗
+# ██║   ██║██║██╔════╝██║    ██║
+# ██║   ██║██║█████╗  ██║ █╗ ██║
+# ╚██╗ ██╔╝██║██╔══╝  ██║███╗██║
+#  ╚████╔╝ ██║███████╗╚███╔███╔╝
+#   ╚═══╝  ╚═╝╚══════╝ ╚══╝╚══╝
+// Display the specified resource
+##################################################################################################################
+   public function view($id)
+   {
+      $recipe = Recipe::find($id);
+
+      // Set the variable so we can use a button in other pages to come back to this page
+      // Session::put('pageName', 'show');
+
+      // get previous recipe id
+      // $previous = Recipe::published()->where('id', '<', $recipe->id)->max('id');
+
+      // get next recipe id
+      // $next = Recipe::published()->where('id', '>', $recipe->id)->min('id');
+
+      //$next = Recipe::published()->orderBy("title")->first();
+      // dd($next);
+      //$previous = Recipe::orderBy("title", 'desc')->first();
+
+      // Add 1 to views column
+      // DB::table('recipes')->where('id','=',$recipe->id)->increment('views',1);
+
+      // If user is logged in, update the last_viewed_by_id and last_viewed_on fields in the recipes table
+      // if (Auth::check()) {
+      //    DB::statement("UPDATE recipes SET last_viewed_by_id = " . Auth::user()->id . " where id = " . $id );
+      //    DB::statement("UPDATE recipes SET last_viewed_on = " . DB::raw('NOW()') . " where id = " . $id );
+      // }
+
+      // Get list of recips by year and month
+      $recipelinks = DB::table('recipes')
+         ->select(DB::raw('YEAR(published_at) year, MONTH(published_at) month, MONTHNAME(published_at) month_name, COUNT(*) recipe_count'))
+         ->where('published_at', '<=', Carbon::now())
+         //->subMonth(3)) --Only show the last 3 months
+         //->whereRaw('published = 1') -- field no longer used
+         ->groupBy('year')
+         ->groupBy('month')
+         ->orderBy('year', 'desc')
+         ->orderBy('month', 'desc')
+         ->get();
+
+      // Save entry to log file using built-in Monolog
+      if (Auth::check()) {
+         //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") viewed :: Recipe (" . $recipe->id . ")");
+      } else {
+         //Log::info(getClientIP() . " viewed :: Recipe (" . $recipe->id . ")");
+      }
+
+      return view('recipes::backend.view', compact('recipe','recipelinks','next','previous'));
+   }
 
 
 }

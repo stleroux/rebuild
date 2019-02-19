@@ -5,12 +5,13 @@
 @stop
 
 @section('left_column')
-   @include('blocks.main_menu')
+   @include('blocks.adminNav')
+	@include('recipes::backend.sidebar')
 @endsection
 
 @section('right_column')
-	{{-- @include('recipes::show.controls') --}}
-	@include('recipes::show.leave_comment')
+	{{-- @include('recipes::backend.view.controls') --}}
+	{{-- @include('recipes::backend.view.leave_comment') --}}
 @endsection
 
 @section ('content')
@@ -27,8 +28,8 @@
 		<div class="card-body card_body">
 	
 			<div class="row">
-				@include('recipes::show.ingredients')
-				@include('recipes::show.image')
+				@include('recipes::backend.view.ingredients')
+				@include('recipes::backend.view.image')
 			</div>
 
 			<div class="row">
@@ -37,26 +38,26 @@
 
 			@auth
 				<div class="row">
-					@include('recipes::show.methodology')
+					@include('recipes::backend.view.methodology')
 				</div>
 
 				<div class="row">
-					@include('recipes::show.category')
-					@include('recipes::show.servings')
-					@include('recipes::show.prep_time')
-					@include('recipes::show.cook_time')
-					@include('recipes::show.personal')
-					@include('recipes::show.views')
-					@include('recipes::show.source')
+					@include('recipes::backend.view.category')
+					@include('recipes::backend.view.servings')
+					@include('recipes::backend.view.prep_time')
+					@include('recipes::backend.view.cook_time')
+					@include('recipes::backend.view.personal')
+					@include('recipes::backend.view.views')
+					@include('recipes::backend.view.source')
 				</div>
 
 				<div class="row">
-					@include('recipes::show.author_notes')
+					@include('recipes::backend.view.author_notes')
 				</div>
 			@endauth
 
 			<div class="row">
-				@include('recipes::show.comments')
+				@include('recipes::backend.view.comments')
 			</div>
 
 		</div>
@@ -67,11 +68,11 @@
 @stop
 
 @section('blocks')
-	@include('recipes::show.controls')
-	{{-- @include('recipes::show.information') --}}
+	{{-- @include('recipes::backend.view.controls') --}}
+	{{-- @include('recipes::backend.view.information') --}}
 	{{-- @include('common.information', ['model'=>$recipe, 'title'=>'Recipe']) --}}
-	@include('recipes::blocks.archives')
-	@include('recipes::show.leave_comment')
+	{{-- @include('recipes::blocks.archives') --}}
+	{{-- @include('recipes::backend.view.leave_comment') --}}
 @stop
 
 @section ('scripts')

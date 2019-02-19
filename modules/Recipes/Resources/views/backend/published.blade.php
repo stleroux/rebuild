@@ -55,7 +55,7 @@
 								<td>
 									<input type="checkbox" onClick="checkbox_is_checked()" name="checked[]" value="{{$recipe->id}}" class="check-all">
 								</td>
-								<td><a href="{{ route('recipes.show', $recipe->id) }}">{{ ucwords($recipe->title) }}</a></td>
+								<td><a href="{{ route('recipes.view', $recipe->id) }}">{{ ucwords($recipe->title) }}</a></td>
 								<td>{{ $recipe->category->name }}</td>
 								<td>{{ $recipe->views }}</td>
 								<td>{{ \Modules\Recipes\Entities\Recipe::withTrashed()->find($recipe->id)->favoritesCount }}</td>
