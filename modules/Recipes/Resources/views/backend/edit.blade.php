@@ -1,36 +1,22 @@
-@extends ('layouts.app')
-
-@section ('title', 'Edit Recipe')
+@extends ('layouts.master')
 
 @section ('stylesheets')
-   <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+   {{-- <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet"> --}}
 @stop
 
-@section('sectionSidebar')
-    @include('recipes.sidebar')
-@stop
+@section('left_column')
+   @include('recipes::backend.sidebar')
+@endsection
 
-@section('breadcrumb')
-   <li><a href="dashboard">Dashboard</a></li>
-   <li><a href="{{ route('recipes.index') }}">Recipes</a></li>
-   <li class="active"><span>Update Recipe</span></li>
-@stop
-
-@section('menubar')
-      
-@stop
+@section('right_column')
+@endsection
 
 @section ('content')
    {!! Form::model($recipe, ['route'=>['recipes.update', $recipe->id], 'method' => 'PUT', 'files' => true]) !!}
       {{-- <input type="hidden" value="{{ $ref }}" name="ref" size="50"/> --}}
-      @include('recipes.edit.datagrid1')
+      @include('recipes::backend.edit.datagrid')
 @stop
 
-@section('blocks')
-      @include('recipes.edit.controls')
-   {!! Form::close() !!}
-@stop
-
-@section ('scripts')
+{{-- @section ('scripts')
    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-@stop
+@stop --}}

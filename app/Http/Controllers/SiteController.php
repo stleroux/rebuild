@@ -9,6 +9,7 @@ use App\Module;
 use App\Permission;
 use App\User;
 use Auth;
+use Session;
 
 use Modules\Posts\Entities\Post;
 use Modules\Recipes\Entities\Recipe;
@@ -40,6 +41,9 @@ class SiteController extends Controller
 ##################################################################################################################
 	public function homepage()
 	{
+		// Set the variable so we can use a button in other pages to come back to this page
+      Session::put('pageName', 'index');
+
 		$posts = Post::published()->with('user')->orderBy('id','desc')->take(setting('homepage_blog_count'))->get();
 
 		// $popularArticle = Article::published()->get()->sortByDesc('views')->take(1);

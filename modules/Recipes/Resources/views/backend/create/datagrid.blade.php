@@ -3,7 +3,7 @@
 		<i class="fa fa-plus-square"></i>
 		Create Recipe
       <span class="float-right">
-         @include('common.buttons.back', ['model'=>'recipe'])
+         @include('common.buttons.cancel', ['model'=>'recipe', 'type'=>''])
          @include('common.buttons.save', ['model'=>'recipe'])
       </span>
 	</div>
@@ -30,10 +30,10 @@
             <!-- Publish Date -->
             <div class="col-xs-12 col-sm-6 col-md-3">
                <div class="form-group {{ $errors->has('published_at') ? 'has-error' : '' }}">
-                  {{ Form::label('published_at', 'Publish(ed) On') }}
+                  {{ Form::label('published_at', 'Publish(ed) On', ['class'=>'required']) }}
                   {{-- {{ Form::text('published_at', null, ['class'=>'form-control required', 'id'=>'datepicker']) }} --}}
                   <div class="input-group">
-                     <input type="text" name="published_at" class="form-control required" id="datePicker" />
+                     <input type="text" name="published_at" class="form-control" id="datePicker" />
                      <div class="input-group-append">
                         <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                      </div>

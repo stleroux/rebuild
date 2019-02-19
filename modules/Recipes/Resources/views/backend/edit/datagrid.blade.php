@@ -1,9 +1,13 @@
-<div class="panel panel-primary">
-	<div class="panel-heading">
-		<h3 class="panel-title">Edit Recipe</h3>
+<div class="card mb-3">
+	<div class="card-header">
+		Edit Recipe
+		<span class="float-right">
+         @include('common.buttons.cancel', ['model'=>'recipe', 'type'=>''])
+         @include('common.buttons.update', ['model'=>'recipe'])
+      </span>
 	</div>
 
-	<div class="panel-body">
+	<div class="card-body">
 		<div class="row">
 
 			<!-- Title -->
@@ -27,8 +31,13 @@
 			<!-- Publish Date -->
 			<div class="col-xs-12 col-sm-6 col-md-3">
 				<div class="form-group {{ $errors->has('published_at') ? 'has-error' : '' }}">
-					{{ Form::label('published_at', 'Publish(ed) On') }}
-					{{ Form::text('published_at', null, ['class'=>'form-control required', 'id'=>'datetime']) }}
+					{{ Form::label('published_at', 'Publish(ed) On', ['class'=>'required']) }}
+					<div class="input-group">
+						{{ Form::text('published_at', null, ['class'=>'form-control', 'id'=>'datePicker']) }}
+						<div class="input-group-append">
+                     <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                  </div>
+               </div>
 					<span class="text-danger">{{ $errors->first('published_at') }}</span>
 				</div>
 			</div>

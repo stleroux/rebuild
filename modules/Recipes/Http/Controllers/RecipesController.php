@@ -387,7 +387,7 @@ class RecipesController extends Controller
          $cats[$category->id] = $category->name;
       }
 
-      return view('recipes.edit', compact('recipe'))->withCategories($cats);
+      return view('recipes::backend.edit', compact('recipe'))->withCategories($cats);
    }
 
 
@@ -1168,23 +1168,30 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function show($id)
    {
-      $recipe = Recipe::find($id);
+      $recipe = Recipe::withTrashed()->find($id);
 
       // Set the variable so we can use a button in other pages to come back to this page
       // Session::put('pageName', 'show');
 
       // get previous recipe id
-      $previous = Recipe::published()->where('id', '<', $recipe->id)->max('id');
+      // $previous = Recipe::published()->where('id', '<', $recipe->id)->max('id');
 
       // get next recipe id
-      $next = Recipe::published()->where('id', '>', $recipe->id)->min('id');
+      // $next = Recipe::published()->where('id', '>', $recipe->id)->min('id');
 
       //$next = Recipe::published()->orderBy("title")->first();
       // dd($next);
       //$previous = Recipe::orderBy("title", 'desc')->first();
 
       // Add 1 to views column
-      DB::table('recipes')->where('id','=',$recipe->id)->increment('views',1);
+      if(
+         (Session::get('pageName') === 'index') ||
+         (Session::get('pageName') === 'myFavorites') ||
+         (Session::get('pageName') === 'archive')
+      ){
+         DB::table('recipes')->where('id','=',$recipe->id)->increment('views',1);
+      }
+
 
       // If user is logged in, update the last_viewed_by_id and last_viewed_on fields in the recipes table
       // if (Auth::check()) {
@@ -1211,7 +1218,7 @@ class RecipesController extends Controller
          //Log::info(getClientIP() . " viewed :: Recipe (" . $recipe->id . ")");
       }
 
-      return view('recipes::frontend.show', compact('recipe','recipelinks','next','previous'));
+      return view('recipes::common.show', compact('recipe','recipelinks','next','previous'));
    }
 
 

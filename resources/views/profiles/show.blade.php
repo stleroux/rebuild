@@ -49,13 +49,15 @@
                                        <input type="text" class="form-control form-control-sm" value="{{ $user->profile->last_name }}" readonly="readonly">
                                     </div>
                                  </div>
-                                 <div class="col-md-2">
+                                 <div class="col-md-3">
                                     <div class="form-group">
                                        <label for="telephone">Telephone</label>
                                        <input type="text" class="form-control form-control-sm" value="{{ $user->profile->telephone }}" readonly="readonly">
                                     </div>
                                  </div>
-                                 <div class="col-sm-3">
+                              </div>
+                              <div class="form-row">
+                                 <div class="col-sm-4">
                                     <div class="form-group">
                                        {{ Form::label('email', 'Email Address') }}
                                        @if($user->public_email == 'no')
