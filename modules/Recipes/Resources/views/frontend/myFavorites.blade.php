@@ -9,6 +9,7 @@
 @endsection
 
 @section('right_column')
+   @include('blocks.popularRecipes')
    @include('recipes::frontend.blocks.archives')
 @endsection
 

@@ -15,18 +15,6 @@
       </a>
       @endif --}}
 
-      <a href="/"
-         class="list-group-item list-group-item-action p-1">
-         <i class="fas fa-home pl-2"></i>
-         Frontend View
-      </a>
-
-      <a href="/dashboard"
-         class="list-group-item list-group-item-action p-1">
-         <i class="fas fa-cog pl-2"></i>
-         Dashboard
-      </a>
-
       <a href="{{ route('categories.index') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('categories.index') ? 'active' : '' }}">
          <i class="fa fa-sitemap pl-2"></i>
          Categories
@@ -35,12 +23,12 @@
          </div>
       </a>
 
-      @if(checkPerm('user_create'))
+{{--       @if(checkPerm('user_create'))
          <a href="{{ route('categories.create') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('categories.create') ? 'active' : '' }}">
             <i class="fas fa-plus-square pl-2"></i>
             New Category
          </a>
-      @endif
+      @endif --}}
 
    </div>
 

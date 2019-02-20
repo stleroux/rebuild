@@ -607,6 +607,8 @@ class RecipesController extends Controller
 			$letters[] = $alpha->letter;
 		}
 
+      $popularRecipes = Recipe::published()->public()->get()->sortBy('title')->sortByDesc('views')->take(setting('homepage_favorite_recipe_count'));
+
 		// If $key value is passed
 		if ($key) {
 			$recipes = Recipe::with('user','category')
@@ -624,7 +626,7 @@ class RecipesController extends Controller
             ->paginate(18);
       }
 		
-      return view('recipes::frontend.index', compact('recipes','letters','recipelinks'));
+      return view('recipes::frontend.index', compact('recipes','letters','recipelinks','popularRecipes'));
 
 	}
 
@@ -711,7 +713,9 @@ class RecipesController extends Controller
          $recipes = $user->favorite(Recipe::class)->sortBy('title');
       }
 
-      return view('recipes::frontend.myFavorites', compact('recipes','recipelinks'));
+      $popularRecipes = Recipe::published()->public()->get()->sortBy('title')->sortByDesc('views')->take(setting('homepage_favorite_recipe_count'));
+
+      return view('recipes::frontend.myFavorites', compact('recipes','recipelinks','popularRecipes'));
 	}
 
 
@@ -1249,7 +1253,7 @@ class RecipesController extends Controller
          $recipe->cook_time = $request->cook_time;
          $recipe->personal = $request->personal;
          $recipe->source = $request->source;
-         $recipe->author_notes = $request->author_notes;
+         $recipe->private_notes = $request->private_notes;
          $recipe->public_notes = $request->public_notes;
          $recipe->modified_by_id = Auth::user()->id;
          $recipe->last_viewed_by_id = Auth::user()->id;
@@ -1643,11 +1647,14 @@ class RecipesController extends Controller
          $recipe = Recipe::withTrashed()->find($item);
             $recipe->published_at = Null;
 
-            // Delete related favorites
-            $favorites = DB::select('select * from recipe_user where recipe_id = '. $recipe->id, [1]);
-               foreach($favorites as $favorite) {
-                  $recipe->favoriteRecipes()->detach($favorite);
-               }
+         // Delete related favorites
+         // $favorites = DB::select('select * from recipe_user where recipe_id = '. $recipe->id, [1]);
+         // foreach($favorites as $favorite) {
+         //    $recipe->favoriteRecipes()->detach($favorite);
+         // }
+         // Delete this recipe's favorites
+         DB::table('favorites')->where('favoriteable_id', '=', $recipe->id)->delete();
+
          $recipe->save();
       }
       
@@ -1684,7 +1691,7 @@ class RecipesController extends Controller
       $recipe->cook_time = $request->cook_time;
       $recipe->personal = $request->personal;
       $recipe->source = $request->source;
-      $recipe->author_notes = $request->author_notes;
+      $recipe->private_notes = $request->private_notes;
       $recipe->public_notes = $request->public_notes;
       $recipe->modified_by_id = Auth::user()->id;
       $recipe->last_viewed_by_id = Auth::user()->id;

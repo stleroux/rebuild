@@ -74,3 +74,7 @@ p {
   padding: 0rem;
 }
 
+/* Used to automatically display the dropdown menu in the navbar whne hovered */
+.dropdown:hover>.dropdown-menu {
+   display: block;
+}

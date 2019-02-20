@@ -27,7 +27,7 @@ class CreateRecipesTable extends Migration {
 			$table->integer('views')->unsigned()->nullable()->default(0);
 			//$table->integer('published')->unsigned()->nullable()->default(0);
 			$table->string('source')->nullable();
-			$table->text('author_notes', 65535)->nullable();
+			$table->text('private_notes', 65535)->nullable();
 			$table->text('public_notes', 65535)->nullable();
 			$table->integer('user_id')->unsigned()->index('user_id');
 			$table->integer('modified_by_id')->unsigned()->nullable()->index('modified_by');

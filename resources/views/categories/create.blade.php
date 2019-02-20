@@ -17,12 +17,9 @@
             <i class="fa fa-plus" aria-hidden="true"></i>
             New Category
             <span class="float-right">
-               <a href="{{ route('categories.index') }}" class="btn btn-sm btn-outline-secondary px-1 py-0">
-                  <i class="fas fa-angle-double-left"></i>
-                  Cancel
-               </a>
-               {{ Form::button('<i class="fas fa-sync-alt"></i> Reset Form', ['type'=>'reset', 'class'=>'btn btn-sm btn-outline-secondary px-1 py-0']) }}
-               {{ Form::button('<i class="fa fa-save"></i> Save ', ['type' => 'submit', 'class' => 'btn btn-sm btn-outline-success px-1 py-0'])  }}
+               @include('common.buttons.cancel', ['model'=>'categorie', 'type'=>''])
+               @include('common.buttons.reset', ['model'=>'categorie', 'type'=>''])
+               @include('common.buttons.save', ['model'=>'categorie', 'type'=>''])
             </span>
          </div>
          <div class="card-body card_body pb-0">

@@ -45,12 +45,12 @@
 					@yield('content')
 				</div>
 				<div class="col-sm-3 col-md-2 py-0 px-0">
-					@guest
+					@yield('right_column')
+					{{-- @guest
 						@include('blocks.login')
 					@else
 						@include('blocks.member')
-					@endguest
-					@yield('right_column')
+					@endguest --}}
 				</div>
 			</div>
 		</div>
@@ -62,7 +62,8 @@
 
 	<!-- Optional JavaScript -->
 	<script type="text/javascript" src="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/dt-1.10.18/datatables.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	{{-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> --}}
+	{{-- The above causes issues with dropdown menu requiring 2x clicks to open the first time --}}
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	
 	@yield('scripts')

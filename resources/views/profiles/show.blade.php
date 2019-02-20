@@ -9,6 +9,7 @@
 @endsection
 
 @section('right_column')
+   @include('blocks.member')
 @endsection
 
 @section('content')
@@ -57,7 +58,7 @@
                                  </div>
                               </div>
                               <div class="form-row">
-                                 <div class="col-sm-4">
+                                 <div class="col-sm-5">
                                     <div class="form-group">
                                        {{ Form::label('email', 'Email Address') }}
                                        @if($user->public_email == 'no')
@@ -164,6 +165,73 @@
                                     <div class="form-group">
                                        <label for="postal_code" class=" control-label">Postal/Zip Code</label>
                                        <input type="text" class="form-control form-control-sm" value="{{ $user->profile->postal_code }}" readonly="readonly">
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+                  {{-- Contributions to the Site --}}
+                  <div class="form-row">
+                     <div class="col">
+                        <div class="card mb-2">
+                           <div class="card-header card_header_2">Contributions</div>
+                           <div class="card-body card_body">
+                              <div class="form-row">
+                                 <div class="col-sm-2">
+                                    <div class="form-group">
+                                       <label for="recipes" class=" control-label">Recipes</label>
+                                       <input type="text"
+                                          class="form-control form-control-sm"
+                                          value="{{ Modules\Recipes\Entities\Recipe::where('user_id','=', Auth::user()->id)->count() }}"
+                                          readonly="readonly">
+                                    </div>
+                                 </div>
+                                 <div class="col-sm-2">
+                                    <div class="form-group">
+                                       <label for="posts" class=" control-label">Posts</label>
+                                       <input type="text"
+                                          class="form-control form-control-sm"
+                                          value="{{ Modules\Posts\Entities\Post::where('user_id','=', Auth::user()->id)->count() }}"
+                                          readonly="readonly">
+                                    </div>
+                                 </div>
+                                 <div class="col-sm-2">
+                                    <div class="form-group">
+                                       <label for="articles" class=" control-label">Articles</label>
+                                       <input type="text"
+                                          class="form-control form-control-sm"
+                                          value="{{ Modules\Articles\Entities\Article::where('user_id','=', Auth::user()->id)->count() }}"
+                                          readonly="readonly">
+                                    </div>
+                                 </div>
+                                 <div class="col-sm-2">
+                                    <div class="form-group">
+                                       <label for="" class=" control-label">&nbsp;</label>
+                                       <input type="text"
+                                          class="form-control form-control-sm"
+                                          value=""
+                                          readonly="readonly">
+                                    </div>
+                                 </div>
+                                 <div class="col-sm-2">
+                                    <div class="form-group">
+                                       <label for="" class=" control-label">&nbsp;</label>
+                                       <input type="text"
+                                          class="form-control form-control-sm"
+                                          value=""
+                                          readonly="readonly">
+                                    </div>                                    
+                                 </div>
+                                 <div class="col-sm-2">
+                                    <div class="form-group">
+                                       <label for="" class=" control-label">&nbsp;</label>
+                                       <input type="text"
+                                          class="form-control form-control-sm"
+                                          value=""
+                                          readonly="readonly">
                                     </div>
                                  </div>
                               </div>

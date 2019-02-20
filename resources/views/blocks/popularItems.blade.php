@@ -39,7 +39,7 @@
             </div>
          @endif
 
-         @if($popularRecipes->count() > 0)
+{{--          @if($popularRecipes->count() > 0)
             <div class="card mb-2">
                <div class="card-header">POPULAR RECIPES</div>
                <div class="card-body p-0 m-0">
@@ -54,7 +54,9 @@
                   @endforeach
                </div>
             </div>
-         @endif
+         @endif --}}
+
+@include('blocks.popularRecipes')
 
          {{-- @foreach ($popularWoodProject as $wp)
             <a class="list-group-item" href="{{ route('woodProjects.show', $wp->id) }}" role="button">

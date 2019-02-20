@@ -64,11 +64,8 @@
 				</div>
 
 				<div class="row">
-					@include('recipes::common.show.author_notes')
-				</div>
-
-				<div class="row">
 					@include('recipes::common.show.public_notes')
+					@include('recipes::common.show.private_notes')
 				</div>
 
 			@endauth

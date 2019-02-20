@@ -35,7 +35,7 @@ class CreateRecipeRequest extends FormRequest
             'cook_time'     => 'required|integer',
             'source'        => 'sometimes',
             'personal'      => 'sometimes',
-            'author_notes'  => 'sometimes',
+            'private_notes' => 'sometimes',
             'public_notes'  => 'sometimes',
         ];
     }

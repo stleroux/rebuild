@@ -9,6 +9,7 @@
 @endsection
 
 @section('right_column')
+	   @include('blocks.member')
 @endsection
 
 @section('content')

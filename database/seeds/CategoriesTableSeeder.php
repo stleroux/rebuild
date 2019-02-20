@@ -24,8 +24,8 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'assyst',
                 'value' => NULL,
                 'deleted_at' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => '2019-02-20 12:39:18',
+                'updated_at' => '2019-02-20 12:39:18',
             ),
             1 => 
             array (
@@ -34,8 +34,8 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'site',
                 'value' => NULL,
                 'deleted_at' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => '2019-02-20 12:39:18',
+                'updated_at' => '2019-02-20 12:39:18',
             ),
             2 => 
             array (
@@ -44,8 +44,8 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'windows',
                 'value' => NULL,
                 'deleted_at' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => '2019-02-20 12:39:18',
+                'updated_at' => '2019-02-20 12:39:18',
             ),
             3 => 
             array (
@@ -54,8 +54,8 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'cakes',
                 'value' => NULL,
                 'deleted_at' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => '2019-02-20 12:39:18',
+                'updated_at' => '2019-02-20 12:39:18',
             ),
             4 => 
             array (
@@ -64,8 +64,8 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'pies',
                 'value' => NULL,
                 'deleted_at' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => '2019-02-20 12:39:18',
+                'updated_at' => '2019-02-20 12:39:18',
             ),
             5 => 
             array (
@@ -74,8 +74,8 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'entrees',
                 'value' => NULL,
                 'deleted_at' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => '2019-02-20 12:39:18',
+                'updated_at' => '2019-02-20 12:39:18',
             ),
             6 => 
             array (
@@ -84,8 +84,8 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'EKME',
                 'value' => NULL,
                 'deleted_at' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => '2019-02-20 12:39:18',
+                'updated_at' => '2019-02-20 12:39:18',
             ),
             7 => 
             array (
@@ -94,8 +94,8 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'furniture',
                 'value' => NULL,
                 'deleted_at' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => '2019-02-20 12:39:18',
+                'updated_at' => '2019-02-20 12:39:18',
             ),
             8 => 
             array (
@@ -104,8 +104,8 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'shelving',
                 'value' => NULL,
                 'deleted_at' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => '2019-02-20 12:39:18',
+                'updated_at' => '2019-02-20 12:39:18',
             ),
             9 => 
             array (
@@ -114,8 +114,8 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'Sequoia',
                 'value' => NULL,
                 'deleted_at' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => '2019-02-20 12:39:18',
+                'updated_at' => '2019-02-20 12:39:18',
             ),
             10 => 
             array (
@@ -124,8 +124,8 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'red mohagony',
                 'value' => NULL,
                 'deleted_at' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => '2019-02-20 12:39:18',
+                'updated_at' => '2019-02-20 12:39:18',
             ),
             11 => 
             array (
@@ -134,7 +134,7 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'White Pine',
                 'value' => NULL,
                 'deleted_at' => NULL,
-                'created_at' => NULL,
+                'created_at' => '2019-02-20 12:39:18',
                 'updated_at' => '2018-02-14 08:13:56',
             ),
             12 => 
@@ -144,8 +144,8 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'maple',
                 'value' => NULL,
                 'deleted_at' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => '2019-02-20 12:39:18',
+                'updated_at' => '2019-02-20 12:39:18',
             ),
             13 => 
             array (
@@ -154,8 +154,8 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'softwood',
                 'value' => NULL,
                 'deleted_at' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => '2019-02-20 12:39:18',
+                'updated_at' => '2019-02-20 12:39:18',
             ),
             14 => 
             array (
@@ -164,8 +164,8 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'hardwood',
                 'value' => NULL,
                 'deleted_at' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => '2019-02-20 12:39:18',
+                'updated_at' => '2019-02-20 12:39:18',
             ),
             15 => 
             array (
@@ -174,8 +174,8 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'Oil based',
                 'value' => NULL,
                 'deleted_at' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => '2019-02-20 12:39:18',
+                'updated_at' => '2019-02-20 12:39:18',
             ),
             16 => 
             array (
@@ -184,8 +184,8 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'Water based',
                 'value' => NULL,
                 'deleted_at' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => '2019-02-20 12:39:18',
+                'updated_at' => '2019-02-20 12:39:18',
             ),
             17 => 
             array (
@@ -194,8 +194,8 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'matte',
                 'value' => NULL,
                 'deleted_at' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => '2019-02-20 12:39:18',
+                'updated_at' => '2019-02-20 12:39:18',
             ),
             18 => 
             array (
@@ -204,8 +204,8 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'low luster',
                 'value' => NULL,
                 'deleted_at' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => '2019-02-20 12:39:18',
+                'updated_at' => '2019-02-20 12:39:18',
             ),
             19 => 
             array (
@@ -214,8 +214,8 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'gloss',
                 'value' => NULL,
                 'deleted_at' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => '2019-02-20 12:39:18',
+                'updated_at' => '2019-02-20 12:39:18',
             ),
             20 => 
             array (
@@ -224,8 +224,8 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'semi gloss',
                 'value' => NULL,
                 'deleted_at' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => '2019-02-20 12:39:18',
+                'updated_at' => '2019-02-20 12:39:18',
             ),
             21 => 
             array (
@@ -234,8 +234,8 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'polycrylic',
                 'value' => NULL,
                 'deleted_at' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => '2019-02-20 12:39:18',
+                'updated_at' => '2019-02-20 12:39:18',
             ),
             22 => 
             array (
@@ -244,8 +244,8 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'verathane',
                 'value' => NULL,
                 'deleted_at' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => '2019-02-20 12:39:18',
+                'updated_at' => '2019-02-20 12:39:18',
             ),
             23 => 
             array (
@@ -254,8 +254,8 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'urethane',
                 'value' => NULL,
                 'deleted_at' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => '2019-02-20 12:39:18',
+                'updated_at' => '2019-02-20 12:39:18',
             ),
             24 => 
             array (
@@ -264,8 +264,8 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'varnish',
                 'value' => NULL,
                 'deleted_at' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => '2019-02-20 12:39:18',
+                'updated_at' => '2019-02-20 12:39:18',
             ),
             25 => 
             array (
@@ -274,8 +274,8 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'semi gloss',
                 'value' => NULL,
                 'deleted_at' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => '2019-02-20 12:39:18',
+                'updated_at' => '2019-02-20 12:39:18',
             ),
             26 => 
             array (
@@ -284,8 +284,8 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'gloss',
                 'value' => NULL,
                 'deleted_at' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => '2019-02-20 12:39:18',
+                'updated_at' => '2019-02-20 12:39:18',
             ),
             27 => 
             array (
@@ -294,8 +294,8 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'high gloss',
                 'value' => NULL,
                 'deleted_at' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => '2019-02-20 12:39:18',
+                'updated_at' => '2019-02-20 12:39:18',
             ),
             28 => 
             array (

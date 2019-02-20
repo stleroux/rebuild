@@ -14,19 +14,19 @@
          Reset My Password
       </a>
 
-      <a href="{{ route('logout') }}"
+{{--       <a href="{{ route('logout') }}"
          class="list-group-item list-group-item-action py-1 px-1"
          onclick="event.preventDefault();
                   document.getElementById('logout-form').submit();">
          <i class="fas fa-sign-out-alt pl-2"></i>
          {{ __('Logout') }}
-      </a>
+      </a> --}}
 
    </div>
 
-   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+{{--    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
       @csrf
-   </form>
+   </form> --}}
 </div>
 
 

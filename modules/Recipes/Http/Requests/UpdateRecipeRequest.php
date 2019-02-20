@@ -34,7 +34,7 @@ class UpdateRecipeRequest extends FormRequest
             'prep_time'		=> 'required|integer',
             'cook_time'		=> 'required|integer',
             'source'		=> 'sometimes',
-            'author_notes'	=> 'sometimes',
+            'private_notes'	=> 'sometimes',
             'public_notes'	=> 'sometimes',
         ];
     }

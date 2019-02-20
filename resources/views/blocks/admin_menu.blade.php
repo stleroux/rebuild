@@ -4,11 +4,11 @@
 		
 		<div class="list-group pt-0 pb-0">
 
-		<a href="/"
+{{-- 		<a href="/"
 			class="list-group-item list-group-item-action p-1 {{ Request::is('/') ? 'active' : '' }}">
 			<i class="fas fa-home pl-2"></i>
 			Home
-		</a>
+		</a> --}}
 
 			@if(checkPerm('category_index'))
 				<a href="{{ route('categories.index') }}"
