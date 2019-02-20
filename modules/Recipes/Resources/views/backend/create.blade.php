@@ -15,8 +15,11 @@
 
 @section('content')
    {!! Form::open(['route' => 'recipes.store', 'files'=>'true']) !!}
+   {{-- <form style="display:inline;">
+      {!! csrf_field() !!} --}}
       @include('recipes::backend.create.datagrid')
    {!! Form::close() !!}
+   {{-- </form> --}}
 @endsection
 
 @section('scripts')

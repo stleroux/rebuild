@@ -1,8 +1,9 @@
 <button
    class="btn btn-sm btn-outline-secondary"
-   type="button"
-   title="My Recipes"
-   onclick="window.location='{{ route($model.'s'.'.myRecipes') }}'">
+   type="submit"
+   formaction="{{ route($model.'s'.'.myRecipes') }}"
+   formmethod="GET"
+   title="{{ ucfirst($model) }}s">
    <i class="fas fa-dot-circle"></i>
    @if($type == 'menu')
       My Recipes

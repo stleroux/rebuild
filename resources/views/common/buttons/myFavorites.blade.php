@@ -1,10 +1,11 @@
 <button
    class="btn btn-sm btn-outline-secondary"
-   type="button"
-   title="My Favorites"
-   onclick="window.location='{{ route($model.'s'.'.myFavorites') }}'">
-   <i class="fab fa-gratipay"></i>
+   type="submit"
+   formaction="{{ route($model.'s'.'.myFavorites') }}"
+   formmethod="GET"
+   title="My Favorite {{ ucfirst($model) }}s">
+   <i class="fas fa-dot-circle"></i>
    @if($type == 'menu')
-      My Favorites
+      My Favorites {{ ucfirst($model) }}
    @endif
 </button>

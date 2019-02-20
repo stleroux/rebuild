@@ -7,7 +7,8 @@
    title="Restore Selected"
    style="display:none;"
    onclick="return confirm('Are you sure you want to restore all these {{ $model }}s?')">
-   {{-- <i class="fas fa-trash-restore"></i> --}}
    <i class="fas fa-trash-restore-alt"></i>
-      {{-- Restore Selected --}}
+   @if($type == 'menu')
+      Restore Selected
+   @endif
 </button>

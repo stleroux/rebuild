@@ -1,8 +1,9 @@
 <button
-   type="button"
    class="btn btn-sm btn-outline-secondary"
-   title="Add Favorite"
-   onclick="window.location='{{ route('recipes.favoriteAdd', $recipe->id) }}'">
+   type="submit"
+   formaction="{{ route($model.'s'.'.favoriteAdd', $id) }}"
+   formmethod="GET"
+   title="Add Favorite">
    <i class="far fa-thumbs-up"></i>
    @if($type == 'menu')
       Add Favorite

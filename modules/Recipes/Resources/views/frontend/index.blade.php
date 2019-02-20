@@ -13,7 +13,9 @@
 @endsection
 
 @section('content')
-		
+	
+	<form style="display:inline;">
+		{{-- {!! csrf_field() !!}	 --}}
 		<div class="card mb-3">
 			<div class="card-header">
 				<i class="fab fa-apple"></i>
@@ -106,5 +108,6 @@
 				</div>
 			@endif
 		</div>
-
+	</form>
+	
 @stop

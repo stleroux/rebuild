@@ -15,6 +15,7 @@
    {!! Form::model($recipe, ['route'=>['recipes.update', $recipe->id], 'method' => 'PUT', 'files' => true]) !!}
       {{-- <input type="hidden" value="{{ $ref }}" name="ref" size="50"/> --}}
       @include('recipes::backend.edit.datagrid')
+   {!! Form::close() !!}
 @stop
 
 {{-- @section ('scripts')

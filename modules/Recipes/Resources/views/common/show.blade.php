@@ -8,7 +8,8 @@
 		@if(
 				(Session::get('pageName') === 'index') ||
 				(Session::get('pageName') === 'myFavorites') ||
-				(Session::get('pageName') === 'archive')
+				(Session::get('pageName') === 'archive') ||
+				(Session::get('pageName') === 'home')
 			)
 	   	@include('blocks.main_menu')
 		@else
@@ -24,12 +25,14 @@
 
 @section ('content')
 
+<form style="display:inline;">
+
 	<div class="card mb-3 bg-transparent">
 		<div class="card-header card_header">
 			{{ $recipe->title }}
 			<span class="float-right">
 				{{-- @include('common.buttons.cancelWithId', ['model'=>'recipe', 'id'=>$recipe->id]) --}}
-				@include('common.buttons.cancel', ['model'=>'recipe'])
+				@include('common.buttons.cancel', ['model'=>'recipe', 'type'=>''])
 			</span>
 		</div>
 	
@@ -45,6 +48,7 @@
 			</div>
 
 			@auth
+
 				<div class="row">
 					@include('recipes::common.show.methodology')
 				</div>
@@ -62,6 +66,11 @@
 				<div class="row">
 					@include('recipes::common.show.author_notes')
 				</div>
+
+				<div class="row">
+					@include('recipes::common.show.public_notes')
+				</div>
+
 			@endauth
 
 			<div class="row">
@@ -73,15 +82,5 @@
 
 	{{-- @include('modals.image', ['title'=>'Recipe Image', 'img_path'=>'_recipes', 'img_name'=>'image', 'model'=>$recipe]) --}}
    {{-- @include('modals.print', ['title'=>'Print','name'=>'recipes','model'=>$recipe]) --}}
-@stop
-
-@section('blocks')
-	{{-- @include('recipes::common.show.controls') --}}
-	{{-- @include('recipes::common.show.information') --}}
-	{{-- @include('common.information', ['model'=>$recipe, 'title'=>'Recipe']) --}}
-	@include('recipes::frontend.blocks.archives')
-	@include('recipes::common.show.leave_comment')
-@stop
-
-@section ('scripts')
+</form>
 @stop

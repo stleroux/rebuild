@@ -25,9 +25,9 @@
 				<span class="float-right">
 					@include('common.buttons.help', ['type'=>''])
 					@include('recipes::backend.trashed.help')
-					@include('common.buttons.trashAll', ['model'=>'recipe'], ['type'=>''])
-					@include('common.buttons.restoreAll', ['model'=>'recipe', ['type'=>'']])
-					@include('common.buttons.publishAll', ['model'=>'recipe', ['type'=>'']])
+					@include('common.buttons.trashAll', ['model'=>'recipe', 'type'=>''])
+					@include('common.buttons.restoreAll', ['model'=>'recipe', 'type'=>''])
+					@include('common.buttons.publishAll', ['model'=>'recipe', 'type'=>''])
 				</span>
 			</div>
 	</form>
@@ -64,8 +64,8 @@
 					         <td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'published_at'])</td>
 					         <td class="text-right">
 					            @include('common.buttons.edit', ['model'=>'recipe', 'id'=>$recipe->id, 'type'=>''])
-					            @include('common.buttons.restore', ['model'=>'recipe', 'id'=>$recipe->id])
-					            @include('common.buttons.trash', ['model'=>'recipe', 'id'=>$recipe->id, 'type'=>''])
+					            @include('common.buttons.restore', ['model'=>'recipe', 'id'=>$recipe->id, 'type'=>''])
+					            @include('common.buttons.delete', ['model'=>'recipe', 'id'=>$recipe->id, 'type'=>''])
 					         </td>
 					      </tr>
 					      @endforeach

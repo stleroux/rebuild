@@ -132,7 +132,7 @@ class RecipesController extends Controller
 
       // Session::put('pageName', 'trashed');
 
-      return view('recipes::delete', compact('recipe'));
+      return view('recipes::backend.delete', compact('recipe'));
    }
 
 
@@ -178,30 +178,29 @@ class RecipesController extends Controller
 // Remove the specified resource from storage
 // Used in the index page and trashAll action to soft delete multiple records
 ##################################################################################################################
-   // public function deleteDestroy($id)
-   // {
-   //    // Check if user has required permission
-   //    // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+   public function deleteDestroy($id)
+   {
+      // Check if user has required permission
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
 
-   //    $recipe = Recipe::withTrashed()->find($id);
+      $recipe = Recipe::withTrashed()->findOrFail($id);
 
-   //    // remove any references to this post from the post_tag table
-   //    // $post->tags()->detach();
+      // remove any references to this post from the post_tag table
+      // $post->tags()->detach();
 
-   //    // Delete the associated image if any
-   //    //Storage::delete($post->image_path);
-   //    File::delete('_recipes/' . $recipe->image_path);
+      // Delete the associated image if any
+      File::delete('_recipes/' . $recipe->image);
 
-   //    $recipe->forceDelete();
+      $recipe->forceDelete();
 
-   //    // Save entry to log file using built-in Monolog
-   //    // Log::info(Auth::user()->username . " (" . Auth::user()->id . ") DELETED post (" . $post->id . ")\r\n", 
-   //    //    [json_decode($post, true)]
-   //    // );
+      // Save entry to log file using built-in Monolog
+      // Log::info(Auth::user()->username . " (" . Auth::user()->id . ") DELETED post (" . $post->id . ")\r\n", 
+      //    [json_decode($post, true)]
+      // );
 
-   //    Session::flash('success', 'The recipe was successfully deleted!');
-   //    return redirect()->route('recipes.trashed');
-   // }
+      Session::flash('success', 'The recipe was successfully deleted!');
+      return redirect()->route('recipes.trashed');
+   }
 
 
 ##################################################################################################################
@@ -228,35 +227,35 @@ class RecipesController extends Controller
 
 
 ##################################################################################################################
-# ██████╗ ███████╗███████╗████████╗██████╗  ██████╗ ██╗   ██╗
-# ██╔══██╗██╔════╝██╔════╝╚══██╔══╝██╔══██╗██╔═══██╗╚██╗ ██╔╝
-# ██║  ██║█████╗  ███████╗   ██║   ██████╔╝██║   ██║ ╚████╔╝ 
-# ██║  ██║██╔══╝  ╚════██║   ██║   ██╔══██╗██║   ██║  ╚██╔╝  
-# ██████╔╝███████╗███████║   ██║   ██║  ██║╚██████╔╝   ██║   
-# ╚═════╝ ╚══════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝    ╚═╝   
+# ██████╗ ███████╗██╗     ███████╗████████╗███████╗    ██████╗ ███████╗███████╗████████╗██████╗  ██████╗ ██╗   ██╗
+# ██╔══██╗██╔════╝██║     ██╔════╝╚══██╔══╝██╔════╝    ██╔══██╗██╔════╝██╔════╝╚══██╔══╝██╔══██╗██╔═══██╗╚██╗ ██╔╝
+# ██║  ██║█████╗  ██║     █████╗     ██║   █████╗      ██║  ██║█████╗  ███████╗   ██║   ██████╔╝██║   ██║ ╚████╔╝ 
+# ██║  ██║██╔══╝  ██║     ██╔══╝     ██║   ██╔══╝      ██║  ██║██╔══╝  ╚════██║   ██║   ██╔══██╗██║   ██║  ╚██╔╝  
+# ██████╔╝███████╗███████╗███████╗   ██║   ███████╗    ██████╔╝███████╗███████║   ██║   ██║  ██║╚██████╔╝   ██║   
+# ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝    ╚═════╝ ╚══════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝    ╚═╝  
 // Remove the specified resource from storage
 // Used in the index page and trashAll action to soft delete multiple records
 ##################################################################################################################
-   public function deleteDestroy($id)
-   {
-      // if(!checkACL('author')) {
-      //     return view('errors.403');
-      // }
+   // public function deleteDestroy($id)
+   // {
+   //    // if(!checkACL('author')) {
+   //    //     return view('errors.403');
+   //    // }
 
-      // Set the variable so we can use a button in other pages to come back to this page
-      // Session::put('pageName', '');
+   //    // Set the variable so we can use a button in other pages to come back to this page
+   //    // Session::put('pageName', '');
 
-      $recipe = Recipe::withTrashed()->findOrFail($id);
-      $recipe->forceDelete();
+   //    $recipe = Recipe::withTrashed()->findOrFail($id);
+   //    $recipe->forceDelete();
 
-      // Save entry to log file using built-in Monolog
-      //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") DELETED article (" . $article->id . ")\r\n",
-      //    [json_decode($article, true)]
-      //);
+   //    // Save entry to log file using built-in Monolog
+   //    //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") DELETED article (" . $article->id . ")\r\n",
+   //    //    [json_decode($article, true)]
+   //    //);
 
-      Session::flash('success','The recipe was deleted successfully.');
-      return redirect()->route('recipes.trashed');
-   }
+   //    Session::flash('success','The recipe was deleted successfully.');
+   //    return redirect()->route('recipes.trashed');
+   // }
 
 
 ##################################################################################################################
@@ -647,12 +646,10 @@ class RecipesController extends Controller
       // Save entry to log file using built-in Monolog
       //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") MADE recipe (" . $recipe->id . ") PRIVATE \r\n", [json_decode($recipe, true)]);
 
+      // Delete this recipe's favorites
+      DB::table('favorites')->where('favoriteable_id', '=', $id)->delete();
+
       Session::flash('success','The recipe was successfully made private');
-
-      // if(Session::get('pageName') != 'show') {
-      //    return redirect()->route('recipes.'. Session::get('pageName'), $id);
-      // }
-
       // return redirect()->route('recipes.'. Session::get('pageName'));
       return redirect()->back();
 
@@ -1187,7 +1184,8 @@ class RecipesController extends Controller
       if(
          (Session::get('pageName') === 'index') ||
          (Session::get('pageName') === 'myFavorites') ||
-         (Session::get('pageName') === 'archive')
+         (Session::get('pageName') === 'archive') ||
+         (Session::get('pageName') === 'home')
       ){
          DB::table('recipes')->where('id','=',$recipe->id)->increment('views',1);
       }
@@ -1274,7 +1272,8 @@ class RecipesController extends Controller
       //);
 
       Session::flash('success','The article has been created successfully!');
-      return redirect()->route('recipes.index');
+      // return redirect()->route('recipes.index');
+      return redirect()->route('recipes.'. Session::get('pageName'));
    }
 
 
@@ -1674,8 +1673,10 @@ class RecipesController extends Controller
 
       // save the data in the database
       $recipe->title = $request->title;
-      $recipe->ingredients = Purifier::clean($request->ingredients);
-      $recipe->methodology = Purifier::clean($request->methodology);
+      // $recipe->ingredients = Purifier::clean($request->ingredients);
+      $recipe->ingredients = $request->ingredients;
+      // $recipe->methodology = Purifier::clean($request->methodology);
+      $recipe->methodology = $request->methodology;
       $recipe->category_id = $request->category_id;
       $recipe->published_at = $request->published_at;
       $recipe->servings = $request->servings;
@@ -1718,7 +1719,8 @@ class RecipesController extends Controller
       Session::flash('success','The recipe was successfully updated!');
       // redirect to another page
       //return redirect()->route('recipes.index');
-      return redirect(Session::get('fullURL'));
+      // return redirect(Session::get('fullURL'));
+      return redirect()->route('recipes.'. Session::get('pageName'));
   }
 
 

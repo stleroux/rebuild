@@ -42,14 +42,14 @@ class SiteController extends Controller
 	public function homepage()
 	{
 		// Set the variable so we can use a button in other pages to come back to this page
-      Session::put('pageName', 'index');
+      Session::put('pageName', 'home');
 
 		$posts = Post::published()->with('user')->orderBy('id','desc')->take(setting('homepage_blog_count'))->get();
 
 		// $popularArticle = Article::published()->get()->sortByDesc('views')->take(1);
 		$popularPosts = Post::published()->get()->sortByDesc('views')->take(setting('homepage_favorite_post_count'));
 		// dd($popularPosts);
-		$popularRecipes = Recipe::published()->get()->sortByDesc('views')->take(setting('homepage_favorite_recipe_count'));
+		$popularRecipes = Recipe::published()->public()->get()->sortBy('title')->sortByDesc('views')->take(setting('homepage_favorite_recipe_count'));
 		// dd($popularRecipes);
 		// $popularWoodProject = WoodProject::get()->sortByDesc('views')->take(1);
 

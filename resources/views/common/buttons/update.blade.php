@@ -1,4 +1,12 @@
-<button type="submit" class="btn btn-sm btn-outline-primary px-1 py-0">
+<button
+   class="btn btn-sm btn-outline-primary"
+   type="submit"
+   {{-- formaction="{{ route($model.'s'.'.update') }}" --}}
+   formmethod="POST"
+   title="Update">
    <i class="fa fa-save"></i>
-   Update
+   @if($type == 'menu')
+      Update
+   @endif
 </button>
+

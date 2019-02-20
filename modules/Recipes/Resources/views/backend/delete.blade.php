@@ -2,7 +2,7 @@
 
 @section('left_column')
    @include('blocks.adminNav')
-   @include('recipes::sidebar')
+   @include('recipes::backend.sidebar')
 @endsection
 
 @section('right_column')
@@ -11,10 +11,14 @@
 @section('content')
 
    <div class="card">
-      <div class="card-header bg-danger text-white text-center"><b>ARE YOU SURE YOU WANT TO PERMANENTLY DELETE THIS RECIPE? {{ $recipe->title }}</b></div>
+      <div class="card-header bg-danger text-white text-center">
+         <b>
+            ARE YOU SURE YOU WANT TO PERMANENTLY DELETE THIS RECIPE?<br />
+            Title : {{ $recipe->title }}?
+         </b>
+      </div>
       <div class="card-body card_body text-center">
-         {{-- <form action="{{ route('recipes.deleteDestroy', $recipe->id) }}" method="POST"> --}}
-            {!! Form::open(['method'=>'POST', 'route'=>['recipes.deleteDestroy', $recipe->id]]) !!}
+         {!! Form::open(['method'=>'POST', 'route'=>['recipes.deleteDestroy', $recipe->id]]) !!}
             {{ csrf_field() }}
             <input type="hidden" name="_method" value="DELETE" />
 
@@ -29,8 +33,7 @@
                   Yes - Permanently Delete This Recipe
                </button>
             @endif
-            
-         </form>
+         {{ Form::close() }}
       </div>
       {{-- <div class="card-footer pt-1 pb-1 pl-2">
          <b>Note: </b>This record will not be recoverable if deleted.

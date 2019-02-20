@@ -32,7 +32,7 @@
          </form>
       </div>
       <div class="card-footer pt-1 pb-1 pl-2">
-         This will also remove all favorites that poeple have vreated for this recipe.
+         This will also remove all favorites that poeple have created for this recipe.
       </div>
    </div>
 

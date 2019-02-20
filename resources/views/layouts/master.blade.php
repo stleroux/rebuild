@@ -29,7 +29,7 @@
 </head>
 <body>
 	
-	{{ Session::get('pageName') }}
+	{{-- {{ Session::get('pageName') }} --}}
 	
 	@include('layouts.master.navbar')
 	@include('layouts.master.messages')

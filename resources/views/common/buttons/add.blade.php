@@ -1,8 +1,9 @@
 <button
    class="btn btn-sm btn-outline-success"
-   type="button"
-   title="Add {{ ucfirst($model) }}"
-   onclick="window.location='{{ route($model.'s'.'.create') }}'">
+   type="submit"
+   formaction="{{ route($model.'s'.'.create') }}"
+   formmethod="GET"
+   title="Add {{ ucfirst($model) }}">
    <i class="fa fa-plus-square"></i>
    @if($type == 'menu')
       Add {{ ucfirst($model) }}

@@ -3,7 +3,7 @@
 		Edit Recipe
 		<span class="float-right">
          @include('common.buttons.cancel', ['model'=>'recipe', 'type'=>''])
-         @include('common.buttons.update', ['model'=>'recipe'])
+         @include('common.buttons.update', ['model'=>'recipe', 'type'=>''])
       </span>
 	</div>
 

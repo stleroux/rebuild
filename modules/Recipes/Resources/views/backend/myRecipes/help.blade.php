@@ -9,6 +9,12 @@
 			</div>
 			<div class="modal-body">
 				<p>These recipes were created by me.</p>
+				<hr />
+				<p>
+					<b>Make Private</b>
+					<br />
+					This action will hide the recipe from the general public. Keep in mind that making this recipe private will remove all the favorites users have added to this recipe
+				</p>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

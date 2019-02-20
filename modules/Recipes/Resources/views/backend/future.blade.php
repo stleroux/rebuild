@@ -14,7 +14,6 @@
 
 @section('content')
 	<form style="display:inline;">
-	{{-- <form method="POST" action="{{ route('articles.trashAll') }}"> --}}
 	{!! csrf_field() !!}
 	
 		<div class="card">
@@ -91,7 +90,7 @@
 					         <td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'published_at'])</td>
 					         <td class="text-right">
 					            @include('common.buttons.edit', ['model'=>'recipe', 'id'=>$recipe->id, 'type'=>''])
-					            @include('common.buttons.restore', ['model'=>'recipe', 'id'=>$recipe->id])
+					            @include('common.buttons.restore', ['model'=>'recipe', 'id'=>$recipe->id, 'type'=>''])
 					            @include('common.buttons.trash', ['model'=>'recipe', 'id'=>$recipe->id, 'type'=>''])
 					        	</td>
 					      </tr>
