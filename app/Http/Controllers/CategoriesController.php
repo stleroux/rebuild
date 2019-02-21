@@ -86,7 +86,7 @@ class CategoriesController extends Controller
 		// }
 
 		$category = Category::find($id);
-		$category->delete();
+		$category->forceDelete();
 
 		// Save entry to log file using built-in Monolog
 		//Log::info(Auth::user()->username . " (" . Auth::user()->id . ") DELETED category (" . $category->id . ")\r\n", [$category = json_decode($category, true)]);
@@ -243,7 +243,7 @@ class CategoriesController extends Controller
 # ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝
 // Display a list of resources
 ##################################################################################################################
-	public function index()
+	public function index(Request $request, $key=null)
 	{
 		// Check if user has required permission
 	  if(!checkPerm('category_index')) { abort(401, 'Unauthorized Access'); }
@@ -257,11 +257,20 @@ class CategoriesController extends Controller
 		//   return view('errors.403');
 		// }
 
-		// Set the variable so we can use a button in other pages to come back to this page
-		Session::put('backURL', Route::currentRouteName());
+		$alphas = DB::table('categories')
+			->select(DB::raw('DISTINCT LEFT(name, 1) as letter'))
+			// ->where('published_at', '<', Carbon::now())
+         ->where('deleted_at', '=', null)
+			->orderBy('letter')
+			->get();
+
+		$letters = [];
+		foreach($alphas as $alpha) {
+			$letters[] = $alpha->letter;
+		}
 
 		// $categories = Category::orderBy('name')->get();
-		$categories = Category::with('module')->get();
+		// $categories = Category::with('module')->get();
 
 		$modules = Module::orderBy('name')->get();
 
@@ -271,10 +280,23 @@ class CategoriesController extends Controller
 			$moduls[$module->id] = $module->name;
 		}
 
+		// If $key value is passed
+		if ($key) {
+			$categories = Category::with('module')
+				->where('name', 'like', $key . '%')
+				->orderBy('name', 'asc')
+				->get();
+		} else {
+   		// No $key value is passed
+   		$categories = Category::with('module')
+   			->orderBy('name', 'asc')
+   			->get();
+      }
+
 		// Save entry to log file using built-in Monolog
 		//Log::info(Auth::user()->username . " (" . Auth::user()->id . ") accessed :: Admin / Categories / Index");
 
-		return view ('categories.index', compact('categories'))->withModules($moduls);
+		return view ('categories.index', compact('categories','letters'))->withModules($moduls);
 	}
 
 
@@ -293,7 +315,7 @@ class CategoriesController extends Controller
 		// }
 
 		// Set the variable so we can use a button in other pages to come back to this page
-		Session::put('backURL', Route::currentRouteName());
+      Session::put('pageName', 'newCategories');
 
 		//$alphas = range('A', 'Z');
 		$alphas = DB::table('categories')
@@ -316,10 +338,10 @@ class CategoriesController extends Controller
 			$categories = Category::newCategories()
 				->where('name', 'like', $key . '%')
 				->get();
-			return view('categories.newCategories', compact('categories','letters'));
+		} else {
+			$categories = Category::newCategories()->get();
 		}
 
-		$categories = Category::newCategories()->get();
 		return view('categories.newCategories', compact('categories','letters'));
 	}
 

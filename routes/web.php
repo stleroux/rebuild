@@ -50,8 +50,16 @@ Route::resource('components', 'ComponentsController');
 Route::get('modules/{module}/delete', 'ModulesController@delete')->name('modules.delete');
 Route::resource('modules', 'ModulesController');
 
-Route::get('categories/{cat}/delete', 'CategoriesController@delete')->name('categories.delete');
-Route::resource('categories', 'CategoriesController');
+Route::get('categories/{cat}/delete',             'CategoriesController@delete')               ->name('categories.delete');
+Route::get('categories/create',                   'CategoriesController@create')               ->name('categories.create');
+Route::post('categories/store',                   'CategoriesController@store')                ->name('categories.store');
+Route::get('categories/{id}/show',                'CategoriesController@show')                 ->name('categories.show');
+Route::get('categories/{id?}',                    'CategoriesController@index')                ->name('categories.index');
+Route::get('categories/{id}/edit',                'CategoriesController@edit')                 ->name('categories.edit');
+Route::put('categories/{id}',                     'CategoriesController@update')               ->name('categories.update');
+Route::delete('categories/{id}/destroy',          'CategoriesController@destroy')              ->name('categories.destroy');
+// Route::resource('categories', 'CategoriesController');
+
 
 Route::resource('settings', 'SettingsController');
 Route::get('settingsPlus', 'SettingsController@settingsPlus')->name('settings.plus');

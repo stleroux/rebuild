@@ -28,11 +28,12 @@
                
                <!--CARD BODY-->
                <div class="card-body card_body pb-0">
+                  @include('common.alphabet', ['model'=>'category', 'page'=>'index'])
                   <table id="datatable" class="table table-hover table-sm">
                      <thead>
                         <tr>
-                           <th>Module</th>
                            <th>Name</th>
+                           <th>Module</th>
                            <th>Value</th>
                            <th>Created</th>
                            <th class="no-sort"></th>
@@ -41,8 +42,8 @@
                      <tbody>
                         @foreach ($categories as $category)
                            <tr>
-                              <td>{{ $category->module->name }}</td>
                               <td><a href="{{ route('categories.show', $category->id) }}">{{ $category->name }}</a></td>
+                              <td>{{ $category->module->name }}</td>
                               <td>{{ $category->value }}</td>
                               <td data-order="{{ $category->created_at}}">{{ $category->created_at->format('M d, Y') }}</td>
                               <td class="text-right">
@@ -51,7 +52,7 @@
                                  @endif
 
                                  @if(checkPerm('category_delete'))
-                                    {{-- @include('common.buttons.trash', ['model'=>'category', 'id'=>$category->id, 'type'=>'']) --}}
+                                    @include('common.buttons.delete', ['model'=>'category', 'id'=>$category->id, 'type'=>''])
                                  @endif
                               </td>
                            </tr>

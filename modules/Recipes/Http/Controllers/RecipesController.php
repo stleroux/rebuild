@@ -1589,7 +1589,8 @@ class RecipesController extends Controller
       // }
 
       // Set the variable so we can use a button in other pages to come back to this page
-      Session::put('backURL', Route::currentRouteName());
+      Session::put('pageName', 'unpublished');
+
 
       //$alphas = range('A', 'Z');
         $alphas = DB::table('recipes')
