@@ -1,25 +1,25 @@
-@extends('layouts.master')
+@extends('layouts.backend')
 
 @section('left_column')
-   {{-- @include('blocks.admin_menu') --}}
+   @include('blocks.adminNav')
    @include('categories.sidebar')
 @endsection
 
 @section('right_column')
-   {{-- @include('categories.create.form') --}}
-   @include('categories.blocks.help')
 @endsection
 
 @section('content')
    {!! Form::open(['route' => 'categories.store']) !!}
-      <div class="card">
+      <div class="card mb-3">
          <div class="card-header card_header">
             <i class="fa fa-plus" aria-hidden="true"></i>
             New Category
             <span class="float-right">
-               @include('common.buttons.cancel', ['model'=>'categorie', 'type'=>''])
-               @include('common.buttons.reset', ['model'=>'categorie', 'type'=>''])
-               @include('common.buttons.save', ['model'=>'categorie', 'type'=>''])
+               @include('common.buttons.help', ['model'=>'category', 'type'=>''])
+               @include('categories.blocks.help', ['model'=>'category', 'type'=>''])
+               @include('common.buttons.cancel', ['model'=>'category', 'type'=>''])
+               @include('common.buttons.reset', ['model'=>'category', 'type'=>''])
+               @include('common.buttons.save', ['model'=>'category', 'type'=>''])
             </span>
          </div>
          <div class="card-body card_body pb-0">

@@ -248,6 +248,9 @@ class CategoriesController extends Controller
 		// Check if user has required permission
 	  if(!checkPerm('category_index')) { abort(401, 'Unauthorized Access'); }
 
+		// Set the variable so we can use a button in other pages to come back to this page
+      Session::put('pageName', 'index');
+
 		// if(!checkACL('manager')) {
 		//   // Save entry to log file of failure
 		//   Log::warning(Auth::user()->username . " (" . Auth::user()->id . ") tried to access the index page");

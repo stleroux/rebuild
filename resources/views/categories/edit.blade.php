@@ -1,12 +1,12 @@
-@extends('layouts.master')
+@extends('layouts.backend')
 
 @section('left_column')
-   {{-- @include('blocks.admin_menu') --}}
+   @include('blocks.adminNav')
    @include('categories.sidebar')
 @endsection
 
 @section('right_column')
-   @include('categories.blocks.help')
+   {{-- @include('categories.blocks.help') --}}
 @endsection
 
 @section('content')
@@ -22,12 +22,11 @@
 						<i class="fa fa-sitemap" aria-hidden="true"></i>
 						Edit Category
 						<span class="float-right">
-							<a href="{{ Route( Session::get('backURL') ) }}" class="btn btn-sm btn-outline-secondary px-1 py-0">
-								<i class="fas fa-angle-double-left"></i>
-								Cancel
-							</a>
-							{{ Form::button('<i class="fas fa-sync-alt"></i> Reset Form', ['type'=>'reset', 'class'=>'btn btn-sm btn-outline-secondary px-1 py-0']) }}
-							{{ Form::button('<i class="fa fa-save"></i> Update ', ['type' => 'submit', 'class' => 'btn btn-sm btn-outline-bprimary px-1 py-0'])  }}
+							@include('common.buttons.help', ['model'=>'category', 'type'=>''])
+							@include('categories.blocks.help', ['model'=>'category', 'type'=>''])
+							@include('common.buttons.cancel', ['model'=>'category', 'type'=>''])
+							@include('common.buttons.reset', ['model'=>'category', 'type'=>''])
+							@include('common.buttons.update', ['model'=>'category', 'type'=>''])
 						</span>
 					</div>
 

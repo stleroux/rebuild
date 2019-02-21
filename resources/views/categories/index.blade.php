@@ -20,15 +20,9 @@
                   <i class="fa fa-sitemap"></i>
                   Categories
                   <span class="float-right">
-                     {{-- @if(checkPerm('user_create'))
-                        <a href="{{ route('categories.create') }}" class="btn btn-sm btn-outline-success px-1 py-0">
-                           <i class="fas fa-plus-square"></i>
-                           New Category
-                        </a>
-                     @endif --}}
-                     @include('common.buttons.help', ['type'=>''])
+                     @include('common.buttons.help', ['model'=>'category', 'type'=>''])
                      @include('help.categories.index')
-                     @include('common.buttons.add', ['model'=>'categorie', 'type'=>''])
+                     @include('common.buttons.add', ['model'=>'category', 'type'=>''])
                   </span>
                </div>
                
@@ -48,32 +42,16 @@
                         @foreach ($categories as $category)
                            <tr>
                               <td>{{ $category->module->name }}</td>
-                              <td>{{ $category->name }}</td>
+                              <td><a href="{{ route('categories.show', $category->id) }}">{{ $category->name }}</a></td>
                               <td>{{ $category->value }}</td>
-                              <td>{{ $category->created_at->format('M d, Y') }}</td>
+                              <td data-order="{{ $category->created_at}}">{{ $category->created_at->format('M d, Y') }}</td>
                               <td class="text-right">
-                                 @if(checkPerm('category_show'))
-                                    <a class="btn btn-sm btn-outline-secondary px-1 py-0"
-                                       href="{{ route('categories.show', $category->id) }}"
-                                       title="View Category">
-                                       <i class="far fa-eye"></i>
-                                    </a>
-                                 @endif
-
                                  @if(checkPerm('category_edit'))
-                                    <a href="{{ route('categories.edit', $category->id) }}"
-                                       class="btn btn-sm btn-outline-bprimary px-1 py-0"
-                                       title="Edit Category">
-                                       <i class="far fa-edit"></i>
-                                    </a>
+                                    @include('common.buttons.edit', ['model'=>'category', 'id'=>$category->id, 'type'=>''])
                                  @endif
 
                                  @if(checkPerm('category_delete'))
-                                    <a href="{{ route('categories.delete', $category->id) }}"
-                                       class="btn btn-sm btn-outline-danger px-1 py-0"
-                                       title="Delete Category">
-                                       <i class="far fa-trash-alt"></i>
-                                    </a>
+                                    {{-- @include('common.buttons.trash', ['model'=>'category', 'id'=>$category->id, 'type'=>'']) --}}
                                  @endif
                               </td>
                            </tr>

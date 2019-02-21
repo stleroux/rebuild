@@ -1,14 +1,20 @@
-<div class="card mb-2">
-   <div class="card-header block_header"{{--  role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" --}}>
-      {{-- <div class="card-title"> --}}
-         <i class="fa fa-question-circle pull-right"></i>
-         Category Help
-      {{-- </div> --}}
-   </div>
-   {{-- <div class="collapse" id="collapseExample"> --}}
-      <div class="card-body card_body">
-         <p>The Value field is only required if you want to create a new Landing Page entry.</p>
+
+<!-- HELP MODAL -->
+<div id="help" class="modal fade" role="dialog">
+   <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+         <div class="modal-header">
+            <div class="modal-title">{{ ucfirst(str_plural($model)) }} Help</div>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+         </div>
+         <div class="modal-body">
+            <p>The Value field is only required if you want to create a new Landing Page entry.</p>
          <p>This is because the Landing Pages display a different value (which is more meaningful to the user) then the one stored in the system.</p>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Close</button>
+         </div>
       </div>
-   {{-- </div> --}}
+   </div>
 </div>

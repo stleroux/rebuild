@@ -1,7 +1,7 @@
-@extends('layouts.master')
+@extends('layouts.backend')
 
 @section('left_column')
-   {{-- @include('blocks.admin_menu') --}}
+   @include('blocks.adminNav')
    @include('categories.sidebar')
 @endsection
 
@@ -36,10 +36,11 @@
          <i class="fa fa-sitemap" aria-hidden="true"></i>
          Category Details
          <span class="float-right">
-            <a href="{{ route('categories.index') }}" class="btn btn-sm btn-outline-secondary px-1 py-0">
+            {{-- <a href="{{ route('categories.index') }}" class="btn btn-sm btn-outline-secondary px-1 py-0">
                <i class="fas fa-angle-double-left"></i>
                Cancel
-            </a>
+            </a> --}}
+            @include('common.buttons.cancel', ['model'=>'category', 'type'=>''])
          </span>
       </div>
       <div class="card-body card_body">

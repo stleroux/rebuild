@@ -13,7 +13,7 @@ class Category extends Model //implements AuditableContract
 	use SoftDeletes;
 	//use Auditable;
 
-	protected $dates = ['deleted_at'];
+	protected $dates = ['deleted_at', 'created_at', 'updated_at'];
 	
 	// Manually tell the model which table to use
 	// Not needed if you call the table Categories (following the conventions)

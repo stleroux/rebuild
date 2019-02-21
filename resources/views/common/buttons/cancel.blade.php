@@ -1,26 +1,19 @@
 @if((Session::get('pageName') === 'archive') || (Session::get('pageName') === 'home'))
-   <button
+   <a href="{{ URL::previous() }}"
       class="btn btn-sm btn-outline-secondary"
-      type="submit"
-      title="Back to previous page"
-      formaction="{{ URL::previous() }}"
-      {{-- formmethod="GET" --}}>
+      title="Back to previous page">
       <i class="fas fa-angle-double-left"></i>
       @if($type == 'menu')
          Cancel
       @endif
-   </button>
+   </a>
 @else
-   <button
+   <a href="{{ route(str_plural($model) . '.' . Session::get('pageName')) }}"
       class="btn btn-sm btn-outline-secondary"
-      type="submit"
-      title="Back to previous page"
-      formaction="{{ route($model.'s.'.Session::get('pageName')) }}"
-      formmethod="GET">
+      title="Back to previous page">
       <i class="fas fa-angle-double-left"></i>
       @if($type == 'menu')
          Cancel
       @endif
-   </button>
+   </a>
 @endif
-

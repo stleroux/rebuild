@@ -1,13 +1,13 @@
-{{-- <a href="{{ route($model.'s'.'.trash', $id) }}"
+<a href="{{ route(str_plural($model) . '.trash', $id) }}"
    class="btn btn-sm btn-outline-danger"
-   title="Trash">
+   title="Trash {{ $model }}">
    <i class="far fa-trash-alt"></i>
    @if($type == 'menu')
-      Trash
+      Trash {{ $model }}
    @endif
-</a> --}}
+</a>
 
-
+{{-- 
 <button
    class="btn btn-sm btn-outline-danger"
    type="submit"
@@ -19,3 +19,12 @@
       Trash {{ ucfirst($model) }}
    @endif
 </button>
+
+<a href="{{ route(str_plural($model) . '.delete', $id) }}"
+   class="btn btn-sm btn-outline-danger"
+   title="Delete {{ $model }}">
+   <i class="fas fa-trash-alt"></i>
+   @if($type == 'menu')
+      Delete {{ $model }}
+   @endif
+</a> --}}
