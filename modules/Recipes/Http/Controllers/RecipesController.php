@@ -1791,4 +1791,19 @@ class RecipesController extends Controller
    }
 
 
+   public function test() {
+      
+      // Popular recipes
+      $popularRecipes = Recipe::published()->public()->get()->sortBy('title')->sortByDesc('views')->take(setting('homepage_favorite_recipe_count'));
+
+      // Get list of recips by year and month
+      $recipelinks = DB::table('recipes')
+         ->select(DB::raw('YEAR(published_at) year, MONTH(published_at) month, MONTHNAME(published_at) month_name, COUNT(*) recipe_count'))
+         ->where('published_at', '<=', Carbon::now())
+         ->groupBy('year')->groupBy('month')->orderBy('year', 'desc')->orderBy('month', 'desc')->get();
+
+      return view('recipes::frontend.test', compact('popularRecipes', 'recipelinks'));
+   }
+
+
 }

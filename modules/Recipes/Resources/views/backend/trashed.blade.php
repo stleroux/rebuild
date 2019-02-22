@@ -25,7 +25,7 @@
 				<span class="float-right">
 					@include('common.buttons.help', ['type'=>''])
 					@include('recipes::backend.trashed.help')
-					@include('common.buttons.trashAll', ['model'=>'recipe', 'type'=>''])
+					@include('common.buttons.deleteAll', ['model'=>'recipe', 'type'=>''])
 					@include('common.buttons.restoreAll', ['model'=>'recipe', 'type'=>''])
 					@include('common.buttons.publishAll', ['model'=>'recipe', 'type'=>''])
 				</span>

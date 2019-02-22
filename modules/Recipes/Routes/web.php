@@ -41,6 +41,8 @@
 Route::group(['prefix' => 'recipes'], function()
 {
 
+   Route::get('test',                     'RecipesController@test')                ->name('recipes.test');
+
    Route::get('unpublished/{key?}',       'RecipesController@unpublished')          ->name('recipes.unpublished');
    Route::get('published/{key?}',         'RecipesController@published')            ->name('recipes.published');
    Route::get('future/{key?}',            'RecipesController@future')               ->name('recipes.future');
