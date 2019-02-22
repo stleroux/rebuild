@@ -1,7 +1,7 @@
-@extends('layouts.master')
+@extends('layouts.backend')
 
 @section('left_column')
-   {{-- @include('blocks.admin_menu') --}}
+   @include('blocks.adminNav')
    @include('components.sidebar')
 @endsection
 
@@ -19,12 +19,12 @@
 					Components
 					<span class="float-sm-right">
 						@if(checkPerm('component_create'))
-							<a href="{{ route('components.create') }}"
+							{{-- <a href="{{ route('components.create') }}"
 								class="btn btn-sm btn-outline-success px-1 py-0">
-								{{-- <i class="far fa-plus-square"></i> --}}
 								<i class="fas fa-plus-square"></i>
 								New Component
-							</a>
+							</a> --}}
+							@include('common.buttons.add', ['model'=>'component', 'type'=>''])
 						@endif
 					</span>
 				</div>
@@ -45,28 +45,31 @@
 									<td class="text-right">
 										@if(checkPerm('component_enable'))
 											@if(\Module::enabled($module))
-												<a class="btn btn-sm btn-outline-warning px-1 py-0"
+												{{-- <a class="btn btn-sm btn-outline-warning px-1 py-0"
 													href="{{ route('components.disableModule', $module) }}"
 													title="Disable Module">
 													<i class="fas fa-thumbs-down"></i>
-												</a>
+												</a> --}}
+												@include('common.buttons.moduleDisable', ['model'=>'component', 'type'=>''])
 											@endif
 										@endif
 										@if(checkPerm('component_disable'))
 											@if(\Module::disabled($module))
-												<a href="{{ route('components.enableModule', $module) }}"
+												{{-- <a href="{{ route('components.enableModule', $module) }}"
 													class="btn btn-sm btn-outline-success px-1 py-0"
 													title="Edit User">
 													<i class="fas fa-thumbs-up"></i>
-												</a>
+												</a> --}}
+												@include('common.buttons.moduleEnable', ['model'=>'component', 'type'=>''])
 											@endif
 										@endif
 										@if(checkPerm('component_delete'))
-											<a class="btn btn-sm btn-outline-danger px-1 py-0"
+											{{-- <a class="btn btn-sm btn-outline-danger px-1 py-0"
 												href="{{ route('components.deleteModule', $module) }}"
 												title="Delete Module">
 												<i class="far fa-trash-alt"></i>
-											</a>
+											</a> --}}
+											@include('common.buttons.moduleDelete', ['model'=>'component', 'type'=>''])
 										@endif
 									</td>
 								</tr>

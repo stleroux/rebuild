@@ -1,7 +1,7 @@
-@extends('layouts.master')
+@extends('layouts.backend')
 
 @section('left_column')
-   {{-- @include('blocks.admin_menu') --}}
+   @include('blocks.adminNav')
    @include('comments.sidebar')
 @endsection
 
@@ -12,9 +12,9 @@
 	{!! Form::model($comment, ['route'=>['comments.update', $comment->id], 'method' => 'PUT']) !!}
 
 		{{-- Set a  variable if coming from the Post.Show view --}}
-		@if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'posts.show')
+		{{-- @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'posts.show')
 			{{ Form::hidden('page', 'showPost') }}
-		@endif
+		@endif --}}
 
 		<div class="row">
 			<div class="col">
@@ -25,22 +25,26 @@
 						Comments
 						<span class="float-right">
 							<!-- Only show if coming from the comments page -->
-							@if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'comments.index')
+							{{-- @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'comments.index')
 							   <a href="{{ route('comments.index') }}" class="btn btn-sm btn-outline-secondary px-1 py-0">
 									<i class="fas fa-angle-double-left"></i>
 									Cancel
 								</a>
-							@endif
+							@endif --}}
 
 							<!-- Only show if coming from the blog search page -->
-							@if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'posts.show')
+							{{-- @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'posts.show')
 							   <a href="{{ URL::previous() }}" class="btn btn-sm btn-outline-secondary px-1 py-0">
 								  <i class="fa fa-arrow-left"></i> Previous
 							   </a>
-							@endif
+							@endif --}}
 
-							{{ Form::button('<i class="fas fa-sync-alt"></i> Reset Form', ['type'=>'reset', 'class'=>'btn btn-sm btn-outline-secondary px-1 py-0']) }}
-							{{ Form::button('<i class="fa fa-save"></i> Update ', ['type' => 'submit', 'class' => 'btn btn-sm btn-outline-bprimary px-1 py-0'])  }}
+							@include('common.buttons.cancel', ['model'=>'comment', 'type'=>''])
+							@include('common.buttons.reset', ['model'=>'comment', 'type'=>''])
+							@include('common.buttons.save', ['model'=>'comment', 'type'=>''])
+
+							{{-- {{ Form::button('<i class="fas fa-sync-alt"></i> Reset Form', ['type'=>'reset', 'class'=>'btn btn-sm btn-outline-secondary px-1 py-0']) }} --}}
+							{{-- {{ Form::button('<i class="fa fa-save"></i> Update ', ['type' => 'submit', 'class' => 'btn btn-sm btn-outline-bprimary px-1 py-0'])  }} --}}
 						</span>
 					</div>
 

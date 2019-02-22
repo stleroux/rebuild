@@ -15,19 +15,7 @@
       </a>
       @endif --}}
 
-      <a href="/"
-         class="list-group-item list-group-item-action p-1">
-         <i class="fas fa-home pl-2"></i>
-         Frontend View
-      </a>
-
-      <a href="/dashboard"
-         class="list-group-item list-group-item-action p-1">
-         <i class="fas fa-cog pl-2"></i>
-         Dashboard
-      </a>
-
-      <a href="{{ route('comments.index') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('comments.index') ? 'active' : '' }}">
+      <a href="{{ route('comments.index') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('comments.*') ? 'active' : '' }}">
          <i class="fa fa-sitemap pl-2"></i>
          Comments
          {{-- <div class="badge badge-primary float-right">

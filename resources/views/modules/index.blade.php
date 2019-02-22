@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('left_column')
-   {{-- @include('blocks.admin_menu') --}}
+   @include('blocks.adminNav')
    @include('modules.sidebar')
 @endsection
 
@@ -35,14 +35,16 @@
                         <td>{{ $module->name }}</td>
                         <td class="text-right">
                            @if(checkPerm('module_edit'))
-                              <a href="{{ route('modules.edit', $module->id) }}" class="btn btn-sm btn-outline-bprimary px-1 py-0" title="Edit">
+                              {{-- <a href="{{ route('modules.edit', $module->id) }}" class="btn btn-sm btn-outline-bprimary px-1 py-0" title="Edit">
                                  <i class="far fa-edit"></i>
-                              </a>
+                              </a> --}}
+                              @include('common.buttons.edit', ['model'=>'module', 'id'=>$module->id, 'type'=>''])
                            @endif
                            @if(checkPerm('module_delete'))
-                              <a href="{{ route('modules.delete', $module->id) }}" class="btn btn-sm btn-outline-danger px-1 py-0" title="Delete">
+                              {{-- <a href="{{ route('modules.delete', $module->id) }}" class="btn btn-sm btn-outline-danger px-1 py-0" title="Delete">
                                  <i class="far fa-trash-alt"></i>
-                              </a>
+                              </a> --}}
+                              @include('common.buttons.delete', ['model'=>'module', 'id'=>$module->id, 'type'=>''])
                            @endif
                         </td>
                      </tr>

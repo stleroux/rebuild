@@ -1,7 +1,7 @@
-@extends('layouts.master')
+@extends('layouts.backend')
 
 @section('left_column')
-   {{-- @include('blocks.admin_menu') --}}
+   @include('blocks.adminNav')
    @include('comments.sidebar')
 @endsection
 
@@ -45,9 +45,9 @@
                   <thead>
                      <tr>
                         <th><input type="checkbox" id="selectall" class="checked" /></th>
+                        <th>Comment</th>
                         <th>Name / Username</th>
                         <th>Email</th>
-                        <th>Comment</th>
                         <th>Item Type</th>
                         <th>Item ID</th>
                         {{-- @if(checkACL('author')) --}}
@@ -61,25 +61,24 @@
                            <td>
                               <input type="checkbox" onClick="checkbox_is_checked()" name="checked[]" value="{{ $comment->id }}" class="check-all">
                            </td>
+                           <td>{{ $comment->comment }}</td>
                            <td>{{ $comment->user->username }}</td>
                            <td>{{ $comment->user->email }}</td>
-                           <td>{{ $comment->comment }}</td>
                            <td>{{ $comment->commentable_type }}</td>
                            <td>{{ $comment->commentable_id }}</td>
                            <td class="text-right">
-                              <a href="{{ route('comments.show', $comment->id) }}" class="btn btn-sm btn-outline-secondary px-1 py-0" title="View Comment">
+                              {{-- <a href="{{ route('comments.show', $comment->id) }}" class="btn btn-sm btn-outline-secondary px-1 py-0" title="View Comment">
                                  <i class="fas fa-eye"></i>
-                              </a>
+                              </a> --}}
 
                               {{-- @if(checkPerm('post_edit', $post)) --}}
-                              <a href="{{ route('comments.edit', $comment->id) }}" class="btn btn-sm btn-outline-bprimary px-1 py-0" title="Edit Comment">
-                                 <i class="far fa-edit"></i>
-                              </a>
+                              @include('common.buttons.edit', ['model'=>'comment', 'id'=>$comment->id, 'type'=>''])
                               {{-- @endif --}}
                               {{-- @if(checkPerm('post_delete', $post)) --}}
-                              <a href="{{ route('comments.delete', $comment->id) }}" class="btn btn-sm btn-outline-danger px-1 py-0" title="Delete Comment">
+                              {{-- <a href="{{ route('comments.delete', $comment->id) }}" class="btn btn-sm btn-outline-danger px-1 py-0" title="Delete Comment">
                                  <i class="far fa-trash-alt"></i>
-                              </a>
+                              </a> --}}
+                              @include('common.buttons.delete', ['model'=>'comment', 'id'=>$comment->id, 'type'=>''])
                               {{-- @endif --}}
                            </td>
                         </tr>

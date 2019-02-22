@@ -597,8 +597,9 @@ class RecipesController extends Controller
 		//$alphas = range('A', 'Z');
 		$alphas = DB::table('recipes')
 			->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
-			->where('published_at', '<', Carbon::now())
+			->where('published_at', '<=', Carbon::now())
          ->where('deleted_at', '=', null)
+         ->where('personal', '=', 0)
 			->orderBy('letter')
 			->get();
 

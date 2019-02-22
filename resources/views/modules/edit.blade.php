@@ -1,7 +1,7 @@
-@extends('layouts.master')
+@extends('layouts.backend')
 
 @section('left_column')
-   {{-- @include('blocks.admin_menu') --}}
+   @include('blocks.adminNav')
    @include('modules.sidebar')
 @endsection
 
@@ -21,14 +21,17 @@
                   <i class="fa fa-cubes"></i>
                   Edit Module
                   <span class="float-right">
-                     <a href="{{ route('modules.index') }}" class="btn btn-sm btn-outline-secondary px-1 py-0">
+                     {{-- <a href="{{ route('modules.index') }}" class="btn btn-sm btn-outline-secondary px-1 py-0">
                         <i class="fas fa-angle-double-left"></i>
                         Cancel
                      </a>
                      <button type="submit" class="btn btn-sm btn-outline-bprimary px-1 py-0">
                         <i class="fa fa-save"></i>
                         Update
-                     </button>
+                     </button> --}}
+                     @include('common.buttons.cancel', ['model'=>'module', 'type'=>''])
+                     @include('common.buttons.reset', ['model'=>'module', 'type'=>''])
+                     @include('common.buttons.save', ['model'=>'module', 'type'=>''])
                   </span>
                </div>
 

@@ -15,24 +15,12 @@
       </a>
       @endif --}}
 
-      <a href="/"
-         class="list-group-item list-group-item-action p-1">
-         <i class="fas fa-home pl-2"></i>
-         Frontend View
-      </a>
-
-      <a href="/dashboard"
-         class="list-group-item list-group-item-action p-1">
-         <i class="fas fa-cog pl-2"></i>
-         Dashboard
-      </a>
-
-      <a href="{{ route('modules.index') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('modules.index') ? 'active' : '' }}">
+      <a href="{{ route('modules.index') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('modules.*') ? 'active' : '' }}">
          <i class="fa fa-cubes pl-2"></i>
          Modules
-         <div class="badge badge-primary float-right">
+         {{-- <div class="badge badge-primary float-right"> --}}
             {{-- {{ App\Category::count() }} --}}
-         </div>
+         {{-- </div> --}}
       </a>
 
       {{-- @if(checkPerm('user_create'))

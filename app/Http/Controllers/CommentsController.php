@@ -112,6 +112,10 @@ class CommentsController extends Controller
 		//   return view('errors.403');
 		// }
 
+		// Set the variable so we can use a button in other pages to come back to this page
+      Session::put('pageName', 'index');
+
+
 		// $categories = Category::orderBy('name')->get();
 		$comments = Comment::orderBy('id','desc')->get();
 

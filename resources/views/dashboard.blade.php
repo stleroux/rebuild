@@ -5,7 +5,7 @@
 @stop
 
 @section('left_column')
-   @include('blocks.adminNav')
+   {{-- @include('blocks.adminNav') --}}
    @include('blocks.admin_menu')
 @endsection
 
