@@ -4,11 +4,13 @@
 @endsection
 
 @section('left_column')
-   {{-- @include('recipes::sidebar') --}}
-   @include('blocks.main_menu')
+   @include('blocks.home_menu')
+   @include('recipes::frontend.sidebar')
+   
 @endsection
 
 @section('right_column')
+   @include('blocks.popularRecipes')
    @include('recipes::frontend.blocks.archives')
 @endsection
 

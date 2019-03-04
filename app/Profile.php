@@ -3,11 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+// use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Profile extends Model
 {
-   use SoftDeletes;
+   // use SoftDeletes;
 
    protected $fillable = ['first_name'];
 

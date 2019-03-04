@@ -19,13 +19,38 @@
             </div>
 
             <!-- Category -->
-            <div class="col-xs-12 col-sm-6 col-md-3">
+{{--             <div class="col-xs-12 col-sm-6 col-md-3">
                <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}" >
                   {{ Form::label('category_id', 'Category', ['class'=>'required']) }}
                   {{ Form::select('category_id', array(''=>'Select a category') + $categories, null, ['class'=>'form-control']) }}
                   <span class="text-danger">{{ $errors->first('category_id') }}</span>
                </div>
-            </div>
+            </div> --}}
+<div class="col-xs-12 col-sm-6 col-md-3">
+   <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}" >
+      {!! Form::label("category_id", "Category", ['class'=>'required']) !!}
+      <select name="category_id" class="custom-select">
+         <option selected>Select One</option>
+         @foreach ($categories as $category)
+            <option disabled>{{ ucfirst($category->name) }}</option>
+            @foreach ($category->children as $children)
+               <option value="{{ $children->id}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- {{ ucfirst($children->name) }}</option>
+            @endforeach
+         @endforeach
+      </select>
+   </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
 
             <!-- Publish Date -->
             <div class="col-xs-12 col-sm-6 col-md-3">

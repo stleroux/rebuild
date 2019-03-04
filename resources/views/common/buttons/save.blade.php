@@ -6,6 +6,6 @@
    title="Save {{ ucfirst($model) }}">
    <i class="fa fa-save"></i>
    @if($type == 'menu')
-      Update {{ $ucfirst($model) }}
+      Save {{ $ucfirst($model) }}
    @endif
 </button>

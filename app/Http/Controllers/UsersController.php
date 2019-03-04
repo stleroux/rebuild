@@ -8,6 +8,7 @@ use Hash;
 use Session;
 use App\Permission;
 use App\User;
+use App\Profile;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -37,6 +38,9 @@ class UsersController extends Controller
 ##################################################################################################################
 	public function index()
 	{
+		// Set the variable so we can use a button in other pages to come back to this page
+		Session::put('pageName', 'index');
+
 		// Check if user has required permission
 		if(!checkPerm('user_index')) { abort(401, 'Unauthorized Access'); }
 
@@ -166,7 +170,9 @@ class UsersController extends Controller
 		// $user->permissions()->delete(); No need to do this as this is done in the migration file with the foreign key
 
 		// Delete the user
+		$user->profile->delete();
 		$user->delete();
+
 
 		// Set flash data with success message
 		Session::flash('delete','The user was deleted successfully.');
@@ -309,10 +315,13 @@ class UsersController extends Controller
 		$user = User::create([
 			'username' => $request->input('username'),
 			'email' => $request->input('email'),
-			'password' => bcrypt('password')
+			// 'password' => bcrypt('password')
+			'password' => Hash::make($request->password)
 		]);
 
 		$user->permissions()->attach($request->input('permission'));
+		$user->profile()->save(new Profile);
+		// Profile::create(['user_id' => $user->id]);
 
 		return redirect()->route('users.index')->with('store','User created successfully');
 	}

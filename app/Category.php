@@ -19,12 +19,22 @@ class Category extends Model //implements AuditableContract
 	// Not needed if you call the table Categories (following the conventions)
 	protected $table = 'categories';
 
+	// protected $guarded = ['id'];
+
+	public function parent() {
+		return $this->belongsTo(self::class, 'parent_id')->orderBy('name');
+	}
+
+	public function children() {
+		return $this->hasMany(self::class, 'parent_id')->orderBy('name');
+	}
+
 	/**
 	* Always capitalize the name when we retrieve it
 	*/
-	public function getNameAttribute($value) {
-		return ucfirst($value);
-	}
+	// public function getNameAttribute($value) {
+	// 	return ucfirst($value);
+	// }
 
 	// 1 category has many posts
 	// a related entry needs to be added to the post model
@@ -40,10 +50,10 @@ class Category extends Model //implements AuditableContract
 		return $this->hasMany('App\Recipe');
 	}
 
-	public function module()
-	{
-		return $this->belongsTo('App\Module')->orderBy('name','desc');
-	}
+	// public function module()
+	// {
+	// 	return $this->belongsTo('App\Module')->orderBy('name','desc');
+	// }
 
 	public function projects()
 	{

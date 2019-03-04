@@ -1,4 +1,4 @@
-@extends ('layouts.master')
+@extends ('layouts.backend')
 
 @section ('stylesheets')
 	{{ Html::style('css/posts.css') }}
@@ -6,7 +6,7 @@
 @stop
 
 @section('left_column')
-   {{-- @include('blocks.admin_menu') --}}
+   @include('blocks.adminNav')
    @include('posts::sidebar')
 @endsection
 
@@ -24,49 +24,29 @@
 					Edit Post
 					<div class="float-right">
 						@if($post->image)
-							<a href="{{ route('posts.deleteImage', $post->id) }}" class="btn btn-sm btn-outline-danger px-1 py-0">
-								<i class="far fa-trash-alt"></i>
-								Delete Image
-							</a>
+							@include('common.buttons.deleteImage', ['model'=>'post', 'id'=>$post->id, 'type'=>''])
 						@endif
-
-						<a href="{{ route('posts.'. Session::get('pageName')) }}" class="btn btn-sm btn-outline-secondary px-1 py-0">
-							<i class="fas fa-angle-double-left"></i>
-							Cancel
-						</a>
-						
-						<button type="submit" class="btn btn-sm btn-outline-bprimary px-1 py-0">
-							<i class="fa fa-save"></i>
-							Update
-						</button>
+						@include('common.buttons.cancel', ['model'=>'post', 'type'=>''])
+						@include('common.buttons.update', ['model'=>'post', 'type'=>''])
 					</div>
 				</div>
 				<div class="card-body card_body">
 						<div class="row">
-							<div class="col-md-8">
+							<div class="col-md-4">
 								<div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
 									{{ Form::label ('title', 'Title', ['class'=>'required']) }}
 									{{ Form::text ('title', null, ['class' => 'form-control form-control-sm']) }}
 									<span class="text-danger">{{ $errors->first('title') }}</span>
 								</div>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-2">
 								<div class="form-group {{ $errors->has('category') ? 'has-error' : '' }}">
 									{{ Form::label('category', 'Category', ['class'=>'required']) }}
 									{{ Form::select('category_id', $categories, null, ['class'=>'form-control  form-control-sm']) }}
 									<span class="text-danger">{{ $errors->first('category') }}</span>
 								</div>
 							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-8">
-								<div class="form-group {{ $errors->has('slug') ? 'has-error' : '' }}">
-									{{ Form::label ('slug', 'Slug', ['class'=>'required']) }}
-									{{ Form::text ('slug', null, ['class' => 'form-control form-control-sm', 'readonly']) }}
-									<span class="text-danger">{{ $errors->first('slug') }}</span>
-								</div>
-							</div>
-							<div class="col-md-4">
+							<div class="col-md-3">
 								<div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
 									{{ Form::label ('image', 'Update image') }}
 									{{ Form::file('image', ['class'=>'border', 'value'=>'Image']) }}
@@ -75,7 +55,17 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-12">
+							{{-- <div class="col-md-8">
+								<div class="form-group {{ $errors->has('slug') ? 'has-error' : '' }}">
+									{{ Form::label ('slug', 'Slug', ['class'=>'required']) }}
+									{{ Form::text ('slug', null, ['class' => 'form-control form-control-sm', 'readonly']) }}
+									<span class="text-danger">{{ $errors->first('slug') }}</span>
+								</div>
+							</div> --}}
+							
+						</div>
+						<div class="row">
+							<div class="col-md-6">
 								<div class="form-group">
 									{{ Form::label('tag', 'Tags') }}
 									{{ Form::select('tags[]', $tags, null, ['class'=>'form-control select2-multi', 'multiple'=>'multiple']) }}

@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.backend')
 
 @section ('stylesheets')
 	{{ Html::style('css/posts.css') }}
@@ -6,7 +6,7 @@
 @stop
 
 @section('left_column')
-   {{-- @include('blocks.admin_menu') --}}
+   @include('blocks.adminNav')
    @include('posts::sidebar')
 @endsection
 
@@ -24,12 +24,15 @@
 						<i class="fas fa-angle-double-left"></i>
 						Cancel
 					</a> --}}
-					<a href="{{ route('posts.'. Session::get('pageName')) }}" class="btn btn-sm btn-outline-secondary px-1 py-0">
+					{{-- <a href="{{ route('posts.'. Session::get('pageName')) }}" class="btn btn-sm btn-outline-secondary px-1 py-0">
 						<i class="fas fa-angle-double-left"></i>
 						Cancel
 					</a>
 					{{ Form::button('<i class="fas fa-sync-alt"></i> Reset Form', ['type'=>'reset', 'class'=>'btn btn-sm btn-outline-secondary px-1 py-0']) }}
-					{{ Form::button('<i class="fa fa-save"></i> Save ', ['type' => 'submit', 'class' => 'btn btn-sm btn-outline-success px-1 py-0'])  }}
+					{{ Form::button('<i class="fa fa-save"></i> Save ', ['type' => 'submit', 'class' => 'btn btn-sm btn-outline-success px-1 py-0'])  }} --}}
+					@include('common.buttons.cancel', ['model'=>'post', 'type'=>''])
+					@include('common.buttons.reset', ['model'=>'post', 'type'=>''])
+					@include('common.buttons.save', ['model'=>'post', 'type'=>''])
 		  		</div>
 			</div>
 

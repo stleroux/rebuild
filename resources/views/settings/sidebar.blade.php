@@ -15,32 +15,10 @@
       </a>
       @endif --}}
 
-      <a href="/"
-         class="list-group-item list-group-item-action p-1">
-         <i class="fas fa-home pl-2"></i>
-         Frontend View
-      </a>
-
-      <a href="/dashboard"
-         class="list-group-item list-group-item-action p-1">
-         <i class="fas fa-cog pl-2"></i>
-         Dashboard
-      </a>
-
-      <a href="{{ route('settings.index') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('settings.index') ? 'active' : '' }}">
+      <a href="{{ route('settings.index') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('settings.*') ? 'active' : '' }}">
          <i class="fa fa-sitemap pl-2"></i>
          Settings
-         <div class="badge badge-primary float-right">
-            {{-- {{ App\Category::count() }} --}}
-         </div>
       </a>
-
-      {{-- @if(checkPerm('user_create'))
-         <a href="{{ route('settings.create') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('settings.create') ? 'active' : '' }}">
-            <i class="fas fa-plus-square pl-2"></i>
-            New Setting
-         </a>
-      @endif --}}
 
    </div>
 

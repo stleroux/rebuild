@@ -5,7 +5,7 @@
 @endsection
 
 @section('left_column')
-   {{-- @include('blocks.main_menu') --}}
+   @include('blocks.adminNav')
    @include('recipes::backend.sidebar')
 @endsection
 

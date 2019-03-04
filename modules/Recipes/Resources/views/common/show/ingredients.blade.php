@@ -1,4 +1,4 @@
-<div class="{{ $recipe->image ? 'col-sm-8' : 'col-sm-12' }}">
+<div class="col-sm-8">
 	<div class="card mb-2">
 		<div class="card-header card_header_2">Ingredients</div>
 		<div class="card-body card_body">

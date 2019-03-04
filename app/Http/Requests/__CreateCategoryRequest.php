@@ -27,8 +27,9 @@ class CreateCategoryRequest extends FormRequest
         // https://laravel.com/docs/5.2/validation#available-validation-rules
         return [
             'name'      => 'required|min:3|max:255',
-            'value'     => 'required_if:module_id,14',
-            'module_id' => 'required'
+            'subcategory' => 'required',
+            // 'value'     => 'required_if:module_id,14',
+            // 'module_id' => 'required'
         ];
     }
 
@@ -38,8 +39,9 @@ class CreateCategoryRequest extends FormRequest
             'name.required'            => 'Required',
             'name.min'                 => 'Minimum 3 characters',
             'name.max'                 => 'Maximum 255 characters',
-            'value.required_if'        => 'Required',
-            'module_id.required'       => 'Required',
+            'subcategory.required'     => 'Required',
+            // 'value.required_if'        => 'Required',
+            // 'module_id.required'       => 'Required',
         ];
     }
 

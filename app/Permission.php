@@ -8,7 +8,7 @@ class Permission extends Model
 {
 
    protected $cast = [
-      'core' => 'boolean',
+      'type' => 'boolean',
    ];
 
    public function users()

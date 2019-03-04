@@ -24,7 +24,7 @@
             <div class="col">
                <div class="form-group {{ $errors->has('tab') ? 'has-error' : '' }}">
                   {{-- {{ Form::label('tab', 'Tab : ', ['class'=>'_required']) }} --}}
-                  {!! Form::select('tab', ['general'=>'General', 'profile'=>'Profile'], null, ['placeholder'=>'Select a Tab', 'class'=>'form-control form-control-sm']) !!}
+                  {!! Form::select('tab', ['general'=>'General', 'profile'=>'Profile', 'contact'=>'Contact'], null, ['placeholder'=>'Select a Tab', 'class'=>'form-control form-control-sm']) !!}
                   <span class="text-danger">{{ $errors->first('tab') }}</span>
                </div>
             </div>

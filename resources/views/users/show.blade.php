@@ -1,11 +1,11 @@
-@extends('layouts.master')
+@extends('layouts.backend')
 
 @section('stylesheets')
    {{ Html::style('css/switch.css') }}
 @endsection
 
 @section('left_column')
-   {{-- @include('blocks.admin_menu') --}}
+   @include('blocks.adminNav')
    @include('users.sidebar')
 @endsection
 
@@ -22,10 +22,7 @@
             <i class="fas fa-user"></i>
             View User
             <span class="float-sm-right">
-               <a href="{{ route('users.index') }}" class="btn btn-sm btn-outline-secondary px-1 py-0">
-                  <i class="fas fa-angle-double-left"></i>
-                  Cancel
-               </a>
+               @include('common.buttons.cancel', ['model'=>'user', 'type'=>''])
             </span>
          </div>
          <!--CARD BODY-->

@@ -1,7 +1,7 @@
-@extends('layouts.master')
+@extends('layouts.backend')
 
 @section('left_column')
-   {{-- @include('blocks.admin_menu') --}}
+   @include('blocks.adminNav')
    @include('users.sidebar')
 @endsection
 
@@ -30,15 +30,12 @@
          <div class="card-header card_header">
             CHANGE USER PASSWORD
             <span class="float-sm-right">
-               <a class="btn btn-xs btn-secondary" href="{{ route('users.index') }}">
-                  <i class="far fa-arrow-alt-circle-left"></i>
-                  Cancel
-               </a>
+               @include('common.buttons.cancel', ['model'=>'user', 'type'=>''])
 
                @if(checkPerm('user_edit'))
-                  <button type="submit" class="btn btn-xs btn-primary">
+                  <button type="submit" class="btn btn-sm btn-outline-primary" title="Change Password">
                      <i class="far fa-save"></i>
-                     Change Password
+                     {{-- Change Password --}}
                   </button>
                @endif
             </span>
@@ -50,7 +47,7 @@
                <div class="col-xs-12 col-sm-12 col-md-12">
                   <div class="form-group">
                      <strong>Password:</strong>
-                     {!! Form::text('password', null, array('placeholder'=>'Password', 'class'=>'form-control form-control-sm')) !!}
+                     {!! Form::text('password', null, array('placeholder'=>'Password', 'class'=>'form-control form-control-sm', 'autofocus'=>'autofocus')) !!}
                   </div>
                </div>
             </div>

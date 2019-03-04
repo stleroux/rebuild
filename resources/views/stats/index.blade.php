@@ -1,6 +1,7 @@
-@extends('layouts.master')
+@extends('layouts.backend')
 
 @section('left_column')
+   @include('blocks.adminNav')
    @include('stats.sidebar')
 @endsection
 

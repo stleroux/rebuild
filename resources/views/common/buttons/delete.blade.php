@@ -1,8 +1,8 @@
 <a href="{{ route(str_plural($model) . '.delete', $id) }}"
    class="btn btn-sm btn-outline-danger"
-   title="Delete {{ $model }}">
+   title="Delete {{ ucfirst($model) }}">
    <i class="fas fa-trash-alt"></i>
    @if($type == 'menu')
-      Delete {{ $model }}
+      Delete {{ ucfirst($model) }}
    @endif
 </a>

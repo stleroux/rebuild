@@ -12,15 +12,51 @@ use Session;
 class SettingsController extends Controller
 {
 
-    public function index()
+##################################################################################################################
+#  ██████╗ ██████╗ ███╗   ██╗███████╗████████╗██████╗ ██╗   ██╗ ██████╗████████╗
+# ██╔════╝██╔═══██╗████╗  ██║██╔════╝╚══██╔══╝██╔══██╗██║   ██║██╔════╝╚══██╔══╝
+# ██║     ██║   ██║██╔██╗ ██║███████╗   ██║   ██████╔╝██║   ██║██║        ██║   
+# ██║     ██║   ██║██║╚██╗██║╚════██║   ██║   ██╔══██╗██║   ██║██║        ██║   
+# ╚██████╗╚██████╔╝██║ ╚████║███████║   ██║   ██║  ██║╚██████╔╝╚██████╗   ██║   
+#  ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝  ╚═════╝   ╚═╝   
+##################################################################################################################
+    public function __construct()
     {
-        $settings = Setting::where('tab','=', 'general')->get();
-        $profiles = Setting::where('tab','=', 'profile')->get();
+        // Only allow authenticated users access to these functions
+        $this->middleware('auth');
 
-        return view('settings.index', compact('settings', 'profiles'));
+        //Log::useFiles(storage_path().'/logs/audits.log');
     }
 
 
+##################################################################################################################
+# ██╗███╗   ██╗██████╗ ███████╗██╗  ██╗
+# ██║████╗  ██║██╔══██╗██╔════╝╚██╗██╔╝
+# ██║██╔██╗ ██║██║  ██║█████╗   ╚███╔╝ 
+# ██║██║╚██╗██║██║  ██║██╔══╝   ██╔██╗ 
+# ██║██║ ╚████║██████╔╝███████╗██╔╝ ██╗
+# ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝
+// Display a list of resources
+##################################################################################################################
+    public function index()
+    {
+        $contacts = Setting::where('tab','=','contact')->get();
+        $profiles = Setting::where('tab','=','profile')->get();
+        $settings = Setting::where('tab','=','general')->get();
+
+        return view('settings.index', compact('contacts','profiles','settings'));
+    }
+
+
+##################################################################################################################
+# ███████╗████████╗ ██████╗ ██████╗ ███████╗
+# ██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗██╔════╝
+# ███████╗   ██║   ██║   ██║██████╔╝█████╗  
+# ╚════██║   ██║   ██║   ██║██╔══██╗██╔══╝  
+# ███████║   ██║   ╚██████╔╝██║  ██║███████╗
+# ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝
+// Store a newly created resource in storage
+##################################################################################################################
     public function store(Request $request)
     {
         $rules = [
@@ -59,61 +95,52 @@ class SettingsController extends Controller
     }
 
 
-    public function edit($id)
-    {
-        $setting = Setting::findOrFail($id);
-        return view('settings.edit', compact('setting'));
-    }
-
-
-    public function update(Request $request, $id)
-    {
-        // validate the data
-        $this->validate($request, array(
-            'key' => 'required',
-            'value' => 'required',
-            'description' => 'required',
-        ));
-
-        $setting = Setting::findOrFail($id);
-            $setting->key = $request->key;
-            $setting->value = $request->value;
-            $setting->tab = $request->tab;
-            $setting->description = $request->description;
-        $setting->save();
-
-        Session::flash('update', 'The site settings have been updated successfully.');
-        return redirect()->route('settings.index');
-
-    }
-
-
-    public function destroy($id)
-    {
-        // Check if user has required permission
-        //if(!checkPerm('permission_delete')) { abort(401, 'Unauthorized Access'); }
-
-        $setting = Setting::findOrFail($id);
-        $setting->delete();
-
-        // Set flash data with success message
-        Session::flash('delete','The site setting was deleted successfully.');
-        // Redirect
-        return redirect()->route('settings.index');
-    }
-
-
-    // public function settingsPlus()
+##################################################################################################################
+# ███████╗██████╗ ██╗████████╗
+# ██╔════╝██╔══██╗██║╚══██╔══╝
+# █████╗  ██║  ██║██║   ██║   
+# ██╔══╝  ██║  ██║██║   ██║   
+# ███████╗██████╔╝██║   ██║   
+# ╚══════╝╚═════╝ ╚═╝   ╚═╝   
+// Show the form for editing the specified resource
+##################################################################################################################
+    // public function edit($id)
     // {
-    //     $settings = Setting::where('tab','=', 'general')->get();
-    //     $profiles = Setting::where('tab','=', 'profile')->get();
-    //     // dd($settings);
-    //     return view('settings.settingsPlus', compact('settings', 'profiles'));
+    //     $setting = Setting::findOrFail($id);
+    //     return view('settings.edit', compact('setting'));
     // }
 
-    public function updatePlus(Request $request)
+
+
+##################################################################################################################
+# ██╗   ██╗██████╗ ██████╗  █████╗ ████████╗███████╗
+# ██║   ██║██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██╔════╝
+# ██║   ██║██████╔╝██║  ██║███████║   ██║   █████╗  
+# ██║   ██║██╔═══╝ ██║  ██║██╔══██║   ██║   ██╔══╝  
+# ╚██████╔╝██║     ██████╔╝██║  ██║   ██║   ███████╗
+#  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
+// UPDATE :: Update the specified resource in storage
+##################################################################################################################
+    public function update(Request $request)
     {
+        // // validate the data
+        // $this->validate($request, array(
+        //     'key' => 'required',
+        //     'value' => 'required',
+        //     'description' => 'required',
+        // ));
+
+        // $setting = Setting::findOrFail($id);
+        //     $setting->key = $request->key;
+        //     $setting->value = $request->value;
+        //     $setting->tab = $request->tab;
+        //     $setting->description = $request->description;
+        // $setting->save();
+
+        // Session::flash('update', 'The site settings have been updated successfully.');
+        // return redirect()->route('settings.index');
         $rows = $request->input('id');
+        
         $values = $request->input('value');
 
         for($i=0; $i<count($rows); $i++) {
@@ -122,7 +149,66 @@ class SettingsController extends Controller
 
         Session::flash('update', 'The site settings have been updated successfully.');
         return redirect()->route('settings.index');
+
     }
+
+
+##################################################################################################################
+# ██████╗ ███████╗██╗     ███████╗████████╗███████╗
+# ██╔══██╗██╔════╝██║     ██╔════╝╚══██╔══╝██╔════╝
+# ██║  ██║█████╗  ██║     █████╗     ██║   █████╗  
+# ██║  ██║██╔══╝  ██║     ██╔══╝     ██║   ██╔══╝  
+# ██████╔╝███████╗███████╗███████╗   ██║   ███████╗
+# ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝
+// Mass Delete selected rows - all selected records
+##################################################################################################################
+    // public function delete(Setting $setting)
+    // {
+    //     // Check if user has required permission
+    //     // if(!checkPerm('setting_delete')) { abort(401, 'Unauthorized Access'); }
+
+    //     $setting = Setting::findOrFail($setting->id);
+    //     return view('settings.delete', compact('setting'));
+    // }
+
+
+##################################################################################################################
+# ██████╗ ███████╗███████╗████████╗██████╗  ██████╗ ██╗   ██╗
+# ██╔══██╗██╔════╝██╔════╝╚══██╔══╝██╔══██╗██╔═══██╗╚██╗ ██╔╝
+# ██║  ██║█████╗  ███████╗   ██║   ██████╔╝██║   ██║ ╚████╔╝ 
+# ██║  ██║██╔══╝  ╚════██║   ██║   ██╔══██╗██║   ██║  ╚██╔╝  
+# ██████╔╝███████╗███████║   ██║   ██║  ██║╚██████╔╝   ██║   
+# ╚═════╝ ╚══════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝    ╚═╝   
+// Remove the specified resource from storage
+// Used in the index page and trashAll action to soft delete multiple records
+##################################################################################################################
+    // public function destroy($id)
+    // {
+    //     // Check if user has required permission
+    //     //if(!checkPerm('permission_delete')) { abort(401, 'Unauthorized Access'); }
+
+    //     $setting = Setting::findOrFail($id);
+    //     $setting->delete();
+
+    //     // Set flash data with success message
+    //     Session::flash('delete','The site setting was deleted successfully.');
+    //     // Redirect
+    //     return redirect()->route('settings.index');
+    // }
+
+
+    // public function updatePlus(Request $request)
+    // {
+    //     $rows = $request->input('id');
+    //     $values = $request->input('value');
+
+    //     for($i=0; $i<count($rows); $i++) {
+    //           Setting::where('id', $rows[$i])->update(['value'=>$values[$i]]);
+    //        }
+
+    //     Session::flash('update', 'The site settings have been updated successfully.');
+    //     return redirect()->route('settings.index');
+    // }
 
 
 }

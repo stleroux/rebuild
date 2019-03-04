@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Support\Facades\Input;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,10 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// Route::get('/', function () {
-//     return view('home');
-// });
 
 Auth::routes();
 
@@ -51,6 +47,7 @@ Route::get('modules/{module}/delete', 'ModulesController@delete')->name('modules
 Route::resource('modules', 'ModulesController');
 
 Route::get('categories/{cat}/delete',             'CategoriesController@delete')               ->name('categories.delete');
+Route::get('categories/getSubs/{id}',             'CategoriesController@getSubs')               ->name('categories.getSubs');
 Route::get('categories/create',                   'CategoriesController@create')               ->name('categories.create');
 Route::post('categories/store',                   'CategoriesController@store')                ->name('categories.store');
 Route::get('categories/{id}/show',                'CategoriesController@show')                 ->name('categories.show');
@@ -58,21 +55,23 @@ Route::get('categories/{id?}',                    'CategoriesController@index') 
 Route::get('categories/{id}/edit',                'CategoriesController@edit')                 ->name('categories.edit');
 Route::put('categories/{id}',                     'CategoriesController@update')               ->name('categories.update');
 Route::delete('categories/{id}/destroy',          'CategoriesController@destroy')              ->name('categories.destroy');
-// Route::resource('categories', 'CategoriesController');
+Route::get('/ajax-subcat',function () {
+   $cat_id = Input::get('cat_id');
+   $subcategories = DB::table('categories')->where('parent_id','=',$cat_id)->orderBy('name')->pluck('name');
+   return Response::json($subcategories);
+});
 
-
-Route::resource('settings', 'SettingsController');
-Route::get('settingsPlus', 'SettingsController@settingsPlus')->name('settings.plus');
-Route::put('updatePlus', 'SettingsController@updatePlus')->name('settings.updatePlus');
+Route::resource('settings', 'SettingsController')->except('update');
+Route::put('update', 'SettingsController@update')->name('settings.update');
 
 // PROFILE
-Route::get('profile/{id}/edit',          ['uses'=>'ProfileController@edit',      'as'=>'profile.edit']);
-Route::put('profile/{id}',               ['uses'=>'ProfileController@update',    'as'=>'profile.update']);
-Route::get('profile/{id}/resetPwd',      ['uses'=>'ProfileController@resetPwd',      'as'=>'profile.resetPwd']);
-Route::post('profile/{id}/resetPwdPost', ['uses'=>'ProfileController@resetPwdPost',  'as'=>'profile.resetPwdPost']);
+Route::get('profile/{id}/edit',              ['uses'=>'ProfileController@edit',              'as'=>'profile.edit']);
+Route::put('profile/{id}',                   ['uses'=>'ProfileController@update',            'as'=>'profile.update']);
+Route::get('profile/{id}/resetPwd',          ['uses'=>'ProfileController@resetPwd',          'as'=>'profile.resetPwd']);
+Route::post('profile/{id}/resetPwdPost',     ['uses'=>'ProfileController@resetPwdPost',      'as'=>'profile.resetPwdPost']);
 Route::get('profile/{id}/resetPreferences',  ['uses'=>'ProfileController@resetPreferences',  'as'=>'profile.resetPreferences']);
-Route::get('profile/deleteImage/{id}',    ['uses'=>'ProfileController@deleteImage',    'as'=>'profile.deleteImage']);
-Route::get('profile/{id}/show',               ['uses'=>'ProfileController@show',          'as'=>'profile.show']);
+Route::get('profile/deleteImage/{id}',       ['uses'=>'ProfileController@deleteImage',       'as'=>'profile.deleteImage']);
+Route::get('profile/{id}/show',              ['uses'=>'ProfileController@show',              'as'=>'profile.show']);
 
 
 

@@ -25,7 +25,7 @@ class CreatePostRequest extends FormRequest
     {
         // https://laravel.com/docs/5.2/validation#available-validation-rules
         return [
-            'title'			=> 'required|max:255',
+            'title'			=> 'min:5|required|max:255',
             // 'slug'			=> 'required|alpha_dash|min:5|max:255|unique:posts,slug',
             'category_id'	=> 'required|integer',
             'body'			=> 'required',
@@ -37,6 +37,7 @@ class CreatePostRequest extends FormRequest
     {
         return [
             'title.required'        => 'Required',
+            'title.min'             => 'Minimum 5 characters',
             'title.max'             => 'Maximum 255 characters',
             // 'slug.required'         => 'Required',
             // 'slug.alpha_dash'       => 'Alpha characters only including the "_"',

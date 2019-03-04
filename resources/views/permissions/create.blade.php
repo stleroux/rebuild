@@ -1,7 +1,7 @@
-@extends('layouts.master')
+@extends('layouts.backend')
 
 @section('left_column')
-   {{-- @include('blocks.admin_menu') --}}
+   @include('blocks.adminNav')
    @include('permissions.sidebar')
 @endsection
 
@@ -17,16 +17,10 @@
             <i class="fas fa-shield-alt"></i>
             New Permission
             <div class="float-right">
-               <a class="btn btn-sm btn-outline-secondary px-1 py-0" href="{{ route('permissions.index') }}">
-                  <i class="fas fa-angle-double-left"></i>
-                  Cancel
-               </a>
-               <button type="submit" class="btn btn-sm btn-outline-bprimary px-1 py-0" name="submit" value="new">
-                  <i class="far fa-hdd"></i> Save & New
-               </button>
-               <button type="submit" class="btn btn-sm btn-outline-success px-1 py-0" name="submit" value="save">
-                  <i class="far fa-save"></i> Save & Close
-               </button>
+               @include('common.buttons.cancel', ['model'=>'permission', 'type'=>''])
+               @include('common.buttons.reset', ['model'=>'permission', 'type'=>''])
+               @include('common.buttons.save&new', ['model'=>'permission', 'type'=>''])
+               @include('common.buttons.save', ['model'=>'permission', 'type'=>''])
             </div>
          </div>
          
@@ -57,11 +51,11 @@
                   </div>
                </div>
                <div class="col-sm-4">
-                  <div class="form-group {{ $errors->has('core') ? 'has-error' : '' }}">
-                     {{ Form::label('core', 'Core Module?', ['class'=>'required']) }}
-                     {{ Form::select('core', ['0'=>'Non-Core', '1'=>'Core', '2'=>'Module'], 0, ['class'=>'form-control form-control-sm']) }}
+                  <div class="form-group {{ $errors->has('type') ? 'has-error' : '' }}">
+                     {{ Form::label('type', 'Core Module?', ['class'=>'required']) }}
+                     {{ Form::select('type', ['0'=>'Non-Core', '1'=>'Core', '2'=>'Module'], 0, ['class'=>'form-control form-control-sm']) }}
                      <small class="form-text"></small>
-                     <span class="text-danger">{{ $errors->first('core') }}</span>
+                     <span class="text-danger">{{ $errors->first('type') }}</span>
                   </div>
                </div>
                <div class="col-sm-12">

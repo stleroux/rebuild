@@ -166,7 +166,7 @@ class PermissionsController extends Controller
 			'name' => 'required|unique:permissions,name',
 			'display_name' => 'required',
 			'model' => 'required',
-			'core' => 'required',
+			'type' => 'required',
 			'description' => 'required',
 		];
 
@@ -181,7 +181,7 @@ class PermissionsController extends Controller
 			$permission->name = $request->name;
 			$permission->display_name = $request->display_name;
 			$permission->model = $request->model;
-			$permission->core = $request->core;
+			$permission->type = $request->type;
 			$permission->description = $request->description;
 		$permission->save();
 
@@ -215,7 +215,7 @@ class PermissionsController extends Controller
 			// 'name' => 'required|unique:permissions,name',
 			'display_name' => 'required',
 			'model' => 'required',
-			'core' => 'required',
+			'type' => 'required',
 			'description' => 'required',
 		));
 
@@ -224,7 +224,7 @@ class PermissionsController extends Controller
 			// $permission->name = $request->name;
 			$permission->display_name = $request->display_name;
 			$permission->model = $request->model;
-			$permission->core = $request->core;
+			$permission->type = $request->type;
 			$permission->description = $request->description;
 		$permission->save();
 

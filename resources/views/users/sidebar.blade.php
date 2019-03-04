@@ -15,32 +15,10 @@
       </a>
       @endif --}}
 
-      <a href="/"
-         class="list-group-item list-group-item-action p-1">
-         <i class="fas fa-home pl-2"></i>
-         Frontend View
-      </a>
-
-      <a href="/dashboard"
-         class="list-group-item list-group-item-action p-1">
-         <i class="fas fa-cog pl-2"></i>
-         Dashboard
-      </a>
-
-      <a href="{{ route('users.index') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('users.index') ? 'active' : '' }}">
+      <a href="{{ route('users.index') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('users.*') ? 'active' : '' }}">
          <i class="fa fa-sitemap pl-2"></i>
          Users
-         <div class="badge badge-primary float-right">
-            {{-- {{ App\Category::count() }} --}}
-         </div>
       </a>
-
-      @if(checkPerm('user_create'))
-         <a href="{{ route('users.create') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('users.create') ? 'active' : '' }}">
-            <i class="fas fa-plus-square pl-2"></i>
-            New User
-         </a>
-      @endif
 
    </div>
 

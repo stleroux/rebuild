@@ -1,18 +1,15 @@
-@extends('layouts.master')
+@extends('layouts.backend')
 
 @section('stylesheets')
    {{ Html::style('css/posts.css') }}
 @stop
 
 @section('left_column')
-   {{-- @include('blocks.admin_menu') --}}
+   @include('blocks.adminNav')
    @include('posts::sidebar')
 @endsection
 
 @section('right_column')
-   {{-- @include('posts::blocks.search') --}}
-   {{-- @include('posts::blocks.archives') --}}
-   {{-- @include('posts::blocks.leaveComment') --}}
 @endsection
 
 @section('content')
@@ -51,28 +48,14 @@
                            <i class="fa fa-download"></i>
                            Restore Selected
                         </button>
-
-                        {{-- <a href="{{ route('posts.create') }}" class="btn btn-sm btn-outline-success px-1 py-0">
-                           <i class="fas fa-plus-square"></i>
-                           New Post
-                        </a> --}}
                      @endif
                   </div>
                </div>
 
-               <div class="card-body card_body p-2">
-                  @if($posts->count() > 0)
+
+               @if($posts->count() > 0)
+                  <div class="card-body card_body p-2">
                      @include('common.alphabet', ['model'=>'post', 'page'=>'trashed'])
-                     {{-- <div class="card mb-2 bg-transparent border-0 pt-0 py-0">
-                        <div class="card-body px-0 py-0 text-center">
-                           <div class="btn-group" role="group">
-                           <a href="{{ route('posts.trashed') }}" class="{{ Request::is('posts/trashed') ? "btn-secondary": "btn-primary" }} btn btn-sm">All</a>
-                           @foreach($letters as $value)
-                              <a href="{{ route('posts.trashed', $value) }}" class="{{ Request::is('posts/trashed/'.$value) ? "btn-secondary": "btn-primary" }} btn btn-sm">{{ strtoupper($value) }}</a>
-                           @endforeach
-                           </div>
-                        </div>
-                     </div> --}}
                      <table id="datatable" class="table table-hover table-sm">
                         <thead>
                            <tr>
@@ -84,7 +67,7 @@
                               <th>Created By</th>
                               <th>Created On</th>
                               <th>Publish(ed) On</th>
-                              <th>Deleted On</th>
+                              <th>Trashed On</th>
                               {{-- @if(checkACL('author')) --}}
                               <th data-orderable="false"></th>
                               {{-- @endif --}}
@@ -102,29 +85,14 @@
                               <td>{{ $post->views }}</td>
                               <td>{{ ucfirst($post->user->username) }}</td>
                               <td>{{ $post->created_at->format('M d, Y') }}</td>
-                              <td>{{ ($post->published) ? $post->published_at->format('M d, Y') : '' }}</td>
+                              <td>{{ ($post->published) ? $post->published_at->format('M d, Y') : 'no data found' }}</td>
                               <td>{{ $post->deleted_at->format('M d, Y') }}</td>
                               {{-- @if(checkACL('author')) --}}
                               <td class="text-right">
-
-                                 <a href="{{ route('posts.restore', $post->id) }}" class="btn btn-sm btn-outline-secondary px-1 py-0" title="Restore Post">
-                                    <i class="fas fa-thumbs-up"></i>
-                                 </a>
-
-                                 <a href="{{ route('posts.showTrashed', $post->id) }}" class="btn btn-sm btn-outline-secondary px-1 py-0" title="View Post">
-                                    <i class="fa fa-eye"></i>
-                                 </a>
-
-                                 {{-- @if(checkPerm('post_edit', $post))
-                                    <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-sm btn-outline-bprimary px-1 py-0" title="Edit Post">
-                                       <i class="far fa-edit"></i>
-                                    </a>
-                                 @endif --}}
-
+                                 @include('common.buttons.show', ['model'=>'post', 'id'=>$post->id, 'type'=>''])
+                                 @include('common.buttons.restore', ['model'=>'post', 'id'=>$post->id, 'type'=>''])
                                  @if(checkPerm('post_delete', $post))
-                                    <a href="{{ route('posts.delete', $post->id) }}" class="btn btn-sm btn-outline-danger px-1 py-0" title="Delete Post Permanently">
-                                       <i class="far fa-trash-alt"></i>
-                                    </a>
+                                    @include('common.buttons.delete', ['model'=>'post', 'id'=>$post->id, 'type'=>''])
                                  @endif
 
                               </td>
@@ -133,10 +101,12 @@
                            @endforeach
                         </tbody>
                      </table>
-                  @else
+                  </div>
+               @else
+                  <div class="card-body">
                      {{ setting('no_records_found') }}
-                  @endif
-               </div>
+                  </div>
+               @endif
             </div>
          </div>
       </div>

@@ -1,7 +1,7 @@
-@extends('layouts.master')
+@extends('layouts.backend')
 
 @section('left_column')
-   {{-- @include('blocks.admin_menu') --}}
+   @include('blocks.adminNav')
    @include('permissions.sidebar')
 @endsection
 
@@ -19,14 +19,8 @@
             <i class="fas fa-shield-alt"></i>
             Edit Permission
             <div class="float-right">
-               <a class="btn btn-sm btn-outline-secondary px-1 py-0" href="{{ route('permissions.index') }}">
-                  <i class="fas fa-angle-double-left"></i>
-                  Cancel
-               </a>
-                <button type="submit" class="btn btn-sm btn-outline-bprimary px-1 py-0">
-                  <i class="fa fa-save"></i>
-                  Update
-               </button>
+               @include('common.buttons.cancel', ['model'=>'permission', 'type'=>''])
+               @include('common.buttons.update', ['model'=>'permission', 'type'=>''])
             </div>
          </div>
          
@@ -54,10 +48,11 @@
                   </div>
                </div>
                <div class="col-sm-4">
-                  <div class="form-group {{ $errors->has('core') ? 'has-error' : '' }}">
-                     {{ Form::label('core', 'Core Module?', ['class'=>'required']) }}
-                     {{ Form::select('core', [ '0' => 'No', '1' => 'Yes'], null, ['class' => 'form-control form-control-sm', 'placeholder' => '']) }}
-                     <span class="text-danger">{{ $errors->first('core') }}</span>
+                  <div class="form-group {{ $errors->has('type') ? 'has-error' : '' }}">
+                     {{ Form::label('type', 'Core Module?', ['class'=>'required']) }}
+                     {{-- {{ Form::select('core', [ '0' => 'No', '1' => 'Yes'], null, ['class' => 'form-control form-control-sm', 'placeholder' => '']) }} --}}
+                     {{ Form::select('type', ['0'=>'Non-Core', '1'=>'Core', '2'=>'Module'], $permission->type, ['class'=>'form-control form-control-sm']) }}
+                     <span class="text-danger">{{ $errors->first('type') }}</span>
                   </div>
                </div>
                <div class="col-sm-12">

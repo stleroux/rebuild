@@ -14,5 +14,11 @@
 {{-- @endsection --}}
 
 @section('content')
-DASHBOARD
+
+   <div class="card">
+      <div class="card-header">WELCOME TO YOUR DASHBOARD</div>
+      <div class="card-body"></div>
+      <div class="card-footer"></div>
+   </div>
+
 @stop

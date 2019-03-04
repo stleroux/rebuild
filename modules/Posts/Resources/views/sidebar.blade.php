@@ -15,18 +15,6 @@
       </a>
       @endif --}}
 
-      <a href="/"
-         class="list-group-item list-group-item-action p-1">
-         <i class="fas fa-home pl-2"></i>
-         Frontend View
-      </a>
-
-      <a href="/dashboard"
-         class="list-group-item list-group-item-action p-1">
-         <i class="fas fa-cog pl-2"></i>
-         Dashboard
-      </a>
-
       <a href="{{ route('posts.index') }}"
          class="list-group-item list-group-item-action p-1 {{ Route::is('posts.index', 'posts.index.*') ? 'active' : '' }}"
          data-parent="#sub_posts">
@@ -58,13 +46,6 @@
          Unpublished Posts
          <span class="badge badge-secondary border float-right">{{ Modules\Posts\Entities\Post::unpublished()->count() }}</span>
       </a>
-
-      @if(checkPerm('post_create'))
-         <a href="{{ route('posts.create') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('posts.create') ? 'active' : '' }}">
-            <i class="fas fa-plus-square pl-2"></i>
-            New Post
-         </a>
-      @endif
 
    </div>
 

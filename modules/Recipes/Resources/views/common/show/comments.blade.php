@@ -19,11 +19,14 @@
 							<tr class="d-flex">
 								<td class="col-8">{{ $comment->comment }}</td>
 								<td class="col-2">
-									@include('common.authorFormat', ['model'=>$comment, 'field'=>'user'])
+									@auth
+										@include('common.authorFormat', ['model'=>$comment, 'field'=>'user'])
+									@else
+										{{ $comment->user->username }}
+									@endif
 								</td>
 								<td class="col-2">
 									@include('common.dateFormat', ['model'=>$comment, 'field'=>'created_at'])
-									{{-- {{ $comment->created_at->format('M d, Y') }} --}}
 								</td>
 							</tr>
 						@endforeach

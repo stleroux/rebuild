@@ -602,7 +602,7 @@ class PostsController extends Controller
 			$post->body = $request->body;
 			// $post->body = Purifier::clean($request->body);
 			$post->user_id = Auth::user()->id;
-			$post->updated_by_id = Auth::user()->id;
+			$post->modified_by_id = Auth::user()->id;
 
 			// Save the image if there is one
 			if ($request->hasFile('image')) {
@@ -815,8 +815,8 @@ class PostsController extends Controller
 ##################################################################################################################
 	public function unpublish($id)
 	{
-	  // Pass along the ROUTE value of the previous page
-	  //$ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
+		// Set the variable so we can use a button in other pages to come back to this page
+		Session::put('pageName', 'unpublish');
 
 	  $post = Post::find($id);
 		 $post->published_at = NULL;

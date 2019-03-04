@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Category;
 use App\Module;
@@ -17,11 +16,13 @@ use Image;
 use JavaScript;
 use Log;
 use Purifier;
+use Request;
 use Route;
 use Session;
 use Storage;
-// use App\Http\Requests\CreateCategoryRequest;
-// use App\Http\Requests\UpdateCategoryRequest;
+
+use App\Http\Requests\CreateCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 
 class CategoriesController extends Controller
 {
@@ -38,7 +39,6 @@ class CategoriesController extends Controller
 	{
 		// Only allow authenticated users access to these functions
 		$this->middleware('auth');
-		Session::forget('byCatName');
 
 		//Log::useFiles(storage_path().'/logs/audits.log');
 	}
@@ -55,13 +55,29 @@ class CategoriesController extends Controller
 ##################################################################################################################
 	public function create()
 	{
-		$categories = Category::with('children')->where('parent_id','=',0)->orderBy('name')->get();
+		$categories = Category::where('parent_id',1)->get();
 		// dd($categories);
+		$pCats = [];
+		// Store the category values into the $cats array
+		foreach ($categories as $pcat) {
+			$pCats[$pcat->id] = $pcat->name;
+		}
+
+		$cats = [];
+		// Store the category values into the $cats array
+		foreach ($categories as $cat) {
+			$cats[$cat->id] = $cat->name;
+		}
+
+		$modules = Module::orderBy('name')->get();
+
+		$moduls = [];
+		// Store the category values into the $cats array
+		foreach ($modules as $module) {
+			$moduls[$module->id] = $module->name;
+		}
 		
-		// $subs = Category::whereIN('parent_id', $categories)->get();
-		// dd($subs);
-		
-		return  view('categories.create', compact('categories'));
+		return  view('categories.create', compact('pCats','cats', 'moduls'));
 	}
 
 
@@ -151,17 +167,16 @@ class CategoriesController extends Controller
 		// }
 
 		// find all categories in the categories table and pass them to the view
-		// $modules = Module::orderBy('name')->get();
+		$modules = Module::orderBy('name')->get();
 
-		// $moduls = [];
-		// // Store the category values into the $cats array
-		// foreach ($modules as $module) {
-		// $moduls[$module->id] = $module->name;
-		// }
+		$moduls = [];
+		// Store the category values into the $cats array
+		foreach ($modules as $module) {
+		$moduls[$module->id] = $module->name;
+		}
 
 		$category = Category::find($id);
-		return  view('categories.edit', compact('category'));
-		// ->withModules($moduls);
+		return  view('categories.edit', compact('category'))->withModules($moduls);
 	}
 
 
@@ -288,29 +303,31 @@ class CategoriesController extends Controller
 		// $categories = Category::orderBy('name')->get();
 		// $categories = Category::with('module')->get();
 
-		// $modules = Module::orderBy('name')->get();
+		$modules = Module::orderBy('name')->get();
 
-		// $moduls = [];
-		// // Store the category values into the $cats array
-		// foreach ($modules as $module) {
-		// 	$moduls[$module->id] = $module->name;
-		// }
+		$moduls = [];
+		// Store the category values into the $cats array
+		foreach ($modules as $module) {
+			$moduls[$module->id] = $module->name;
+		}
 
 		// If $key value is passed
 		if ($key) {
-			$categories = Category::with('parent','children')->where('name', 'like', $key . '%')
+			$categories = Category::with('module')
+				->where('name', 'like', $key . '%')
 				->orderBy('name', 'asc')
 				->get();
 		} else {
    		// No $key value is passed
-   		$categories = Category::with('parent','children')->orderBy('name', 'asc')->get();
-   		// dd($categories);
+   		$categories = Category::with('module')
+   			->orderBy('name', 'asc')
+   			->get();
       }
 
 		// Save entry to log file using built-in Monolog
 		//Log::info(Auth::user()->username . " (" . Auth::user()->id . ") accessed :: Admin / Categories / Index");
 
-		return view ('categories.index', compact('categories','letters'));
+		return view ('categories.index', compact('categories','letters', 'moduls'));
 	}
 
 
@@ -400,94 +417,24 @@ class CategoriesController extends Controller
 # ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝
 // Store a newly created resource in storage
 ##################################################################################################################
-	public function store(Request $request)
+	public function store(CreateCategoryRequest $request)
 	{
-		if($request->part === 'main')
-		{
-			$rules = [
-				'mName' => 'required|min:3|max:50',
-			];
+		// if(!checkACL('manager')) {
+		//   return view('errors.403');
+		// }
 
-			$customMessages = [
-				'mName.required' => 'Required',
-				'mName.min' => 'Minimum 3 characters',
-				'mName.max' => 'Maximum 50 characters',
-			];
+		$category = new Category;
+			$category->name = $request->name;
+			$category->value = $request->value;
+			$category->description = $request->description;
+			$category->module_id = $request->module_id;
+		$category->save();
 
-			$this->validate($request, $rules, $customMessages);
+		// Save entry to log file using built-in Monolog
+		//Log::info(Auth::user()->username . " (" . Auth::user()->id . ") CREATED category (" . $category->id . ")\r\n", [$category = json_decode($category, true)]);
 
-			$category = new Category;
-				$category->parent_id = 0;
-				$category->name = $request->mName;
-				$category->value = $request->mValue;
-				$category->description = $request->mDescription;
-			$category->save();
-
-			Session::flash('store','The new parent category has been created.');
-			return redirect()->route('categories.create');
-		} 
-
-		if($request->part === 'sub')
-		{
-			$rules = [
-				'sSubs' => 'required',
-				'sName' => 'required|min:3|max:50',
-			];
-
-			$customMessages = [
-				'sSubs.required' => 'Required',
-				'sName.required' => 'Required',
-				'sName.min' => 'Minimum 3 characters',
-				'sName.max' => 'Maximum 50 characters',
-			];
-
-			$this->validate($request, $rules, $customMessages);
-
-			$category = new Category;
-				$category->parent_id = $request->sSubs;
-				$category->name = $request->sName;
-				$category->value = $request->sValue;
-				$category->description = $request->sDescription;
-			$category->save();
-
-			Session::flash('store','The new sub-category has been created.');
-			return redirect()->route('categories.create');
-		}
-
-		if($request->part === 'category')
-		{
-			$rules = [
-				'cCategory' => 'required',
-				'cSubcategory' => 'required',
-				'cName' => 'required|min:3|max:50',
-			];
-
-			$customMessages = [
-				'cCategory.required' => 'Required',
-				'cSubcategory.required' => 'Required',
-				'cName.required' => 'Required',
-				'cName.min' => 'Minimum 3 characters',
-				'cName.max' => 'Maximum 50 characters',
-			];
-
-			$this->validate($request, $rules, $customMessages);
-
-$cSubCategory = Category::where('name', '=', $request->cSubcategory)->pluck('id');
-// dd($cSubCategory);
-
-			$category = new Category;
-				// $category->parent_id = $request->cCategory;
-				// $category->subcategory = $request->cSubcategory;
-				$category->parent_id = $cSubCategory[0];
-				$category->name = $request->cName;
-				$category->value = $request->cValue;
-				$category->description = $request->cDescription;
-			$category->save();
-
-			Session::flash('store','The new category has been created.');
-			return redirect()->route('categories.index');
-		}
-		
+		Session::flash('store','The new category has been created.');
+		return redirect()->route('categories.index');
 	}
 
 
@@ -500,7 +447,7 @@ $cSubCategory = Category::where('name', '=', $request->cSubcategory)->pluck('id'
 #  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
 // UPDATE :: Update the specified resource in storage
 ##################################################################################################################
-	public function update(Request $request, $id)
+	public function update(UpdateCategoryRequest $request, $id)
 	{
 		// if(!checkACL('manager')) {
 		//   return view('errors.403');
@@ -511,7 +458,7 @@ $cSubCategory = Category::where('name', '=', $request->cSubcategory)->pluck('id'
 			$category->name = $request->input('name');
 			$category->value = $request->input('value');
 			$category->description = $request->input('description');
-			// $category->module_id = $request->input('module_id');
+			$category->module_id = $request->input('module_id');
 		// Save the data to the database
 		$category->save();
 
@@ -523,19 +470,5 @@ $cSubCategory = Category::where('name', '=', $request->cSubcategory)->pluck('id'
 		// Redirect to posts.show
 		return redirect()->route('categories.index');
 	}
-
-
-// public function getSubs($id)
-// {
-// 	// $subCats = Category::where('parent_id', $id)->get();
-// 	// dd($subCats);
-// 	$cat_id = Input::get('cat_id');
-//    $subcategories = DB::table('categories')
-//       ->where('parent_id','=',$cat_id)
-//       ->orderBy('name')
-//       ->pluck('name');
-// 	return Response::json($subcategories);
-// }
-
 
 }

@@ -1,18 +1,15 @@
-@extends('layouts.master')
+@extends('layouts.backend')
 
 @section('stylesheets')
 	{{ Html::style('css/posts.css') }}
 @stop
 
 @section('left_column')
-   {{-- @include('blocks.admin_menu') --}}
+   @include('blocks.adminNav')
    @include('posts::sidebar')
 @endsection
 
 @section('right_column')
-	{{-- @include('posts::blocks.search') --}}
-	{{-- @include('posts::blocks.archives') --}}
-	{{-- @include('posts::blocks.leaveComment') --}}
 @endsection
 
 @section('content')
@@ -52,10 +49,7 @@
 										Publish Selected
 									</button>
 
-									<a href="{{ route('posts.create') }}" class="btn btn-sm btn-outline-success px-1 py-0">
-										<i class="fas fa-plus-square"></i>
-										New Post
-									</a>
+									@include('common.buttons.add', ['model'=>'post', 'type'=>''])
 								@endif
 							</div>
 						</div>
@@ -63,16 +57,6 @@
 
 					<div class="card-body card_body">
 						@if($posts->count() > 0)
-							{{-- <div class="card mb-2 bg-transparent border-0 pt-0 py-0">
-								<div class="card-body px-0 py-0 text-center">
-									<div class="btn-group" role="group">
-									<a href="{{ route('posts.newPosts') }}" class="{{ Request::is('posts/newPosts') ? "btn-secondary": "btn-primary" }} btn btn-sm">All</a>
-									@foreach($letters as $value)
-										<a href="{{ route('posts.newPosts', $value) }}" class="{{ Request::is('posts/newPosts/'.$value) ? "btn-secondary": "btn-primary" }} btn btn-sm">{{ strtoupper($value) }}</a>
-									@endforeach
-									</div>
-								</div>
-							</div> --}}
 							@include('common.alphabet', ['model'=>'post', 'page'=>'newPosts'])
 							<table id="datatable" class="table table-hover table-sm">
 								<thead>
@@ -103,27 +87,13 @@
 										<td>{{ $post->created_at->format('M d, Y') }}</td>										
 										{{-- @if(checkACL('author')) --}}
 										<td class="text-right">
-											<a href="{{ route('posts.publish', $post->id) }}" class="btn btn-sm btn-outline-secondary px-1 py-0" title="Publish Post">
-												<i class="fa fa-upload"></i>
-											</a>
-
-											{{-- <a href="{{ route('posts.unpublish', $post->id) }}" class="btn btn-sm btn-outline-secondary px-1 py-0" title="Unpublish Post">
-												<i class="fa fa-download"></i>
-											</a> --}}
-
-											<a href="{{ route('posts.show', $post->id) }}" class="btn btn-sm btn-outline-secondary px-1 py-0" title="View Post">
-												<i class="fa fa-eye"></i>
-											</a>
-
+											@include('common.buttons.show', ['model'=>'post', 'id'=>$post->id, 'type'=>''])
+											@include('common.buttons.publish', ['model'=>'post', 'id'=>$post->id, 'type'=>''])
 											@if(checkPerm('post_edit', $post))
-												<a href="{{ route('posts.edit', $post->id) }}" class="btn btn-sm btn-outline-bprimary px-1 py-0" title="Edit Post">
-													<i class="far fa-edit"></i>
-												</a>
+												@include('common.buttons.edit', ['model'=>'post', 'id'=>$post->id, 'type'=>''])
 											@endif
 											@if(checkPerm('post_delete', $post))
-												<a href="{{ route('posts.trash', $post->id) }}" class="btn btn-sm btn-outline-danger px-1 py-0" title="Trash Post">
-													<i class="far fa-trash-alt"></i>
-												</a>
+												@include('common.buttons.trash', ['model'=>'post', 'id'=>$post->id, 'type'=>''])
 											@endif
 										</td>
 										{{-- @endif --}}

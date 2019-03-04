@@ -28,6 +28,8 @@ class SiteController extends Controller
 	public function __construct()
 	{
 		// $this->middleware('auth');
+		Session::forget('byCatName');
+		Session::forget('byCatLetter');
 	}
 
 
@@ -152,6 +154,7 @@ class SiteController extends Controller
 
 	public function dashboard()
 	{
+		
 		return view('dashboard');
 	}
 }

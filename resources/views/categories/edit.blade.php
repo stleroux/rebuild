@@ -32,27 +32,27 @@
 
 					<div class="card-body card_body">
 						<div class="row">
-							<div class="col">
+							<div class="col-3">
 								<div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
 									{{ Form::label('name', 'Name', ['class'=>'required']) }}
 									{{ Form::text('name', null, ['class' => 'form-control form-control-sm', 'autofocus', "onfocus"=>"this.focus();this.select()"]) }}
 									<span class="text-danger">{{ $errors->first('name') }}</span>
 								</div>
 							</div>
-							<div class="col">
+							<div class="col-3">
 								<div class="form-group {{ $errors->has('value') ? 'has-error' : '' }}">
 									{{ Form::label('value', 'Value') }}
 									{{ Form::text('value', null, ['class' => 'form-control form-control-sm']) }}
 									<span class="text-danger">{{ $errors->first('value') }}</span>
 								</div>
 							</div>
-							<div class="col">
+{{-- 							<div class="col">
 								<div class="form-group {{ $errors->has('module_id') ? 'has-error' : '' }}">
 									{{ Form::label('module_id', 'Module', ['class'=>'required']) }}
 									{{ Form::select('module_id', array(''=>'Select a module') + $modules, null, ['class'=>'form-control form-control-sm']) }}
 									<span class="text-danger">{{ $errors->first('module_id') }} </span>
 								</div>
-							</div>
+							</div> --}}
 							<div class="w-100"></div>
 							<div class="col">
 								<div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">

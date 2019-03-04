@@ -15,32 +15,10 @@
       </a>
       @endif --}}
 
-      <a href="/"
-         class="list-group-item list-group-item-action p-1">
-         <i class="fas fa-home pl-2"></i>
-         Frontend View
-      </a>
-
-      <a href="/dashboard"
-         class="list-group-item list-group-item-action p-1">
-         <i class="fas fa-cog pl-2"></i>
-         Dashboard
-      </a>
-
-      <a href="{{ route('permissions.index') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('permissions.index') ? 'active' : '' }}">
+      <a href="{{ route('permissions.index') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('permissions.*') ? 'active' : '' }}">
          <i class="fas fa-shield-alt pl-2"></i>
          Permissions
-         <div class="badge badge-primary float-right">
-            {{ App\Category::count() }}
-         </div>
       </a>
-
-      @if(checkPerm('user_create'))
-         <a href="{{ route('permissions.create') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('permissions.create') ? 'active' : '' }}">
-            <i class="fas fa-plus-square pl-2"></i>
-            New Permission
-         </a>
-      @endif
 
    </div>
 

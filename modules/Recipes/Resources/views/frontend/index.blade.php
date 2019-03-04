@@ -5,7 +5,8 @@
 @stop
 
 @section('left_column')
-   @include('blocks.main_menu')
+	@include('blocks.home_menu')
+	@include('recipes::frontend.sidebar')
 @endsection
 
 @section('right_column')
@@ -24,7 +25,6 @@
 				<span class="float-right">
 					@include('common.buttons.help', ['model'=>'recipe', 'type'=>''])
 					@include('recipes::frontend.index.help')
-               {{-- @include('common.buttons.myRecipes', ['model'=>'recipe', 'type'=>'']) --}}
                @auth
                	@include('common.buttons.myFavorites', ['model'=>'recipe', 'type'=>''])
                @endauth
@@ -33,7 +33,10 @@
 
 			@if($recipes->count() > 0)
 				<div class="card-body card_body p-2">
-					@include('common.alphabet', ['model'=>'recipe', 'page'=>'index'])
+					@if(Session::get('pageName', 'index'))
+						@include('common.alphabet', ['model'=>'recipe', 'page'=>'index'])
+					@endif
+
 					@foreach($recipes->chunk(6) as $chunk)
 						<div class="card-deck mb-0 px-2">
 							@foreach($chunk as $recipe)

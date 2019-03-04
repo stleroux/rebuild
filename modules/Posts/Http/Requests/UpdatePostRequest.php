@@ -25,8 +25,8 @@ class UpdatePostRequest extends FormRequest
     {
         // https://laravel.com/docs/5.2/validation#available-validation-rules
         return [
-            'title'         => 'required|max:255',
-            'slug'          => "required|alpha-dash|min:5|max:255|unique:posts,slug," . $this->id,
+            'title'         => 'required|min:5|max:255',
+            // 'slug'          => "required|alpha-dash|min:5|max:255|unique:posts,slug," . $this->id,
             'category_id'   => 'required|integer',
             'body'          => 'required',
             'image'         => 'sometimes|image|mimes:jpeg,jpg,png,bmp,gif',
@@ -37,12 +37,13 @@ class UpdatePostRequest extends FormRequest
     {
         return [
             'title.required'        => 'Required',
+            'title.min'             => 'Minimum 5 characters',
             'title.max'             => 'Maximum 255 characters',
-            'slug.required'         => 'Required',
-            'slug.alpha_dash'       => 'Alpha characters only including the "_"',
-            'slug.min'              => 'Minimum 5 characters',
-            'slug.max'              => 'Maximum 255 characters',
-            'slug.unique'           => 'Must be unique',
+            // 'slug.required'         => 'Required',
+            // 'slug.alpha_dash'       => 'Alpha characters only including the "_"',
+            // 'slug.min'              => 'Minimum 5 characters',
+            // 'slug.max'              => 'Maximum 255 characters',
+            // 'slug.unique'           => 'Must be unique',
             'category_id.required'  => 'Required',
             'body.required'         => 'Required',
         ];

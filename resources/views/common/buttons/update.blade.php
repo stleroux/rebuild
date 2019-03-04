@@ -3,10 +3,10 @@
    type="submit"
    {{-- formaction="{{ route($model.'s'.'.update') }}" --}}
    formmethod="POST"
-   title="Update">
+   title="Update {{ ucfirst($model) }}">
    <i class="fa fa-save"></i>
    @if($type == 'menu')
-      Update
+      Update {{ ucfirst($model) }}
    @endif
 </button>
 

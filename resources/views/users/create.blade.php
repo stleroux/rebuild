@@ -1,11 +1,11 @@
-@extends('layouts.master')
+@extends('layouts.backend')
 
 @section('stylesheets')
    {{ Html::style('css/switch.css') }}
 @endsection
 
 @section('left_column')
-   {{-- @include('blocks.admin_menu') --}}
+   @include('blocks.adminNav')
    @include('users.sidebar')
 @endsection
 
@@ -22,21 +22,42 @@
             <i class="fas fa-user"></i>
             New User
             <span class="float-sm-right">
-               <a href="{{ route('users.index') }}" class="btn btn-sm btn-outline-secondary px-1 py-0">
-                  <i class="fas fa-angle-double-left"></i>
-                  Cancel
-               </a>
+               @include('common.buttons.cancel', ['model'=>'user', 'type'=>''])
                @if(checkPerm('user_create'))
-                  <button type="submit" class="btn btn-sm btn-outline-bprimary px-1 py-0">
-                     <i class="far fa-save"></i>
-                     Save
-                  </button>
+                  @include('common.buttons.reset', ['model'=>'user', 'type'=>''])
+                  @include('common.buttons.save', ['model'=>'user', 'type'=>''])
                @endif
             </span>
          </div>
          <!--CARD BODY-->
          <div class="card-body card_body">
-            @include('users.form', ['disabled'=>''])
+            {{-- @include('users.form', ['disabled'=>'']) --}}
+            <div class="row">
+
+               <div class="col-sm-12 col-md-2">
+                  <div class="form-group {{ $errors->has('username') ? 'has-error' : '' }}">
+                     {{ Form::label('username', 'Username', ['class'=>'required']) }}
+                     {!! Form::text('username', null, array('placeholder'=>'Username', 'class'=>'form-control form-control-sm', 'autofocus'=>'autofocus' )) !!}
+                     <span class="text-danger">{{ $errors->first('username') }}</span>
+                  </div>
+               </div>
+
+               <div class="col-sm-12 col-md-4">
+                  <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
+                     {{ Form::label('email', 'Email', ['class'=>'required']) }}
+                     {!! Form::text('email', null, array('placeholder'=>'Email', 'class'=>'form-control form-control-sm' )) !!}
+                     <span class="text-danger">{{ $errors->first('email') }}</span>
+                  </div>
+               </div>
+
+               <div class="col-sm-12 col-md-3">
+                  <div class="form-group">
+                     {{ Form::label('password', 'Password', ['class'=>'required']) }}
+                     {!! Form::text('password', null, array('placeholder'=>'Automatically set to :: password', 'class'=>'form-control form-control-sm', 'readonly'=>'readonly')) !!}
+                  </div>
+               </div>
+
+            </div>
          </div>
          <div class="card-footer pt-1 pb-1 pl-2">
             Fields marked with an <span class="required"></span> are required

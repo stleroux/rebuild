@@ -1,7 +1,7 @@
-@extends('layouts.master')
+@extends('layouts.backend')
 
 @section('left_column')
-   {{-- @include('blocks.admin_menu') --}}
+   @include('blocks.adminNav')
    @include('posts::sidebar')
 @endsection
 
@@ -15,10 +15,7 @@
          <i class="far fa-newspaper"></i>
          {{ ucwords($post->title) }}
          <span class="float-right">
-            <a href="{{ route('posts.'. Session::get('pageName')) }}" class="btn btn-sm btn-outline-secondary px-1 py-0">
-               <i class="fas fa-angle-double-left"></i>
-               Cancel
-            </a>
+            @include('common.buttons.cancel', ['model'=>'post', 'type'=>''])
          </span>
       </div>
       <div class="card-body card_body">
