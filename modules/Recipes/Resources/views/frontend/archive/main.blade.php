@@ -33,7 +33,7 @@
 				@foreach ($archives as $archive)
 					<tr>
 						<td><a href="{{ route('recipes.show', $archive->id) }}">{{ $archive->title }}</a></td>
-						<td>{{ $archive->category->name }}</td>
+						<td>{{ ucwords($archive->category->name) }}</td>
 						<td>{{ $archive->views }}</td>
 						<td>
 							{{ $archive->user->profile->first_name }} {{ $archive->user->profile->last_name }}

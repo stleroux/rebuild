@@ -51,7 +51,7 @@ Route::group(['prefix' => 'recipes'], function()
    Route::get('myFavorites/{key?}',       'RecipesController@myFavorites')          ->name('recipes.myFavorites');
    Route::get('newRecipes/{key?}',        'RecipesController@newRecipes')           ->name('recipes.newRecipes');
    Route::get('trashed/{key?}',           'RecipesController@trashed')              ->name('recipes.trashed');
-   Route::get('bycat/{key}',              'RecipesController@bycat')                ->name('recipes.bycat');
+   // Route::get('bycat/{key}',              'RecipesController@bycat')                ->name('recipes.bycat');
 
    Route::get('import',                   'RecipesController@import')               ->name('recipes.import');
    Route::get('pdfview',                  'RecipesController@pdfview')              ->name('recipes.pdfview');
@@ -99,7 +99,7 @@ Route::group(['prefix' => 'recipes'], function()
    Route::post('{id}/storeComment',       'RecipesController@storeComment')         ->name('recipes.storeComment');
 
    // Make sure this one stays last as it will catch everything else
-   Route::get('{year}/{month}',           'RecipesController@archive')              ->name('recipes.archive');
+   Route::get('archives/{year}/{month}',           'RecipesController@archive')              ->name('recipes.archives');
 
 
    
