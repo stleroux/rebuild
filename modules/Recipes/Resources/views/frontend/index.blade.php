@@ -33,9 +33,7 @@
 
 			@if($recipes->count() > 0)
 				<div class="card-body card_body p-2">
-					@if(Session::get('pageName', 'index'))
-						@include('common.alphabet', ['model'=>'recipe', 'page'=>'index'])
-					@endif
+					@include('recipes::frontend.alphabet', ['model'=>'recipe'])
 
 					@foreach($recipes->chunk(6) as $chunk)
 						<div class="card-deck mb-0 px-2">

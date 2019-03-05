@@ -585,7 +585,131 @@ class RecipesController extends Controller
 # ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝
 // Display a list of resources
 ##################################################################################################################
-	public function index(Request $request, $key=null)
+   public function index(Request $request)
+   {
+      // Set the variable so we can use a button in other pages to come back to this page
+      Session::put('pageName', 'index');
+
+      // Get all categories related to Recipe Category (id=>1)
+      $categories = Category::where('parent_id',1)->get();
+
+      // Get the popular recipes
+      $popularRecipes = Recipe::published()->public()->get()->sortBy('title')->sortByDesc('views')->take(setting('homepage_favorite_recipe_count'));
+
+      // Get list of recips by year and month
+      $recipelinks = DB::table('recipes')
+         ->select(DB::raw('YEAR(published_at) year, MONTH(published_at) month, MONTHNAME(published_at) month_name, COUNT(*) recipe_count'))
+         ->where('published_at', '<=', Carbon::now())
+         ->groupBy('year')->groupBy('month')->orderBy('year', 'desc')->orderBy('month', 'desc')->get();
+
+      $alphas = DB::table('recipes')
+         ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
+         ->where('published_at', '<=', Carbon::now())
+         ->where('deleted_at', '=', null)
+         ->where('personal', '=', 0)
+         ->orderBy('letter')
+         ->get();
+
+
+
+      $byCatName = Category::where('name', $request->cat)->first();
+      // dd($byCatName);
+
+      if($request->cat == 'all'){
+         // echo "All recipes";
+         $recipes = Recipe::with('user','category')
+            ->published()
+            ->public()
+            ->orderBy('title', 'asc')
+            ->paginate(18);
+
+         if($request->key){
+            // echo " and grouped by " .$request->key;
+            $recipes = Recipe::with('user','category')
+               ->published()
+               ->public()
+               ->where('title', 'like', $request->key . '%')
+               ->orderBy('title', 'asc')
+               ->paginate(18);
+         }
+      } else {
+         // echo "Recipes categorized by " .$request->cat;
+         if($byCatName->parent_id != 1) {
+            $recipes = Recipe::with('user','category')
+               ->published()
+               ->public()
+               ->where('category_id', '=', $byCatName->id)
+               ->orderBy('title', 'asc')
+               ->paginate(18);
+            if($request->key){
+               // echo " and grouped by " .$request->key;
+               $recipes = Recipe::with('user','category')
+                  ->published()
+                  ->public()
+                  ->where('category_id', '=', $byCatName->id)
+                  ->where('title', 'like', $request->key . '%')
+                  ->orderBy('title', 'asc')
+                  ->paginate(18);
+            }
+         } else {
+            $allc = Category::where('parent_id', $byCatName->id)->pluck('id');
+            //dd($allc);
+            $recipes = Recipe::with('user','category')
+               ->published()
+               ->public()
+               ->whereIn('category_id', $allc)
+               ->orderBy('title', 'asc')
+               ->paginate(18);
+            if($request->key){
+               // echo " and grouped by " .$request->key;
+               $recipes = Recipe::with('user','category')
+                  ->published()
+                  ->public()
+                  ->whereIn('category_id', $allc)
+                  ->where('title', 'like', $request->key . '%')
+                  ->orderBy('title', 'asc')
+                  ->paginate(18);
+            }
+         }
+      }
+
+      $letters = [];
+      foreach($alphas as $alpha) {
+         $letters[] = $alpha->letter;
+      }
+      
+      return view('recipes::frontend.index', compact('recipes','categories','popularRecipes','recipelinks','letters'));
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public function index1(Request $request, $key=null)
 	{
 
       // Set the variable so we can use a button in other pages to come back to this page
@@ -638,8 +762,8 @@ class RecipesController extends Controller
       } elseif (strlen($key) > 1) {
          $byCatName = Category::where('name',$key)->first();
          // Set the variable so we can use a button in other pages to come back to this page
-         Session::put('pageName', $byCatName->name);
-         // Session::forget('byCatLetter');
+         // Session::put('pageName', $byCatName->name);
+         // Session::forget('pageName');
 
          if($byCatName->parent_id == 1) { // 1 => Recipes
             $allc = Category::where('parent_id', $byCatName->id)->pluck('id');

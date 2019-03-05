@@ -1,40 +1,38 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class CreateCategoriesTable extends Migration
-{
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('categories', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('module_id')->unsigned();
+class CreateCategoriesTable extends Migration {
 
-            $table->string('name');
-            $table->string('value')->nullable();
-            $table->text('description')->nullable();
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('categories', function(Blueprint $table)
+		{
+			$table->increments('id');
+			$table->integer('parent_id')->unsigned()->nullable();
+			$table->string('name');
+			$table->string('value')->nullable();
+			$table->text('description', 65535)->nullable();
+			$table->softDeletes();
+			$table->timestamps();
+		});
+	}
 
-            $table->softDeletes();
-            $table->timestamps();
-                        
-            // Add foreign key in the database manually
-            $table->foreign('module_id')->references('id')->on('modules')->onDelete('cascade');
-        });
-    }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::drop('categories');
-    }
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::drop('categories');
+	}
+
 }

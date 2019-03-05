@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ProfilesTableSeeder::class);
         $this->call(SettingsTableSeeder::class);
         $this->call(TagsTableSeeder::class);
+        // $this->call(RecipesTableSeeder::class);
     }
 }
