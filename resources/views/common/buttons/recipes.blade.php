@@ -1,7 +1,7 @@
 <button
    class="btn btn-sm btn-outline-secondary"
    type="submit"
-   formaction="{{ route($model.'s'.'.index') }}"
+   formaction="{{ route($model.'s'.'.index', 'all') }}"
    formmethod="GET"
    title="{{ ucfirst($model) }}s">
    <i class="fab fa-apple"></i>

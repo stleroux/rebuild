@@ -26,6 +26,12 @@
 				</li>
 			@endauth
 
+         @guest
+            <li class="nav-item {{ Request::is('login*') ? 'active' : '' }}">
+               <a class="nav-link" href="{{ URL('/login') }}"><span style="font-weight: normal;">Login</span></a>
+            </li>
+         @endif
+
 			<li class="nav-item {{ Request::is('about*') ? 'active' : '' }}">
 				<a class="nav-link" href="{{ URL('/about') }}"><span style="font-weight: normal;">About us</span></a>
 			</li>
