@@ -9,7 +9,7 @@
 @endsection
 
 @section('right_column')
-   @include('blocks.login')
+   {{-- @include('blocks.login') --}}
    @include('blocks.popularItems')
 	{{-- @include('blocks.recipesArchive') --}}
    {{-- @include('blocks.postsArchive') --}}

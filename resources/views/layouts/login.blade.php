@@ -9,14 +9,23 @@
 
    <title>{{ config('app.name', 'TheWoodBarn.ca') }}</title>
 
+   <!-- Scripts -->
+   {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
+   {{-- Removed above because it interferes with DataTable --}}
+
+   <link rel="stylesheet" href="/css/jquery.datetimepicker.min.css">
+
    <!-- Font Awesome -->
-   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+   {{-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"> --}}
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
    <!-- Styles -->
+   {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/dt-1.10.18/datatables.min.css"/>
-   {{-- <link href="{{ asset('css/bootstrap_4/slate.css') }}" rel="stylesheet"> --}}
-   {{-- <link href="{{ asset('css/woodbarn.css') }}" rel="stylesheet"> --}}
-   
+   {{-- <link rel="stylesheet" href="{{ asset('css/bootstrap_4/slate.css') }}"> --}}
+   <link rel="stylesheet" href="{{ asset('css/bootstrap-colors.css') }}" />
+   <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+   @yield('stylesheets')
 </head>
 <body>
    @include('layouts.master.navbar')
