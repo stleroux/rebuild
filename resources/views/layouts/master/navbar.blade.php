@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand sticky-top my-0 mx-0 py-0 pl-2 pr-0 navbar-dark bg-dark">
+<nav class="navbar navbar-expand-sm sticky-top my-0 mx-0 py-0 pl-2 pr-0 navbar-dark bg-dark">
 	
 	<a class="navbar-brand" href="/">
 		<h2 class="my-0 mx-0 py-0 px-0">{{ setting('app_name') }}</h2>
@@ -40,38 +40,38 @@
 				<a class="nav-link" href="{{ URL('/contact') }}"><span style="font-weight: normal;">Contact us</span></a>
 			</li>
 			
-	<!-- Dropdown -->
-   @auth
-   <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-         My Account
-      </a>
-      <div class="dropdown-menu dropdown-menu-right">
-      	<a href="{{ route('profile.show', Auth::User()->id) }}"
-            class="dropdown-item {{ Route::is('profile.edit', 'profile.show') ? 'active' : '' }} p-2">
-            <i class="fas fa-user-circle"></i>
-            My Profile
-         </a>
+      	<!-- Dropdown -->
+         @auth
+         <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+               My Account
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+            	<a href="{{ route('profile.show', Auth::User()->id) }}"
+                  class="dropdown-item {{ Route::is('profile.edit', 'profile.show') ? 'active' : '' }} p-2">
+                  <i class="fas fa-user-circle"></i>
+                  My Profile
+               </a>
 
-         <a href="{{ route('profile.resetPwd', Auth::user()->id) }}"
-            class="dropdown-item {{ Route::is('profile.resetPwd') ? 'active' : '' }} p-2">
-            <i class="fas fa-user-lock"></i>
-            Reset My Password
-         </a>
+               <a href="{{ route('profile.resetPwd', Auth::user()->id) }}"
+                  class="dropdown-item {{ Route::is('profile.resetPwd') ? 'active' : '' }} p-2">
+                  <i class="fas fa-user-lock"></i>
+                  Reset My Password
+               </a>
 
-         <a href="{{ route('logout') }}"
-            class="dropdown-item p-2"
-            onclick="event.preventDefault();
-                     document.getElementById('logout-form').submit();">
-            <i class="fas fa-sign-out-alt"></i>
-            {{ __('Logout') }}
-         </a>
-         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            @csrf
-         </form>
-      </div>
-   </li>
-   @endauth
+               <a href="{{ route('logout') }}"
+                  class="dropdown-item p-2"
+                  onclick="event.preventDefault();
+                           document.getElementById('logout-form').submit();">
+                  <i class="fas fa-sign-out-alt"></i>
+                  {{ __('Logout') }}
+               </a>
+               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  @csrf
+               </form>
+            </div>
+         </li>
+         @endauth
 			{{-- <li class="nav-item">
 				<a class="nav-link disabled" href="#">Disabled</a>
 			</li> --}}
@@ -79,4 +79,5 @@
 		</ul>
 
 	</div>
+   
 </nav>
