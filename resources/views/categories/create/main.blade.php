@@ -39,7 +39,7 @@
 
                <div class="col-3">
                   <div class="form-group {{ $errors->has('mName') ? 'has-error' : '' }}">
-                     {{ Form::label('mName', 'Category Name', ['class'=>'required']) }}
+                     {{ Form::label('mName', 'Main Category', ['class'=>'required']) }}
                      {{ Form::text('mName', null, ['class' => 'form-control form-control-sm']) }}
                      <span class="text-danger">{{ $errors->first('mName') }}</span>
                   </div>

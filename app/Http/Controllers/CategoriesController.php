@@ -61,7 +61,7 @@ class CategoriesController extends Controller
 		// $subs = Category::whereIN('parent_id', $categories)->get();
 		// dd($subs);
 		
-		return  view('categories.create', compact('categories'));
+		return view('categories.create', compact('categories'));
 	}
 
 

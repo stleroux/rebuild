@@ -600,7 +600,11 @@ class RecipesController extends Controller
       $recipelinks = DB::table('recipes')
          ->select(DB::raw('YEAR(published_at) year, MONTH(published_at) month, MONTHNAME(published_at) month_name, COUNT(*) recipe_count'))
          ->where('published_at', '<=', Carbon::now())
-         ->groupBy('year')->groupBy('month')->orderBy('year', 'desc')->orderBy('month', 'desc')->get();
+         ->groupBy('year')
+         ->groupBy('month')
+         ->orderBy('year', 'desc')
+         ->orderBy('month', 'desc')
+         ->get();
 
       $byCatName = Category::where('name', $request->cat)->first();
 
@@ -774,7 +778,11 @@ class RecipesController extends Controller
       $recipelinks = DB::table('recipes')
          ->select(DB::raw('YEAR(published_at) year, MONTH(published_at) month, MONTHNAME(published_at) month_name, COUNT(*) recipe_count'))
          ->where('published_at', '<=', Carbon::now())
-         ->groupBy('year')->groupBy('month')->orderBy('year', 'desc')->orderBy('month', 'desc')->get();
+         ->groupBy('year')
+         ->groupBy('month')
+         ->orderBy('year', 'desc')
+         ->orderBy('month', 'desc')
+         ->get();
 
       if(Auth::check()) {
          $user = Auth::user();
@@ -806,7 +814,11 @@ class RecipesController extends Controller
          $recipelinks = DB::table('recipes')
             ->select(DB::raw('YEAR(published_at) year, MONTH(published_at) month, MONTHNAME(published_at) month_name, COUNT(*) recipe_count'))
             ->where('published_at', '<=', Carbon::now())
-            ->groupBy('year')->groupBy('month')->orderBy('year', 'desc')->orderBy('month', 'desc')->get();
+            ->groupBy('year')
+            ->groupBy('month')
+            ->orderBy('year', 'desc')
+            ->orderBy('month', 'desc')
+            ->get();
 
 			$alphas = DB::table('recipes')
 				->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
@@ -863,7 +875,6 @@ class RecipesController extends Controller
             ->select(DB::raw('YEAR(published_at) year, MONTH(published_at) month, MONTHNAME(published_at) month_name, COUNT(*) recipe_count'))
             ->where('published_at', '<=', Carbon::now())
             ->where('personal', '=', 1)
-            // ->private()
             ->groupBy('year')
             ->groupBy('month')
             ->orderBy('year', 'desc')

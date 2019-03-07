@@ -34,7 +34,8 @@
 
 			@if($recipes->count() > 0)
 				<div class="card-body card_body p-2">
-					@include('common.alphabet', ['model'=>'recipe', 'page'=>'published'])
+					@include('recipes::frontend.alphabet', ['model'=>'recipe', 'page'=>'published'])
+					{{-- @include('recipes::frontend.alphabet', ['model'=>'recipe']) --}}
 					<table id="datatable" class="table table-sm table-hover">
 						<thead>
 							<tr>

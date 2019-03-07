@@ -16,7 +16,7 @@
             <div class="row">
                <div class="col-3">
                   <div class="form-group {{ $errors->has('sSubs') ? 'has-error' : '' }}">
-                     {!! Form::label('sSubs','Sub Category', ['class'=>'required']) !!}
+                     {!! Form::label('sSubs','Main Category', ['class'=>'required']) !!}
                      <select name="sSubs" id="subs" class="form-control input-sm">
                         <option value="">Select One</option>
                         @foreach($categories as $k)
@@ -39,7 +39,7 @@
 
                <div class="col-3">
                   <div class="form-group {{ $errors->has('sName') ? 'has-error' : '' }}">
-                     {{ Form::label('sName', 'Category Name', ['class'=>'required']) }}
+                     {{ Form::label('sName', 'Sub Category', ['class'=>'required']) }}
                      {{ Form::text('sName', null, ['class' => 'form-control form-control-sm']) }}
                      <span class="text-danger">{{ $errors->first('sName') }}</span>
                   </div>
