@@ -124,21 +124,21 @@ class ProfileController extends Controller
 ##################################################################################################################
    public function edit(Request $request, $id)
    {
-      $landingpages = Category::whereHas('module', function ($query) {
-         $query->where('name', '=', 'landing pages');
-      })->orderBy('name','asc')->get();
+      // $landingpages = Category::whereHas('module', function ($query) {
+      //    $query->where('name', '=', 'landing pages');
+      // })->orderBy('name','asc')->get();
 
       // Create an empty array to store the landing pages
-      $landingPages = [];
+      // $landingPages = [];
 
       // Store the landing pages values into the $landingPages array
-      foreach ($landingpages as $landingPage) {
-         $landingPages[$landingPage->id] = ucfirst($landingPage->value);
-      }
+      // foreach ($landingpages as $landingPage) {
+      //    $landingPages[$landingPage->id] = ucfirst($landingPage->value);
+      // }
 
       $user = User::with('profile')->findOrFail($id);
 
-      return view('profiles.edit', compact('user', 'landingPages'));
+      return view('profiles.edit', compact('user'));
    }
 
 
@@ -197,23 +197,23 @@ class ProfileController extends Controller
       //          ->where('name', '=', 'landing pages');
       //    })->orderBy('name','asc')->get();
       // } else {
-         $landingpages = Category::whereHas('module', function ($query) {
-            $query
-               ->where('name', '=', 'landing pages')
-               //->where('value', 'NOT LIKE', '%(BE)%')
-            ;
-         })->orderBy('name','asc')->get();
+         // $landingpages = Category::whereHas('module', function ($query) {
+         //    $query
+         //       ->where('name', '=', 'landing pages')
+         //       //->where('value', 'NOT LIKE', '%(BE)%')
+         //    ;
+         // })->orderBy('name','asc')->get();
       // }
 
       // Create an empty array to store the categories
-      $landingPages = [];
+      // $landingPages = [];
 
       // Store the category values into the $cats array
-      foreach ($landingpages as $landingPage) {
-         $landingPages[$landingPage->id] = ucfirst($landingPage->value);
-      }
+      // foreach ($landingpages as $landingPage) {
+      //    $landingPages[$landingPage->id] = ucfirst($landingPage->value);
+      // }
 
-      return view('profiles.show', compact('user'))->withLandingPages($landingPages);
+      return view('profiles.show', compact('user')); // ->withLandingPages($landingPages);
    }
 
 
