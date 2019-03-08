@@ -78,3 +78,7 @@ p {
 .dropdown:hover>.dropdown-menu {
    display: block;
 }
+
+/*.modal-lg {
+    max-width: 80%;
+}*/

@@ -40,9 +40,6 @@
 
 Route::group(['prefix' => 'recipes'], function()
 {
-
-   Route::get('test',                     'RecipesController@test')                ->name('recipes.test');
-
    Route::get('unpublished/{key?}',       'RecipesController@unpublished')          ->name('recipes.unpublished');
    Route::get('published/{key?}',         'RecipesController@published')            ->name('recipes.published');
    Route::get('future/{key?}',            'RecipesController@future')               ->name('recipes.future');
@@ -61,8 +58,9 @@ Route::group(['prefix' => 'recipes'], function()
    Route::get('{id}/show',                'RecipesController@show')                 ->name('recipes.show');
    Route::get('{id}/view',                'RecipesController@view')                 ->name('recipes.view');
    Route::get('{id}/trashedView',         'RecipesController@trashedView')          ->name('recipes.trashedView');
-   Route::get('{cat?}/{key?}',             'RecipesController@index')                ->name('recipes.index');
    Route::get('{id}/edit',                'RecipesController@edit')                 ->name('recipes.edit');
+   Route::get('{cat?}/{key?}',            'RecipesController@index')                ->name('recipes.index');
+   
    Route::put('{id}',                     'RecipesController@update')               ->name('recipes.update');
    // Route::delete('{id}',                  'RecipesController@destroy')              ->name('recipes.destroy');
 
@@ -101,6 +99,4 @@ Route::group(['prefix' => 'recipes'], function()
    // Make sure this one stays last as it will catch everything else
    Route::get('archives/{year}/{month}',           'RecipesController@archive')              ->name('recipes.archives');
 
-
-   
 });

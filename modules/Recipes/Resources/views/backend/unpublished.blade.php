@@ -51,7 +51,7 @@
                            <input type="checkbox" onClick="checkbox_is_checked()" name="checked[]" value="{{$recipe->id}}" class="check-all">
                         </td>
                         <td><a href="{{ route('recipes.show', $recipe->id) }}">{{ ucwords($recipe->title) }}</a></td>
-                        <td>{{ $recipe->category->name }}</td>
+                        <td>{{ ucwords($recipe->category->name) }}</td>
                         <td>{{ $recipe->views }}</td>
                         <td>@include('common.authorFormat', ['model'=>$recipe, 'field'=>'user'])</td>
                         <td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'created_at'])</td>

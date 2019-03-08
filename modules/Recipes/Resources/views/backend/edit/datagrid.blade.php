@@ -37,11 +37,12 @@
    <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}" >
       {!! Form::label("category_id", "Category", ['class'=>'required']) !!}
       <select name="category_id" class="custom-select">
-         <option selected>Select One</option>
+         {{-- <option value="{{ $recipe->category_id }}" selected>{{ $recipe->category->name }}</option> --}}
+         {{-- <option selected>Select One</option> --}}
          @foreach ($categories as $category)
             <option disabled>{{ ucfirst($category->name) }}</option>
             @foreach ($category->children as $children)
-               <option value="{{ $children->id}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- {{ ucfirst($children->name) }}</option>
+               <option value="{{ $children->id }}" {{ ($recipe->category_id == $children->id ) ? 'selected' : '' }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- {{ ucfirst($children->name) }}</option>
             @endforeach
          @endforeach
       </select>

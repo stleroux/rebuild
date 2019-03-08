@@ -56,11 +56,12 @@ class RecipesController extends Controller
 ##################################################################################################################
 	public function archive($year, $month)
 	{
+      // Check if user has required permission
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
 
       // Set the variable so we can use a button in other pages to come back to this page
       Session::put('pageName', 'archive');
 
-      // $categories = Category::where('module_id',3)->where('parent_id',0)->get();
       // Get all categories related to Recipe Category (id=>1)
       $categories = Category::where('parent_id',1)->get();
 
@@ -71,20 +72,7 @@ class RecipesController extends Controller
          ->orderBy('title')
 			->get();
 
-      $popularRecipes = Recipe::published()->public()->get()->sortBy('title')->sortByDesc('views')->take(setting('homepage_favorite_recipe_count'));
-
-		// Get list of recips by year and month
-		$recipelinks = DB::table('recipes')
-			->select(DB::raw('YEAR(published_at) year, MONTH(published_at) month, MONTHNAME(published_at) month_name, COUNT(*) recipe_count'))
-         ->where('published_at', '<=', Carbon::now())
-         ->where('deleted_at', '=', null)
-			->groupBy('year')
-         ->groupBy('month')
-         ->orderBy('year', 'desc')
-         ->orderBy('month', 'desc')
-         ->get();
-
-		return view('recipes::frontend.archive', compact('archives','year','month','recipelinks','categories','popularRecipes'));
+		return view('recipes::frontend.archive', compact('archives','year','month','categories'));
 	}
 
 
@@ -99,26 +87,12 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function create()
    {
-      // if(!checkACL('author')) {
-      //     return view('errors.403');
-      // }
+      // Check if user has required permission
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
 
-      // // find all categories in the categories table and pass them to the view
-      // $categories = Category::whereHas('module', function ($query) {
-      //    $query->where('name', '=', 'recipes');
-      // })->orderBy('name','asc')->get();
-
-      // // Create an empty array to store the categories
-      // $cats = [];
-      // // Store the category values into the $cats array
-      // foreach ($categories as $category) {
-      //    $cats[$category->id] = $category->name;
-      // }
-      // $categories = Category::where('module_id',3)->where('parent_id',0)->get();
       // Get all categories related to Recipe Category (id=>1)
       $categories = Category::where('parent_id',1)->get();
 
-      // return view('recipes::backend.create')->withCategories($cats);
       return view('recipes::backend.create', compact('categories'));
    }
 
@@ -138,9 +112,6 @@ class RecipesController extends Controller
       // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
 
       $recipe = Recipe::onlyTrashed()->findOrFail($id);
-      // dd($recipe);
-
-      // Session::put('pageName', 'trashed');
 
       return view('recipes::backend.delete', compact('recipe'));
    }
@@ -157,20 +128,15 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function deleteAll(Request $request)
    {
-      // Set the variable so we can use a button in other pages to come back to this page
-      // Session::put('pageName', '');
+      // Check if user has required permission
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
 
-      //dd('TEST_DELETE');
       $this->validate($request, [
          'checked' => 'required',
       ]);
-      //dd('TEST_DELETE');
 
       $checked = $request->input('checked');
-      //dd($checked);
 
-      // $article = Article::withTrashed()->findOrFail($checked);
-      //Article::destroy($checked);
       Recipe::whereIn('id', $checked)->forceDelete();
 
       Session::flash('success','The recipes were deleted successfully.');
@@ -195,18 +161,10 @@ class RecipesController extends Controller
 
       $recipe = Recipe::withTrashed()->findOrFail($id);
 
-      // remove any references to this post from the post_tag table
-      // $post->tags()->detach();
-
       // Delete the associated image if any
       File::delete('_recipes/' . $recipe->image);
 
       $recipe->forceDelete();
-
-      // Save entry to log file using built-in Monolog
-      // Log::info(Auth::user()->username . " (" . Auth::user()->id . ") DELETED post (" . $post->id . ")\r\n", 
-      //    [json_decode($post, true)]
-      // );
 
       Session::flash('success', 'The recipe was successfully deleted!');
       return redirect()->route('recipes.trashed');
@@ -339,30 +297,16 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function duplicate($id)
    {
-      //if(!checkACL('manager')) {
-      //  // Save entry to log file of failure
-      //  Log::warning(Auth::user()->username . " (" . Auth::user()->id . ") tried to access :: Articles / Duplicate");
-      //  return view('errors.403');
-      //}
-
-      // Set the variable so we can use a button in other pages to come back to this page
-      // Session::put('pageName', '');
+      // Check if user has required permission
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
 
       $recipe = Recipe::find($id);
         $newRecipe = $recipe->replicate();
         $newRecipe->user_id = Auth::user()->id;
       $newRecipe->save();
 
-      // change the user_id field to be that of the user that is currently logged in
-      
-      //$newArticle->views = 0;
-      //$newArticle->save();
-
-      // Save entry to log file using built-in Monolog
-      //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") duplicated :: article " . $article->id . " to article ". $newArticle->id);
-
       Session::flash ('success','The recipe was duplicated successfully!');
-      return redirect()->route($ref);
+      return redirect()->back();
    }
 
 
@@ -377,28 +321,14 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function edit($id)
    {
-      // if(!checkACL('author')) {
-      //     return view('errors.403');
-      // }
+      // Check if user has required permission
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
 
       // Find the article to edit
       $recipe = Recipe::findOrFail($id);
 
       // find all categories in the categories table and pass them to the view
-      // $categories = Category::whereHas('module', function ($query) {
-      //    $query->where('name', '=', 'recipes');
-      // })->get();
-
-      // // Create an empty array to store the categories
-      // $cats = [];
-      // // Store the category values into the $cats array
-      // foreach ($categories as $category) {
-      //    $cats[$category->id] = $category->name;
-      // }
-
-      // $categories = Category::where('parent_id',1)->pluck('id','name');
       $categories = Category::with('children')->where('parent_id',1)->get();
-      // dd($categories);
 
       return view('recipes::backend.edit', compact('recipe','categories'));
    }
@@ -414,12 +344,13 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function favoriteAdd($id)
    {
+      // Check if user has required permission
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+
       $recipe = Recipe::find($id);
       $recipe->addFavorite();
 
       Session::flash ('success','The recipe was successfully added to your Favorites list!');
-      //return redirect()->route('recipes.myFavorites','all');
-      // return redirect()->route('recipes.show', $id);
       return redirect()->route('recipes.'. Session::get('pageName'));
    }
 
@@ -434,18 +365,13 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function favoriteRemove($id)
    {
-      // $user = Auth::user()->id;
-      // $recipe = Recipe::find($id);
-
-      // $recipe->favorites()->detach($user);
+      // Check if user has required permission
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
 
       $recipe = Recipe::find($id);
       $recipe->removeFavorite();
 
       Session::flash ('success','The recipe was successfully removed to your Favorites list!');
-      // return redirect()->route('recipes.index','all');
-      //return redirect()->route('recipes.myFavorites','all');
-      // return redirect()->route('recipes.show', $id);
       return redirect()->route('recipes.'. Session::get('pageName'));
    }
 
@@ -461,21 +387,17 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function future(Request $request, $key=null)
    {
-      // if(!checkACL('guest')) {
-      //     return view('errors.403');
-      // }
+      // Check if user has required permission
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
 
       // Set the variable so we can use a button in other pages to come back to this page
       Session::put('pageName', 'future');
 
-      //$alphas = range('A', 'Z');
       $alphas = DB::table('recipes')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
-         // ->where('personal', '!=', 1)
          ->where('published_at','>', Carbon::Now())
          ->orderBy('letter')
          ->get();
-         //dd($alphas);
 
       $letters = [];
       foreach($alphas as $alpha) {
@@ -511,14 +433,8 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function import()
    {
-      // if(!checkACL('manager')) {
-      //   // Save entry to log file of failure
-      //   Log::warning(Auth::user()->username . " (" . Auth::user()->id . ") tried to access :: Articles / Import");
-      //   return view('errors.403');
-      // }
-
-      // Save entry to log file of failure
-      //Log::warning(Auth::user()->username . " (" . Auth::user()->id . ") accessed :: Articles / Import");
+      // Check if user has required permission
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
 
       return view('recipes.import');
    }
@@ -534,11 +450,8 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function importExcel()
    {
-      // if(!checkACL('manager')) {
-      //   // Save entry to log file of failure
-      //   Log::warning(Auth::user()->username . " (" . Auth::user()->id . ") tried to access :: Admin / Articles / Import");
-      //   return view('errors.403');
-      // }
+      // Check if user has required permission
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
 
       if(Input::hasFile('import_file')) {
             $path = Input::file('import_file')->getRealPath();
@@ -587,24 +500,14 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function index(Request $request)
    {
+      // Check if user has required permission
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+
       // Set the variable so we can use a button in other pages to come back to this page
       Session::put('pageName', 'index');
 
       // Get all categories related to Recipe Category (id=>1)
       $categories = Category::where('parent_id',1)->get();
-
-      // Get the popular recipes
-      $popularRecipes = Recipe::published()->public()->get()->sortBy('title')->sortByDesc('views')->take(setting('homepage_favorite_recipe_count'));
-
-      // Get list of recips by year and month
-      $recipelinks = DB::table('recipes')
-         ->select(DB::raw('YEAR(published_at) year, MONTH(published_at) month, MONTHNAME(published_at) month_name, COUNT(*) recipe_count'))
-         ->where('published_at', '<=', Carbon::now())
-         ->groupBy('year')
-         ->groupBy('month')
-         ->orderBy('year', 'desc')
-         ->orderBy('month', 'desc')
-         ->get();
 
       $byCatName = Category::where('name', $request->cat)->first();
 
@@ -699,7 +602,7 @@ class RecipesController extends Controller
          $letters[] = $alpha->letter;
       }
       
-      return view('recipes::frontend.index', compact('recipes','categories','popularRecipes','recipelinks','letters'));
+      return view('recipes::frontend.index', compact('recipes','categories','letters'));
    }
 
 
@@ -713,20 +616,18 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function makePrivate($id)
    {
+      // Check if user has required permission
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+
       $recipe = Recipe::find($id);
          $recipe->personal = 1;
       $recipe->save();
-
-      // Save entry to log file using built-in Monolog
-      //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") MADE recipe (" . $recipe->id . ") PRIVATE \r\n", [json_decode($recipe, true)]);
 
       // Delete this recipe's favorites
       DB::table('favorites')->where('favoriteable_id', '=', $id)->delete();
 
       Session::flash('success','The recipe was successfully made private');
-      // return redirect()->route('recipes.'. Session::get('pageName'));
       return redirect()->back();
-
    }
 
 
@@ -740,22 +641,14 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function makePublic($id)
    {
+      // Check if user has required permission
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+
       $recipe = Recipe::find($id);
          $recipe->personal = 0;
       $recipe->save();
 
-      // Save entry to log file using built-in Monolog
-      //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") REMOVE PRIVATE from recipe (" . $recipe->id . ")\r\n", 
-      //    [json_decode($recipe, true)]
-      //);
-
       Session::flash('success','The recipe was successfully made public');
-      
-      // f(Session::get('pageName') != 'show') {
-      //    return redirect()->route('recipes.'. Session::get('pageName'), $id);
-      // }
-
-      // return redirect()->route('recipes.'. Session::get('pageName'));
       return redirect()->back();
    }
 
@@ -771,27 +664,18 @@ class RecipesController extends Controller
 ##################################################################################################################
 	public function myFavorites(Request $request, $key=null)
 	{
+      // Check if user has required permission
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+
       // Set the variable so we can use a button in other pages to come back to this page
       Session::put('pageName', 'myFavorites');
-
-      // Get list of recips by year and month
-      $recipelinks = DB::table('recipes')
-         ->select(DB::raw('YEAR(published_at) year, MONTH(published_at) month, MONTHNAME(published_at) month_name, COUNT(*) recipe_count'))
-         ->where('published_at', '<=', Carbon::now())
-         ->groupBy('year')
-         ->groupBy('month')
-         ->orderBy('year', 'desc')
-         ->orderBy('month', 'desc')
-         ->get();
 
       if(Auth::check()) {
          $user = Auth::user();
          $recipes = $user->favorite(Recipe::class)->sortBy('title');
       }
 
-      $popularRecipes = Recipe::published()->public()->get()->sortBy('title')->sortByDesc('views')->take(setting('homepage_favorite_recipe_count'));
-
-      return view('recipes::frontend.myFavorites', compact('recipes','recipelinks','popularRecipes'));
+      return view('recipes::frontend.myFavorites', compact('recipes'));
 	}
 
 
@@ -806,27 +690,18 @@ class RecipesController extends Controller
 ##################################################################################################################
 	public function myRecipes($key=null)
 	{
+      // Check if user has required permission
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+
       // Set the variable so we can use a button in other pages to come back to this page
       Session::put('pageName', 'myRecipes');
 
 		if (Auth::check()) {
-         // Get list of recips by year and month
-         $recipelinks = DB::table('recipes')
-            ->select(DB::raw('YEAR(published_at) year, MONTH(published_at) month, MONTHNAME(published_at) month_name, COUNT(*) recipe_count'))
-            ->where('published_at', '<=', Carbon::now())
-            ->groupBy('year')
-            ->groupBy('month')
-            ->orderBy('year', 'desc')
-            ->orderBy('month', 'desc')
-            ->get();
-
 			$alphas = DB::table('recipes')
 				->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
 				->where('user_id','=', Auth::user()->id)
-				// ->where('published_at', '<', Carbon::now())
 				->orderBy('letter')
 				->get();
-			//dd($alphas);
 
 			$letters = [];
 			foreach($alphas as $alpha) {
@@ -848,7 +723,7 @@ class RecipesController extends Controller
                ->paginate(18);
          }
 
-			return view('recipes::backend.myRecipes', compact('recipes','letters', 'recipelinks'));
+			return view('recipes::backend.myRecipes', compact('recipes','letters'));
 		} else {
          return ('You need to be logged in');
       }
@@ -866,6 +741,9 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function myPrivateRecipes($key=null)
    {
+      // Check if user has required permission
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+
       // Set the variable so we can use a button in other pages to come back to this page
       Session::put('pageName', 'myPrivateRecipes');
 
@@ -884,12 +762,9 @@ class RecipesController extends Controller
          $alphas = DB::table('recipes')
             ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
             ->where('user_id','=', Auth::user()->id)
-            // ->where('published_at', '<', Carbon::now())
             ->where('personal', '=', 1)
-            // ->private()
             ->orderBy('letter')
             ->get();
-         //dd($alphas);
 
          $letters = [];
          foreach($alphas as $alpha) {
@@ -931,23 +806,17 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function newRecipes(Request $request, $key=null)
    {
-      // if(!checkACL('author')) {
-      //     return view('errors.403');
-      // }
+      // Check if user has required permission
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
 
       // Set the variable so we can use a button in other pages to come back to this page
       Session::put('pageName', 'newRecipes');
 
-      //$alphas = range('A', 'Z');
       $alphas = DB::table('recipes')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
          ->where('created_at', '>=' , Auth::user()->last_login_date)
-         //->where('user_id', '=', Auth::user()->id)
-         // ->where('personal', '!=', 1)
-         // ->where('published_at','!=', null)
          ->orderBy('letter')
          ->get();
-      //dd($alphas);
 
       $letters = [];
       foreach($alphas as $alpha) {
@@ -1033,10 +902,10 @@ class RecipesController extends Controller
 ##################################################################################################################
 	public function print($id)
 	{
-		$recipe = Recipe::find($id);
+      // Check if user has required permission
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
 
-		// Save entry to log file using built-in Monolog
-		// Log::info(Auth::user()->username . " (" . Auth::user()->id . ") PRINTED recipe (" . $recipe->id . ")\r\n", [json_decode($recipe, true)]);
+		$recipe = Recipe::find($id);
 
 		return view('recipes.print')->withRecipe($recipe);
 	}
@@ -1052,13 +921,15 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function publish($id)
    {
+      // Check if user has required permission
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+
       $recipe = Recipe::find($id);
         $recipe->published_at = Carbon::now();
         $recipe->deleted_at = Null;
       $recipe->save();
 
       Session::flash ('success','The recipe was successfully published.');
-      // return redirect()->route('recipes.show', $id);
       return redirect()->back();
    }
 
@@ -1073,32 +944,24 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function publishAll(Request $request)
    {
-      // Pass along the ROUTE value of the previous page
-      $ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
+      // Check if user has required permission
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
 
-      //dd('TEST_DELETE');
       $this->validate($request, [
          'checked' => 'required',
       ]);
-      //dd('TEST_DELETE');
 
       $checked = $request->input('checked');
-      //dd($checked);
 
-      // $article = Article::withTrashed()->findOrFail($checked);
-      //Article::destroy($checked);
-      //Article::whereIn('id', $checked)->publish();
       foreach ($checked as $item) {
-         //dd($item);
          $recipe = Recipe::withTrashed()->find($item);
-         //dd($article);
             $recipe->published_at = Carbon::now();
             $recipe->deleted_at = Null;
          $recipe->save();
       }
 
       Session::flash('success','The recipes were published successfully.');
-      return redirect()->route($ref);
+      return redirect()->back();
    }
 
 
@@ -1112,30 +975,18 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function published(Request $request, $key=null)
    {
-      // if(!checkACL('user')) {
-      //     return view('errors.403');
-      // }
+      // Check if user has required permission
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
 
       // Set the variable so we can use a button in other pages to come back to this page
       Session::put('pageName', 'published');
 
-      //$alphas = range('A', 'Z');
-        $alphas = DB::table('recipes')
-         ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
-         ->where('published_at','<', Carbon::Now())
-         ->where('deleted_at','=', Null)
-         ->orderBy('letter')
-         ->get();
-
-      // Get list of recips by year and month
-      $recipelinks = DB::table('recipes')
-         ->select(DB::raw('YEAR(published_at) year, MONTH(published_at) month, MONTHNAME(published_at) month_name, COUNT(*) recipe_count'))
-         ->where('published_at', '<=', Carbon::now())
-         ->groupBy('year')
-         ->groupBy('month')
-         ->orderBy('year', 'desc')
-         ->orderBy('month', 'desc')
-         ->get();
+     $alphas = DB::table('recipes')
+      ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
+      ->where('published_at','<', Carbon::Now())
+      ->where('deleted_at','=', Null)
+      ->orderBy('letter')
+      ->get();
 
       $letters = [];
       foreach($alphas as $alpha) {
@@ -1156,7 +1007,7 @@ class RecipesController extends Controller
             ->get();
       }
 
-      return view('recipes::backend.published', compact('recipes','letters','recipelinks'));
+      return view('recipes::backend.published', compact('recipes','letters'));
    }
 
 
@@ -1171,18 +1022,15 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function resetViews($id)
    {
-      // Pass along the ROUTE value of the previous page
-      $ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
+      // Check if user has required permission
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
 
       $recipe = Recipe::find($id);
          $recipe->views = 0;
       $recipe->save();
 
-      // Save entry to log file using built-in Monolog
-      //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") MADE recipe (" . $recipe->id . ") PRIVATE \r\n", [json_decode($recipe, true)]);
-
       Session::flash('success','The recipe\'s views count was reset to 0.');
-      return redirect()->route($ref);
+      return redirect()->back();
    }
 
 
@@ -1197,9 +1045,10 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function restore($id)
    {
+      // Check if user has required permission
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+
       $recipe = Recipe::withTrashed()->findOrFail($id);
-      //$article->deleted_at = NULL;
-      //$article->save();
       $recipe->restore();
 
       Session::flash ('success','The recipe was successfully restored.');
@@ -1218,18 +1067,11 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function restoreAll(Request $request)
    {
-      //dd('TEST_RESTORE');
-      //dd($request);
-      //$this->validate($request, [
-      //    'checked' => 'required',
-      //]);
-      //dd('TEST_RESTORE');
+      // Check if user has required permission
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
 
       $checked = $request->input('checked');
-      //dd($checked);
 
-      // $article = new Article();
-      // $article->restore($checked);
       Recipe::whereIn('id', $checked)->restore();
 
       Session::flash('success','The recipes were restored successfully.');
@@ -1248,31 +1090,20 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function show($id)
    {
+      // Check if user has required permission
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+
       $recipe = Recipe::withTrashed()->find($id);
 
-      // Set the variable so we can use a button in other pages to come back to this page
-      // Session::put('pageName', 'show');
-
-      // get previous recipe id
-      // $previous = Recipe::published()->where('id', '<', $recipe->id)->max('id');
-
-      // get next recipe id
-      // $next = Recipe::published()->where('id', '>', $recipe->id)->min('id');
-
-      //$next = Recipe::published()->orderBy("title")->first();
-      // dd($next);
-      //$previous = Recipe::orderBy("title", 'desc')->first();
-
-      // Add 1 to views column
       if(
          (Session::get('pageName') === 'index') ||
          (Session::get('pageName') === 'myFavorites') ||
          (Session::get('pageName') === 'archive') ||
          (Session::get('pageName') === 'home')
       ){
+         // Add 1 to views column
          DB::table('recipes')->where('id','=',$recipe->id)->increment('views',1);
       }
-
 
       // If user is logged in, update the last_viewed_by_id and last_viewed_on fields in the recipes table
       // if (Auth::check()) {
@@ -1282,28 +1113,7 @@ class RecipesController extends Controller
 
       $categories = Category::where('parent_id',1)->get();
 
-      $popularRecipes = Recipe::published()->public()->get()->sortBy('title')->sortByDesc('views')->take(setting('homepage_favorite_recipe_count'));
-
-      // Get list of recips by year and month
-      $recipelinks = DB::table('recipes')
-         ->select(DB::raw('YEAR(published_at) year, MONTH(published_at) month, MONTHNAME(published_at) month_name, COUNT(*) recipe_count'))
-         ->where('published_at', '<=', Carbon::now())
-         //->subMonth(3)) --Only show the last 3 months
-         //->whereRaw('published = 1') -- field no longer used
-         ->groupBy('year')
-         ->groupBy('month')
-         ->orderBy('year', 'desc')
-         ->orderBy('month', 'desc')
-         ->get();
-
-      // Save entry to log file using built-in Monolog
-      if (Auth::check()) {
-         //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") viewed :: Recipe (" . $recipe->id . ")");
-      } else {
-         //Log::info(getClientIP() . " viewed :: Recipe (" . $recipe->id . ")");
-      }
-
-      return view('recipes::common.show', compact('recipe','recipelinks','categories','popularRecipes'));
+      return view('recipes::common.show', compact('recipe','categories'));
    }
 
 
@@ -1317,11 +1127,9 @@ class RecipesController extends Controller
 // Store a newly created resource in storage
 ##################################################################################################################
    public function store(CreateRecipeRequest $request)
-   // public function store(Request $request)
    {
-      // if(!checkACL('author')) {
-      //     return view('errors.403');
-      // }
+      // Check if user has required permission
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
 
       $recipe = new Recipe;
          $recipe->title = $request->title;
@@ -1354,12 +1162,7 @@ class RecipesController extends Controller
 
       $recipe->save();
 
-      // Save entry to log file using built-in Monolog
-      //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") CREATED article (" . $article->id . ")\r\n", [json_decode($article, true)]
-      //);
-
       Session::flash('success','The article has been created successfully!');
-      // return redirect()->route('recipes.index');
       return redirect()->route('recipes.'. Session::get('pageName'));
    }
 
@@ -1372,31 +1175,21 @@ class RecipesController extends Controller
 # ███████║   ██║   ╚██████╔╝██║  ██║███████╗    ╚██████╗╚██████╔╝██║ ╚═╝ ██║██║ ╚═╝ ██║███████╗██║ ╚████║   ██║   
 # ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝     ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝   ╚═╝   
 ##################################################################################################################
-	 public function storeComment(CreateCommentRequest $request, $id)
-		  // public function storeComment(Request $request, $id)
-	 {
-		  //dd($id);
-		  $recipe = Recipe::find($id);
-		  //dd($project);
+   public function storeComment(CreateCommentRequest $request, $id)
+   {
+      // Check if user has required permission
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
 
-		  $comment = new Comment();
-				// $comment->name = $request->name;
-				// $comment->email = $request->email;
-				$comment->user_id = Auth::user()->id;
-				$comment->comment = $request->comment;
-			$recipe->comments()->save($comment);
-		  //$comment->save();
+      $recipe = Recipe::find($id);
 
-		  // Save entry to log file using built-in Monolog
-		  // if (Auth::check()) {
-		  //     Log::info(Auth::user()->username . " (" . Auth::user()->id . ") commented on post (" . $post->id . ")\r\n", [json_decode($comment, true)]);
-		  // } else {
-		  //     Log::info(Request::ip() . " commented on post " . $post->id);
-		  // }
+      $comment = new Comment();
+      $comment->user_id = Auth::user()->id;
+      $comment->comment = $request->comment;
+      $recipe->comments()->save($comment);
 
-		  Session::flash('success', 'Comment added succesfully.');
-		  return redirect()->route('recipes.show', $recipe->id);
-	 }
+      Session::flash('success', 'Comment added succesfully.');
+      return redirect()->route('recipes.show', $recipe->id);
+   }
 
 
 ##################################################################################################################
@@ -1414,22 +1207,7 @@ class RecipesController extends Controller
 
       $recipe = Recipe::findOrFail($id);
 
-      // dd($recipe);
-      // $model = "recipe";
-      // dd($model);
-      // Set the $page variable so we can come back to the calling page    
-      // if (app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'posts.index') {
-      //    $page = 'index';
-      // }elseif (app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'posts.unpublished') {
-      //    $page = 'unpublished';
-      // }elseif (app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'posts.newPosts') {
-      //    $page = 'newPosts';
-      // }
-
-      // Session::put('pageName', 'trashed');
-
       return view('recipes::backend.trash', compact('recipe'));
-      // return view('common.trash', compact('recipe','model'));
    }
 
 
@@ -1453,13 +1231,11 @@ class RecipesController extends Controller
       ]);
 
       $checked = $request->input('checked');
-      // dd($checked);
 
       Recipe::destroy($checked);
 
       Session::flash('success','The recipes were trashed successfully.');
       return redirect()->route('recipes.'. Session::get('pageName'));
-
    }
 
 
@@ -1485,11 +1261,6 @@ class RecipesController extends Controller
       // Delete the recipe
       $recipe->delete();
 
-      // Save entry to log file using built-in Monolog
-      // Log::info(Auth::user()->username . " (" . Auth::user()->id . ") DELETED post (" . $post->id . ")\r\n", 
-      //    [json_decode($post, true)]
-      // );
-
       Session::flash('success', 'The recipe was successfully deleted!');
       return redirect()->route('recipes.'. Session::get('pageName'));
    }
@@ -1509,10 +1280,11 @@ class RecipesController extends Controller
       // Check if user has required permission
       // if(!checkPerm('post_index')) { abort(401, 'Unauthorized Access'); }
 
-      //$alphas = range('A', 'Z');
+      // Set the variable so we can use a button in other pages to come back to this page
+      Session::put('pageName', 'trashed');
+
       $alphas = DB::table('recipes')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
-         //->where('published_at','<', Carbon::Now())
          ->where('deleted_at','!=', Null)
          ->orderBy('letter')
          ->get();
@@ -1521,20 +1293,6 @@ class RecipesController extends Controller
       foreach($alphas as $alpha) {
         $letters[] = $alpha->letter;
       }
-
-      // Get list of posts by year and month
-      $recipelinks = DB::table('recipes')
-         ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) recipe_count'))
-         ->where('published_at', '<=', Carbon::now())
-         //->where('created_at', '<=', Carbon::now()->subMonth(3))
-         ->groupBy('year')
-         ->groupBy('month')
-         ->orderBy('year', 'desc')
-         ->orderBy('month', 'desc')
-         ->get();
-      // dd($postlinks);
-
-      Session::put('pageName', 'trashed');
 
       // If $key value is passed
       if ($key) {
@@ -1550,18 +1308,7 @@ class RecipesController extends Controller
             ->get();
       }
       
-      return view('recipes::backend.trashed', compact('recipes','letters', 'recipelinks'));
-
-
-       //   public function trashed(Request $request)
-   // {
-      // if(!checkACL('guest')) {
-      //     return view('errors.403');
-      // }
-
-   //    $recipes = Recipe::with('user','category')->onlyTrashed()->get();
-   //    return view('recipes.trashed', compact('recipes'));
-   // }
+      return view('recipes::backend.trashed', compact('recipes','letters'));
    }
 
 
@@ -1576,50 +1323,11 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function trashedView($id)
    {
+      // Check if user has required permission
+      // if(!checkPerm('post_index')) { abort(401, 'Unauthorized Access'); }
+
       $recipe = Recipe::withTrashed()->find($id);
 
-      // Set the variable so we can use a button in other pages to come back to this page
-      // Session::put('pageName', 'show');
-
-      // get previous recipe id
-      // $previous = Recipe::published()->where('id', '<', $recipe->id)->max('id');
-
-      // get next recipe id
-      // $next = Recipe::published()->where('id', '>', $recipe->id)->min('id');
-
-      //$next = Recipe::published()->orderBy("title")->first();
-      // dd($next);
-      //$previous = Recipe::orderBy("title", 'desc')->first();
-
-      // Add 1 to views column
-      // DB::table('recipes')->where('id','=',$recipe->id)->increment('views',1);
-
-      // If user is logged in, update the last_viewed_by_id and last_viewed_on fields in the recipes table
-      // if (Auth::check()) {
-      //    DB::statement("UPDATE recipes SET last_viewed_by_id = " . Auth::user()->id . " where id = " . $id );
-      //    DB::statement("UPDATE recipes SET last_viewed_on = " . DB::raw('NOW()') . " where id = " . $id );
-      // }
-
-      // Get list of recips by year and month
-      // $recipelinks = DB::table('recipes')
-      //    ->select(DB::raw('YEAR(published_at) year, MONTH(published_at) month, MONTHNAME(published_at) month_name, COUNT(*) recipe_count'))
-      //    ->where('published_at', '<=', Carbon::now())
-      //    //->subMonth(3)) --Only show the last 3 months
-      //    //->whereRaw('published = 1') -- field no longer used
-      //    ->groupBy('year')
-      //    ->groupBy('month')
-      //    ->orderBy('year', 'desc')
-      //    ->orderBy('month', 'desc')
-      //    ->get();
-
-      // Save entry to log file using built-in Monolog
-      if (Auth::check()) {
-         //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") viewed :: Recipe (" . $recipe->id . ")");
-      } else {
-         //Log::info(getClientIP() . " viewed :: Recipe (" . $recipe->id . ")");
-      }
-
-      // return view('recipes::backend.view', compact('recipe','recipelinks','next','previous'));
       return view('recipes::backend.trashedView', compact('recipe'));
    }
 
@@ -1634,24 +1342,16 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function unpublish($id)
    {
-      // Pass along the ROUTE value of the previous page
-      //$ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
+      // Check if user has required permission
+      // if(!checkPerm('post_index')) { abort(401, 'Unauthorized Access'); }
 
       $recipe = Recipe::find($id);
          $recipe->published_at = NULL;
-         // $article->favoriteArticles()->delete(); // Remove associated rows from article_user (favorites table)
-        
-         $favorites = DB::select('select * from recipe_user where recipe_id = '. $id, [1]);
-         //dd ($favorites);
-         foreach($favorites as $favorite) {
-            //dd($favorite);
-            $recipe->favorites()->detach($favorite);
-         }
+         // Delete this recipe's favorites
+         DB::table('favorites')->where('favoriteable_id', '=', $recipe->id)->delete();
       $recipe->save();
 
       Session::flash ('success','The recipe was successfully unpublished.');
-      //return redirect()->route($ref);
-      // return redirect()->route('recipes.show', $id);
       return redirect()->back();
    }
 
@@ -1667,22 +1367,17 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function unpublished(Request $request, $key=null)
    {
-      // if(!checkACL('editor')) {
-      //     return view('errors.403');
-      // }
+      // Check if user has required permission
+      // if(!checkPerm('post_index')) { abort(401, 'Unauthorized Access'); }
 
       // Set the variable so we can use a button in other pages to come back to this page
       Session::put('pageName', 'unpublished');
 
-
-      //$alphas = range('A', 'Z');
-        $alphas = DB::table('recipes')
-         ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
-         // ->where('personal', '!=', 1)
-         ->where('published_at','=', null)
-         ->orderBy('letter')
-         ->get();
-         //dd($alphas);
+     $alphas = DB::table('recipes')
+      ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
+      ->where('published_at','=', null)
+      ->orderBy('letter')
+      ->get();
 
       $letters = [];
       foreach($alphas as $alpha) {
@@ -1717,8 +1412,8 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function unpublishAll(Request $request)
    {
-      // Pass along the ROUTE value of the previous page
-      $ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
+      // Check if user has required permission
+      // if(!checkPerm('post_index')) { abort(401, 'Unauthorized Access'); }
 
       $this->validate($request, [
          'checked' => 'required',
@@ -1727,22 +1422,13 @@ class RecipesController extends Controller
       $checked = $request->input('checked');
 
       foreach ($checked as $item) {
-         //dd($item);
          $recipe = Recipe::withTrashed()->find($item);
             $recipe->published_at = Null;
-
-         // Delete related favorites
-         // $favorites = DB::select('select * from recipe_user where recipe_id = '. $recipe->id, [1]);
-         // foreach($favorites as $favorite) {
-         //    $recipe->favoriteRecipes()->detach($favorite);
-         // }
-         // Delete this recipe's favorites
-         DB::table('favorites')->where('favoriteable_id', '=', $recipe->id)->delete();
-
+            // Delete this recipe's favorites
+            DB::table('favorites')->where('favoriteable_id', '=', $recipe->id)->delete();
          $recipe->save();
       }
       
-
       Session::flash('success','The recipes were unpublished successfully.');
       return redirect()->route('recipes.'. Session::get('pageName'));
    }
@@ -1759,6 +1445,9 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function update(UpdateRecipeRequest $request, $id)
    {
+      // Check if user has required permission
+      // if(!checkPerm('post_index')) { abort(401, 'Unauthorized Access'); }
+
       // Get the recipe values from the database
       $recipe = Recipe::find($id);
 
@@ -1791,7 +1480,6 @@ class RecipesController extends Controller
 
          // get name of old image
          $oldImageName = $recipe->image;
-         //dd($oldImageName);
 
          // Update database
          $recipe->image = $filename;
@@ -1803,14 +1491,8 @@ class RecipesController extends Controller
 
       $recipe->save();
 
-      // Save entry to log file using built-in Monolog
-      //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") updated :: Recipe (" . $recipe->id .")");
-
       // set a flash message to be displayed on screen
       Session::flash('success','The recipe was successfully updated!');
-      // redirect to another page
-      //return redirect()->route('recipes.index');
-      // return redirect(Session::get('fullURL'));
       return redirect()->route('recipes.'. Session::get('pageName'));
   }
 
@@ -1826,65 +1508,12 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function view($id)
    {
+      // Check if user has required permission
+      // if(!checkPerm('post_index')) { abort(401, 'Unauthorized Access'); }
+
       $recipe = Recipe::find($id);
 
-      // Set the variable so we can use a button in other pages to come back to this page
-      // Session::put('pageName', 'show');
-
-      // get previous recipe id
-      // $previous = Recipe::published()->where('id', '<', $recipe->id)->max('id');
-
-      // get next recipe id
-      // $next = Recipe::published()->where('id', '>', $recipe->id)->min('id');
-
-      //$next = Recipe::published()->orderBy("title")->first();
-      // dd($next);
-      //$previous = Recipe::orderBy("title", 'desc')->first();
-
-      // Add 1 to views column
-      // DB::table('recipes')->where('id','=',$recipe->id)->increment('views',1);
-
-      // If user is logged in, update the last_viewed_by_id and last_viewed_on fields in the recipes table
-      // if (Auth::check()) {
-      //    DB::statement("UPDATE recipes SET last_viewed_by_id = " . Auth::user()->id . " where id = " . $id );
-      //    DB::statement("UPDATE recipes SET last_viewed_on = " . DB::raw('NOW()') . " where id = " . $id );
-      // }
-
-      // Get list of recips by year and month
-      $recipelinks = DB::table('recipes')
-         ->select(DB::raw('YEAR(published_at) year, MONTH(published_at) month, MONTHNAME(published_at) month_name, COUNT(*) recipe_count'))
-         ->where('published_at', '<=', Carbon::now())
-         //->subMonth(3)) --Only show the last 3 months
-         //->whereRaw('published = 1') -- field no longer used
-         ->groupBy('year')
-         ->groupBy('month')
-         ->orderBy('year', 'desc')
-         ->orderBy('month', 'desc')
-         ->get();
-
-      // Save entry to log file using built-in Monolog
-      if (Auth::check()) {
-         //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") viewed :: Recipe (" . $recipe->id . ")");
-      } else {
-         //Log::info(getClientIP() . " viewed :: Recipe (" . $recipe->id . ")");
-      }
-
-      return view('recipes::backend.view', compact('recipe','recipelinks','next','previous'));
-   }
-
-
-   public function test() {
-      
-      // Popular recipes
-      $popularRecipes = Recipe::published()->public()->get()->sortBy('title')->sortByDesc('views')->take(setting('homepage_favorite_recipe_count'));
-
-      // Get list of recips by year and month
-      $recipelinks = DB::table('recipes')
-         ->select(DB::raw('YEAR(published_at) year, MONTH(published_at) month, MONTHNAME(published_at) month_name, COUNT(*) recipe_count'))
-         ->where('published_at', '<=', Carbon::now())
-         ->groupBy('year')->groupBy('month')->orderBy('year', 'desc')->orderBy('month', 'desc')->get();
-
-      return view('recipes::frontend.test', compact('popularRecipes', 'recipelinks'));
+      return view('recipes::backend.view', compact('recipe','next','previous'));
    }
 
 

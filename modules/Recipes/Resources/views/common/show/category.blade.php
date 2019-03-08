@@ -4,7 +4,7 @@
 		<div class="card-header card_header_2">Category</div>
 		<div class="card-body text-center">
          @if($recipe->category)
-            {{ $recipe->category->name }}
+            {{ ucwords($recipe->category->name) }}
          @else
             Not Specified
          @endif

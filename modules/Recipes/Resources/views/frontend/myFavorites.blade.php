@@ -19,7 +19,7 @@
       {{-- {!! csrf_field() !!} --}}
       <div class="card mb-3">
          <div class="card-header">
-            <i class="fab fa-gratipay"></i>
+            <i class="far fa-heart"></i>
             MY FAVORITE RECIPES
             <span class="float-right">
                @include('common.buttons.help', ['model'=>'recipe', 'type'=>''])
