@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section ('stylesheets')
+   {{ Html::style('css/woodbarn.css') }}
+@endsection
+
 @section('content')
 
    <div class="card mb-2">

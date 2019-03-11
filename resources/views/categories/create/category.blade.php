@@ -5,8 +5,8 @@
             <i class="fa fa-plus" aria-hidden="true"></i>
             New Category
             <span class="float-right">
-               @include('common.buttons.help', ['model'=>'category', 'type'=>''])
-               @include('categories.blocks.help', ['model'=>'category', 'type'=>''])
+               @include('common.buttons.help', ['model'=>'category', 'type'=>'', 'part'=>'category'])
+               @include('help.categories.create.category', ['model'=>'category', 'type'=>''])
                @include('common.buttons.cancel', ['model'=>'category', 'type'=>''])
                @include('common.buttons.reset', ['model'=>'category', 'type'=>''])
                @include('common.buttons.save', ['model'=>'category', 'type'=>''])
@@ -67,3 +67,28 @@
          </div>
       </div>
    {!! Form::close() !!}
+
+
+
+@section('scripts')
+
+   <script>
+      $(document).ready(function () { 
+         $('#category').on('change',function(e){
+            console.log(e);
+            var cat_id = e.target.value;
+            //ajax
+            $.get('/ajax-subcat?cat_id='+ cat_id,function(data){
+            //success data
+            //console.log(data);
+            var subcat =  $('#subcategory').empty();
+               $.each(data,function(create,subcatObj){
+                  var option = $('<option/>', {id:create, value:subcatObj});
+                  subcat.append('<option value ="'+subcatObj+'">'+subcatObj+'</option>');
+               });
+            });
+         });
+      });
+   </script>
+
+@endsection

@@ -351,7 +351,8 @@ class RecipesController extends Controller
       $recipe->addFavorite();
 
       Session::flash ('success','The recipe was successfully added to your Favorites list!');
-      return redirect()->route('recipes.'. Session::get('pageName'));
+      // return redirect()->route('recipes.'. Session::get('pageName'));
+      return redirect()->back();
    }
 
 
@@ -372,7 +373,8 @@ class RecipesController extends Controller
       $recipe->removeFavorite();
 
       Session::flash ('success','The recipe was successfully removed to your Favorites list!');
-      return redirect()->route('recipes.'. Session::get('pageName'));
+      // return redirect()->route('recipes.'. Session::get('pageName'));
+      return redirect()->back();
    }
 
 

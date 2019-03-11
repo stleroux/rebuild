@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section ('stylesheets')
+   {{ Html::style('css/woodbarn.css') }}
+@endsection
+
 @section('left_column')
    @include('blocks.main_menu')
 @endsection

@@ -1,7 +1,7 @@
 @extends ('layouts.print')
 
 @section ('stylesheets')
-   {{-- {{ Html::style('css/print.css') }} --}}
+   {{ Html::style('css/print.css') }}
 @stop
 
 @section ('content')

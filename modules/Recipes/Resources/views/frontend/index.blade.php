@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('stylesheets')
-	{{-- {{ Html::style('css/recipes.css') }} --}}
+	{{ Html::style('css/recipes.css') }}
 @stop
 
 @section('left_column')
@@ -30,11 +30,11 @@
 		</div>
 
 		@if($recipes->count() > 0)
-			<div class="card-body card_body p-2">
+			<div class="card-body card_body p-2 bg-transparent">
 				@include('recipes::frontend.alphabet', ['model'=>'recipe'])
 
 				@foreach($recipes->chunk(6) as $chunk)
-					<div class="card-deck mb-0 px-2">
+					<div class="card-deck mb-0 px-2 bg-transparent">
 						@foreach($chunk as $recipe)
 							<div class="card col-xs-12 col-sm-6 col-md-4 col-lg-2 p-0 m-2">
 								@if($recipe->image)

@@ -1,7 +1,7 @@
 @extends ('layouts.master')
 
 @section ('stylesheets')
-   {{-- {{ Html::style('css/woodbarn.css') }} --}}
+   {{ Html::style('css/woodbarn.css') }}
 @stop
 
 @section('left_column')

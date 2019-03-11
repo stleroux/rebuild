@@ -14,7 +14,7 @@ body {
 }
 
 /* change the highlight on the active menu item */
-.menu_active {
+.active {
    background-image: url('../images/5.jpg');
    background-repeat: no-repeat;
    background-size: 100% 100%;

@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-sm sticky-top my-0 mx-0 py-0 pl-2 pr-0 navbar-dark bg-dark">
+{{-- <nav class="navbar navbar-expand-sm sticky-top my-0 mx-0 py-0 pl-2 pr-0 navbar-dark navbar_background"> --}}
+   <nav class="navbar navbar-expand-sm sticky-top my-0 mx-0 py-0 pl-2 pr-0 navbar-dark bg-dark">
 	
 	<a class="navbar-brand" href="/">
 		<h2 class="my-0 mx-0 py-0 px-0">{{ setting('app_name') }}</h2>
@@ -16,28 +17,28 @@
 			
 			@guest
 				<li class="nav-item {{ Request::is('register*') ? 'active' : '' }}">
-					<a class="nav-link" href="{{ URL('/register') }}"><span style="font-weight: normal;">Register Account</span></a>
+					<a class="nav-link" href="{{ URL('/register') }}">Register Account</a>
 				</li>
 			@endguest
 
 			@auth
 				<li class="nav-item {{ Request::is('dashboard*') ? 'active' : '' }}">
-					<a class="nav-link" href="{{ route('dashboard') }}"><span style="font-weight: normal;">Dashboard</span></a>
+					<a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
 				</li>
 			@endauth
 
          @guest
             <li class="nav-item {{ Request::is('login*') ? 'active' : '' }}">
-               <a class="nav-link" href="{{ URL('/login') }}"><span style="font-weight: normal;">Login</span></a>
+               <a class="nav-link" href="{{ URL('/login') }}">Login</a>
             </li>
          @endif
 
 			<li class="nav-item {{ Request::is('about*') ? 'active' : '' }}">
-				<a class="nav-link" href="{{ URL('/about') }}"><span style="font-weight: normal;">About us</span></a>
+				<a class="nav-link" href="{{ URL('/about') }}">About us</a>
 			</li>
 			
 			<li class="nav-item {{ Request::is('contact*') ? 'active' : '' }}">
-				<a class="nav-link" href="{{ URL('/contact') }}"><span style="font-weight: normal;">Contact us</span></a>
+				<a class="nav-link" href="{{ URL('/contact') }}">Contact us</a>
 			</li>
 			
       	<!-- Dropdown -->

@@ -13,7 +13,7 @@
 <a href="{{ route(str_plural($model).'.myFavorites') }}"
    class="btn btn-sm btn-outline-secondary"
    title="My Favorites">
-   <i class="far fa-heart"></i>
+   <i class="fas fa-heart"></i>
    @if($type == 'menu')
       My Favorites
    @endif
