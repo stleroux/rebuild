@@ -124,7 +124,7 @@
 			
 			<!-- Public Notes -->
 			<div class="col-xs-12 col-md-6">
-				<div class="form-group {{ $errors->has('public_notes') ? 'has-error' : '' }}" >
+				<div class="form-group">
 					{!! Form::label("public_notes", "Public Notes") !!}
 					{{ Form::textarea ('public_notes', null, array('class' => 'form-control simple', 'rows'=>'2')) }}
 				</div>
@@ -132,15 +132,15 @@
 		
 			<!-- Author's Notes -->
 			<div class="col-xs-12 col-md-6">
-				<div class="form-group {{ $errors->has('public_notes') ? 'has-error' : '' }}" >
-					{!! Form::label("author_notes", "Author's Personal Notes") !!} <small>(not shown to public)</small>
-					{{ Form::textarea ('author_notes', null, array('class' => 'form-control simple', 'rows'=>'2')) }}
+				<div class="form-group">
+					{!! Form::label("private_notes", "Author's Personal Notes") !!} <small>(not shown to public)</small>
+					{{ Form::textarea ('private_notes', null, array('class' => 'form-control simple', 'rows'=>'2')) }}
 				</div>
 			</div>
 
 			<!-- Source -->
 			<div class="col-xs-12 col-sm-6">
-				<div class="form-group {{ $errors->has('source') ? 'has-error' : '' }}">
+				<div class="form-group">
 					{!! Form::label("source", "Source") !!}
 					{!! Form::text("source", null, ["class" => "form-control"]) !!}
 					<span class="text-danger">{{ $errors->first('source') }}</span>
@@ -166,7 +166,7 @@
 			</div>
 
 			<div class="col-xs-6 col-sm-4">
-				{!! Form::label("image", "Replace Image") !!} <small></small>
+				{!! Form::label("image", "Replace Image") !!}
 				{{ Form::file('image', ['class'=>'form-control']) }}
 				<span class="help-block">Only choose new image to replace the existing one.</span>
 			</div>

@@ -59,7 +59,7 @@ Route::group(['prefix' => 'recipes'], function()
    Route::get('{id}/view',                'RecipesController@view')                 ->name('recipes.view');
    Route::get('{id}/trashedView',         'RecipesController@trashedView')          ->name('recipes.trashedView');
    Route::get('{id}/edit',                'RecipesController@edit')                 ->name('recipes.edit');
-   Route::get('{cat?}/{key?}',            'RecipesController@index')                ->name('recipes.index');
+   
    
    Route::put('{id}',                     'RecipesController@update')               ->name('recipes.update');
    // Route::delete('{id}',                  'RecipesController@destroy')              ->name('recipes.destroy');
@@ -81,22 +81,23 @@ Route::group(['prefix' => 'recipes'], function()
    // Route::delete('deleteTrashed/{id}',    'RecipesController@deleteTrashed')        ->name('recipes.deleteTrashed');
    // Route::post('deleteAll',               'RecipesController@deleteAll')            ->name('recipes.deleteAll');
 
-   Route::get('{id}/trash',                    'RecipesController@trash')               ->name('recipes.trash');   
-   Route::delete('{id}/trashDestroy',          'RecipesController@trashDestroy')        ->name('recipes.trashDestroy');
-   Route::post('trashAll',                     'RecipesController@trashAll')            ->name('recipes.trashAll');
+   Route::get('{id}/trash',               'RecipesController@trash')               ->name('recipes.trash');   
+   Route::delete('{id}/trashDestroy',     'RecipesController@trashDestroy')        ->name('recipes.trashDestroy');
+   Route::post('trashAll',                'RecipesController@trashAll')            ->name('recipes.trashAll');
 
-   Route::get('{id}/delete',                   'RecipesController@delete')              ->name('recipes.delete');
-   Route::delete('{id}/deleteDestroy',         'RecipesController@deleteDestroy')       ->name('recipes.deleteDestroy');
-   Route::post('deleteAll',                    'RecipesController@deleteAll')           ->name('recipes.deleteAll');
+   Route::get('{id}/delete',              'RecipesController@delete')              ->name('recipes.delete');
+   Route::delete('{id}/deleteDestroy',    'RecipesController@deleteDestroy')       ->name('recipes.deleteDestroy');
+   Route::post('deleteAll',               'RecipesController@deleteAll')           ->name('recipes.deleteAll');
 
-   Route::get('{id}/favoriteAdd',         'RecipesController@favoriteAdd')          ->name('recipes.favoriteAdd');
-   Route::get('{id}/favoriteRemove',      'RecipesController@favoriteRemove')       ->name('recipes.favoriteRemove');
-   Route::get('{id}/makePublic',          'RecipesController@makePublic')           ->name('recipes.makePublic');
-   Route::get('{id}/makePrivate',         'RecipesController@makePrivate')          ->name('recipes.makePrivate');
-   Route::get('{id}/duplicate',           'RecipesController@duplicate')            ->name('recipes.duplicate');
-   Route::post('{id}/storeComment',       'RecipesController@storeComment')         ->name('recipes.storeComment');
+   Route::get('{id}/favoriteAdd',         'RecipesController@favoriteAdd')         ->name('recipes.favoriteAdd');
+   Route::get('{id}/favoriteRemove',      'RecipesController@favoriteRemove')      ->name('recipes.favoriteRemove');
+   Route::get('{id}/makePublic',          'RecipesController@makePublic')          ->name('recipes.makePublic');
+   Route::get('{id}/makePrivate',         'RecipesController@makePrivate')         ->name('recipes.makePrivate');
+   Route::get('{id}/duplicate',           'RecipesController@duplicate')           ->name('recipes.duplicate');
+   Route::post('{id}/storeComment',       'RecipesController@storeComment')        ->name('recipes.storeComment');
 
    // Make sure this one stays last as it will catch everything else
-   Route::get('archives/{year}/{month}',           'RecipesController@archive')              ->name('recipes.archives');
+   Route::get('archives/{year}/{month}',  'RecipesController@archive')             ->name('recipes.archives');
 
+   Route::get('{cat?}/{key?}',            'RecipesController@index')               ->name('recipes.index');
 });

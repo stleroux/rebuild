@@ -114,7 +114,7 @@
 
             <!-- Make Private -->
             <div class="col-xs-6 col-md-3 col-lg-2">
-               <div class="form-group {{ $errors->has('private') ? 'has-error' : '' }}" >
+               <div class="form-group">
                   {!! Form::label("personal", "Make Private") !!}
                   {{ Form::select('personal', array('0' => 'No', '1' => 'Yes'), 0, ['class'=>'form-control']) }}
                </div>
@@ -122,7 +122,7 @@
 
             <!-- Public Notes -->
             <div class="col-xs-12 col-md-6">
-               <div class="form-group {{ $errors->has('public_notes') ? 'has-error' : '' }}" >
+               <div class="form-group">
                   {!! Form::label("public_notes", "Public Notes") !!}
                   {{ Form::textarea ('public_notes', null, array('class' => 'form-control simple', 'rows'=>'2')) }}
                </div>
@@ -130,15 +130,15 @@
 
             <!-- Author's Notes -->
             <div class="col-xs-12 col-md-6">
-               <div class="form-group {{ $errors->has('public_notes') ? 'has-error' : '' }}" >
-                  {!! Form::label("author_notes", "Author's Personal Notes") !!} <small>(not shown to public)</small>
-                  {{ Form::textarea ('author_notes', null, array('class' => 'form-control simple', 'rows'=>'2')) }}
+               <div class="form-group">
+                  {!! Form::label("private_notes", "Author's Personal Notes") !!} <small>(not shown to public)</small>
+                  {{ Form::textarea ('private_notes', null, array('class' => 'form-control simple', 'rows'=>'2')) }}
                </div>
             </div>
 
             <!-- Source -->
             <div class="col-xs-12 col-sm-6">
-               <div class="form-group {{ $errors->has('source') ? 'has-error' : '' }}">
+               <div class="form-group">
                   {!! Form::label("source", "Source") !!}
                   {{ Form::text ('source', null, array('class' => 'form-control')) }}
                </div>
