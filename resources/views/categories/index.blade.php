@@ -20,8 +20,9 @@
                   <i class="fa fa-sitemap"></i>
                   Categories
                   <span class="float-right">
-                     @include('common.buttons.help', ['model'=>'category', 'type'=>''])
-                     @include('help.categories.index')
+                     @include('common.buttons.help', ['bookmark'=>'categories'])
+                     {{-- @include('help.categories.index') --}}
+                     {{-- @include('help.index') --}}
                      @include('common.buttons.add', ['model'=>'category', 'type'=>''])
                   </span>
                </div>

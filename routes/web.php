@@ -21,6 +21,7 @@ Route::get('/privacy', 'SiteController@privacy')->name('privacy');
 Route::get('/test', 'SiteController@test')->name('test');
 Route::get('/stats', 'SiteController@stats')->name('stats');
 Route::get('/dashboard', 'SiteController@dashboard')->name('dashboard');
+Route::view('/help', 'help.index');
 
 // Route::get('/blog', 'SiteController@blog')->name('blog');
 

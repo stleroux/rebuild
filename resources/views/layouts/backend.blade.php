@@ -26,6 +26,7 @@
    <link rel="stylesheet" href="{{ asset('css/bootstrap-colors.css') }}" />
    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
    @yield('stylesheets')
+   @include('help.index')
 </head>
 <body>
    

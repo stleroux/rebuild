@@ -1,5 +1,4 @@
-
-<div id="help" class="modal fade" role="dialog">
+<div id="index_help" class="modal fade" role="dialog">
    <div class="modal-dialog modal-lg" style="max-width: 80%;">
    {{-- <div class="modal-dialog modal-lg" style="overflow-y: scroll; max-height:90%;  margin-top: 50px; margin-bottom:50px;"> --}}
       <!-- Modal content-->
