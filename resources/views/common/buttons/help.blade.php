@@ -1,4 +1,4 @@
-<button
+{{-- <button
    class="btn btn-sm btn-outline-primary"
    type="button"
    data-toggle="modal"
@@ -6,15 +6,15 @@
    data-bookmark="#{{ $bookmark }}"
    title="Help">
    <i class="fa fa-question-circle"></i>
-</button>
+</button> --}}
 
 
-{{-- <a href="/help" --}}
-   {{-- target="_blank" --}}
+<a href="/help#{{$bookmark}}"
+   target="_blank"
    {{-- type="button" --}}
-{{--    data-toggle="modal"
-   data-target="categories"
+   {{-- data-toggle="modal" --}}
+   {{-- data-target="categories" --}}
    class="btn btn-sm btn-outline-primary"
    title="Help">
    <i class="fa fa-question-circle"></i>
-</a> --}}
+</a>

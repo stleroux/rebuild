@@ -1,32 +1,48 @@
-<!-- HELP MODAL -->
-<div id="help" class="modal fade" role="dialog">
-   <div class="modal-dialog modal-lg" style="max-width: 80%;">
-      <!-- Modal content-->
-      <div class="modal-content">
-         <div class="modal-header">
-            <div class="modal-title"><h5>New Main Category Help</h5></div>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+@extends('layouts.help')
+
+@section('left_column')
+   dsdsd
+@endsection
+
+@section('content')
+
+      <h1>Main system help</h1>
+            
+         <div id="recipes">
+            <h2>Recipes Help</h2>
+            <p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p>
+            <p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p>
+            <p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p>
+            <p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p>
+            <p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p>
+            <p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p>
+            <p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p>
+            <p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p>
+            <p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p>
+            <p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p>
          </div>
-         <div class="modal-body pt-0">
 
-            <h1>Main system help</h1>
-            <h2 id="recipes">Recipes Help</h2>
-            <p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p>
-            <p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p>
 
-            <h2 id="categories">Categories</h2>
+         <div id="categories">
+            <h2>Categories</h2>
             <p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p>
             <p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p>
+         </div>
 
-            <h2 id="categories_add_category">Add A Category</h2>
+         <div id="categories_add_category">
+            <h2>Add A Category</h2>
             <p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p>
             <p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p>
+         </div>
 
-            <h2 id="categories_add_subCategory">Add A SubCategory</h2>
+         <div id="categories_add_subCategory">
+            <h2>Add A SubCategory</h2>
             <p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p>
             <p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p>
+         </div>
 
-            <h2 id="categories_add_mainCategory">Add A MainCategories</h2>
+         <div id="categories_add_mainCategory">
+            <h2>Add A MainCategories</h2>
             <div class="row">
                <div class="col">
                   <p><h6>Required field(s)</h6></p>
@@ -69,8 +85,6 @@
                   </table>
                </div>
             </div>
-
          </div>
-      </div>
-   </div>
-</div>
+
+@endsection
