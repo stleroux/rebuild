@@ -8,8 +8,8 @@
             <table class="table table-bordered table-sm table-hover">
                <thead class="thead-dark">
                   <tr>
-                     <th class="col-2">Field</th>
-                     <th class="col-10">Description</th>
+                     <th style="width: 20%">Field</th>
+                     <th>Description</th>
                   </tr>
                </thead>
                <tbody>
@@ -35,8 +35,8 @@
             <table class="table table-bordered table-sm table-hover">
                <thead class="thead-dark">
                   <tr>
-                     <th class="col-2">Field</th>
-                     <th class="col-10">Description</th>
+                     <th style="width: 20%">Field</th>
+                     <th>Description</th>
                   </tr>
                </thead>
                <tbody>

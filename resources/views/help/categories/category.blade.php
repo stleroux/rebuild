@@ -1,15 +1,15 @@
 <div class="card mb-2" id="categories_add_category">
    <h4 class="card-header bg-primary">Add A Category</h4>
-   <div class="card-body">
-      <div class="row">
-         <div class="col">
+   <div class="card-body p-2">
+      {{-- <div class="row"> --}}
+         {{-- <div class="col"> --}}
             <p>Text about the categories section</p>
             <p><h5>Required field(s)</h5></p>
             <table class="table table-bordered table-sm table-hover">
                <thead class="thead-dark">
                   <tr>
-                     <th class="col-2">Field</th>
-                     <th class="col-10">Description</th>
+                     <th style="width: 20%">Field</th>
+                     <th>Description</th>
                   </tr>
                </thead>
                <tbody>
@@ -27,16 +27,16 @@
                   </tr>
                </tbody>
             </table>
-         </div>
-      </div>
-      <div class="row">
-         <div class="col">
+         {{-- </div> --}}
+      {{-- </div> --}}
+      {{-- <div class="row"> --}}
+         {{-- <div class="col"> --}}
             <p><h5>Optional field(s)</h5></p>
             <table class="table table-bordered table-sm table-hover">
                <thead class="thead-dark">
                   <tr>
-                     <th class="col-2">Field</th>
-                     <th class="col-10">Description</th>
+                     <th style="width: 20%">Field</th>
+                     <th>Description</th>
                   </tr>
                </thead>
                <tbody>
@@ -50,7 +50,7 @@
                   </tr>
                </tbody>
             </table>
-         </div>
-      </div>
+         {{-- </div> --}}
+      {{-- </div> --}}
    </div>
 </div>
