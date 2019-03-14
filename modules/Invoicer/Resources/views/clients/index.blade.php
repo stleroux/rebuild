@@ -40,6 +40,13 @@
 												{{ csrf_field() }}
 												
 												@if(checkPerm('invoicer_client_show'))
+													<a href="{{ route('invoicer.invoices.create', $client->id) }}" class="btn btn-xs btn-outline-primary">
+														<i class="far fa-plus-square"></i>
+														New Invoice
+													</a>
+												@endif
+
+												@if(checkPerm('invoicer_client_show'))
 													<a href="{{ route('invoicer.clients.show', $client->id) }}" class="btn btn-xs btn-outline-primary">
 														<i class="fa fa-eye" aria-hidden="true"></i>
 														View

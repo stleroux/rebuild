@@ -21,8 +21,8 @@
 			<i class="fab fa-apple"></i>
 			RECIPES
 			<span class="float-right">
-				@include('common.buttons.help', ['model'=>'recipe', 'type'=>'', 'part'=>'index'])
-				@include('recipes::help.index')
+				{{-- @include('common.buttons.help', ['model'=>'recipe', 'type'=>'', 'part'=>'index']) --}}
+				{{-- @include('recipes::help.index') --}}
             @auth
             	@include('common.buttons.myFavorites', ['model'=>'recipe', 'type'=>''])
             @endauth

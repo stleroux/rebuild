@@ -30,7 +30,7 @@ Route::prefix('invoicer')->group(function() {
    Route::get('invoices/logged',                      'InvoicesController@logged')              ->name('invoices.logged');
 
    Route::get('invoices',                             'InvoicesController@index')               ->name('invoicer.invoices');
-   Route::get('invoices/create',                      'InvoicesController@create')              ->name('invoicer.invoices.create');
+   Route::get('invoices/create/{id?}',                      'InvoicesController@create')              ->name('invoicer.invoices.create');
    Route::post('invoices/store',                      'InvoicesController@store')               ->name('invoicer.invoices.store');
    Route::get('invoices/{id}',                        'InvoicesController@show')                ->name('invoicer.invoices.show');
    Route::get('invoices/{id}/edit',                   'InvoicesController@edit')                ->name('invoicer.invoices.edit');

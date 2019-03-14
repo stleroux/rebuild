@@ -37,6 +37,6 @@ class CreateInvoicerInvoiceItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invoicer_invoice_item');
+        Schema::dropIfExists('invoicer_invoiceItems');
     }
 }

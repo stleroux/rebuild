@@ -23,7 +23,13 @@
 					<div class="col-md-9">
 						<div class="form-group {{ $errors->has('client_id') ? 'has-error' : '' }}">
 							{{ Form::label('client_id', 'Client', ['class'=>'required']) }}
-							{{ Form::select('client_id', $clients, [], ['class'=>'form-control', 'placeholder'=>'Select']) }}
+							@if(!empty($client))
+								{{ Form::select('client_id', $clients, [$client->id], ['class'=>'form-control', 'placeholder'=>'Select']) }}
+							@else
+								{{ Form::select('client_id', $clients, [], ['class'=>'form-control', 'placeholder'=>'Select']) }}
+							@endif
+
+							
 							<span class="text-danger">{{ $errors->first('client_id') }}</span>
 						</div>
 						<div class="form-group {{ $errors->has('notes') ? 'has-error' : '' }}">

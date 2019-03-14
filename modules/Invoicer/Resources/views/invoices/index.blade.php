@@ -115,7 +115,7 @@
 
 									@if(checkPerm('invoicer_invoice_edit'))
 										@if($invoice->status == 'logged')
-											<a href="{{ route('invoices.status_invoiced', $invoice->id) }}" class="btn btn-xs btn-outline-primary" title="Invoiced">
+											<a href="{{ route('invoices.status_invoiced', $invoice->id) }}" class="btn btn-xs btn-outline-primary" title="Invoice">
 												<i class="far fa-file-alt"></i>
 												Invoice
 											</a>

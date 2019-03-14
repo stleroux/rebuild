@@ -39,15 +39,25 @@ class InvoicesController extends Controller
 #  ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝
 // Show the form for creating a new resource
 ##################################################################################################################
-	public function create()
+	public function create($id = null)
 	{
 		// Check if user has required permission
-	  if(!checkPerm('invoicer_invoice_create')) { abort(401, 'Unauthorized Access'); }
+		if(!checkPerm('invoicer_invoice_create')) { abort(401, 'Unauthorized Access'); }
 
-		$clients = Client::orderBy('company_name','asc')->pluck('company_name','id');
 		$products = Product::all();
+		$clients = Client::orderBy('company_name','asc')->pluck('company_name','id');
 
-		return view('invoicer::invoices.create', compact('clients','products'));
+		if($id){
+			// $client = Client::where('id',$id)->pluck('company_name','id');
+			$client = Client::findOrFail($id);
+			// dd($client);
+			return view('invoicer::invoices.create', compact('products','clients','client'));
+		}
+
+		return view('invoicer::invoices.create', compact('products','clients'));
+		
+
+		
 	}
 
 
