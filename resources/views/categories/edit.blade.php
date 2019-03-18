@@ -22,8 +22,9 @@
 						<i class="fa fa-sitemap" aria-hidden="true"></i>
 						Edit Category
 						<span class="float-right">
-							@include('common.buttons.help', ['model'=>'category', 'type'=>'', 'part'=>'category'])
-							@include('help.categories.edit.category', ['model'=>'category', 'type'=>''])
+							{{-- @include('common.buttons.help', ['model'=>'category', 'type'=>'', 'part'=>'category']) --}}
+							{{-- @include('help.categories.edit.category', ['model'=>'category', 'type'=>'']) --}}
+							@include('common.buttons.help', ['bookmark'=>'categories_edit_category'])
 							@include('common.buttons.cancel', ['model'=>'category', 'type'=>''])
 							@include('common.buttons.reset', ['model'=>'category', 'type'=>''])
 							@include('common.buttons.update', ['model'=>'category', 'type'=>''])

@@ -6,5 +6,6 @@
       @include('help.categories.category')
       @include('help.categories.subCategory')
       @include('help.categories.mainCategory')
+      @include('help.categories.edit')
    </div>
 </div>
