@@ -22,8 +22,8 @@
             <i class="fa fa-address-card-o"></i>
             Unpublished Recipes
             <span class="float-right">
-               @include('common.buttons.help', ['model'=>'recipe', 'type'=>''])
-               @include('recipes::backend.unpublished.help')
+               @include('common.buttons.help', ['model'=>'recipe', 'bookmark'=>'recipes'])
+               {{-- @include('recipes::backend.unpublished.help') --}}
                @include('common.buttons.add', ['model'=>'recipe', 'type'=>''])
             </span>
          </div>

@@ -21,8 +21,8 @@
             <i class="fa fa-address-card-o" aria-hidden="true"></i>
             New Recipes
             <span class="float-right">
-               @include('common.buttons.help', ['model'=>'recipe', 'type'=>''])
-               @include('recipes::backend.newRecipes.help')
+               @include('common.buttons.help', ['model'=>'recipe', 'bookmark'=>'recipes'])
+               {{-- @include('recipes::backend.newRecipes.help') --}}
                @include('common.buttons.add', ['model'=>'recipe', 'type'=>''])
             </span>
          </div>

@@ -24,7 +24,7 @@
 				<i class="fab fa-apple"></i>
 				Published Recipes
 				<span class="float-right">
-					@include('common.buttons.help', ['model'=>'recipe', 'type'=>'', 'bookmark'=>'recipes_published'])
+					@include('common.buttons.help', ['model'=>'recipe', 'bookmark'=>'recipes'])
 					{{-- @include('recipes::backend.published.help') --}}
 					@include('common.buttons.add', ['model'=>'recipe', 'type'=>''])
 					@include('common.buttons.unpublishAll', ['model'=>'recipe', 'type'=>''])

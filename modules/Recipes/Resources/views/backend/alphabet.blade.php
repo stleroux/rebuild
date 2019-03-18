@@ -1,4 +1,4 @@
-wqwqwq<div class="text-center">
+<div class="text-center">
    <div class="btn-group" role="group">
       @if(Request::route('cat') == 'all')
          <a href="{{ route(str_plural($model) . '.' . Session::get('pageName')) }}"

@@ -57,23 +57,12 @@ class PostsController extends Controller
 		// Check if user has required permission
 		if(!checkPerm('post_create')) { abort(401, 'Unauthorized Access'); }
 
-		// find all categories in the categories table and pass them to the view
-		$categories = Category::whereHas('module', function ($query) {
-			$query->where('name', 'like', 'posts');
-		})->get();
-
-		// Create an empty array to store the categories
-		$cats = [];
-		// Store the category values into the $cats array
-		foreach ($categories as $category) {
-			$cats[$category->id] = $category->name;
-		}
-
+		// Get all categories related to Posts Category
+		$cats = Category::where('name','posts')->first();
+		$categories = Category::where('parent_id', $cats->id)->get();
 		$tags = Tag::all();
 
-		return view('posts::create')
-			->withCategories($cats)
-			->withTags($tags);
+		return view('posts::create', compact('categories','tags'));
 	}
 
 
@@ -180,30 +169,32 @@ class PostsController extends Controller
 		// Check if user has required permission
 		if(!checkPerm('post_edit', $post)) { abort(401, 'Unauthorized Access'); }
 
-		// find the categories
-		$categories = Category::whereHas('module', function ($query) {
-			$query->where('name', '=', 'posts');
-		})->get();
+		// // find the categories
+		// $categories = Category::whereHas('module', function ($query) {
+		// 	$query->where('name', '=', 'posts');
+		// })->get();
 
-		// Create an empty array to store the categories
-		$cats = [];
-		// Store the category values into the $cats array
-		foreach ($categories as $category) {
-			$cats[$category->id] = $category->name;
-		}
+		// // Create an empty array to store the categories
+		// $cats = [];
+		// // Store the category values into the $cats array
+		// foreach ($categories as $category) {
+		// 	$cats[$category->id] = $category->name;
+		// }
+
+		// Get all categories related to Posts Category
+		$cats = Category::where('name','posts')->first();
+		$categories = Category::where('parent_id', $cats->id)->get();
+		$tags = Tag::all();
 
 		// find the associated tags
-		$tags = Tag::all();
+		$tags = Tag::all()->pluck('id','name');
 		// Create an empty array to store the tags
-		$tags2 = [];
-		foreach ($tags as $tag) {
-			 $tags2[$tag->id] = $tag->name;
-		}
+		// $tags = [];
+		// foreach ($tags2 as $tag) {
+		// 	$tags[$tag->id] = $tag->name;
+		// }
 
-		return view('posts::edit')
-			->withPost($post)  
-			->withCategories($cats)
-			->withTags($tags2);
+		return view('posts::edit', compact('post','categories','tags'));
 	}
 
 
@@ -271,6 +262,9 @@ class PostsController extends Controller
 		// Check if user has required permission
 		if(!checkPerm('post_index')) { abort(401, 'Unauthorized Access'); }
 
+		// Set the variable so we can use a button in other pages to come back to this page
+      Session::put('pageName', 'index');
+
 		//$alphas = range('A', 'Z');
 		$alphas = DB::table('posts')
 			->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
@@ -332,6 +326,9 @@ class PostsController extends Controller
 		//     return view('errors.403');
 		// }
 
+		// Set the variable so we can use a button in other pages to come back to this page
+      Session::put('pageName', 'newPosts');
+
 		//$alphas = range('A', 'Z');
 		$alphas = DB::table('posts')
 			->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
@@ -347,8 +344,6 @@ class PostsController extends Controller
 		foreach($alphas as $alpha) {
 			$letters[] = $alpha->letter;
 		}
-
-		Session::put('pageName', 'newPosts');
 
 		// If $key value is passed
 		if ($key) {
@@ -395,10 +390,6 @@ class PostsController extends Controller
 ##################################################################################################################
 	public function publish($id)
 	{
-		// Pass along the ROUTE value of the previous page
-		//$ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
-		// Session::put('fullURL', \Request::fullUrl());
-
 		$post = Post::find($id);
 
 		$post->published_at = Carbon::now();
@@ -525,17 +516,22 @@ class PostsController extends Controller
 		// Add 1 to views column
 		DB::table('posts')->where('id','=',$post->id)->increment('views',1);
 
-		// find all categories in the categories table and pass them to the view
-		$categories = Category::whereHas('module', function ($query) {
-			$query->where('name', 'like', 'posts');
-		})->get();
+		// // find all categories in the categories table and pass them to the view
+		// $categories = Category::whereHas('module', function ($query) {
+		// 	$query->where('name', 'like', 'posts');
+		// })->get();
 
-		// Create an empty array to store the categories
-		$cats = [];
-		// Store the category values into the $cats array
-		foreach ($categories as $category) {
-			$cats[$category->id] = $category->name;
-		}
+		// // Create an empty array to store the categories
+		// $cats = [];
+		// // Store the category values into the $cats array
+		// foreach ($categories as $category) {
+		// 	$cats[$category->id] = $category->name;
+		// }
+
+		// Get all categories related to Posts Category
+		$cats = Category::where('name','posts')->first();
+		$categories = Category::where('parent_id', $cats->id)->get();
+		$tags = Tag::all();
 
 		$tags = Tag::all();
 
@@ -633,10 +629,11 @@ class PostsController extends Controller
 		// );
 
 		// set a flash message to be displayed on screen
-			Session::flash('success','The post was successfully saved!');
+		Session::flash('success','The post was successfully saved!');
 
 		// redirect to another page
-			return redirect()->route('posts.show', $post->id);
+		// return redirect()->route('posts.show', $post->id);
+		return redirect()->route('posts.index');
 	}
 
 
@@ -754,6 +751,9 @@ class PostsController extends Controller
 		// Check if user has required permission
 		if(!checkPerm('post_index')) { abort(401, 'Unauthorized Access'); }
 
+		// Set the variable so we can use a button in other pages to come back to this page
+      Session::put('pageName', 'trashed');
+
 		//$alphas = range('A', 'Z');
 		$alphas = DB::table('posts')
 			->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
@@ -778,8 +778,6 @@ class PostsController extends Controller
 			->orderBy('month', 'desc')
 			->get();
 		// dd($postlinks);
-
-		Session::put('pageName', 'trashed');
 
 		// If $key value is passed
 		if ($key) {
@@ -852,6 +850,9 @@ class PostsController extends Controller
 		// Check if user has required permission
 		if(!checkPerm('post_index')) { abort(401, 'Unauthorized Access'); }
 
+		// Set the variable so we can use a button in other pages to come back to this page
+      Session::put('pageName', 'unpublished');
+
 		//$alphas = range('A', 'Z');
 		$alphas = DB::table('posts')
 			->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
@@ -878,8 +879,6 @@ class PostsController extends Controller
 			->orderBy('month', 'desc')
 			->get();
 		// dd($postlinks);
-
-		Session::put('pageName', 'unpublished');
 
 		// If $key value is passed
 		if ($key) {
@@ -1025,11 +1024,11 @@ class PostsController extends Controller
 # ╚██████╔╝███████║███████╗██║  ██║    ███████║██║  ██║╚██████╔╝╚███╔███╔╝
 #  ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝    ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝
 ##################################################################################################################
-	public function showUser($id)
-	{
-		$user = User::find($id);
-		return view('posts::showUser')->withUser($user);
-	}
+	// public function showUser($id)
+	// {
+	// 	$user = User::find($id);
+	// 	return view('posts::showUser')->withUser($user);
+	// }
 
 
 }

@@ -23,8 +23,8 @@
 				<i class="fab fa-apple"></i>
 				Trashed Recipes
 				<span class="float-right">
-					@include('common.buttons.help', ['type'=>''])
-					@include('recipes::backend.trashed.help')
+					@include('common.buttons.help', ['model'=>'recipe', 'bookmark'=>'recipes'])
+					{{-- @include('recipes::backend.trashed.help') --}}
 					@include('common.buttons.deleteAll', ['model'=>'recipe', 'type'=>''])
 					@include('common.buttons.restoreAll', ['model'=>'recipe', 'type'=>''])
 					@include('common.buttons.publishAll', ['model'=>'recipe', 'type'=>''])
@@ -38,7 +38,7 @@
 					<table id="datatable" class="table table-sm table-hover">
 					   <thead>
 					      <tr>
-					          <th><input type="checkbox" id="selectall" class="checked" /></th>
+					         <th><input type="checkbox" id="selectall" class="checked" /></th>
 					         <th>Name</th>
 					         <th>Category</th>
 					         <th>Views</th>
@@ -63,7 +63,7 @@
 					         <td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'deleted_at'])</td>
 					         <td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'published_at'])</td>
 					         <td class="text-right">
-					            @include('common.buttons.edit', ['model'=>'recipe', 'id'=>$recipe->id, 'type'=>''])
+					            {{-- @include('common.buttons.edit', ['model'=>'recipe', 'id'=>$recipe->id, 'type'=>'']) --}}
 					            @include('common.buttons.restore', ['model'=>'recipe', 'id'=>$recipe->id, 'type'=>''])
 					            @include('common.buttons.delete', ['model'=>'recipe', 'id'=>$recipe->id, 'type'=>''])
 					         </td>

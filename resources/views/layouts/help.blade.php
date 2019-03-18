@@ -31,7 +31,7 @@
             <div class="col-sm-3 col-md-2 pt-0 pr-0 pl-0 pb-0">
 {{--              @include('blocks.main_menu') --}}
                @yield('left_column')
-               Left Column
+               
             </div>
             <div class="col-sm-9 col-md-10 py-0 px-2">
                @yield('content')

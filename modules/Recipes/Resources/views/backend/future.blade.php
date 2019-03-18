@@ -21,8 +21,8 @@
             <i class="fas fa-address-card"></i>
             Future Recipes
             <span class="float-right">
-               @include('common.buttons.help', ['model'=>'recipe', 'type'=>''])
-               @include('recipes::backend.future.help')
+               @include('common.buttons.help', ['model'=>'recipe', 'bookmark'=>'recipes'])
+               {{-- @include('recipes::backend.future.help') --}}
                @include('common.buttons.add', ['model'=>'recipe', 'type'=>''])
 
 					<button

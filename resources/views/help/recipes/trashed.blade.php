@@ -1,15 +1,16 @@
-<div class="card mb-2" id="categories_add_subCategory">
+<div class="card mb-2" id="recipes_trashed">
       <div class="card-header bg-primary">
-      <span class="h4">Add A Sub Category</span>
+      <span class="h4">Trashed Recipes</span>
       <span class="float-right">
          <a href="#" class="btn btn-xs btn-secondary"><small>Top</small></a>
-         <a href="#categories" class="btn btn-xs btn-secondary"><small>Section Top</small></a>
+         <a href="#recipes" class="btn btn-xs btn-secondary"><small>Section Top</small></a>
       </span>
    </div>
    <div class="card-body">
       <div class="row">
          <div class="col">
-            <p>Text about the sub categories section</p>
+            <p>Lists the recipes that have been published on the site.<br />
+            Only certain users have access to this section of the site.</p>
             <p><h5>Required field(s)</h5></p>
             <table class="table table-bordered table-sm table-hover">
                <thead class="thead-dark">

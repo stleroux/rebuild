@@ -1,15 +1,16 @@
 <div class="card mb-3">
 	<div class="card-header">
+		<i class="fa fa-edit"></i>
 		Edit Recipe
 		<span class="float-right">
-         @include('common.buttons.cancel', ['model'=>'recipe', 'type'=>''])
-         @include('common.buttons.update', ['model'=>'recipe', 'type'=>''])
-      </span>
+			@include('common.buttons.help', ['model'=>'recipe', 'bookmark'=>'recipes'])
+			@include('common.buttons.cancel', ['model'=>'recipe', 'type'=>''])
+			@include('common.buttons.update', ['model'=>'recipe', 'type'=>''])
+		</span>
 	</div>
 
 	<div class="card-body">
 		<div class="row">
-
 			<!-- Title -->
 			<div class="col-xs-12 col-sm-12 col-md-6">
 				<div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
@@ -20,35 +21,19 @@
 			</div>
 
 			<!-- Category -->
-{{-- 			<div class="col-xs-12 col-sm-6 col-md-3">
-				<div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}">
-					{{ Form::label('category_id', 'Category', ['class'=>'required']) }}
-					<!-- {{ Form::select('category_id', $categories, null, ['class'=>'form-control']) }} -->
-					<select name="category" id="">
-						@foreach($categories as $category)
-							<option value="{{ $category->id }}">{{ $category->name }}</option>
+			<div class="col-xs-12 col-sm-6 col-md-3">
+				<div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}" >
+					{!! Form::label("category_id", "Category", ['class'=>'required']) !!}
+					<select name="category_id" class="custom-select">
+						@foreach ($categories as $category)
+							<option disabled>{{ ucfirst($category->name) }}</option>
+							@foreach ($category->children as $children)
+								<option value="{{ $children->id }}" {{ ($recipe->category_id == $children->id ) ? 'selected' : '' }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- {{ ucfirst($children->name) }}</option>
+							@endforeach
 						@endforeach
 					</select>
-					<span class="text-danger">{{ $errors->first('category_id') }}</span>
 				</div>
-			</div> --}}
-
-<div class="col-xs-12 col-sm-6 col-md-3">
-   <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}" >
-      {!! Form::label("category_id", "Category", ['class'=>'required']) !!}
-      <select name="category_id" class="custom-select">
-         {{-- <option value="{{ $recipe->category_id }}" selected>{{ $recipe->category->name }}</option> --}}
-         {{-- <option selected>Select One</option> --}}
-         @foreach ($categories as $category)
-            <option disabled>{{ ucfirst($category->name) }}</option>
-            @foreach ($category->children as $children)
-               <option value="{{ $children->id }}" {{ ($recipe->category_id == $children->id ) ? 'selected' : '' }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- {{ ucfirst($children->name) }}</option>
-            @endforeach
-         @endforeach
-      </select>
-   </div>
-</div>
-
+			</div>
 
 			<!-- Publish Date -->
 			<div class="col-xs-12 col-sm-6 col-md-3">
@@ -57,9 +42,9 @@
 					<div class="input-group">
 						{{ Form::text('published_at', null, ['class'=>'form-control', 'id'=>'datePicker']) }}
 						<div class="input-group-append">
-                     <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                  </div>
-               </div>
+							<span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+						</div>
+					</div>
 					<span class="text-danger">{{ $errors->first('published_at') }}</span>
 				</div>
 			</div>
@@ -114,11 +99,6 @@
 				<div class="form-group {{ $errors->has('private') ? 'has-error' : '' }}" >
 					{!! Form::label("personal", "Make Private") !!}
 					{{ Form::select('personal', array('0' => 'No', '1' => 'Yes'), $recipe->personal, ['class'=>'form-control']) }}
-					{{-- <input type="checkbox" name="personal" 
-								  data-toggle="toggle"
-								  data-on="Yes"
-								  data-off="No"
-							 > --}}
 				</div>
 			</div>
 			
@@ -170,7 +150,6 @@
 				{{ Form::file('image', ['class'=>'form-control']) }}
 				<span class="help-block">Only choose new image to replace the existing one.</span>
 			</div>
-
 
 		</div>
 	</div>

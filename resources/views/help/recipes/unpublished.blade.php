@@ -1,9 +1,16 @@
-<div class="card mb-2" id="recipes_published">
-   <h4 class="card-header bg-primary">Published Recipes</h4>
+<div class="card mb-2" id="recipes_unpublished">
+      <div class="card-header bg-primary">
+      <span class="h4">Unpublished Recipes</span>
+      <span class="float-right">
+         <a href="#" class="btn btn-xs btn-secondary"><small>Top</small></a>
+         <a href="#recipes" class="btn btn-xs btn-secondary"><small>Section Top</small></a>
+      </span>
+   </div>
    <div class="card-body">
       <div class="row">
          <div class="col">
-            <p>Text about the sub categories section</p>
+            <p>Lists the recipes that have been published on the site.<br />
+            Only certain users have access to this section of the site.</p>
             <p><h5>Required field(s)</h5></p>
             <table class="table table-bordered table-sm table-hover">
                <thead class="thead-dark">

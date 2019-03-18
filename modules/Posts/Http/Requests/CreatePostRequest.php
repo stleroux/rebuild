@@ -27,7 +27,7 @@ class CreatePostRequest extends FormRequest
         return [
             'title'			=> 'min:5|required|max:255',
             // 'slug'			=> 'required|alpha_dash|min:5|max:255|unique:posts,slug',
-            'category_id'	=> 'required|integer',
+            'category_id'	=> 'required',
             'body'			=> 'required',
             'image'         => 'sometimes|image|mimes:jpeg,jpg,png,bmp,gif',
         ];

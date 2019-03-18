@@ -3,60 +3,43 @@
 		<i class="fa fa-plus-square"></i>
 		Create Recipe
       <span class="float-right">
+         @include('common.buttons.help', ['model'=>'recipe', 'bookmark'=>'recipes'])
          @include('common.buttons.cancel', ['model'=>'recipe', 'type'=>''])
          @include('common.buttons.save', ['model'=>'recipe', 'type'=>''])
       </span>
 	</div>
+
 	<div class="card-body">
 		<div class="row">
-            <!-- Title -->
-            <div class="col-xs-12 col-sm-12 col-md-6">
-               <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}" >
-                  {!! Form::label("title", "Title", ['class'=>'required']) !!}
-                  {{ Form::text ('title', null, array('class' => 'form-control', 'autofocus'=>'autofocus')) }}
-                     <span class="text-danger">{{ $errors->first('title') }}</span>
-               </div>
+         <!-- Title -->
+         <div class="col-xs-12 col-sm-12 col-md-6">
+            <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}" >
+               {!! Form::label("title", "Title", ['class'=>'required']) !!}
+               {{ Form::text ('title', null, array('class' => 'form-control', 'autofocus'=>'autofocus')) }}
+                  <span class="text-danger">{{ $errors->first('title') }}</span>
             </div>
+         </div>
 
             <!-- Category -->
-{{--             <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="col-xs-12 col-sm-6 col-md-3">
                <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}" >
-                  {{ Form::label('category_id', 'Category', ['class'=>'required']) }}
-                  {{ Form::select('category_id', array(''=>'Select a category') + $categories, null, ['class'=>'form-control']) }}
-                  <span class="text-danger">{{ $errors->first('category_id') }}</span>
+                  {!! Form::label("category_id", "Category", ['class'=>'required']) !!}
+                  <select name="category_id" class="custom-select">
+                     <option selected>Select One</option>
+                     @foreach ($categories as $category)
+                        <option disabled>{{ ucfirst($category->name) }}</option>
+                        @foreach ($category->children as $children)
+                           <option value="{{ $children->id}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- {{ ucfirst($children->name) }}</option>
+                        @endforeach
+                     @endforeach
+                  </select>
                </div>
-            </div> --}}
-<div class="col-xs-12 col-sm-6 col-md-3">
-   <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}" >
-      {!! Form::label("category_id", "Category", ['class'=>'required']) !!}
-      <select name="category_id" class="custom-select">
-         <option selected>Select One</option>
-         @foreach ($categories as $category)
-            <option disabled>{{ ucfirst($category->name) }}</option>
-            @foreach ($category->children as $children)
-               <option value="{{ $children->id}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- {{ ucfirst($children->name) }}</option>
-            @endforeach
-         @endforeach
-      </select>
-   </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
+            </div>
 
             <!-- Publish Date -->
             <div class="col-xs-12 col-sm-6 col-md-3">
                <div class="form-group {{ $errors->has('published_at') ? 'has-error' : '' }}">
                   {{ Form::label('published_at', 'Publish(ed) On') }}
-                  {{-- {{ Form::text('published_at', null, ['class'=>'form-control required', 'id'=>'datepicker']) }} --}}
                   <div class="input-group">
                      <input type="text" name="published_at" class="form-control" id="datePicker" />
                      <div class="input-group-append">

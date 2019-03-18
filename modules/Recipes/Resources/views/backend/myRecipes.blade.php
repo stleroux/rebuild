@@ -21,8 +21,8 @@
             <i class="fa fa-address-card-o" aria-hidden="true"></i>
             My Recipes
             <span class="float-right">
-               @include('common.buttons.help', ['model'=>'recipe', 'type'=>''])
-               @include('recipes::backend.myRecipes.help')
+               @include('common.buttons.help', ['model'=>'recipe', 'bookmark'=>'recipes'])
+               {{-- @include('recipes::backend.myRecipes.help') --}}
                @include('common.buttons.add', ['model'=>'recipe', 'type'=>''])
             </span>
          </div>
@@ -33,7 +33,7 @@
                <table id="datatable" class="table table-sm table-hover">
                   <thead>
                      <tr>
-                         <th><input type="checkbox" id="selectall" class="checked" /></th>
+                        <th><input type="checkbox" id="selectall" class="checked" /></th>
                         <th>Name</th>
                         <th>Category</th>
                         <th>Views</th>

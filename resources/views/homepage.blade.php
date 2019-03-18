@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section ('stylesheets')
-   {{-- {{ Html::style('css/woodbarn.css') }} --}}
+   {{ Html::style('css/woodbarn.css') }}
 @endsection
 
 @section('left_column')
@@ -88,71 +88,77 @@
             </div>
          </div>
          
-         <div class="card bg-transparent mb-2">
-            <div class="card-header card_header_2">
-                  <i class="far fa-address-card"></i>
-                  Recipes
+         @if(\Module::enabled('Recipes'))
+            <div class="card bg-transparent mb-2">
+               <div class="card-header card_header_2">
+                     <i class="far fa-address-card"></i>
+                     Recipes
+               </div>
+               <div class="card-body card_body">
+                  <p>The title says it all. Access this section to see recipes contributed by some of our members.</p>
+               </div>
             </div>
-            <div class="card-body card_body">
-               <p>The title says it all. Access this section to see recipes contributed by some of our members.</p>
-            </div>
-         </div>
+         @endif
 
-         <div class="card bg-transparent mb-2">
-            <div class="card-header card_header_2">
-                  <i class="far fa-newspaper"></i>
-                  The Blog
+         @if(\Module::enabled('Posts'))
+            <div class="card bg-transparent mb-2">
+               <div class="card-header card_header_2">
+                     <i class="far fa-newspaper"></i>
+                     The Blog
+               </div>
+               <div class="card-body card_body">
+                  <p>Here you will find the latest news of the site. Keep an eye on this section to find out what is happening with the site.</p>
+               </div>
             </div>
-            <div class="card-body card_body">
-               <p>Here you will find the latest news of the site. Keep an eye on this section to find out what is happening with the site.</p>
-            </div>
-         </div>
+         @endif
 
       </div>
    </div>
 
 	{{-- @include('homepage.blog') --}}
    {{-- BLOG --}}
-   @if($posts->count() > 0)
-      <div class="card mb-3">
-         <div class="card-header card_header">
-            <i class="far fa-newspaper" aria-hidden="true"></i>
-            Latest Posts
-         </div>
-         <div class="card-body card_body">
-            @if(count($posts) > 0)
-               @foreach ($posts as $post)
-                  <div class="card mb-2 bg-transparent">
-                     <div class="card-header card_header_2">{{ $post->title }}</div>
-                     <div class="card-body card_body">
-                        <div class="row">
-                        <div class="col-sm-10">
-                           <p>{{ substr(strip_tags($post->body), 0, 250) }} {{ strlen(strip_tags($post->body)) > 250 ? " [More]..." : "" }}</p>
+   @if(\Module::enabled('Posts'))
+      @if($posts->count() > 0)
+         <div class="card mb-3">
+            <div class="card-header card_header">
+               <i class="far fa-newspaper" aria-hidden="true"></i>
+               Latest Posts
+            </div>
+            <div class="card-body card_body">
+               @if(count($posts) > 0)
+                  @foreach ($posts as $post)
+                     <div class="card mb-2 bg-transparent">
+                        <div class="card-header card_header_2">{{ $post->title }}</div>
+                        <div class="card-body card_body">
+                           <div class="row">
+                           <div class="col-sm-10">
+                              <p>{{ substr(strip_tags($post->body), 0, 250) }} {{ strlen(strip_tags($post->body)) > 250 ? " [More]..." : "" }}</p>
+                           </div>
+                           <div class="col-sm-2">
+                              {{-- <a href="{{ url('posts::blog/'.$post->slug) }}" class="btn btn-sm btn-primary"> --}}
+                                 <a href="{{ route('blog.single', $post->slug) }}" class="btn btn-sm btn-primary float-right">
+                                 <div class="text text-left">
+                                    <i class="fa fa-chevron-right" aria-hidden="true"></i> Read More
+                                 </div>
+                              </a>
+                           </div>
+                           </div>
                         </div>
-                        <div class="col-sm-2">
-                           {{-- <a href="{{ url('posts::blog/'.$post->slug) }}" class="btn btn-sm btn-primary"> --}}
-                              <a href="{{ route('blog.single', $post->slug) }}" class="btn btn-sm btn-primary float-right">
-                              <div class="text text-left">
-                                 <i class="fa fa-chevron-right" aria-hidden="true"></i> Read More
-                              </div>
-                           </a>
-                        </div>
+                        <div class="card-footer bg-transparent px-1 py-1">
+                           Created by {{ $post->user->username }}
+                           {{-- @include('common.authorFormat', ['model'=>$post, 'field'=>'user']) --}}
+                           on {{-- @include('common.dateFormat', ['model'=>$post, 'field'=>'created_at']) --}}
+                           {{ $post->created_at->format('M d, Y') }}
                         </div>
                      </div>
-                     <div class="card-footer bg-transparent px-1 py-1">
-                        Created by {{ $post->user->username }}
-                        {{-- @include('common.authorFormat', ['model'=>$post, 'field'=>'user']) --}}
-                        on {{-- @include('common.dateFormat', ['model'=>$post, 'field'=>'created_at']) --}}
-                        {{ $post->created_at->format('M d, Y') }}
-                     </div>
-                  </div>
-               @endforeach
-            @else
-               {{-- @include('common.noRecordsFound', ['name'=>'Latest Posts', 'icon'=>'newspaper-o', 'color'=>'primary']) --}}
-               No Records Found
-            @endif
+                  @endforeach
+               @else
+                  {{-- @include('common.noRecordsFound', ['name'=>'Latest Posts', 'icon'=>'newspaper-o', 'color'=>'primary']) --}}
+                  No Records Found
+               @endif
+            </div>
          </div>
-      </div>
+      @endif
    @endif
    
 

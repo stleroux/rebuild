@@ -1,5 +1,11 @@
 <div class="card mb-2" id="categories_add_category">
-   <h4 class="card-header bg-primary">Add A Category</h4>
+      <div class="card-header bg-primary">
+      <span class="h4">Add A Category</span>
+      <span class="float-right">
+         <a href="#" class="btn btn-xs btn-secondary"><small>Top</small></a>
+         <a href="#categories" class="btn btn-xs btn-secondary"><small>Section Top</small></a>
+      </span>
+   </div>
    <div class="card-body p-2">
       {{-- <div class="row"> --}}
          {{-- <div class="col"> --}}

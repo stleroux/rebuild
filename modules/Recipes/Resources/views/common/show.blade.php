@@ -37,6 +37,7 @@
 			{{ $recipe->title }}
 			<span class="float-right">
 				{{-- @include('common.buttons.cancelWithId', ['model'=>'recipe', 'id'=>$recipe->id]) --}}
+				@include('common.buttons.print')
 				@include('common.buttons.cancel', ['model'=>'recipe', 'type'=>''])
 			</span>
 		</div>
