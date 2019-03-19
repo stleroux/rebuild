@@ -145,10 +145,10 @@
                            </div>
                         </div>
                         <div class="card-footer bg-transparent px-1 py-1">
-                           Created by {{ $post->user->username }}
-                           {{-- @include('common.authorFormat', ['model'=>$post, 'field'=>'user']) --}}
-                           on {{-- @include('common.dateFormat', ['model'=>$post, 'field'=>'created_at']) --}}
-                           {{ $post->created_at->format('M d, Y') }}
+                           Created by {{-- {{ $post->user->username }} --}}
+                           @include('common.authorFormat', ['model'=>$post, 'field'=>'user'])
+                           on @include('common.dateFormat', ['model'=>$post, 'field'=>'created_at'])
+                           {{-- {{ $post->created_at->format('M d, Y') }} --}}
                         </div>
                      </div>
                   @endforeach

@@ -8,31 +8,69 @@
 
 @section ('content')
 
-	<br />
-	<div class="panel panel-default">
+	<div class="card">
 		
-		<div class="panel-heading">
-			<h3 class="panel-title">{{ ucwords($recipe->title) }}</h3>
+		<div class="card-header">
+			
+				<span class="h3">{{ ucwords($recipe->title) }}</span>
+				<span class="float-right">
+					<a href="{{ route('recipes.show', $recipe->id) }}" class="btn btn-sm btn-outline-secondary d-print-none">Return</a>
+            	<a href="" class="btn btn-sm btn-outline-primary d-print-none" onClick="window.print()">Print</a>
+				</span>
+			
 		</div>
 		
-		<div class="panel-body">
+		<div class="card-body">
 			<div class="row">
-				<div class="col-xs-12 col-sm-4">
-					<div class="panel panel-default">
-						<div class="panel-heading">Ingredients</div>
-						<div class="panel-body">
+				<div class="col-xs-12 col-sm-8">
+					<div class="card mb-2">
+						<div class="card-header">Ingredients</div>
+						<div class="card-body">
 							{!! $ingredients = str_replace(array('<p>','</p>'),array('','<br />'),$recipe->ingredients) !!}<br />
 						</div>
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-4">
-					<div class="panel panel-default">
-						<div class="panel-heading">Information</div>
-						<div class="panel-body">
+					{{-- <div class="card mb-2" style="background-image: '_recipes/" . $recipe->image>
+						<div class="card-header">Image</div>
+						<div class="card-body text text-center">
+							@if ($recipe->image)
+								{{ Html::image("_recipes/" . $recipe->image, "", array('height'=>'200','width'=>'200')) }}
+							@endif
+						</div>
+					</div> --}}
+					<div class="card img-fluid" style="width:500px">
+						<div class="card-header">Image</div>
+  <img class="card-img-top" src="/_recipes/{{ $recipe->image }}" alt="Card image" style="width:100%; max-height:250px">
+  
+</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-8">
+					<div class="card mb-2">
+						<div class="card-header">Methodology</div>
+						<div class="card-body">{!! $recipe->methodology !!}</div>
+					</div>
+					<div class="card" style="margin-bottom: 0px">
+						<div class="card-header">Notes</div>
+						<div class="card-body">
+							@if ($recipe->public_notes) 
+								{!! $recipe->public_notes !!}
+							@else
+								N/A
+							@endif
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-4">
+					<div class="card mb-2">
+						<div class="card-header">Information</div>
+						<div class="card-body">
 							<table width="100%">
 								<tr>
 									<th>Category</th>
-									<td>{{ $recipe->category->name }}</td>
+									<td>{{ ucwords($recipe->category->name) }}</td>
 								</tr>
 								<tr>
 									<th>Servings</th>
@@ -53,7 +91,10 @@
 								<tr>
 									<th>Created On</th>
 		
-									<td>@include('common.dateFormat', ['dateFormat'=>Auth::user()->dateFormat, 'model'=>$recipe, 'field'=>'created_at'])</td>
+									<td>
+										{{-- @include('common.dateFormat', ['dateFormat'=>Auth::user()->dateFormat, 'model'=>$recipe, 'field'=>'created_at']) --}}
+										@include('common.dateFormat', ['model'=>$recipe, 'field'=>'created_at'])
+									</td>
 								</tr>
 								<tr>
 									<th>Source</th>
@@ -66,34 +107,6 @@
 									</td>
 								</tr>
 							</table>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-4">
-					<div class="panel panel-default">
-						<div class="panel-heading">Image</div>
-						<div class="panel-body text text-center">
-							@if ($recipe->image)
-								{{ Html::image("_recipes/" . $recipe->image, "", array('height'=>'200','width'=>'200')) }}
-							@endif
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-12">
-					<div class="panel panel-default">
-						<div class="panel-heading">Methodology</div>
-						<div class="panel-body">{!! $recipe->methodology !!}</div>
-					</div>
-					<div class="panel panel-default" style="margin-bottom: 0px">
-						<div class="panel-heading">Notes</div>
-						<div class="panel-body">
-							@if ($recipe->public_notes) 
-								{!! $recipe->public_notes !!}
-							@else
-								N/A
-							@endif
 						</div>
 					</div>
 				</div>

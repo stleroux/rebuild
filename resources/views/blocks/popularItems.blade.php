@@ -39,7 +39,7 @@
                </div>
             </div>
          @endif --}}
-@include('blocks.popularPosts');
+@include('blocks.popularPosts')
 @include('blocks.popularRecipes')
 
          {{-- @foreach ($popularWoodProject as $wp)

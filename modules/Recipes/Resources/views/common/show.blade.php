@@ -30,14 +30,13 @@
 
 <form style="display:inline;">
 
-{{-- <input type="text" value="{{ Session::get('byCatName') }}"> --}}
-
 	<div class="card mb-3 bg-transparent">
 		<div class="card-header card_header">
 			{{ $recipe->title }}
 			<span class="float-right">
-				{{-- @include('common.buttons.cancelWithId', ['model'=>'recipe', 'id'=>$recipe->id]) --}}
-				@include('common.buttons.print')
+				@auth
+					@include('common.buttons.print', ['model'=>'recipe', 'id'=>$recipe->id])
+				@endauth
 				@include('common.buttons.cancel', ['model'=>'recipe', 'type'=>''])
 			</span>
 		</div>

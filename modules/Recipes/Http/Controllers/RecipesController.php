@@ -909,7 +909,7 @@ class RecipesController extends Controller
 
 		$recipe = Recipe::find($id);
 
-		return view('recipes.print')->withRecipe($recipe);
+		return view('recipes::frontend.print', compact('recipe'));
 	}
 
 
