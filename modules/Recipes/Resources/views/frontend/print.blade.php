@@ -31,19 +31,14 @@
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-4">
-					{{-- <div class="card mb-2" style="background-image: '_recipes/" . $recipe->image>
+					<div class="card mb-2" style="background-image: '_recipes/{{ $recipe->image}}'">
 						<div class="card-header">Image</div>
 						<div class="card-body text text-center">
 							@if ($recipe->image)
 								{{ Html::image("_recipes/" . $recipe->image, "", array('height'=>'200','width'=>'200')) }}
 							@endif
 						</div>
-					</div> --}}
-					<div class="card img-fluid" style="width:500px">
-						<div class="card-header">Image</div>
-  <img class="card-img-top" src="/_recipes/{{ $recipe->image }}" alt="Card image" style="width:100%; max-height:250px">
-  
-</div>
+					</div>
 				</div>
 			</div>
 			<div class="row">
