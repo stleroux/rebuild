@@ -1,12 +1,12 @@
 <div class="text-center">
    <div class="btn-group" role="group">
       @if(Request::route('cat') == 'all')
-         <a href="{{ route(str_plural($model) . '.' . Session::get('pageName'), 'all') }}"
+         <a href="{{ route(str_plural($model) . '.index', 'all') }}"
             class="{{ Request::is(str_plural($model) . '/' . 'all') ? "btn-secondary": "btn-primary" }} btn btn-sm">
             All
          </a>
          @foreach($letters as $value)
-            <a href="{{ route(str_plural($model) . '.' . Session::get('pageName'), ['all', $value]) }}"
+            <a href="{{ route(str_plural($model) . '.index', ['all', $value]) }}"
                class="{{ Request::is(str_plural($model) . '/all/' . $value) ? "btn-secondary": "btn-primary" }} btn btn-sm">
                {{ strtoupper($value) }}
             </a>

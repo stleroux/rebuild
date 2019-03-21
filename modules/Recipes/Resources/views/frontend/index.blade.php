@@ -21,8 +21,9 @@
 			<i class="fab fa-apple"></i>
 			RECIPES
 			<span class="float-right">
-				{{-- @include('common.buttons.help', ['model'=>'recipe', 'type'=>'', 'part'=>'index']) --}}
-				{{-- @include('recipes::help.index') --}}
+				@if(Request::is('recipes/all'))
+					<a href="{{ route('recipes.printAll') }}">Print All</a>
+				@endif
 				@include('common.buttons.help', ['bookmark'=>'recipes_published'])
             @auth
             	@include('common.buttons.myFavorites', ['model'=>'recipe', 'type'=>''])

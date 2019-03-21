@@ -506,7 +506,7 @@ class RecipesController extends Controller
       // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
 
       // Set the variable so we can use a button in other pages to come back to this page
-      Session::put('pageName', 'index');
+      Session::put('pageName', 'recipes_index');
 
       // Get all categories related to Recipe Category (id=>1)
       $categories = Category::where('parent_id',1)->get();
@@ -911,6 +911,25 @@ class RecipesController extends Controller
 
 		return view('recipes::frontend.print', compact('recipe'));
 	}
+
+
+##################################################################################################################
+# ██████╗ ██████╗ ██╗███╗   ██╗████████╗     █████╗ ██╗     ██╗     
+# ██╔══██╗██╔══██╗██║████╗  ██║╚══██╔══╝    ██╔══██╗██║     ██║     
+# ██████╔╝██████╔╝██║██╔██╗ ██║   ██║       ███████║██║     ██║     
+# ██╔═══╝ ██╔══██╗██║██║╚██╗██║   ██║       ██╔══██║██║     ██║     
+# ██║     ██║  ██║██║██║ ╚████║   ██║       ██║  ██║███████╗███████╗
+# ╚═╝     ╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝   ╚═╝       ╚═╝  ╚═╝╚══════╝╚══════╝
+##################################################################################################################
+   public function printAll()
+   {
+      // Check if user has required permission
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+
+      $recipes = Recipe::orderBy('title', 'asc')->get();
+
+      return view('recipes::frontend.printAll', compact('recipes'));
+   }
 
 
 ##################################################################################################################

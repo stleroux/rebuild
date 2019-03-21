@@ -11,13 +11,11 @@
 	<div class="card">
 		
 		<div class="card-header">
-			
-				<span class="h3">{{ ucwords($recipe->title) }}</span>
-				<span class="float-right">
-					<a href="{{ route('recipes.show', $recipe->id) }}" class="btn btn-sm btn-outline-secondary d-print-none">Return</a>
-            	<a href="" class="btn btn-sm btn-outline-primary d-print-none" onClick="window.print()">Print</a>
-				</span>
-			
+			<span class="h3">{{ ucwords($recipe->title) }}</span>
+			<span class="float-right">
+				<a href="{{ route('recipes.show', $recipe->id) }}" class="btn btn-sm btn-outline-secondary d-print-none">Return</a>
+				<a href="" class="btn btn-sm btn-outline-primary d-print-none" onClick="window.print()">Print</a>
+			</span>
 		</div>
 		
 		<div class="card-body">
@@ -31,11 +29,13 @@
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-4">
-					<div class="card mb-2" style="background-image: '_recipes/{{ $recipe->image}}'">
-						<div class="card-header">Image</div>
-						<div class="card-body text text-center">
-							@if ($recipe->image)
-								{{ Html::image("_recipes/" . $recipe->image, "", array('height'=>'200','width'=>'200')) }}
+					<div class="card mb-2">
+						<div class="card-header card_header_2">Image</div>
+						<div class="card-body text text-center p-0 m-0">
+							@if($recipe->image)
+								<img src="/_recipes/{{ $recipe->image }}" alt="" height="200px" width="auto" class="card-img">
+							@else
+								<img src="/_recipes/image_not_available.jpg" alt="" height="200px" width="auto" class="card-img">
 							@endif
 						</div>
 					</div>

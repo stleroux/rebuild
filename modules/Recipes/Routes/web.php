@@ -65,6 +65,7 @@ Route::group(['prefix' => 'recipes'], function()
    // Route::delete('{id}',                  'RecipesController@destroy')              ->name('recipes.destroy');
 
    Route::get('{id}/print',               'RecipesController@print')                ->name('recipes.print');
+   Route::get('printAll',                 'RecipesController@printAll')             ->name('recipes.printAll');
    Route::get('{id}/publish',             'RecipesController@publish')              ->name('recipes.publish');
    Route::get('{id}/resetViews',          'RecipesController@resetViews')           ->name('recipes.resetViews');
    Route::post('publishAll',              'RecipesController@publishAll')           ->name('recipes.publishAll');
