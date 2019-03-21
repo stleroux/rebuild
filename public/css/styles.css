@@ -79,3 +79,21 @@ p {
    display: block;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+/* Used in the help file to make the TOC stick to the top of the page when scrolled */
+div.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: lightgrey;
+}
