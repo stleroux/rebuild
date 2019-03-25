@@ -6,11 +6,12 @@
 
 @section('left_column')
 		@if(
-				(Session::get('pageName') === 'index') ||
+				(Session::get('pageName') === 'recipes_index') ||
 				(Session::get('pageName') === 'myFavorites') ||
 				(Session::get('pageName') === 'archive') ||
 				(Session::get('pageName') === 'home') ||
-				(Session::get('pageName') === 'bycat')
+				(Session::get('pageName') === 'bycat') ||
+				(Session::get('pageName') === 'show')
 			)
 	   	@include('blocks.home_menu')
 	   	@include('recipes::frontend.sidebar')
@@ -34,10 +35,10 @@
 		<div class="card-header card_header">
 			{{ $recipe->title }}
 			<span class="float-right">
+				@include('common.buttons.cancel', ['model'=>'recipe', 'type'=>''])
 				@auth
 					@include('common.buttons.print', ['model'=>'recipe', 'id'=>$recipe->id])
 				@endauth
-				@include('common.buttons.cancel', ['model'=>'recipe', 'type'=>''])
 			</span>
 		</div>
 	

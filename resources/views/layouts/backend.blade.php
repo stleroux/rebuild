@@ -29,11 +29,7 @@
 </head>
 <body>
    
-{{--    pageName : {{ Session::get('pageName') }}
-   <br />
-   byCatName : {{ Session::get('byCatName') }}
-   <br />
-   byCatLetter : {{ Session::get('byCatLetter') }} --}}
+{{-- pageName : {{ Session::get('pageName') }}<br />byCatName : {{ Session::get('byCatName') }}<br />byCatLetter : {{ Session::get('byCatLetter') }} --}}
    
    @include('layouts.master.navbar')
    @include('layouts.master.messages')

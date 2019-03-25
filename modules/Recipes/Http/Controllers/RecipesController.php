@@ -512,6 +512,7 @@ class RecipesController extends Controller
       $categories = Category::where('parent_id',1)->get();
 
       $byCatName = Category::where('name', $request->cat)->first();
+      // dd($byCatName);
 
       if($request->cat == 'all'){
          $alphas = DB::table('recipes')
@@ -604,7 +605,7 @@ class RecipesController extends Controller
          $letters[] = $alpha->letter;
       }
       
-      return view('recipes::frontend.index', compact('recipes','categories','letters'));
+      return view('recipes::frontend.index', compact('recipes','categories','letters','byCatName'));
    }
 
 
@@ -921,16 +922,48 @@ class RecipesController extends Controller
 # ██║     ██║  ██║██║██║ ╚████║   ██║       ██║  ██║███████╗███████╗
 # ╚═╝     ╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝   ╚═╝       ╚═╝  ╚═╝╚══════╝╚══════╝
 ##################################################################################################################
-   public function printAll()
+   public function printAll($category)
    {
       // Check if user has required permission
       // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
 
-      $recipes = Recipe::orderBy('title', 'asc')->get();
+      if($category == "all"){
+         $recipes = Recipe::orderBy('title', 'asc')->get();
+      } else {
+         $cName = Category::where('name', $category)->pluck('id');
+         $sCats = Category::where('parent_id', $cName)->pluck('id');
+
+         if($sCats->count() <= 0){
+            $recipes = Recipe::where('category_id', $cName)->orderBy('title', 'asc')->get();
+         } else {
+            $recipes = Recipe::whereIn('category_id', $sCats)->orderBy('title', 'asc')->get();
+         }
+      }
 
       return view('recipes::frontend.printAll', compact('recipes'));
    }
 
+// public function print($category=null, $id=null){
+//    if($id){
+//       $recipes = Recipe::find($id);
+//       dd($recipes);
+//    }
+
+//    if($category == "all"){
+//       $recipes = Recipe::orderBy('title', 'asc')->get();
+//    } else {
+//       $cName = Category::where('name', $category)->pluck('id');
+//       $sCats = Category::where('parent_id', $cName)->pluck('id');
+
+//       if($sCats->count() <= 0){
+//          $recipes = Recipe::where('category_id', $cName)->orderBy('title', 'asc')->get();
+//       } else {
+//          $recipes = Recipe::whereIn('category_id', $sCats)->orderBy('title', 'asc')->get();
+//       }
+//    }
+
+//    return view('recipes::frontend.print', compact('recipes'));
+// }
 
 ##################################################################################################################
 # ██████╗ ██╗   ██╗██████╗ ██╗     ██╗███████╗██╗  ██╗
@@ -1117,7 +1150,7 @@ class RecipesController extends Controller
       $recipe = Recipe::withTrashed()->find($id);
 
       if(
-         (Session::get('pageName') === 'index') ||
+         (Session::get('pageName') === 'recipes_index') ||
          (Session::get('pageName') === 'myFavorites') ||
          (Session::get('pageName') === 'archive') ||
          (Session::get('pageName') === 'home')
@@ -1209,7 +1242,8 @@ class RecipesController extends Controller
       $recipe->comments()->save($comment);
 
       Session::flash('success', 'Comment added succesfully.');
-      return redirect()->route('recipes.show', $recipe->id);
+      // return redirect()->route('recipes.show', $recipe->id);
+      return redirect()->back();
    }
 
 

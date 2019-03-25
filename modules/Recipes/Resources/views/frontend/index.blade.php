@@ -21,11 +21,17 @@
 			<i class="fab fa-apple"></i>
 			RECIPES
 			<span class="float-right">
-				@if(Request::is('recipes/all'))
-					<a href="{{ route('recipes.printAll') }}">Print All</a>
-				@endif
-				@include('common.buttons.help', ['bookmark'=>'recipes_published'])
-            @auth
+				@include('common.buttons.help', ['bookmark'=>'recipes'])
+				@auth
+					@if(Request::is('recipes/all'))
+						<a href="{{ route('recipes.printAll', 'all') }}" class="btn btn-sm btn-outline-secondary" title="Print All">
+							<i class="fa fa-print"></i>
+						</a>
+					@else
+						<a href="{{ route('recipes.printAll', Request::segment(2)) }}" class="btn btn-sm btn-outline-secondary" title="Print All aaa">
+							<i class="fa fa-print"></i>
+						</a>
+					@endif
             	@include('common.buttons.myFavorites', ['model'=>'recipe', 'type'=>''])
             @endauth
 			</span>

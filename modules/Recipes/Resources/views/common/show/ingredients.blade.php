@@ -8,7 +8,7 @@
 				@if(strlen($recipe->ingredients > 50))
 					{!! str_limit($recipe->ingredients, $limit = 110, $end = ' [More...]') !!}
 				@else
-					{!! str_limit($recipe->ingredients, $limit = 35, $end = ' [More...]') !!}
+					{!! str_limit($recipe->ingredients, $limit = 50, $end = ' [More...]') !!}
 				@endif
 			@endif
 		</div>

@@ -1,4 +1,4 @@
-@if((Session::get('pageName') === 'archive') || (Session::get('pageName') === 'home'))
+{{-- @if((Session::get('pageName') === 'archive') || (Session::get('pageName') === 'home'))
    <a href="{{ URL::previous() }}"
       class="btn btn-sm btn-outline-secondary"
       title="Back to previous page">
@@ -16,4 +16,10 @@
       title="Back to previous page">
       <i class="fas fa-angle-double-left"></i>
    </a>
-@endif
+@endif --}}
+
+   <a onclick="window.history.back();"
+      class="btn btn-sm btn-outline-secondary d-print-none"
+      title="Back to previous page">
+      <i class="fas fa-angle-double-left"></i>
+   </a>

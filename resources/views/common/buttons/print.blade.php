@@ -3,13 +3,13 @@
 </button>
  --}}
 
-{{-- <a href="{{ route(str_plural($model).'.print', $id) }}"
+<a href="{{ route(str_plural($model).'.print', $id) }}"
    class="btn btn-sm btn-outline-secondary"
    title="Print Recipe">
    <i class="fas fa-print"></i>
-</a> --}}
+</a>
 
-<a
+{{-- <a
    href="{{ route(str_plural($model).'.print', $id) }}"
    class="btn btn-sm btn-outline-secondary"
    type="button"
@@ -20,3 +20,11 @@
    <i class="fa fa-print"></i>
 </a>
 @include('recipes::frontend.modals.print')
+
+ --}}
+
+{{--  <a href=""
+   class="btn btn-sm btn-outline-secondary d-print-none"
+   onClick="window.print()">
+   <i class="fa fa-print"></i>
+</a> --}}
