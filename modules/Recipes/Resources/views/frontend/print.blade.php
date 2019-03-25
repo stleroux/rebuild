@@ -8,7 +8,7 @@
 
 @section ('content')
 
-	<div class="card">
+	<div class="card mt-5">
 		
 		<div class="card-header">
 			<span class="h3">{{ ucwords($recipe->title) }}</span>

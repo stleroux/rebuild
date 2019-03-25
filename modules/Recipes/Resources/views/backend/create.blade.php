@@ -50,6 +50,7 @@
                            @endforeach
                         @endforeach
                      </select>
+                     <a href="{{ route('categories.create') }}" class="btn btn-xs btn-primary" target="_blank">New category</a>
                   </div>
                </div>
 

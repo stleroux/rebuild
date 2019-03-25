@@ -9,7 +9,7 @@
 @section ('content')
 
 @foreach($recipes as $recipe)
-   <div class="card mb-3">
+   <div class="card mb-3 mt-5" style="page-break-after: always">
       
       <div class="card-header">
          <span class="h3">{{ ucwords($recipe->title) }}</span>
