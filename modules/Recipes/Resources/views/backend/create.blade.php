@@ -41,6 +41,11 @@
                <div class="col-xs-12 col-sm-6 col-md-3">
                   <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}" >
                      {!! Form::label("category_id", "Category", ['class'=>'required']) !!}
+                     <span class="float-right small">
+                        <a href="{{ route('categories.create') }}" target="_blank">
+                           Create Category
+                        </a>
+                     </span>
                      <select name="category_id" class="custom-select">
                         <option selected>Select One</option>
                         @foreach ($categories as $category)
@@ -50,7 +55,6 @@
                            @endforeach
                         @endforeach
                      </select>
-                     <a href="{{ route('categories.create') }}" class="btn btn-xs btn-primary" target="_blank">New category</a>
                   </div>
                </div>
 
