@@ -42,9 +42,10 @@
                   <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}" >
                      {!! Form::label("category_id", "Category", ['class'=>'required']) !!}
                      <span class="float-right small">
-                        <a href="{{ route('categories.create') }}" target="_blank">
+                        {{-- <a href="{{ route('categories.create') }}" target="_blank">
                            Create Category
-                        </a>
+                        </a> --}}
+                        <a href="#" class="small" data-toggle="modal" tabindex="-1" data-target=".addCategoryModal">Add Category</a>
                      </span>
                      <select name="category_id" class="custom-select">
                         <option selected>Select One</option>
@@ -158,6 +159,64 @@
          </div>
       </div>
    {!! Form::close() !!}
+
+
+<div class="modal fade addCategoryModal" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h4 class="modal-title">Add New Category</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+         </div>
+ 
+         {!! Form::open(['url' => 'categories/store','class'=>'']) !!}
+            {{ csrf_field() }}
+         {{-- {!! Form::open(route('categories.addModal'), ['class'=>'myForm-waterSource']) !!} --}}
+            <div class="modal-body">
+               <input type="text" id="parent_id" value="1">
+               <div class="form-group">
+                  {!! Form::text('name',null,['class'=>'input form-control','id'=>'name','autofocus'=>'autofocus']) !!}
+               </div>
+            </div>
+ 
+            <div class="modal-footer">
+               <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+               {!! Form::submit('Submit',['class'=>'btn btn-sm btn-primary']) !!}
+            </div>
+         {!! Form::close() !!}
+      </div>
+   </div>
+</div>
+
+<script>
+
+   $(document).on('submit', 'addCategoryModal', function(e) {
+
+      $.ajax({
+         url: $(this).attr('action'),
+         type: $(this).attr('method'),
+         data: $(this).serialize(),
+
+         success: function(html) {
+            $.get('{{ url('categories/store') }}', function(data) {
+            console.log(data);
+            $.each(data, function(index,subCatObj){
+               if (!$('#category_id option[value="'+subCatObj.id+'"]').length) {
+                  $('#category_id').append('<option value="'+subCatObj.id+'">'+subCatObj.description+'</option>');
+               }
+            });
+
+            $('#addCategoryModal').modal('hide');
+            $('#name').val('');
+         });
+      }
+   });
+
+   e.preventDefault();
+
+});
+ 
+</script>
 @endsection
 
 @section('scripts')
