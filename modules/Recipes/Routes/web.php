@@ -1,4 +1,13 @@
 <?php
+// use App\Category; //<-- dont forget this
+ 
+// Route::get('categories/saveModal',function(){
+ 
+//     $data = Category::orderBy('name')->get();
+//  dd($data);
+//     // return Response::json($data);
+ 
+// });
 
 // Route::prefix('recipes')->name('recipes.')->group(function() {
 

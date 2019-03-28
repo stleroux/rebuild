@@ -47,7 +47,7 @@
                         </a> --}}
                         <a href="#" class="small" data-toggle="modal" tabindex="-1" data-target=".addCategoryModal">Add Category</a>
                      </span>
-                     <select name="category_id" class="custom-select">
+                     <select name="category_id" id="catSelect" class="custom-select">
                         <option selected>Select One</option>
                         @foreach ($categories as $category)
                            <option disabled>{{ ucfirst($category->name) }}</option>
@@ -169,11 +169,23 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
          </div>
  
-         {!! Form::open(['url' => 'categories/store','class'=>'']) !!}
+         {{-- {!! Form::open(['url'=>'categories/saveModal', 'class'=>'', 'method'=>'GET']) !!} --}}
+         {!! Form::open(['route' => 'categories.saveModal']) !!}
             {{ csrf_field() }}
          {{-- {!! Form::open(route('categories.addModal'), ['class'=>'myForm-waterSource']) !!} --}}
             <div class="modal-body">
-               <input type="text" id="parent_id" value="1">
+               {{-- <input type="text" id="parent_id" value="1"> --}}
+               <div class="form-group {{ $errors->has('cCategory') ? 'has-error' : '' }}">
+                     {!! Form::label('cCategory','Main Category', ['class'=>'required']) !!}
+                     <select name="cCategory" id="category" class="form-control input-sm">
+                        <option value="">Select One</option>
+                        @foreach($categories as $k)
+                           <option value="{{ $k['id'] }}">{{ ucwords($k['name']) }}</option>
+                        @endforeach
+                     </select>
+                     <span class="text-danger">{{ $errors->first('cCategory') }} </span>
+                  </div>
+
                <div class="form-group">
                   {!! Form::text('name',null,['class'=>'input form-control','id'=>'name','autofocus'=>'autofocus']) !!}
                </div>
@@ -188,37 +200,42 @@
    </div>
 </div>
 
+
+@endsection
+
+@section('scripts')
 <script>
 
    $(document).on('submit', 'addCategoryModal', function(e) {
-
+      e.preventDefault();
       $.ajax({
          url: $(this).attr('action'),
          type: $(this).attr('method'),
          data: $(this).serialize(),
 
-         success: function(html) {
-            $.get('{{ url('categories/store') }}', function(data) {
-            console.log(data);
-            $.each(data, function(index,subCatObj){
-               if (!$('#category_id option[value="'+subCatObj.id+'"]').length) {
-                  $('#category_id').append('<option value="'+subCatObj.id+'">'+subCatObj.description+'</option>');
-               }
+         success: function(result) {
+            // $.get('{{ url('categories/saveModal') }}', function(data) {
+            $.get('{{ route('categories.saveModal') }}', function(data) {
+               console.log(data);
+               // $.each(data, function(index,subCatObj){
+               //    if (!$('#category_id option[value="'+subCatObj.id+'"]').length) {
+               //       $('#category_id').append('<option value="'+subCatObj.id+'">'+subCatObj.description+'</option>');
+               //    }
+               // });
             });
-
             $('#addCategoryModal').modal('hide');
+            $('#cCategory').val('');
             $('#name').val('');
-         });
-      }
+            $('#catSelect').catSelect('refresh');
+         }
+
+      });
+
+      
+
+      
+
    });
-
-   e.preventDefault();
-
-});
  
 </script>
-@endsection
-
-@section('scripts')
-
 @endsection
