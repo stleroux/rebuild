@@ -8,7 +8,4 @@
    style="display:none;"
    onclick="return confirm('Are you sure you want to restore all these {{ $model }}s?')">
    <i class="fas fa-trash-restore-alt"></i>
-   @if($type == 'menu')
-      Restore Selected
-   @endif
 </button>

@@ -8,5 +8,4 @@
    style="display:none;"
    onclick="return confirm('Are you sure you want to trash these {{ $model }}s?')">
    <i class="far fa-trash-alt"></i>
-   {{-- Trash  Selected --}}
 </button>

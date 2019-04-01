@@ -8,7 +8,4 @@
    style="display:none;"
    onclick="return confirm('Are you sure you want to publish these {{ $model }}s?')">
    <i class="fas fa-upload"></i>
-   @if($type == 'menu')
-      Publish Selected
-   @endif
 </button>

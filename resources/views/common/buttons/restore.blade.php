@@ -5,7 +5,4 @@
    formmethod="GET"
    title="Restore {{ ucfirst($model) }}">
    <i class="fas fa-trash-restore-alt"></i>
-   @if($type == 'menu')
-      Restore {{ ucfirst($model) }}
-   @endif
 </button>

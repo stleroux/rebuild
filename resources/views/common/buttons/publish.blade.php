@@ -5,7 +5,4 @@
    formmethod="GET"
    title="Publish">
    <i class="fas fa-upload"></i>
-   @if($type == 'menu')
-      Publish
-   @endif
 </button>

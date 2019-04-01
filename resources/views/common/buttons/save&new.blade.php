@@ -4,8 +4,5 @@
    {{-- formaction="{{ route($model.'s'.'.store') }}" --}}
    formmethod="POST"
    title="Save & New {{ ucfirst($model) }}">
-      <i class="far fa-hdd"></i>
-   @if($type == 'menu')
-      Save & New {{ $ucfirst($model) }}
-   @endif
+   <i class="far fa-hdd"></i>
 </button>

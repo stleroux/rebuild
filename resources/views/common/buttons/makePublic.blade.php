@@ -5,7 +5,4 @@
    formmethod="GET"
    title="Make Public">
    <i class="far fa-eye"></i>
-   @if($type == 'menu')
-      Make Public
-   @endif
 </button>

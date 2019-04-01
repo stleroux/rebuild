@@ -5,8 +5,4 @@
    formmethod="POST"
    title="Update {{ ucfirst($model) }}">
    <i class="fa fa-save"></i>
-   @if($type == 'menu')
-      Update {{ ucfirst($model) }}
-   @endif
 </button>
-

@@ -20,6 +20,7 @@
             <i class="fa fa-plus-square"></i>
             Create Recipe
             <span class="float-right">
+               
                @include('common.buttons.help', ['model'=>'recipe', 'bookmark'=>'recipes'])
                @include('common.buttons.cancel', ['model'=>'recipe', 'type'=>''])
                @include('common.buttons.save', ['model'=>'recipe', 'type'=>''])
@@ -41,9 +42,6 @@
                <div class="col-xs-12 col-sm-6 col-md-3">
                   <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}" >
                      {!! Form::label("category_id", "Category", ['class'=>'required']) !!}
-                     {{-- <span class="float-right small">
-                        <a href="#" class="small" data-toggle="modal" tabindex="-1" data-target=".addCategoryModal">Add Category</a>
-                     </span> --}}
                      <select name="category_id" id="catSelect" class="custom-select">
                         <option selected>Select One</option>
                         @foreach ($categories as $category)
@@ -156,46 +154,6 @@
          </div>
       </div>
    {!! Form::close() !!}
-
-
-<div class="modal fade addCategoryModal" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
-   <div class="modal-dialog">
-      <div class="modal-content">
-         <div class="modal-header">
-            <h4 class="modal-title">Add New Category</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-         </div>
- 
-         {{-- {!! Form::open(['url'=>'categories/saveModal', 'class'=>'', 'method'=>'GET']) !!} --}}
-         {!! Form::open(['route' => 'categories.saveModal']) !!}
-            {{ csrf_field() }}
-         {{-- {!! Form::open(route('categories.addModal'), ['class'=>'myForm-waterSource']) !!} --}}
-            <div class="modal-body">
-               {{-- <input type="text" id="parent_id" value="1"> --}}
-               <div class="form-group {{ $errors->has('cCategory') ? 'has-error' : '' }}">
-                     {!! Form::label('cCategory','Main Category', ['class'=>'required']) !!}
-                     <select name="cCategory" id="category" class="form-control input-sm">
-                        <option value="">Select One</option>
-                        @foreach($categories as $k)
-                           <option value="{{ $k['id'] }}">{{ ucwords($k['name']) }}</option>
-                        @endforeach
-                     </select>
-                     <span class="text-danger">{{ $errors->first('cCategory') }} </span>
-                  </div>
-
-               <div class="form-group">
-                  {!! Form::text('name',null,['class'=>'input form-control','id'=>'name','autofocus'=>'autofocus']) !!}
-               </div>
-            </div>
- 
-            <div class="modal-footer">
-               <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
-               {!! Form::submit('Submit',['class'=>'btn btn-sm btn-primary']) !!}
-            </div>
-         {!! Form::close() !!}
-      </div>
-   </div>
-</div>
 
 
 @endsection

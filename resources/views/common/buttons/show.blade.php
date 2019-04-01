@@ -2,7 +2,4 @@
    class="btn btn-sm btn-outline-secondary"
    title="Show {{ ucfirst($model) }}">
    <i class="far fa-eye"></i>
-   @if($type == 'menu')
-      Show {{ ucfirst($model) }}
-   @endif
 </a>

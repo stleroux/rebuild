@@ -5,7 +5,4 @@
    formmethod="GET"
    title="Make Private">
    <i class="far fa-eye-slash"></i>
-   @if($type == 'menu')
-      Make Private
-   @endif
 </button>

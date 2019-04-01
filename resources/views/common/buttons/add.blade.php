@@ -2,7 +2,4 @@
    class="btn btn-sm btn-outline-success"
    title="Add {{ ucfirst($model) }}">
    <i class="fa fa-plus-square"></i>
-   @if($type == 'menu')
-      Add {{ ucfirst($model) }}
-   @endif
 </a>
