@@ -20,29 +20,11 @@ use Purifier;
 use Route;
 use Session;
 use Storage;
-use Response;
 // use App\Http\Requests\CreateCategoryRequest;
 // use App\Http\Requests\UpdateCategoryRequest;
 
 class CategoriesController extends Controller
 {
-
-	public function saveModal(Request $request)
-	{
-		$category = new Category;
-			$category->parent_id = $request->cCategory;
-			$category->name = $request->name;
-			// $category->value = $request->cValue;
-			// $category->description = $request->cDescription;
-		$category->save();
-
-   	// return Response::json($category);
-	}
- 
-
-
- 
-
 
 ##################################################################################################################
 #  ██████╗ ██████╗ ███╗   ██╗███████╗████████╗██████╗ ██╗   ██╗ ██████╗████████╗

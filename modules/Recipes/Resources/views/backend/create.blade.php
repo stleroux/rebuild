@@ -41,12 +41,9 @@
                <div class="col-xs-12 col-sm-6 col-md-3">
                   <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}" >
                      {!! Form::label("category_id", "Category", ['class'=>'required']) !!}
-                     <span class="float-right small">
-                        {{-- <a href="{{ route('categories.create') }}" target="_blank">
-                           Create Category
-                        </a> --}}
+                     {{-- <span class="float-right small">
                         <a href="#" class="small" data-toggle="modal" tabindex="-1" data-target=".addCategoryModal">Add Category</a>
-                     </span>
+                     </span> --}}
                      <select name="category_id" id="catSelect" class="custom-select">
                         <option selected>Select One</option>
                         @foreach ($categories as $category)
@@ -204,38 +201,5 @@
 @endsection
 
 @section('scripts')
-<script>
 
-   $(document).on('submit', 'addCategoryModal', function(e) {
-      e.preventDefault();
-      $.ajax({
-         url: $(this).attr('action'),
-         type: $(this).attr('method'),
-         data: $(this).serialize(),
-
-         success: function(result) {
-            // $.get('{{ url('categories/saveModal') }}', function(data) {
-            $.get('{{ route('categories.saveModal') }}', function(data) {
-               console.log(data);
-               // $.each(data, function(index,subCatObj){
-               //    if (!$('#category_id option[value="'+subCatObj.id+'"]').length) {
-               //       $('#category_id').append('<option value="'+subCatObj.id+'">'+subCatObj.description+'</option>');
-               //    }
-               // });
-            });
-            $('#addCategoryModal').modal('hide');
-            $('#cCategory').val('');
-            $('#name').val('');
-            $('#catSelect').catSelect('refresh');
-         }
-
-      });
-
-      
-
-      
-
-   });
- 
-</script>
 @endsection
