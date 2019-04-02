@@ -59,7 +59,7 @@
                               </div>
                            </div>
                            <div class="form-row">
-                              <div class="col-sm-5">
+                              <div class="col-md-5">
                                  <div class="form-group">
                                     {{ Form::label('email', 'Email Address') }}
                                     @if($user->public_email == 'no')
@@ -72,13 +72,13 @@
                            </div>
 
                            <div class="form-row">
-                              <div class="col-sm-2">
+                              <div class="col-md-2">
                                  <div class="form-group">
                                     <label for="username">Username</label>
                                     <input type="text" class="form-control form-control-sm" readonly="readonly" value="{{ $user->username }}">
                                  </div>
                               </div>
-                              <div class="col-sm-2">
+                              <div class="col-md-2">
                                  <div class="form-group">
                                     <label for="created_at">Member Since</label>
                                     @if($user->created_at)
@@ -88,13 +88,13 @@
                                     @endif
                                  </div>
                               </div>
-                              <div class="col-sm-2">
+                              <div class="col-md-4 col-lg-3">
                                  <div class="form-group">
                                     <label for="last_login_date">Last Login Date</label>
                                     <input type="text" class="form-control form-control-sm" readonly="readonly" value="{{ $user->last_login_date->format('M d, Y') }}">
                                  </div>
                               </div>
-                              <div class="col-sm-2">
+                              <div class="col-md-2">
                                  <div class="form-group">
                                     <label for="login_count">Login Count</label>
                                     <input type="text" class="form-control form-control-sm" readonly="readonly" value="{{ $user->login_count }}">
@@ -114,42 +114,42 @@
                         <div class="card-header card_header_2">Address Info</div>
                         <div class="card-body card_body">
                            <div class="form-row">
-                              <div class="col-sm-2">
+                              <div class="col-md-2">
                                  <div class="form-group">
-                                    <label for="civic_number" class=" control-label">Civic/Unit N<sup>o</sup></label>
+                                    <label for="civic_number" class="control-label">Civic/Unit N<sup>o</sup></label>
                                     <input type="text" class="form-control form-control-sm" value="{{ $user->profile->civic_number }}" readonly="readonly">
                                  </div>
                               </div>
-                              <div class="col-sm-5">
+                              <div class="col-md-5">
                                  <div class="form-group">
-                                    <label for="address1" class=" control-label">Address 1</label>
+                                    <label for="address1" class="control-label">Address 1</label>
                                     <input type="text" class="form-control form-control-sm" value="{{ $user->profile->address1 }}" readonly="readonly">
                                  </div>
                               </div>
-                              <div class="col-sm-5">
+                              <div class="col-md-5">
                                  <div class="form-group">
-                                    <label for="address2" class=" control-label">Address 2</label>
+                                    <label for="address2" class="control-label">Address 2</label>
                                     <input type="text" class="form-control form-control-sm" value="{{ $user->profile->address2 }}" readonly="readonly">
                                  </div>
                               </div>
                            </div>
 
                            <div class="form-row">
-                              <div class="col-sm-2">
+                              <div class="col-md-2">
                                  <div class="form-group">
-                                    <label for="city" class=" control-label">City</label>
+                                    <label for="city" class="control-label">City</label>
                                     <input type="text" class="form-control form-control-sm" value="{{ $user->profile->city }}" readonly="readonly">
                                  </div>
                               </div>
-                              <div class="col-sm-2">
+                              <div class="col-md-2">
                                  <div class="form-group">
-                                    <label for="province" class=" control-label">Province/State</label>
+                                    <label for="province" class="control-label">Province/State</label>
                                     <input type="text" class="form-control form-control-sm" value="{{ $user->profile->province }}" readonly="readonly">
                                  </div>                                    
                               </div>
-                              <div class="col-sm-2">
+                              <div class="col-md-2">
                                  <div class="form-group">
-                                    <label for="postal_code" class=" control-label">Postal/Zip Code</label>
+                                    <label for="postal_code" class="control-label">Postal/Zip Code</label>
                                     <input type="text" class="form-control form-control-sm" value="{{ $user->profile->postal_code }}" readonly="readonly">
                                  </div>
                               </div>
@@ -166,54 +166,54 @@
                         <div class="card-header card_header_2">Contributions</div>
                         <div class="card-body card_body">
                            <div class="form-row">
-                              <div class="col-sm-2">
+                              <div class="col-md-2">
                                  <div class="form-group">
-                                    <label for="recipes" class=" control-label">Recipes</label>
+                                    <label for="recipes" class="control-label">Recipes</label>
                                     <input type="text"
                                        class="form-control form-control-sm"
                                        value="{{ Modules\Recipes\Entities\Recipe::where('user_id','=', Auth::user()->id)->count() }}"
                                        readonly="readonly">
                                  </div>
                               </div>
-                              <div class="col-sm-2">
+                              <div class="col-md-2">
                                  <div class="form-group">
-                                    <label for="posts" class=" control-label">Posts</label>
+                                    <label for="posts" class="control-label">Posts</label>
                                     <input type="text"
                                        class="form-control form-control-sm"
                                        value="{{ Modules\Posts\Entities\Post::where('user_id','=', Auth::user()->id)->count() }}"
                                        readonly="readonly">
                                  </div>
                               </div>
-                              <div class="col-sm-2">
+                              <div class="col-md-2">
                                  <div class="form-group">
-                                    <label for="articles" class=" control-label">Articles</label>
+                                    <label for="articles" class="control-label">Articles</label>
                                     <input type="text"
                                        class="form-control form-control-sm"
                                        value="{{ Modules\Articles\Entities\Article::where('user_id','=', Auth::user()->id)->count() }}"
                                        readonly="readonly">
                                  </div>
                               </div>
-                              <div class="col-sm-2">
+                              <div class="col-md-2">
                                  <div class="form-group">
-                                    <label for="" class=" control-label">&nbsp;</label>
+                                    <label for="" class="control-label">&nbsp;</label>
                                     <input type="text"
                                        class="form-control form-control-sm"
                                        value=""
                                        readonly="readonly">
                                  </div>
                               </div>
-                              <div class="col-sm-2">
+                              <div class="col-md-2">
                                  <div class="form-group">
-                                    <label for="" class=" control-label">&nbsp;</label>
+                                    <label for="" class="control-label">&nbsp;</label>
                                     <input type="text"
                                        class="form-control form-control-sm"
                                        value=""
                                        readonly="readonly">
                                  </div>                                    
                               </div>
-                              <div class="col-sm-2">
+                              <div class="col-md-2">
                                  <div class="form-group">
-                                    <label for="" class=" control-label">&nbsp;</label>
+                                    <label for="" class="control-label">&nbsp;</label>
                                     <input type="text"
                                        class="form-control form-control-sm"
                                        value=""
