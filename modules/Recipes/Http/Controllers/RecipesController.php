@@ -46,7 +46,8 @@ class RecipesController extends Controller
    public function __construct()
    {
       // Only allow authenticated users access to these functions
-      $this->middleware('auth');
+      $this->middleware('auth')->except('index','show','archive');
+      // $this->middleware('subscribed')->except('store');
    }
 
 

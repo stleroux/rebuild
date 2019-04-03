@@ -4,10 +4,7 @@
    </div>
 
       <a href="{{ route('recipes.index', 'all') }}"
-         class="list-group-item list-group-item-action py-1 px-1 
-         {{ Request::is('recipes/all') ? 'active' : '' }}
-         {{-- {{ Request::is('recipes/'. collect(request()->segments())->last()) ? 'active' : '' }} --}}
-         ">
+         class="list-group-item list-group-item-action py-1 px-1 {{ Request::is('recipes/all') ? 'active' : '' }}">
          <i class="fab fa-apple pl-2"></i>
          Recipes
       </a>

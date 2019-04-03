@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('stylesheets')
-   {{-- {{ Html::style('css/recipes.css') }} --}}
+   {{ Html::style('css/recipes.css') }}
 @endsection
 
 @section('left_column')
@@ -19,11 +19,11 @@
       {{-- {!! csrf_field() !!} --}}
       <div class="card mb-3">
          <div class="card-header">
-            <i class="far fa-heart"></i>
+            <i class="fas fa-heart"></i>
             MY FAVORITE RECIPES
             <span class="float-right">
-               @include('common.buttons.help', ['model'=>'recipe', 'type'=>''])
-               @include('recipes::frontend.myFavorites.help')
+               @include('common.buttons.help', ['model'=>'recipe', 'bookmark'=>''])
+               {{-- @include('recipes::frontend.myFavorites.help') --}}
                @include('common.buttons.recipes', ['model'=>'recipe', 'type'=>''])
                {{-- @include('common.buttons.myRecipes', ['model'=>'recipe', 'type'=>'']) --}}
             </span>

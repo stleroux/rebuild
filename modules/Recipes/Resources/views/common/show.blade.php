@@ -1,7 +1,7 @@
 @extends ('layouts.master')
 
 @section ('stylesheets')
-	{{-- {{ Html::style('css/recipes.css') }} --}}
+	{{ Html::style('css/recipes.css') }}
 @stop
 
 @section('left_column')
