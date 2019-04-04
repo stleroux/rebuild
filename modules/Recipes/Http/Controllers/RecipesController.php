@@ -534,7 +534,7 @@ class RecipesController extends Controller
             ->published()
             ->public()
             ->orderBy('title', 'asc')
-            ->paginate(18);
+            ->paginate(15);
 
          if($request->key){
             // echo " and grouped by " .$request->key;
@@ -543,7 +543,7 @@ class RecipesController extends Controller
                ->public()
                ->where('title', 'like', $request->key . '%')
                ->orderBy('title', 'asc')
-               ->paginate(18);
+               ->paginate(15);
          }
       } else {
          // echo "Recipes categorized by " .$request->cat;
@@ -562,7 +562,7 @@ class RecipesController extends Controller
                ->public()
                ->where('category_id', '=', $byCatName->id)
                ->orderBy('title', 'asc')
-               ->paginate(18);
+               ->paginate(15);
 
             if($request->key){
                // echo " and grouped by " .$request->key;
@@ -572,7 +572,7 @@ class RecipesController extends Controller
                   ->where('category_id', '=', $byCatName->id)
                   ->where('title', 'like', $request->key . '%')
                   ->orderBy('title', 'asc')
-                  ->paginate(18);
+                  ->paginate(15);
             }
          } else {
             $allc = Category::where('parent_id', $byCatName->id)->pluck('id');
@@ -591,7 +591,7 @@ class RecipesController extends Controller
                ->public()
                ->whereIn('category_id', $allc)
                ->orderBy('title', 'asc')
-               ->paginate(18);
+               ->paginate(15);
 
             if($request->key){
                // echo " and grouped by " .$request->key;
@@ -601,7 +601,7 @@ class RecipesController extends Controller
                   ->whereIn('category_id', $allc)
                   ->where('title', 'like', $request->key . '%')
                   ->orderBy('title', 'asc')
-                  ->paginate(18);
+                  ->paginate(15);
             }
          }
       }
