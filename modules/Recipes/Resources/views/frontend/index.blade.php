@@ -101,11 +101,10 @@
 							</div>
 						@endforeach
 					</div>
-				
 			</div>
 
 
-{{-- 			<div class="card-body card_body p-2 bg-transparent">
+			{{-- <div class="card-body card_body p-2 bg-transparent">
 				@include('recipes::frontend.alphabet', ['model'=>'recipe'])
 				@foreach($recipes->chunk(6) as $chunk)
 					<div class="card-deck mb-0 px-2 bg-transparent">
