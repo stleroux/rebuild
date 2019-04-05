@@ -61,11 +61,11 @@
 							@endif
 
 							<div class="card-body pt-1 pb-0">
-								<a href="{{ route('recipes.show', $recipe->id) }}" class="" style="text-decoration: none">
+								{{-- <a href="{{ route('recipes.show', $recipe->id) }}" class="" style="text-decoration: none"> --}}
 									<h6 class="card-title text-center pb-2 m-0">
 										{{ ucwords($recipe->title) }}
 									</h6>
-								</a>
+								{{-- </a> --}}
 							</div>
 
 							<div class="card-text p-0 m-0 text-center">

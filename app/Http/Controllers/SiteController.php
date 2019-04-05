@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Category;
-use App\Comment;
-use App\Module;
-use App\Permission;
-use App\User;
-use Auth;
+//use App\Category;
+//use App\Comment;
+//use App\Module;
+//use App\Permission;
+//use App\User;
+//use Auth;
 use Session;
 
 use Modules\Posts\Entities\Post;
-use Modules\Recipes\Entities\Recipe;
+// use Modules\Recipes\Entities\Recipe;
 
 class SiteController extends Controller
 {
