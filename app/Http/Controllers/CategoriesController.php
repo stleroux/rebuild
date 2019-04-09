@@ -473,12 +473,12 @@ class CategoriesController extends Controller
 
 			$this->validate($request, $rules, $customMessages);
 
-			$cSubCategory = Category::where('name', '=', $request->cSubcategory)->pluck('id');
-			// dd($cSubCategory);
+			$cSubCategory = Category::
+				where('name', '=', $request->cSubcategory)
+				->where('parent_id', '=', $request->cCategory)
+				->pluck('id');
 
 			$category = new Category;
-				// $category->parent_id = $request->cCategory;
-				// $category->subcategory = $request->cSubcategory;
 				$category->parent_id = $cSubCategory[0];
 				$category->name = $request->cName;
 				$category->value = $request->cValue;

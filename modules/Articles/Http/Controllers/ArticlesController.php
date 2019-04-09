@@ -2,11 +2,12 @@
 
 namespace Modules\Articles\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use App\Http\Controllers\Controller; // Required for validation
 use Illuminate\Support\Facades\Input;
-use App\Article;
+
+use Modules\Articles\Entities\Article;
 use App\Category;
 use App\Comment;
 use App\User;
@@ -571,13 +572,13 @@ class ArticlesController extends Controller
             ->orderBy('title', 'asc')
             ->get();
          //dd($articles);
-         return view('articles.index', compact('articles','letters', 'articlelinks'));
+         return view('articles::index', compact('articles','letters', 'articlelinks'));
       }
 
       // No $key value is passed
       $articles = Article::with('user','category')->published()->get();
       //dd($articles);
-      return view('articles.index', compact('articles','letters', 'articlelinks'));
+      return view('articles::index', compact('articles','letters', 'articlelinks'));
    }
 
 

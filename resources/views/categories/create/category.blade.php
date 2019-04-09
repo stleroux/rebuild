@@ -6,7 +6,6 @@
             New Category
             <span class="float-right">
                @include('common.buttons.help', ['bookmark'=>'categories_add_category'])
-               {{-- @include('help.categories.create.category', ['model'=>'category', 'type'=>'']) --}}
                @include('common.buttons.cancel', ['model'=>'category', 'type'=>''])
                @include('common.buttons.reset', ['model'=>'category', 'type'=>''])
                @include('common.buttons.save', ['model'=>'category', 'type'=>''])
@@ -46,7 +45,7 @@
                </div>
                <div class="col-3">
                   <div class="form-group {{ $errors->has('cValue') ? 'has-error' : '' }}">
-                     {{ Form::label('cVlue', 'Value') }}
+                     {{ Form::label('cValue', 'Value') }}
                      {{ Form::text('cValue', null, ['class' => 'form-control form-control-sm', 'placeholder'=>'See Category Help for details.']) }}
                      <span class="text-danger">{{ $errors->first('cValue') }}</span>
                   </div>

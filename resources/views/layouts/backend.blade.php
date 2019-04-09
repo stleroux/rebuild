@@ -25,6 +25,7 @@
    {{-- <link rel="stylesheet" href="{{ asset('css/bootstrap_4/slate.css') }}"> --}}
    <link rel="stylesheet" href="{{ asset('css/bootstrap-colors.css') }}" />
    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+   <link rel="stylesheet" href="{{ asset('css/backendMenu.css') }}">   
    @yield('stylesheets')
 </head>
 <body>
@@ -32,6 +33,7 @@
 {{-- pageName : {{ Session::get('pageName') }}<br />byCatName : {{ Session::get('byCatName') }}<br />byCatLetter : {{ Session::get('byCatLetter') }} --}}
    
    @include('layouts.master.navbar')
+   @include('layouts.backendMenu')
    @include('layouts.master.messages')
 
    <main class="container-fluid">

@@ -51,7 +51,7 @@
                                  <td><a href="{{ route('categories.show', $category->id) }}">{{ ucfirst($category->name) }}</a></td>
                                  {{-- <td>{{ $category->module->name }}</td> --}}
                                  {{-- <td>{{ $category->parent->name or 'Null' }}</td> --}}
-                                 <td>{{ $category->parent_id ? ucfirst($category->parent->name) : '' }}</td>
+                                 <td>{{ $category->parent_id ? ucfirst($category->parent->name) : '' }} <small>({{ $category->parent_id }})</small></td>
                                  <td>{{ $category->value }}</td>
                                  <td data-order="{{ $category->created_at}}">{{ $category->created_at ? $category->created_at->format('M d, Y') : 'no data found' }}</td>
                                  <td class="text-right">

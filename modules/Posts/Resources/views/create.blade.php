@@ -45,18 +45,6 @@
 				  			<span class="text-danger">{{ $errors->first('title') }}</span>
 						</div>
 			 		</div>
-{{-- 			 		<div class="col-3">
-						<div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}">
-				  			{{ Form::label('category_id', 'Category', ['class'=>'required']) }}
-							{{ Form::select('category_id', array(''=>'Select a category') + $categories, null, ['class'=>'form-control form-control-sm']) }}
-							<select name="category_id">
-								@foreach($categories as $c)
-									<option value="$c->id">{{ $c->name }}</option>
-								@endforeach
-							</select>
-				  			<span class="text-danger">{{ $errors->first('category_id') }}</span>
-						</div>
-			 		</div> --}}
                <!-- Category -->
                <div class="col-xs-12 col-sm-6 col-md-3">
                   <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}" >
