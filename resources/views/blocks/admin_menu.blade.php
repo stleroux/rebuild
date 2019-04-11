@@ -1,4 +1,4 @@
-@if(checkPerm('admin_menu'))
+{{-- @if(checkPerm('admin_menu')) --}}
 	<div class="card mb-2">
 		<div class="card-header block_header">ADMIN MENU</div>
 		
@@ -196,4 +196,4 @@
 
 		</div>
 	</div>
-@endif
+{{-- @endif --}}

@@ -33,30 +33,48 @@
 {{-- pageName : {{ Session::get('pageName') }}<br />byCatName : {{ Session::get('byCatName') }}<br />byCatLetter : {{ Session::get('byCatLetter') }} --}}
    
    @include('layouts.master.navbar')
-   @include('layouts.backendMenu')
+   @if(checkPerm('admin_menu'))
+      @include('layouts.backendMenu')
+   @endif
    @include('layouts.master.messages')
 
    <main class="container-fluid">
       <div id="app" class="py-0 px-0">
          <div class="row pt-0 pr-2 pl-2 pb-0">
             <div class="col-sm-3 col-md-2 pt-0 pr-0 pl-0 pb-0">
-{{--              @include('blocks.main_menu') --}}
                @yield('left_column')
             </div>
             <div class="col-sm-9 col-md-10 py-0 px-2">
                @yield('content')
             </div>
-            {{-- <div class="col-sm-3 col-md-2 py-0 px-0">
-               @yield('right_column') --}}
-{{--                @guest
-                  @include('blocks.login')
-               @else
-                  @include('blocks.member')
-               @endguest --}}
-            {{-- </div> --}}
          </div>
       </div>
    </main>
+
+{{--    @if(!checkPerm('admin_menu'))
+      <main class="container-fluid">
+         <div id="app" class="py-0 px-0">
+            <div class="row pt-0 pr-2 pl-2 pb-0">
+               <div class="col-sm-3 col-md-2 pt-0 pr-0 pl-0 pb-0">
+                  @yield('left_column')
+               </div>
+               <div class="col-sm-9 col-md-10 py-0 px-2">
+                  @yield('content')
+               </div>
+            </div>
+         </div>
+      </main>
+   @else
+      <main class="container-fluid">
+         <div id="app" class="py-0 px-0">
+            <div class="row pt-0 pr-2 pl-2 pb-0">
+               <div class="col py-0 px-2">
+                  @yield('content')
+               </div>
+            </div>
+         </div>
+      </main>
+   @endif --}}
       
    <footer class="footer fixed-bottom">
       @include('layouts.master.footer')
