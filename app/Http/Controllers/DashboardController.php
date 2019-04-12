@@ -69,6 +69,7 @@ class DashboardController extends Controller
     public function stats()
     {
         $categoryCount = Category::count();
+        // dd($categoryCount);
         $commentCount = Comment::count();
         $componentCount = \Module::count();
         $moduleCount = Module::count();
@@ -78,7 +79,7 @@ class DashboardController extends Controller
         $userCount = User::count();
 
         $comments = Comment::all();
-        $modules = Module::all();
+        $modules = \Module::all();
 
         return view('stats.index', compact(
             'categoryCount','commentCount','componentCount','moduleCount','permissionCount','postCount','recipeCount','userCount',

@@ -138,37 +138,36 @@
                            </div>
                            <div class="card-body card_body">
                               <div class="row px-2">
-                              <table class="table table-mini table-hover col-sm-3 mx-1">
-                                 <thead>
-                                    <tr>
-                                       <th colspan="2">Categories</th>
-                                    </tr>
-                                 </thead>
-                                 <tbody>
-                                    @foreach($modules as $module)
+                                 <table class="table table-mini table-hover col-sm-3 mx-1">
+                                    <thead>
                                        <tr>
-                                          <td>{{ ucwords($module->name) }}</td>
-                                          <td align="center">{!! App\Category::where('module_id', '=', $module->id)->count() !!}</td>
+                                          <th colspan="2">Components (MODULES)</th>
                                        </tr>
-                                    @endforeach
-                                 </tbody>
-                              </table>
+                                    </thead>
+                                    <tbody>
+                                       @foreach($modules as $module)
+                                          <tr>
+                                             <td>{{ $module->name }}</td>
+                                          </tr>
+                                       @endforeach
+                                    </tbody>
+                                 </table>
 
-                              <table class="table table-mini table-hover col-sm-3 mx-1">
-                                 <thead>
-                                    <tr>
-                                       <th colspan="2">Comments</th>
-                                    </tr>
-                                 </thead>
-                                 <tbody>
-                                    @foreach($comments as $comment)
+                                 <table class="table table-mini table-hover col-sm-3 mx-1">
+                                    <thead>
                                        <tr>
-                                          <td>{{ ucwords($comment->commentable_type) }}</td>
-                                          <td align="center">{!! App\Comment::where('commentable_type', '=', $comment->commentable_type)->count() !!}</td>
+                                          <th colspan="2">Comments</th>
                                        </tr>
-                                    @endforeach
-                                 </tbody>
-                              </table>
+                                    </thead>
+                                    <tbody>
+                                       @foreach($comments as $comment)
+                                          <tr>
+                                             <td>{{ ucwords($comment->commentable_type) }}</td>
+                                             <td align="center">{!! App\Comment::where('commentable_type', '=', $comment->commentable_type)->count() !!}</td>
+                                          </tr>
+                                       @endforeach
+                                    </tbody>
+                                 </table>
                               </div>
 
                            </div>
