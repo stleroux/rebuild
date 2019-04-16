@@ -250,21 +250,23 @@
                      @if($post->comments->count())
                         <table class="table table-hover table-sm">
                            <thead>
-                              <tr>
-                                 <th class="col-sm-1">Name</th>
-                                 <th>Comment</th>
-                                 <th class="col-sm-1">Posted On</th>
+                              <tr class="d-flex">
+                                 <th class="col-2">Name</th>
+                                 <th class="col-8">Comment</th>
+                                 <th class="col-2">Posted On</th>
                               </tr>
                            </thead>
                            <tbody>
                               @foreach($post->comments as $comment)
-                                 <tr>
-                                    {{-- <td>@include('common.authorFormat', ['model'=>$comment, 'field'=>'user'])</td> --}}
-                                    <td>{{ $post->user->username }}</td>
-                                    <td>{!! $comment->comment !!}</td>
-                                    <td>
-                                       {{-- @include('common.dateFormat', ['model'=>$comment, 'field'=>'created_at']) --}}
-                                       {{ $post->created_at->format('M d, Y') }}
+                                 <tr class="d-flex">
+                                    <td class="col-2">
+                                       @include('common.authorFormat', ['model'=>$comment, 'field'=>'user'])
+                                    </td>
+                                    <td class="col-8">
+                                       {!! $comment->comment !!}
+                                    </td>
+                                    <td class="col-2">
+                                       @include('common.dateFormat', ['model'=>$comment, 'field'=>'created_at'])
                                     </td>
                                  </tr>
                               @endforeach
