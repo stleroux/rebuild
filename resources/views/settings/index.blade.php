@@ -5,8 +5,8 @@
 @endsection
 
 @section('left_column')
-   {{-- @include('blocks.adminNav') --}}
-   {{-- @include('settings.sidebar') --}}
+   @include('blocks.adminNav')
+   @include('settings.sidebar')
 @endsection
 
 @section('right_column')
