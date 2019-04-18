@@ -11,7 +11,7 @@ nav ul {
    list-style: none;
 }
 
-.nav a {
+.backend_menu a {
    display: block; 
    background: #111; 
    color: #fff; 
@@ -25,56 +25,56 @@ nav ul {
    position: relative;
 }
 
-.nav {  
+.backend_menu {  
    vertical-align: top; 
    display: inline-block;
    box-shadow: 1px -1px -1px 1px #000, -1px 1px -1px 1px #fff, 0 0 6px 3px #fff;
    border-radius: 6px;
 }
 
-.nav li { position: relative; }
+.backend_menu li { position: relative; }
 
-.nav > li { 
+.backend_menu > li { 
    float: left; 
    border-bottom: 4px #aaa solid; 
    margin-right: 1px; 
 }
 
-.nav > li > a { 
+.backend_menu > li > a { 
    margin-bottom: 1px;
    box-shadow: inset 0 2em .33em -.5em #555; 
 }
 
-.nav > li:hover , .nav > li:hover >a {
+.backend_menu > li:hover , .backend_menu > li:hover >a {
    border-bottom-color: orange;
 }
 
-.nav li:hover > a {
+.backend_menu li:hover > a {
    color: orange;
 }
 
-.nav > li:first-child {
+.backend_menu > li:first-child {
    border-radius: 4px 0 0 4px;
 }
 
-.nav > li:first-child> a {
+.backend_menu > li:first-child> a {
    border-radius: 4px 0 0 0;
 }
 
-.nav > li:last-child  {
+.backend_menu > li:last-child  {
    border-radius: 0 0 4px 0; 
    margin-right: 0;
 }
 
-.nav > li:last-child > a {
+.backend_menu > li:last-child > a {
    border-radius: 0 4px 0 0;
 }
 
-.nav li li a {
+.backend_menu li li a {
    margin-top: 1px;
 }
 
-.nav li a:first-child:nth-last-child(2):before { 
+.backend_menu li a:first-child:nth-last-child(2):before { 
    content: "";
    position: absolute;
    height: 0;
@@ -86,7 +86,7 @@ nav ul {
 
 
 /* submenu positioning*/
-.nav ul {
+.backend_menu ul {
    position: absolute;
    white-space: nowrap;
    border-bottom: 5px solid  orange;
@@ -94,39 +94,39 @@ nav ul {
    left: -99999em;
 }
 
-.nav > li:hover > ul {
+.backend_menu > li:hover > ul {
    left: auto;
    padding-top: 5px  ;
    min-width: 100%;
 }
 
-.nav > li li ul { 
+.backend_menu > li li ul { 
    border-left: 1px solid #fff;
 }
 
-.nav > li li:hover > ul { 
+.backend_menu > li li:hover > ul { 
    /* margin-left: 1px */
    left: 100%;
    top: -1px;
 }
 
 /* arrow hover styling */
-.nav > li > a:first-child:nth-last-child(2):before { 
+.backend_menu > li > a:first-child:nth-last-child(2):before { 
    border-top-color: #aaa;
 }
 
-.nav > li:hover > a:first-child:nth-last-child(2):before {
+.backend_menu > li:hover > a:first-child:nth-last-child(2):before {
    border: 5px solid transparent; 
    border-bottom-color: orange; 
    margin-top: -5px
 }
 
-.nav li li > a:first-child:nth-last-child(2):before {  
+.backend_menu li li > a:first-child:nth-last-child(2):before {  
    border-left-color: #aaa; 
    margin-top: -5px
 }
 
-.nav li li:hover > a:first-child:nth-last-child(2):before {
+.backend_menu li li:hover > a:first-child:nth-last-child(2):before {
    border: 5px solid transparent; 
    border-right-color: orange;
    right: 10px; 

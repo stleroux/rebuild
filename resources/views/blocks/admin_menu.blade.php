@@ -26,13 +26,13 @@
 				</a>
 			{{-- @endif --}}
 
-			@if(checkPerm('component_index'))
+{{-- 			@if(checkPerm('component_index'))
 				<a href="{{ route('components.index') }}"
 					class="list-group-item list-group-item-action p-1 {{ Request::is('components*') ? 'active' : '' }}">
 					<i class="fas fa-boxes pl-2"></i>
 					Components
 				</a>
-			@endif
+			@endif --}}
 
 			@if(checkPerm('module_index'))
 				<a href="{{ route('modules.index') }}"

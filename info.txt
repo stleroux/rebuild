@@ -46,7 +46,10 @@ https://github.com/ChristianKuri/laravel-favorite
 
 Cache settings for database table
 https://stackoverflow.com/questions/32824781/laravel-load-settings-from-database
-
+-- App\Helpers\helpers.php
+--- Comment out settings function
+-- App\Providers\AppServiceProvider.php
+--- Comment out : Cache::forever('setting', Setting::all());
 
 // Depdendent dynamic dropdowns
 https://stackoverflow.com/questions/34350592/selecting-a-sub-category-after-selecting-category-using-laravel

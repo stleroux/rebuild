@@ -5,8 +5,8 @@
 @endsection
 
 @section('left_column')
-   @include('blocks.adminNav')
-   @include('recipes::backend.sidebar')
+   {{-- @include('blocks.adminNav') --}}
+   {{-- @include('recipes::backend.sidebar') --}}
 @endsection
 
 @section('right_column')

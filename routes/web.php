@@ -39,11 +39,11 @@ Route::get('users/{user}/changeUserPWD', 'UsersController@changeUserPWD')->name(
 Route::post('users/{user}/changeUserPWDPost', 'UsersController@changeUserPWDPost')->name('users.changeUserPWDPost');
 Route::resource('users', 'UsersController');
 
-Route::get('components/{module}/disableModule', 'ComponentsController@disableModule')->name('components.disableModule');
-Route::get('components/{module}/enableModule', 'ComponentsController@enableModule')->name('components.enableModule');
-Route::get('components/{module}/deleteModule', 'ComponentsController@deleteModule')->name('components.deleteModule');
-Route::post('components/{module}/deleteModulePost', 'ComponentsController@deleteModulePost')->name('components.deleteModulePost');
-Route::resource('components', 'ComponentsController');
+Route::get('modules/{module}/disableModule', 'ModulesController@disableModule')->name('modules.disableModule');
+Route::get('modules/{module}/enableModule', 'ModulesController@enableModule')->name('modules.enableModule');
+Route::get('modules/{module}/deleteModule', 'ModulesController@deleteModule')->name('modules.deleteModule');
+Route::post('modules/{module}/deleteModulePost', 'ModulesController@deleteModulePost')->name('modules.deleteModulePost');
+// Route::resource('components', 'ComponentsController');
 
 Route::get('modules/{module}/delete', 'ModulesController@delete')->name('modules.delete');
 Route::resource('modules', 'ModulesController');

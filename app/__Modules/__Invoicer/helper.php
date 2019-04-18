@@ -1,5 +1,0 @@
-<?php
-
-/**
- *	Invoicer Helper  
- */

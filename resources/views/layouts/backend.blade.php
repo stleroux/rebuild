@@ -40,12 +40,17 @@
 
    <main class="container-fluid">
       <div id="app" class="py-0 px-0">
-         <div class="row pt-0 pr-2 pl-2 pb-0">
-            <div class="col-sm-3 col-md-2 pt-0 pr-0 pl-0 pb-0">
-               @yield('left_column')
+         <div class="row py-0 pr-2 pl-2">
+            <div class="col-sm-2 p-0">
+               @if(!checkPerm('admin_menu'))
+                  @yield('left_column')
+               @endif
             </div>
-            <div class="col-sm-9 col-md-10 py-0 px-2">
+            <div class="col-sm-8 py-0 px-2">
                @yield('content')
+            </div>
+            <div class="col-sm-2 p-0">
+               @yield('right_column')
             </div>
          </div>
       </div>

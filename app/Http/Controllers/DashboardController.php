@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Comment;
-use App\Module;
 use App\Permission;
 use App\User;
 use Modules\Posts\Entities\Post;
@@ -71,8 +70,8 @@ class DashboardController extends Controller
         $categoryCount = Category::count();
         // dd($categoryCount);
         $commentCount = Comment::count();
-        $componentCount = \Module::count();
-        $moduleCount = Module::count();
+        // $componentCount = \Module::count();
+        $moduleCount = \Module::count();
         $permissionCount = Permission::count();
         $postCount = Post::count();
         $recipeCount = Recipe::count();
@@ -82,7 +81,7 @@ class DashboardController extends Controller
         $modules = \Module::all();
 
         return view('stats.index', compact(
-            'categoryCount','commentCount','componentCount','moduleCount','permissionCount','postCount','recipeCount','userCount',
+            'categoryCount','commentCount','moduleCount','permissionCount','postCount','recipeCount','userCount',
             'comments','modules'
         ));
     }

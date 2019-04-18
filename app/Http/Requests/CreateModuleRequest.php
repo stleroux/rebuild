@@ -16,7 +16,6 @@ class CreateModuleRequest extends FormRequest
         return true;
     }
 
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -33,9 +32,9 @@ class CreateModuleRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required'            => 'Required',
-            'name.min'                 => 'Minimum 3 characters',
-            'name.max'                 => 'Maximum 255 characters',
+            'name.required' => 'Required',
+            'name.min' => 'Minimum 3 characters',
+            'name.max' => 'Maximum 255 characters',
         ];
     }
 

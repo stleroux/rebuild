@@ -16,7 +16,7 @@
 
    {!! Form::model($user) !!}
 
-      <div class="card">
+      <div class="card mb-2">
          <!--CARD HEADER-->
          <div class="card-header card_header">
             <i class="fas fa-user"></i>
@@ -47,99 +47,101 @@
          </div>
       </div>
          
-      <div class="card my-2">
+      <div class="card mb-3">
          <div class="card-header card_header">
             Display the permissions assigned to this user
             <span class="float-right">
                <span class="badge badge-primary">{{ $user->permissions->count() }}</span>
             </span>
          </div>
-         <div id="accordion">
-            <div class="card">
-               <div class="card-header px-2 py-2" id="core" data-toggle="collapse" data-target="#corePermissions" aria-expanded="true" aria-controls="corePermissions">Core Permissions</div>
-               <div id="corePermissions" class="collapse show" aria-labelledby="core" data-parent="#accordion">
-                  <div class="card-body px-1 py-1">
-                     <div class="card-columns">
-                        @foreach ($coreGroups as $group => $permissions)
-                           <div class="card mb-2">
-                              <div class="card-header card_header_2">{{ ucfirst($group) }}</div>
-                              <div class="card-body card_body pt-2 pb-1 px-1">
-                                 @foreach($permissions as $permission)
-                                    <div class="form-group mb-0">
-                                       <span class="switch switch-xs">
-                                          {{ Form::checkbox('permission[]', $permission->id, in_array($permission->id, $userPermissions) ? true : false, ['id'=>$permission->id, 'disabled'=>'disabled']) }}
-                                          <label for="{{$permission->id}}">{{ ucfirst($permission->display_name) }}</label>
-                                       </span>
-                                       <span class="float-right">
-                                          <a data-toggle="tooltip" title="Allow member to {{ strtolower($permission->description) }}">
-                                             <i class="fas fa-info-circle"></i>
-                                          </a>
-                                       </span>
-                                    </div>
-                                 @endforeach
+         <div class="card-body p-2">
+            <div id="accordion">
+               <div class="card mb-2">
+                  <div class="card-header" id="core" data-toggle="collapse" data-target="#corePermissions" aria-expanded="true" aria-controls="corePermissions">Core Permissions</div>
+                  <div id="corePermissions" class="collapse show" aria-labelledby="core" data-parent="#accordion">
+                     <div class="card-body p-2">
+                        <div class="card-columns">
+                           @foreach ($coreGroups as $group => $permissions)
+                              <div class="card mb-2">
+                                 <div class="card-header card_header_2">{{ ucfirst($group) }}</div>
+                                 <div class="card-body card_body pt-2 pb-1 px-1">
+                                    @foreach($permissions as $permission)
+                                       <div class="form-group mb-0">
+                                          <span class="switch switch-xs">
+                                             {{ Form::checkbox('permission[]', $permission->id, in_array($permission->id, $userPermissions) ? true : false, ['id'=>$permission->id, 'disabled'=>'disabled']) }}
+                                             <label for="{{$permission->id}}">{{ ucfirst($permission->display_name) }}</label>
+                                          </span>
+                                          <span class="float-right">
+                                             <a data-toggle="tooltip" title="Allow member to {{ strtolower($permission->description) }}">
+                                                <i class="fas fa-info-circle"></i>
+                                             </a>
+                                          </span>
+                                       </div>
+                                    @endforeach
+                                 </div>
                               </div>
-                           </div>
-                        @endforeach
+                           @endforeach
+                        </div>
                      </div>
                   </div>
                </div>
-            </div>
 
-            <div class="card">
-               <div class="card-header px-2 py-2" id="nonCore" data-toggle="collapse" data-target="#nonCorePermissions" aria-expanded="false" aria-controls="nonCorePermissions">Non Core Permissions</div>
-               <div id="nonCorePermissions" class="collapse" aria-labelledby="nonCore" data-parent="#accordion">
-                  <div class="card-body px-1 py-1">
-                     <div class="card-columns">
-                        @foreach ($nonCoreGroups as $group => $permissions)
-                           <div class="card mb-2">
-                              <div class="card-header card_header_2">{{ ucfirst($group) }}</div>
-                              <div class="card-body card_body pt-2 pb-1 px-1">
-                                 @foreach($permissions as $permission)
-                                    <div class="form-group mb-0">
-                                       <span class="switch switch-xs">
-                                          {{ Form::checkbox('permission[]', $permission->id, in_array($permission->id, $userPermissions) ? true : false, ['id'=>$permission->id, 'disabled'=>'disabled']) }}
-                                          <label for="{{$permission->id}}">{{ ucfirst($permission->display_name) }}</label>
-                                       </span>
-                                       <span class="float-right">
-                                          <a data-toggle="tooltip" title="Allow member to {{ strtolower($permission->description) }}">
-                                             <i class="fas fa-info-circle"></i>
-                                          </a>
-                                       </span>
-                                    </div>
-                                 @endforeach
+               <div class="card mb-2">
+                  <div class="card-header" id="nonCore" data-toggle="collapse" data-target="#nonCorePermissions" aria-expanded="false" aria-controls="nonCorePermissions">Non Core Permissions</div>
+                  <div id="nonCorePermissions" class="collapse" aria-labelledby="nonCore" data-parent="#accordion">
+                     <div class="card-body p-2">
+                        <div class="card-columns">
+                           @foreach ($nonCoreGroups as $group => $permissions)
+                              <div class="card mb-2">
+                                 <div class="card-header card_header_2">{{ ucfirst($group) }}</div>
+                                 <div class="card-body card_body pt-2 pb-1 px-1">
+                                    @foreach($permissions as $permission)
+                                       <div class="form-group mb-0">
+                                          <span class="switch switch-xs">
+                                             {{ Form::checkbox('permission[]', $permission->id, in_array($permission->id, $userPermissions) ? true : false, ['id'=>$permission->id, 'disabled'=>'disabled']) }}
+                                             <label for="{{$permission->id}}">{{ ucfirst($permission->display_name) }}</label>
+                                          </span>
+                                          <span class="float-right">
+                                             <a data-toggle="tooltip" title="Allow member to {{ strtolower($permission->description) }}">
+                                                <i class="fas fa-info-circle"></i>
+                                             </a>
+                                          </span>
+                                       </div>
+                                    @endforeach
+                                 </div>
                               </div>
-                           </div>
-                        @endforeach
+                           @endforeach
+                        </div>
                      </div>
                   </div>
                </div>
-            </div>
 
-            <div class="card">
-               <div class="card-header px-2 py-2" id="modules" data-toggle="collapse" data-target="#modulesPermissions" aria-expanded="false" aria-controls="modulesPermissions">Modules Permissions</div>
-               <div id="modulesPermissions" class="collapse" aria-labelledby="modules" data-parent="#accordion">
-                  <div class="card-body px-1 py-1">
-                     <div class="card-columns">
-                        @foreach ($moduleGroups as $group => $permissions)
-                           <div class="card mb-2">
-                              <div class="card-header card_header_2">{{ ucfirst($group) }}</div>
-                              <div class="card-body card_body pt-2 pb-1 px-1">
-                                 @foreach($permissions as $permission)
-                                    <div class="form-group mb-0">
-                                       <span class="switch switch-xs">
-                                          {{ Form::checkbox('permission[]', $permission->id, in_array($permission->id, $userPermissions) ? true : false, ['id'=>$permission->id, 'disabled'=>'disabled']) }}
-                                          <label for="{{$permission->id}}">{{ ucfirst($permission->display_name) }}</label>
-                                       </span>
-                                       <span class="float-right">
-                                          <a data-toggle="tooltip" title="Allow member to {{ strtolower($permission->description) }}">
-                                             <i class="fas fa-info-circle"></i>
-                                          </a>
-                                       </span>
-                                    </div>
-                                 @endforeach
+               <div class="card mb-2">
+                  <div class="card-header" id="modules" data-toggle="collapse" data-target="#modulesPermissions" aria-expanded="false" aria-controls="modulesPermissions">Modules Permissions</div>
+                  <div id="modulesPermissions" class="collapse" aria-labelledby="modules" data-parent="#accordion">
+                     <div class="card-body p-2">
+                        <div class="card-columns">
+                           @foreach ($moduleGroups as $group => $permissions)
+                              <div class="card mb-2">
+                                 <div class="card-header card_header_2">{{ ucfirst($group) }}</div>
+                                 <div class="card-body card_body pt-2 pb-1 px-1">
+                                    @foreach($permissions as $permission)
+                                       <div class="form-group mb-0">
+                                          <span class="switch switch-xs">
+                                             {{ Form::checkbox('permission[]', $permission->id, in_array($permission->id, $userPermissions) ? true : false, ['id'=>$permission->id, 'disabled'=>'disabled']) }}
+                                             <label for="{{$permission->id}}">{{ ucfirst($permission->display_name) }}</label>
+                                          </span>
+                                          <span class="float-right">
+                                             <a data-toggle="tooltip" title="Allow member to {{ strtolower($permission->description) }}">
+                                                <i class="fas fa-info-circle"></i>
+                                             </a>
+                                          </span>
+                                       </div>
+                                    @endforeach
+                                 </div>
                               </div>
-                           </div>
-                        @endforeach
+                           @endforeach
+                        </div>
                      </div>
                   </div>
                </div>

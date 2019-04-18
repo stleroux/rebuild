@@ -18,10 +18,17 @@
       <a href="{{ route('modules.index') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('modules.*') ? 'active' : '' }}">
          <i class="fa fa-cubes pl-2"></i>
          Modules
-         {{-- <div class="badge badge-primary float-right">
-            {{ App\Comments::count() }}
-         </div> --}}
+         {{-- <div class="badge badge-primary float-right"> --}}
+            {{-- {{ App\Category::count() }} --}}
+         {{-- </div> --}}
       </a>
+
+      {{-- @if(checkPerm('user_create'))
+         <a href="{{ route('modules.create') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('modules.create') ? 'active' : '' }}">
+            <i class="fas fa-plus-square pl-2"></i>
+            New Module
+         </a>
+      @endif --}}
 
    </div>
 

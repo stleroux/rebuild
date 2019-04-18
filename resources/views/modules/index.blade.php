@@ -1,4 +1,8 @@
-@extends('layouts.master')
+@extends('layouts.backend')
+
+@section('stylesheets')
+   {{-- {{ Html::style('css/recipes.css') }} --}}
+@endsection
 
 @section('left_column')
    @include('blocks.adminNav')
@@ -6,54 +10,60 @@
 @endsection
 
 @section('right_column')
-   @include('modules.blocks.new')
 @endsection
 
 @section('content')
 
-<div class="row">
-   <div class="col-sm-12">
-      <div class="card">
-         <div class="card-header card_header">
-            <i class="fa fa-cubes"></i>
-            Modules
-         </div>
-         
-         <div class="card-body card_body">
-            <table id="datatable" class="table table-hover table-sm">
-               <thead>
-                  <tr>
-                     <th>ID</th>
-                     <th>Name</th>
-                     <th data-orderable="false"></th>
-                  </tr>
-               </thead>
-               <tbody>
-                  @foreach ($modules as $module)
-                     <tr>
-                        <td>{{ $module->id }}</td>
-                        <td>{{ $module->name }}</td>
-                        <td class="text-right">
-                           @if(checkPerm('module_edit'))
-                              {{-- <a href="{{ route('modules.edit', $module->id) }}" class="btn btn-sm btn-outline-bprimary px-1 py-0" title="Edit">
-                                 <i class="far fa-edit"></i>
-                              </a> --}}
-                              @include('common.buttons.edit', ['model'=>'module', 'id'=>$module->id, 'type'=>''])
-                           @endif
-                           @if(checkPerm('module_delete'))
-                              {{-- <a href="{{ route('modules.delete', $module->id) }}" class="btn btn-sm btn-outline-danger px-1 py-0" title="Delete">
-                                 <i class="far fa-trash-alt"></i>
-                              </a> --}}
-                              @include('common.buttons.delete', ['model'=>'module', 'id'=>$module->id, 'type'=>''])
-                           @endif
-                        </td>
-                     </tr>
-                  @endforeach
-               </tbody>
-            </table>
-         </div>
-      </div>
-   </div>
-</div>
+	<div class="row">
+		<div class="col">
+			<div class="card">
+				<!--CARD HEADER-->
+				<div class="card-header card_header">
+					<i class="fa fa-cubes"></i>
+					Modules
+					<span class="float-sm-right">
+						@if(checkPerm('module_create'))
+							@include('common.buttons.add', ['model'=>'module', 'type'=>''])
+						@endif
+					</span>
+				</div>
+				
+				<!--CARD BODY-->
+				<div class="card-body card_body">
+					<table id="datatable" class="table table-hover table-sm">
+						<thead>
+							<tr>
+								<th>Module Name</th>
+								<th class="no-sort"></th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach ($modules as $module)
+								<tr>
+									<td>{{ $module }}</td>
+									<td class="text-right">
+										@if(checkPerm('module_enable'))
+											@if(\Module::enabled($module))
+												@include('common.buttons.moduleDisable', ['model'=>'module', 'type'=>''])
+											@endif
+										@endif
+										@if(checkPerm('module_disable'))
+											@if(\Module::disabled($module))
+												@include('common.buttons.moduleEnable', ['model'=>'module', 'type'=>''])
+											@endif
+										@endif
+										@if(checkPerm('module_delete'))
+											@include('common.buttons.moduleDelete', ['model'=>'module', 'type'=>''])
+										@endif
+									</td>
+								</tr>
+							@endforeach
+
+						</tbody>
+					</table>
+				</div> {{-- End of card-body --}}
+			</div>
+		</div>
+	</div>
 
 @endsection

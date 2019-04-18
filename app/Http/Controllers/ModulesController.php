@@ -2,26 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
-// use App\Http\Controllers\Controller;
-use App\Module;
-
-use Illuminate\Support\Facades\Input;
-
-use Auth;
-use DB;
-use Excel;
-use File;
-use Image;
-use Purifier;
 use Session;
-use Storage;
-use Log;
+use Illuminate\Http\Request;
 
 use App\Http\Requests\CreateModuleRequest;
-use App\Http\Requests\UpdateModuleRequest;
 
 class ModulesController extends Controller
 {
@@ -34,11 +18,27 @@ class ModulesController extends Controller
 # ╚██████╗╚██████╔╝██║ ╚████║███████║   ██║   ██║  ██║╚██████╔╝╚██████╗   ██║   
 #  ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝  ╚═════╝   ╚═╝   
 ##################################################################################################################
-	public function __construct() {
-		// only allow authenticated users to access these pages
+	public function __construct()
+	{
 		$this->middleware('auth');
+	}
 
-		//Log::useFiles(storage_path().'/logs/Admin_Modules.log');
+
+##################################################################################################################
+#  ██████╗██████╗ ███████╗ █████╗ ████████╗███████╗
+# ██╔════╝██╔══██╗██╔════╝██╔══██╗╚══██╔══╝██╔════╝
+# ██║     ██████╔╝█████╗  ███████║   ██║   █████╗  
+# ██║     ██╔══██╗██╔══╝  ██╔══██║   ██║   ██╔══╝  
+# ╚██████╗██║  ██║███████╗██║  ██║   ██║   ███████╗
+#  ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝
+// Show the form for creating a new resource
+##################################################################################################################
+	public function create()
+	{
+		// Check if user has required permission
+		if(!checkPerm('module_create')) { abort(401, 'Unauthorized Access'); }
+
+		return view('modules.create');
 	}
 
 
@@ -51,12 +51,12 @@ class ModulesController extends Controller
 # ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝
 // Mass Delete selected rows - all selected records
 ##################################################################################################################
-	public function delete($id)
+	public function deleteModule($module)
 	{
-		// Check if user has required module
+		// Check if user has required permission
 		if(!checkPerm('module_delete')) { abort(401, 'Unauthorized Access'); }
 
-		$module = Module::findOrFail($id);
+		$module = \Module::find($module);
 		return view('modules.delete', compact('module'));
 	}
 
@@ -71,42 +71,61 @@ class ModulesController extends Controller
 // Remove the specified resource from storage
 // Used in the index page and trashAll action to soft delete multiple records
 ##################################################################################################################
-	public function destroy($id)
+	public function deleteModulePost($module)
 	{
-		// Check if user has required module
+		// Check if user has required permission
 		if(!checkPerm('module_delete')) { abort(401, 'Unauthorized Access'); }
 
-		$module = Module::find($id);
-
-		// $categories = Category::where('module_id', '=', $id);
-		// dd($categories);
-
+		$module = \Module::find($module);
 		$module->delete();
 
-		// Save entry to log file using built-in Monolog
-		//Log::info(Auth::user()->username . " (" . Auth::user()->id . ") DELETED module (" . $module->id . ")\r\n", [json_decode($module, true)]);
-
-		Session::flash('delete', 'The module was successfully deleted!');
+		// Set flash data with success message
+		Session::flash('delete','The module was deleted successfully.');
 		return redirect()->route('modules.index');
 	}
 
 
 ##################################################################################################################
-# ███████╗██████╗ ██╗████████╗
-# ██╔════╝██╔══██╗██║╚══██╔══╝
-# █████╗  ██║  ██║██║   ██║   
-# ██╔══╝  ██║  ██║██║   ██║   
-# ███████╗██████╔╝██║   ██║   
-# ╚══════╝╚═════╝ ╚═╝   ╚═╝   
-// Show the form for editing the specified resource
+# ██████╗ ██╗███████╗ █████╗ ██████╗ ██╗     ███████╗    ███╗   ███╗ ██████╗ ██████╗ ██╗   ██╗██╗     ███████╗
+# ██╔══██╗██║██╔════╝██╔══██╗██╔══██╗██║     ██╔════╝    ████╗ ████║██╔═══██╗██╔══██╗██║   ██║██║     ██╔════╝
+# ██║  ██║██║███████╗███████║██████╔╝██║     █████╗      ██╔████╔██║██║   ██║██║  ██║██║   ██║██║     █████╗  
+# ██║  ██║██║╚════██║██╔══██║██╔══██╗██║     ██╔══╝      ██║╚██╔╝██║██║   ██║██║  ██║██║   ██║██║     ██╔══╝  
+# ██████╔╝██║███████║██║  ██║██████╔╝███████╗███████╗    ██║ ╚═╝ ██║╚██████╔╝██████╔╝╚██████╔╝███████╗███████╗
+# ╚═════╝ ╚═╝╚══════╝╚═╝  ╚═╝╚═════╝ ╚══════╝╚══════╝    ╚═╝     ╚═╝ ╚═════╝ ╚═════╝  ╚═════╝ ╚══════╝╚══════╝
 ##################################################################################################################
-	public function edit($id)
+	public function disableModule($module)
 	{
 		// Check if user has required permission
-		if(!checkPerm('module_edit')) { abort(401, 'Unauthorized Access'); }
+		if(!checkPerm('module_disable')) { abort(401, 'Unauthorized Access'); }
 
-		$module = Module::find($id);
-		return  view('modules.edit', compact('module'));
+		$module = \Module::find($module);
+		$module->disable();
+
+		// Set flash data with success message
+		Session::flash('success','The module was disabled successfully.');
+		return redirect()->back();
+	}
+
+
+##################################################################################################################
+# ███████╗███╗   ██╗ █████╗ ██████╗ ██╗     ███████╗    ███╗   ███╗ ██████╗ ██████╗ ██╗   ██╗██╗     ███████╗
+# ██╔════╝████╗  ██║██╔══██╗██╔══██╗██║     ██╔════╝    ████╗ ████║██╔═══██╗██╔══██╗██║   ██║██║     ██╔════╝
+# █████╗  ██╔██╗ ██║███████║██████╔╝██║     █████╗      ██╔████╔██║██║   ██║██║  ██║██║   ██║██║     █████╗  
+# ██╔══╝  ██║╚██╗██║██╔══██║██╔══██╗██║     ██╔══╝      ██║╚██╔╝██║██║   ██║██║  ██║██║   ██║██║     ██╔══╝  
+# ███████╗██║ ╚████║██║  ██║██████╔╝███████╗███████╗    ██║ ╚═╝ ██║╚██████╔╝██████╔╝╚██████╔╝███████╗███████╗
+# ╚══════╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═════╝ ╚══════╝╚══════╝    ╚═╝     ╚═╝ ╚═════╝ ╚═════╝  ╚═════╝ ╚══════╝╚══════╝
+##################################################################################################################
+	public function enableModule($module)
+	{
+		// Check if user has required permission
+		if(!checkPerm('module_enable')) { abort(401, 'Unauthorized Access'); }
+
+		$module = \Module::find($module);
+		$module->enable();
+
+		// Set flash data with success message
+		Session::flash('success','The module was enabled successfully.');
+		return redirect()->back();
 	}
 
 
@@ -124,9 +143,11 @@ class ModulesController extends Controller
 		// Check if user has required permission
 		if(!checkPerm('module_index')) { abort(401, 'Unauthorized Access'); }
 
-		$modules = Module::orderBy('name','ASC')->get();
-		return view('modules.index',compact('modules'));
-}
+		$modules = \Module::all();
+
+		return view('modules.index', compact('modules'));
+	}
+
 
 
 ##################################################################################################################
@@ -140,208 +161,15 @@ class ModulesController extends Controller
 ##################################################################################################################
 	public function store(CreateModuleRequest $request)
 	{
-		// Check if user has required permission
-		if(!checkPerm('module_create')) { abort(401, 'Unauthorized Access'); }
+		$this->validate($request, [
+			'name' => 'required',
+		]);
 
-		$module = new Module;
-			$module->name = $request->name;
-		$module->save();
-
-		// Save entry to log file using built-in Monolog
-		//Log::info(Auth::user()->username . " (" . Auth::user()->id . ") CREATED module (" . $module->id . ")\r\n", [json_decode($module, true)]);
-
-		Session::flash('store','The new module has been created.');
-		return redirect()->route('modules.index');
-	}
-
-
-##################################################################################################################
-# ██╗   ██╗██████╗ ██████╗  █████╗ ████████╗███████╗
-# ██║   ██║██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██╔════╝
-# ██║   ██║██████╔╝██║  ██║███████║   ██║   █████╗  
-# ██║   ██║██╔═══╝ ██║  ██║██╔══██║   ██║   ██╔══╝  
-# ╚██████╔╝██║     ██████╔╝██║  ██║   ██║   ███████╗
-#  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
-// UPDATE :: Update the specified resource in storage
-##################################################################################################################
-	public function update(UpdateModuleRequest $request, $id)
-	{
-		// Get the category value from the database
-		$module = Module::find($id);
-			$module->name = $request->input('name');
-		$module->save();
-
-		// Save entry to log file using built-in Monolog
-		//Log::info(Auth::user()->username . " (" . Auth::user()->id . ") UPDATED module (" . $module->id . ")\r\n", [json_decode($module, true)]);
+		\Artisan::call('module:make', ['name'=>[$request->name]]);
 
 		// Set flash data with success message
-		Session::flash ('update', 'The module was successfully updated!');
-		// Redirect to posts.show
+		Session::flash('store','The module ' . $request->name . ' was created successfully.');
 		return redirect()->route('modules.index');
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-##################################################################################################################
-# ███████╗██╗  ██╗██████╗  ██████╗ ██████╗ ████████╗    ██████╗ ██████╗ ███████╗
-# ██╔════╝╚██╗██╔╝██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝    ██╔══██╗██╔══██╗██╔════╝
-# █████╗   ╚███╔╝ ██████╔╝██║   ██║██████╔╝   ██║       ██████╔╝██║  ██║█████╗  
-# ██╔══╝   ██╔██╗ ██╔═══╝ ██║   ██║██╔══██╗   ██║       ██╔═══╝ ██║  ██║██╔══╝  
-# ███████╗██╔╝ ██╗██║     ╚██████╔╝██║  ██║   ██║       ██║     ██████╔╝██║     
-# ╚══════╝╚═╝  ╚═╝╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝       ╚═╝     ╚═════╝ ╚═╝     
-##################################################################################################################
-	public function exportPDF()
-	{
-		if(!checkACL('manager')) {
-			return view('errors.403');
-		}
-
-		$data = Module::get()->toArray();
-		return Excel::create('Modules_List', function($excel) use ($data) {
-			$excel->sheet('mySheet', function($sheet) use ($data)
-			{
-				$sheet->fromArray($data);
-			});
-		})->download("pdf");
-	}
-
-
-##################################################################################################################
-# ██╗███╗   ███╗██████╗  ██████╗ ██████╗ ████████╗
-# ██║████╗ ████║██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝
-# ██║██╔████╔██║██████╔╝██║   ██║██████╔╝   ██║   
-# ██║██║╚██╔╝██║██╔═══╝ ██║   ██║██╔══██╗   ██║   
-# ██║██║ ╚═╝ ██║██║     ╚██████╔╝██║  ██║   ██║   
-# ╚═╝╚═╝     ╚═╝╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   
-// IMPORT :: Show the form for importing entries to storage.
-##################################################################################################################
-	public function import()
-	{
-		if(!checkACL('manager')) {
-			return view('errors.403');
-		}
-
-		return view('backend.modules.import');
-	}
-
-
-##################################################################################################################
-# ██████╗  ██████╗ ██╗    ██╗███╗   ██╗██╗      ██████╗  █████╗ ██████╗     ███████╗██╗  ██╗ ██████╗███████╗██╗     
-# ██╔══██╗██╔═══██╗██║    ██║████╗  ██║██║     ██╔═══██╗██╔══██╗██╔══██╗    ██╔════╝╚██╗██╔╝██╔════╝██╔════╝██║     
-# ██║  ██║██║   ██║██║ █╗ ██║██╔██╗ ██║██║     ██║   ██║███████║██║  ██║    █████╗   ╚███╔╝ ██║     █████╗  ██║     
-# ██║  ██║██║   ██║██║███╗██║██║╚██╗██║██║     ██║   ██║██╔══██║██║  ██║    ██╔══╝   ██╔██╗ ██║     ██╔══╝  ██║     
-# ██████╔╝╚██████╔╝╚███╔███╔╝██║ ╚████║███████╗╚██████╔╝██║  ██║██████╔╝    ███████╗██╔╝ ██╗╚██████╗███████╗███████╗
-# ╚═════╝  ╚═════╝  ╚══╝╚══╝ ╚═╝  ╚═══╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═════╝     ╚══════╝╚═╝  ╚═╝ ╚═════╝╚══════╝╚══════╝
-##################################################################################################################
-	public function downloadExcel($type)
-	{
-		if(!checkACL('manager')) {
-			return view('errors.403');
-		}
-
-		$data = Module::get()->toArray();
-		return Excel::create('Modules_List', function($excel) use ($data) {
-			$excel->sheet('mySheet', function($sheet) use ($data)
-			{
-				$sheet->fromArray($data);
-			});
-		})->download($type);
-	}
-
-
-##################################################################################################################
-# ██╗███╗   ███╗██████╗  ██████╗ ██████╗ ████████╗    ███████╗██╗   ██╗███╗   ██╗ ██████╗████████╗██╗ ██████╗ ███╗   ██╗
-# ██║████╗ ████║██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝    ██╔════╝██║   ██║████╗  ██║██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║
-# ██║██╔████╔██║██████╔╝██║   ██║██████╔╝   ██║       █████╗  ██║   ██║██╔██╗ ██║██║        ██║   ██║██║   ██║██╔██╗ ██║
-# ██║██║╚██╔╝██║██╔═══╝ ██║   ██║██╔══██╗   ██║       ██╔══╝  ██║   ██║██║╚██╗██║██║        ██║   ██║██║   ██║██║╚██╗██║
-# ██║██║ ╚═╝ ██║██║     ╚██████╔╝██║  ██║   ██║       ██║     ╚██████╔╝██║ ╚████║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║
-# ╚═╝╚═╝     ╚═╝╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝       ╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
-##################################################################################################################
-	public function importExcel()
-	{
-		if(!checkACL('manager')) {
-			return view('errors.403');
-		}
-
-		if(Input::hasFile('import_file')){
-			$path = Input::file('import_file')->getRealPath();
-			$data = Excel::load($path, function($reader) {})->get();
-			
-			if(!empty($data) && $data->count()){
-				foreach ($data as $key => $value) {
-					$insert[] = [
-						'name'         => $value->name,
-						'created_at'    => $value->created_at,
-						'updated_at'    => $value->updated_at,
-					];
-				}
-							
-				if(!empty($insert)){
-					DB::table('modules')->insert($insert);
-					//dd('Insert Record successfully.');
-					Session::flash('success','Import was successfull!');
-					//return view('roles.index');
-					return redirect()->route('backend.modules.index');
-				}
-			}
-		}
-		return back();
-	}
-
-
-##################################################################################################################
-# ███╗   ██╗███████╗██╗    ██╗    ███╗   ███╗ ██████╗ ██████╗ ██╗   ██╗██╗     ███████╗███████╗
-# ████╗  ██║██╔════╝██║    ██║    ████╗ ████║██╔═══██╗██╔══██╗██║   ██║██║     ██╔════╝██╔════╝
-# ██╔██╗ ██║█████╗  ██║ █╗ ██║    ██╔████╔██║██║   ██║██║  ██║██║   ██║██║     █████╗  ███████╗
-# ██║╚██╗██║██╔══╝  ██║███╗██║    ██║╚██╔╝██║██║   ██║██║  ██║██║   ██║██║     ██╔══╝  ╚════██║
-# ██║ ╚████║███████╗╚███╔███╔╝    ██║ ╚═╝ ██║╚██████╔╝██████╔╝╚██████╔╝███████╗███████╗███████║
-# ╚═╝  ╚═══╝╚══════╝ ╚══╝╚══╝     ╚═╝     ╚═╝ ╚═════╝ ╚═════╝  ╚═════╝ ╚══════╝╚══════╝╚══════╝
-// Display a listing of the resource that were created since the user's last login.
-##################################################################################################################
-	 public function newModules(Request $request, $key=null)
-	 {
-			// if(!checkACL('guest')) {
-			//     return view('errors.403');
-			// }
-
-			//$alphas = range('A', 'Z');
-			$alphas = DB::table('modules')
-				 ->select(DB::raw('DISTINCT LEFT(name, 1) as letter'))
-				 ->where('created_at', '>=' , Auth::user()->last_login_date)
-				 //->where('user_id', '=', Auth::user()->id)
-				 // ->where('personal', '!=', 1)
-				 // ->where('published_at','!=', null)
-				 ->orderBy('letter')
-				 ->get();
-			//dd($alphas);
-
-			$letters = [];
-			foreach($alphas as $alpha) {
-				$letters[] = $alpha->letter;
-			}
-
-			// If $key value is passed
-			if ($key) {
-				$modules = Module::newModules()
-					->where('namee', 'like', $key . '%')
-					->get();
-			} else {
-				$modules = Module::newModules()->get();
-			}
-
-			return view('backend.modules.newModules', compact('modules','letters'));
-	 }
-
-	 
- }
+}

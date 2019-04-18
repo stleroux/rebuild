@@ -1,8 +1,12 @@
-@extends('layouts.master')
+@extends('layouts.backend')
+
+@section('stylesheets')
+   {{-- {{ Html::style('css/recipes.css') }} --}}
+@endsection
 
 @section('left_column')
-   {{-- @include('blocks.admin_menu') --}}
-   @include('components.sidebar')
+   @include('blocks.admin_menu')
+   @include('modules.sidebar')
 @endsection
 
 @section('right_column')
@@ -10,14 +14,14 @@
 
 @section('content')
 
-	{!! Form::open(array('route' => 'components.store', 'method'=>'POST')) !!}
+	{!! Form::open(array('route' => 'modules.store', 'method'=>'POST')) !!}
 		<div class="card">
 			
 			<div class="card-header card_header">
-				<i class="fas fa-boxes"></i>
-				New Component
+				<i class="fa fa-cubes"></i>
+				New Module
 				<div class="float-right">
-					<a href="{{ route('components.index') }}" class="btn btn-sm btn-outline-secondary px-1 py-0">
+					<a href="{{ route('modules.index') }}" class="btn btn-sm btn-outline-secondary px-1 py-0">
 						<i class="fas fa-angle-double-left"></i>
 						Cancel
 					</a>

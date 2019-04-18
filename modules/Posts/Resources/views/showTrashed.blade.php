@@ -1,7 +1,11 @@
 @extends('layouts.master')
 
+@section('stylesheets')
+   {{-- {{ Html::style('css/recipes.css') }} --}}
+@endsection
+
 @section('left_column')
-   {{-- @include('blocks.admin_menu') --}}
+   @include('blocks.adminNav')
    @include('posts::sidebar')
 @endsection
 

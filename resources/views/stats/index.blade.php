@@ -1,5 +1,9 @@
 @extends('layouts.backend')
 
+@section('stylesheets')
+   {{-- {{ Html::style('css/recipes.css') }} --}}
+@endsection
+
 @section('left_column')
    @include('blocks.adminNav')
    @include('stats.sidebar')
@@ -50,7 +54,7 @@
                                  </div>
                               </div>
 
-                              <div class="card bg-bprimary col-sm-1 p-0 m-2">
+                              {{-- <div class="card bg-bprimary col-sm-1 p-0 m-2">
                                  <div class="card-header p-0 m-0">Components</div>
                                  <div class="card-body p-0 m-1">
                                     <i class="fas fa-4x fa-boxes"></i>
@@ -58,7 +62,7 @@
                                  <div class="card-footer m-0 p-0">
                                     <h1 class="p-0 m-0">{{ $componentCount }}</h1>
                                  </div>
-                              </div>
+                              </div> --}}
 
                               <div class="card bg-bprimary col-sm-1 p-0 m-2">
                                  <div class="card-header p-0 m-0">Members</div>
@@ -138,36 +142,40 @@
                            </div>
                            <div class="card-body card_body">
                               <div class="row px-2">
-                                 <table class="table table-mini table-hover col-sm-3 mx-1">
-                                    <thead>
-                                       <tr>
-                                          <th colspan="2">Components (MODULES)</th>
-                                       </tr>
-                                    </thead>
-                                    <tbody>
-                                       @foreach($modules as $module)
+                                 <div class="col-3">
+                                    <table class="table table-mini table-hover mx-1">
+                                       <thead>
                                           <tr>
-                                             <td>{{ $module->name }}</td>
+                                             <th colspan="2">Modules</th>
                                           </tr>
-                                       @endforeach
-                                    </tbody>
-                                 </table>
+                                       </thead>
+                                       <tbody>
+                                          @foreach($modules as $module)
+                                             <tr>
+                                                <td>{{ $module->name }}</td>
+                                             </tr>
+                                          @endforeach
+                                       </tbody>
+                                    </table>
+                                 </div>
 
-                                 <table class="table table-mini table-hover col-sm-3 mx-1">
-                                    <thead>
-                                       <tr>
-                                          <th colspan="2">Comments</th>
-                                       </tr>
-                                    </thead>
-                                    <tbody>
-                                       @foreach($comments as $comment)
+                                 <div class="col-3">
+                                    <table class="table table-mini table-hover col-sm-3 mx-1">
+                                       <thead>
                                           <tr>
-                                             <td>{{ ucwords($comment->commentable_type) }}</td>
-                                             <td align="center">{!! App\Comment::where('commentable_type', '=', $comment->commentable_type)->count() !!}</td>
+                                             <th colspan="2">Comments</th>
                                           </tr>
-                                       @endforeach
-                                    </tbody>
-                                 </table>
+                                       </thead>
+                                       <tbody>
+                                          @foreach($comments as $comment)
+                                             <tr>
+                                                <td>{{ ucwords($comment->commentable_type) }}</td>
+                                                <td align="center">{!! App\Comment::where('commentable_type', '=', $comment->commentable_type)->count() !!}</td>
+                                             </tr>
+                                          @endforeach
+                                       </tbody>
+                                    </table>
+                                 </div>
                               </div>
 
                            </div>
