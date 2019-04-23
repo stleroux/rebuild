@@ -74,8 +74,4 @@ Route::get('profile/deleteImage/{id}',       ['uses'=>'ProfileController@deleteI
 Route::get('profile/{id}/show',              ['uses'=>'ProfileController@show',              'as'=>'profile.show']);
 
 
-
-
-
-
-
+Route::resource('places', 'PlacesController');Route::resource('places', 'PlacesController');Route::resource('places', 'PlacesController');Route::resource('places', 'PlacesController');Route::resource('places', 'PlacesController');Route::resource('places', 'PlacesController');Route::resource('places', 'PlacesController');Route::resource('places', 'PlacesController');Route::resource('places', 'PlacesController');Route::resource('children', 'ChildrenController');
