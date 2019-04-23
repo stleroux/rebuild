@@ -30,6 +30,24 @@ class SettingsController extends Controller
 
 
 ##################################################################################################################
+#  ██████╗██████╗ ███████╗ █████╗ ████████╗███████╗
+# ██╔════╝██╔══██╗██╔════╝██╔══██╗╚══██╔══╝██╔════╝
+# ██║     ██████╔╝█████╗  ███████║   ██║   █████╗  
+# ██║     ██╔══██╗██╔══╝  ██╔══██║   ██║   ██╔══╝  
+# ╚██████╗██║  ██║███████╗██║  ██║   ██║   ███████╗
+#  ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝
+// Show the form for creating a new resource
+##################################################################################################################
+    public function create()
+    {
+        // Check if user has required permission
+        // if(!checkPerm('module_create')) { abort(401, 'Unauthorized Access'); }
+
+        return view('settings.create');
+    }
+
+
+##################################################################################################################
 # ██╗███╗   ██╗██████╗ ███████╗██╗  ██╗
 # ██║████╗  ██║██╔══██╗██╔════╝╚██╗██╔╝
 # ██║██╔██╗ ██║██║  ██║█████╗   ╚███╔╝ 
@@ -69,6 +87,7 @@ class SettingsController extends Controller
         $customMessages = [
             'key.required' => 'The :attribute field can not be left blank.',
             'value.required' => 'The :attribute field is required.',
+            'tab.required' => 'The :attribute field is required.',
             'description.required' => 'The :attribute field is required.',
         ];
 
@@ -104,11 +123,11 @@ class SettingsController extends Controller
 # ╚══════╝╚═════╝ ╚═╝   ╚═╝   
 // Show the form for editing the specified resource
 ##################################################################################################################
-    // public function edit($id)
-    // {
-    //     $setting = Setting::findOrFail($id);
-    //     return view('settings.edit', compact('setting'));
-    // }
+    public function edit($id)
+    {
+        $setting = Setting::findOrFail($id);
+        return view('settings.edit', compact('setting'));
+    }
 
 
 

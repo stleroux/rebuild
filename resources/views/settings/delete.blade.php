@@ -6,7 +6,7 @@
 
 @section('left_column')
    @include('blocks.adminNav')
-   @include('permissions.sidebar')
+   @include('settings.sidebar')
 @endsection
 
 @section('right_column')
@@ -36,7 +36,7 @@
             @endif
          </form>
       </div>
-      <div class="card-footer pt-1 pb-1 pl-2">
+      <div class="card-footer pt-1 pb-1 pl-2 text-danger">
          <b>Note: </b>This record will not be recoverable if deleted.
       </div>
    </div>

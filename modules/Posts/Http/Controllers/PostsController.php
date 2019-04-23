@@ -12,6 +12,7 @@ use App\Category;
 use App\User;
 use Auth;
 use DB;
+use Carbon\Carbon;
 use File;
 use Image;
 use Purifier;
@@ -19,7 +20,6 @@ use Session;
 use Storage;
 use Log;
 use URL;
-use Carbon\Carbon;
 
 use Modules\Posts\Http\Requests\CreatePostRequest;
 use Modules\Posts\Http\Requests\UpdatePostRequest;

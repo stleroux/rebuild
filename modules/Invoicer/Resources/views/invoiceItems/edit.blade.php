@@ -11,11 +11,11 @@
 			<div class="card-header">
 				Edit Billable Item
 				<span class="float-right">
-					<a href="{{ route('invoicer.invoices.edit', $item->invoice->id) }}" class="btn btn-xs btn-outline-secondary">
+					<a href="{{ route('invoicer.invoices.edit', $item->invoice->id) }}" class="btn btn-sm btn-outline-secondary">
 						<i class="fa fa-backward"></i>
 						Cancel
 					</a>
-					{{ Form::button('<i class="fa fa-save"></i> Update Billable', ['class' => 'btn btn-xs btn-primary', 'type' => 'submit']) }}
+					{{ Form::button('<i class="fa fa-save"></i> Update Billable', ['class' => 'btn btn-sm btn-primary', 'type' => 'submit']) }}
 				</span>
 			</div>
 			

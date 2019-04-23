@@ -5,17 +5,17 @@
 	<div class="text-right no-print">
 		@if($invoice->status != 'paid')
 			@if(checkPerm('invoicer_invoice_edit'))
-				<a href="{{ route('invoicer.invoices.edit', $invoice->id) }}" class="btn btn-xs btn-outline-secondary d-print-none">
+				<a href="{{ route('invoicer.invoices.edit', $invoice->id) }}" class="btn btn-sm btn-outline-secondary d-print-none">
 					<i class="fa fa-edit"></i>
 					Edit Invoice
 				</a>
 			@endif
 		@endif
-		<button onClick="window.print()" class="btn btn-xs btn-outline-secondary d-print-none">
+		<button onClick="window.print()" class="btn btn-sm btn-outline-secondary d-print-none">
 			<i class="fa fa-print"></i>
 			Print this page
 		</button>
-		<a href="{{ route('invoicer.invoices') }}" class="btn btn-xs btn-primary d-print-none">
+		<a href="{{ route('invoicer.invoices') }}" class="btn btn-sm btn-primary d-print-none">
 			<i class="fa fa-list"></i>
 			Invoices List
 		</a>
@@ -120,7 +120,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									@foreach($invoice->invoiceItems as $item)
+									@foreach($invoice->invoiceItems->sortByDesc('work_date') as $item)
 										<tr>
 											<td>{{ $item->product->details }}</td>
 											<td nowrap="nowrap">{{ $item->work_date->format('M d, Y') }}</td>

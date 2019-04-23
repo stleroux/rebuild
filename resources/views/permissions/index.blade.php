@@ -22,7 +22,7 @@
 					Permissions
 					@if(checkPerm('permission_create'))
 						<span class="float-sm-right">
-							@include('common.buttons.add', ['model'=>'permission', 'type'=>''])
+							@include('common.buttons.add', ['model'=>'permission'])
 						</span>
 					@endif
 				</div>

@@ -9,7 +9,7 @@
 						Products
 						@if(checkPerm('invoicer_product_create'))
 							<span class="float-right">
-								<a href="{{ route('invoicer.products.create') }}" class="btn btn-xs btn-secondary">
+								<a href="{{ route('invoicer.products.create') }}" class="btn btn-sm btn-secondary">
 									<i class="far fa-plus-square"></i>
 									Add New Product
 								</a>
@@ -38,14 +38,14 @@
 												{{ csrf_field() }}
 
 												@if(checkPerm('invoicer_product_show'))
-													<a href="{{ route('invoicer.products.show', $product->id) }}" class="btn btn-xs btn-outline-primary">
+													<a href="{{ route('invoicer.products.show', $product->id) }}" class="btn btn-sm btn-outline-primary">
 														<i class="fa fa-eye"></i>
 														View
 													</a>
 												@endif
 
 												@if(checkPerm('invoicer_product_edit'))
-													<a href="{{ route('invoicer.products.edit', $product->id) }}" class="btn btn-xs btn-primary">
+													<a href="{{ route('invoicer.products.edit', $product->id) }}" class="btn btn-sm btn-primary">
 														<i class="fa fa-edit"></i>
 														Edit
 													</a>
@@ -54,7 +54,7 @@
 												<input type="hidden" name="_method" value="DELETE" />
 
 												@if(checkPerm('invoicer_product_delete'))
-													<button type="submit" class="btn btn-xs btn-danger">
+													<button type="submit" class="btn btn-sm btn-danger">
 														<i class="fa fa-trash-alt"></i>
 														Delete
 													</button>
@@ -104,16 +104,19 @@
 							<input type="text" class="form-control" name="searchWord">
 						</div>
 						<div class="form-group text-center">
-							<button type="submit" value="Search" class="btn btn-xs btn-primary">
+							<button type="submit" value="Search" class="btn btn-sm btn-primary">
 								<i class="fa fa-binoculars"></i>
 								Search
 							</button>
-							<a href="{{ route('invoicer.products') }}" class="btn btn-xs btn-outline-secondary">
+							<a href="{{ route('invoicer.products') }}" class="btn btn-sm btn-outline-secondary">
 								<i class="far fa-square"></i>
 								Reset
 							</a>
 						</div>
 					</form>
+				</div>
+				<div class="card-footer">
+					Click the Reset button to clear search parameters and display all products
 				</div>
 			</div>
 		</div>

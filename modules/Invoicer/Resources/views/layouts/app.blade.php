@@ -31,8 +31,11 @@
 
         @include('invoicer::layouts.navbar')
         
+        
         <main class="py-5">
+            @include('invoicer::layouts.flash')
             <div class="container-fluid">
+
                 @yield('content')
             </div>
         </main>
@@ -41,6 +44,12 @@
             @include('invoicer::layouts.footer')
         </footer>
     </div>
+
+    <script>
+        setTimeout(function() {
+            $('#successMessage').fadeOut('fast');
+        }, 5000); // <-- time in milliseconds
+    </script>
 </body>
 
 </html>

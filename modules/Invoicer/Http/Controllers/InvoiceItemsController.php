@@ -73,7 +73,7 @@ class InvoiceItemsController extends Controller
 		$this::invUpdate($invoice_id);
 
 		// set a flash message to be displayed on screen
-		Session::flash('delete','The billable item was deleted successfully.');
+		Session::flash('danger','The billable item was deleted successfully.');
 
 		// redirect to another page
 		return redirect()->route('invoicer.invoices.edit', $item->invoice_id );
@@ -168,7 +168,7 @@ class InvoiceItemsController extends Controller
 		// \App\Invoice::update($request->invoice_id);
 
 		// set a flash message to be displayed on screen
-		Session::flash('store','The billable item was successfully added!');
+		Session::flash('success','The billable item was successfully added!');
 
 		// redirect to another page
 	   return redirect()->route('invoicer.invoices.edit', $item->invoice_id);
@@ -208,7 +208,7 @@ class InvoiceItemsController extends Controller
 		$this::invUpdate($request->invoice_id);
 
 		// set a flash message to be displayed on screen
-		Session::flash('update','The billable item was updated successfully!');
+		Session::flash('info','The billable item was updated successfully!');
 
 	   // redirect to another page
 	   return redirect()->route('invoicer.invoices.edit', $item->invoice_id);

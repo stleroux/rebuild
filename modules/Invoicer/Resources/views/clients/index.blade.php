@@ -9,7 +9,7 @@
 						Clients
 						@if(checkPerm('invoicer_client_create'))
 							<span class="float-right">
-								<a href="{{ route('invoicer.clients.create') }}" class="btn btn-xs btn-secondary">
+								<a href="{{ route('invoicer.clients.create') }}" class="btn btn-sm btn-secondary">
 									<i class="far fa-plus-square"></i>
 									Add New Client
 								</a>
@@ -24,6 +24,7 @@
 										<th>@sortablelink('id','Client ID')</th>
 										<th>@sortablelink('company_name','Company Name')</th>
 										<th>@sortablelink('contact_name','Contact Name')</th>
+										<th>@sortablelink('email','Contact Email')</th>
 										<th></th>
 									</tr>
 								</thead>
@@ -33,6 +34,7 @@
 										<td>{{ $client->id }}</td>
 										<td>{{ $client->company_name }}</td>
 										<td>{{ $client->contact_name }}</td>
+										<td>{{ $client->email }}</td>
 										<td>
 											<form action="{{ route('invoicer.clients.destroy',[$client->id]) }}" method="POST" 
 												onsubmit="return confirm('Do you really want to delete this client?');"
@@ -40,21 +42,21 @@
 												{{ csrf_field() }}
 												
 												@if(checkPerm('invoicer_client_show'))
-													<a href="{{ route('invoicer.invoices.create', $client->id) }}" class="btn btn-xs btn-outline-primary">
+													<a href="{{ route('invoicer.invoices.create', $client->id) }}" class="btn btn-sm btn-outline-primary">
 														<i class="far fa-plus-square"></i>
 														New Invoice
 													</a>
 												@endif
 
 												@if(checkPerm('invoicer_client_show'))
-													<a href="{{ route('invoicer.clients.show', $client->id) }}" class="btn btn-xs btn-outline-primary">
+													<a href="{{ route('invoicer.clients.show', $client->id) }}" class="btn btn-sm btn-outline-primary">
 														<i class="fa fa-eye" aria-hidden="true"></i>
 														View
 													</a>
 												@endif
 												
 												@if(checkPerm('invoicer_client_edit'))
-													<a href="{{ route('invoicer.clients.edit', $client->id) }}" class="btn btn-xs btn-primary">
+													<a href="{{ route('invoicer.clients.edit', $client->id) }}" class="btn btn-sm btn-primary">
 														<i class="fa fa-edit"></i>
 														Edit
 													</a>
@@ -63,7 +65,7 @@
 												<input type="hidden" name="_method" value="DELETE" />
 												
 												@if(checkPerm('invoicer_client_delete'))
-													<button type="submit" class="btn btn-xs btn-danger">
+													<button type="submit" class="btn btn-sm btn-danger">
 														<i class="fa fa-trash-alt"></i>
 														Delete
 													</button>
@@ -112,16 +114,19 @@
 							<input type="text" class="form-control" name="searchWord">
 						</div>
 						<div class="form-group text-center">
-							<button type="submit" value="Search" class="btn btn-xs btn-primary">
+							<button type="submit" value="Search" class="btn btn-sm btn-primary">
 								<i class="fa fa-binoculars" aria-hidden="true"></i>
 								Search
 							</button>
-							<a href="{{ route('invoicer.clients') }}" class="btn btn-xs btn-outline-secondary">
+							<a href="{{ route('invoicer.clients') }}" class="btn btn-sm btn-outline-secondary">
 								<i class="far fa-square"></i>
 								Reset
 							</a>
 						</div>
 					</form>
+				</div>
+				<div class="card-footer">
+					Click the Reset button to clear search parameters and display all clients
 				</div>
 			</div>
 		</div>

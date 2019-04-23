@@ -35,7 +35,6 @@ return [
    // INVOICE SETTINGS
 
    'termsAndConditions' => '
-      <b>Terms and Conditions</b>
       Content of terms and conditions will go here',
 
    'hst_rate' => 0.13,

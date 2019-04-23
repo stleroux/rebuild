@@ -2,16 +2,19 @@
 
 namespace Modules\Invoicer\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Http\Controllers\Controller;
 use Modules\Invoicer\Entities\Client;
 use Modules\Invoicer\Entities\Invoice;
 use Modules\Invoicer\Entities\InvoiceItem;
 use Modules\Invoicer\Entities\Product;
+use Modules\Invoicer\Mail\InvoicedPDFMail;
 use carbon\Carbon;
 use Config;
 use DB;
+use PDF;
 use Session;
 
 class InvoicesController extends Controller
@@ -79,7 +82,7 @@ class InvoicesController extends Controller
 		$invoice = Invoice::find($id);
 		$invoice->delete();
 
-		Session::flash('delete','The invoice was deleted successfully.');
+		Session::flash('danger','The invoice was deleted successfully.');
 		return redirect()->route('invoicer.invoices');
 	}
 
@@ -229,10 +232,19 @@ class InvoicesController extends Controller
 			$invoice->invoiced_at = Carbon::now();
 		$invoice->save();
 
-		// Set flash data with success message
-		Session::flash ('success', 'This invoice was successfully updated!');
+		// Create PDF file and store it
+		$pdf = PDF::loadView('invoicer::invoices.invoicedPDF', ['invoice'=>$invoice]);
+		$pdf->save(public_path().'/invoices/'. $invoice->id . '.pdf');
 
-		// Redirect to posts.show
+		// Send email
+      // Mail::to('stephaneandstacie@gmail.com')->send(new InvoicedPDFMail($invoice));
+
+      // Email PDF to client's email
+      Mail::to($invoice->client->email)->send(new InvoicedPDFMail($invoice));
+
+		// Set flash data with success message
+		Session::flash ('success', 'This invoice was successfully updated and emailed to the client!');
+		// Redirect
 		return redirect()->route('invoicer.invoices');
 	}
 
@@ -362,7 +374,7 @@ class InvoicesController extends Controller
 		}
 
 		// set a flash message to be displayed on screen
-		Session::flash('store','The invoice was successfully saved!');
+		Session::flash('success','The invoice was successfully saved!');
 
 		// redirect to another page
 	   return redirect()->route('invoicer.invoices');
@@ -415,7 +427,7 @@ class InvoicesController extends Controller
 		$invoice->save();
 
 		// Set flash data with success message
-		Session::flash ('update', 'This invoice was successfully updated!');
+		Session::flash ('info', 'This invoice was successfully updated!');
 
 		// Redirect to posts.show
 		return redirect()->route('invoicer.invoices');

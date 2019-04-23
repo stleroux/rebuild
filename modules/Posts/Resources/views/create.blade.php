@@ -16,7 +16,7 @@
 @section('content')
 
 	{!! Form::open(['route' => 'posts.store', 'files'=>'true']) !!}
-		<div class="card mb-2">
+		<div class="card mb-3">
 			<div class="card-header card_header py-1">
 				New Post
 				<div class="float-right">
@@ -93,9 +93,9 @@
 						</div>
 			 		</div>
 			 	</div>
-		  	</div>
 		  	
-		</div>
+         </div>
+      </div>
   	{!! Form::close() !!}
 
 @stop

@@ -10,11 +10,11 @@
 			<div class="card-header">
 				Edit Product
 				<span class="float-right">
-					<a href="{{ route('invoicer.products') }}" class="btn btn-xs btn-outline-secondary">
+					<a href="{{ route('invoicer.products') }}" class="btn btn-sm btn-outline-secondary">
 						<i class="fa fa-backward"></i>
 						Cancel
 					</a>
-					{{ Form::button('<i class="fa fa-save"></i> Update Product', ['class' => 'btn btn-xs btn-primary', 'type' => 'submit']) }}
+					{{ Form::button('<i class="fa fa-save"></i> Update Product', ['class' => 'btn btn-sm btn-primary', 'type' => 'submit']) }}
 				</span>
 			</div>
 			

@@ -1,5 +1,5 @@
 <div class="text-center">
-	
+
 	@if ($message = Session::get('store'))
 		<div class="bg-success text-dark py-0" id="success-alert">{{ $message }}</div>
 		<div class="py-0" id="success-empty"><br /></div>

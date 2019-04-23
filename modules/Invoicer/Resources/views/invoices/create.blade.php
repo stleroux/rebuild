@@ -10,11 +10,11 @@
 			<div class="card-header">
 				Create New Invoice
 				<span class="float-right">
-					<a href="{{ route('invoicer.invoices') }}" class="btn btn-xs btn-outline-secondary">
+					<a href="{{ route('invoicer.invoices') }}" class="btn btn-sm btn-outline-secondary">
 						<i class="fas fa-backward"></i>
 						Cancel
 					</a>
-					{{ Form::button('<i class="fa fa-save"></i> Save Invoice', ['class' => 'btn btn-xs btn-primary', 'type' => 'submit']) }}
+					{{ Form::button('<i class="fa fa-save"></i> Save Invoice', ['class' => 'btn btn-sm btn-primary', 'type' => 'submit']) }}
 				</span>
 			</div>
 			
@@ -55,7 +55,7 @@
 
 						<div class="form-group {{ $errors->has('status') ? 'has-error' : '' }}">
 							{{ Form::label ('status', 'Status', ['class'=>'required']) }}
-							{{ Form::select('status', ['logged'=>'Logged', 'paid'=>'Paid', 'invoiced'=>'Invoiced'], null, ['placeholder'=>'Pick one...', 'class'=>'form-control']) }}
+							{{ Form::select('status', ['logged'=>'Logged', 'invoiced'=>'Invoiced', 'paid'=>'Paid'], null, ['placeholder'=>'Pick one...', 'class'=>'form-control']) }}
 							<span class="text-danger">{{ $errors->first('status') }}</span>
 						</div>
 					</div>

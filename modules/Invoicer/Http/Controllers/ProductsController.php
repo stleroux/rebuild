@@ -63,7 +63,7 @@ class ProductsController extends Controller
 		$product->delete();
 
 		// Set flash data with success message
-		Session::flash('delete','The product was deleted successfully.');
+		Session::flash('danger','The product was deleted successfully.');
 
 		// Redirect
 		return redirect()->route('invoicer.products');
@@ -128,10 +128,10 @@ class ProductsController extends Controller
 		}
 
 		if($request->selection == 'details') {
-			$products = Product::where('details', 'like', $request->searchWord . '%')->paginate(10);
+			$products = Product::where('details', 'like', '%' . $request->searchWord . '%')->paginate(10);
 		}
 		
-		return view('invoicer::products', compact('products'));
+		return view('invoicer::products.index', compact('products'));
 	}
 
 
@@ -179,7 +179,7 @@ class ProductsController extends Controller
 		$product->save();
 
 		// set a flash message to be displayed on screen
-		Session::flash('store','The product was successfully saved!');
+		Session::flash('success','The product was successfully saved!');
 
 		// redirect to another page
 	   return redirect()->route('invoicer.products');
@@ -210,7 +210,7 @@ class ProductsController extends Controller
 		$product->save();
 		
 		// Set flash data with success message
-		Session::flash ('update', 'The product was successfully updated!');
+		Session::flash ('info', 'The product was successfully updated!');
 
 		// Redirect
 		return redirect()->route('invoicer.products');

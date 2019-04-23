@@ -13,18 +13,16 @@ use Illuminate\Support\Facades\Input;
 
 Auth::routes();
 
-Route::get('/test', 'DashboardController@test')->name('test');
 Route::get('/stats', 'DashboardController@stats')->name('stats');
 Route::get('/dashboard', 'DashboardController@dashboard')->name('dashboard');
 
 Route::get('/', 'SiteController@homepage')->name('home');
-Route::get('/contact', 'SiteController@contact')->name('contact');
 Route::get('/about', 'SiteController@about')->name('about');
 Route::get('/terms', 'SiteController@terms')->name('terms');
 Route::get('/privacy', 'SiteController@privacy')->name('privacy');
 Route::view('/help', 'help.index');
-
-// Route::get('/blog', 'SiteController@blog')->name('blog');
+Route::get('contact', 'ContactFormController@create');
+Route::post('contact', 'ContactFormController@store');
 
 Route::get('comments/{comment}/delete', 'CommentsController@delete')->name('comments.delete');
 Route::resource('comments', 'CommentsController');
@@ -34,7 +32,7 @@ Route::resource('permissions', 'PermissionsController');
 
 Route::get('users/{user}/delete', 'UsersController@delete')->name('users.delete');
 
-// Allo admin to change user password
+// Allow admin to change user password
 Route::get('users/{user}/changeUserPWD', 'UsersController@changeUserPWD')->name('users.changeUserPWD');
 Route::post('users/{user}/changeUserPWDPost', 'UsersController@changeUserPWDPost')->name('users.changeUserPWDPost');
 Route::resource('users', 'UsersController');
@@ -43,7 +41,6 @@ Route::get('modules/{module}/disableModule', 'ModulesController@disableModule')-
 Route::get('modules/{module}/enableModule', 'ModulesController@enableModule')->name('modules.enableModule');
 Route::get('modules/{module}/deleteModule', 'ModulesController@deleteModule')->name('modules.deleteModule');
 Route::post('modules/{module}/deleteModulePost', 'ModulesController@deleteModulePost')->name('modules.deleteModulePost');
-// Route::resource('components', 'ComponentsController');
 
 Route::get('modules/{module}/delete', 'ModulesController@delete')->name('modules.delete');
 Route::resource('modules', 'ModulesController');

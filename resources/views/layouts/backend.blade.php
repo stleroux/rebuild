@@ -12,6 +12,7 @@
    <!-- Scripts -->
    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
    {{-- Removed above because it interferes with DataTable --}}
+   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
    <link rel="stylesheet" href="/css/jquery.datetimepicker.min.css">
 

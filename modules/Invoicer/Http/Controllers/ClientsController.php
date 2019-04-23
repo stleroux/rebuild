@@ -64,7 +64,7 @@ class ClientsController extends Controller
 		$client->delete();
 
 		// Set flash data with success message
-		Session::flash('success','The client was deleted successfully.');
+		Session::flash('danger','The client was deleted successfully.');
 
 		// Redirect
 		return redirect()->route('invoicer.clients');
@@ -170,6 +170,7 @@ class ClientsController extends Controller
 		$this->validate($request, array(
 			'company_name' => 'required',
 			'contact_name' => 'required',
+			'email' => 'required|email'
 		));
 
 		// save the data in the database
@@ -190,10 +191,11 @@ class ClientsController extends Controller
 		$client->save();
 
 		// set a flash message to be displayed on screen
-		Session::flash('store','The client was successfully saved!');
+		Session::flash('success','The client was successfully saved!');
 
 		// redirect to another page
 	   return redirect()->route('invoicer.clients');
+	   // return redirect()->route('invoicer.clients')->with('success','The client was successfully saved!');
 	}
 
 
@@ -212,6 +214,7 @@ class ClientsController extends Controller
 		$this->validate($request, array(
 			'company_name' => 'required',
 			'contact_name' => 'required',
+			'email' => 'required|email'
 		));
 
 		$client = Client::find($id);
@@ -230,7 +233,7 @@ class ClientsController extends Controller
 		$client->save();
 		
 		// Set flash data with success message
-		Session::flash ('update', 'The client was successfully updated!');
+		Session::flash ('info', 'The client was successfully updated!');
 
 		// Redirect
 		return redirect()->route('invoicer.clients');

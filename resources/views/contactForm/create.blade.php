@@ -10,8 +10,6 @@
 
 @section ('content')
 
-   @include('errors.construction')
-
    <div class="card mb-2">
 
       <div class="card-header card_header">
@@ -20,21 +18,29 @@
       </div>
       
       <div class="card-body card_body">
-         <form action="{{-- {{ route('postContact') }} --}}" method="POST" class="px-0 py-2">
-            {{ csrf_field() }}
-            <!-- Use url() instead of route() when there is no named route -->
-         
-            <div class="form-group py-0 {{ $errors->has('email') ? 'has-error' : '' }}">
-               {{ Form::label('email', 'Email', ['class'=>'required']) }}
-               <input id="email" name="email" class="form-control form-control-sm" autofocus="autofocus" value="{{ old('email') }}">
-               <span class="text-danger">{{ $errors->first('email') }}</span>
-            </div>
+         <form action="/contact" method="POST" class="px-0 py-2">
+   
+            @csrf
             
             <div class="form-group py-0 {{ $errors->has('subject') ? 'has-error' : '' }}">
                {{ Form::label('subject', 'Subject', ['class'=>'required']) }}
-               <input id="subject" name="subject" class="form-control form-control-sm" value="{{ old('subject') }}">
+               <input id="subject" name="subject" class="form-control form-control-sm" autofocus="autofocus" value="{{ old('subject') }}">
                <span class="text-danger">{{ $errors->first('subject') }}</span>
             </div>
+
+            @if(Auth::user())
+               <div class="form-group py-0 {{ $errors->has('email') ? 'has-error' : '' }}">
+                  {{ Form::label('email', 'Email', ['class'=>'required']) }}
+                  <input id="email" name="email" class="form-control form-control-sm" readonly="readonly" value="{{ Auth::user()->email }}">
+                  <span class="text-danger">{{ $errors->first('email') }}</span>
+               </div>
+            @else
+               <div class="form-group py-0 {{ $errors->has('email') ? 'has-error' : '' }}">
+                  {{ Form::label('email', 'Email', ['class'=>'required']) }}
+                  <input id="email" name="email" class="form-control form-control-sm" value="{{ old('email') }}">
+                  <span class="text-danger">{{ $errors->first('email') }}</span>
+               </div>
+            @endif
             
             <div class="form-group py-0 {{ $errors->has('message') ? 'has-error' : '' }}">
                {{ Form::label('message', 'Message', ['class'=>'required']) }}
@@ -42,10 +48,12 @@
                <span class="text-danger">{{ $errors->first('message') }}</span>
             </div>
 
-            <input type="submit" value="Send Message" class="btn btn-sm btn-success btn-block" disabled="disabled">
-               {{-- <i class="fa fa-envelope-o" aria-hidden="true"></i> --}}
+            @include('common.reCaptcha')
 
-            <div class="g-recaptcha" data-sitekey="6LduZyYTAAAAANM_G6pjSZs4O61YJpVDPlLABw11"></div>
+            <div class="text-center">
+               <input type="submit" value="Send Message" class="btn btn-sm btn-primary">
+            </div>
+
          </form>
       </div>
 

@@ -9,11 +9,11 @@
 			<div class="card-header">
 				Edit Invoice
 				<span class="float-right">
-					<a href="{{ route('invoicer.invoices') }}" class="btn btn-xs btn-outline-secondary">
+					<a href="{{ route('invoicer.invoices') }}" class="btn btn-sm btn-outline-secondary">
 						<i class="fa fa-backward"></i>
 						Cancel
 					</a>
-					{{ Form::button('<i class="far fa-save"></i> Update Invoice', ['class' => 'btn btn-xs btn-primary', 'type' => 'submit']) }}
+					{{ Form::button('<i class="far fa-save"></i> Update Invoice', ['class' => 'btn btn-sm btn-primary', 'type' => 'submit']) }}
 				</span>
 			</div>
 			
@@ -82,7 +82,7 @@
 					<div class="col-md-3">
 						<div class="form-group {{ $errors->has('status') ? 'has-error' : '' }}">
 							{{ Form::label ('status', 'Status', ['class'=>'required']) }}
-							{{ Form::select('status', ['logged'=>'Logged', 'paid'=>'Paid', 'invoiced'=>'Invoiced'], $invoice->status, ['class'=>'form-control']) }}
+							{{ Form::select('status', ['logged'=>'Logged', 'invoiced'=>'Invoiced', 'paid'=>'Paid'], $invoice->status, ['class'=>'form-control']) }}
 							<span class="text-danger">{{ $errors->first('status') }}</span>
 						</div>
 						{{-- Sub Total --}}
@@ -133,7 +133,7 @@
 				@if(checkPerm('invoicer_invoice_edit'))
 					@if($invoice->status != 'paid')
 						<span class="float-right">
-							<a href="{{ route('invoicer.invoiceItems.create', $invoice->id) }}" class="btn btn-xs btn-primary">
+							<a href="{{ route('invoicer.invoiceItems.create', $invoice->id) }}" class="btn btn-sm btn-primary">
 								<i class="far fa-plus-square"></i>
 								Add Billable
 							</a>
@@ -157,7 +157,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							@foreach($invoice->invoiceItems as $item)
+							@foreach($invoice->invoiceItems->sortByDesc('work_date') as $item)
 								<tr>
 									<td>{{ $item->product->details }}</td>
 									<td nowrap="nowrap">{{ $item->work_date->format('M d, Y') }}</td>
@@ -172,14 +172,14 @@
 											<input type="hidden" name="_method" value="DELETE" />
 
 											@if(checkPerm('invoicer_invoice_edit'))
-												<a href="{{ route('invoiceItems.edit', $item->id) }}" class="btn btn-xs btn-primary">
+												<a href="{{ route('invoiceItems.edit', $item->id) }}" class="btn btn-sm btn-primary">
 													<i class="fa fa-edit"></i>
 													Edit
 												</a>
 											@endif
 											
 											@if(checkPerm('invoicer_invoice_edit'))
-												<button type="submit" class="btn btn-xs btn-danger">
+												<button type="submit" class="btn btn-sm btn-danger">
 													<i class="fa fa-trash-alt"></i>
 													Delete
 												</button>

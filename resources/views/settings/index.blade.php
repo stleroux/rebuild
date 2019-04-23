@@ -10,7 +10,7 @@
 @endsection
 
 @section('right_column')
-   @include('settings.blocks.create')
+   {{-- @include('settings.blocks.create') --}}
 @endsection
 
 @section('content')
@@ -24,10 +24,14 @@
             <div class="card mb-2">
                <div class="card-header p-1 m-0">
                   <div class="float-right">
-                     <button type="submit" class="btn btn-sm btn-outline-bprimary">
+                     {{-- <button type="submit" class="btn btn-sm btn-outline-bprimary">
                      <i class="fa fa-save"></i>
                      Update Site Settings
-                     </button>
+                     </button> --}}
+                     {{-- @if(checkPerm('permission_create')) --}}
+                        @include('common.buttons.update', ['model'=>'setting'])
+                        @include('common.buttons.add', ['model'=>'setting'])
+                     {{-- @endif --}}
                   </div>
                   
                   <ul class="nav nav-tabs card-header-tabs">
@@ -46,13 +50,13 @@
                <div class="card-body py-2">
                   <div class="tab-content" id="myTabContent">
                      <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
-                        @include('settings.tabs.general')
+                        @include('settings.tab_general')
                      </div>
                      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        @include('settings.tabs.profile')
+                        @include('settings.tab_profile')
                      </div>
                      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                        @include('settings.tabs.contact')
+                        @include('settings.tab_contact')
                      </div>
                   </div>
                </div>

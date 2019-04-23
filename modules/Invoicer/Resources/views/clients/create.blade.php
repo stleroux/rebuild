@@ -10,11 +10,11 @@
 			<div class="card-header">
 				Create New Client
 				<span class="float-right">
-					<a href="{{ route('invoicer.clients') }}" class="btn btn-xs btn-outline-secondary">
+					<a href="{{ route('invoicer.clients') }}" class="btn btn-sm btn-outline-secondary">
 						<i class="fa fa-backward"></i>
 						Cancel
 					</a>
-					{{ Form::button('<i class="fa fa-save"></i> Save Client', ['class' => 'btn btn-xs btn-primary', 'type' => 'submit']) }}
+					{{ Form::button('<i class="fa fa-save"></i> Save Client', ['class' => 'btn btn-sm btn-primary', 'type' => 'submit']) }}
 				</span>
 			</div>
 			
@@ -85,7 +85,7 @@
 							<span class="text-danger">{{ $errors->first('fax') }}</span>
 						</div>
 						<div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
-							{{ Form::label ('email', 'Email Address:')}}
+							{{ Form::label ('email', 'Email Address:', ['class'=>'required'])}}
 							{{ Form::text ('email', null, array('class'=>'form-control')) }}
 							<span class="text-danger">{{ $errors->first('email') }}</span>
 						</div>

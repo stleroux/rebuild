@@ -43,13 +43,13 @@
 			<span class="float-right">
 				@if(checkPerm('invoicer_invoice_edit'))
 					@if(Request::is('invoicer/invoices/logged'))
-						<a href="{{ route('invoices.status_invoiced_all') }}" class="btn btn-xs btn-outline-primary">
+						<a href="{{ route('invoices.status_invoiced_all') }}" class="btn btn-sm btn-outline-primary">
 							<i class="far fa-file-alt"></i>
 							Mark All as Invoiced
 						</a>
 					@endif
 					@if(Request::is('invoicer/invoices/invoiced'))
-						<a href="{{ route('invoices.status_paid_all') }}" class="btn btn-xs btn-outline-primary">
+						<a href="{{ route('invoices.status_paid_all') }}" class="btn btn-sm btn-outline-primary">
 							<i class="far fa-money-bill-alt"></i>
 							Mark All as Paid
 						</a>
@@ -57,7 +57,7 @@
 				@endif
 
 				@if(checkPerm('invoicer_invoice_create'))
-					<a href="{{ route('invoicer.invoices.create') }}" class="btn btn-xs btn-secondary">
+					<a href="{{ route('invoicer.invoices.create') }}" class="btn btn-sm btn-secondary">
 						<i class="far fa-plus-square"></i>
 						Add New Invoice
 					</a>
@@ -115,13 +115,13 @@
 
 									@if(checkPerm('invoicer_invoice_edit'))
 										@if($invoice->status == 'logged')
-											<a href="{{ route('invoices.status_invoiced', $invoice->id) }}" class="btn btn-xs btn-outline-primary" title="Invoice">
+											<a href="{{ route('invoices.status_invoiced', $invoice->id) }}" class="btn btn-sm btn-outline-primary" title="Invoice">
 												<i class="far fa-file-alt"></i>
 												Invoice
 											</a>
 										@endif
 										@if($invoice->status == 'invoiced')
-											<a href="{{ route('invoices.status_paid', $invoice->id) }}" class="btn btn-xs btn-outline-primary" title="Paid">
+											<a href="{{ route('invoices.status_paid', $invoice->id) }}" class="btn btn-sm btn-outline-primary" title="Paid">
 												<i class="far fa-money-bill-alt"></i>
 												Paid
 											</a>
@@ -129,14 +129,14 @@
 									@endif
 
 									@if(checkPerm('invoicer_invoice_show'))
-										<a href="{{ route('invoicer.invoices.show', $invoice->id) }}" class="btn btn-xs btn-outline-primary" title="View invoice">
+										<a href="{{ route('invoicer.invoices.show', $invoice->id) }}" class="btn btn-sm btn-outline-primary" title="View invoice">
 											<i class="fa fa-eye"></i>
 											View
 										</a>
 									@endif
 
 									@if(checkPerm('invoicer_invoice_edit'))
-										<a href="{{ route('invoicer.invoices.edit', $invoice->id) }}" class="btn btn-xs btn-primary" title="Edit invoice">
+										<a href="{{ route('invoicer.invoices.edit', $invoice->id) }}" class="btn btn-sm btn-primary" title="Edit invoice">
 											<i class="fa fa-edit"></i>
 											Edit
 										</a>
@@ -144,7 +144,7 @@
 
 									<input type="hidden" name="_method" value="DELETE" />
 									@if(checkPerm('invoicer_invoice_delete'))
-										<button type="submit" class="btn btn-xs btn-danger">
+										<button type="submit" class="btn btn-sm btn-danger">
 											<i class="fa fa-trash-alt"></i>
 											Delete
 										</button>
