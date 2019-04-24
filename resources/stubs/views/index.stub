@@ -1,0 +1,73 @@
+@extends('layouts.')
+
+@section('stylesheets')
+   {{-- {{ Html::style('css/recipes.css') }} --}}
+@endsection
+
+@section('left_column')
+   {{-- @include('blocks.adminNav') --}}
+   {{-- @include('{{modelNamePluralLowerCase}}.sidebar') --}}
+@endsection
+
+@section('right_column')
+@endsection
+
+@section('content')
+
+   <div class="row">
+      <div class="col">
+         <div class="card mb-2">
+            <!--CARD HEADER-->
+            <div class="card-header card_header">
+               {{-- <i class="fa fa-sitemap"></i> --}}
+               {{modelNamePlural}}
+               <span class="float-right">
+                  @include('common.buttons.help', ['bookmark'=>'{{modelNamePluralLowerCase}}'])
+                  @include('common.buttons.add', ['model'=>'{{modelNameSingularLowerCase}}', 'type'=>''])
+               </span>
+            </div>
+
+            <!--CARD BODY-->
+            @if(${{modelNamePluralLowerCase}}->count() > 0)
+               <div class="card-body card_body pb-0">
+                  @include('common.alphabet', ['model'=>'{{modelNameSingularLowerCase}}', 'page'=>'index'])
+                  <table id="datatable" class="table table-hover table-sm">
+                     <thead>
+                        <tr>
+                           <th>ID</th>
+                           {{-- Add more columns here --}}
+                           <th>Created</th>
+                           <th class="no-sort"></th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        @foreach (${{modelNamePluralLowerCase}} as ${{modelNameSingularLowerCase}})
+                           <tr>
+                              <td>{{ ${{modelNameSingularLowerCase}}->id }}</td>
+                              {{-- Add more columns here --}}
+                              <td data-order="{{ ${{modelNameSingularLowerCase}}->created_at}}">{{ ${{modelNameSingularLowerCase}}->created_at ? ${{modelNameSingularLowerCase}}->created_at->format('M d, Y') : 'no data found' }}</td>
+                              <td class="text-right">
+                                 @if(checkPerm('{{modelNameSingularLowerCase}}_edit'))
+                                    @include('common.buttons.edit', ['model'=>'{{modelNameSingularLowerCase}}', 'id'=>${{modelNameSingularLowerCase}}->id])
+                                 @endif
+
+                                 @if(checkPerm('{{modelNameSingularLowerCase}}_delete'))
+                                    @include('common.buttons.delete', ['model'=>'{{modelNameSingularLowerCase}}', 'id'=>${{modelNameSingularLowerCase}}->id])
+                                 @endif
+                              </td>
+                           </tr>
+                        @endforeach
+                     </tbody>
+                  </table>
+               </div>
+            @else
+               <div class="card-body card_body">
+                  {{ setting('no_records_found') }}
+               </div>
+            @endif
+            
+         </div>
+      </div>
+   </div>
+
+@endsection
