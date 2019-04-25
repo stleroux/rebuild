@@ -1,1 +1,39 @@
-EDIT STUB
+@extends ('layouts.backend')
+
+@section ('stylesheets')
+   {{-- {{ Html::style('css/recipes.css') }} --}}
+@stop
+
+@section('left_column')
+   {{-- @include('blocks.adminNav') --}}
+   {{-- @include('recipes::backend.sidebar') --}}
+@endsection
+
+@section('right_column')
+@endsection
+
+@section ('content')
+   
+   {!! Form::model(${{modelNameSingularLowerCase}}, ['route'=>['{{modelNamePluralLowerCase}}.update', ${{modelNameSingularLowerCase}}->id], 'method' => 'PUT', 'files' => true]) !!}
+      
+      <div class="card mb-3">
+         
+         <div class="card-header">
+            <i class="fa fa-edit"></i>
+            Edit {{modelNameSingularLowerCase}}
+            <span class="float-right">
+               @include('common.buttons.help', ['model'=>'{{modelNameSingularLowerCase}}', 'bookmark'=>'{{modelNamePluralLowerCase}}'])
+               @include('common.buttons.cancel', ['model'=>'{{modelNameSingularLowerCase}}'])
+               @include('common.buttons.update', ['model'=>'{{modelNameSingularLowerCase}}'])
+            </span>
+         </div>
+
+         <div class="card-body">
+            @include('{{modelNamePluralLowerCase}}.form')
+         </div>
+
+      </div>
+
+   {!! Form::Close() !!}
+
+@endsection

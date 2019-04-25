@@ -51,6 +51,9 @@ class CrudGeneratorCommand extends Command
         $this->info('Creating Show view');
         $this->showView($name);
 
+        $this->info('Creating form');
+        $this->showForm($name);
+
         // Add resource controller to routes files
         $this->info('Adding resource route');
         File::append(base_path('routes/web.php'), 'Route::resource(\'' . strtolower(Str::plural($name)) . "', '" . (Str::plural($name)) . "Controller');"). "<br />";
@@ -212,9 +215,6 @@ class CrudGeneratorCommand extends Command
             $this->getStub('views/index')
         );
 
-        // if(!file_exists($path = resource_path("/views/" . strtolower(Str::plural($name)))))
-        //     mkdir($path, 0777, true);
-
         file_put_contents(resource_path("/views/".Str::plural($name)."/index.blade.php"), $template);
     }
 
@@ -238,6 +238,28 @@ class CrudGeneratorCommand extends Command
         );
 
         file_put_contents(resource_path("/views/".Str::plural($name)."/show.blade.php"), $template);
+    }
+
+
+    protected function showForm($name)
+    {
+        $template = str_replace(
+            [
+                '{{modelName}}',
+                '{{modelNamePluralLowerCase}}',
+                '{{modelNameSingularLowerCase}}',
+                '{{modelNamePlural}}',
+            ],
+            [
+                $name,                          // Place
+                strtolower(Str::plural($name)), // places
+                strtolower($name),              // place
+                Str::plural($name)              // Places
+            ],
+            $this->getStub('views/form')
+        );
+
+        file_put_contents(resource_path("/views/".Str::plural($name)."/form.blade.php"), $template);
     }
 
 
