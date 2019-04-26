@@ -26,6 +26,10 @@ class CrudGeneratorCommand extends Command
         // Get the name of the argument
         $name = $this->argument('name');
 
+
+        $this->info('Creating necessary folders');
+        $this->createFolders($name);
+
         // Create the files
         $this->info('Creating controller');
         $this->controller($name);
@@ -51,12 +55,12 @@ class CrudGeneratorCommand extends Command
         $this->info('Creating Show view');
         $this->showView($name);
 
-        $this->info('Creating form');
-        $this->showForm($name);
+        $this->info('Creating Form View');
+        $this->formView($name);
 
         // Add resource controller to routes files
         $this->info('Adding resource route');
-        File::append(base_path('routes/web.php'), 'Route::resource(\'' . strtolower(Str::plural($name)) . "', '" . (Str::plural($name)) . "Controller');"). "<br />";
+        File::append(base_path('routes/web.php'), 'Route::resource(\'' . strtolower(Str::plural($name)) . "', '" . (Str::plural($name)) . "Controller');\n");
 
         // Create a migration file
         $this->info('Creating migration');
@@ -67,9 +71,13 @@ class CrudGeneratorCommand extends Command
             ]
         );
 
-        $this->info('');
-        $this->info('Done. Don\' forget to update the migration file and then run "php artisan migrate"');
-
+        $this->info('======================================================================================');
+        $this->info('Almost there.');
+        $this->info('Don\'t forget to:');
+        $this->info('-> Update the migration file and then run "php artisan migrate"');
+        $this->info('-> Update the views');
+        $this->info('-> Update the form');
+        $this->info('======================================================================================');
     }
 
 
@@ -99,9 +107,6 @@ class CrudGeneratorCommand extends Command
             $this->getStub('Request')
         );
 
-        if(!file_exists($path = app_path('/Http/Requests')))
-            mkdir($path, 0777, true);
-
         file_put_contents(app_path("/Http/Requests/{$name}Request.php"), $template);
     }
 
@@ -130,120 +135,43 @@ class CrudGeneratorCommand extends Command
 
     protected function createView($name)
     {
-        $template = str_replace(
-            [
-                '{{modelName}}',
-                '{{modelNamePluralLowerCase}}',
-                '{{modelNameSingularLowerCase}}',
-                '{{modelNamePlural}}',
-            ],
-            [
-                $name,                          // Place
-                strtolower(Str::plural($name)), // places
-                strtolower($name),              // place
-                Str::plural($name)              // Places
-            ],
-            $this->getStub('views/create')
-        );
-
-        if(!file_exists($path = resource_path("/views/" . strtolower(Str::plural($name)))))
-            mkdir($path, 0777, true);
-
-        file_put_contents(resource_path("/views/".Str::plural($name)."/create.blade.php"), $template);
+        file_put_contents(resource_path("/views/".strtolower(Str::plural($name))."/create.blade.php"), $this->getTemplate('views/create'));
     }
 
 
     protected function deleteView($name)
     {
-        $template = str_replace(
-            [
-                '{{modelName}}',
-                '{{modelNamePluralLowerCase}}',
-                '{{modelNameSingularLowerCase}}',
-                '{{modelNamePlural}}',
-            ],
-            [
-                $name,                          // Place
-                strtolower(Str::plural($name)), // places
-                strtolower($name),              // place
-                Str::plural($name)              // Places
-            ],
-            $this->getStub('views/delete')
-        );
-
-        file_put_contents(resource_path("/views/".Str::plural($name)."/delete.blade.php"), $template);
+        file_put_contents(resource_path("/views/".strtolower(Str::plural($name))."/delete.blade.php"), $this->getTemplate('views/delete'));
     }
 
 
     protected function editView($name)
     {
-        $template = str_replace(
-            [
-                '{{modelName}}',
-                '{{modelNamePluralLowerCase}}',
-                '{{modelNameSingularLowerCase}}',
-                '{{modelNamePlural}}',
-            ],
-            [
-                $name,                          // Place
-                strtolower(Str::plural($name)), // places
-                strtolower($name),              // place
-                Str::plural($name)              // Places
-            ],
-            $this->getStub('views/edit')
-        );
-
-        file_put_contents(resource_path("/views/".Str::plural($name)."/edit.blade.php"), $template);
+        file_put_contents(resource_path("/views/".strtolower(Str::plural($name))."/edit.blade.php"), $this->getTemplate('views/edit'));
     }
 
 
     protected function indexView($name)
     {
-        $template = str_replace(
-            [
-                '{{modelName}}',
-                '{{modelNamePluralLowerCase}}',
-                '{{modelNameSingularLowerCase}}',
-                '{{modelNamePlural}}',
-            ],
-            [
-                $name,                          // Place
-                strtolower(Str::plural($name)), // places
-                strtolower($name),              // place
-                Str::plural($name)              // Places
-            ],
-            $this->getStub('views/index')
-        );
-
-        file_put_contents(resource_path("/views/".Str::plural($name)."/index.blade.php"), $template);
+        file_put_contents(resource_path("/views/".strtolower(Str::plural($name))."/index.blade.php"), $this->getTemplate('views/index'));
     }
 
 
     protected function showView($name)
     {
-        $template = str_replace(
-            [
-                '{{modelName}}',
-                '{{modelNamePluralLowerCase}}',
-                '{{modelNameSingularLowerCase}}',
-                '{{modelNamePlural}}',
-            ],
-            [
-                $name,                          // Place
-                strtolower(Str::plural($name)), // places
-                strtolower($name),              // place
-                Str::plural($name)              // Places
-            ],
-            $this->getStub('views/show')
-        );
-
-        file_put_contents(resource_path("/views/".Str::plural($name)."/show.blade.php"), $template);
+        file_put_contents(resource_path("/views/".strtolower(Str::plural($name))."/show.blade.php"), $this->getTemplate('views/show'));
     }
 
 
-    protected function showForm($name)
+    protected function formView($name)
     {
-        $template = str_replace(
+        file_put_contents(resource_path("/views/".strtolower(Str::plural($name))."/form.blade.php"), $this->getTemplate('views/form'));
+    }
+
+
+    protected function getTemplate($viewName)
+    {
+        return $template = str_replace(
             [
                 '{{modelName}}',
                 '{{modelNamePluralLowerCase}}',
@@ -251,16 +179,24 @@ class CrudGeneratorCommand extends Command
                 '{{modelNamePlural}}',
             ],
             [
-                $name,                          // Place
-                strtolower(Str::plural($name)), // places
-                strtolower($name),              // place
-                Str::plural($name)              // Places
+                $this->name,                          // Place
+                strtolower(Str::plural($this->name)), // places
+                strtolower($this->name),              // place
+                Str::plural($this->name)              // Places
             ],
-            $this->getStub('views/form')
+            $this->getStub($viewName)
         );
-
-        file_put_contents(resource_path("/views/".Str::plural($name)."/form.blade.php"), $template);
     }
 
+
+    protected function createFolders($name)
+    {
+        if(!file_exists($path = app_path('/Http/Requests')))
+            mkdir($path, 0777, true);
+
+        // Create folder for views if it doesn't exist already
+        if(!file_exists($path = resource_path("/views/" . strtolower(Str::plural($name)))))
+            mkdir($path, 0777, true);
+    }
 
 }
