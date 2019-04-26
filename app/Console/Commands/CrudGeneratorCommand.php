@@ -27,49 +27,49 @@ class CrudGeneratorCommand extends Command
         $name = $this->argument('name');
 
 
-        $this->info('Creating necessary folders');
-        $this->createFolders($name);
+        // $this->info('Creating necessary folders');
+        // $this->createFolders($name);
 
         // Create the files
         $this->info('Creating controller');
         $this->controller($name);
         
-        $this->info('Creating model');
-        $this->model($name);
+        // $this->info('Creating model');
+        // $this->model($name);
 
-        $this->info('Creating request');
-        $this->request($name);
+        // $this->info('Creating request');
+        // $this->request($name);
 
-        $this->info('Creating Create view');
-        $this->createView($name);
+        // $this->info('Creating Create view');
+        // $this->createView($name);
 
-        $this->info('Creating Delete view');
-        $this->deleteView($name);
+        // $this->info('Creating Delete view');
+        // $this->deleteView($name);
 
-        $this->info('Creating Edit view');
-        $this->editView($name);
+        // $this->info('Creating Edit view');
+        // $this->editView($name);
 
-        $this->info('Creating Index view');
-        $this->indexView($name);
+        // $this->info('Creating Index view');
+        // $this->indexView($name);
 
-        $this->info('Creating Show view');
-        $this->showView($name);
+        // $this->info('Creating Show view');
+        // $this->showView($name);
 
-        $this->info('Creating Form View');
-        $this->formView($name);
+        // $this->info('Creating Form View');
+        // $this->formView($name);
 
         // Add resource controller to routes files
-        $this->info('Adding resource route');
-        File::append(base_path('routes/web.php'), 'Route::resource(\'' . strtolower(Str::plural($name)) . "', '" . (Str::plural($name)) . "Controller');\n");
+        // $this->info('Adding resource route');
+        // File::append(base_path('routes/web.php'), 'Route::resource(\'' . strtolower(Str::plural($name)) . "', '" . (Str::plural($name)) . "Controller');\n");
 
         // Create a migration file
-        $this->info('Creating migration');
-        \Artisan::call('make:migration', 
-            [
-                'name'=>'create_' . strtolower(Str::plural($name)) . '_table',
-                '--create'=>strtolower(Str::plural($name))
-            ]
-        );
+        // $this->info('Creating migration');
+        // \Artisan::call('make:migration', 
+        //     [
+        //         'name'=>'create_' . strtolower(Str::plural($name)) . '_table',
+        //         '--create'=>strtolower(Str::plural($name))
+        //     ]
+        // );
 
         $this->info('======================================================================================');
         $this->info('Almost there.');
@@ -198,5 +198,6 @@ class CrudGeneratorCommand extends Command
         if(!file_exists($path = resource_path("/views/" . strtolower(Str::plural($name)))))
             mkdir($path, 0777, true);
     }
+
 
 }

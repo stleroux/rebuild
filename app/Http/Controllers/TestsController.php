@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\{{modelName}}Request;
-use App\{{modelName}};
+use App\Http\Requests\TestRequest;
+use App\Test;
 
-class {{modelNamePlural}}Controller extends Controller
+class TestsController extends Controller
 {
 ##################################################################################################################
 #  ██████╗ ██████╗ ███╗   ██╗███████╗████████╗██████╗ ██╗   ██╗ ██████╗████████╗
@@ -29,9 +29,9 @@ class {{modelNamePlural}}Controller extends Controller
     public function create()
     {
         // Check if user has required permission
-        // if(!checkPerm('{{modelNameSingularLowerCase}}_create')) { abort(401, 'Unauthorized Access'); }
+        // if(!checkPerm('test_create')) { abort(401, 'Unauthorized Access'); }
 
-        return view('{{modelNamePluralLowerCase}}.create'); 
+        return view('tests.create'); 
     }
 
 
@@ -45,19 +45,19 @@ class {{modelNamePlural}}Controller extends Controller
 // Remove the specified resource from storage
 // Used in the index page and trashAll action to soft delete multiple records
 ##################################################################################################################
-    public function destroy({{modelName}} ${{modelNameSingularLowerCase}})
+    public function destroy(Test $test)
     {
-        // Check if user has required {{modelNameSingularLowerCase}}
-        // if(!checkPerm('{{modelNameSingularLowerCase}}_delete')) { abort(401, 'Unauthorized Access'); }
+        // Check if user has required test
+        // if(!checkPerm('test_delete')) { abort(401, 'Unauthorized Access'); }
 
-        ${{modelNameSingularLowerCase}} = {{modelName}}::findOrFail(${{modelNameSingularLowerCase}}->id);
-        ${{modelNameSingularLowerCase}}->delete();
+        $test = Test::findOrFail($test->id);
+        $test->delete();
 
         // Set flash data with success message
-        Session::flash('delete','The {{modelNameSingularLowerCase}} was deleted successfully.');
+        Session::flash('delete','The test was deleted successfully.');
 
         // Redirect
-        return redirect()->route('{{modelNamePluralLowerCase}}.index');
+        return redirect()->route('tests.index');
     }
 
 
@@ -70,13 +70,13 @@ class {{modelNamePlural}}Controller extends Controller
 # ╚══════╝╚═════╝ ╚═╝   ╚═╝   
 // Show the form for editing the specified resource
 ##################################################################################################################
-    public function edit({{modelName}} ${{modelNameSingularLowerCase}}, $id)
+    public function edit(Test $test, $id)
     {
         // Check if user has required permission
-        // if(!checkPerm('{{modelNameSingularLowerCase}}_edit')) { abort(401, 'Unauthorized Access'); }
+        // if(!checkPerm('test_edit')) { abort(401, 'Unauthorized Access'); }
 
-        ${{modelNameSingularLowerCase}} = {{modelName}}::findOrFail(${{modelNameSingularLowerCase}}->id);
-        return view('{{modelNamePluralLowerCase}}.edit', compact('{{modelNameSingularLowerCase}}'));
+        $test = Test::findOrFail($test->id);
+        return view('tests.edit', compact('test'));
     }
 
 
@@ -92,10 +92,10 @@ class {{modelNamePlural}}Controller extends Controller
     public function index()
     {
         // Check if user has required permission
-        // if(!checkPerm('{{modelNameSingularLowerCase}}_index')) { abort(401, 'Unauthorized Access'); }
+        // if(!checkPerm('test_index')) { abort(401, 'Unauthorized Access'); }
 
-        ${{modelNamePluralLowerCase}} = {{modelName}}::All();
-        return view('{{modelNamePluralLowerCase}}.index', compact('{{modelNamePluralLowerCase}}'));
+        $tests = Test::All();
+        return view('tests.index', compact('tests'));
     }
 
 
@@ -108,10 +108,10 @@ class {{modelNamePlural}}Controller extends Controller
 # ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝
 // Store a newly created resource in storage
 ##################################################################################################################
-    public function store({{modelName}}Request $request)
+    public function store(TestRequest $request)
     {
-        ${{modelNameSingularLowerCase}} = {{modelName}}::create($request->all());
-        return response()->json(${{modelNameSingularLowerCase}}, 201);
+        $test = Test::create($request->all());
+        return response()->json($test, 201);
     }
 
 
@@ -126,8 +126,8 @@ class {{modelNamePlural}}Controller extends Controller
 ##################################################################################################################
     public function show($id)
     {
-        ${{modelNameSingularLowerCase}} = {{modelName}}::findOrFail($id);
-        return response()->json(${{modelNameSingularLowerCase}});
+        $test = Test::findOrFail($id);
+        return response()->json($test);
     }
 
 
@@ -140,11 +140,11 @@ class {{modelNamePlural}}Controller extends Controller
 #  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
 // UPDATE :: Update the specified resource in storage
 ##################################################################################################################
-    public function update({{modelName}}Request $request, $id)
+    public function update(TestRequest $request, $id)
     {
-        ${{modelNameSingularLowerCase}} = {{modelName}}::findOrFail($id);
-        ${{modelNameSingularLowerCase}}->update($request->all());
-        return response()->json(${{modelNameSingularLowerCase}}, 200);
+        $test = Test::findOrFail($id);
+        $test->update($request->all());
+        return response()->json($test, 200);
     }
 
 
