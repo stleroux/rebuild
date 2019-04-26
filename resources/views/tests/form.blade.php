@@ -18,14 +18,16 @@
 
       <div class="card-header">
          <i class="fa fa-plus-square"></i>
-         Show {{modelName}}
+         Show Test
          <span class="float-right">
-            @include('common.buttons.help', ['model'=>'{{modelNameSingularLowerCase}}', 'bookmark'=>'{{modelNamePluralLowerCase}}'])
+            @include('common.buttons.help', ['model'=>'test', 'bookmark'=>'tests'])
+            @include('common.buttons.cancel', ['model'=>'test'])
+            @include('common.buttons.save', ['model'=>'test'])
          </span>
       </div>
 
       <div class="card-body">
-         @include('{{modelNamePluralLowerCase}}.form')
+         @include('tests.form')
       </div>
 
    </div>

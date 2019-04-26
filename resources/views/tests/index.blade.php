@@ -6,7 +6,7 @@
 
 @section('left_column')
    {{-- @include('blocks.adminNav') --}}
-   {{-- @include('{{modelNamePluralLowerCase}}.sidebar') --}}
+   {{-- @include('tests.sidebar') --}}
 @endsection
 
 @section('right_column')
@@ -20,17 +20,17 @@
             <!--CARD HEADER-->
             <div class="card-header card_header">
                {{-- <i class="fa fa-sitemap"></i> --}}
-               {{modelNamePlural}}
+               Tests
                <span class="float-right">
-                  @include('common.buttons.help', ['bookmark'=>'{{modelNamePluralLowerCase}}'])
-                  @include('common.buttons.add', ['model'=>'{{modelNameSingularLowerCase}}'])
+                  @include('common.buttons.help', ['bookmark'=>'tests'])
+                  @include('common.buttons.add', ['model'=>'test'])
                </span>
             </div>
 
             <!--CARD BODY-->
-            @if(${{modelNamePluralLowerCase}}->count() > 0)
+            @if($tests->count() > 0)
                <div class="card-body card_body pb-0">
-                  @include('common.alphabet', ['model'=>'{{modelNameSingularLowerCase}}', 'page'=>'index'])
+                  @include('common.alphabet', ['model'=>'test', 'page'=>'index'])
                   <table id="datatable" class="table table-hover table-sm">
                      <thead>
                         <tr>
@@ -41,18 +41,18 @@
                         </tr>
                      </thead>
                      <tbody>
-                        @foreach (${{modelNamePluralLowerCase}} as ${{modelNameSingularLowerCase}})
+                        @foreach ($tests as $test)
                            <tr>
-                              <td>{{ ${{modelNameSingularLowerCase}}->id }}</td>
+                              <td>{{ $test->id }}</td>
                               {{-- Add more columns here --}}
-                              <td data-order="{{ ${{modelNameSingularLowerCase}}->created_at}}">{{ ${{modelNameSingularLowerCase}}->created_at ? ${{modelNameSingularLowerCase}}->created_at->format('M d, Y') : 'no data found' }}</td>
+                              <td data-order="{{ $test->created_at}}">{{ $test->created_at ? $test->created_at->format('M d, Y') : 'no data found' }}</td>
                               <td class="text-right">
-                                 @if(checkPerm('{{modelNameSingularLowerCase}}_edit'))
-                                    @include('common.buttons.edit', ['model'=>'{{modelNameSingularLowerCase}}', 'id'=>${{modelNameSingularLowerCase}}->id])
+                                 @if(checkPerm('test_edit'))
+                                    @include('common.buttons.edit', ['model'=>'test', 'id'=>$test->id])
                                  @endif
 
-                                 @if(checkPerm('{{modelNameSingularLowerCase}}_delete'))
-                                    @include('common.buttons.delete', ['model'=>'{{modelNameSingularLowerCase}}', 'id'=>${{modelNameSingularLowerCase}}->id])
+                                 @if(checkPerm('test_delete'))
+                                    @include('common.buttons.delete', ['model'=>'test', 'id'=>$test->id])
                                  @endif
                               </td>
                            </tr>

@@ -17,12 +17,12 @@
    <div class="card">
       <div class="card-header bg-danger text-white text-center">
          <b>
-            ARE YOU SURE YOU WANT TO PERMANENTLY DELETE THIS {{modelNameUpperCase}}?<br />
-            Title : {{ ${{modelNameSingularLowerCase}}->title }}?
+            ARE YOU SURE YOU WANT TO PERMANENTLY DELETE THIS TEST?<br />
+            Title : {{ $test->title }}?
          </b>
       </div>
       <div class="card-body card_body text-center">
-         {!! Form::open(['method'=>'POST', 'route'=>['{{modelNamePluralLowerCase}}.deleteDestroy', ${{modelNameSingularLowerCase}}->id]]) !!}
+         {!! Form::open(['method'=>'POST', 'route'=>['tests.deleteDestroy', $test->id]]) !!}
             {{ csrf_field() }}
             <input type="hidden" name="_method" value="DELETE" />
 

@@ -14,22 +14,22 @@
 
 @section('content')
    
-   {!! Form::open(['route' => '{{modelNamePluralLowerCase}}.store', 'files'=>'true']) !!}
+   {!! Form::open(['route' => 'tests.store', 'files'=>'true']) !!}
    
       <div class="card mb-3">
 
          <div class="card-header">
             <i class="fa fa-plus-square"></i>
-            Create {{modelName}}
+            Create Test
             <span class="float-right">
-               @include('common.buttons.help', ['model'=>'{{modelNameSingularLowerCase}}', 'bookmark'=>'{{modelNamePluralLowerCase}}'])
-               @include('common.buttons.cancel', ['model'=>'{{modelNameSingularLowerCase}}'])
-               @include('common.buttons.save', ['model'=>'{{modelNameSingularLowerCase}}'])
+               @include('common.buttons.help', ['model'=>'test', 'bookmark'=>'tests'])
+               @include('common.buttons.cancel', ['model'=>'test'])
+               @include('common.buttons.save', ['model'=>'test'])
             </span>
          </div>
 
          <div class="card-body">
-            @include('{{modelNamePluralLowerCase}}.form')
+            @include('tests.form')
          </div>
 
       </div>

@@ -14,22 +14,22 @@
 
 @section ('content')
    
-   {!! Form::model(${{modelNameSingularLowerCase}}, ['route'=>['{{modelNamePluralLowerCase}}.update', ${{modelNameSingularLowerCase}}->id], 'method' => 'PUT', 'files' => true]) !!}
+   {!! Form::model($test, ['route'=>['tests.update', $test->id], 'method' => 'PUT', 'files' => true]) !!}
       
       <div class="card mb-3">
          
          <div class="card-header">
             <i class="fa fa-edit"></i>
-            Edit {{modelName}}
+            Edit Test
             <span class="float-right">
-               @include('common.buttons.help', ['model'=>'{{modelNameSingularLowerCase}}', 'bookmark'=>'{{modelNamePluralLowerCase}}'])
-               @include('common.buttons.cancel', ['model'=>'{{modelNameSingularLowerCase}}'])
-               @include('common.buttons.update', ['model'=>'{{modelNameSingularLowerCase}}'])
+               @include('common.buttons.help', ['model'=>'test', 'bookmark'=>'tests'])
+               @include('common.buttons.cancel', ['model'=>'test'])
+               @include('common.buttons.update', ['model'=>'test'])
             </span>
          </div>
 
          <div class="card-body">
-            @include('{{modelNamePluralLowerCase}}.form')
+            @include('tests.form')
          </div>
 
       </div>
