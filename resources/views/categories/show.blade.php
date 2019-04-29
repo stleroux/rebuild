@@ -18,7 +18,7 @@
          <i class="fa fa-sitemap" aria-hidden="true"></i>
          Category Details
          <span class="float-right">
-            @include('common.buttons.cancel', ['model'=>'category', 'type'=>''])
+            @include('common.buttons.cancel', ['model'=>'category'])
          </span>
       </div>
       <div class="card-body card_body">

@@ -15,6 +15,9 @@
 @section ('content')
    
    {!! Form::model(${{modelNameSingularLowerCase}}, ['route'=>['{{modelNamePluralLowerCase}}.update', ${{modelNameSingularLowerCase}}->id], 'method' => 'PUT', 'files' => true]) !!}
+
+   <form action="/{{modelNamePluralLowerCase}}/{{${{modelNameSingularLowerCase}}->id}}" method="POST">
+      @method("PATCH")
       
       <div class="card mb-3">
          

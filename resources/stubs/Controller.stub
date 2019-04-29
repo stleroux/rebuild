@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\{{modelName}}Request;
 use App\{{modelName}};
+use Session;
 
 class {{modelNamePlural}}Controller extends Controller
 {
@@ -15,6 +16,11 @@ class {{modelNamePlural}}Controller extends Controller
 # ╚██████╗╚██████╔╝██║ ╚████║███████║   ██║   ██║  ██║╚██████╔╝╚██████╗   ██║   
 #  ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝  ╚═════╝   ╚═╝   
 ##################################################################################################################
+   public function __construct()
+   {
+      $this->middleware('auth');
+      $this->enablePermissions = false;
+   }
 
 
 ##################################################################################################################
@@ -29,9 +35,14 @@ class {{modelNamePlural}}Controller extends Controller
     public function create()
     {
         // Check if user has required permission
-        // if(!checkPerm('{{modelNameSingularLowerCase}}_create')) { abort(401, 'Unauthorized Access'); }
+        if($this->enablePermissions)
+        {
+            if(!checkPerm('{{modelNameSingularLowerCase}}_create')) { abort(401, 'Unauthorized Access'); }
+        }
 
-        return view('{{modelNamePluralLowerCase}}.create'); 
+        ${{modelNameSingularLowerCase}} = New {{modelName}}();
+
+        return view('{{modelNamePluralLowerCase}}.create', compact('{{modelNameSingularLowerCase}}'));
     }
 
 
@@ -47,17 +58,39 @@ class {{modelNamePlural}}Controller extends Controller
 ##################################################################################################################
     public function destroy({{modelName}} ${{modelNameSingularLowerCase}})
     {
-        // Check if user has required {{modelNameSingularLowerCase}}
-        // if(!checkPerm('{{modelNameSingularLowerCase}}_delete')) { abort(401, 'Unauthorized Access'); }
+        // Check if user has required permission
+        if($this->enablePermissions)
+        {
+            if(!checkPerm('{{modelNameSingularLowerCase}}_delete')) { abort(401, 'Unauthorized Access'); }
+        }
 
-        ${{modelNameSingularLowerCase}} = {{modelName}}::findOrFail(${{modelNameSingularLowerCase}}->id);
         ${{modelNameSingularLowerCase}}->delete();
 
         // Set flash data with success message
         Session::flash('delete','The {{modelNameSingularLowerCase}} was deleted successfully.');
-
         // Redirect
         return redirect()->route('{{modelNamePluralLowerCase}}.index');
+    }
+
+
+##################################################################################################################
+# ██████╗ ███████╗██╗     ███████╗████████╗███████╗
+# ██╔══██╗██╔════╝██║     ██╔════╝╚══██╔══╝██╔════╝
+# ██║  ██║█████╗  ██║     █████╗     ██║   █████╗  
+# ██║  ██║██╔══╝  ██║     ██╔══╝     ██║   ██╔══╝  
+# ██████╔╝███████╗███████╗███████╗   ██║   ███████╗
+# ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝
+// Mass Delete selected rows - all selected records
+##################################################################################################################
+    public function delete({{modelName}} ${{modelNameSingularLowerCase}})
+    {
+        // Check if user has required permission
+        if($this->enablePermissions)
+        {
+            if(!checkPerm('{{modelNameSingularLowerCase}}_delete')) { abort(401, 'Unauthorized Access'); }
+        }
+
+        return view('{{modelNamePluralLowerCase}}.delete', compact('{{modelNameSingularLowerCase}}'));
     }
 
 
@@ -70,12 +103,14 @@ class {{modelNamePlural}}Controller extends Controller
 # ╚══════╝╚═════╝ ╚═╝   ╚═╝   
 // Show the form for editing the specified resource
 ##################################################################################################################
-    public function edit({{modelName}} ${{modelNameSingularLowerCase}}, $id)
+    public function edit({{modelName}} ${{modelNameSingularLowerCase}})
     {
         // Check if user has required permission
-        // if(!checkPerm('{{modelNameSingularLowerCase}}_edit')) { abort(401, 'Unauthorized Access'); }
+        if($this->enablePermissions)
+        {
+            if(!checkPerm('{{modelNameSingularLowerCase}}_edit')) { abort(401, 'Unauthorized Access'); }
+        }
 
-        ${{modelNameSingularLowerCase}} = {{modelName}}::findOrFail(${{modelNameSingularLowerCase}}->id);
         return view('{{modelNamePluralLowerCase}}.edit', compact('{{modelNameSingularLowerCase}}'));
     }
 
@@ -92,7 +127,10 @@ class {{modelNamePlural}}Controller extends Controller
     public function index()
     {
         // Check if user has required permission
-        // if(!checkPerm('{{modelNameSingularLowerCase}}_index')) { abort(401, 'Unauthorized Access'); }
+        if($this->enablePermissions)
+        {
+            if(!checkPerm('{{modelNameSingularLowerCase}}_index')) { abort(401, 'Unauthorized Access'); }
+        }
 
         ${{modelNamePluralLowerCase}} = {{modelName}}::All();
         return view('{{modelNamePluralLowerCase}}.index', compact('{{modelNamePluralLowerCase}}'));
@@ -108,10 +146,11 @@ class {{modelNamePlural}}Controller extends Controller
 # ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝
 // Store a newly created resource in storage
 ##################################################################################################################
-    public function store({{modelName}}Request $request)
+    public function store()
     {
-        ${{modelNameSingularLowerCase}} = {{modelName}}::create($request->all());
-        return response()->json(${{modelNameSingularLowerCase}}, 201);
+        {{modelName}}::create($this->validateRequest());
+
+        return redirect('{{modelNamePluralLowerCase}}');
     }
 
 
@@ -124,10 +163,15 @@ class {{modelNamePlural}}Controller extends Controller
 # ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝ 
 // Display the specified resource
 ##################################################################################################################
-    public function show($id)
+    public function show({{modelName}} ${{modelNameSingularLowerCase}})
     {
-        ${{modelNameSingularLowerCase}} = {{modelName}}::findOrFail($id);
-        return response()->json(${{modelNameSingularLowerCase}});
+        // Check if user has required permission
+        if($this->enablePermissions)
+        {
+            if(!checkPerm('{{modelNameSingularLowerCase}}_show')) { abort(401, 'Unauthorized Access'); }
+        }
+
+        return view('{{modelNamePluralLowerCase}}.show', compact('{{modelNameSingularLowerCase}}'));
     }
 
 
@@ -140,12 +184,30 @@ class {{modelNamePlural}}Controller extends Controller
 #  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
 // UPDATE :: Update the specified resource in storage
 ##################################################################################################################
-    public function update({{modelName}}Request $request, $id)
+    public function update({{modelName}} ${{modelNameSingularLowerCase}})
     {
-        ${{modelNameSingularLowerCase}} = {{modelName}}::findOrFail($id);
-        ${{modelNameSingularLowerCase}}->update($request->all());
-        return response()->json(${{modelNameSingularLowerCase}}, 200);
+        ${{modelNameSingularLowerCase}}->update($this->validateRequest());
+
+        return redirect('{{modelNamePluralLowerCase}}');
     }
 
+
+##################################################################################################################
+#██╗   ██╗ █████╗ ██╗     ██╗██████╗  █████╗ ████████╗███████╗    ██████╗ ███████╗ ██████╗ ██╗   ██╗███████╗███████╗████████╗
+#██║   ██║██╔══██╗██║     ██║██╔══██╗██╔══██╗╚══██╔══╝██╔════╝    ██╔══██╗██╔════╝██╔═══██╗██║   ██║██╔════╝██╔════╝╚══██╔══╝
+#██║   ██║███████║██║     ██║██║  ██║███████║   ██║   █████╗      ██████╔╝█████╗  ██║   ██║██║   ██║█████╗  ███████╗   ██║   
+#╚██╗ ██╔╝██╔══██║██║     ██║██║  ██║██╔══██║   ██║   ██╔══╝      ██╔══██╗██╔══╝  ██║▄▄ ██║██║   ██║██╔══╝  ╚════██║   ██║   
+# ╚████╔╝ ██║  ██║███████╗██║██████╔╝██║  ██║   ██║   ███████╗    ██║  ██║███████╗╚██████╔╝╚██████╔╝███████╗███████║   ██║   
+#  ╚═══╝  ╚═╝  ╚═╝╚══════╝╚═╝╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝    ╚═╝  ╚═╝╚══════╝ ╚══▀▀═╝  ╚═════╝ ╚══════╝╚══════╝   ╚═╝   
+##################################################################################################################
+
+    private function validateRequest()
+    {
+        return request()->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'status' => 'required',
+        ]);
+    }
 
 }

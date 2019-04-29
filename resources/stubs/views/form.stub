@@ -1,35 +1,23 @@
-@extends('layouts.backend')
+<div class="form-group">
+   <label for="name">Name</label>
+   <input type="text" name="name" value="{{ old('name') ?? ${{modelNameSingularLowerCase}}->name }}" class="form-control">
+   <div>{{ $errors->first('name') }}</div>
+</div>
 
-@section('stylesheets')
-   {{-- {{ Html::style('css/recipes.css') }} --}}
-@endsection
+<div class="form-group">
+   <label for="email">Email</label>
+   <input type="text" name="email" value="{{ old('email') ?? ${{modelNameSingularLowerCase}}->email }}" class="form-control">
+   <div>{{ $errors->first('email') }}</div>
+</div>
 
-@section('left_column')
-   {{-- @include('blocks.adminNav') --}}
-   {{-- @include('recipes::backend.sidebar') --}}
-@endsection
-
-@section('right_column')
-@endsection
-
-@section('content')
+<div class="form-group">
+   <label for="status">Status</label>
+   <select name="status" id="status" class="form-control">
+      @foreach(${{modelNameSingularLowerCase}}->statusOptions() as $statusOptionKey => $statusOptionValue)
+         <option value="{{$statusOptionKey}}" {{ ${{modelNameSingularLowerCase}}->status == $statusOptionValue ? 'selected' : '' }}>{{ $statusOptionValue }}</option>
+      @endforeach
+   </select>
+   <div>{{ $errors->first('status') }}</div>
+</div>
    
-   <div class="card mb-3">
-
-      <div class="card-header">
-         <i class="fa fa-plus-square"></i>
-         Show {{modelName}}
-         <span class="float-right">
-            @include('common.buttons.help', ['model'=>'{{modelNameSingularLowerCase}}', 'bookmark'=>'{{modelNamePluralLowerCase}}'])
-            @include('common.buttons.cancel', ['model'=>'{{modelNameSingularLowerCase}}'])
-            @include('common.buttons.save', ['model'=>'{{modelNameSingularLowerCase}}'])
-         </span>
-      </div>
-
-      <div class="card-body">
-         @include('{{modelNamePluralLowerCase}}.form')
-      </div>
-
-   </div>
-   
-@endsection
+@csrf

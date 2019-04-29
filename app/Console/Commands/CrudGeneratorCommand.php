@@ -5,15 +5,14 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use File;
+use DB;
 
 class CrudGeneratorCommand extends Command
 {
 
     protected $signature = 'crud:generator {name : Class (singular), e.g.: User}';
 
-
     protected $description = 'Create CRUD operations';
-
 
     public function __construct()
     {
@@ -26,50 +25,61 @@ class CrudGeneratorCommand extends Command
         // Get the name of the argument
         $name = $this->argument('name');
 
-        // Create the files
-        $this->info('Creating controller');
-        $this->controller($name);
+        if ($this->confirm('Do you wish to create the Controller?')) {
+            $this->controller($name);
+            $this->info('Controller created');
+        }
         
-        $this->info('Creating model');
-        $this->model($name);
+        if ($this->confirm('Do you wish to create the Model?')) {
+            $this->model($name);
+            $this->info('Model created');
+        }
 
-        $this->info('Creating request');
-        $this->request($name);
+        if ($this->confirm('Do you wish to create the Request?')) {
+            $this->request($name);
+            $this->info('Request created');
+        }
+        
+        if ($this->confirm('Do you wish to create the views?')) {
+            $this->createFolders($name);
+                $this->info('Necessary folders created');
+            $this->indexView($name);
+                $this->info('Index view created');
+            $this->createView($name);
+                $this->info('Create view was created');
+            $this->showView($name);
+                $this->info('Show view created');
+            $this->editView($name);
+                $this->info('Edit view created');
+            $this->deleteView($name);
+                $this->info('Delete view was created');
+            $this->showForm($name);
+                $this->info('Form view created');
+        }
 
-        $this->info('Creating Create view');
-        $this->createView($name);
+        if ($this->confirm('Do you wish to add base permissions to the database?')) {
+            $this->addPermissions($name);
+            $this->info('Base permissions added to database');
+        }
 
-        $this->info('Creating Delete view');
-        $this->deleteView($name);
+        if ($this->confirm('Do you wish to add related routes?')) {
+            File::append(base_path('routes/web.php'),'Route::get(\'' . strtolower(Str::plural($name)) . "/{test}/delete', '" . (Str::plural($name)) . "Controller@delete')->name('" . strtolower(Str::plural($name)) . ".delete');\n");
+            File::append(base_path('routes/web.php'), 'Route::resource(\'' . strtolower(Str::plural($name)) . "', '" . (Str::plural($name)) . "Controller');\n");
+            $this->info('Route resource added to web.php routes file');
+        }
 
-        $this->info('Creating Edit view');
-        $this->editView($name);
+        if ($this->confirm('Do you wish to create the migration file?')) {
+            \Artisan::call('make:migration', 
+                [
+                    'name'=>'create_' . strtolower(Str::plural($name)) . '_table',
+                    '--create'=>strtolower(Str::plural($name))
+                ]
+            );
+            $this->info('Migration created');
+            $this->info('Don\'t forget to update the migration file and then run "php artisan migrate"');
+        }
 
-        $this->info('Creating Index view');
-        $this->indexView($name);
-
-        $this->info('Creating Show view');
-        $this->showView($name);
-
-        $this->info('Creating form');
-        $this->showForm($name);
-
-        // Add resource controller to routes files
-        // $this->info('Adding resource route');
-        // File::append(base_path('routes/web.php'), 'Route::resource(\'' . strtolower(Str::plural($name)) . "', '" . (Str::plural($name)) . "Controller');\n");
-
-        // Create a migration file
-        // $this->info('Creating migration');
-        // \Artisan::call('make:migration', 
-        //     [
-        //         'name'=>'create_' . strtolower(Str::plural($name)) . '_table',
-        //         '--create'=>strtolower(Str::plural($name))
-        //     ]
-        // );
-
-        $this->info('');
-        $this->info('Done. Don\' forget to update the migration file and then run "php artisan migrate"');
-
+        $this->info('Done! Happy coding.');
     }
 
 
@@ -81,196 +91,160 @@ class CrudGeneratorCommand extends Command
 
     protected function model($name)
     {
-        $template = str_replace(
-            [
-                '{{modelName}}'
-            ],
-            [
-                $name
-            ],
-            $this->getStub('Model')
-        );
-
-        file_put_contents(app_path("/{$name}.php"), $template);
+        file_put_contents(
+            app_path("/{$name}.php"),
+            $this->getTemplate('Model', $name));
     }
 
 
     protected function request($name)
     {
-        $template = str_replace(
-            [
-                '{{modelName}}'
-            ],
-            [
-                $name
-            ],
-            $this->getStub('Request')
-        );
-
-        if(!file_exists($path = app_path('/Http/Requests')))
-            mkdir($path, 0777, true);
-
-        file_put_contents(app_path("/Http/Requests/{$name}Request.php"), $template);
+        file_put_contents(
+            app_path("/Http/Requests/{$name}Request.php"),
+            $this->getTemplate('Request', $name));
     }
 
 
     protected function controller($name)
     {
-        $template = str_replace(
-            [
-                '{{modelName}}',
-                '{{modelNamePluralLowerCase}}',
-                '{{modelNameSingularLowerCase}}',
-                '{{modelNamePlural}}',
-            ],
-            [
-                $name,                          // Place
-                strtolower(Str::plural($name)), // places
-                strtolower($name),              // place
-                Str::plural($name)              // Places
-            ],
-            $this->getStub('Controller')
-        );
-
-        file_put_contents(app_path("/Http/Controllers/".Str::plural($name)."Controller.php"), $template);
+        file_put_contents(
+            app_path("/Http/Controllers/".Str::plural($name)."Controller.php"),
+            $this->getTemplate('Controller', $name));
     }
 
 
     protected function createView($name)
     {
-        $template = str_replace(
-            [
-                '{{modelName}}',
-                '{{modelNamePluralLowerCase}}',
-                '{{modelNameSingularLowerCase}}',
-                '{{modelNamePlural}}',
-            ],
-            [
-                $name,                          // Place
-                strtolower(Str::plural($name)), // places
-                strtolower($name),              // place
-                Str::plural($name)              // Places
-            ],
-            $this->getStub('views/create')
-        );
-
-        if(!file_exists($path = resource_path("/views/" . strtolower(Str::plural($name)))))
-            mkdir($path, 0777, true);
-
-        file_put_contents(resource_path("/views/".Str::plural($name)."/create.blade.php"), $template);
+        file_put_contents(
+            resource_path("/views/".strtolower(Str::plural($name))."/create.blade.php"),
+            $this->getTemplate('views/create', $name));
     }
 
 
     protected function deleteView($name)
     {
-        $template = str_replace(
-            [
-                '{{modelName}}',
-                '{{modelNameUpperCase}}',
-                '{{modelNamePluralLowerCase}}',
-                '{{modelNameSingularLowerCase}}',
-                '{{modelNamePlural}}',
-            ],
-            [
-                $name,                          // Place
-                strtoupper($name),              // places
-                strtolower(Str::plural($name)), // places
-                strtolower($name),              // place
-                Str::plural($name)              // Places
-            ],
-            $this->getStub('views/delete')
-        );
-
-        file_put_contents(resource_path("/views/".Str::plural($name)."/delete.blade.php"), $template);
+        file_put_contents(
+            resource_path("/views/".strtolower(Str::plural($name))."/delete.blade.php"),
+            $this->getTemplate('views/delete', $name));
     }
 
 
     protected function editView($name)
     {
-        $template = str_replace(
-            [
-                '{{modelName}}',
-                '{{modelNamePluralLowerCase}}',
-                '{{modelNameSingularLowerCase}}',
-                '{{modelNamePlural}}',
-            ],
-            [
-                $name,                          // Place
-                strtolower(Str::plural($name)), // places
-                strtolower($name),              // place
-                Str::plural($name)              // Places
-            ],
-            $this->getStub('views/edit')
-        );
-
-        file_put_contents(resource_path("/views/".Str::plural($name)."/edit.blade.php"), $template);
+        file_put_contents(
+            resource_path("/views/".strtolower(Str::plural($name))."/edit.blade.php"),
+            $this->getTemplate('views/edit', $name));
     }
 
 
     protected function indexView($name)
     {
-        $template = str_replace(
-            [
-                '{{modelName}}',
-                '{{modelNamePluralLowerCase}}',
-                '{{modelNameSingularLowerCase}}',
-                '{{modelNamePlural}}',
-            ],
-            [
-                $name,                          // Place
-                strtolower(Str::plural($name)), // places
-                strtolower($name),              // place
-                Str::plural($name)              // Places
-            ],
-            $this->getStub('views/index')
-        );
-
-        file_put_contents(resource_path("/views/".Str::plural($name)."/index.blade.php"), $template);
+        file_put_contents(
+            resource_path("/views/".strtolower(Str::plural($name))."/index.blade.php"),
+            $this->getTemplate('views/index', $name));
     }
 
 
     protected function showView($name)
     {
-        $template = str_replace(
-            [
-                '{{modelName}}',
-                '{{modelNamePluralLowerCase}}',
-                '{{modelNameSingularLowerCase}}',
-                '{{modelNamePlural}}',
-            ],
-            [
-                $name,                          // Place
-                strtolower(Str::plural($name)), // places
-                strtolower($name),              // place
-                Str::plural($name)              // Places
-            ],
-            $this->getStub('views/show')
-        );
-
-        file_put_contents(resource_path("/views/".Str::plural($name)."/show.blade.php"), $template);
+        file_put_contents(
+            resource_path("/views/".strtolower(Str::plural($name))."/show.blade.php"),
+            $this->getTemplate('views/show', $name));
     }
 
 
     protected function showForm($name)
     {
-        $template = str_replace(
+        file_put_contents(
+            resource_path("/views/".strtolower(Str::plural($name))."/form.blade.php"),
+            $this->getTemplate('views/form', $name)
+        );
+    }
+
+
+    protected function getTemplate($viewName, $name)
+    {
+        return str_replace(
             [
                 '{{modelName}}',
+                '{{modelNameUpperCase}}',
                 '{{modelNamePluralLowerCase}}',
                 '{{modelNameSingularLowerCase}}',
                 '{{modelNamePlural}}'
             ],
             [
                 $name,                          // Place
+                strtoupper($name),              // PLACE
                 strtolower(Str::plural($name)), // places
                 strtolower($name),              // place
                 Str::plural($name)              // Places
             ],
-            $this->getStub('views/form')
+            $this->getStub($viewName)
         );
-
-        file_put_contents(resource_path("/views/".Str::plural($name)."/form.blade.php"), $template);
     }
+
+
+    protected function createFolders($name)
+    {
+        if(!file_exists($path = resource_path("/views/" . strtolower(Str::plural($name)))))
+        {
+            mkdir($path, 0777, true);
+        }
+
+        if(!file_exists($path = app_path('/Http/Requests')))
+        {
+            mkdir($path, 0777, true);
+        }
+            
+    }
+
+
+    protected function addPermissions($name)
+    {
+        DB::table('permissions')->insert([
+            [
+                // index permission
+                'name' => strtolower($name).'_index',
+                'display_name' => 'index',
+                'model' => strtolower($name),
+                'type' => 0,
+                'description' => 'list '.strtolower($name)
+            ],
+            [
+                // create permission
+                'name' => strtolower($name).'_create',
+                'display_name' => 'create',
+                'model' => strtolower($name),
+                'type' => 0,
+                'description' => 'create '.strtolower($name)
+            ],
+            [
+                // edit permission
+                'name' => strtolower($name).'_edit',
+                'display_name' => 'edit',
+                'model' => strtolower($name),
+                'type' => 0,
+                'description' => 'edit '.strtolower($name)
+            ],
+            [
+                // show permission
+                'name' => strtolower($name).'_show',
+                'display_name' => 'show',
+                'model' => strtolower($name),
+                'type' => 0,
+                'description' => 'view '.strtolower($name)
+            ],
+            [
+                // delete permission
+                'name' => strtolower($name).'_delete',
+                'display_name' => 'delete',
+                'model' => strtolower($name),
+                'type' => 0,
+                'description' => 'delete '.strtolower($name)
+            ]
+        ]);
+    }
+
 
 
 }

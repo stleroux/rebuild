@@ -29,7 +29,7 @@
          </div>
 
          <div class="card-body">
-            @include('{{modelNamePluralLowerCase}}.form')
+            @include('{{modelNamePluralLowerCase}}.form')            
          </div>
 
       </div>

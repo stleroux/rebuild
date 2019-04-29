@@ -18,11 +18,11 @@
       <div class="card-header bg-danger text-white text-center">
          <b>
             ARE YOU SURE YOU WANT TO PERMANENTLY DELETE THIS {{modelNameUpperCase}}?<br />
-            Title : {{ ${{modelNameSingularLowerCase}}->title }}?
+            {{-- Title : {{ ${{modelNameSingularLowerCase}}->title }}? --}}
          </b>
       </div>
       <div class="card-body card_body text-center">
-         {!! Form::open(['method'=>'POST', 'route'=>['{{modelNamePluralLowerCase}}.deleteDestroy', ${{modelNameSingularLowerCase}}->id]]) !!}
+         {!! Form::open(['method'=>'POST', 'route'=>['{{modelNamePluralLowerCase}}.destroy', ${{modelNameSingularLowerCase}}->id]]) !!}
             {{ csrf_field() }}
             <input type="hidden" name="_method" value="DELETE" />
 
@@ -31,17 +31,17 @@
                 No - Return To Previous Page
             </a>
             
-            @if(checkPerm('post_delete'))
+            {{-- @if(checkPerm('post_delete')) --}}
                <button type="submit" class="btn btn-outline-danger">
                   <i class="far fa-trash-alt"></i>
                   Yes - Permanently Delete This Recipe
                </button>
-            @endif
+            {{-- @endif --}}
          {{ Form::close() }}
       </div>
-      {{-- <div class="card-footer pt-1 pb-1 pl-2">
+      <div class="card-footer pt-1 pb-1 pl-2">
          <b>Note: </b>This record will not be recoverable if deleted.
-      </div> --}}
+      </div>
    </div>
 
 @endsection

@@ -11,6 +11,14 @@
 		</tr>
 		<tr>
 			<td>
+				Comments
+				<span class="badge badge-primary badge-pill float-right">
+					{{ App\Comment::where('user_id','=', Auth::user()->id)->count() }}
+				</span>
+			</td>
+		</tr>
+		<tr>
+			<td>
 				Posts
 				<span class="badge badge-primary badge-pill float-right">
 					{{ Modules\Posts\Entities\Post::where('user_id','=', Auth::user()->id)->count() }}

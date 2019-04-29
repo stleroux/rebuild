@@ -21,11 +21,12 @@
          Show {{modelName}}
          <span class="float-right">
             @include('common.buttons.help', ['model'=>'{{modelNameSingularLowerCase}}', 'bookmark'=>'{{modelNamePluralLowerCase}}'])
+            @include('common.buttons.cancel', ['model'=>'category'])
          </span>
       </div>
 
       <div class="card-body">
-         @include('{{modelNamePluralLowerCase}}.form')
+         <p>{{ ${{modelNameSingularLowerCase}}->name }}</p>
       </div>
 
    </div>

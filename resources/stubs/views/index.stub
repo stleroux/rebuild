@@ -1,4 +1,4 @@
-@extends('layouts.')
+@extends('layouts.master')
 
 @section('stylesheets')
    {{-- {{ Html::style('css/recipes.css') }} --}}
@@ -30,11 +30,14 @@
             <!--CARD BODY-->
             @if(${{modelNamePluralLowerCase}}->count() > 0)
                <div class="card-body card_body pb-0">
-                  @include('common.alphabet', ['model'=>'{{modelNameSingularLowerCase}}', 'page'=>'index'])
+                  {{-- @include('common.alphabet', ['model'=>'{{modelNameSingularLowerCase}}', 'page'=>'index']) --}}
                   <table id="datatable" class="table table-hover table-sm">
                      <thead>
                         <tr>
                            <th>ID</th>
+                           <th>Name</th>
+                           <th>Email</th>
+                           <th>Status</th>
                            {{-- Add more columns here --}}
                            <th>Created</th>
                            <th class="no-sort"></th>
@@ -44,16 +47,19 @@
                         @foreach (${{modelNamePluralLowerCase}} as ${{modelNameSingularLowerCase}})
                            <tr>
                               <td>{{ ${{modelNameSingularLowerCase}}->id }}</td>
+                              <td><a href="{{ route('{{modelNamePluralLowerCase}}.show', ${{modelNameSingularLowerCase}}->id) }}">{{ ${{modelNameSingularLowerCase}}->name }}</a></td>
+                              <td>{{ ${{modelNameSingularLowerCase}}->email }}</td>
+                              <td>{{ ${{modelNameSingularLowerCase}}->status }}</td>
                               {{-- Add more columns here --}}
                               <td data-order="{{ ${{modelNameSingularLowerCase}}->created_at}}">{{ ${{modelNameSingularLowerCase}}->created_at ? ${{modelNameSingularLowerCase}}->created_at->format('M d, Y') : 'no data found' }}</td>
                               <td class="text-right">
-                                 @if(checkPerm('{{modelNameSingularLowerCase}}_edit'))
+                                 {{-- @if(checkPerm('{{modelNameSingularLowerCase}}_edit')) --}}
                                     @include('common.buttons.edit', ['model'=>'{{modelNameSingularLowerCase}}', 'id'=>${{modelNameSingularLowerCase}}->id])
-                                 @endif
+                                 {{-- @endif --}}
 
-                                 @if(checkPerm('{{modelNameSingularLowerCase}}_delete'))
+                                 {{-- @if(checkPerm('{{modelNameSingularLowerCase}}_delete')) --}}
                                     @include('common.buttons.delete', ['model'=>'{{modelNameSingularLowerCase}}', 'id'=>${{modelNameSingularLowerCase}}->id])
-                                 @endif
+                                 {{-- @endif --}}
                               </td>
                            </tr>
                         @endforeach

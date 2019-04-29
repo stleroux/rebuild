@@ -73,3 +73,4 @@ Route::get('profile/{id}/resetPreferences',  ['uses'=>'ProfileController@resetPr
 Route::get('profile/deleteImage/{id}',       ['uses'=>'ProfileController@deleteImage',       'as'=>'profile.deleteImage']);
 Route::get('profile/{id}/show',              ['uses'=>'ProfileController@show',              'as'=>'profile.show']);
 
+
