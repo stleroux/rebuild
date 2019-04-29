@@ -69,12 +69,17 @@ class CrudGeneratorCommand extends Command
         }
 
         if ($this->confirm('Do you wish to create the migration file?')) {
-            \Artisan::call('make:migration', 
-                [
-                    'name'=>'create_' . strtolower(Str::plural($name)) . '_table',
-                    '--create'=>strtolower(Str::plural($name))
-                ]
-            );
+            // Create migration file using artisan command
+            // \Artisan::call('make:migration', 
+            //     [
+            //         'name'=>'create_' . strtolower(Str::plural($name)) . '_table',
+            //         '--create'=>strtolower(Str::plural($name))
+            //     ]
+            // );
+            $this->makeMigration($name);
+
+// dsdsdsd
+
             $this->info('Migration created');
             $this->info('Don\'t forget to update the migration file and then run "php artisan migrate"');
         }
@@ -159,6 +164,16 @@ class CrudGeneratorCommand extends Command
             resource_path("/views/".strtolower(Str::plural($name))."/form.blade.php"),
             $this->getTemplate('views/form', $name)
         );
+    }
+
+
+    protected function makeMigration($name)
+    {
+        file_put_contents(
+            database_path("/migrations/". date('Y_m_d_His') . "_create_" .strtolower(Str::plural($name))."_table.php"),
+            $this->getTemplate('migration', $name)
+        );
+    
     }
 
 
