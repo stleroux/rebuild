@@ -8,10 +8,10 @@ use App\Http\Controllers\Controller; // Required for validation
 use Modules\Recipes\Entities\Recipe;
 use Illuminate\Support\Facades\Input;
 
-use App\Category;
-use App\Comment;
-use App\Module;
-use App\User;
+use App\Models\Category;
+use App\Models\Comment;
+use App\Models\Module;
+use App\Models\User;
 use Carbon\Carbon;
 use Auth;
 use DB;

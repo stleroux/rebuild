@@ -8,9 +8,9 @@ use App\Http\Controllers\Controller;
 use Hash;
 use Auth;
 use Session;
-use App\Category;
-use App\Profile;
-use App\User;
+use App\Models\Category;
+use App\Models\Profile;
+use App\Models\User;
 use Image;
 use File;
 

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Category;
-use App\Comment;
-use App\Permission;
-use App\User;
+use App\Models\Category;
+use App\Models\Comment;
+use App\Models\Permission;
+use App\Models\User;
 use Modules\Posts\Entities\Post;
 use Modules\Recipes\Entities\Recipe;
 

@@ -22,11 +22,11 @@
          </ul>
       </li> --}}
 
-      <li><a href="{{ Route('modules.index') }}"><i class="fa fa-cubes pr-1"></i>Modules</a>
+{{--       <li><a href="{{ Route('modules.index') }}"><i class="fa fa-cubes pr-1"></i>Modules</a>
          <ul>
             <li><a href="{{ Route('modules.create') }}"><i class="fa fa-plus-square pr-1"></i>Add</a></li>
          </ul>
-      </li>
+      </li> --}}
 
       <li><a href="{{ Route('permissions.index') }}"><i class="fas fa-shield-alt pr-1"></i>Permissions</a>
          <ul>

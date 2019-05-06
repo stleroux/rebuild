@@ -171,7 +171,7 @@ class CrudGeneratorCommand extends Command
     {
         file_put_contents(
             database_path("/migrations/". date('Y_m_d_His') . "_create_" .strtolower(Str::plural($name))."_table.php"),
-            $this->getTemplate('migration', $name)
+            $this->getTemplate('Migration', $name)
         );
     
     }

@@ -5,7 +5,7 @@ namespace Modules\Recipes\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Auth;
-use App\Category;
+use App\Models\Category;
 use Carbon\Carbon;
 use ChristianKuri\LaravelFavorite\Traits\Favoriteable;
 
@@ -39,27 +39,27 @@ class Recipe extends Model
 
    public function comments()
    {
-      return $this->morphMany('\App\Comment', 'commentable')->orderBy('id','desc');
+      return $this->morphMany('\App\Models\Comment', 'commentable')->orderBy('id','desc');
    }
    
 	public function user()
    {
-      return $this->belongsTo('App\User');
+      return $this->belongsTo('App\Models\User');
    }
 
    public function modifiedBy()
    {
-      return $this->belongsTo('App\User');
+      return $this->belongsTo('App\Models\User');
    }
 
    public function lastViewedBy()
    {
-      return $this->belongsTo('App\User');
+      return $this->belongsTo('App\Models\User');
    }
 
    public function category()
    {
-      return $this->belongsTo('App\Category');
+      return $this->belongsTo('App\Models\Category');
    }
 
    // used in the add and remove favorite

@@ -7,8 +7,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Comment;
-use Modules\Posts\Entities\Post;
+use App\Models\Comment;
+use App\Models\Post;
 use DB;
 use Session;
 use Log;

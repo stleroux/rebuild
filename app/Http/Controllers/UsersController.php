@@ -6,9 +6,9 @@ use Artisan;
 use DB;
 use Hash;
 use Session;
-use App\Permission;
-use App\User;
-use App\Profile;
+use App\Models\Permission;
+use App\Models\User;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller

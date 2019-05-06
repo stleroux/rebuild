@@ -5,7 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use \Cache;
 use DB;
-use App\Setting;
+use App\Models\Setting;
 use Carbon\Carbon;
 use Modules\Recipes\Entities\Recipe;
 

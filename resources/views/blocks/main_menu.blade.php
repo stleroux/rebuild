@@ -9,13 +9,13 @@
          Home
       </a>
       
-      @if(\Module::enabled('Posts'))
+      {{-- @if(\Module::enabled('Posts')) --}}
          <a href="{{ route('blog.index') }}"
             class="list-group-item list-group-item-action py-1 px-1 {{ Request::is('blog*') ? 'active' : '' }}">
             <i class="fas fa-blog pl-2"></i>
             Blog
          </a>
-      @endif
+      {{-- @endif --}}
 
       @if(\Module::enabled('Recipes'))
          <a href="{{ route('recipes.index', 'all') }}"
@@ -53,7 +53,7 @@
          @endif
       @endif
       
-      @if(\Module::enabled('Invoicer'))
+      {{-- @if(\Module::enabled('Invoicer')) --}}
          @if(checkPerm('invoicer_index'))
             <a href="{{ route('invoicer') }}"
                class="list-group-item list-group-item-action py-1 px-1 {{ Route::is('invoicer.*') ? 'active' : '' }}">
@@ -61,7 +61,7 @@
                Invoicer
             </a>
          @endif
-      @endif
+      {{-- @endif --}}
       
       <a href="#"
          class="list-group-item list-group-item-action py-1 px-1 {{ Route::is('darts.*') ? 'active' : '' }}">

@@ -34,13 +34,13 @@
 				</a>
 			@endif --}}
 
-			@if(checkPerm('module_index'))
+			{{-- @if(checkPerm('module_index'))
 				<a href="{{ route('modules.index') }}"
 					class="list-group-item list-group-item-action p-1 {{ Request::is('modules*') ? 'active' : '' }}">
 					<i class="fa fa-cubes pl-2"></i>
 					Modules
 				</a>
-			@endif
+			@endif --}}
 
 			@if(checkPerm('permission_index'))
 				<a href="{{ route('permissions.index') }}"

@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 //use Auth;
 use Session;
 
-use Modules\Posts\Entities\Post;
+use App\Models\Post;
 // use Modules\Recipes\Entities\Recipe;
 
 class SiteController extends Controller
