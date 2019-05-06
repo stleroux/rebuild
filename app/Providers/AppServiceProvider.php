@@ -7,7 +7,7 @@ use \Cache;
 use DB;
 use App\Models\Setting;
 use Carbon\Carbon;
-use Modules\Recipes\Entities\Recipe;
+use App\Models\Recipes\Recipe;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('popularRecipes', $popularRecipes);
         });
 
-        view()->composer('recipes::frontend.blocks.archives', function ($view) {
+        view()->composer('recipes.frontend.blocks.archives', function ($view) {
             $recipelinks = DB::table('recipes')
                 ->select(DB::raw('YEAR(published_at) year, MONTH(published_at) month, MONTHNAME(published_at) month_name, COUNT(*) recipe_count'))
                 ->where('published_at', '<=', Carbon::now())
@@ -48,8 +48,8 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         if ($this->app->environment() !== 'production') {
-            $this->app->register(\Way\Generators\GeneratorsServiceProvider::class);
-            $this->app->register(\Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider::class);
+            // $this->app->register(\Way\Generators\GeneratorsServiceProvider::class);
+            // $this->app->register(\Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider::class);
         }
     }
     

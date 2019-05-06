@@ -1,4 +1,4 @@
-@if(\Module::enabled('Posts'))
+{{-- @if(\Module::enabled('Posts')) --}}
    @if($popularPosts->count() > 0)
       <div class="card mb-2">
          <div class="card-header">POPULAR BLOG</div>
@@ -15,4 +15,4 @@
          </div>
       </div>
    @endif
-@endif
+{{-- @endif --}}

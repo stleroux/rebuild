@@ -1,4 +1,4 @@
-@if(\Module::enabled('Recipes'))
+{{-- @if(\Module::enabled('Recipes')) --}}
    @if($popularRecipes->count() > 0)
       <div class="card mb-2">
          <div class="card-header card_header_2">POPULAR RECIPES</div>
@@ -15,4 +15,4 @@
          </div>
       </div>
    @endif
-@endif
+{{-- @endif --}}

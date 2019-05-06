@@ -97,7 +97,7 @@ class CrudGeneratorCommand extends Command
     protected function model($name)
     {
         file_put_contents(
-            app_path("/{$name}.php"),
+            app_path("/Models/{$name}.php"),
             $this->getTemplate('Model', $name));
     }
 

@@ -17,13 +17,13 @@
          </a>
       {{-- @endif --}}
 
-      @if(\Module::enabled('Recipes'))
+      {{-- @if(\Module::enabled('Recipes')) --}}
          <a href="{{ route('recipes.index', 'all') }}"
             class="list-group-item list-group-item-action py-1 px-1 {{ Route::is('recipes.index','recipes.myRecipes','recipes.myFavorites') ? 'active' : '' }}">
             <i class="fab fa-apple pl-2"></i>
             Recipes
          </a>
-      @endif
+      {{-- @endif --}}
 
       <a href="#"
          class="list-group-item list-group-item-action py-1 px-1 {{ Request::is('albums*') ? 'active' : '' }}">
@@ -41,7 +41,7 @@
          </i>
       </a>
 
-      @if(\Module::enabled('Articles'))
+      {{-- @if(\Module::enabled('Articles')) --}}
          @if(checkPerm('article_index'))
             <a href="{{ route('articles.index') }}"
                class="list-group-item list-group-item-action py-1 px-1 {{ Route::is('articles.*') ? 'active' : '' }}">
@@ -51,7 +51,7 @@
                </i>
             </a>
          @endif
-      @endif
+      {{-- @endif --}}
       
       {{-- @if(\Module::enabled('Invoicer')) --}}
          @if(checkPerm('invoicer_index'))

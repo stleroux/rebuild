@@ -88,7 +88,7 @@
             </div>
          </div>
          
-         @if(\Module::enabled('Recipes'))
+         {{-- @if(\Module::enabled('Recipes')) --}}
             <div class="card bg-transparent mb-2">
                <div class="card-header card_header_2">
                      <i class="far fa-address-card"></i>
@@ -98,9 +98,9 @@
                   <p>The title says it all. Access this section to see recipes contributed by some of our members.</p>
                </div>
             </div>
-         @endif
+         {{-- @endif --}}
 
-         @if(\Module::enabled('Posts'))
+         {{-- @if(\Module::enabled('Posts')) --}}
             <div class="card bg-transparent mb-2">
                <div class="card-header card_header_2">
                      <i class="far fa-newspaper"></i>
@@ -110,14 +110,14 @@
                   <p>Here you will find the latest news of the site. Keep an eye on this section to find out what is happening with the site.</p>
                </div>
             </div>
-         @endif
+         {{-- @endif --}}
 
       </div>
    </div>
 
 	{{-- @include('homepage.blog') --}}
    {{-- BLOG --}}
-   @if(\Module::enabled('Posts'))
+   {{-- @if(\Module::enabled('Posts')) --}}
       @if($posts->count() > 0)
          <div class="card mb-3">
             <div class="card-header card_header">
@@ -159,7 +159,7 @@
             </div>
          </div>
       @endif
-   @endif
+   {{-- @endif --}}
    
 
 @endsection
