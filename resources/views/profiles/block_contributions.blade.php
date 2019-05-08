@@ -5,7 +5,7 @@
 			<td>
 				Articles
 				<span class="badge badge-primary badge-pill float-right">
-					{{ Modules\Articles\Entities\Article::where('user_id','=', Auth::user()->id)->count() }}
+					{{ App\Models\Articles\Article::where('user_id','=', Auth::user()->id)->count() }}
 				</span>
 			</td>
 		</tr>
@@ -13,7 +13,7 @@
 			<td>
 				Comments
 				<span class="badge badge-primary badge-pill float-right">
-					{{ App\Comment::where('user_id','=', Auth::user()->id)->count() }}
+					{{ App\Models\Comment::where('user_id','=', Auth::user()->id)->count() }}
 				</span>
 			</td>
 		</tr>
@@ -21,7 +21,7 @@
 			<td>
 				Posts
 				<span class="badge badge-primary badge-pill float-right">
-					{{ Modules\Posts\Entities\Post::where('user_id','=', Auth::user()->id)->count() }}
+					{{ App\Models\Post::where('user_id','=', Auth::user()->id)->count() }}
 				</span>
 			</td>
 		</tr>
@@ -29,7 +29,7 @@
 			<td>
 				Recipes
 				<span class="badge badge-primary badge-pill float-right">
-					{{ Modules\Recipes\Entities\Recipe::where('user_id','=', Auth::user()->id)->count() }}
+					{{ App\Models\Recipes\Recipe::where('user_id','=', Auth::user()->id)->count() }}
 				</span>
 			</td>
 		</tr>
