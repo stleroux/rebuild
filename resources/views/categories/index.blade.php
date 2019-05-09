@@ -27,7 +27,7 @@
                      @include('common.buttons.help', ['bookmark'=>'categories'])
                      {{-- @include('help.categories.index') --}}
                      {{-- @include('help.index') --}}
-                     @include('common.buttons.add', ['model'=>'category', 'type'=>''])
+                     @include('common.buttons.add', ['model'=>'category'])
                   </span>
                </div>
                
@@ -60,11 +60,11 @@
                                  <td data-order="{{ $category->created_at}}">{{ $category->created_at ? $category->created_at->format('M d, Y') : 'no data found' }}</td>
                                  <td class="text-right">
                                     @if(checkPerm('category_edit'))
-                                       @include('common.buttons.edit', ['model'=>'category', 'id'=>$category->id, 'type'=>''])
+                                       @include('common.buttons.edit', ['model'=>'category', 'id'=>$category->id])
                                     @endif
 
                                     @if(checkPerm('category_delete'))
-                                       @include('common.buttons.delete', ['model'=>'category', 'id'=>$category->id, 'type'=>''])
+                                       @include('common.buttons.delete', ['model'=>'category', 'id'=>$category->id])
                                     @endif
                                  </td>
                               </tr>
