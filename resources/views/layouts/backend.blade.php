@@ -26,8 +26,9 @@
    {{-- <link rel="stylesheet" href="{{ asset('css/bootstrap_4/slate.css') }}"> --}}
    <link rel="stylesheet" href="{{ asset('css/bootstrap-colors.css') }}" />
    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-   <link rel="stylesheet" href="{{ asset('css/backendMenu.css') }}">   
-   <style type="text/css" media="screen"> @import url("menuh.css"); </style>
+   <link rel="stylesheet" href="{{ asset('css/menuStyles.css') }}">
+   {{-- <link rel="stylesheet" href="{{ asset('css/backendMenu.css') }}"> --}}
+   {{-- <style type="text/css" media="screen"> @import url("menuh.css"); </style> --}}
    <!--[if lt IE 7]>
       <style type="text/css" media="screen">
          #menuh{float:none;}
@@ -42,21 +43,21 @@
    
 {{-- pageName : {{ Session::get('pageName') }}<br />byCatName : {{ Session::get('byCatName') }}<br />byCatLetter : {{ Session::get('byCatLetter') }} --}}
    
-   @include('layouts.master.navbar')
+   @include('layouts.navbar.navbar')
    {{-- @if(checkPerm('admin_menu')) --}}
-      @include('layouts.backendMenu')
+      {{-- @include('layouts.backendMenu') --}}
    {{-- @endif --}}
    @include('layouts.master.messages')
 
    <main class="container-fluid">
       <div id="app" class="py-0 px-0">
          <div class="row py-0 pr-2 pl-2">
-            <div class="col-sm-2 p-0">
+            {{-- <div class="col-sm-2 p-0"> --}}
                {{-- @if(!checkPerm('admin_menu')) --}}
-                  @yield('left_column')
+                  {{-- @yield('left_column') --}}
                {{-- @endif --}}
-            </div>
-            <div class="col-sm-10 py-0 px-2">
+            {{-- </div> --}}
+            <div class="col-12 py-0 px-2">
                @yield('content')
             </div>
             {{-- <div class="col-sm-2 p-0">

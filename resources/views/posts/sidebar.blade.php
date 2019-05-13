@@ -20,7 +20,7 @@
          data-parent="#sub_posts">
          <i class="fas fa-upload pl-2"></i>
          Published Posts
-         <span class="badge badge-secondary border float-right">{{ App\Post::published()->count() }}</span>
+         <span class="badge badge-secondary border float-right">{{ App\Models\Post::published()->count() }}</span>
       </a>
 
       <a href="{{ route('posts.newPosts') }}"
@@ -28,7 +28,7 @@
          data-parent="#sub_posts">
          <i class="fas fa-dot-circle pl-2"></i>
          New Posts
-         <span class="badge badge-secondary border float-right">{{ App\Post::newPostsCount()->count() }}</span>
+         <span class="badge badge-secondary border float-right">{{ App\Models\Post::newPostsCount()->count() }}</span>
       </a>
 
       <a href="{{ route('posts.trashed') }}"
@@ -36,7 +36,7 @@
          data-parent="#sub_posts">
          <i class="far fa-trash-alt pl-2"></i>
          Trashed Posts
-         <span class="badge badge-secondary border float-right">{{ App\Post::trashedCount()->count() }}</span>
+         <span class="badge badge-secondary border float-right">{{ App\Models\Post::trashedCount()->count() }}</span>
       </a>
       
       <a href="{{ route('posts.unpublished') }}"
@@ -44,7 +44,7 @@
          data-parent="#sub_posts">
          <i class="fas fa-download pl-2"></i>
          Unpublished Posts
-         <span class="badge badge-secondary border float-right">{{ App\Post::unpublished()->count() }}</span>
+         <span class="badge badge-secondary border float-right">{{ App\Models\Post::unpublished()->count() }}</span>
       </a>
 
    </div>

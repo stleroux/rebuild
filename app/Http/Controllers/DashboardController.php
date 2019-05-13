@@ -7,8 +7,8 @@ use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Permission;
 use App\Models\User;
-use Modules\Posts\Entities\Post;
-use Modules\Recipes\Entities\Recipe;
+use App\Models\Post;
+use App\Models\Recipes\Recipe;
 
 class DashboardController extends Controller
 {
@@ -71,18 +71,17 @@ class DashboardController extends Controller
         // dd($categoryCount);
         $commentCount = Comment::count();
         // $componentCount = \Module::count();
-        $moduleCount = \Module::count();
+        // $moduleCount = \Module::count();
         $permissionCount = Permission::count();
         $postCount = Post::count();
         $recipeCount = Recipe::count();
         $userCount = User::count();
 
         $comments = Comment::all();
-        $modules = \Module::all();
+        // $modules = \Module::all();
 
         return view('stats.index', compact(
-            'categoryCount','commentCount','moduleCount','permissionCount','postCount','recipeCount','userCount',
-            'comments','modules'
+            'categoryCount','commentCount','permissionCount','postCount','recipeCount','userCount','comments'
         ));
     }
 

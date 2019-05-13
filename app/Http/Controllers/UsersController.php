@@ -100,19 +100,24 @@ class UsersController extends Controller
 		if(!checkPerm('user_create')) { abort(401, 'Unauthorized Access'); }
 		
 		// Get all active modules
-		$modules = \Module::allEnabled();
+		// $modules = \Module::allEnabled();
 
 		// Create empty array to store module groups
-		$moduleGroups = [];
+		// $moduleGroups = [];
 		
 		// Iterate through active modules and add them to the moduleGroups array
-		foreach($modules as $mod) {
-			$moduleName = strtolower(str_singular($mod->name));
-			array_push($moduleGroups, $moduleName);
-		}
+		// foreach($modules as $mod) {
+		// 	$moduleName = strtolower(str_singular($mod->name));
+		// 	array_push($moduleGroups, $moduleName);
+		// }
 
 		// Get all permissions based on modules
-		$modulePermissions = Permission::whereIn('model', $moduleGroups)->orderBy('name')->get();
+		// $modulePermissions = Permission::whereIn('model', $moduleGroups)->orderBy('name')->get();
+		// $moduleGroups = $modulePermissions->groupBy('model');
+
+		// Get permissions of groups identified as module
+		$moduleGroups = Permission::select('model')->distinct()->where('type',2)->orderBy('model','asc')->get();
+		$modulePermissions = Permission::whereIn('model', $moduleGroups)->orderBy('model')->orderBy('display_name')->get();
 		$moduleGroups = $modulePermissions->groupBy('model');
 		
 		// Get permissions of groups identified as core
@@ -199,25 +204,25 @@ class UsersController extends Controller
 		
 		$user = User::find($id);
 		// Get all active modules
-		$modules = \Module::allEnabled();
+		// $modules = \Module::allEnabled();
 
 		// Create empty array to store module groups
-		$moduleGroups = [];
+		// $moduleGroups = [];
 		
 		// Iterate through active modules and add them to the moduleGroups array
-		foreach($modules as $mod) {
-			$moduleName = strtolower(str_singular($mod->name));
-			array_push($moduleGroups, $moduleName);
-		}
+		// foreach($modules as $mod) {
+		// 	$moduleName = strtolower(str_singular($mod->name));
+		// 	array_push($moduleGroups, $moduleName);
+		// }
 
 		// Get all permissions based on modules
-		$modulePermissions = Permission::whereIn('model', $moduleGroups)->orderBy('name')->get();
-		$moduleGroups = $modulePermissions->groupBy('model');
+		// $modulePermissions = Permission::whereIn('model', $moduleGroups)->orderBy('name')->get();
+		// $moduleGroups = $modulePermissions->groupBy('model');
 
-		// Get permissions of groups identified as admin
-		// $adminGroups = Permission::select('model')->distinct()->where('type',2)->orderBy('model','asc')->get();
-		// $adminPermissions = Permission::whereIn('model', $adminGroups)->orderBy('model')->orderBy('display_name')->get();
-		// $adminGroups = $adminPermissions->groupBy('model');
+		// Get permissions of groups identified as module
+		$moduleGroups = Permission::select('model')->distinct()->where('type',2)->orderBy('model','asc')->get();
+		$modulePermissions = Permission::whereIn('model', $moduleGroups)->orderBy('model')->orderBy('display_name')->get();
+		$moduleGroups = $modulePermissions->groupBy('model');
 
 		// Get permissions of groups identified as core
 		$coreGroups = Permission::select('model')->distinct()->where('type',1)->orderBy('model','asc')->get();
@@ -255,25 +260,25 @@ class UsersController extends Controller
 		
 		$user = User::find($id);
 		// Get all active modules
-		$modules = \Module::allEnabled();
+		// $modules = \Module::allEnabled();
 
 		// Create empty array to store module groups
-		$moduleGroups = [];
+		// $moduleGroups = [];
 		
 		// Iterate through active modules and add them to the moduleGroups array
-		foreach($modules as $mod) {
-			$moduleName = strtolower(str_singular($mod->name));
-			array_push($moduleGroups, $moduleName);
-		}
+		// foreach($modules as $mod) {
+		// 	$moduleName = strtolower(str_singular($mod->name));
+		// 	array_push($moduleGroups, $moduleName);
+		// }
 
 		// Get all permissions based on modules
-		$modulePermissions = Permission::whereIn('model', $moduleGroups)->orderBy('name')->get();
-		$moduleGroups = $modulePermissions->groupBy('model');
+		// $modulePermissions = Permission::whereIn('model', $moduleGroups)->orderBy('name')->get();
+		// $moduleGroups = $modulePermissions->groupBy('model');
 
-		// Get permissions of groups identified as admin
-		// $adminGroups = Permission::select('model')->distinct()->where('type',2)->orderBy('model','asc')->get();
-		// $adminPermissions = Permission::whereIn('model', $adminGroups)->orderBy('model')->orderBy('display_name')->get();
-		// $adminGroups = $adminPermissions->groupBy('model');
+		// Get permissions of groups identified as module
+		$moduleGroups = Permission::select('model')->distinct()->where('type',2)->orderBy('model','asc')->get();
+		$modulePermissions = Permission::whereIn('model', $moduleGroups)->orderBy('model')->orderBy('display_name')->get();
+		$moduleGroups = $modulePermissions->groupBy('model');
 
 		// Get permissions of groups identified as core
 		$coreGroups = Permission::select('model')->distinct()->where('type',1)->orderBy('model','asc')->get();
@@ -291,7 +296,7 @@ class UsersController extends Controller
 			->pluck('permission_user.permission_id','permission_user.permission_id')
 			->all();
 
-		return view('users.show', compact('user','corePermissions','coreGroups','modulePermissions','moduleGroups','userPermissions','nonCorePermissions','nonCoreGroups'));
+		return view('users.show', compact('user','corePermissions','coreGroups','userPermissions','nonCorePermissions','nonCoreGroups','moduleGroups','modulePermissions'));
 	}
 
 

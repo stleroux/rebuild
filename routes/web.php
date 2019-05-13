@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Input;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,3 +35,4 @@ foreach (File::allFiles(__DIR__ . '/routes') as $route_file) {
 
 Route::get('tests/{test}/delete', 'TestsController@delete')->name('tests.delete');
 Route::resource('tests', 'TestsController');
+

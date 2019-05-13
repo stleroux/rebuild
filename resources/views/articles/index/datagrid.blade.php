@@ -1,21 +1,21 @@
-<table id="datatable" class="table table-hover table-condensed table-responsive searchHighlight">
+<table id="datatable" class="table table-hover table-sm searchHighlight">
 	<thead>
 		<tr>
 			{{-- @if(checkACL('editor')) --}}
 				<th><input type="checkbox" id="selectall" class="checked" /></th>
 			{{-- @endif --}}
 			{{-- Add columns for search purposes only --}}
-			<th class="hidden">English</th>
-			<th class="hidden">French</th>
+			<th class="d-none">English</th>
+			<th class="d-none">French</th>
 			{{-- Add columns for search purposes only --}}
 
-			<th><div>Title</div></th>
-			<th class="hidden-xs">Category</th>
-			<th class="hidden-xs hidden-sm">Views</th>
-			<th class="hidden-xs">Author</th>
+			<th>Title</th>
+			<th class="">Category</th>
+			<th class="">Views</th>
+			<th class="">Author</th>
 			{{-- @if(checkACL('manager')) --}}
-				<th class="hidden-sm hidden-xs">Created On</th>
-				<th class="hidden-sm hidden-xs">Publish(ed) On</th>
+				<th class="">Created On</th>
+				<th class="">Publish(ed) On</th>
 			{{-- @endif --}}
 		</tr>
 	</thead>
@@ -28,17 +28,17 @@
 					</td>
 				{{-- @endif --}}
 				{{-- Hide columns at all levels. Only needed because Datatables only searches for columns in the table --}}
-				<td class="hidden">{{ $article->description_eng }}</td>
-				<td class="hidden">{{ $article->description_fre }}</td>
+				<td class="d-none">{{ $article->description_eng }}</td>
+				<td class="d-none">{{ $article->description_fre }}</td>
 				{{-- Hide columns at all levels. Only needed because Datatables only searches for columns in the table --}}
 				
 				<td><a href="{{ route('articles.show', $article->id) }}" class="">{{ $article->title }}</a></td>
-				<td class="hidden-xs">{{ $article->category->name }}</td>
-				<td class="hidden-xs hidden-sm">{{ $article->views }}</td>
-				<td class="hidden-xs">@include('common.authorFormat', ['model'=>$article, 'field'=>'user'])</td>
+				<td class="">{{ $article->category->name }}</td>
+				<td class="">{{ $article->views }}</td>
+				<td class="">@include('common.authorFormat', ['model'=>$article, 'field'=>'user'])</td>
 				{{-- @if(checkACL('manager')) --}}
-					<td class="hidden-sm hidden-xs">@include('common.dateFormat', ['model'=>$article, 'field'=>'created_at'])</td>
-					<td class="hidden-sm hidden-xs 
+					<td class="">@include('common.dateFormat', ['model'=>$article, 'field'=>'created_at'])</td>
+					<td class=" 
 						{{ $article->published_at >= Carbon\Carbon::now() ? 'text text-warning' : '' }}
 						{{ $article->published_at == null ? 'text text-info' : '' }}
 					">

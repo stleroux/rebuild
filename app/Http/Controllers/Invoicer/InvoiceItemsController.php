@@ -1,13 +1,13 @@
 <?php
 
-namespace Modules\Invoicer\Http\Controllers;
+namespace App\Http\Controllers\Invoicer;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
-use Modules\Invoicer\Entities\InvoiceItem;
-use Modules\Invoicer\Entities\Invoice;
-use Modules\Invoicer\Entities\Product;
+use App\Models\Invoicer\InvoiceItem;
+use App\Models\Invoicer\Invoice;
+use App\Models\Invoicer\Product;
 use Session;
 use Config;
 use DB;
@@ -46,7 +46,7 @@ class InvoiceItemsController extends Controller
 		$products = Product::orderBy('code', 'asc')->pluck('code','id');
 		// $products = Product::orderBy('code', 'asc')->get()->toArray();
 
-		return view('invoicer::invoiceItems.create', compact('invoice', 'products'));
+		return view('invoicer.invoiceItems.create', compact('invoice', 'products'));
 	}
 
 
@@ -97,7 +97,7 @@ class InvoiceItemsController extends Controller
 		$item = InvoiceItem::find($id);
 		$products = Product::orderBy('code', 'asc')->pluck('code','id');
 		
-		return view('invoicer::invoiceItems.edit', compact('item','products'));
+		return view('invoicer.invoiceItems.edit', compact('item','products'));
 	}
 
 

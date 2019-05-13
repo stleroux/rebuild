@@ -28,7 +28,7 @@
    @yield('stylesheets')
 </head>
 <body>
-   @include('layouts.master.navbar')
+   @include('layouts.navbar.navbar')
    <main class="container-fluid">
       
       <div id="app" class="py-2">

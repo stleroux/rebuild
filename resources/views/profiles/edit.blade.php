@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.backend')
 
 @section ('stylesheets')
    {{-- {{ Html::style('css/woodbarn.css') }} --}}
@@ -9,14 +9,16 @@
 @endsection
 
 @section('right_column')
-   @include('profiles.block_edit_image')
+   
 @endsection
 
 @section('content')
    {!! Form::model($user, ['route'=>['profile.update', $user->id], 'method'=>'PUT', 'files'=>true]) !!}
 
+
+
       <div class="row">
-         <div class="col">
+         <div class="col-10">
             <div class="card mb-3">
                <div class="card-header card_header">
                   Edit Profile
@@ -363,6 +365,9 @@
 
                </div>
             </div>
+         </div>
+         <div class="col-2">
+            @include('profiles.block_edit_image')
          </div>
       </div>
 

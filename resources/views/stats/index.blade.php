@@ -80,7 +80,7 @@
                                     <i class="fas fa-4x fa-users"></i>
                                  </div>
                                  <div class="card-footer m-0 p-0">
-                                    <h1 class="p-0 m-0">{{ $moduleCount }}</h1>
+                                    <h1 class="p-0 m-0">{{-- {{ $moduleCount }} --}}</h1>
                                  </div>
                               </div>
 
@@ -150,11 +150,11 @@
                                           </tr>
                                        </thead>
                                        <tbody>
-                                          @foreach($modules as $module)
+                                          {{-- @foreach($modules as $module)
                                              <tr>
                                                 <td>{{ $module->name }}</td>
                                              </tr>
-                                          @endforeach
+                                          @endforeach --}}
                                        </tbody>
                                     </table>
                                  </div>
@@ -170,7 +170,7 @@
                                           @foreach($comments as $comment)
                                              <tr>
                                                 <td>{{ ucwords($comment->commentable_type) }}</td>
-                                                <td align="center">{!! App\Comment::where('commentable_type', '=', $comment->commentable_type)->count() !!}</td>
+                                                <td align="center">{!! App\Models\Comment::where('commentable_type', '=', $comment->commentable_type)->count() !!}</td>
                                              </tr>
                                           @endforeach
                                        </tbody>

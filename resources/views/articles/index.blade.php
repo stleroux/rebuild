@@ -1,6 +1,6 @@
 {{-- Page to display Articles in frontend --}}
 
-@extends('layouts.master')
+@extends('layouts.backend')
 
 @section('title','Articles')
 

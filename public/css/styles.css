@@ -75,9 +75,9 @@ p {
 }
 
 /* Used to automatically display the dropdown menu in the navbar whne hovered */
-.dropdown:hover>.dropdown-menu {
+/*.dropdown:hover>.dropdown-menu {
    display: block;
-}
+}*/
 
 
 
@@ -98,3 +98,37 @@ div.sticky {
   background-color: lightgrey;
 }
 
+
+
+/* Adjust the number of columns to display when using card-columns like in the permissions section of user management */
+@media (min-width: 34em) {
+    .card-columns {
+        -webkit-column-count: 2;
+        -moz-column-count: 2;
+        column-count: 2;
+    }
+}
+
+@media (min-width: 48em) {
+    .card-columns {
+        -webkit-column-count: 3;
+        -moz-column-count: 3;
+        column-count: 3;
+    }
+}
+
+@media (min-width: 62em) {
+    .card-columns {
+        -webkit-column-count: 4;
+        -moz-column-count: 4;
+        column-count: 4;
+    }
+}
+
+@media (min-width: 75em) {
+    .card-columns {
+        -webkit-column-count: 5;
+        -moz-column-count: 5;
+        column-count: 5;
+    }
+}
