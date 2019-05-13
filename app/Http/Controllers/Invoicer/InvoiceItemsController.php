@@ -115,10 +115,10 @@ class InvoiceItemsController extends Controller
 		$invoice = Invoice::find($invID);
 			 // Perform required calculations
 			$inv_amount_charged = DB::table('invoicer_invoiceItems')->where('invoice_id', '=', $invoice->id)->sum('total');
-			$inv_hst = $inv_amount_charged * Config::get('invoicer.hst_rate');
+			$inv_hst = $inv_amount_charged * Setting('invoicer.hstRate');
 			$inv_sub_total = $inv_amount_charged + $inv_hst;
-			$inv_wsib = $inv_amount_charged * Config::get('invoicer.wsib_rate');
-			$inv_income_taxes = $inv_amount_charged * Config::get('invoicer.income_tax_rate');
+			$inv_wsib = $inv_amount_charged * Setting('invoicer.wsibRate');
+			$inv_income_taxes = $inv_amount_charged * Setting('invoicer.incomeTaxRate');
 			$inv_total_deductions = $inv_wsib + $inv_income_taxes;
 			$inv_total = $inv_amount_charged - $inv_total_deductions;
 			

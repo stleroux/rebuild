@@ -49,7 +49,7 @@
                <div class="col-1">
                   <div class="form-group {{ $errors->has('tab') ? 'has-error' : '' }}">
                      {{ Form::label('tab', 'Tab', ['class'=>'required']) }}
-                     {!! Form::select('tab', ['general'=>'General', 'profile'=>'Profile'], ['class'=>'form-control']) !!}
+                     {!! Form::select('tab', ['general'=>'General', 'profile'=>'Profile', 'invoicer'=>'Invoicer'], ['class'=>'form-control form-control-sm']) !!}
                      <span class="text-danger">{{ $errors->first('tab') }}</span>
                   </div>
                </div>

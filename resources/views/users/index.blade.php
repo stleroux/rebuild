@@ -23,7 +23,7 @@
 					Users
 					<span class="float-sm-right">
 						@if(checkPerm('user_create'))
-							@include('common.buttons.add', ['model'=>'user', 'type'=>''])
+							@include('common.buttons.add', ['model'=>'user'])
 						@endif
 					</span>
 				</div>
@@ -49,7 +49,7 @@
 									<td>{{ $user->created_at->format('M d, Y') }}</td>
 									<td class="text-right">
 										@if(checkPerm('user_show'))
-											@include('common.buttons.show', ['model'=>'user', 'id'=>$user->id, 'type'=>''])
+											@include('common.buttons.show', ['model'=>'user', 'id'=>$user->id])
 										@endif
 
 										@if(checkPerm('change_user_pwd'))
@@ -61,11 +61,11 @@
 										@endif
 										
 										@if(checkPerm('user_edit'))
-											@include('common.buttons.edit', ['model'=>'user', 'id'=>$user->id, 'type'=>''])
+											@include('common.buttons.edit', ['model'=>'user', 'id'=>$user->id])
 										@endif
 
 										@if(checkPerm('user_delete'))
-											@include('common.buttons.delete', ['model'=>'user', 'id'=>$user->id, 'type'=>''])
+											@include('common.buttons.delete', ['model'=>'user', 'id'=>$user->id])
 										@endif
 									</td>
 								</tr>

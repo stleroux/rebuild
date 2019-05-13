@@ -1,4 +1,4 @@
-@foreach($contacts->chunk(2) as $chunk)
+@foreach($invoicer->chunk(2) as $chunk)
    <div class="card-deck">
       @foreach($chunk as $r)
          <div class="col-6 p-0">

@@ -42,7 +42,7 @@
                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                        <a class="nav-link" id="invoicer-tab" data-toggle="tab" href="#invoicer" role="tab" aria-controls="invoicer" aria-selected="false">Invoicer</a>
                      </li>
                   </ul>
 
@@ -55,8 +55,8 @@
                      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         @include('settings.tab_profile')
                      </div>
-                     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                        @include('settings.tab_contact')
+                     <div class="tab-pane fade" id="invoicer" role="tabpanel" aria-labelledby="invoicer-tab">
+                        @include('settings.tab_invoicer')
                      </div>
                   </div>
                </div>

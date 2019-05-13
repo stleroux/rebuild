@@ -31,22 +31,45 @@
 				<div class="col-sm-8">
 					<div class="col-sm-12">
 						<h3 class="text-center">
-							{{ Config::get('invoicer.companyName') }}
+							{{ Setting('invoicer.companyName') }}
 						</h3>
 					</div>
 					<div class="row">
-						<div class="col-sm-6 text-right">
-							{{ Config::get('invoicer.companyTelephone') }}<br />
-							{{ Config::get('invoicer.companyEmail') }}<br />
-							{{-- {{ Config::get('invoicer.companyWebsite') }}<br /> --}}
-							WSIB N<sup>o</sup>: {{ Config::get('invoicer.WSIB_no') }}<br />
-							HST N<sup>o</sup>: {{ Config::get('invoicer.HST_no') }}
-						</div>
-						<div class="col-sm-6">
-							{{ Config::get('invoicer.address_1') }}<br />
-							{{ Config::get('invoicer.address_2') }}<br />
-							{{ Config::get('invoicer.companyCity') }}, {{ Config::get('invoicer.companyState') }}<br >
-							{{ Config::get('invoicer.companyZip') }}
+						<div class="col-sm-12 text-center">
+							{{ Setting('invoicer.address_1') . ', ' }}
+							{{ (Setting('invoicer.address_2')) ? Setting('invoicer.address_2') . ', ' : '' }}
+							{{ (Setting('invoicer.city')) ? Setting('invoicer.city') . ', ' : '' }}
+							{{ (Setting('invoicer.state')) ? Setting('invoicer.state') . ', ' : '' }}
+							{{ (Setting('invoicer.zip')) ? Setting('invoicer.zip') : '' }}
+							<br />
+							@if(Setting('invoicer.telephone') && (Setting('invoicer.fax')))
+								<i class='fas fa-phone'></i> {{ Setting('invoicer.telephone') }} &nbsp;
+								<i class="fas fa-fax"></i> {{ Setting('invoicer.fax') }}
+							@elseif(Setting('invoicer.telephone'))
+								<i class='fas fa-phone'></i> {{ Setting('invoicer.telephone') }}
+							@elseif (Setting('invoicer.fax'))
+								<i class="fas fa-fax"></i> {{ Setting('invoicer.fax') }}
+							@endif
+
+							<br />
+							@if(Setting('invoicer.email') && (Setting('invoicer.website')))
+								<i class="fas fa-at"></i> {{ Setting('invoicer.email') }} &nbsp;
+								<i class="fas fa-newspaper"></i> {{ Setting('invoicer.website') }}
+							@elseif(Setting('invoicer.email'))
+								<i class="fas fa-at"></i> {{ Setting('invoicer.email') }}
+							@elseif(Setting('invoicer.website'))
+								<i class="fas fa-newspaper"></i> {{ Setting('invoicer.website') }}
+							@endif
+
+							<br />
+							@if(Setting('invoicer.wsibNo') && (Setting('invoicer.hstNo')))
+								WSIB N<sup>o</sup>: {{ Setting('invoicer.wsibNo') }} &nbsp;
+								HST N<sup>o</sup>: {{ Setting('invoicer.hstNo') }}
+							@elseif(Setting('invoicer.wsibNo'))
+								WSIB N<sup>o</sup>: {{ Setting('invoicer.wsibNo') }}
+							@elseif(Setting('invoicer.hstNo'))
+								HST N<sup>o</sup>: {{ Setting('invoicer.hstNo') }}
+							@endif
 						</div>
 					</div>
 				</div>
@@ -147,7 +170,7 @@
 			<div class="col-sm-12">
 				<div class="row">
 					<div class="card w-75">
-						{!! Config::get('invoicer.termsAndConditions') !!}
+						{{ Setting('invoicer.termsAndConditions') }}
 					</div>
 					<div class="card w-25 border-0">
 						{{-- <div class="col-sm-2 text-right"> --}}

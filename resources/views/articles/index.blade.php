@@ -1,15 +1,11 @@
 {{-- Page to display Articles in frontend --}}
 
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('title','Articles')
 
 @section('stylesheets')
 	{{ Html::style('css/articles.css') }}
-@stop
-
-@section('sectionSidebar')
-	{{-- @include('articles.sidebar') --}}
 @stop
 
 @section('content')
@@ -28,16 +24,9 @@
 				@endif
 			</div>
 		</div>
-@stop
-
-@section('right_column')
-		@auth
-			@include('articles.index.controls')
-		@endauth
-		@include('articles.blocks.archives')
 	</form>
 @endsection
 
-@section('scripts')
+{{-- @section('scripts')
 	@include('articles.common.btnScript')
-@stop
+@stop --}}

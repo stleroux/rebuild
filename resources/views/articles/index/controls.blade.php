@@ -2,7 +2,7 @@
 <div class="card">
 
 	@guest
-		<a href="{{ route('homepage') }}" class="btn btn-default btn-block">
+		<a href="{{ route('home') }}" class="btn btn-default btn-block">
 			<i class="fa fa-home" aria-hidden="true"></i>
 			Home
 		</a>
