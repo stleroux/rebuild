@@ -1,5 +1,11 @@
 <ul class="navbar-nav ml-auto">
-   
+
+@auth
+   <li class="nav-item text-success">
+      {{ Auth::user()->username }}
+   </li>
+@endauth
+
    @guest
       <li class="nav-item {{ Request::is('register*') ? 'active' : '' }}">
          <a class="nav-link" href="{{ URL('/register') }}">Register Account</a>

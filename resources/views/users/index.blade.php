@@ -61,7 +61,7 @@
 										@endif
 										
 										@if(checkPerm('user_edit'))
-											@include('common.buttons.edit', ['model'=>'user', 'id'=>$user->id])
+											@include('common.buttons.edit', ['name'=>'user', 'model'=>$user, 'id'=>$user->id])
 										@endif
 
 										@if(checkPerm('user_delete'))
