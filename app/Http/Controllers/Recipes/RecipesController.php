@@ -1045,6 +1045,7 @@ class RecipesController extends Controller
       ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
       ->where('published_at','<', Carbon::Now())
       ->where('deleted_at','=', Null)
+      ->where('personal', '!=', 1)
       ->orderBy('letter')
       ->get();
 
@@ -1057,6 +1058,7 @@ class RecipesController extends Controller
       if ($key) {
          $recipes = Recipe::with('user','category')
             ->published()
+            ->public()
             ->where('title', 'like', $key . '%')
             ->orderBy('title', 'asc')
             ->get();
@@ -1064,6 +1066,7 @@ class RecipesController extends Controller
          // No $key value is passed
          $recipes = Recipe::with('user','category')
             ->published()
+            ->public()
             ->get();
       }
 

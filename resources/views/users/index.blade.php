@@ -49,7 +49,7 @@
 									<td>{{ $user->created_at->format('M d, Y') }}</td>
 									<td class="text-right">
 										@if(checkPerm('user_show'))
-											@include('common.buttons.show', ['model'=>'user', 'id'=>$user->id])
+											@include('common.buttons.show', ['name'=>'user', 'model'=>$user])
 										@endif
 
 										@if(checkPerm('change_user_pwd'))
@@ -61,11 +61,11 @@
 										@endif
 										
 										@if(checkPerm('user_edit'))
-											@include('common.buttons.edit', ['name'=>'user', 'model'=>$user, 'id'=>$user->id])
+											@include('common.buttons.edit', ['name'=>'user', 'model'=>$user])
 										@endif
 
 										@if(checkPerm('user_delete'))
-											@include('common.buttons.delete', ['model'=>'user', 'id'=>$user->id])
+											@include('common.buttons.delete', ['name'=>'user', 'model'=>$user])
 										@endif
 									</td>
 								</tr>

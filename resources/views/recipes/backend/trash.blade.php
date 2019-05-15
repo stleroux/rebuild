@@ -2,7 +2,7 @@
 
 @section('left_column')
    @include('blocks.adminNav')
-   @include('recipes::backend.sidebar')
+   @include('recipes.backend.sidebar')
 @endsection
 
 @section('right_column')

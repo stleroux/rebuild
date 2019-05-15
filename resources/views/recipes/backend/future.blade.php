@@ -23,7 +23,7 @@
             <span class="float-right">
                @include('common.buttons.help', ['model'=>'recipe', 'bookmark'=>'recipes'])
                {{-- @include('recipes::backend.future.help') --}}
-               @include('common.buttons.add', ['model'=>'recipe', 'type'=>''])
+               @include('common.buttons.add', ['model'=>'recipe'])
 
 					<button
 						class="btn btn-sm btn-danger px-1 py-0"
@@ -89,9 +89,9 @@
 					         <td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'created_at'])</td>
 					         <td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'published_at'])</td>
 					         <td class="text-right">
-					            @include('common.buttons.edit', ['model'=>'recipe', 'id'=>$recipe->id, 'type'=>''])
-					            @include('common.buttons.restore', ['model'=>'recipe', 'id'=>$recipe->id, 'type'=>''])
-					            @include('common.buttons.trash', ['model'=>'recipe', 'id'=>$recipe->id, 'type'=>''])
+					            @include('common.buttons.edit', ['name'=>'recipe', 'model'=>$recipe])
+					            @include('common.buttons.publish', ['name'=>'recipe', 'model'=>$recipe])
+					            @include('common.buttons.trash', ['name'=>'recipe', 'model'=>$recipe])
 					        	</td>
 					      </tr>
 					      @endforeach

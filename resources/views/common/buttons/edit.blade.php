@@ -4,4 +4,8 @@
       title="Edit {{ ucfirst($name) }}">
       <i class="far fa-edit"></i>
    </a>
+@else
+   <a href="#" class="btn btn-sm btn-outline-primary">
+      
+   </a>
 @endif

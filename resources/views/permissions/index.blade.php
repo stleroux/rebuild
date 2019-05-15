@@ -48,15 +48,15 @@
 									<td>{{ ucwords($permission->description) }}</td>
 									<td class="text-right" nowrap="nowrap">
 										@if(checkPerm('permission_show'))
-											@include('common.buttons.show', ['model'=>'permission', 'id'=>$permission->id, 'type'=>''])
+											@include('common.buttons.show', ['name'=>'permission', 'model'=>$permission])
 										@endif
 
 										@if(checkPerm('permission_edit'))
-											@include('common.buttons.edit', ['model'=>'permission', 'id'=>$permission->id, 'type'=>''])
+											@include('common.buttons.edit', ['name'=>'permission', 'model'=>$permission])
 										@endif
 
 										@if(checkPerm('permission_delete'))
-											@include('common.buttons.delete', ['model'=>'permission', 'id'=>$permission->id, 'type'=>''])
+											@include('common.buttons.delete', ['name'=>'permission', 'model'=>$permission])
 										@endif
 									</td>
 								</tr>

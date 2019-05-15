@@ -1,12 +1,11 @@
 <?php
 
-// Check if logged in user has specified permission
+// Check if logged in user has specified permission or if they are the author of the model
 function checkPerm($pname, $model = null)
 {
 
    if(Auth::check())
    {
-
       // if(in_array(auth()->user()->id, [1,2]))
       // {
       //    return true;
@@ -14,38 +13,24 @@ function checkPerm($pname, $model = null)
 
       // Get the logged in user's permissions
       $perms = Auth::user()->permissions;
-      // dd($perms);
-
       foreach($perms as $perm)
       {
-         // Check if logged in user has specified permission
+         // Return TRUE if the logged in user has the specified access permission
          if($perm->name == $pname)
          {
-            // User has permission
             return true;
          }
       }
 
       if($model)
       {
-         // Check if logged in user is the owner of the record
+         // Return TRUE if the logged in user is the owner of the current model
          if($model->user_id == auth::user()->id)
          {
-            // User is the record owner
             return true;
          }
       }
    }
-
-
-
-   // if(Auth::check()) {
-   //    if(in_array(auth()->user()->id, [1,2]))
-   //    {
-   //       return true;
-   //    }
-   // }
-
 }
 
 

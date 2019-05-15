@@ -19,8 +19,8 @@
             Edit Recipe
             <span class="float-right">
                @include('common.buttons.help', ['model'=>'recipe', 'bookmark'=>'recipes'])
-               @include('common.buttons.cancel', ['model'=>'recipe', 'type'=>''])
-               @include('common.buttons.update', ['model'=>'recipe', 'type'=>''])
+               @include('common.buttons.cancel', ['model'=>'recipe'])
+               @include('common.buttons.update', ['model'=>'recipe'])
             </span>
          </div>
 

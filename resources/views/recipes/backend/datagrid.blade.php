@@ -4,8 +4,8 @@
       Create Recipe
       <span class="float-right">
          @include('common.buttons.help', ['model'=>'recipe', 'bookmark'=>'recipes'])
-         @include('common.buttons.cancel', ['model'=>'recipe', 'type'=>''])
-         @include('common.buttons.save', ['model'=>'recipe', 'type'=>''])
+         @include('common.buttons.cancel', ['model'=>'recipe'])
+         @include('common.buttons.save', ['model'=>'recipe'])
       </span>
    </div>
 
