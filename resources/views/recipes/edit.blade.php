@@ -5,7 +5,7 @@
 @stop
 
 @section('left_column')
-   @include('recipes.backend.sidebar')
+   @include('recipes.sidebar')
 @endsection
 
 @section('right_column')

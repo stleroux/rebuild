@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
 	{{ Html::style('css/recipes.css') }}
@@ -6,12 +6,13 @@
 
 @section('left_column')
 	{{-- @include('blocks.adminNav') --}}
-	{{-- @include('recipes::backend.sidebar') --}}
-	{{-- @include('blocks.admin_menu') --}}
+	{{-- @include('recipes.sidebar') --}}
+	@include('blocks.main_menu')
+	{{-- @include('blocks.home_menu') --}}
 @endsection
 
 @section('right_column')
-	{{-- @include('recipes::blocks.archives') --}}
+	@include('recipes.blocks.archives')
 @endsection
 
 @section('content')
@@ -56,7 +57,7 @@
 								<td>
 									<input type="checkbox" onClick="checkbox_is_checked()" name="checked[]" value="{{$recipe->id}}" class="check-all">
 								</td>
-								<td><a href="{{ route('recipes.show', $recipe->id) }}">{{ ucwords($recipe->title) }}</a></td>
+								<td><a href="{{ route('recipes.view', $recipe->id) }}">{{ ucwords($recipe->title) }}</a></td>
 								<td>{{ ucwords($recipe->category->name) }}</td>
 								<td>{{ $recipe->views }}</td>
 								<td>{{ \App\Models\Recipes\Recipe::withTrashed()->find($recipe->id)->favoritesCount }}</td>

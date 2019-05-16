@@ -185,55 +185,55 @@ class PermissionsTableSeeder extends Seeder
             15 => 
             array (
                 'id' => 16,
-                'name' => 'module_index',
+                'name' => 'component_index',
                 'display_name' => 'Index',
-                'model' => 'module',
+                'model' => 'component',
                 'type' => 1,
-                'description' => 'List module',
+                'description' => 'List components',
                 'created_at' => '2018-11-26 14:37:41',
                 'updated_at' => '2018-11-28 16:52:00',
             ),
             16 => 
             array (
                 'id' => 17,
-                'name' => 'module_create',
+                'name' => 'component_create',
                 'display_name' => 'create',
-                'model' => 'module',
+                'model' => 'component',
                 'type' => 1,
-                'description' => 'Create module',
+                'description' => 'Create components',
                 'created_at' => '2018-11-26 14:45:03',
                 'updated_at' => '2018-11-28 16:52:19',
             ),
             17 => 
             array (
                 'id' => 18,
-                'name' => 'module_enable',
+                'name' => 'component_enable',
                 'display_name' => 'enable',
-                'model' => 'module',
+                'model' => 'component',
                 'type' => 1,
-                'description' => 'Enable a module',
+                'description' => 'Enable a component',
                 'created_at' => '2018-11-26 14:46:16',
                 'updated_at' => '2018-11-28 16:53:14',
             ),
             18 => 
             array (
                 'id' => 19,
-                'name' => 'module_disable',
+                'name' => 'component_disable',
                 'display_name' => 'disable',
-                'model' => 'module',
+                'model' => 'component',
                 'type' => 1,
-                'description' => 'Disable a module',
+                'description' => 'Disable a component',
                 'created_at' => '2018-11-26 14:46:44',
                 'updated_at' => '2018-11-28 16:53:24',
             ),
             19 => 
             array (
                 'id' => 20,
-                'name' => 'module_delete',
+                'name' => 'component_delete',
                 'display_name' => 'delete',
-                'model' => 'module',
+                'model' => 'component',
                 'type' => 1,
-                'description' => 'Delete a module',
+                'description' => 'Delete components',
                 'created_at' => '2018-11-26 14:47:24',
                 'updated_at' => '2018-11-28 16:53:37',
             ),
@@ -450,14 +450,58 @@ class PermissionsTableSeeder extends Seeder
             array (
                 'id' => 47,
                 'name' => 'admin_menu',
-                'display_name' => 'horizontal admin menu',
+                'display_name' => 'admin menu',
                 'model' => 'admin',
                 'type' => 0,
-                'description' => 'display the backend menu horizontally instead of vertically on the left',
+                'description' => '',
                 'created_at' => NULL,
-                'updated_at' => '2019-04-10 21:58:12',
+                'updated_at' => NULL,
             ),
             40 => 
+            array (
+                'id' => 48,
+                'name' => 'module_index',
+                'display_name' => 'index',
+                'model' => 'module',
+                'type' => 1,
+                'description' => 'list modules',
+                'created_at' => '2018-11-30 14:04:16',
+                'updated_at' => '2018-11-30 14:04:16',
+            ),
+            41 => 
+            array (
+                'id' => 49,
+                'name' => 'module_create',
+                'display_name' => 'create',
+                'model' => 'module',
+                'type' => 1,
+                'description' => 'create modules',
+                'created_at' => '2018-11-30 15:37:02',
+                'updated_at' => '2018-11-30 15:37:02',
+            ),
+            42 => 
+            array (
+                'id' => 50,
+                'name' => 'module_edit',
+                'display_name' => 'edit',
+                'model' => 'module',
+                'type' => 1,
+                'description' => 'edit modules',
+                'created_at' => '2018-11-30 16:06:29',
+                'updated_at' => '2018-11-30 16:06:29',
+            ),
+            43 => 
+            array (
+                'id' => 51,
+                'name' => 'module_delete',
+                'display_name' => 'delete',
+                'model' => 'module',
+                'type' => 1,
+                'description' => 'delete modules',
+                'created_at' => '2018-11-30 16:10:38',
+                'updated_at' => '2018-11-30 16:10:38',
+            ),
+            44 => 
             array (
                 'id' => 52,
                 'name' => 'category_index',
@@ -468,7 +512,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2018-12-03 15:02:47',
                 'updated_at' => '2018-12-03 15:02:47',
             ),
-            41 => 
+            45 => 
             array (
                 'id' => 53,
                 'name' => 'category_create',
@@ -479,7 +523,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2018-12-03 15:04:11',
                 'updated_at' => '2018-12-03 15:04:11',
             ),
-            42 => 
+            46 => 
             array (
                 'id' => 54,
                 'name' => 'category_edit',
@@ -490,7 +534,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2018-12-03 16:53:16',
                 'updated_at' => '2018-12-03 16:53:16',
             ),
-            43 => 
+            47 => 
             array (
                 'id' => 55,
                 'name' => 'category_delete',
@@ -501,7 +545,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2018-12-03 16:53:48',
                 'updated_at' => '2018-12-03 16:53:48',
             ),
-            44 => 
+            48 => 
             array (
                 'id' => 56,
                 'name' => 'category_show',
@@ -511,6 +555,28 @@ class PermissionsTableSeeder extends Seeder
                 'description' => 'show category',
                 'created_at' => '2018-12-03 17:36:32',
                 'updated_at' => '2018-12-03 17:36:32',
+            ),
+            49 => 
+            array (
+                'id' => 57,
+                'name' => 'article_index',
+                'display_name' => 'Index',
+                'model' => 'Article',
+                'type' => 2,
+                'description' => 'List articles',
+                'created_at' => '2019-04-08 08:46:02',
+                'updated_at' => '2019-04-08 08:46:02',
+            ),
+            50 => 
+            array (
+                'id' => 58,
+                'name' => 'recipe_edit',
+                'display_name' => 'Edit',
+                'model' => 'Recipe',
+                'type' => 2,
+                'description' => 'edit all recipes',
+                'created_at' => '2019-05-15 10:28:03',
+                'updated_at' => '2019-05-15 10:28:03',
             ),
         ));
         

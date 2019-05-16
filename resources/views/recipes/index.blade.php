@@ -29,11 +29,16 @@
 							<i class="fa fa-print"></i>
 						</a>
 					@else
-						<a href="{{ route('recipes.printAll', Request::segment(2)) }}" class="btn btn-sm btn-outline-secondary" title="Print All aaa">
+						<a href="{{ route('recipes.printAll', Request::segment(2)) }}" class="btn btn-sm btn-outline-secondary" title="Print All in Category">
 							<i class="fa fa-print"></i>
 						</a>
 					@endif
-					@include('common.buttons.myFavorites', ['model'=>'recipe', 'type'=>''])
+					@include('common.buttons.myFavorites', ['model'=>'recipe'])
+					<a href="{{ route('recipes.published') }}" class="btn btn-sm btn-primary">P</a>
+					<a href="{{ route('recipes.unpublished') }}" class="btn btn-sm btn-primary">U</a>
+					<a href="{{ route('recipes.newRecipes') }}" class="btn btn-sm btn-primary">N</a>
+					<a href="{{ route('recipes.future') }}" class="btn btn-sm btn-primary">F</a>
+					<a href="{{ route('recipes.trashed') }}" class="btn btn-sm btn-primary">T</a>
 				@endauth
 			</span>
 		</div>
@@ -83,9 +88,9 @@
 								<div class="card-text pb-1 m-0">
 									<div class="align-self-end text-center">
 										@if(!$recipe->isFavorited())
-											@include('common.buttons.favoriteAdd', ['model'=>'recipe', 'id'=>$recipe->id, 'type'=>''])
+											@include('common.buttons.favoriteAdd', ['name'=>'recipe', 'model'=>$recipe])
 										@else
-											@include('common.buttons.favoriteRemove', ['model'=>'recipe', 'id'=>$recipe->id, 'type'=>''])
+											@include('common.buttons.favoriteRemove', ['name'=>'recipe', 'model'=>$recipe])
 										@endif
 									</div>
 								</div>

@@ -1,4 +1,4 @@
-<a href="{{ route(str_plural($model).'.favoriteAdd', $id) }}"
+<a href="{{ route(str_plural($name).'.favoriteAdd', $model->id) }}"
    class="btn btn-sm btn-outline-secondary"
    title="Add Favorite">
    <i class="fas fa-heart"></i>

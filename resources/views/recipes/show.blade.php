@@ -16,8 +16,8 @@
 	   	@include('blocks.home_menu')
 	   	@include('recipes.sidebar')
 		@else
-		   @include('blocks.adminNav')
-			@include('recipes.backend.sidebar')
+		   {{-- @include('blocks.adminNav') --}}
+			@include('recipes.sidebar')
 		@endif
 @endsection
 
@@ -38,6 +38,10 @@
 				@include('common.buttons.cancel', ['model'=>'recipe'])
 				@auth
 					@include('common.buttons.print', ['model'=>'recipe', 'id'=>$recipe->id])
+					@include('common.buttons.edit', ['name'=>'recipe', 'model'=>$recipe])
+					@include('common.buttons.publish', ['name'=>'recipe', 'model'=>$recipe])
+					@include('common.buttons.unpublish', ['name'=>'recipe', 'model'=>$recipe])
+					@include('common.buttons.trash', ['name'=>'recipe', 'model'=>$recipe])
 				@endauth
 			</span>
 		</div>

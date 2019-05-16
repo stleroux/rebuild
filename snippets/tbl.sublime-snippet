@@ -1,0 +1,22 @@
+<snippet>
+   <content><![CDATA[
+<table class="table tbale-condensed table-striped table-hover">
+   <thead>
+      <tr>
+         <th>Header</th>
+         <th>Header</th>
+      </tr>
+   </thead>
+   <tbody>
+      <tr>
+         <td>Data</td>
+         <td>Data</td>
+      </tr>
+   </tbody>
+</table>
+]]></content>
+   <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+   <tabTrigger>tbl</tabTrigger>
+   <!-- Optional: Set a scope to limit where the snippet will trigger -->
+   <!-- <scope>source.python</scope> -->
+</snippet>

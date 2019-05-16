@@ -84,177 +84,202 @@ class PermissionUserTableSeeder extends Seeder
             ),
             13 => 
             array (
-                'permission_id' => 8,
+                'permission_id' => 9,
                 'user_id' => 2,
             ),
             14 => 
             array (
-                'permission_id' => 9,
+                'permission_id' => 10,
                 'user_id' => 2,
             ),
             15 => 
             array (
-                'permission_id' => 10,
+                'permission_id' => 17,
                 'user_id' => 2,
             ),
             16 => 
             array (
-                'permission_id' => 17,
+                'permission_id' => 20,
                 'user_id' => 2,
             ),
             17 => 
             array (
-                'permission_id' => 20,
+                'permission_id' => 19,
                 'user_id' => 2,
             ),
             18 => 
             array (
-                'permission_id' => 19,
+                'permission_id' => 18,
                 'user_id' => 2,
             ),
             19 => 
             array (
-                'permission_id' => 18,
-                'user_id' => 2,
-            ),
-            20 => 
-            array (
                 'permission_id' => 12,
                 'user_id' => 3,
             ),
-            21 => 
+            20 => 
             array (
                 'permission_id' => 11,
                 'user_id' => 3,
             ),
-            22 => 
+            21 => 
             array (
                 'permission_id' => 15,
                 'user_id' => 3,
             ),
-            23 => 
+            22 => 
             array (
                 'permission_id' => 24,
                 'user_id' => 2,
             ),
-            24 => 
+            23 => 
             array (
                 'permission_id' => 27,
                 'user_id' => 2,
             ),
-            25 => 
+            24 => 
             array (
                 'permission_id' => 28,
                 'user_id' => 2,
             ),
-            26 => 
+            25 => 
             array (
                 'permission_id' => 31,
                 'user_id' => 2,
             ),
-            27 => 
+            26 => 
             array (
                 'permission_id' => 30,
                 'user_id' => 2,
             ),
-            28 => 
+            27 => 
             array (
                 'permission_id' => 25,
                 'user_id' => 2,
             ),
-            29 => 
+            28 => 
             array (
                 'permission_id' => 29,
                 'user_id' => 2,
             ),
-            30 => 
+            29 => 
             array (
                 'permission_id' => 26,
                 'user_id' => 2,
             ),
-            31 => 
+            30 => 
             array (
                 'permission_id' => 33,
                 'user_id' => 2,
             ),
-            32 => 
+            31 => 
             array (
                 'permission_id' => 35,
                 'user_id' => 2,
             ),
-            33 => 
+            32 => 
             array (
                 'permission_id' => 32,
                 'user_id' => 2,
             ),
-            34 => 
+            33 => 
             array (
                 'permission_id' => 36,
                 'user_id' => 2,
             ),
-            35 => 
+            34 => 
             array (
                 'permission_id' => 38,
                 'user_id' => 2,
             ),
-            36 => 
+            35 => 
             array (
                 'permission_id' => 41,
                 'user_id' => 2,
             ),
-            37 => 
+            36 => 
             array (
                 'permission_id' => 39,
                 'user_id' => 2,
             ),
-            38 => 
+            37 => 
             array (
                 'permission_id' => 37,
                 'user_id' => 2,
             ),
-            39 => 
+            38 => 
             array (
                 'permission_id' => 40,
                 'user_id' => 2,
             ),
-            40 => 
+            39 => 
             array (
                 'permission_id' => 34,
                 'user_id' => 2,
             ),
+            40 => 
+            array (
+                'permission_id' => 48,
+                'user_id' => 2,
+            ),
             41 => 
             array (
-                'permission_id' => 52,
+                'permission_id' => 50,
                 'user_id' => 2,
             ),
             42 => 
             array (
-                'permission_id' => 53,
+                'permission_id' => 51,
                 'user_id' => 2,
             ),
             43 => 
             array (
-                'permission_id' => 55,
+                'permission_id' => 49,
                 'user_id' => 2,
             ),
             44 => 
             array (
-                'permission_id' => 54,
+                'permission_id' => 52,
                 'user_id' => 2,
             ),
             45 => 
             array (
-                'permission_id' => 56,
+                'permission_id' => 53,
                 'user_id' => 2,
             ),
             46 => 
             array (
-                'permission_id' => 47,
-                'user_id' => 3,
+                'permission_id' => 55,
+                'user_id' => 2,
             ),
             47 => 
             array (
+                'permission_id' => 54,
+                'user_id' => 2,
+            ),
+            48 => 
+            array (
+                'permission_id' => 56,
+                'user_id' => 2,
+            ),
+            49 => 
+            array (
+                'permission_id' => 21,
+                'user_id' => 2,
+            ),
+            50 => 
+            array (
+                'permission_id' => 57,
+                'user_id' => 2,
+            ),
+            51 => 
+            array (
                 'permission_id' => 47,
+                'user_id' => 2,
+            ),
+            52 => 
+            array (
+                'permission_id' => 8,
                 'user_id' => 2,
             ),
         ));

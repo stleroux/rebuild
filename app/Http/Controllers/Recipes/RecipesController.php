@@ -936,11 +936,13 @@ class RecipesController extends Controller
       if($category == "all"){
          $recipes = Recipe::orderBy('title', 'asc')->get();
       } else {
-         $cName = Category::where('name', $category)->pluck('id');
-         $sCats = Category::where('parent_id', $cName)->pluck('id');
+         $cCat = Category::where('name', $category)->pluck('id');
+         // dd($cName);
+         $sCats = Category::where('parent_id', $cCat)->pluck('id');
+         // dd($sCats);
 
          if($sCats->count() <= 0){
-            $recipes = Recipe::where('category_id', $cName)->orderBy('title', 'asc')->get();
+            $recipes = Recipe::where('category_id', $cCat)->orderBy('title', 'asc')->get();
          } else {
             $recipes = Recipe::whereIn('category_id', $sCats)->orderBy('title', 'asc')->get();
          }
@@ -1226,7 +1228,8 @@ class RecipesController extends Controller
       $recipe->save();
 
       Session::flash('success','The article has been created successfully!');
-      return redirect()->route('recipes.'. Session::get('pageName'));
+      // return redirect()->route('recipes.'. Session::get('pageName'));
+      return redirect()->back();
    }
 
 
@@ -1557,7 +1560,9 @@ class RecipesController extends Controller
 
       // set a flash message to be displayed on screen
       Session::flash('success','The recipe was successfully updated!');
-      return redirect()->route('recipes.'. Session::get('pageName'));
+      // return redirect()->route('recipes.'. Session::get('pageName'));
+      return redirect()->route('recipes.index', 'all');
+
   }
 
 
@@ -1573,12 +1578,31 @@ class RecipesController extends Controller
    public function view($id)
    {
       // Check if user has required permission
-      // if(!checkPerm('post_index')) { abort(401, 'Unauthorized Access'); }
+      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
 
-      $recipe = Recipe::find($id);
+      $recipe = Recipe::withTrashed()->find($id);
 
-      return view('recipes.view', compact('recipe','next','previous'));
+      if(
+         (Session::get('pageName') === 'recipes_index') ||
+         (Session::get('pageName') === 'myFavorites') ||
+         (Session::get('pageName') === 'archive') ||
+         (Session::get('pageName') === 'home')
+      ){
+         // Add 1 to views column
+         DB::table('recipes')->where('id','=',$recipe->id)->increment('views',1);
+      }
+
+      // If user is logged in, update the last_viewed_by_id and last_viewed_on fields in the recipes table
+      // if (Auth::check()) {
+      //    DB::statement("UPDATE recipes SET last_viewed_by_id = " . Auth::user()->id . " where id = " . $id );
+      //    DB::statement("UPDATE recipes SET last_viewed_on = " . DB::raw('NOW()') . " where id = " . $id );
+      // }
+
+      $categories = Category::where('parent_id',1)->get();
+
+      return view('recipes.view', compact('recipe','categories'));
    }
 
 
 }
+
