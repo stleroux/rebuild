@@ -14,7 +14,7 @@
 				(Session::get('pageName') === 'show')
 			)
 	   	@include('blocks.home_menu')
-	   	@include('recipes.frontend.sidebar')
+	   	@include('recipes.sidebar')
 		@else
 		   @include('blocks.adminNav')
 			@include('recipes.backend.sidebar')
@@ -23,8 +23,8 @@
 
 @section('right_column')
 	@include('blocks.popularRecipes')
-	@include('recipes.frontend.blocks.archives')
-	@include('recipes.common.show.leave_comment')
+	@include('recipes.blocks.archives')
+	@include('recipes.show.leave_comment')
 @endsection
 
 @section ('content')
@@ -35,7 +35,7 @@
 		<div class="card-header card_header">
 			{{ $recipe->title }}
 			<span class="float-right">
-				@include('common.buttons.cancel', ['model'=>'recipe', 'type'=>''])
+				@include('common.buttons.cancel', ['model'=>'recipe'])
 				@auth
 					@include('common.buttons.print', ['model'=>'recipe', 'id'=>$recipe->id])
 				@endauth
@@ -45,8 +45,8 @@
 		<div class="card-body card_body">
 	
 			<div class="row">
-				@include('recipes.common.show.ingredients')
-				@include('recipes.common.show.image')
+				@include('recipes.show.ingredients')
+				@include('recipes.show.image')
 			</div>
 
 			<div class="row">
@@ -56,29 +56,29 @@
 			@auth
 
 				<div class="row">
-					@include('recipes.common.show.methodology')
+					@include('recipes.show.methodology')
 				</div>
 
 				<div class="row">
-					@include('recipes.common.show.category')
-					@include('recipes.common.show.servings')
-					@include('recipes.common.show.prep_time')
-					@include('recipes.common.show.cook_time')
-					@include('recipes.common.show.personal')
-					@include('recipes.common.show.views')
-					@include('recipes.common.show.source')
-					@include('recipes.common.show.author')
+					@include('recipes.show.category')
+					@include('recipes.show.servings')
+					@include('recipes.show.prep_time')
+					@include('recipes.show.cook_time')
+					@include('recipes.show.personal')
+					@include('recipes.show.views')
+					@include('recipes.show.source')
+					@include('recipes.show.author')
 				</div>
 
 				<div class="row">
-					@include('recipes.common.show.public_notes')
-					@include('recipes.common.show.private_notes')
+					@include('recipes.show.public_notes')
+					@include('recipes.show.private_notes')
 				</div>
 
 			@endauth
 
 			<div class="row">
-				@include('recipes.common.show.comments')
+				@include('recipes.show.comments')
 			</div>
 
 		</div>

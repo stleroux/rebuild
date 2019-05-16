@@ -5,13 +5,13 @@
 
 @section('left_column')
    @include('blocks.home_menu')
-   @include('recipes.frontend.sidebar')
+   @include('recipes.sidebar')
    
 @endsection
 
 @section('right_column')
    @include('blocks.popularRecipes')
-   @include('recipes.frontend.blocks.archives')
+   @include('recipes.blocks.archives')
 @endsection
 
 @section ('content')

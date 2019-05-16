@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('popularRecipes', $popularRecipes);
         });
 
-        view()->composer('recipes.frontend.blocks.archives', function ($view) {
+        view()->composer('recipes.blocks.archives', function ($view) {
             $recipelinks = DB::table('recipes')
                 ->select(DB::raw('YEAR(published_at) year, MONTH(published_at) month, MONTHNAME(published_at) month_name, COUNT(*) recipe_count'))
                 ->where('published_at', '<=', Carbon::now())

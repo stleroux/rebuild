@@ -10,7 +10,7 @@
 
 @section('right_column')
    @include('blocks.popularRecipes')
-   @include('recipes.frontend.blocks.archives')
+   @include('recipes.blocks.archives')
 @endsection
 
 @section('content')
@@ -23,15 +23,15 @@
             MY FAVORITE RECIPES
             <span class="float-right">
                @include('common.buttons.help', ['model'=>'recipe', 'bookmark'=>''])
-               {{-- @include('recipes::frontend.myFavorites.help') --}}
-               @include('common.buttons.recipes', ['model'=>'recipe', 'type'=>''])
-               {{-- @include('common.buttons.myRecipes', ['model'=>'recipe', 'type'=>'']) --}}
+               {{-- @include('recipes::myFavorites.help') --}}
+               @include('common.buttons.recipes', ['model'=>'recipe'])
+               {{-- @include('common.buttons.myRecipes', ['model'=>'recipe']) --}}
             </span>
          </div>
 
       @if($recipes->count() > 0)
          <div class="card-body card_body p-2 bg-transparent">
-            {{-- @include('recipes::frontend.alphabet', ['model'=>'recipe']) --}}
+            {{-- @include('recipes::alphabet', ['model'=>'recipe']) --}}
 
             @foreach($recipes->chunk(6) as $chunk)
                <div class="card-deck mb-0 px-2 bg-transparent">
@@ -60,7 +60,7 @@
                                  <span class="badge badge-light text-dark" title="Times Viewed">{{ $recipe->views }} Views</span>
                                  <span class="badge badge-light text-dark" title="Comments">{{ $recipe->comments->count() }} Comments</span>
                                  <br />
-                                 <span class="badge badge-light text-dark" title="Times Favorited">{{ \Modules\Recipes\Entities\Recipe::find($recipe->id)->favoritesCount }} Favorited</span>
+                                 <span class="badge badge-light text-dark" title="Times Favorited">{{ App\Models\Recipes\Recipe::find($recipe->id)->favoritesCount }} Favorited</span>
                               </p>
                            </div>   
                         </div>
@@ -69,9 +69,9 @@
                            <div class="card-text pb-1 m-0">
                               <div class="align-self-end text-center">
                                  @if(!$recipe->isFavorited())
-                                    @include('common.buttons.favoriteAdd', ['model'=>'recipe', 'id'=>$recipe->id, 'type'=>''])
+                                    @include('common.buttons.favoriteAdd', ['model'=>'recipe', 'id'=>$recipe->id])
                                  @else
-                                    @include('common.buttons.favoriteRemove', ['model'=>'recipe', 'id'=>$recipe->id, 'type'=>''])
+                                    @include('common.buttons.favoriteRemove', ['model'=>'recipe', 'id'=>$recipe->id])
                                  @endif
                               </div>
                            </div>

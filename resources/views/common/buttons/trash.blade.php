@@ -4,4 +4,8 @@
       title="Trash {{ $name }}">
       <i class="far fa-trash-alt"></i>
    </a>
+@else
+   <button class="btn btn-sm btn-outline-danger" disabled="disabled">
+      <i class="far fa-trash-alt"></i>
+   </button>
 @endif

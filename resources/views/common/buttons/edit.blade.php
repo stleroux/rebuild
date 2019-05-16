@@ -5,7 +5,7 @@
       <i class="far fa-edit"></i>
    </a>
 @else
-   <a href="#" class="btn btn-sm btn-outline-primary">
-      
-   </a>
+   <button class="btn btn-sm btn-outline-primary" disabled="disabled">
+      <i class="far fa-edit"></i>
+   </button>
 @endif

@@ -78,7 +78,7 @@ class RecipesController extends Controller
          ->orderBy('title')
 			->get();
 
-		return view('recipes.frontend.archive', compact('archives','year','month','categories'));
+		return view('recipes.archive', compact('archives','year','month','categories'));
 	}
 
 
@@ -99,7 +99,7 @@ class RecipesController extends Controller
       // Get all categories related to Recipe Category (id=>1)
       $categories = Category::where('parent_id',1)->get();
 
-      return view('recipes.backend.create', compact('categories'));
+      return view('recipes.create', compact('categories'));
    }
 
 
@@ -119,7 +119,7 @@ class RecipesController extends Controller
 
       $recipe = Recipe::onlyTrashed()->findOrFail($id);
 
-      return view('recipes.backend.delete', compact('recipe'));
+      return view('recipes.delete', compact('recipe'));
    }
 
 
@@ -336,7 +336,7 @@ class RecipesController extends Controller
       // find all categories in the categories table and pass them to the view
       $categories = Category::with('children')->where('parent_id',1)->get();
 
-      return view('recipes.backend.edit', compact('recipe','categories'));
+      return view('recipes.edit', compact('recipe','categories'));
    }
 
 
@@ -426,7 +426,7 @@ class RecipesController extends Controller
             ->get();
       }
 
-      return view('recipes.backend.future', compact('recipes','letters'));
+      return view('recipes.future', compact('recipes','letters'));
    }
 
 
@@ -611,7 +611,7 @@ class RecipesController extends Controller
          $letters[] = $alpha->letter;
       }
       
-      return view('recipes.frontend.index', compact('recipes','categories','letters','byCatName'));
+      return view('recipes.index', compact('recipes','categories','letters','byCatName'));
    }
 
 
@@ -684,7 +684,7 @@ class RecipesController extends Controller
          $recipes = $user->favorite(Recipe::class)->sortBy('title');
       }
 
-      return view('recipes.frontend.myFavorites', compact('recipes'));
+      return view('recipes.myFavorites', compact('recipes'));
 	}
 
 
@@ -732,7 +732,7 @@ class RecipesController extends Controller
                ->paginate(18);
          }
 
-			return view('recipes.backend.myRecipes', compact('recipes','letters'));
+			return view('recipes.myRecipes', compact('recipes','letters'));
 		} else {
          return ('You need to be logged in');
       }
@@ -797,7 +797,7 @@ class RecipesController extends Controller
                ->paginate(18);
          }
 
-         return view('recipes.backend.myPrivateRecipes', compact('recipes','letters', 'recipelinks'));
+         return view('recipes.myPrivateRecipes', compact('recipes','letters', 'recipelinks'));
       } else {
          return ('You need to be logged in');
       }
@@ -844,7 +844,7 @@ class RecipesController extends Controller
             ->paginate(18);
       }
 
-      return view('recipes.backend.newRecipes', compact('recipes','letters'));
+      return view('recipes.newRecipes', compact('recipes','letters'));
    }
 
 
@@ -916,7 +916,7 @@ class RecipesController extends Controller
 
 		$recipe = Recipe::find($id);
 
-		return view('recipes.frontend.print', compact('recipe'));
+		return view('recipes.print', compact('recipe'));
 	}
 
 
@@ -946,7 +946,7 @@ class RecipesController extends Controller
          }
       }
 
-      return view('recipes.frontend.printAll', compact('recipes'));
+      return view('recipes.printAll', compact('recipes'));
    }
 
 // public function print($category=null, $id=null){
@@ -968,7 +968,7 @@ class RecipesController extends Controller
 //       }
 //    }
 
-//    return view('recipes.frontend.print', compact('recipes'));
+//    return view('recipes.print', compact('recipes'));
 // }
 
 ##################################################################################################################
@@ -1070,7 +1070,7 @@ class RecipesController extends Controller
             ->get();
       }
 
-      return view('recipes.backend.published', compact('recipes','letters'));
+      return view('recipes.published', compact('recipes','letters'));
    }
 
 
@@ -1176,7 +1176,7 @@ class RecipesController extends Controller
 
       $categories = Category::where('parent_id',1)->get();
 
-      return view('recipes.common.show', compact('recipe','categories'));
+      return view('recipes.show', compact('recipe','categories'));
    }
 
 
@@ -1271,7 +1271,7 @@ class RecipesController extends Controller
 
       $recipe = Recipe::findOrFail($id);
 
-      return view('recipes.backend.trash', compact('recipe'));
+      return view('recipes.trash', compact('recipe'));
    }
 
 
@@ -1372,7 +1372,7 @@ class RecipesController extends Controller
             ->get();
       }
       
-      return view('recipes.backend.trashed', compact('recipes','letters'));
+      return view('recipes.trashed', compact('recipes','letters'));
    }
 
 
@@ -1392,7 +1392,7 @@ class RecipesController extends Controller
 
       $recipe = Recipe::withTrashed()->find($id);
 
-      return view('recipes.backend.trashedView', compact('recipe'));
+      return view('recipes.trashedView', compact('recipe'));
    }
 
 
@@ -1462,7 +1462,7 @@ class RecipesController extends Controller
             ->get();
       }
 
-      return view('recipes.backend.unpublished', compact('recipes','letters'));
+      return view('recipes.unpublished', compact('recipes','letters'));
    }
 
 
@@ -1577,7 +1577,7 @@ class RecipesController extends Controller
 
       $recipe = Recipe::find($id);
 
-      return view('recipes.backend.view', compact('recipe','next','previous'));
+      return view('recipes.view', compact('recipe','next','previous'));
    }
 
 

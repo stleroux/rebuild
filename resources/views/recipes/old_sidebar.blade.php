@@ -18,7 +18,6 @@
                   </div>
                </a>
             @endif
-
       
 
          @if(checkACL('author'))

@@ -6,12 +6,12 @@
 
 @section('left_column')
 	@include('blocks.home_menu')
-	@include('recipes.frontend.sidebar')
+	@include('recipes.sidebar')
 @endsection
 
 @section('right_column')
 	@include('blocks.popularRecipes')
-	@include('recipes.frontend.blocks.archives')
+	@include('recipes.blocks.archives')
 @endsection
 
 @section('content')
@@ -41,7 +41,7 @@
 		@if($recipes->count() > 0)
 			<div class="card-body p-1">
 				<div class="my-1">
-					@include('recipes.frontend.alphabet', ['model'=>'recipe'])
+					@include('recipes.alphabet', ['model'=>'recipe'])
 				</div>
 				
 				<div class="row justify-content-center">
