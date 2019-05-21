@@ -110,11 +110,11 @@
    @include('scripts.datatables')
    @include('scripts.tinyMCE')
    
-   {{-- <script>
+   <script>
       $(function () {
          $('[data-toggle="tooltip"]').tooltip()
       });
-   </script> --}}
+   </script>
    <script>
       $('#success-empty').hide();
       setTimeout(function() {

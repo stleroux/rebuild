@@ -65,9 +65,6 @@ class RecipesController extends Controller
       // Check if user has required permission
       // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
 
-      // Set the variable so we can use a button in other pages to come back to this page
-      Session::put('pageName', 'archive');
-
       // Get all categories related to Recipe Category (id=>1)
       $categories = Category::where('parent_id',1)->get();
 
@@ -398,9 +395,6 @@ class RecipesController extends Controller
       // Check if user has required permission
       // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
 
-      // Set the variable so we can use a button in other pages to come back to this page
-      Session::put('pageName', 'future');
-
       $alphas = DB::table('recipes')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
          ->where('published_at','>', Carbon::Now())
@@ -511,14 +505,9 @@ class RecipesController extends Controller
       // Check if user has required permission
       // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
 
-      // Set the variable so we can use a button in other pages to come back to this page
-      Session::put('pageName', 'recipes_index');
-
       // Get all categories related to Recipe Category (id=>1)
       $categories = Category::where('parent_id',1)->get();
-
       $byCatName = Category::where('name', $request->cat)->first();
-      // dd($byCatName);
 
       if($request->cat == 'all'){
          $alphas = DB::table('recipes')
@@ -676,9 +665,6 @@ class RecipesController extends Controller
       // Check if user has required permission
       // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
 
-      // Set the variable so we can use a button in other pages to come back to this page
-      Session::put('pageName', 'myFavorites');
-
       if(Auth::check()) {
          $user = Auth::user();
          $recipes = $user->favorite(Recipe::class)->sortBy('title');
@@ -701,9 +687,6 @@ class RecipesController extends Controller
 	{
       // Check if user has required permission
       // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
-
-      // Set the variable so we can use a button in other pages to come back to this page
-      Session::put('pageName', 'myRecipes');
 
 		if (Auth::check()) {
 			$alphas = DB::table('recipes')
@@ -752,9 +735,6 @@ class RecipesController extends Controller
    {
       // Check if user has required permission
       // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
-
-      // Set the variable so we can use a button in other pages to come back to this page
-      Session::put('pageName', 'myPrivateRecipes');
 
       if (Auth::check()) {
          // Get list of recips by year and month
@@ -817,9 +797,6 @@ class RecipesController extends Controller
    {
       // Check if user has required permission
       // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
-
-      // Set the variable so we can use a button in other pages to come back to this page
-      Session::put('pageName', 'newRecipes');
 
       $alphas = DB::table('recipes')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
@@ -951,27 +928,6 @@ class RecipesController extends Controller
       return view('recipes.printAll', compact('recipes'));
    }
 
-// public function print($category=null, $id=null){
-//    if($id){
-//       $recipes = Recipe::find($id);
-//       dd($recipes);
-//    }
-
-//    if($category == "all"){
-//       $recipes = Recipe::orderBy('title', 'asc')->get();
-//    } else {
-//       $cName = Category::where('name', $category)->pluck('id');
-//       $sCats = Category::where('parent_id', $cName)->pluck('id');
-
-//       if($sCats->count() <= 0){
-//          $recipes = Recipe::where('category_id', $cName)->orderBy('title', 'asc')->get();
-//       } else {
-//          $recipes = Recipe::whereIn('category_id', $sCats)->orderBy('title', 'asc')->get();
-//       }
-//    }
-
-//    return view('recipes.print', compact('recipes'));
-// }
 
 ##################################################################################################################
 # ██████╗ ██╗   ██╗██████╗ ██╗     ██╗███████╗██╗  ██╗
@@ -1039,9 +995,6 @@ class RecipesController extends Controller
    {
       // Check if user has required permission
       // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
-
-      // Set the variable so we can use a button in other pages to come back to this page
-      Session::put('pageName', 'published');
 
      $alphas = DB::table('recipes')
       ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
@@ -1160,21 +1113,8 @@ class RecipesController extends Controller
 
       $recipe = Recipe::withTrashed()->find($id);
 
-      if(
-         (Session::get('pageName') === 'recipes_index') ||
-         (Session::get('pageName') === 'myFavorites') ||
-         (Session::get('pageName') === 'archive') ||
-         (Session::get('pageName') === 'home')
-      ){
-         // Add 1 to views column
-         DB::table('recipes')->where('id','=',$recipe->id)->increment('views',1);
-      }
-
-      // If user is logged in, update the last_viewed_by_id and last_viewed_on fields in the recipes table
-      // if (Auth::check()) {
-      //    DB::statement("UPDATE recipes SET last_viewed_by_id = " . Auth::user()->id . " where id = " . $id );
-      //    DB::statement("UPDATE recipes SET last_viewed_on = " . DB::raw('NOW()') . " where id = " . $id );
-      // }
+      // Increase the view count since this is viewed from the frontend
+      DB::table('recipes')->where('id','=',$recipe->id)->increment('views',1);
 
       $categories = Category::where('parent_id',1)->get();
 
@@ -1347,9 +1287,6 @@ class RecipesController extends Controller
       // Check if user has required permission
       // if(!checkPerm('post_index')) { abort(401, 'Unauthorized Access'); }
 
-      // Set the variable so we can use a button in other pages to come back to this page
-      Session::put('pageName', 'trashed');
-
       $alphas = DB::table('recipes')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
          ->where('deleted_at','!=', Null)
@@ -1436,9 +1373,6 @@ class RecipesController extends Controller
    {
       // Check if user has required permission
       // if(!checkPerm('post_index')) { abort(401, 'Unauthorized Access'); }
-
-      // Set the variable so we can use a button in other pages to come back to this page
-      Session::put('pageName', 'unpublished');
 
      $alphas = DB::table('recipes')
       ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
@@ -1581,22 +1515,6 @@ class RecipesController extends Controller
       // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
 
       $recipe = Recipe::withTrashed()->find($id);
-
-      if(
-         (Session::get('pageName') === 'recipes_index') ||
-         (Session::get('pageName') === 'myFavorites') ||
-         (Session::get('pageName') === 'archive') ||
-         (Session::get('pageName') === 'home')
-      ){
-         // Add 1 to views column
-         DB::table('recipes')->where('id','=',$recipe->id)->increment('views',1);
-      }
-
-      // If user is logged in, update the last_viewed_by_id and last_viewed_on fields in the recipes table
-      // if (Auth::check()) {
-      //    DB::statement("UPDATE recipes SET last_viewed_by_id = " . Auth::user()->id . " where id = " . $id );
-      //    DB::statement("UPDATE recipes SET last_viewed_on = " . DB::raw('NOW()') . " where id = " . $id );
-      // }
 
       $categories = Category::where('parent_id',1)->get();
 

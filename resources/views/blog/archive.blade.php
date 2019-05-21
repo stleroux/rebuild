@@ -9,6 +9,9 @@
 @endsection
 
 @section('right_column')
+   @include('blog.blocks.search')
+   @include('blocks.popularPosts')
+   @include('blog.blocks.archives')
 @endsection
 
 @section ('content')

@@ -49,14 +49,14 @@ class SiteController extends Controller
 		$posts = Post::published()->with('user')->orderBy('id','desc')->take(setting('homepage_blog_count'))->get();
 
 		// $popularArticle = Article::published()->get()->sortByDesc('views')->take(1);
-		$popularPosts = Post::published()->get()->sortByDesc('views')->take(setting('homepage_favorite_post_count'));
+		// $popularPosts = Post::published()->get()->sortByDesc('views')->take(setting('homepage_favorite_post_count'));
 		// dd($popularPosts);
 		// $popularRecipes = Recipe::published()->public()->get()->sortBy('title')->sortByDesc('views')->take(setting('homepage_favorite_recipe_count'));
 		// dd($popularRecipes);
 		// $popularWoodProject = WoodProject::get()->sortByDesc('views')->take(1);
 
 		// return view('homepage', compact('posts','popularPosts','popularRecipes'));
-		return view('homepage', compact('posts','popularPosts'));
+		return view('homepage', compact('posts'));
 	}
 
 

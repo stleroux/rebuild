@@ -60,11 +60,11 @@
                                  <td data-order="{{ $category->created_at}}">{{ $category->created_at ? $category->created_at->format('M d, Y') : 'no data found' }}</td>
                                  <td class="text-right">
                                     @if(checkPerm('category_edit'))
-                                       @include('common.buttons.edit', ['model'=>'category', 'id'=>$category->id])
+                                       @include('common.buttons.edit', ['name'=>'category', 'model'=>$category])
                                     @endif
 
                                     @if(checkPerm('category_delete'))
-                                       @include('common.buttons.delete', ['model'=>'category', 'id'=>$category->id])
+                                       @include('common.buttons.delete', ['name'=>'category', 'model'=>$category])
                                     @endif
                                  </td>
                               </tr>

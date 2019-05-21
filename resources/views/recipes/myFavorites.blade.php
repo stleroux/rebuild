@@ -1,16 +1,13 @@
-@extends('layouts.master')
+@extends('layouts.recipes')
 
 @section('stylesheets')
    {{ Html::style('css/recipes.css') }}
 @endsection
 
 @section('left_column')
-   @include('blocks.main_menu')
 @endsection
 
 @section('right_column')
-   @include('blocks.popularRecipes')
-   @include('recipes.blocks.archives')
 @endsection
 
 @section('content')
@@ -69,9 +66,9 @@
                            <div class="card-text pb-1 m-0">
                               <div class="align-self-end text-center">
                                  @if(!$recipe->isFavorited())
-                                    @include('common.buttons.favoriteAdd', ['model'=>'recipe', 'id'=>$recipe->id])
+                                    @include('common.buttons.favoriteAdd', ['name'=>'recipe', 'model'=>$recipe])
                                  @else
-                                    @include('common.buttons.favoriteRemove', ['model'=>'recipe', 'id'=>$recipe->id])
+                                    @include('common.buttons.favoriteRemove', ['name'=>'recipe', 'model'=>$recipe])
                                  @endif
                               </div>
                            </div>

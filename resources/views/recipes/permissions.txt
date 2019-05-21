@@ -1,0 +1,26 @@
+Recipes Permissions:
+
+:: Registered users
+- view
+- add / remove favorites
+
+:: Authorized users
+- add
+- edit own
+- update own
+- delete own
+- mark private
+- view own private recipes
+- view own recipes list
+
+:: Priviledged users
+- edit all
+- delete all
+- publish / unpublish
+
+:: Admin
+- published (view)
+- trashed (view)
+- unpublished (view)
+- new (view)
+- future (view)

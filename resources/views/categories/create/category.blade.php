@@ -6,9 +6,9 @@
             New Category
             <span class="float-right">
                @include('common.buttons.help', ['bookmark'=>'categories_add_category'])
-               @include('common.buttons.cancel', ['model'=>'category', 'type'=>''])
-               @include('common.buttons.reset', ['model'=>'category', 'type'=>''])
-               @include('common.buttons.save', ['model'=>'category', 'type'=>''])
+               {{-- @include('common.buttons.cancel', ['name'=>'category', 'model'=>$category]) --}}
+               @include('common.buttons.reset', ['model'=>'category'])
+               @include('common.buttons.save', ['model'=>'category'])
             </span>
          </div>
          <div class="card-body card_body pb-0">
@@ -40,6 +40,9 @@
                   <div class="form-group {{ $errors->has('cName') ? 'has-error' : '' }}">
                      {{ Form::label('cName', 'Category Name', ['class'=>'required']) }}
                      {{ Form::text('cName', null, ['class' => 'form-control form-control-sm']) }}
+                     <small id="passwordHelpBlock" class="form-text text-muted">
+                        Use camelCase for categories with multiple words. I.E.: fruitDishes, hotSoups
+                     </small>
                      <span class="text-danger">{{ $errors->first('cName') }}</span>
                   </div>
                </div>

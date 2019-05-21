@@ -7,7 +7,7 @@
             <span class="float-right">
                @include('common.buttons.help', ['bookmark'=>'categories_add_subCategory'])
                {{-- @include('help.categories.create.subCategory', ['model'=>'category', 'type'=>'']) --}}
-               @include('common.buttons.cancel', ['model'=>'category', 'type'=>''])
+               {{-- @include('common.buttons.cancel', ['name'=>'category', 'model'=>$category]) --}}
                @include('common.buttons.reset', ['model'=>'category', 'type'=>''])
                @include('common.buttons.save', ['model'=>'category', 'type'=>''])
             </span>

@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Input;
 
 Route::get('categories/{cat}/delete',             'CategoriesController@delete')               ->name('categories.delete');
 Route::get('categories/getSubs/{id}',             'CategoriesController@getSubs')               ->name('categories.getSubs');

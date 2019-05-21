@@ -1,12 +1,10 @@
-@extends('layouts.backend')
+@extends('layouts.recipes')
 
 @section ('stylesheets')
    {{ Html::style('css/recipes.css') }}
 @endsection
 
 @section('left_column')
-   {{-- @include('blocks.adminNav') --}}
-   {{-- @include('recipes::backend.sidebar') --}}
 @endsection
 
 @section('right_column')
@@ -24,12 +22,18 @@
                @include('common.buttons.help', ['model'=>'recipe', 'bookmark'=>'recipes'])
                {{-- @include('recipes::backend.myPrivateRecipes.help') --}}
                @include('common.buttons.add', ['model'=>'recipe'])
+               @include('recipes.buttons.published')
+               @include('recipes.buttons.unpublished')
+               @include('recipes.buttons.new')
+               @include('recipes.buttons.future')
+               @include('recipes.buttons.trashed')
+               @include('recipes.buttons.mine')
             </span>
          </div>
 
          @if($recipes->count() > 0)
             <div class="card-body card_body p-2">
-               @include('common.alphabet', ['model'=>'recipe', 'page'=>'myPrivateRecipes'])
+               @include('recipes.alphabet', ['model'=>'recipe', 'page'=>'myPrivateRecipes'])
                <table id="datatable" class="table table-sm table-hover">
                   <thead>
                      <tr>
@@ -49,7 +53,7 @@
                         <td>
                            <input type="checkbox" onClick="checkbox_is_checked()" name="checked[]" value="{{$recipe->id}}" class="check-all">
                         </td>
-                        <td><a href="{{ route('recipes.show', $recipe->id) }}">{{ ucwords($recipe->title) }}</a></td>
+                        <td><a href="{{ route('recipes.view', $recipe->id) }}">{{ ucwords($recipe->title) }}</a></td>
                         <td>{{ ucwords($recipe->category->name) }}</td>
                         <td>{{ $recipe->views }}</td>
                         <td>@include('common.authorFormat', ['model'=>$recipe, 'field'=>'user'])</td>

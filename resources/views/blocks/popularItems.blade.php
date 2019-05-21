@@ -40,7 +40,7 @@
             </div>
          @endif --}}
 @include('blocks.popularPosts')
-{{-- @include('blocks.popularRecipes') --}}
+@include('recipes.blocks.popularRecipes')
 
          {{-- @foreach ($popularWoodProject as $wp)
             <a class="list-group-item" href="{{ route('woodProjects.show', $wp->id) }}" role="button">

@@ -1,18 +1,13 @@
-@extends('layouts.master')
+@extends('layouts.recipes')
 
 @section('stylesheets')
 	{{ Html::style('css/recipes.css') }}
 @stop
 
 @section('left_column')
-	{{-- @include('blocks.adminNav') --}}
-	{{-- @include('recipes.sidebar') --}}
-	@include('blocks.main_menu')
-	{{-- @include('blocks.home_menu') --}}
 @endsection
 
 @section('right_column')
-	@include('recipes.blocks.archives')
 @endsection
 
 @section('content')
@@ -30,12 +25,18 @@
 					@include('common.buttons.add', ['model'=>'recipe'])
 					@include('common.buttons.unpublishAll', ['model'=>'recipe'])
 					@include('common.buttons.trashAll', ['model'=>'recipe'])
+					@include('recipes.buttons.unpublished')
+					@include('recipes.buttons.new')
+					@include('recipes.buttons.future')
+					@include('recipes.buttons.trashed')
+					@include('recipes.buttons.mine')
+					@include('recipes.buttons.private')
 				</span>
 			</div>
 
 			@if($recipes->count() > 0)
 				<div class="card-body card_body p-2">
-					@include('recipes.backend.alphabet', ['model'=>'recipe', 'page'=>'published'])
+					@include('recipes.alphabet', ['model'=>'recipe', 'page'=>'published'])
 					{{-- @include('recipes::frontend.alphabet', ['model'=>'recipe']) --}}
 					<table id="datatable" class="table table-sm table-hover">
 						<thead>

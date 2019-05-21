@@ -9,10 +9,10 @@
 @endsection
 
 @section('right_column')
-   {{-- @include('posts::blog.blocks.search') --}}
+   @include('blog.blocks.search')
+   @include('blocks.popularPosts')
    @include('blog.blocks.archives')
    @include('blog.blocks.leaveComment')
-   {{-- @include('blog.single.image') --}}
 @stop
 
 @section('content')

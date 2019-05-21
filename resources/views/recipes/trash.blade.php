@@ -1,8 +1,6 @@
-@extends('layouts.backend')
+@extends('layouts.recipes')
 
 @section('left_column')
-   @include('blocks.adminNav')
-   @include('recipes.backend.sidebar')
 @endsection
 
 @section('right_column')

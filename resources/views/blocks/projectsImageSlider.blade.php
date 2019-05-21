@@ -1,7 +1,7 @@
 <div class="card mb-2">
    <div class="card-header block_header">
       <i class="fab fa-pagelines"></i>
-      WOOD PROJECTS
+      POPULAR WOOD PROJECTS
    </div>
    <div class="card-body">
       <div id="carouselExampleIndicators" class="carousel slide mb-2" data-ride="carousel">

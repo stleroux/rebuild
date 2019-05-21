@@ -1,17 +1,12 @@
-@extends ('layouts.master')
+@extends ('layouts.recipes')
 
 @section('stylesheets')
 @endsection
 
 @section('left_column')
-   @include('blocks.home_menu')
-   @include('recipes.sidebar')
-   
 @endsection
 
 @section('right_column')
-   @include('blocks.popularRecipes')
-   @include('recipes.blocks.archives')
 @endsection
 
 @section ('content')
@@ -35,7 +30,8 @@
          @endif
          {{ $year }}
          <span class="float-right">
-            @include('common.buttons.cancel', ['model'=>'recipe'])
+            {{-- @include('common.buttons.cancel', ['model'=>'recipe']) --}}
+            @include('recipes.buttons.back')
          </span>
       </div>
       <div class="card-body">

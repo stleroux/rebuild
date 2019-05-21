@@ -1,29 +1,13 @@
-@extends ('layouts.master')
+@extends ('layouts.recipes')
 
 @section ('stylesheets')
 	{{ Html::style('css/recipes.css') }}
 @stop
 
 @section('left_column')
-		@if(
-				(Session::get('pageName') === 'recipes_index') ||
-				(Session::get('pageName') === 'myFavorites') ||
-				(Session::get('pageName') === 'archive') ||
-				(Session::get('pageName') === 'home') ||
-				(Session::get('pageName') === 'bycat') ||
-				(Session::get('pageName') === 'show')
-			)
-	   	@include('blocks.home_menu')
-	   	@include('recipes.sidebar')
-		@else
-		   {{-- @include('blocks.adminNav') --}}
-			@include('recipes.sidebar')
-		@endif
 @endsection
 
 @section('right_column')
-	@include('blocks.popularRecipes')
-	@include('recipes.blocks.archives')
 	@include('recipes.show.leave_comment')
 @endsection
 
@@ -35,13 +19,20 @@
 		<div class="card-header card_header">
 			{{ $recipe->title }}
 			<span class="float-right">
-				@include('common.buttons.cancel', ['model'=>'recipe'])
+				{{-- @include('common.buttons.cancel', ['model'=>'recipe']) --}}
+				@include('recipes.buttons.back')
 				@auth
 					@include('common.buttons.print', ['model'=>'recipe', 'id'=>$recipe->id])
 					@include('common.buttons.edit', ['name'=>'recipe', 'model'=>$recipe])
 					@include('common.buttons.publish', ['name'=>'recipe', 'model'=>$recipe])
 					@include('common.buttons.unpublish', ['name'=>'recipe', 'model'=>$recipe])
 					@include('common.buttons.trash', ['name'=>'recipe', 'model'=>$recipe])
+					@include('recipes.buttons.published')
+					@include('recipes.buttons.unpublished')
+					@include('recipes.buttons.new')
+					@include('recipes.buttons.trashed')
+					@include('recipes.buttons.mine')
+					@include('recipes.buttons.private')
 				@endauth
 			</span>
 		</div>

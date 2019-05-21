@@ -1,12 +1,10 @@
-@extends('layouts.backend')
+@extends('layouts.recipes')
 
 @section('stylesheets')
    {{ Html::style('css/recipes.css') }}
 @endsection
 
 @section('left_column')
-   {{-- @include('blocks.adminNav') --}}
-   {{-- @include('recipes::backend.sidebar') --}}
 @endsection
 
 @section('right_column')

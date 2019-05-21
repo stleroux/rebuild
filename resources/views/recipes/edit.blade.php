@@ -1,11 +1,10 @@
-@extends ('layouts.backend')
+@extends ('layouts.recipes')
 
 @section ('stylesheets')
    {{-- <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet"> --}}
 @stop
 
 @section('left_column')
-   @include('recipes.sidebar')
 @endsection
 
 @section('right_column')

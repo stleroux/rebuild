@@ -15,7 +15,8 @@
 			<span class="float-right">
 				{{-- <a href="{{ route('recipes.show', $recipe->id) }}" class="btn btn-sm btn-outline-secondary d-print-none">Return</a> --}}
 				{{-- @include('common.buttons.cancel') --}}
-				@include('common.buttons.cancel', ['model'=>'recipe', 'type'=>''])
+				{{-- @include('common.buttons.cancel', ['model'=>'recipe']) --}}
+				@include('recipes.buttons.back')
 				@include('common.buttons.print2')
 			</span>
 		</div>

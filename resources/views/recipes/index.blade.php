@@ -10,11 +10,13 @@
 @endsection
 
 @section('right_column')
-	@include('blocks.popularRecipes')
+	@include('recipes.blocks.popularRecipes')
 	@include('recipes.blocks.archives')
 @endsection
 
 @section('content')
+
+@include('recipes.test')
 
 	<div class="card mb-3">
 
@@ -34,11 +36,14 @@
 						</a>
 					@endif
 					@include('common.buttons.myFavorites', ['model'=>'recipe'])
-					<a href="{{ route('recipes.published') }}" class="btn btn-sm btn-primary">P</a>
-					<a href="{{ route('recipes.unpublished') }}" class="btn btn-sm btn-primary">U</a>
-					<a href="{{ route('recipes.newRecipes') }}" class="btn btn-sm btn-primary">N</a>
-					<a href="{{ route('recipes.future') }}" class="btn btn-sm btn-primary">F</a>
-					<a href="{{ route('recipes.trashed') }}" class="btn btn-sm btn-primary">T</a>
+					@include('common.buttons.add', ['model'=>'recipe'])
+					@include('recipes.buttons.published')
+					@include('recipes.buttons.unpublished')
+					@include('recipes.buttons.new')
+					@include('recipes.buttons.future')
+					@include('recipes.buttons.trashed')
+					@include('recipes.buttons.mine')
+					@include('recipes.buttons.private')
 				@endauth
 			</span>
 		</div>

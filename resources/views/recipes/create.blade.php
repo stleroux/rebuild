@@ -1,16 +1,13 @@
-@extends('layouts.backend')
+@extends('layouts.recipes')
 
 @section('stylesheets')
    {{ Html::style('css/recipes.css') }}
 @endsection
 
 @section('left_column')
-   {{-- @include('blocks.adminNav') --}}
-   {{-- @include('recipes::backend.sidebar') --}}
 @endsection
 
 @section('right_column')
-   {{-- @include('recipes::create.controls') --}}
 @endsection
 
 @section('content')
@@ -21,7 +18,8 @@
             Create Recipe
             <span class="float-right">
                @include('common.buttons.help', ['model'=>'recipe', 'bookmark'=>'recipes'])
-               @include('common.buttons.cancel', ['model'=>'recipe'])
+               {{-- @include('common.buttons.cancel', ['model'=>'recipe']) --}}
+               @include('recipes.buttons.back')
                @include('common.buttons.save', ['model'=>'recipe'])
             </span>
          </div>

@@ -9,10 +9,9 @@
 @endsection
 
 @section('right_column')
-	 @include('posts::blog.blocks.search')
-	 @include('posts::blog.blocks.archives')
-	 {{-- @include('posts::blog.blocks.leaveComment') --}}
-	 {{-- @include('blog.single.image') --}}
+	@include('blog.blocks.search')
+   @include('blocks.popularPosts')
+   @include('blog.blocks.archives')
 @stop
 
 @section ('content')

@@ -15,7 +15,8 @@
          <span class="h3">{{ ucwords($recipe->title) }}</span>
          @if($loop->first)
             <span class="float-right">
-               @include('common.buttons.cancel')
+               {{-- @include('common.buttons.cancel') --}}
+               @include('recipes.buttons.back')
                @include('common.buttons.print2')
             </span>
          @endif
