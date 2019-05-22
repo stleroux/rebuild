@@ -1,12 +1,13 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
    {{-- {{ Html::style('css/recipes.css') }} --}}
 @endsection
 
 @section('left_column')
-   @include('blocks.adminNav')
-   @include('comments.sidebar')
+   {{-- @include('blocks.adminNav') --}}
+   {{-- @include('comments.sidebar') --}}
+   @include('blocks.main_menu')
 @endsection
 
 @section('right_column')
@@ -76,13 +77,13 @@
                               </a> --}}
 
                               {{-- @if(checkPerm('post_edit', $post)) --}}
-                              @include('common.buttons.edit', ['model'=>'comment', 'id'=>$comment->id, 'type'=>''])
+                              @include('common.buttons.edit', ['name'=>'comment', 'model'=>$comment])
                               {{-- @endif --}}
                               {{-- @if(checkPerm('post_delete', $post)) --}}
                               {{-- <a href="{{ route('comments.delete', $comment->id) }}" class="btn btn-sm btn-outline-danger px-1 py-0" title="Delete Comment">
                                  <i class="far fa-trash-alt"></i>
                               </a> --}}
-                              @include('common.buttons.delete', ['model'=>'comment', 'id'=>$comment->id, 'type'=>''])
+                              @include('common.buttons.delete', ['name'=>'comment', 'model'=>$comment])
                               {{-- @endif --}}
                            </td>
                         </tr>

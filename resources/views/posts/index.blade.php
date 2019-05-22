@@ -1,12 +1,13 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
 	{{ Html::style('css/posts.css') }}
 @endsection
 
 @section('left_column')
-   @include('blocks.adminNav')
-   @include('posts.sidebar')
+   {{-- @include('blocks.adminNav') --}}
+   {{-- @include('posts.sidebar') --}}
+   @include('blocks.main_menu')
 @endsection
 
 @section('right_column')
@@ -105,18 +106,18 @@
 												{{-- <a href="{{ route('posts.unpublish', $post->id) }}" class="btn btn-sm btn-outline-secondary px-1 py-0" title="Unpublish Post">
 													<i class="fa fa-download"></i>
 												</a> --}}
-												@include('common.buttons.unpublish', ['model'=>'post', 'id'=>$post->id])
+												@include('common.buttons.unpublish', ['name'=>'post', 'model'=>$post])
 
 												{{-- <a href="{{ route('posts.show', $post->id) }}" class="btn btn-sm btn-outline-secondary px-1 py-0" title="View Post">
 													<i class="fa fa-eye"></i>
 												</a> --}}
-												@include('common.buttons.show', ['model'=>'post', 'id'=>$post->id])
+												@include('common.buttons.show', ['name'=>'post', 'model'=>$post])
 
 												@if(checkPerm('post_edit', $post))
-													@include('common.buttons.edit', ['model'=>'post', 'id'=>$post->id])
+													@include('common.buttons.edit', ['name'=>'post', 'model'=>$post])
 												@endif
 												@if(checkPerm('post_delete', $post))
-													@include('common.buttons.trash', ['model'=>'post', 'id'=>$post->id])
+													@include('common.buttons.trash', ['name'=>'post', 'model'=>$post])
 												@endif
 											</td>
 										</tr>

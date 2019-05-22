@@ -5,8 +5,9 @@
 @endsection
 
 @section('left_column')
-   @include('blocks.adminNav')
-   @include('permissions.sidebar')
+   {{-- @include('blocks.adminNav') --}}
+   {{-- @include('permissions.sidebar') --}}
+   @include('blocks.main_menu')
 @endsection
 
 @section('right_column')

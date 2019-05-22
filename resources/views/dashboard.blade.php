@@ -1,4 +1,4 @@
-@extends ('layouts.backend')
+@extends ('layouts.master')
 
 @section ('stylesheets')
    {{-- {{ Html::style('css/woodbarn.css') }} --}}
@@ -6,8 +6,9 @@
 @stop
 
 @section('left_column')
-   @include('blocks.adminNav')
-   {{-- @include('blocks.admin_menu') --}}
+   {{-- @include('blocks.adminNav') --}}
+   {{-- @include('blocks.main_menu') --}}
+   @include('blocks.main_menu')
 @endsection
 
 @section('right_column')
