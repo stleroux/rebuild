@@ -38,6 +38,7 @@ class PostsController extends Controller
 	public function __construct() {
 		// only allow authenticated users to access these pages
 		$this->middleware('auth');
+      $this->enablePermissions = false;
 
 		//Log::useFiles(storage_path().'/logs/posts.log');
 	}
@@ -100,7 +101,7 @@ class PostsController extends Controller
 	public function deleteAll(Request $request)
 	{
 		// Set the variable so we can use a button in other pages to come back to this page
-      Session::put('pageName', '');
+      Session::put('fromPage', '');
 
 		$this->validate($request, [
 		   'checked' => 'required',

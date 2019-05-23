@@ -24,6 +24,7 @@ class SettingsController extends Controller
     {
         // Only allow authenticated users access to these functions
         $this->middleware('auth');
+        $this->enablePermissions = false;
 
         //Log::useFiles(storage_path().'/logs/audits.log');
     }
@@ -130,7 +131,6 @@ class SettingsController extends Controller
     }
 
 
-
 ##################################################################################################################
 # ██╗   ██╗██████╗ ██████╗  █████╗ ████████╗███████╗
 # ██║   ██║██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██╔════╝
@@ -140,7 +140,37 @@ class SettingsController extends Controller
 #  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
 // UPDATE :: Update the specified resource in storage
 ##################################################################################################################
-    public function update(Request $request)
+    public function update(Request $request, $id)
+    {
+        // validate the data
+        $this->validate($request, array(
+            'key' => 'required',
+            'value' => 'required',
+            'description' => 'required',
+        ));
+
+        $setting = Setting::findOrFail($id);
+            $setting->key = $request->key;
+            $setting->value = $request->value;
+            $setting->tab = $request->tab;
+            $setting->description = $request->description;
+        $setting->save();
+
+        Session::flash('update', 'The setting has been updated successfully.');
+        return redirect()->route('settings.index');
+    }
+
+
+##################################################################################################################
+# ██╗   ██╗██████╗ ██████╗  █████╗ ████████╗███████╗     █████╗ ██╗     ██╗     
+# ██║   ██║██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██╔════╝    ██╔══██╗██║     ██║     
+# ██║   ██║██████╔╝██║  ██║███████║   ██║   █████╗      ███████║██║     ██║     
+# ██║   ██║██╔═══╝ ██║  ██║██╔══██║   ██║   ██╔══╝      ██╔══██║██║     ██║     
+# ╚██████╔╝██║     ██████╔╝██║  ██║   ██║   ███████╗    ██║  ██║███████╗███████╗
+#  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝    ╚═╝  ╚═╝╚══════╝╚══════╝
+// UPDATE :: Update the specified resource in storage
+##################################################################################################################
+    public function updateAll(Request $request)
     {
         // // validate the data
         // $this->validate($request, array(

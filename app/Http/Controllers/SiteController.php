@@ -28,8 +28,8 @@ class SiteController extends Controller
 	public function __construct()
 	{
 		// $this->middleware('auth');
-		Session::forget('byCatName');
-		Session::forget('byCatLetter');
+		// Session::forget('byCatName');
+		// Session::forget('byCatLetter');
 	}
 
 
@@ -44,7 +44,7 @@ class SiteController extends Controller
 	public function homepage()
 	{
 		// Set the variable so we can use a button in other pages to come back to this page
-      Session::put('pageName', 'home');
+      // Session::put('pageName', 'home');
 
 		$posts = Post::published()->with('user')->orderBy('id','desc')->take(setting('homepage_blog_count'))->get();
 

@@ -35,8 +35,12 @@
 							<i class="fa fa-print"></i>
 						</a>
 					@endif
-					@include('common.buttons.myFavorites', ['model'=>'recipe'])
-					@include('common.buttons.add', ['model'=>'recipe'])
+{{-- 
+					<a href="{{ route('recipes.myFavorites') }}" class="btn btn-sm btn-outline-secondary" title="My Favorites">
+					   <i class="fas fa-heart"></i>
+					</a> --}}
+					@include('recipes.buttons.myFavorites')
+					@include('recipes.buttons.add')
 					@include('recipes.buttons.published')
 					@include('recipes.buttons.unpublished')
 					@include('recipes.buttons.new')

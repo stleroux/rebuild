@@ -39,7 +39,8 @@ class CategoriesController extends Controller
 	{
 		// Only allow authenticated users access to these functions
 		$this->middleware('auth');
-		Session::forget('byCatName');
+      $this->enablePermissions = false;
+		// Session::forget('byCatName');
 
 		//Log::useFiles(storage_path().'/logs/audits.log');
 	}
@@ -266,7 +267,7 @@ class CategoriesController extends Controller
 	  if(!checkPerm('category_index')) { abort(401, 'Unauthorized Access'); }
 
 		// Set the variable so we can use a button in other pages to come back to this page
-      Session::put('pageName', 'index');
+      // Session::put('pageName', 'index');
 
 		// if(!checkACL('manager')) {
 		//   // Save entry to log file of failure
@@ -330,7 +331,7 @@ class CategoriesController extends Controller
 		// }
 
 		// Set the variable so we can use a button in other pages to come back to this page
-      Session::put('pageName', 'newCategories');
+      // Session::put('pageName', 'newCategories');
 
 		//$alphas = range('A', 'Z');
 		$alphas = DB::table('categories')

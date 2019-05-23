@@ -1,4 +1,5 @@
 <?php
 
-Route::resource('settings', 'SettingsController')->except('update');
-Route::put('update', 'SettingsController@update')->name('settings.update');
+Route::resource('settings', 'SettingsController');
+// ->except('update');
+Route::put('updateAll', 'SettingsController@updateAll')->name('settings.updateAll');

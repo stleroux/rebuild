@@ -25,6 +25,7 @@ class DashboardController extends Controller
     {
         // Only allow authenticated users access to these functions
         $this->middleware('auth');
+        $this->enablePermissions = false;
     }
 
 

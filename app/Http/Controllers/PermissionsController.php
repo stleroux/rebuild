@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Session;
+use App\Http\Requests\CreatePermissionRequest;
+use App\Http\Requests\UpdatePermissionRequest;
 use App\Models\Permission;
 use Illuminate\Http\Request;
+use Session;
 
 class PermissionsController extends Controller
 {
@@ -20,6 +22,7 @@ class PermissionsController extends Controller
 	public function __construct()
 	{
 		$this->middleware('auth');
+      $this->enablePermissions = false;
 	}
 
 
@@ -35,7 +38,9 @@ class PermissionsController extends Controller
 	public function create()
 	{
 		// Check if user has required permission
-		if(!checkPerm('permission_create')) { abort(401, 'Unauthorized Access'); }
+		if($this->enablePermissions) {
+			if(!checkPerm('permission_create')) { abort(401, 'Unauthorized Access'); }
+		}
 
 		return view('permissions.create'); 
 	}
@@ -152,30 +157,8 @@ class PermissionsController extends Controller
 # ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝
 // Store a newly created resource in storage
 ##################################################################################################################
-	public function store(Request $request)
+	public function store(CreatePermissionRequest $request, Permission $permission)
 	{
-		// validate the data
-		// $this->validate($request, array(
-		//     'name' => 'required|unique:permissions,name',
-		//     'display_name' => 'required',
-		//     'model' => 'required',
-		//     'core' => 'required',
-		//     'description' => 'required',
-		// ));
-		$rules = [
-			'name' => 'required|unique:permissions,name',
-			'display_name' => 'required',
-			'model' => 'required',
-			'type' => 'required',
-			'description' => 'required',
-		];
-
-		$customMessages = [
-			'name.required' => 'The :attribute field can not be left blank.'
-		];
-
-		$this->validate($request, $rules, $customMessages);
-
 		// save the data in the database
 		$permission = new Permission;
 			$permission->name = $request->name;
@@ -208,17 +191,8 @@ class PermissionsController extends Controller
 #  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
 // UPDATE :: Update the specified resource in storage
 ##################################################################################################################
-	public function update(Request $request, Permission $permission)
+	public function update(UpdatePermissionRequest $request, Permission $permission)
 	{
-		// validate the data
-		$this->validate($request, array(
-			// 'name' => 'required|unique:permissions,name',
-			'display_name' => 'required',
-			'model' => 'required',
-			'type' => 'required',
-			'description' => 'required',
-		));
-
 		// save the data in the database
 		$permission = Permission::findOrFail($permission->id);
 			// $permission->name = $request->name;
@@ -234,8 +208,6 @@ class PermissionsController extends Controller
 		// redirect to another page
 	   return redirect()->route('permissions.index');
 	}
-
-
 
 
 }

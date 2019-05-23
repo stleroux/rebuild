@@ -25,6 +25,7 @@ class DashboardController extends Controller
 ##################################################################################################################
 	public function __construct() {
 		$this->middleware('auth');
+      $this->enablePermissions = false;
 		//Log::useFiles(storage_path().'/logs/articles.log');
 		//Log::useFiles(storage_path().'/logs/audits.log');
 	}

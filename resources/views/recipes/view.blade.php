@@ -1,29 +1,16 @@
-@extends ('layouts.backend')
+@extends ('layouts.recipes')
 
 @section ('stylesheets')
    {{ Html::style('css/recipes.css') }}
 @stop
 
 @section('left_column')
-      @if(
-            (Session::get('pageName') === 'recipes_index') ||
-            (Session::get('pageName') === 'myFavorites') ||
-            (Session::get('pageName') === 'archive') ||
-            (Session::get('pageName') === 'home') ||
-            (Session::get('pageName') === 'bycat') ||
-            (Session::get('pageName') === 'show')
-         )
-         @include('blocks.home_menu')
-         @include('recipes.sidebar')
-      @else
-         {{-- @include('blocks.adminNav') --}}
-         @include('recipes.sidebar')
-      @endif
+   @include('blocks.main_menu')
 @endsection
 
 @section('right_column')
-   @include('blocks.popularRecipes')
-   @include('recipes.blocks.archives')
+   {{-- @include('recipes.blocks.popularRecipes') --}}
+   {{-- @include('recipes.blocks.archives') --}}
    @include('recipes.show.leave_comment')
 @endsection
 
@@ -35,7 +22,7 @@
       <div class="card-header card_header">
          {{ $recipe->title }}
          <span class="float-right">
-            @include('common.buttons.cancel', ['model'=>'recipe'])
+            @include('recipes.buttons.back')
             @auth
                @include('common.buttons.print', ['model'=>'recipe', 'id'=>$recipe->id])
             @endauth

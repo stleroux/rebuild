@@ -1,12 +1,11 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
    {{-- {{ Html::style('css/recipes.css') }} --}}
 @endsection
 
 @section('left_column')
-   @include('blocks.adminNav')
-   @include('permissions.sidebar')
+   @include('blocks.main_menu')
 @endsection
 
 @section('right_column')
@@ -14,17 +13,26 @@
 
 @section('content')
 
-   {!! Form::open(array('route' => 'permissions.store', 'method'=>'POST')) !!}
+   {!! Form::open(array('route' => 'permissions.store')) !!}
       <div class="card">
          
          <div class="card-header card_header">
             <i class="fas fa-shield-alt"></i>
             New Permission
             <div class="float-right">
-               @include('common.buttons.cancel', ['model'=>'permission', 'type'=>''])
-               @include('common.buttons.reset', ['model'=>'permission', 'type'=>''])
-               @include('common.buttons.save&new', ['model'=>'permission', 'type'=>''])
-               @include('common.buttons.save', ['model'=>'permission', 'type'=>''])
+               {{-- @include('common.buttons.cancel', ['model'=>'permission']) --}}
+               @include('permissions.buttons.back')
+               @include('common.buttons.reset', ['model'=>'permission'])
+               {{-- @include('common.buttons.save&new', ['model'=>'permission', 'value'=>'new']) --}}
+               {{-- @include('common.buttons.save', ['model'=>'permission', 'type'=>'']) --}}
+               <button type="submit" class="btn btn-sm btn-outline-bprimary" name="submit" value="new" title="Save & New">
+                  <i class="far fa-hdd"></i>
+                  {{-- Update & Continue --}}
+               </button>
+               <button type="submit" class="btn btn-sm btn-outline-success" name="submit" value="close" title="Save & Close">
+                  <i class="far fa-save"></i>
+                  {{-- Update & Close --}}
+               </button>
             </div>
          </div>
          

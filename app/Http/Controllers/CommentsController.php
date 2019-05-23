@@ -32,7 +32,9 @@ class CommentsController extends Controller
 ##################################################################################################################
 	public function __construct()
 	{
-			$this->middleware('auth', ['except' => 'store']);
+		$this->middleware('auth', ['except' => 'store']);
+	   $this->enablePermissions = false;
+
 			//Log::useFiles(storage_path().'/logs/comments.log');
 	}
 

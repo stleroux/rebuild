@@ -37,11 +37,8 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function __construct() {
       // only allow authenticated users to access these pages
-      //$this->middleware('auth', ['except'=>['index','show']]);
-      // changing auth to guest would only allow guests to access these pages
-      // you can also restrict the actions by adding ['except' => 'name_of_action'] at the end
-      //$this->middleware('auth')->except('frontArticles', 'show');
-
+      $this->middleware('auth');
+      $this->enablePermissions = false;
       //Log::useFiles(storage_path().'/logs/articles.log');
       //Log::useFiles(storage_path().'/logs/audits.log');
    }
@@ -57,20 +54,14 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function addfavorite($id)
    {
-      // Pass along the ROUTE value of the previous page
-      //$ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
-
       $user = Auth::user()->id;
       $article = Article::find($id);
 
       $article->favorites()->sync([$user], false);
 
       Session::flash ('success','The article was successfully added to your Favorites list!');
-      // return redirect()->route('articles.index');
-      // return redirect()->route($ref);
-      Session::flash('backUrl', \Request::fullUrl());
-      
-      //return redirect()->back()->withRef($ref);
+      // Session::flash('backUrl', \Request::fullUrl());
+
       return redirect()->back();
    }
 
@@ -104,7 +95,7 @@ class ArticlesController extends Controller
          ->get();
 
       // Set the variable so we can use a button in other pages to come back to this page
-      Session::flash('archiveUrl', \Request::fullUrl());
+      // Session::flash('archiveUrl', \Request::fullUrl());
       //Session::put('archiveUrl', \Request::fullUrl());
       //Session::flush('archiveUrl');
 

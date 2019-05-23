@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateModuleRequest extends FormRequest
+class UpdatePermissionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,16 +25,20 @@ class CreateModuleRequest extends FormRequest
     {
         // https://laravel.com/docs/5.2/validation#available-validation-rules
         return [
-            'name' => 'required|min:3|max:255'
+            // 'name' => 'required|min:3|max:255|unique:permissions,name',
+            'display_name'  => 'required',
+            'model'         => 'required',
+            'type'          => 'required',
+            'description'   => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Required',
-            'name.min' => 'Minimum 3 characters',
-            'name.max' => 'Maximum 255 characters',
+            // 'name.required' => 'Required',
+            // 'name.min' => 'Minimum 3 characters',
+            // 'name.max' => 'Maximum 255 characters',
         ];
     }
 

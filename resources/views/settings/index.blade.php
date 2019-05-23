@@ -17,7 +17,7 @@
 @section('content')
 
 {{-- {{ $settings }} --}}
-   {!! Form::model($settings, ['route'=>['settings.update'], 'method'=>'PUT']) !!}
+   {!! Form::model($settings, ['route'=>['settings.updateAll'], 'method'=>'PUT']) !!}
    {{ Form::token() }}
    
       <div class="row">

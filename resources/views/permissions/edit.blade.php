@@ -1,12 +1,11 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
    {{-- {{ Html::style('css/recipes.css') }} --}}
 @endsection
 
 @section('left_column')
-   @include('blocks.adminNav')
-   @include('permissions.sidebar')
+   @include('blocks.main_menu')
 @endsection
 
 @section('right_column')
@@ -23,8 +22,9 @@
             <i class="fas fa-shield-alt"></i>
             Edit Permission
             <div class="float-right">
-               @include('common.buttons.cancel', ['model'=>'permission', 'type'=>''])
-               @include('common.buttons.update', ['model'=>'permission', 'type'=>''])
+               @include('permissions.buttons.back')
+               @include('permissions.buttons.update')
+{{--                @include('common.buttons.update', ['model'=>'permission']) --}}
             </div>
          </div>
          

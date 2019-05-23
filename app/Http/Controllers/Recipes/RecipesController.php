@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers\Recipes;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use App\Http\Controllers\Controller; // Required for validation
-use Illuminate\Support\Facades\Input;
-
+use App\Http\Requests\CreateCommentRequest;
+use App\Http\Requests\CreateRecipeRequest;
+use App\Http\Requests\UpdateRecipeRequest;
 use App\Models\Category;
 use App\Models\Comment;
-use App\Models\Module;
-use App\Models\Recipes\Recipe;
 use App\Models\User;
+use App\Models\Recipes\Recipe;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Input;
 use Auth;
 use DB;
 use Excel;
@@ -27,10 +28,6 @@ use Session;
 use Storage;
 use Table;
 use URL;
-
-use App\Http\Requests\CreateRecipeRequest;
-use App\Http\Requests\UpdateRecipeRequest;
-use App\Http\Requests\CreateCommentRequest;
 
 class RecipesController extends Controller
 {
@@ -47,6 +44,7 @@ class RecipesController extends Controller
    {
       // Only allow authenticated users access to these functions
       $this->middleware('auth')->except('index','show','archive');
+      $this->enablePermissions = true;
       // $this->middleware('subscribed')->except('store');
    }
 
@@ -62,9 +60,6 @@ class RecipesController extends Controller
 ##################################################################################################################
 	public function archive($year, $month)
 	{
-      // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
-
       // Get all categories related to Recipe Category (id=>1)
       $categories = Category::where('parent_id',1)->get();
 
@@ -91,7 +86,9 @@ class RecipesController extends Controller
    public function create()
    {
       // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_create')) { abort(401, 'Unauthorized Access'); }
+      }
 
       // Get all categories related to Recipe Category (id=>1)
       $categories = Category::where('parent_id',1)->get();
@@ -112,7 +109,9 @@ class RecipesController extends Controller
    public function delete($id)
    {
       // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_trash')) { abort(401, 'Unauthorized Access'); }
+      }
 
       $recipe = Recipe::onlyTrashed()->findOrFail($id);
 
@@ -132,7 +131,9 @@ class RecipesController extends Controller
    public function deleteAll(Request $request)
    {
       // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_delete')) { abort(401, 'Unauthorized Access'); }
+      }
 
       $this->validate($request, [
          'checked' => 'required',
@@ -160,7 +161,9 @@ class RecipesController extends Controller
    public function deleteDestroy($id)
    {
       // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_delete')) { abort(401, 'Unauthorized Access'); }
+      }
 
       $recipe = Recipe::withTrashed()->findOrFail($id);
 
@@ -300,12 +303,15 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function duplicate($id)
    {
-      // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
-
       $recipe = Recipe::find($id);
-        $newRecipe = $recipe->replicate();
-        $newRecipe->user_id = Auth::user()->id;
+
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_duplicate', $recipe)) { abort(401, 'Unauthorized Access'); }
+      }
+      
+      $newRecipe = $recipe->replicate();
+      $newRecipe->user_id = Auth::user()->id;
       $newRecipe->save();
 
       Session::flash ('success','The recipe was duplicated successfully!');
@@ -324,11 +330,13 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function edit($id)
    {
-      // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
-
       // Find the article to edit
       $recipe = Recipe::findOrFail($id);
+
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_edit', $recipe)) { abort(401, 'Unauthorized Access'); }
+      }
 
       // find all categories in the categories table and pass them to the view
       $categories = Category::with('children')->where('parent_id',1)->get();
@@ -348,7 +356,9 @@ class RecipesController extends Controller
    public function favoriteAdd($id)
    {
       // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_favorite')) { abort(401, 'Unauthorized Access'); }
+      }
 
       $recipe = Recipe::find($id);
       $recipe->addFavorite();
@@ -370,7 +380,9 @@ class RecipesController extends Controller
    public function favoriteRemove($id)
    {
       // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_favorite')) { abort(401, 'Unauthorized Access'); }
+      }
 
       $recipe = Recipe::find($id);
       $recipe->removeFavorite();
@@ -392,8 +404,13 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function future(Request $request, $key=null)
    {
+      // Set the session to the current page route
+      Session::put('fromPage', Route::currentRouteName());
+
       // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_future')) { abort(401, 'Unauthorized Access'); }
+      }
 
       $alphas = DB::table('recipes')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
@@ -502,8 +519,9 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function index(Request $request)
    {
-      // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      // Set the session to the current page route
+      Session::put('fromPage', Route::currentRouteName());
+      // dd(Session::get('fromPage'));
 
       // Get all categories related to Recipe Category (id=>1)
       $categories = Category::where('parent_id',1)->get();
@@ -615,7 +633,9 @@ class RecipesController extends Controller
    public function makePrivate($id)
    {
       // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_private')) { abort(401, 'Unauthorized Access'); }
+      }
 
       $recipe = Recipe::find($id);
          $recipe->personal = 1;
@@ -640,7 +660,9 @@ class RecipesController extends Controller
    public function makePublic($id)
    {
       // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_private')) { abort(401, 'Unauthorized Access'); }
+      }
 
       $recipe = Recipe::find($id);
          $recipe->personal = 0;
@@ -663,7 +685,9 @@ class RecipesController extends Controller
 	public function myFavorites(Request $request, $key=null)
 	{
       // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      // if($this->enablePermissions) {
+      //    if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      // }
 
       if(Auth::check()) {
          $user = Auth::user();
@@ -685,8 +709,13 @@ class RecipesController extends Controller
 ##################################################################################################################
 	public function myRecipes($key=null)
 	{
+      // Set the session to the current page route
+      Session::put('fromPage', Route::currentRouteName());
+
       // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      // if($this->enablePermissions) {
+      //    if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      // }
 
 		if (Auth::check()) {
 			$alphas = DB::table('recipes')
@@ -733,8 +762,13 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function myPrivateRecipes($key=null)
    {
+      // Set the session to the current page route
+      Session::put('fromPage', Route::currentRouteName());
+
       // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      // if($this->enablePermissions) {
+      //    if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      // }
 
       if (Auth::check()) {
          // Get list of recips by year and month
@@ -795,8 +829,13 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function newRecipes(Request $request, $key=null)
    {
+      // Set the session to the current page route
+      Session::put('fromPage', Route::currentRouteName());
+
       // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_new')) { abort(401, 'Unauthorized Access'); }
+      }
 
       $alphas = DB::table('recipes')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
@@ -889,7 +928,9 @@ class RecipesController extends Controller
 	public function print($id)
 	{
       // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_print')) { abort(401, 'Unauthorized Access'); }
+      }
 
 		$recipe = Recipe::find($id);
 
@@ -908,7 +949,9 @@ class RecipesController extends Controller
    public function printAll($category)
    {
       // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_print')) { abort(401, 'Unauthorized Access'); }
+      }
 
       if($category == "all"){
          $recipes = Recipe::orderBy('title', 'asc')->get();
@@ -940,7 +983,9 @@ class RecipesController extends Controller
    public function publish($id)
    {
       // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_publish')) { abort(401, 'Unauthorized Access'); }
+      }
 
       $recipe = Recipe::find($id);
         $recipe->published_at = Carbon::now();
@@ -963,7 +1008,9 @@ class RecipesController extends Controller
    public function publishAll(Request $request)
    {
       // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_publish')) { abort(401, 'Unauthorized Access'); }
+      }
 
       $this->validate($request, [
          'checked' => 'required',
@@ -993,8 +1040,12 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function published(Request $request, $key=null)
    {
+      Session::put('fromPage', 'recipes.published');
+
       // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_published')) { abort(401, 'Unauthorized Access'); }
+      }
 
      $alphas = DB::table('recipes')
       ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
@@ -1041,7 +1092,9 @@ class RecipesController extends Controller
    public function resetViews($id)
    {
       // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      // if($this->enablePermissions) {
+      //    if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      // }
 
       $recipe = Recipe::find($id);
          $recipe->views = 0;
@@ -1064,7 +1117,9 @@ class RecipesController extends Controller
    public function restore($id)
    {
       // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_restore')) { abort(401, 'Unauthorized Access'); }
+      }
 
       $recipe = Recipe::withTrashed()->findOrFail($id);
       $recipe->restore();
@@ -1086,7 +1141,9 @@ class RecipesController extends Controller
    public function restoreAll(Request $request)
    {
       // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_restore')) { abort(401, 'Unauthorized Access'); }
+      }
 
       $checked = $request->input('checked');
 
@@ -1108,9 +1165,6 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function show($id)
    {
-      // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
-
       $recipe = Recipe::withTrashed()->find($id);
 
       // Increase the view count since this is viewed from the frontend
@@ -1131,10 +1185,12 @@ class RecipesController extends Controller
 # ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝
 // Store a newly created resource in storage
 ##################################################################################################################
-   public function store(CreateRecipeRequest $request)
+   public function store(CreateRecipeRequest $request, Recipe $recipe)
    {
       // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_create')) { abort(401, 'Unauthorized Access'); }
+      }
 
       $recipe = new Recipe;
          $recipe->title = $request->title;
@@ -1167,9 +1223,10 @@ class RecipesController extends Controller
 
       $recipe->save();
 
-      Session::flash('success','The article has been created successfully!');
+      Session::flash('success','Recipe created successfully!');
       // return redirect()->route('recipes.'. Session::get('pageName'));
       return redirect()->back();
+      // return redirect()->route('recipes.index');
    }
 
 
@@ -1184,7 +1241,9 @@ class RecipesController extends Controller
    public function storeComment(CreateCommentRequest $request, $id)
    {
       // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      if($this->enablePermissions) {
+         if(!checkPerm('comment_store')) { abort(401, 'Unauthorized Access'); }
+      }
 
       $recipe = Recipe::find($id);
 
@@ -1210,7 +1269,9 @@ class RecipesController extends Controller
    public function trash($id)
    {
       // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_trash')) { abort(401, 'Unauthorized Access'); }
+      }
 
       $recipe = Recipe::findOrFail($id);
 
@@ -1230,8 +1291,10 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function trashAll(Request $request)
    {
-      // Pass along the ROUTE value of the previous page
-      // $ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_trash')) { abort(401, 'Unauthorized Access'); }
+      }
 
       $this->validate($request, [
          'checked' => 'required',
@@ -1259,7 +1322,9 @@ class RecipesController extends Controller
    public function trashDestroy($id)
    {
       // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_delete')) { abort(401, 'Unauthorized Access'); }
+      }
 
       $recipe = Recipe::find($id);
 
@@ -1285,7 +1350,9 @@ class RecipesController extends Controller
    public function trashed(Request $request, $key=null)
    {
       // Check if user has required permission
-      // if(!checkPerm('post_index')) { abort(401, 'Unauthorized Access'); }
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_trashed')) { abort(401, 'Unauthorized Access'); }
+      }
 
       $alphas = DB::table('recipes')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
@@ -1328,7 +1395,9 @@ class RecipesController extends Controller
    public function trashedView($id)
    {
       // Check if user has required permission
-      // if(!checkPerm('post_index')) { abort(401, 'Unauthorized Access'); }
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_trashed')) { abort(401, 'Unauthorized Access'); }
+      }
 
       $recipe = Recipe::withTrashed()->find($id);
 
@@ -1347,7 +1416,9 @@ class RecipesController extends Controller
    public function unpublish($id)
    {
       // Check if user has required permission
-      // if(!checkPerm('post_index')) { abort(401, 'Unauthorized Access'); }
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_publish')) { abort(401, 'Unauthorized Access'); }
+      }
 
       $recipe = Recipe::find($id);
          $recipe->published_at = NULL;
@@ -1371,8 +1442,13 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function unpublished(Request $request, $key=null)
    {
+      // Set the session to the current page route
+      Session::put('fromPage', Route::currentRouteName());
+
       // Check if user has required permission
-      // if(!checkPerm('post_index')) { abort(401, 'Unauthorized Access'); }
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_published')) { abort(401, 'Unauthorized Access'); }
+      }
 
      $alphas = DB::table('recipes')
       ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
@@ -1414,7 +1490,9 @@ class RecipesController extends Controller
    public function unpublishAll(Request $request)
    {
       // Check if user has required permission
-      // if(!checkPerm('post_index')) { abort(401, 'Unauthorized Access'); }
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_publish')) { abort(401, 'Unauthorized Access'); }
+      }
 
       $this->validate($request, [
          'checked' => 'required',
@@ -1446,11 +1524,16 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function update(UpdateRecipeRequest $request, $id)
    {
-      // Check if user has required permission
-      // if(!checkPerm('post_index')) { abort(401, 'Unauthorized Access'); }
-
       // Get the recipe values from the database
       $recipe = Recipe::find($id);
+      // dd($recipe);
+
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_edit', $recipe)) { abort(401, 'Unauthorized Access'); }
+      }
+
+      
 
       // save the data in the database
       $recipe->title = $request->title;
@@ -1512,7 +1595,9 @@ class RecipesController extends Controller
    public function view($id)
    {
       // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      // if($this->enablePermissions) {
+      //    if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      // }
 
       $recipe = Recipe::withTrashed()->find($id);
 

@@ -24,13 +24,17 @@ function checkPerm($pname, $model = null)
 
       if($model)
       {
+        // echo($model);
          // Return TRUE if the logged in user is the owner of the current model
          if($model->user_id == auth::user()->id)
          {
+            // echo $model->user_id;
+            // echo auth::user()->id;
             return true;
          }
       }
    }
+   return false;
 }
 
 

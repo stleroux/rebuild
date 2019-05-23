@@ -1,45 +1,46 @@
-<!-- Only show the Search Results button if coming from the search results page -->
-@if (false !== stripos($_SERVER['HTTP_REFERER'], "/recipes/all"))
+{{-- @if (false !== stripos($_SERVER['HTTP_REFERER'], "/"))
+   <a href="{{ route('home') }}" class="btn btn-sm btn-outline-secondary">
+      <i class="fa fa-home"></i>
+   </a>
+@endif --}}
+@if(Session::get('fromPage')==='recipes.index')
+   <a href="{{ route('recipes.index','all') }}" class="btn btn-sm btn-outline-secondary">
+      <i class="fas fa-angle-double-left"></i>
+   </a>
+@else
+   <a href="{{ route(Session::get('fromPage')) }}" class="btn btn-sm btn-outline-secondary">
+      <i class="fas fa-angle-double-left"></i>
+   </a>
+@endif
+
+{{-- @if (false !== stripos($_SERVER['HTTP_REFERER'], "/recipes/all"))
    <a href="{{ route('recipes.index', 'all') }}" class="btn btn-sm btn-outline-secondary">
       <i class="fa fa-arrow-left"></i>
    </a>
-@endif
-
-@if (false !== stripos($_SERVER['HTTP_REFERER'], "/recipes/published"))
+@elseif (false !== stripos($_SERVER['HTTP_REFERER'], "/recipes/published"))
    <a href="{{ route('recipes.published') }}" class="btn btn-sm btn-outline-secondary">
       <i class="fa fa-arrow-left"></i>
    </a>
-@endif
-
-@if (false !== stripos($_SERVER['HTTP_REFERER'], "/recipes/unpublished"))
+@elseif (false !== stripos($_SERVER['HTTP_REFERER'], "/recipes/unpublished"))
    <a href="{{ route('recipes.unpublished') }}" class="btn btn-sm btn-outline-secondary">
       <i class="fa fa-arrow-left"></i>
    </a>
-@endif
-
-@if (false !== stripos($_SERVER['HTTP_REFERER'], "/recipes/newRecipes"))
+@elseif (false !== stripos($_SERVER['HTTP_REFERER'], "/recipes/newRecipes"))
    <a href="{{ route('recipes.newRecipes') }}" class="btn btn-sm btn-outline-secondary">
       <i class="fa fa-arrow-left"></i>
    </a>
-@endif
-
-@if (false !== stripos($_SERVER['HTTP_REFERER'], "/recipes/future"))
+@elseif (false !== stripos($_SERVER['HTTP_REFERER'], "/recipes/future"))
    <a href="{{ route('recipes.future') }}" class="btn btn-sm btn-outline-secondary">
       <i class="fa fa-arrow-left"></i>
    </a>
-@endif
-
-@if (false !== stripos($_SERVER['HTTP_REFERER'], "/recipes/myRecipes"))
+@elseif (false !== stripos($_SERVER['HTTP_REFERER'], "/recipes/myRecipes"))
    <a href="{{ route('recipes.myRecipes') }}" class="btn btn-sm btn-outline-secondary">
       <i class="fa fa-arrow-left"></i>
    </a>
-@endif
-
-@if (false !== stripos($_SERVER['HTTP_REFERER'], "/recipes/myPrivateRecipes"))
+@elseif (false !== stripos($_SERVER['HTTP_REFERER'], "/recipes/myPrivateRecipes"))
    <a href="{{ route('recipes.myPrivateRecipes') }}" class="btn btn-sm btn-outline-secondary">
       <i class="fa fa-arrow-left"></i>
    </a>
-@endif
 
 @foreach ($categories as $category)
    @if (false !== stripos($_SERVER['HTTP_REFERER'], "recipes/" . $category->name))
@@ -56,14 +57,11 @@
    @endforeach
 @endforeach
 
-@if (false !== stripos($_SERVER['HTTP_REFERER'], "recipes/archives"))
+@elseif (false !== stripos($_SERVER['HTTP_REFERER'], "recipes/archives"))
    <a href="{{ URL::previous() }}" class="btn btn-sm btn-outline-secondary">
       <i class="fa fa-arrow-left"></i>
    </a>
-@endif
+@else
+   blah
+@endif --}}
 
-@if (false !== stripos($_SERVER['HTTP_REFERER'], "/"))
-   <a href="{{ route('home') }}" class="btn btn-sm btn-outline-secondary">
-      <i class="fa fa-home"></i>
-   </a>
-@endif

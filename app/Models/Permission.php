@@ -11,8 +11,8 @@ class Permission extends Model
       'type' => 'boolean',
    ];
 
-   public function users()
-   {
-      return $this->beongsToMany('App\Models\User');
-   }
+   // public function users()
+   // {
+   //    return $this->beongsToMany('App\Models\User');
+   // }
 }
