@@ -1,16 +1,14 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
-   {{-- {{ Html::style('css/recipes.css') }} --}}
+   {{ Html::style('css/woodbarn.css') }}
 @endsection
 
 @section('left_column')
-   @include('blocks.adminNav')
-   @include('categories.sidebar')
+	@include('blocks.main_menu')
 @endsection
 
 @section('right_column')
-   {{-- @include('categories.blocks.help') --}}
 @endsection
 
 @section('content')
@@ -28,10 +26,10 @@
 						<span class="float-right">
 							{{-- @include('common.buttons.help', ['model'=>'category', 'type'=>'', 'part'=>'category']) --}}
 							{{-- @include('help.categories.edit.category', ['model'=>'category', 'type'=>'']) --}}
-							@include('common.buttons.help', ['bookmark'=>'categories_edit_category'])
-							@include('common.buttons.cancel', ['model'=>'category', 'type'=>''])
-							@include('common.buttons.reset', ['model'=>'category', 'type'=>''])
-							@include('common.buttons.update', ['model'=>'category', 'type'=>''])
+							@include('categories.buttons.help', ['bookmark'=>'categories_edit_category'])
+							@include('categories.buttons.back')
+							@include('categories.buttons.reset')
+							@include('categories.buttons.update')
 						</span>
 					</div>
 

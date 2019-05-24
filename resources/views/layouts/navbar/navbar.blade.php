@@ -11,7 +11,7 @@
 
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		{{-- Left side --}}
-         @include('layouts.navbar.navbarLeft')
+         {{-- @include('layouts.navbar.navbarLeft') --}}
 		{{-- Right Side --}}
          @include('layouts.navbar.navbarRight')
 	</div>

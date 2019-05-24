@@ -5,10 +5,11 @@
             <i class="fa fa-plus" aria-hidden="true"></i>
             New Category
             <span class="float-right">
-               @include('common.buttons.help', ['bookmark'=>'categories_add_category'])
-               {{-- @include('common.buttons.cancel', ['name'=>'category', 'model'=>$category]) --}}
-               @include('common.buttons.reset', ['model'=>'category'])
-               @include('common.buttons.save', ['model'=>'category'])
+               @include('categories.buttons.help', ['bookmark'=>'categories_add_category'])
+               {{-- @include('categories.buttons.cancel', ['name'=>'category', 'model'=>$category]) --}}
+               @include('categories.buttons.back')
+               @include('categories.buttons.reset')
+               @include('categories.buttons.save')
             </span>
          </div>
          <div class="card-body card_body pb-0">
@@ -16,7 +17,7 @@
                <div class="col-3">
                   <div class="form-group {{ $errors->has('cCategory') ? 'has-error' : '' }}">
                      {!! Form::label('cCategory','Main Category', ['class'=>'required']) !!}
-                     <select name="cCategory" id="category" class="form-control input-sm">
+                     <select name="cCategory" id="category" class="form-control form-control-sm">
                         <option value="">Select One</option>
                         @foreach($categories as $k)
                            <option value="{{ $k['id'] }}">{{ ucwords($k['name']) }}</option>
@@ -29,7 +30,7 @@
                <div class="col-3">
                   <div class="form-group {{ $errors->has('cSubcategory') ? 'has-error' : '' }}">
                      {!! Form::label('cSubcategory','Sub Category', ['class'=>'required']) !!}
-                     <select name="cSubcategory" id="subcategory" class="form-control input-sm">
+                     <select name="cSubcategory" id="subcategory" class="form-control form-control-sm">
                         <option value=""></option>
                      </select>
                      <span class="text-danger">{{ $errors->first('cSubcategory') }} </span>

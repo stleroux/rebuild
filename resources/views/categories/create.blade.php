@@ -1,22 +1,21 @@
 @extends('layouts.master')
 
 @section('stylesheets')
-   {{-- {{ Html::style('css/recipes.css') }} --}}
+   {{ Html::style('css/woodbarn.css') }}
 @endsection
 
 @section('left_column')
-   {{-- @include('blocks.adminNav') --}}
    @include('blocks.main_menu')
-   {{-- @include('categories.sidebar') --}}
 @endsection
 
 @section('right_column')
+   @include('categories.blocks.help')
 @endsection
 
 @section('content')
 
-   @include('categories.create.category')
-   @include('categories.create.sub')
-   @include('categories.create.main')
+   @include('categories.create_category')
+   @include('categories.create_sub')
+   @include('categories.create_main')
 
 @endsection

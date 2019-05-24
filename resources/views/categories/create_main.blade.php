@@ -5,11 +5,10 @@
             <i class="fa fa-plus" aria-hidden="true"></i>
             New Parent Category
             <span class="float-right">
-               @include('common.buttons.help', ['bookmark'=>'categories_add_mainCategory'])
-               {{-- @include('help.categories.create.mainCategory', ['model'=>'category', 'model'=>$category]) --}}
-               {{-- @include('common.buttons.cancel', ['name'=>'category', 'model'=>$category]) --}}
-               @include('common.buttons.reset', ['model'=>'category'])
-               @include('common.buttons.save', ['model'=>'category'])
+               @include('categories.buttons.help', ['bookmark'=>'categories_add_mainCategory'])
+               @include('categories.buttons.back')
+               @include('categories.buttons.reset')
+               @include('categories.buttons.save')
             </span>
          </div>
          <div class="card-body card_body pb-0">

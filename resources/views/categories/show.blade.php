@@ -1,12 +1,11 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
-   {{-- {{ Html::style('css/recipes.css') }} --}}
+   {{ Html::style('css/woodbarn.css') }}
 @endsection
 
 @section('left_column')
-   @include('blocks.adminNav')
-   @include('categories.sidebar')
+   @include('blocks.main_menu')
 @endsection
 
 @section('right_column')
@@ -18,7 +17,7 @@
          <i class="fa fa-sitemap" aria-hidden="true"></i>
          Category Details
          <span class="float-right">
-            @include('common.buttons.cancel', ['model'=>'category'])
+            @include('categories.buttons.back')
          </span>
       </div>
       <div class="card-body card_body">

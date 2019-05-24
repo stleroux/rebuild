@@ -61,9 +61,9 @@
                         <td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'created_at'])</td>
                         <td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'published_at'])</td>
                         <td class="text-right">
-                           @include('common.buttons.edit', ['name'=>'recipe', 'model'=>$recipe])
-                           @include('common.buttons.publish', ['name'=>'recipe', 'model'=>$recipe])
-                           @include('common.buttons.trash', ['name'=>'recipe', 'model'=>$recipe])
+                           @include('recipes.buttons.edit')
+                           @include('recipes.buttons.publish')
+                           @include('recipes.buttons.trash')
                         </td>
                      </tr>
                      @endforeach

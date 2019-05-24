@@ -1,12 +1,11 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
-   {{-- {{ Html::style('css/recipes.css') }} --}}
+   {{ Html::style('css/woodbarn.css') }}
 @endsection
 
 @section('left_column')
-   @include('blocks.adminNav')
-   @include('categories.sidebar')
+   @include('blocks.main_menu')
 @endsection
 
 @section('right_column')
@@ -26,10 +25,10 @@
             {{ csrf_field() }}
             <input type="hidden" name="_method" value="DELETE" />
 
-            <a class="btn btn-outline-secondary" href="{{ route('categories.index') }}">No - Return To Previous Page</a>
+            <a class="btn btn-secondary" href="{{ route('categories.index') }}">No - Return To Previous Page</a>
             
             @if(checkPerm('permission_delete'))
-               <button type="submit" class="btn btn-outline-danger">
+               <button type="submit" class="btn btn-danger">
                   <i class="far fa-trash-alt" aria-hidden="true"></i>
                   Yes - Delete Permanently
                </button>

@@ -1,13 +1,11 @@
 @extends('layouts.master')
 
 @section('stylesheets')
-   {{-- {{ Html::style('css/recipes.css') }} --}}
+   {{ Html::style('css/woodbarn.css') }}
 @endsection
 
 @section('left_column')
-   {{-- @include('blocks.adminNav') --}}
-   {{-- @include('categories.sidebar') --}}
-      @include('blocks.main_menu')
+   @include('blocks.main_menu')
 @endsection
 
 @section('right_column')
@@ -25,10 +23,10 @@
                   <i class="fa fa-sitemap"></i>
                   Categories
                   <span class="float-right">
-                     @include('common.buttons.help', ['bookmark'=>'categories'])
+                     @include('categories.buttons.help', ['bookmark'=>'categories'])
                      {{-- @include('help.categories.index') --}}
                      {{-- @include('help.index') --}}
-                     @include('common.buttons.add', ['model'=>'category'])
+                     @include('categories.buttons.add')
                   </span>
                </div>
                
@@ -36,7 +34,7 @@
                
                @if($categories->count() > 0)
                   <div class="card-body card_body pb-0">
-                     @include('common.alphabet', ['model'=>'category', 'page'=>'index'])
+                     {{-- @include('common.alphabet', ['model'=>'category', 'page'=>'index']) --}}
                      <table id="datatable" class="table table-hover table-sm">
                         <thead>
                            <tr>
@@ -53,20 +51,21 @@
                            @foreach ($categories as $category)
                               <tr>
                                  <td>{{ $category->id }}</td>
-                                 <td><a href="{{ route('categories.show', $category->id) }}">{{ ucfirst($category->name) }}</a></td>
+                                 <td>{{ ucfirst($category->name) }}</td>
                                  {{-- <td>{{ $category->module->name }}</td> --}}
                                  {{-- <td>{{ $category->parent->name or 'Null' }}</td> --}}
-                                 <td>{{ $category->parent_id ? ucfirst($category->parent->name) : '' }} <small>({{ $category->parent_id }})</small></td>
+                                 <td>{{ $category->parent_id ? ucfirst($category->parent->name) : '' }} <small>(Parent:{{ $category->parent_id }})</small></td>
                                  <td>{{ $category->value }}</td>
                                  <td data-order="{{ $category->created_at}}">{{ $category->created_at ? $category->created_at->format('M d, Y') : 'no data found' }}</td>
                                  <td class="text-right">
-                                    @if(checkPerm('category_edit'))
-                                       @include('common.buttons.edit', ['name'=>'category', 'model'=>$category])
-                                    @endif
+                                       @include('categories.buttons.show')
+                                    {{-- @if(checkPerm('category_edit')) --}}
+                                       @include('categories.buttons.edit')
+                                    {{-- @endif --}}
 
-                                    @if(checkPerm('category_delete'))
-                                       @include('common.buttons.delete', ['name'=>'category', 'model'=>$category])
-                                    @endif
+                                    {{-- @if(checkPerm('category_delete')) --}}
+                                       @include('categories.buttons.delete')
+                                    {{-- @endif --}}
                                  </td>
                               </tr>
                            @endforeach

@@ -5,11 +5,10 @@
             <i class="fa fa-plus" aria-hidden="true"></i>
             New Sub Category
             <span class="float-right">
-               @include('common.buttons.help', ['bookmark'=>'categories_add_subCategory'])
-               {{-- @include('help.categories.create.subCategory', ['model'=>'category', 'type'=>'']) --}}
-               {{-- @include('common.buttons.cancel', ['name'=>'category', 'model'=>$category]) --}}
-               @include('common.buttons.reset', ['model'=>'category', 'type'=>''])
-               @include('common.buttons.save', ['model'=>'category', 'type'=>''])
+               @include('categories.buttons.help', ['bookmark'=>'categories_add_subCategory'])
+               @include('categories.buttons.back')
+               @include('categories.buttons.reset')
+               @include('categories.buttons.save')
             </span>
          </div>
          <div class="card-body card_body pb-0">
@@ -17,7 +16,7 @@
                <div class="col-3">
                   <div class="form-group {{ $errors->has('sSubs') ? 'has-error' : '' }}">
                      {!! Form::label('sSubs','Main Category', ['class'=>'required']) !!}
-                     <select name="sSubs" id="subs" class="form-control input-sm">
+                     <select name="sSubs" id="subs" class="form-control form-control-sm">
                         <option value="">Select One</option>
                         @foreach($categories as $k)
                            <option value="{{ $k['id'] }}">{{ ucwords($k['name']) }}</option>

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('stylesheets')
-   {{-- {{ Html::style('css/recipes.css') }} --}}
+   {{ Html::style('css/woodbarn.css') }}
 @endsection
 
 @section('left_column')
@@ -21,7 +21,7 @@
 					Permissions
 					@if(checkPerm('permission_create'))
 						<span class="float-sm-right">
-							@include('common.buttons.add', ['model'=>'permission'])
+							@include('permissions.buttons.add')
 						</span>
 					@endif
 				</div>
@@ -47,15 +47,15 @@
 									<td>{{ ucwords($permission->description) }}</td>
 									<td class="text-right" nowrap="nowrap">
 										@if(checkPerm('permission_show'))
-											@include('common.buttons.show', ['name'=>'permission', 'model'=>$permission])
+											@include('permissions.buttons.show')
 										@endif
 
 										@if(checkPerm('permission_edit'))
-											@include('common.buttons.edit', ['name'=>'permission', 'model'=>$permission])
+											@include('permissions.buttons.edit')
 										@endif
 
 										@if(checkPerm('permission_delete'))
-											@include('common.buttons.delete', ['name'=>'permission', 'model'=>$permission])
+											@include('permissions.buttons.delete')
 										@endif
 									</td>
 								</tr>

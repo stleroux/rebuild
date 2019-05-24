@@ -15,7 +15,7 @@
 	<form style="display:inline;">
 		{!! csrf_field() !!}
 		
-		<div class="card mb-3 pb-0 bg-transparent">
+		<div class="card mb-3 pb-0">
 			<div class="card-header">
 				<i class="fab fa-apple"></i>
 				Published Recipes
@@ -68,8 +68,8 @@
 								<td class="text-right">
 									@include('recipes.buttons.edit')
 
-									@include('common.buttons.unpublish', ['name'=>'recipe', 'model'=>$recipe])
-									@include('common.buttons.trash', ['name'=>'recipe', 'model'=>$recipe])
+									@include('recipes.buttons.unpublish')
+									@include('recipes.buttons.trash')
 								</td>
 							</tr>
 							@endforeach

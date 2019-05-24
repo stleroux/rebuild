@@ -1,10 +1,10 @@
 <ul class="navbar-nav ml-auto">
 
-@auth
-   <li class="nav-item text-success">
-      {{ Auth::user()->username }}
-   </li>
-@endauth
+   @auth
+      <li class="nav-item text-success">
+         {{ Auth::user()->username }}
+      </li>
+   @endauth
 
    @guest
       <li class="nav-item {{ Request::is('register*') ? 'active' : '' }}">
@@ -12,13 +12,15 @@
       </li>
    @endguest
 
-
-
    @guest
       <li class="nav-item {{ Request::is('login*') ? 'active' : '' }}">
          <a class="nav-link" href="{{ URL('/login') }}">Login</a>
       </li>
    @endif
+
+   <li class="nav-item {{ Request::is('dashboard*') ? 'active' : '' }}">
+      <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
+   </li>
 
    <li class="nav-item {{ Request::is('about*') ? 'active' : '' }}">
       <a class="nav-link" href="{{ URL('/about') }}">About us</a>

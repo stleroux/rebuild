@@ -1,12 +1,11 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
-   {{-- {{ Html::style('css/recipes.css') }} --}}
+   {{ Html::style('css/woodbarn.css') }}
 @endsection
 
 @section('left_column')
-   @include('blocks.adminNav')
-   @include('posts.sidebar')
+   @include('blocks.main_menu')
 @endsection
 
 @section('right_column')
@@ -19,7 +18,7 @@
          <i class="far fa-newspaper"></i>
          {{ ucwords($post->title) }}
          <span class="float-right">
-            @include('common.buttons.cancel', ['model'=>'post', 'type'=>''])
+            @include('posts.buttons.back')
          </span>
       </div>
       <div class="card-body card_body">

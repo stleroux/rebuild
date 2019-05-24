@@ -1,13 +1,12 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section ('stylesheets')
-	{{ Html::style('css/posts.css') }}
+	{{ Html::style('css/woodbarn.css') }}
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" />
 @stop
 
 @section('left_column')
-   @include('blocks.adminNav')
-   @include('posts.sidebar')
+   @include('blocks.main_menu')
 @endsection
 
 @section('right_column')
@@ -30,9 +29,9 @@
 					</a>
 					{{ Form::button('<i class="fas fa-sync-alt"></i> Reset Form', ['type'=>'reset', 'class'=>'btn btn-sm btn-outline-secondary px-1 py-0']) }}
 					{{ Form::button('<i class="fa fa-save"></i> Save ', ['type' => 'submit', 'class' => 'btn btn-sm btn-outline-success px-1 py-0'])  }} --}}
-					@include('common.buttons.cancel', ['model'=>'post', 'type'=>''])
-					@include('common.buttons.reset', ['model'=>'post', 'type'=>''])
-					@include('common.buttons.save', ['model'=>'post', 'type'=>''])
+					@include('posts.buttons.back')
+					@include('posts.buttons.reset')
+					@include('posts.buttons.save')
 		  		</div>
 			</div>
 
@@ -49,7 +48,7 @@
                <div class="col-xs-12 col-sm-6 col-md-3">
                   <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}" >
                      {!! Form::label("category_id", "Category", ['class'=>'required']) !!}
-                     <select name="category_id" class="custom-select">
+                     <select name="category_id" class="form-control form-control-sm">
                         <option value="" selected>Select One</option>
                         @foreach ($categories as $category)
                            <option disabled>{{ ucfirst($category->name) }}</option>
@@ -64,11 +63,11 @@
 				 	<div class="col-3">
 						<div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
 					  		{{ Form::label ('image', 'Upload image') }}
-					  		{{ Form::file('image', ['class'=>'border', 'value'=>'Image']) }}
+					  		{{ Form::file('image', ['class'=>'form-control form-control-sm', 'value'=>'Image']) }}
 					  		<span class="text-danger">{{ $errors->first('image') }}</span>
 						</div>
 			 		</div>
-			 	</div>
+   		 	</div>
 			 	
 			 	<div class="row">
 			 		<div class="col">

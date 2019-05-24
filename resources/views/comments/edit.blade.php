@@ -1,12 +1,11 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
-   {{-- {{ Html::style('css/recipes.css') }} --}}
+   {{ Html::style('css/woodbarn.css') }}
 @endsection
 
 @section('left_column')
-   @include('blocks.adminNav')
-   @include('comments.sidebar')
+   @include('blocks.main_menu')
 @endsection
 
 @section('right_column')
@@ -43,9 +42,9 @@
 							   </a>
 							@endif --}}
 
-							@include('common.buttons.cancel', ['model'=>'comment', 'type'=>''])
-							@include('common.buttons.reset', ['model'=>'comment', 'type'=>''])
-							@include('common.buttons.save', ['model'=>'comment', 'type'=>''])
+							@include('comments.buttons.back')
+							@include('comments.buttons.reset')
+							@include('comments.buttons.save')
 
 							{{-- {{ Form::button('<i class="fas fa-sync-alt"></i> Reset Form', ['type'=>'reset', 'class'=>'btn btn-sm btn-outline-secondary px-1 py-0']) }} --}}
 							{{-- {{ Form::button('<i class="fa fa-save"></i> Update ', ['type' => 'submit', 'class' => 'btn btn-sm btn-outline-bprimary px-1 py-0'])  }} --}}

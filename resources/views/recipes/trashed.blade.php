@@ -15,7 +15,7 @@
 	<form style="display:inline;">
 		{!! csrf_field() !!}
 		
-		<div class="card mb-3 pb-0 bg-transparent">
+		<div class="card mb-3 pb-0">
 			<div class="card-header">
 				<i class="fab fa-apple"></i>
 				Trashed Recipes

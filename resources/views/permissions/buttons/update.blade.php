@@ -1,5 +1,5 @@
 <button
-   class="btn btn-sm btn-outline-primary"
+   class="btn btn-sm btn-primary"
    type="submit"
    {{-- formaction="{{ route($model.'s'.'.update') }}" --}}
    formmethod="POST"

@@ -1,12 +1,11 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
-   {{ Html::style('css/posts.css') }}
+   {{ Html::style('css/woodbarn.css') }}
 @stop
 
 @section('left_column')
-   @include('blocks.adminNav')
-   @include('posts.sidebar')
+   @include('blocks.main_menu')
 @endsection
 
 @section('right_column')
@@ -27,7 +26,7 @@
                   <div class="float-right">
                      @if(checkPerm('post_create'))
                         <button
-                           class="btn btn-sm btn-outline-danger px-1 py-0"
+                           class="btn btn-sm btn-danger px-1 py-0"
                            type="submit"
                            formaction="{{ route('posts.trashAll') }}"
                            formmethod="POST"
@@ -39,7 +38,7 @@
                         </button>
                                           
                         <button
-                           class = "btn btn-sm btn-outline-secondary px-1 py-0"
+                           class = "btn btn-sm btn-secondary px-1 py-0"
                            type="submit"
                            formaction="{{ route('posts.publishAll') }}"
                            formmethod="POST"
@@ -50,7 +49,7 @@
                            Publish Selected
                         </button>
 
-                        @include('common.buttons.add', ['model'=>'post'])
+                        @include('posts.buttons.add')
                      @endif
                   </div>
                </div>
@@ -91,8 +90,8 @@
                                  {{-- <a href="{{ route('posts.publish', $post->id) }}" class="btn btn-sm btn-outline-secondary px-1 py-0" title="Publish Post">
                                     <i class="fa fa-upload"></i>
                                  </a> --}}
-                                 @include('common.buttons.show', ['model'=>'post', 'id'=>$post->id])
-                                 @include('common.buttons.publish', ['model'=>'post', 'id'=>$post->id])
+                                 @include('posts.buttons.show')
+                                 @include('posts.buttons.publish')
 
                                  {{-- <a href="{{ route('posts.unpublish', $post->id) }}" class="btn btn-sm btn-outline-secondary px-1 py-0" title="Unpublish Post">
                                     <i class="fa fa-download"></i>
@@ -107,13 +106,13 @@
                                     {{-- <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-sm btn-outline-bprimary px-1 py-0" title="Edit Post">
                                        <i class="far fa-edit"></i>
                                     </a> --}}
-                                    @include('common.buttons.edit', ['model'=>'post', 'id'=>$post->id])
+                                    @include('posts.buttons.edit')
                                  @endif
                                  @if(checkPerm('post_delete', $post))
                                     {{-- <a href="{{ route('posts.trash', $post->id) }}" class="btn btn-sm btn-outline-danger px-1 py-0" title="Trash Post">
                                        <i class="far fa-trash-alt"></i>
                                     </a> --}}
-                                    @include('common.buttons.trash', ['model'=>'post', 'id'=>$post->id])
+                                    @include('posts.buttons.trash')
                                  @endif
                               </td>
                               {{-- @endif --}}

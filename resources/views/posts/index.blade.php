@@ -1,12 +1,10 @@
 @extends('layouts.master')
 
 @section('stylesheets')
-	{{ Html::style('css/posts.css') }}
+	{{ Html::style('css/woodbarn.css') }}
 @endsection
 
 @section('left_column')
-   {{-- @include('blocks.adminNav') --}}
-   {{-- @include('posts.sidebar') --}}
    @include('blocks.main_menu')
 @endsection
 
@@ -27,7 +25,7 @@
 						<div class="float-right">
 							@if(checkPerm('post_create'))
 								<button
-									class="btn btn-sm btn-outline-danger px-1 py-0"
+									class="btn btn-sm btn-danger px-1 py-0"
 									type="submit"
 									formaction="{{ route('posts.trashAll') }}"
 									formmethod="POST"
@@ -39,7 +37,7 @@
 								</button>
 														
 								<button
-									class = "btn btn-sm btn-outline-secondary px-1 py-0"
+									class = "btn btn-sm btn-secondary px-1 py-0"
 									type="submit"
 									formaction="{{ route('posts.unpublishAll') }}"
 									formmethod="POST"
@@ -50,7 +48,8 @@
 									Unpublish Selected
 								</button>
 
-								@include('common.buttons.add', ['model'=>'post'])
+								@include('posts.buttons.add')
+								@include('posts.buttons.unpublished')
 							@endif
 						</div>
 					</div>
@@ -106,18 +105,18 @@
 												{{-- <a href="{{ route('posts.unpublish', $post->id) }}" class="btn btn-sm btn-outline-secondary px-1 py-0" title="Unpublish Post">
 													<i class="fa fa-download"></i>
 												</a> --}}
-												@include('common.buttons.unpublish', ['name'=>'post', 'model'=>$post])
+												@include('posts.buttons.unpublish')
 
 												{{-- <a href="{{ route('posts.show', $post->id) }}" class="btn btn-sm btn-outline-secondary px-1 py-0" title="View Post">
 													<i class="fa fa-eye"></i>
 												</a> --}}
-												@include('common.buttons.show', ['name'=>'post', 'model'=>$post])
+												@include('posts.buttons.show')
 
 												@if(checkPerm('post_edit', $post))
-													@include('common.buttons.edit', ['name'=>'post', 'model'=>$post])
+													@include('posts.buttons.edit')
 												@endif
 												@if(checkPerm('post_delete', $post))
-													@include('common.buttons.trash', ['name'=>'post', 'model'=>$post])
+													@include('posts.buttons.trash')
 												@endif
 											</td>
 										</tr>

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('stylesheets')
-   {{-- {{ Html::style('css/recipes.css') }} --}}
+   {{ Html::style('css/woodbarn.css') }}
 @endsection
 
 @section('left_column')
@@ -22,17 +22,17 @@
             <div class="float-right">
                {{-- @include('common.buttons.cancel', ['model'=>'permission']) --}}
                @include('permissions.buttons.back')
-               @include('common.buttons.reset', ['model'=>'permission'])
-               {{-- @include('common.buttons.save&new', ['model'=>'permission', 'value'=>'new']) --}}
-               {{-- @include('common.buttons.save', ['model'=>'permission', 'type'=>'']) --}}
-               <button type="submit" class="btn btn-sm btn-outline-bprimary" name="submit" value="new" title="Save & New">
-                  <i class="far fa-hdd"></i>
+               @include('permissions.buttons.reset')
+               @include('permissions.buttons.save&new')
+               @include('permissions.buttons.save')
+               {{-- <button type="submit" class="btn btn-sm btn-primary" name="submit" value="new" title="Save & New"> --}}
+                  {{-- <i class="far fa-hdd"></i> --}}
                   {{-- Update & Continue --}}
-               </button>
-               <button type="submit" class="btn btn-sm btn-outline-success" name="submit" value="close" title="Save & Close">
-                  <i class="far fa-save"></i>
+               {{-- </button> --}}
+               {{-- <button type="submit" class="btn btn-sm btn-success" name="submit" value="close" title="Save & Close"> --}}
+                  {{-- <i class="far fa-save"></i> --}}
                   {{-- Update & Close --}}
-               </button>
+               {{-- </button> --}}
             </div>
          </div>
          
