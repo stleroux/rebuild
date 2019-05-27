@@ -17,7 +17,7 @@
       {{-- {!! csrf_field() !!} --}}
       <div class="row">
          <div class="col">
-            <div class="card mb-2">
+            <div class="card mb-3">
                <!--CARD HEADER-->
                <div class="card-header card_header">
                   <i class="fa fa-sitemap"></i>
@@ -33,7 +33,7 @@
                <!--CARD BODY-->
                
                @if($categories->count() > 0)
-                  <div class="card-body card_body pb-0">
+                  <div class="card-body card_body pb-1">
                      {{-- @include('common.alphabet', ['model'=>'category', 'page'=>'index']) --}}
                      <table id="datatable" class="table table-hover table-sm">
                         <thead>

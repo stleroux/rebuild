@@ -17,9 +17,9 @@
             <i class="fa fa-edit"></i>
             Edit Recipe
             <span class="float-right">
-               @include('common.buttons.help', ['model'=>'recipe', 'bookmark'=>'recipes'])
+               @include('recipes.buttons.help', ['bookmark'=>'recipes'])
                @include('recipes.buttons.back')
-               @include('recipes.buttons.update')
+               @include('recipes.buttons.btn_update')
             </span>
          </div>
 
@@ -29,7 +29,7 @@
                <div class="col-xs-12 col-sm-12 col-md-6">
                   <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
                      {!! Form::label("title", "Title", ['class'=>'required']) !!}
-                     {!! Form::text("title", null, ["class" => "form-control", "autofocus", 'onfocus' => 'this.focus();this.select()']) !!}
+                     {!! Form::text("title", null, ["class" => "form-control form-control-sm", "autofocus", 'onfocus' => 'this.focus();this.select()']) !!}
                      <span class="text-danger">{{ $errors->first('title') }}</span>
                   </div>
                </div>
@@ -38,7 +38,7 @@
                <div class="col-xs-12 col-sm-6 col-md-3">
                   <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}" >
                      {!! Form::label("category_id", "Category", ['class'=>'required']) !!}
-                     <select name="category_id" class="custom-select">
+                     <select name="category_id" class="custom-select form-control-sm">
                         @foreach ($categories as $category)
                            <option disabled>{{ ucfirst($category->name) }}</option>
                            @foreach ($category->children as $children)
@@ -52,9 +52,9 @@
                <!-- Publish Date -->
                <div class="col-xs-12 col-sm-6 col-md-3">
                   <div class="form-group {{ $errors->has('published_at') ? 'has-error' : '' }}">
-                     {{ Form::label('published_at', 'Publish(ed) On', ['class'=>'required']) }}
-                     <div class="input-group">
-                        {{ Form::text('published_at', null, ['class'=>'form-control', 'id'=>'datePicker']) }}
+                     {{ Form::label('published_at', 'Publish(ed) On' ) }}
+                     <div class="input-group input-group-sm">
+                        {{ Form::text('published_at', null, ['class'=>'form-control form-control-sm', 'id'=>'datePicker']) }}
                         <div class="input-group-append">
                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                         </div>
@@ -67,7 +67,7 @@
                <div class="col-xs-12 col-sm-12 col-md-6">
                   <div class="form-group {{ $errors->has('ingredients') ? 'has-error' : '' }}">
                      {{ Form::label('ingredients', 'Ingredients', ['class'=>'required']) }} <small>(One per line)</small>
-                     {{ Form::textarea('ingredients', null, ['class'=>'form-control simple', 'rows'=>'8']) }}
+                     {{ Form::textarea('ingredients', null, ['class'=>'form-control form-control-sm simple', 'rows'=>'8']) }}
                      <span class="text-danger">{{ $errors->first('ingredients') }}</span>
                   </div>
                </div>
@@ -76,7 +76,7 @@
                <div class="col-xs-12 col-sm-12 col-md-6">
                   <div class="form-group {{ $errors->has('methodology') ? 'has-error' : '' }}">
                      {{ Form::label('methodology', 'Methodology', ['class'=>'required']) }} <small>(One per line)</small>
-                     {{ Form::textarea('methodology', null, ['class'=>'form-control simple', 'rows'=>'8']) }}
+                     {{ Form::textarea('methodology', null, ['class'=>'form-control form-control-sm simple', 'rows'=>'8']) }}
                      <span class="text-danger">{{ $errors->first('methodology') }}</span>
                   </div>
                </div>
@@ -85,7 +85,7 @@
                <div class="col-xs-6 col-md-3 col-lg-2">
                   <div class="form-group {{ $errors->has('servings') ? 'has-error' : '' }}" >
                      {!! Form::label("servings", "Servings") !!}
-                     {{ Form::number ('servings', null, array('class' => 'form-control')) }}
+                     {{ Form::number ('servings', null, array('class' => 'form-control form-control-sm')) }}
                      <span class="text-danger">{{ $errors->first('servings') }}</span>
                   </div>
                </div>
@@ -94,7 +94,7 @@
                <div class="col-xs-6 col-md-3 col-lg-2">
                   <div class="form-group {{ $errors->has('prep_time') ? 'has-error' : '' }}" >
                      {!! Form::label("prep_time", "Prep Time") !!}
-                     {{ Form::number ('prep_time', null, array('class' => 'form-control', 'placeholder'=>'minutes')) }}
+                     {{ Form::number ('prep_time', null, array('class' => 'form-control form-control-sm', 'placeholder'=>'minutes')) }}
                      <span class="text-danger">{{ $errors->first('prep_time') }}</span>
                   </div>
                </div>
@@ -103,7 +103,7 @@
                <div class="col-xs-6 col-md-3 col-lg-2">
                   <div class="form-group {{ $errors->has('cook_time') ? 'has-error' : '' }}" >
                      {!! Form::label("cook_time", "Cook Time") !!}
-                     {{ Form::number ('cook_time', null, array('class' => 'form-control', 'placeholder'=>'minutes')) }}
+                     {{ Form::number ('cook_time', null, array('class' => 'form-control form-control-sm', 'placeholder'=>'minutes')) }}
                      <span class="text-danger">{{ $errors->first('cook_time') }}</span>
                   </div>
                </div>
@@ -112,7 +112,7 @@
                <div class="col-xs-6 col-md-3 col-lg-2">
                   <div class="form-group {{ $errors->has('private') ? 'has-error' : '' }}" >
                      {!! Form::label("personal", "Make Private") !!}
-                     {{ Form::select('personal', array('0' => 'No', '1' => 'Yes'), $recipe->personal, ['class'=>'form-control']) }}
+                     {{ Form::select('personal', array('0' => 'No', '1' => 'Yes'), $recipe->personal, ['class'=>'form-control form-control-sm']) }}
                   </div>
                </div>
                
@@ -120,7 +120,7 @@
                <div class="col-xs-12 col-md-6">
                   <div class="form-group">
                      {!! Form::label("public_notes", "Public Notes") !!}
-                     {{ Form::textarea ('public_notes', null, array('class' => 'form-control simple', 'rows'=>'2')) }}
+                     {{ Form::textarea ('public_notes', null, array('class' => 'form-control form-control-sm simple', 'rows'=>'2')) }}
                   </div>
                </div>
             
@@ -128,7 +128,7 @@
                <div class="col-xs-12 col-md-6">
                   <div class="form-group">
                      {!! Form::label("private_notes", "Author's Personal Notes") !!} <small>(not shown to public)</small>
-                     {{ Form::textarea ('private_notes', null, array('class' => 'form-control simple', 'rows'=>'2')) }}
+                     {{ Form::textarea ('private_notes', null, array('class' => 'form-control form-control-sm simple', 'rows'=>'2')) }}
                   </div>
                </div>
 
@@ -136,7 +136,7 @@
                <div class="col-xs-12 col-sm-6">
                   <div class="form-group">
                      {!! Form::label("source", "Source") !!}
-                     {!! Form::text("source", null, ["class" => "form-control"]) !!}
+                     {!! Form::text("source", null, ["class" => "form-control form-control-sm"]) !!}
                      <span class="text-danger">{{ $errors->first('source') }}</span>
                   </div>
                </div>
@@ -161,7 +161,7 @@
 
                <div class="col-xs-6 col-sm-4">
                   {!! Form::label("image", "Replace Image") !!}
-                  {{ Form::file('image', ['class'=>'form-control']) }}
+                  {{ Form::file('image', ['class'=>'form-control form-control-sm p-0']) }}
                   <span class="help-block">Only choose new image to replace the existing one.</span>
                </div>
 

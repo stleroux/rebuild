@@ -1,12 +1,9 @@
 @if(checkPerm('recipe_edit', $recipe))
    <a href="{{ route('recipes.edit', $recipe->id) }}"
-      {{-- class="btn btn-sm btn-outline-primary" --}}
-      title="Edit Recipe"><i class="far fa-edit"></i></a>
+      class="btn btn-{{ $size }} btn-info"
+      title="Edit Recipe"><i class="{{ Config::get('buttons.edit') }}"></i></a>
 @else
-   {{-- <button class="btn btn-sm btn-outline-primary" disabled="disabled">
-      <i class="far fa-edit"></i>
-   </button> --}}
    <a href="{{ route('recipes.edit', $recipe->id) }}"
-      class="btn-link disabled"
-      title="Edit Recipe"><i class="far fa-edit"></i></a>
+      class="btn btn-{{ $size }} btn-primary disabled"
+      title="Edit Recipe"><i class="{{ Config::get('buttons.edit') }} text-dark"></i></a>
 @endif

@@ -1,5 +1,5 @@
 <a href="{{ route('recipes.myFavorites') }}"
-   class="btn btn-sm btn-outline-secondary"
+   class="btn btn-sm btn-primary"
    title="My Favorites">
-   <i class="fas fa-heart"></i>
+   <i class="{{ Config::get('buttons.favorites') }}"></i>
 </a>

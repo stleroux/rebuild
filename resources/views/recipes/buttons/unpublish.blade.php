@@ -12,13 +12,13 @@
  --}}
 @if(checkPerm('recipe_unpublish', $recipe))
    <a href="{{ route('recipes.unpublish', $recipe->id) }}"
-      {{-- class="btn btn-sm btn-outline-primary" --}}
-      title="Unpublish Recipe"><i class="fas fa-download text-dark"></i></a>
+      class="btn btn-{{ $size }} btn-primary"
+      title="Unpublish Recipe"><i class="{{ Config::get('buttons.publish') }} text-danger"></i></a>
 @else
    {{-- <button class="btn btn-sm btn-outline-primary" disabled="disabled">
       <i class="far fa-edit"></i>
    </button> --}}
    <a href="#"
-      class="btn-link disabled"
-      title="Unpublish Recipe"><i class="fas fa-download"></i></a>
+      class="btn btn-{{ $size }} btn-primary disabled"
+      title="Unpublish Recipe"><i class="{{ Config::get('buttons.publish') }} text-dark"></i></a>
 @endif

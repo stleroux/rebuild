@@ -10,7 +10,7 @@
 						class="list-group-item list-group-item-action py-1 px-1 {{ Request::is('recipes/archives/' . $rlink->year . '/' . $rlink->month) ? 'active' : '' }}">
                   <i class="fas fa-archive pl-2"></i>
 						{{ $rlink->month_name }} - {{ $rlink->year }}
-						<span class="float-right badge badge-primary">{{ $rlink->recipe_count }}</span>
+						<span class="float-right badge badge-warning text-dark">{{ $rlink->recipe_count }}</span>
 					</a>
 				@endforeach
 			</ul>

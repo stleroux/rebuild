@@ -25,7 +25,7 @@
    <link rel="stylesheet" href="{{ asset('css/bootstrap_4/slate.css') }}">
    <link rel="stylesheet" href="{{ asset('css/bootstrap-colors.css') }}" />
    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-   <link rel="stylesheet" href="{{ asset('css/menuStyles.css') }}">
+   {{-- <link rel="stylesheet" href="{{ asset('css/menuStyles.css') }}"> --}}
    @yield('stylesheets')
 </head>
 <body>

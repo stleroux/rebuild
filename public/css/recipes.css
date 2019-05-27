@@ -93,3 +93,9 @@ body {
    height: 200px !important;
    object-fit: cover;
 }
+
+#card-hover:hover {
+   background-color: green;
+   color: white;
+}
+

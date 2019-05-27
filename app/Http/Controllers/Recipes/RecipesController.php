@@ -44,7 +44,7 @@ class RecipesController extends Controller
    {
       // Only allow authenticated users access to these functions
       $this->middleware('auth')->except('index','show','archive');
-      $this->enablePermissions = true;
+      $this->enablePermissions = false;
       // $this->middleware('subscribed')->except('store');
    }
 

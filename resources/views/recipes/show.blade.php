@@ -22,11 +22,11 @@
 				{{-- @include('common.buttons.cancel', ['model'=>'recipe']) --}}
 				@include('recipes.buttons.back')
 				@auth
-					@include('common.buttons.print', ['model'=>'recipe', 'id'=>$recipe->id])
-					@include('common.buttons.edit', ['name'=>'recipe', 'model'=>$recipe])
-					@include('common.buttons.publish', ['name'=>'recipe', 'model'=>$recipe])
-					@include('common.buttons.unpublish', ['name'=>'recipe', 'model'=>$recipe])
-					@include('common.buttons.trash', ['name'=>'recipe', 'model'=>$recipe])
+					@include('recipes.buttons.print')
+					@include('recipes.buttons.edit', ['size'=>'sm'])
+					@include('recipes.buttons.publish', ['size'=>'sm'])
+					@include('recipes.buttons.unpublish', ['size'=>'sm'])
+					@include('recipes.buttons.trash', ['size'=>'sm'])
 					@include('recipes.buttons.published')
 					@include('recipes.buttons.unpublished')
 					@include('recipes.buttons.new')

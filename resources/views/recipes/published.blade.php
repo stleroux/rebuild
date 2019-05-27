@@ -20,11 +20,10 @@
 				<i class="fab fa-apple"></i>
 				Published Recipes
 				<span class="float-right">
-					@include('common.buttons.help', ['model'=>'recipe', 'bookmark'=>'recipes'])
-					{{-- @include('recipes::backend.published.help') --}}
-					@include('common.buttons.add', ['model'=>'recipe'])
-					@include('common.buttons.unpublishAll', ['model'=>'recipe'])
-					@include('common.buttons.trashAll', ['model'=>'recipe'])
+					@include('recipes.buttons.help', ['model'=>'recipe', 'bookmark'=>'recipes'])
+					@include('recipes.buttons.add')
+						@include('recipes.buttons.btn_unpublishAll')
+						@include('recipes.buttons.btn_trashAll')
 					@include('recipes.buttons.unpublished')
 					@include('recipes.buttons.new')
 					@include('recipes.buttons.future')
@@ -36,7 +35,7 @@
 
 			@if($recipes->count() > 0)
 				<div class="card-body card_body p-2">
-					@include('recipes.alphabet', ['model'=>'recipe', 'page'=>'published'])
+					@include('recipes.alphabet_2', ['model'=>'recipe', 'page'=>'published'])
 					{{-- @include('recipes::frontend.alphabet', ['model'=>'recipe']) --}}
 					<table id="datatable" class="table table-sm table-hover">
 						<thead>
@@ -66,10 +65,9 @@
 								<td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'created_at'])</td>
 								<td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'published_at'])</td>
 								<td class="text-right">
-									@include('recipes.buttons.edit')
-
-									@include('recipes.buttons.unpublish')
-									@include('recipes.buttons.trash')
+									@include('recipes.buttons.edit', ['size'=>'xs'])
+									@include('recipes.buttons.unpublish', ['size'=>'xs'])
+									@include('recipes.buttons.trash', ['size'=>'xs'])
 								</td>
 							</tr>
 							@endforeach
@@ -85,4 +83,8 @@
 
 	</form>
 
+@endsection
+
+@section('scripts')
+	@include('scripts.bulkButtons')
 @endsection

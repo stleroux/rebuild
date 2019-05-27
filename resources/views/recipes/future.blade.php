@@ -19,11 +19,14 @@
             <i class="fas fa-address-card"></i>
             Future Recipes
             <span class="float-right">
-               @include('common.buttons.help', ['model'=>'recipe', 'bookmark'=>'recipes'])
-               {{-- @include('recipes::backend.future.help') --}}
-               @include('common.buttons.add', ['model'=>'recipe'])
+               @include('recipes.buttons.help', ['bookmark'=>'recipes'])
+               @include('recipes.buttons.add')
 
-					<button
+{{-- @include('recipes.buttons.btn_publishAll') --}}
+@include('recipes.buttons.btn_unpublishAll')
+@include('recipes.buttons.btn_trashAll')
+
+{{-- 					<button
 						class="btn btn-sm btn-danger px-1 py-0"
 						type="submit"
 						formaction="{{ route('recipes.trashAll') }}"
@@ -54,7 +57,7 @@
 						style="display:none;"
 						onclick="return confirm('Are you sure you want to publish these recipes?')">
 							 Publish Selected
-					</button>
+					</button> --}}
 
 					@include('recipes.buttons.published')
                @include('recipes.buttons.unpublished')
@@ -67,7 +70,7 @@
 
 			@if($recipes->count() > 0)
 				<div class="card-body card_body p-2">
-					@include('recipes.alphabet', ['model'=>'recipe', 'page'=>'future'])
+					@include('recipes.alphabet_2', ['model'=>'recipe', 'page'=>'future'])
 					<table id="datatable" class="table table-sm table-hover">
 					   <thead>
 					      <tr>
@@ -94,9 +97,9 @@
 					         <td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'created_at'])</td>
 					         <td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'published_at'])</td>
 					         <td class="text-right">
-					            @include('common.buttons.edit', ['name'=>'recipe', 'model'=>$recipe])
-					            @include('common.buttons.publish', ['name'=>'recipe', 'model'=>$recipe])
-					            @include('common.buttons.trash', ['name'=>'recipe', 'model'=>$recipe])
+					            @include('recipes.buttons.edit', ['size'=>'xs'])
+					            @include('recipes.buttons.unpublish', ['size'=>'xs'])
+					            @include('recipes.buttons.trash', ['size'=>'xs'])
 					        	</td>
 					      </tr>
 					      @endforeach
@@ -110,4 +113,8 @@
 			@endif
 	 	</div>
 	</form>
-@stop
+@endsection
+
+@section('scripts')
+	@include('scripts.bulkButtons')
+@endsection

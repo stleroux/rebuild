@@ -134,45 +134,5 @@
 @stop
 
 @section('scripts')
-      <script>
-
-             $(function () {
-                   $("#selectall").click(function () {
-                           if ($("#selectall").is(':checked')) {
-                                 $("input[type=checkbox]").each(function () {
-                                        $(this).attr("checked", true);
-                                 });
-                                 $("#bulk-delete").show();
-                                 $("#bulk-publish").show();
-                                 $(".selectmenu").hide();
-
-                           } else {
-                                 $("input[type=checkbox]").each(function () {
-                                        $(this).attr("checked", false);
-                                 });
-                                 $("#bulk-delete").hide();
-                                 $("#bulk-publish").hide();
-                                 $(".selectmenu").show();
-                           }
-                   });
-             });
-
-             function checkbox_is_checked() {
-
-                   if ($(".check-all:checked").length > 0)
-                   {
-                           $("#bulk-delete").show();
-                           $("#bulk-publish").show();
-                           $(".selectmenu").hide();
-                   }
-                   else
-                   {
-                           $("#bulk-delete").hide();
-                           $("#bulk-publish").hide();
-                           $(".selectmenu").show();
-                   }
-             };
-
-      </script>
-
+   @include('scripts.bulkButtons')
 @stop

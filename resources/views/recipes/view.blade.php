@@ -24,7 +24,7 @@
          <span class="float-right">
             @include('recipes.buttons.back')
             @auth
-               @include('common.buttons.print', ['model'=>'recipe', 'id'=>$recipe->id])
+               @include('recipes.buttons.print')
             @endauth
          </span>
       </div>

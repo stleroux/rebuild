@@ -49,7 +49,7 @@
 		</div>
 	</main>
 		
-	<footer class="footer fixed-bottom">
+	<footer class="footer">
 		@include('layouts.master.footer')
 	</footer>
 

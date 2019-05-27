@@ -20,11 +20,11 @@
 				<i class="fab fa-apple"></i>
 				Trashed Recipes
 				<span class="float-right">
-					@include('common.buttons.help', ['model'=>'recipe', 'bookmark'=>'recipes'])
+					@include('recipes.buttons.help', ['bookmark'=>'recipes'])
 					{{-- @include('recipes::backend.trashed.help') --}}
-					@include('common.buttons.deleteAll', ['model'=>'recipe'])
-					@include('common.buttons.restoreAll', ['model'=>'recipe'])
-					@include('common.buttons.publishAll', ['model'=>'recipe'])
+					@include('recipes.buttons.btn_deleteAll')
+					@include('recipes.buttons.btn_restoreAll')
+					@include('recipes.buttons.btn_publishAll')
 
 					@include('recipes.buttons.published')
                @include('recipes.buttons.unpublished')
@@ -38,7 +38,7 @@
 			
 			@if($recipes->count() > 0)
 				<div class="card-body card_body p-2">
-					@include('recipes.alphabet', ['model'=>'recipe', 'page'=>'trashed'])
+					@include('recipes.alphabet_2', ['model'=>'recipe', 'page'=>'trashed'])
 					<table id="datatable" class="table table-sm table-hover">
 					   <thead>
 					      <tr>
@@ -68,8 +68,8 @@
 					         <td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'published_at'])</td>
 					         <td class="text-right">
 					            {{-- @include('common.buttons.edit', ['model'=>'recipe', 'id'=>$recipe->id]) --}}
-					            @include('common.buttons.restore', ['name'=>'recipe', 'model'=>$recipe])
-					            @include('common.buttons.delete', ['name'=>'recipe', 'model'=>$recipe])
+					            @include('recipes.buttons.restore', ['size'=>'xs'])
+					            @include('recipes.buttons.delete', ['size'=>'xs'])
 					         </td>
 					      </tr>
 					      @endforeach

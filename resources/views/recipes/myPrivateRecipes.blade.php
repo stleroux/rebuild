@@ -19,9 +19,9 @@
             <i class="fa fa-address-card-o" aria-hidden="true"></i>
             My Private Recipes
             <span class="float-right">
-               @include('common.buttons.help', ['model'=>'recipe', 'bookmark'=>'recipes'])
+               @include('recipes.buttons.help', ['bookmark'=>'recipes'])
                {{-- @include('recipes::backend.myPrivateRecipes.help') --}}
-               @include('common.buttons.add', ['model'=>'recipe'])
+               @include('recipes.buttons.add')
                @include('recipes.buttons.published')
                @include('recipes.buttons.unpublished')
                @include('recipes.buttons.new')
@@ -33,7 +33,7 @@
 
          @if($recipes->count() > 0)
             <div class="card-body card_body p-2">
-               @include('recipes.alphabet', ['model'=>'recipe', 'page'=>'myPrivateRecipes'])
+               @include('recipes.alphabet_2', ['model'=>'recipe', 'page'=>'myPrivateRecipes'])
                <table id="datatable" class="table table-sm table-hover">
                   <thead>
                      <tr>
@@ -60,13 +60,9 @@
                         <td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'created_at'])</td>
                         <td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'published_at'])</td>
                         <td class="text-right">
-                           @include('common.buttons.edit', ['name'=>'recipe', 'model'=>$recipe])
-                           @if(!$recipe->personal)
-                              @include('common.buttons.makePrivate', ['name'=>'recipe', 'model'=>$recipe])
-                           @else
-                              @include('common.buttons.makePublic', ['name'=>'recipe', 'model'=>$recipe])
-                           @endif
-                           @include('common.buttons.trash', ['name'=>'recipe', 'model'=>$recipe])
+                           @include('recipes.buttons.edit', ['size'=>'xs'])
+                           @include('recipes.buttons.makePublic', ['size'=>'xs'])
+                           @include('recipes.buttons.trash', ['size'=>'xs'])
                         </td>
                      </tr>
                      @endforeach

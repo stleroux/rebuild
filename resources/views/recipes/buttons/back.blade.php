@@ -4,12 +4,12 @@
    </a>
 @endif --}}
 @if(Session::get('fromPage')==='recipes.index')
-   <a href="{{ route('recipes.index','all') }}" class="btn btn-sm btn-outline-secondary">
-      <i class="fas fa-angle-double-left"></i>
+   <a href="{{ route('recipes.index','all') }}" class="btn btn-sm btn-secondary">
+      <i class="{{ Config::get('buttons.back') }}"></i>
    </a>
 @else
-   <a href="{{ route(Session::get('fromPage')) }}" class="btn btn-sm btn-outline-secondary">
-      <i class="fas fa-angle-double-left"></i>
+   <a href="{{ route(Session::get('fromPage')) }}" class="btn btn-sm btn-secondary">
+      <i class="{{ Config::get('buttons.back') }}"></i>
    </a>
 @endif
 

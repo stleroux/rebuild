@@ -16,29 +16,23 @@
 
 @section('content')
 
-@include('recipes.test')
-
 	<div class="card mb-3">
 
 		<div class="card-header">
 			<i class="fab fa-apple"></i>
 			RECIPES
 			<span class="float-right">
-				@include('common.buttons.help', ['bookmark'=>'recipes'])
+				@include('recipes.buttons.help', ['bookmark'=>'recipes'])
 				@auth
 					@if(Request::is('recipes/all'))
-						<a href="{{ route('recipes.printAll', 'all') }}" class="btn btn-sm btn-outline-secondary" title="Print All">
-							<i class="fa fa-print"></i>
+						<a href="{{ route('recipes.printAll', 'all') }}" class="btn btn-sm btn-primary" title="Print All">
+							<i class="{{ Config::get('buttons.print') }}"></i>
 						</a>
 					@else
-						<a href="{{ route('recipes.printAll', Request::segment(2)) }}" class="btn btn-sm btn-outline-secondary" title="Print All in Category">
-							<i class="fa fa-print"></i>
+						<a href="{{ route('recipes.printAll', Request::segment(2)) }}" class="btn btn-sm btn-primary" title="Print All in Category">
+							<i class="{{ Config::get('buttons.print') }}"></i>
 						</a>
 					@endif
-{{-- 
-					<a href="{{ route('recipes.myFavorites') }}" class="btn btn-sm btn-outline-secondary" title="My Favorites">
-					   <i class="fas fa-heart"></i>
-					</a> --}}
 					@include('recipes.buttons.myFavorites')
 					@include('recipes.buttons.add')
 					@include('recipes.buttons.published')
@@ -55,14 +49,14 @@
 		@if($recipes->count() > 0)
 			<div class="card-body p-1">
 				<div class="my-1">
-					@include('recipes.alphabet', ['model'=>'recipe'])
+					@include('recipes.alphabet')
 				</div>
 				
 				<div class="row justify-content-center">
 					@foreach ($recipes as $recipe)
-						<div class="card col-xs-10 col-sm-6 col-md-4 col-lg-3 col-xl-2 m-1 p-1"
-								onMouseOver="this.style.backgroundColor='#C0C0C0'"
-								onMouseOut="this.style.backgroundColor=''">
+						<div id="card-hover" class="card col-xs-10 col-sm-6 col-md-4 col-lg-3 col-xl-2 m-1 p-1"
+								{{-- onMouseOver="this.style.backgroundColor='red', this.style.color='yellow'"
+								onMouseOut="this.style.backgroundColor='', this.style.color=''" --}}>
 
 							@if($recipe->image)
 								<a href="{{ route('recipes.show', $recipe->id) }}" class="" style="text-decoration: none">
