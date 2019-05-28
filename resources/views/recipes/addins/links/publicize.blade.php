@@ -8,8 +8,8 @@
       <i class="far fa-eye"></i>
    </button> --}}
 
-@if(checkPerm('recipe_makePublic', $recipe))
-   <a href="{{ route('recipes.makePublic', $recipe->id) }}"
+@if(checkPerm('recipe_private', $recipe))
+   <a href="{{ route('recipes.publicize', $recipe->id) }}"
       class="btn btn-{{ $size }} btn-secondary"
       title="Make Public"><i class="{{ Config::get('buttons.public') }}"></i>
    </a>

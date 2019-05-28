@@ -22,7 +22,7 @@
 			<i class="fab fa-apple"></i>
 			RECIPES
 			<span class="float-right">
-				@include('recipes.buttons.help', ['bookmark'=>'recipes'])
+				@include('recipes.addins.links.help', ['bookmark'=>'recipes'])
 				@auth
 					@if(Request::is('recipes/all'))
 						<a href="{{ route('recipes.printAll', 'all') }}" class="btn btn-sm btn-primary" title="Print All">
@@ -33,15 +33,15 @@
 							<i class="{{ Config::get('buttons.print') }}"></i>
 						</a>
 					@endif
-					@include('recipes.buttons.add')
-					@include('recipes.buttons.myFavorites')					
-					@include('recipes.buttons.published')
-					@include('recipes.buttons.unpublished')
-					@include('recipes.buttons.new')
-					@include('recipes.buttons.future')
-					@include('recipes.buttons.trashed')
-					@include('recipes.buttons.mine')
-					@include('recipes.buttons.private')
+					@include('recipes.addins.links.add')
+					@include('recipes.addins.pages.myFavorites')					
+					@include('recipes.addins.pages.published')
+					@include('recipes.addins.pages.unpublished')
+					@include('recipes.addins.pages.new')
+					@include('recipes.addins.pages.future')
+					@include('recipes.addins.pages.trashed')
+					@include('recipes.addins.pages.mine')
+					@include('recipes.addins.pages.myPrivate')
 				@endauth
 			</span>
 		</div>
@@ -90,11 +90,11 @@
 							@auth
 								<div class="card-text pb-1 m-0">
 									<div class="align-self-end text-center">
-										@if(!$recipe->isFavorited())
-											@include('common.buttons.favoriteAdd', ['name'=>'recipe', 'model'=>$recipe])
-										@else
-											@include('common.buttons.favoriteRemove', ['name'=>'recipe', 'model'=>$recipe])
-										@endif
+										{{-- @if(!$recipe->isFavorited()) --}}
+											@include('recipes.addins.links.favorite')
+										{{-- @else
+											@include('common.addins.links.favoriteRemove', ['name'=>'recipe', 'model'=>$recipe])
+										@endif --}}
 									</div>
 								</div>
 							@endauth

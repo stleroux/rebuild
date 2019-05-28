@@ -19,9 +19,9 @@
             <i class="fas fa-heart"></i>
             MY FAVORITE RECIPES
             <span class="float-right">
-               @include('common.buttons.help', ['model'=>'recipe', 'bookmark'=>''])
+               @include('recipes.addins.links.help', ['model'=>'recipe', 'bookmark'=>''])
                {{-- @include('recipes::myFavorites.help') --}}
-               @include('common.buttons.recipes', ['model'=>'recipe'])
+               @include('recipes.addins.links.back', ['model'=>'recipe'])
                {{-- @include('common.buttons.myRecipes', ['model'=>'recipe']) --}}
             </span>
          </div>

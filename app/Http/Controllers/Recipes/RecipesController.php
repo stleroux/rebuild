@@ -356,9 +356,9 @@ class RecipesController extends Controller
    public function favoriteAdd($id)
    {
       // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_favorite')) { abort(401, 'Unauthorized Access'); }
-      }
+      // if($this->enablePermissions) {
+      //    if(!checkPerm('recipe_favorite')) { abort(401, 'Unauthorized Access'); }
+      // }
 
       $recipe = Recipe::find($id);
       $recipe->addFavorite();
@@ -380,9 +380,9 @@ class RecipesController extends Controller
    public function favoriteRemove($id)
    {
       // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_favorite')) { abort(401, 'Unauthorized Access'); }
-      }
+      // if($this->enablePermissions) {
+      //    if(!checkPerm('recipe_favorite')) { abort(401, 'Unauthorized Access'); }
+      // }
 
       $recipe = Recipe::find($id);
       $recipe->removeFavorite();
@@ -619,57 +619,6 @@ class RecipesController extends Controller
       }
       
       return view('recipes.index', compact('recipes','categories','letters','byCatName'));
-   }
-
-
-##################################################################################################################
-# ███╗   ███╗ █████╗ ██╗  ██╗███████╗    ██████╗ ██████╗ ██╗██╗   ██╗ █████╗ ████████╗███████╗
-# ████╗ ████║██╔══██╗██║ ██╔╝██╔════╝    ██╔══██╗██╔══██╗██║██║   ██║██╔══██╗╚══██╔══╝██╔════╝
-# ██╔████╔██║███████║█████╔╝ █████╗      ██████╔╝██████╔╝██║██║   ██║███████║   ██║   █████╗  
-# ██║╚██╔╝██║██╔══██║██╔═██╗ ██╔══╝      ██╔═══╝ ██╔══██╗██║╚██╗ ██╔╝██╔══██║   ██║   ██╔══╝  
-# ██║ ╚═╝ ██║██║  ██║██║  ██╗███████╗    ██║     ██║  ██║██║ ╚████╔╝ ██║  ██║   ██║   ███████╗
-# ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝    ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝  ╚═╝  ╚═╝   ╚═╝   ╚══════╝
-##################################################################################################################
-   public function makePrivate($id)
-   {
-      // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_private')) { abort(401, 'Unauthorized Access'); }
-      }
-
-      $recipe = Recipe::find($id);
-         $recipe->personal = 1;
-      $recipe->save();
-
-      // Delete this recipe's favorites
-      DB::table('favorites')->where('favoriteable_id', '=', $id)->delete();
-
-      Session::flash('success','The recipe was successfully made private');
-      return redirect()->back();
-   }
-
-
-##################################################################################################################
-# ███╗   ███╗ █████╗ ██╗  ██╗███████╗    ██████╗ ██╗   ██╗██████╗ ██╗     ██╗ ██████╗
-# ████╗ ████║██╔══██╗██║ ██╔╝██╔════╝    ██╔══██╗██║   ██║██╔══██╗██║     ██║██╔════╝
-# ██╔████╔██║███████║█████╔╝ █████╗      ██████╔╝██║   ██║██████╔╝██║     ██║██║     
-# ██║╚██╔╝██║██╔══██║██╔═██╗ ██╔══╝      ██╔═══╝ ██║   ██║██╔══██╗██║     ██║██║     
-# ██║ ╚═╝ ██║██║  ██║██║  ██╗███████╗    ██║     ╚██████╔╝██████╔╝███████╗██║╚██████╗
-# ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝    ╚═╝      ╚═════╝ ╚═════╝ ╚══════╝╚═╝ ╚═════╝
-##################################################################################################################
-   public function makePublic($id)
-   {
-      // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_private')) { abort(401, 'Unauthorized Access'); }
-      }
-
-      $recipe = Recipe::find($id);
-         $recipe->personal = 0;
-      $recipe->save();
-
-      Session::flash('success','The recipe was successfully made public');
-      return redirect()->back();
    }
 
 
@@ -969,6 +918,59 @@ class RecipesController extends Controller
       }
 
       return view('recipes.printAll', compact('recipes'));
+   }
+
+
+##################################################################################################################
+# ██████╗ ██████╗ ██╗██╗   ██╗ █████╗ ████████╗██╗███████╗███████╗
+# ██╔══██╗██╔══██╗██║██║   ██║██╔══██╗╚══██╔══╝██║╚══███╔╝██╔════╝
+# ██████╔╝██████╔╝██║██║   ██║███████║   ██║   ██║  ███╔╝ █████╗  
+# ██╔═══╝ ██╔══██╗██║╚██╗ ██╔╝██╔══██║   ██║   ██║ ███╔╝  ██╔══╝  
+# ██║     ██║  ██║██║ ╚████╔╝ ██║  ██║   ██║   ██║███████╗███████╗
+# ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝  ╚═╝  ╚═╝   ╚═╝   ╚═╝╚══════╝╚══════╝
+##################################################################################################################
+   public function privatize($id)
+   {
+      $recipe = Recipe::find($id);
+      
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_private', $recipe)) { abort(401, 'Unauthorized Access'); }
+      }
+
+      $recipe->personal = 1;
+      $recipe->save();
+
+      // Delete this recipe's favorites
+      DB::table('favorites')->where('favoriteable_id', '=', $id)->delete();
+
+      Session::flash('success','The recipe was successfully made private');
+      return redirect()->back();
+   }
+
+
+##################################################################################################################
+# ██████╗ ██╗   ██╗██████╗ ██╗     ██╗ ██████╗██╗███████╗███████╗
+# ██╔══██╗██║   ██║██╔══██╗██║     ██║██╔════╝██║╚══███╔╝██╔════╝
+# ██████╔╝██║   ██║██████╔╝██║     ██║██║     ██║  ███╔╝ █████╗  
+# ██╔═══╝ ██║   ██║██╔══██╗██║     ██║██║     ██║ ███╔╝  ██╔══╝  
+# ██║     ╚██████╔╝██████╔╝███████╗██║╚██████╗██║███████╗███████╗
+# ╚═╝      ╚═════╝ ╚═════╝ ╚══════╝╚═╝ ╚═════╝╚═╝╚══════╝╚══════╝
+##################################################################################################################
+   public function publicize($id)
+   {
+      $recipe = Recipe::find($id);
+
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_private', $recipe)) { abort(401, 'Unauthorized Access'); }
+      }
+
+      $recipe->personal = 0;
+      $recipe->save();
+
+      Session::flash('success','The recipe was successfully made public');
+      return redirect()->back();
    }
 
 

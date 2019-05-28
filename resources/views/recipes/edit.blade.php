@@ -17,9 +17,10 @@
             <i class="fa fa-edit"></i>
             Edit Recipe
             <span class="float-right">
-               @include('recipes.buttons.help', ['bookmark'=>'recipes'])
-               @include('recipes.buttons.back')
-               @include('recipes.buttons.btn_update')
+               @include('recipes.addins.links.help', ['bookmark'=>'recipes'])
+               @include('recipes.addins.links.back')
+               @include('recipes.addins.links.privatize', ['size'=>'sm'])
+               @include('recipes.addins.buttons.update')
             </span>
          </div>
 

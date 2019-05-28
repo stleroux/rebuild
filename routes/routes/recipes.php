@@ -54,8 +54,8 @@ Route::group(['prefix' => 'recipes'], function()
 
    Route::get('{id}/favoriteAdd',         'Recipes\RecipesController@favoriteAdd')         ->name('recipes.favoriteAdd');
    Route::get('{id}/favoriteRemove',      'Recipes\RecipesController@favoriteRemove')      ->name('recipes.favoriteRemove');
-   Route::get('{id}/makePublic',          'Recipes\RecipesController@makePublic')          ->name('recipes.makePublic');
-   Route::get('{id}/makePrivate',         'Recipes\RecipesController@makePrivate')         ->name('recipes.makePrivate');
+   Route::get('{id}/publicize',           'Recipes\RecipesController@publicize')           ->name('recipes.publicize');
+   Route::get('{id}/privatize',           'Recipes\RecipesController@privatize')           ->name('recipes.privatize');
    Route::get('{id}/duplicate',           'Recipes\RecipesController@duplicate')           ->name('recipes.duplicate');
    Route::post('{id}/storeComment',       'Recipes\RecipesController@storeComment')        ->name('recipes.storeComment');
 

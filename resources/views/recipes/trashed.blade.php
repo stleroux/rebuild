@@ -67,7 +67,6 @@
 					         <td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'deleted_at'])</td>
 					         <td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'published_at'])</td>
 					         <td class="text-right">
-					            {{-- @include('common.buttons.edit', ['model'=>'recipe', 'id'=>$recipe->id]) --}}
 					            @include('recipes.buttons.restore', ['size'=>'xs'])
 					            @include('recipes.buttons.delete', ['size'=>'xs'])
 					         </td>

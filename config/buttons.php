@@ -5,6 +5,7 @@ return [
    'back'         => 'fas fa-angle-double-left fa-fw',
    'edit'         => 'far fa-edit fa-fw',
    'delete'       => 'fas fa-trash-alt fa-fw',
+   'favorite'     => 'fas fa-heart fa-fw',
    'favorites'    => 'fas fa-heart fa-fw',
    'future'       => 'far fa-calendar-plus fa-fw',
    'help'         => 'fa fa-question-circle fa-fw',

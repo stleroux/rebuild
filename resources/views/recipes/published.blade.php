@@ -20,16 +20,16 @@
 				<i class="fab fa-apple"></i>
 				Published Recipes
 				<span class="float-right">
-					@include('recipes.buttons.help', ['model'=>'recipe', 'bookmark'=>'recipes'])
-					@include('recipes.buttons.add')
-						@include('recipes.buttons.btn_unpublishAll')
-						@include('recipes.buttons.btn_trashAll')
-					@include('recipes.buttons.unpublished')
-					@include('recipes.buttons.new')
-					@include('recipes.buttons.future')
-					@include('recipes.buttons.trashed')
-					@include('recipes.buttons.mine')
-					@include('recipes.buttons.private')
+					@include('recipes.addins.links.help', ['model'=>'recipe', 'bookmark'=>'recipes'])
+					@include('recipes.addins.links.add')
+						@include('recipes.addins.buttons.unpublishAll')
+						@include('recipes.addins.buttons.trashAll')
+					@include('recipes.addins.pages.unpublished')
+					@include('recipes.addins.pages.new')
+					@include('recipes.addins.pages.future')
+					@include('recipes.addins.pages.trashed')
+					@include('recipes.addins.pages.mine')
+					@include('recipes.addins.pages.myPrivate')
 				</span>
 			</div>
 
@@ -65,9 +65,9 @@
 								<td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'created_at'])</td>
 								<td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'published_at'])</td>
 								<td class="text-right">
-									@include('recipes.buttons.edit', ['size'=>'xs'])
-									@include('recipes.buttons.publish', ['size'=>'xs'])
-									@include('recipes.buttons.trash', ['size'=>'xs'])
+									@include('recipes.addins.links.edit', ['size'=>'xs'])
+									{{-- @include('recipes.addins.links.publish', ['size'=>'xs']) --}}
+									@include('recipes.addins.links.trash', ['size'=>'xs'])
 								</td>
 							</tr>
 							@endforeach

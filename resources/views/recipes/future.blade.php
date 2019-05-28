@@ -19,52 +19,16 @@
             <i class="fas fa-address-card"></i>
             Future Recipes
             <span class="float-right">
-               @include('recipes.buttons.help', ['bookmark'=>'recipes'])
-               @include('recipes.buttons.add')
-
-{{-- @include('recipes.buttons.btn_publishAll') --}}
-@include('recipes.buttons.btn_unpublishAll')
-@include('recipes.buttons.btn_trashAll')
-
-{{-- 					<button
-						class="btn btn-sm btn-danger px-1 py-0"
-						type="submit"
-						formaction="{{ route('recipes.trashAll') }}"
-						formmethod="POST"
-						id="bulk-trash"
-						style="display:none;"
-						onclick="return confirm('Are you sure you want to trash these recipes?')">
-							 Trash  Selected
-					</button>
-
-					<button
-						class="btn btn-sm btn-secondary px-1 py-0"
-						type="submit"
-						formaction="{{ route('recipes.unpublishAll') }}"
-						formmethod="POST"
-						id="bulk-unpublish"
-						style="display:none;"
-						onclick="return confirm('Are you sure you want to unpublish these recipes?')">
-							 Unpublish Selected
-					</button>
-
-					<button
-						class="btn btn-sm btn-secondary px-1 py-0"
-						type="submit"
-						formaction="{{ route('recipes.publishAll') }}"
-						formmethod="POST"
-						id="bulk-publish"
-						style="display:none;"
-						onclick="return confirm('Are you sure you want to publish these recipes?')">
-							 Publish Selected
-					</button> --}}
-
-					@include('recipes.buttons.published')
-               @include('recipes.buttons.unpublished')
-               @include('recipes.buttons.new')
-               @include('recipes.buttons.trashed')
-               @include('recipes.buttons.mine')
-               @include('recipes.buttons.private')
+               @include('recipes.addins.links.help', ['bookmark'=>'recipes'])
+               @include('recipes.addins.links.add')
+					@include('recipes.addins.buttons.unpublishAll')
+					@include('recipes.addins.buttons.trashAll')
+					@include('recipes.addins.pages.published')
+               @include('recipes.addins.pages.unpublished')
+               @include('recipes.addins.pages.new')
+               @include('recipes.addins.pages.trashed')
+               @include('recipes.addins.pages.mine')
+               @include('recipes.addins.pages.myPrivate')
 				</span>
 			</div>
 

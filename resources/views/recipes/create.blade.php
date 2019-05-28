@@ -18,9 +18,9 @@
             <i class="fa fa-plus-square"></i>
             Create Recipe
             <span class="float-right">
-               @include('recipes.buttons.help', ['bookmark'=>'recipes'])
-               @include('recipes.buttons.back')
-               @include('recipes.buttons.save')
+               @include('recipes.addins.links.help', ['bookmark'=>'recipes'])
+               @include('recipes.addins.links.back')
+               @include('recipes.addins.buttons.save')
             </span>
          </div>
 

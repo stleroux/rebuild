@@ -19,15 +19,14 @@
             <i class="fa fa-address-card-o" aria-hidden="true"></i>
             My Recipes
             <span class="float-right">
-               @include('recipes.buttons.help', ['bookmark'=>'recipes'])
-               {{-- @include('recipes::backend.myRecipes.help') --}}
-               @include('recipes.buttons.add')
-               @include('recipes.buttons.published')
-               @include('recipes.buttons.unpublished')
-               @include('recipes.buttons.new')
-               @include('recipes.buttons.future')
-               @include('recipes.buttons.trashed')
-               @include('recipes.buttons.private')
+               @include('recipes.addins.links.help', ['bookmark'=>'recipes'])
+               @include('recipes.addins.links.add')
+               @include('recipes.addins.pages.published')
+               @include('recipes.addins.pages.unpublished')
+               @include('recipes.addins.pages.new')
+               @include('recipes.addins.pages.future')
+               @include('recipes.addins.pages.trashed')
+               @include('recipes.addins.pages.myPrivate')
             </span>
          </div>
 
@@ -60,13 +59,13 @@
                         <td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'created_at'])</td>
                         <td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'published_at'])</td>
                         <td class="text-right">
-                           @include('recipes.buttons.edit', ['size'=>'xs'])
-                           @if(!$recipe->personal)
-                              @include('recipes.buttons.makePrivate', ['size'=>'xs'])
-                           @else
-                              @include('recipes.buttons.makePublic', ['size'=>'xs'])
-                           @endif
-                           @include('recipes.buttons.trash', ['size'=>'xs'])
+                           @include('recipes.addins.links.edit', ['size'=>'xs'])
+                           {{-- @if(!$recipe->personal) --}}
+                              {{-- @include('recipes.addins.links.privatize', ['size'=>'xs']) --}}
+                           {{-- @else
+                              @include('recipes.addins.links.makePublic', ['size'=>'xs'])
+                           @endif --}}
+                           @include('recipes.addins.links.trash', ['size'=>'xs'])
                         </td>
                      </tr>
                      @endforeach

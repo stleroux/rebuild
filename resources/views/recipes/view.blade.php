@@ -22,10 +22,19 @@
       <div class="card-header card_header">
          {{ $recipe->title }}
          <span class="float-right">
-            @include('recipes.buttons.back')
-            @auth
-               @include('recipes.buttons.print')
-            @endauth
+            @include('recipes.addins.links.back')
+            @include('recipes.addins.links.print')
+            @include('recipes.addins.links.privatize', ['size'=>'sm'])
+            @include('recipes.addins.links.edit', ['size'=>'sm'])
+            @include('recipes.addins.links.favorite', ['size'=>'sm'])
+            @include('recipes.addins.links.publish', ['size'=>'sm'])
+            @include('recipes.addins.links.trash', ['size'=>'sm'])
+            @include('recipes.addins.pages.published')
+            @include('recipes.addins.pages.unpublished')
+            @include('recipes.addins.pages.new')
+            @include('recipes.addins.pages.trashed')
+            @include('recipes.addins.pages.mine')
+            @include('recipes.addins.pages.myPrivate')
          </span>
       </div>
    
