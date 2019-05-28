@@ -1,17 +1,21 @@
-{{-- @if(checkPerm('recipes_publish', $recipe))
-   <button
-      class="btn btn-sm btn-secondary"
-      type="submit"
-      formaction="{{ route('recipes.publish', $recipe->id) }}"
-      formmethod="GET"
-      title="Publish">
-      <i class="fas fa-upload"></i>
-   </button>
-@endif --}}
-
-<a href="{{ route('recipes.publish', $recipe->id) }}"
-   class="btn btn-{{ $size }} btn-primary"
-   title="Publish Recipe">
-   <i class="{{ Config::get('buttons.publish') }} text-success"></i>
-</a>
-      
+@if($recipe->published_at)
+   @if(checkPerm('recipe_publish', $recipe))
+      <a href="{{ route('recipes.unpublish', $recipe->id) }}"
+         class="btn btn-{{ $size }} btn-primary"
+         title="Unpublish Recipe"><i class="{{ Config::get('buttons.publish') }} text-danger"></i></a>
+   @else
+      <a href="#"
+         class="btn btn-{{ $size }} btn-primary disabled"
+         title="Unpublish Recipe"><i class="{{ Config::get('buttons.publish') }} text-dark"></i></a>
+   @endif
+@else
+   @if(checkPerm('recipe_publish', $recipe))
+      <a href="{{ route('recipes.publish', $recipe->id) }}"
+         class="btn btn-{{ $size }} btn-primary"
+         title="Publish Recipe"><i class="{{ Config::get('buttons.publish') }} text-success"></i></a>
+   @else
+      <a href="#"
+         class="btn btn-{{ $size }} btn-primary disabled"
+         title="Publish Recipe"><i class="{{ Config::get('buttons.publish') }} text-dark"></i></a>
+   @endif
+@endif

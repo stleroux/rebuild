@@ -19,21 +19,17 @@
 		<div class="card-header card_header">
 			{{ $recipe->title }}
 			<span class="float-right">
-				{{-- @include('common.buttons.cancel', ['model'=>'recipe']) --}}
 				@include('recipes.buttons.back')
-				@auth
-					@include('recipes.buttons.print')
-					@include('recipes.buttons.edit', ['size'=>'sm'])
-					@include('recipes.buttons.publish', ['size'=>'sm'])
-					@include('recipes.buttons.unpublish', ['size'=>'sm'])
-					@include('recipes.buttons.trash', ['size'=>'sm'])
-					@include('recipes.buttons.published')
-					@include('recipes.buttons.unpublished')
-					@include('recipes.buttons.new')
-					@include('recipes.buttons.trashed')
-					@include('recipes.buttons.mine')
-					@include('recipes.buttons.private')
-				@endauth
+				@include('recipes.buttons.print')
+				@include('recipes.buttons.edit', ['size'=>'sm'])
+				@include('recipes.buttons.publish', ['size'=>'sm'])
+				@include('recipes.buttons.trash', ['size'=>'sm'])
+				@include('recipes.buttons.published')
+				@include('recipes.buttons.unpublished')
+				@include('recipes.buttons.new')
+				@include('recipes.buttons.trashed')
+				@include('recipes.buttons.mine')
+				@include('recipes.buttons.private')
 			</span>
 		</div>
 	

@@ -66,7 +66,7 @@
 								<td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'published_at'])</td>
 								<td class="text-right">
 									@include('recipes.buttons.edit', ['size'=>'xs'])
-									@include('recipes.buttons.unpublish', ['size'=>'xs'])
+									@include('recipes.buttons.publish', ['size'=>'xs'])
 									@include('recipes.buttons.trash', ['size'=>'xs'])
 								</td>
 							</tr>

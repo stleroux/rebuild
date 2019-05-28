@@ -33,8 +33,8 @@
 							<i class="{{ Config::get('buttons.print') }}"></i>
 						</a>
 					@endif
-					@include('recipes.buttons.myFavorites')
 					@include('recipes.buttons.add')
+					@include('recipes.buttons.myFavorites')					
 					@include('recipes.buttons.published')
 					@include('recipes.buttons.unpublished')
 					@include('recipes.buttons.new')

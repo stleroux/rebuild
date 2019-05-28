@@ -74,11 +74,11 @@
          Posts
       </a>
 
-      <a href="{{ route('recipes.published') }}"
+{{--       <a href="{{ route('recipes.published') }}"
          class="list-group-item list-group-item-action p-1 {{ Route::is('recipes.*') ? 'active' : '' }}">
          <i class="fab fa-apple pl-2"></i>
          Recipes
-      </a>
+      </a> --}}
 
       <a href="{{ route('recipes.index', 'all') }}"
          class="list-group-item list-group-item-action py-1 px-1 {{ Route::is('recipes.index','recipes.myRecipes','recipes.myFavorites') ? 'active' : '' }}">
