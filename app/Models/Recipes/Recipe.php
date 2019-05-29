@@ -115,8 +115,6 @@ class Recipe extends Model
    {
       return $query
          ->where('created_at', '>=' , Auth::user()->last_login_date);
-         //->where('user_id', '=', Auth::user()->id)
-         // ->orderBy('title','DESC');
    }
 
    public function scopeFuture($query)

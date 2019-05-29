@@ -521,6 +521,20 @@ class RecipesController extends Controller
    {
       // Set the session to the current page route
       Session::put('fromPage', Route::currentRouteName());
+      // dd(Route::current()->parameters['cat']);
+      
+      if(!Route::current()->parameters['cat'] == '') {
+         Session::put('cat', Route::current()->parameters['cat']);
+      }
+
+      // if(!Route::current()->parameters['key'] == '') {
+      //    Session::put('key', Route::current()->parameters['key']);
+      // }
+      
+
+      // $current_params = Route::current()->parameters();
+      // dd($current_params->$key);
+      // dd(Route::current()->parameters['key']);
       // dd(Session::get('fromPage'));
 
       // Get all categories related to Recipe Category (id=>1)
@@ -1167,6 +1181,8 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function show($id)
    {
+      // Session::put('fromPage', 'recipes.published');
+      
       $recipe = Recipe::withTrashed()->find($id);
 
       // Increase the view count since this is viewed from the frontend
@@ -1579,8 +1595,9 @@ class RecipesController extends Controller
 
       // set a flash message to be displayed on screen
       Session::flash('success','The recipe was successfully updated!');
-      // return redirect()->route('recipes.'. Session::get('pageName'));
-      return redirect()->route('recipes.index', 'all');
+      // dd(Session::get('fromPage'));
+      return redirect()->route(Session::get('fromPage'));
+      // return redirect()->route('recipes.index', 'all');
 
   }
 

@@ -15,6 +15,7 @@
 @endsection
 
 @section('content')
+{{ Session::get('fromPage') }}
 
 	<div class="card mb-3">
 

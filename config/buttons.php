@@ -16,6 +16,7 @@ return [
    'publish'      => 'far fa-lightbulb fa-fw',
    'published'    => 'far fa-file-alt fa-fw',
    'private'      => 'far fa-eye-slash fa-fw',
+   'recipes'      => 'fab fa-apple fa-fw',
    'restore'      => 'fas fa-trash-restore-alt fa-fw',
    'save'         => 'fa fa-save fa-fw',
    'trash'        => 'far fa-trash-alt fa-fw',

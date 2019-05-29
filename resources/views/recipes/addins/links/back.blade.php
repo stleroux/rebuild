@@ -1,17 +1,30 @@
-{{-- @if (false !== stripos($_SERVER['HTTP_REFERER'], "/"))
-   <a href="{{ route('home') }}" class="btn btn-sm btn-outline-secondary">
-      <i class="fa fa-home"></i>
-   </a>
-@endif --}}
+@foreach ($categories as $category)
+   @if (false !== stripos($_SERVER['HTTP_REFERER'], "recipes/" . $category->name))
+      <a href="{{ url('recipes/'.$category->name) }}" class="btn btn-sm btn-secondary">
+         <i class="{{ Config::get('buttons.back') }}"></i>
+      </a>
+   @endif
+   @foreach ($category->children as $children)
+      @if (false !== stripos($_SERVER['HTTP_REFERER'], "recipes/" . $children->name))
+         <a href="{{ url('recipes/'.$children->name) }}" class="btn btn-sm btn-secondary">
+            <i class="{{ Config::get('buttons.back') }}"></i>
+         </a>
+      @endif
+   @endforeach
+@endforeach
+
 @if(Session::get('fromPage')==='recipes.index')
    <a href="{{ route('recipes.index','all') }}" class="btn btn-sm btn-secondary">
-      <i class="{{ Config::get('buttons.back') }}"></i>
+      <i class="{{ Config::get('buttons.recipes') }}"></i>
    </a>
-@else
+@elseif(Session::get('fromPage'))
    <a href="{{ route(Session::get('fromPage')) }}" class="btn btn-sm btn-secondary">
       <i class="{{ Config::get('buttons.back') }}"></i>
    </a>
 @endif
+
+
+
 
 {{-- @if (false !== stripos($_SERVER['HTTP_REFERER'], "/recipes/all"))
    <a href="{{ route('recipes.index', 'all') }}" class="btn btn-sm btn-outline-secondary">
@@ -41,22 +54,9 @@
    <a href="{{ route('recipes.myPrivateRecipes') }}" class="btn btn-sm btn-outline-secondary">
       <i class="fa fa-arrow-left"></i>
    </a>
+--}}
 
-@foreach ($categories as $category)
-   @if (false !== stripos($_SERVER['HTTP_REFERER'], "recipes/" . $category->name))
-      <a href="{{ url('recipes/'.$category->name) }}" class="btn btn-sm btn-outline-secondary">
-         <i class="fa fa-arrow-left"></i>
-      </a>
-   @endif
-   @foreach ($category->children as $children)
-      @if (false !== stripos($_SERVER['HTTP_REFERER'], "recipes/" . $children->name))
-         <a href="{{ url('recipes/'.$children->name) }}" class="btn btn-sm btn-outline-secondary">
-            <i class="fa fa-arrow-left"></i>
-         </a>
-      @endif
-   @endforeach
-@endforeach
-
+{{--
 @elseif (false !== stripos($_SERVER['HTTP_REFERER'], "recipes/archives"))
    <a href="{{ URL::previous() }}" class="btn btn-sm btn-outline-secondary">
       <i class="fa fa-arrow-left"></i>

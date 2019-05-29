@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 //use App\Permission;
 //use App\User;
 //use Auth;
+use Route;
 use Session;
 
 use App\Models\Post;
@@ -44,7 +45,7 @@ class SiteController extends Controller
 	public function homepage()
 	{
 		// Set the variable so we can use a button in other pages to come back to this page
-      // Session::put('pageName', 'home');
+      Session::put('fromPage', Route::currentRouteName());
 
 		$posts = Post::published()->with('user')->orderBy('id','desc')->take(setting('homepage_blog_count'))->get();
 

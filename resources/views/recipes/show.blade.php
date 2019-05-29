@@ -23,6 +23,7 @@
 				@include('recipes.addins.links.print')
 				@include('recipes.addins.links.edit', ['size'=>'sm'])
 				@include('recipes.addins.links.favorite', ['size'=>'sm'])
+            @include('recipes.addins.links.privatize', ['size'=>'sm'])
 				@include('recipes.addins.links.publish', ['size'=>'sm'])
 				@include('recipes.addins.links.trash', ['size'=>'sm'])
 				@include('recipes.addins.pages.published')

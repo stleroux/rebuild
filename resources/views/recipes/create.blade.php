@@ -52,18 +52,20 @@
                </div>
 
                <!-- Publish Date -->
-               <div class="col-xs-12 col-sm-6 col-md-3">
-                  <div class="form-group {{ $errors->has('published_at') ? 'has-error' : '' }}">
-                     {{ Form::label('published_at', 'Publish(ed) On') }}
-                     <div class="input-group input-group-sm">
-                        <input type="text" name="published_at" class="form-control" id="datePicker" />
-                        <div class="input-group-append">
-                           <span class="input-group-text input-group-text-sm"><i class="far fa-calendar-alt"></i></span>
+               @if(checkperm('recipe_publish'))
+                  <div class="col-xs-12 col-sm-6 col-md-3">
+                     <div class="form-group {{ $errors->has('published_at') ? 'has-error' : '' }}">
+                        {{ Form::label('published_at', 'Publish(ed) On') }}
+                        <div class="input-group input-group-sm">
+                           <input type="text" name="published_at" class="form-control" id="datePicker" />
+                           <div class="input-group-append">
+                              <span class="input-group-text input-group-text-sm"><i class="far fa-calendar-alt"></i></span>
+                           </div>
                         </div>
+                        <span class="text-danger">{{ $errors->first('published_at') }}</span>
                      </div>
-                     <span class="text-danger">{{ $errors->first('published_at') }}</span>
                   </div>
-               </div>
+               @endif
 
                <!-- Ingredients -->
                <div class="col-xs-12 col-sm-12 col-md-6">
