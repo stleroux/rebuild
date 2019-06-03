@@ -19,31 +19,31 @@
 	<div class="row">
 		<div class="col">
 			<div class="card">
-				<div class="card-header card_header">
-					Blog Archives for 
-					@if ($month == 1) January @endif
-					@if ($month == 2) February @endif
-					@if ($month == 3) March @endif
-					@if ($month == 4) April @endif
-					@if ($month == 5) May @endif
-					@if ($month == 6) June @endif
-					@if ($month == 7) July @endif
-					@if ($month == 8) August @endif
-					@if ($month == 9) September @endif
-					@if ($month == 10) October @endif
-					@if ($month == 11) November @endif
-					@if ($month == 12) December @endif
+				<div class="card-header section_header">
+					BLOG ARCHIVES FOR  
+					@if ($month == 1) JANUARY @endif
+					@if ($month == 2) FEBRUARY @endif
+					@if ($month == 3) MARCH @endif
+					@if ($month == 4) APRIL @endif
+					@if ($month == 5) MAY @endif
+					@if ($month == 6) JUNE @endif
+					@if ($month == 7) JULY @endif
+					@if ($month == 8) AAUGUST @endif
+					@if ($month == 9) SEPTEMBER @endif
+					@if ($month == 10) OCTOBER @endif
+					@if ($month == 11) NOVEMBER @endif
+					@if ($month == 12) DECEMBER @endif
 					{{ $year }}
 
 					<span class="float-right">
 						@if (true !== stripos($_SERVER['HTTP_REFERER'], "/search/posts"))
-							<a href="{{ route('blog.index') }}" class="btn btn-sm btn-block btn-outline-secondary px-1 py-0">
+							<a href="{{ route('blog.index') }}" class="btn btn-sm btn-block btn-primary px-1 py-0">
 								<i class="fas fa-blog"></i> Blog
 							</a>
 						@endif
 					</span>
 				</div>
-				<div class="card-body card_body">
+				<div class="card-body section_body">
 					<table class="table table-sm table-hover">
 						<thead>
 							<tr>
@@ -68,7 +68,7 @@
 										{{ $archive->user->username }}
 									</td>
 									<td class="text-right">
-										<a href="{{ route('blog.single', $archive->slug) }}" class="btn btn-sm btn-outline-secondary px-1 py-0" title="View Blog">
+										<a href="{{ route('blog.single', $archive->slug) }}" class="btn btn-sm btn-secondary px-1 py-0" title="View Blog">
 											<i class="fa fa-eye"></i>
 										</a>
 									</td>

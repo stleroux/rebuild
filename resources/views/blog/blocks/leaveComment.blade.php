@@ -1,8 +1,8 @@
 @if(checkPerm('post_index'))
 	<div class="card mb-2">
 		<div class="card-header block_header">
-			<i class="fa fa-comment" aria-hidden="true"></i>
-			Leave a comment
+			<i class="fa fa-comment"></i>
+			Leave A Comment
 		</div>
 		<div class="card-body pt-1 pb-2">
 			{{ Form::open(['route' => ['blog.storeComment', $post->id], 'method' => 'POST']) }}
@@ -44,7 +44,7 @@
 			<div class="row">
 				<div class="col py-0 px-0">
 					{{-- {{ Form::submit('Add Comment', ['class' => 'btn btn-success btn-block', 'style' => 'margin-top:15px;']) }} --}}
-					{{ Form::button('<i class="fa fa-plus-circle"></i> Add Comment', ['type' => 'submit', 'class' => 'btn btn-success btn-block'] )  }}
+					{{ Form::button('<i class="fa fa-plus-circle"></i> Add Comment', ['type' => 'submit', 'class' => 'btn btn-sm btn-success btn-block'] )  }}
 				</div>
 			</div>
 			{{ Form::close() }}

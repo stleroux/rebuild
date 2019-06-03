@@ -19,11 +19,11 @@
    @if(count($posts) > 0)
       @foreach ($posts as $post)
          <div class="card mb-2">
-            <div class="card-header card_header">
-               <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+            <div class="card-header section_header">
+               <i class="far fa-newspaper"></i>
                {{ $post->title }}
             </div>
-            <div class="card-body card_body">
+            <div class="card-body section_body">
                
                <div class="row">
                
@@ -38,7 +38,7 @@
                      <p>{!! substr(strip_tags($post->body), 0, 250) !!} {{ strlen(strip_tags($post->body)) > 250 ? ' [More]...' : '' }}</p>
                   </div>
                   <div class="col px-2 text text-right">
-                     <a href="{{ route('blog.single', $post->slug) }}" class="btn btn-sm btn-outline-secondary">
+                     <a href="{{ route('blog.single', $post->slug) }}" class="btn btn-sm btn-secondary">
                         <i class="fa fa-chevron-right" aria-hidden="true"></i> Read More
                      </a>
                   </div>
@@ -46,10 +46,10 @@
                
             </div>
             <div class="card-footer px-1 py-1">
-               Created by {{ ucfirst($post->user->username) }}
-                  {{-- @include('common.authorFormat', ['model'=>$post, 'field'=>'user']) --}}
-               on {{ $post->created_at->format('M d, Y') }}
-                  {{-- @include('common.dateFormat', ['model'=>$post, 'field'=>'created_at']) --}}
+               Created by {{-- {{ ucfirst($post->user->username) }} --}}
+                  @include('common.authorFormat', ['model'=>$post, 'field'=>'user'])
+               on {{-- {{ $post->created_at->format('M d, Y') }} --}}
+                  @include('common.dateFormat', ['model'=>$post, 'field'=>'created_at'])
             </div>
          </div>
       @endforeach
@@ -62,11 +62,11 @@
    @else
       {{-- @include('common.noRecordsFound', ['color'=>'primary', 'name'=>'Blog Entries', 'icon'=>'newspaper-o']) --}}
       <div class="card mb-2">
-         <div class="card-header card_header">
-            <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+         <div class="card-header section_header">
+            <i class="fa fa-newspaper-o"></i>
             Blog
          </div>
-         <div class="card-body card_body">
+         <div class="card-body section_body">
             No Records Found
          </div>
       </div>

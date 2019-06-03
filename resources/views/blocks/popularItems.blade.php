@@ -1,7 +1,7 @@
 <div class="card mb-2">
    <div class="card-header block_header">
       <i class="far fa-star" aria-hidden="true"></i>
-      MOST POPULAR ITEMS
+      Most Popular Items
    </div>
    <div class="list-group card_body px-2">
       <p>Have a look at the most viewed items on the site.</p>

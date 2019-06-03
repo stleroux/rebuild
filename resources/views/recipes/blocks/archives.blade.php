@@ -1,5 +1,5 @@
 <div class="card mb-2">
-   <div class="card-header block_header">
+   <div class="card-header card_header_2">
       RECIPE ARCHIVES
    </div>
    <div class="list-group py-0 px-0">

@@ -22,7 +22,7 @@ body {
 }
 
 /* Card Headers */
-.card_header {
+.section_header {
 	background-image: url("../images/1.jpg");
 	color: white;
 	padding-top: 8px;
@@ -32,12 +32,11 @@ body {
 }
 
 /* Card Bodies */
-.card_body {
+.section_body {
 	background-image: url('../images/14.jpg');
 	background-size: 100% 100%;
 	background-attachment: fixed;
 	color: black;
-	/*font-weight: bold;*/
 	padding-top: 8px;
 	padding-bottom: 8px;
 	padding-left: 10px;
@@ -45,7 +44,7 @@ body {
 }
 
 /* Level 2 Card Headers */
-.card_header_2 {
+.card_header {
 	background-image: url("../images/10.jpg");
 	color: white;
 	padding-top: 8px;
@@ -68,12 +67,24 @@ body {
 	background-attachment: fixed;
 }
 
+/* Block Headers */
+.sub_block_header { 
+	/*background-image: url("../images/birch.jpg");*/
+	font-weight: bolder;
+	color: black;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	padding-left: 10px;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-attachment: fixed;
+}
+
 .table-hover tbody tr:hover, .table-hover tbody tr:hover th {
 	background-image: url("../images/9.jpg");
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 	color: white;
-	/*font-weight: bold;*/
 }
 
 .table thead {

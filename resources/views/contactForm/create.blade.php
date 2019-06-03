@@ -12,12 +12,12 @@
 
    <div class="card mb-2">
 
-      <div class="card-header card_header">
-            <i class="fa fa-phone" aria-hidden="true"></i>
+      <div class="card-header section_header">
+            <i class="fa fa-phone"></i>
             Contact Us
       </div>
       
-      <div class="card-body card_body">
+      <div class="card-body section_body">
          <form action="/contact" method="POST" class="px-0 py-2">
    
             @csrf

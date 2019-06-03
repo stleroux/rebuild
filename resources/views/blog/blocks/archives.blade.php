@@ -1,6 +1,6 @@
 <div class="card mb-2">
 	<div class="card-header block_header">
-		<i class="fab fa-newspaper-alt"></i>
+		<i class="far fa-file-archive"></i>
 		Blog Archives
 	</div>
 	<div class="card-body px-0 py-0">
