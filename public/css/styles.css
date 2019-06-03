@@ -74,13 +74,18 @@ p {
   padding: 0rem;
 }
 
-/* Used to automatically display the dropdown menu in the navbar whne hovered */
+/* Used to automatically display the dropdown menu in the navbar when hovered */
 /*.dropdown:hover>.dropdown-menu {
    display: block;
 }*/
 
 
-
+/* Center items in top navbar */
+.navbar-nav.navbar-center {
+    position: absolute;
+    left: 50%;
+    transform: translatex(-50%);
+}
 
 
 

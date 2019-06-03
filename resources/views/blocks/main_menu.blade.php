@@ -32,17 +32,21 @@
          Blog
       </a>
 
-      <a href="{{ route('categories.index') }}"
-         class="list-group-item list-group-item-action p-1 {{ Request::is('categories*') ? 'active' : '' }}">
-         <i class="fa fa-sitemap pl-2"></i>
-         Categories
-      </a>
+      @if(checkPerm('category_index'))
+         <a href="{{ route('categories.index') }}"
+            class="list-group-item list-group-item-action p-1 {{ Request::is('categories*') ? 'active' : '' }}">
+            <i class="fa fa-sitemap pl-2"></i>
+            Categories
+         </a>
+      @endif
 
-      <a href="{{ route('comments.index') }}"
-         class="list-group-item list-group-item-action p-1 {{ Request::is('comments*') ? 'active' : '' }}">
-         <i class="fas fa-comments pl-2"></i>
-         Comments
-      </a>
+      @if(checkPerm('comment_index'))
+         <a href="{{ route('comments.index') }}"
+            class="list-group-item list-group-item-action p-1 {{ Request::is('comments*') ? 'active' : '' }}">
+            <i class="fas fa-comments pl-2"></i>
+            Comments
+         </a>
+      @endif
 
       <a href="#"
          class="list-group-item list-group-item-action py-1 px-1 {{ Route::is('darts.*') ? 'active' : '' }}">
@@ -68,17 +72,13 @@
          </a>
       @endif
 
-      <a href="{{ route('posts.index') }}"
-         class="list-group-item list-group-item-action p-1 {{ Request::is('posts*') ? 'active' : '' }}">
-         <i class="far fa-newspaper pl-2"></i>
-         Posts
-      </a>
-
-{{--       <a href="{{ route('recipes.published') }}"
-         class="list-group-item list-group-item-action p-1 {{ Route::is('recipes.*') ? 'active' : '' }}">
-         <i class="fab fa-apple pl-2"></i>
-         Recipes
-      </a> --}}
+      @if(checkPerm('post_index'))
+         <a href="{{ route('posts.index') }}"
+            class="list-group-item list-group-item-action p-1 {{ Request::is('posts*') ? 'active' : '' }}">
+            <i class="far fa-newspaper pl-2"></i>
+            Posts
+         </a>
+      @endif
 
       <a href="{{ route('recipes.index', 'all') }}"
          class="list-group-item list-group-item-action py-1 px-1 {{ Route::is('recipes.index','recipes.myRecipes','recipes.myFavorites') ? 'active' : '' }}">
@@ -86,17 +86,21 @@
          Recipes
       </a>
 
-      <a href="{{ route('settings.index') }}"
-         class="list-group-item list-group-item-action p-1 {{ Route::is('settings.*') ? 'active' : '' }}">
-         <i class="fas fa-cog pl-2"></i>
-         Site Settings
-      </a>
+      @if(checkPerm('site_settings'))
+         <a href="{{ route('settings.index') }}"
+            class="list-group-item list-group-item-action p-1 {{ Route::is('settings.*') ? 'active' : '' }}">
+            <i class="fas fa-cog pl-2"></i>
+            Site Settings
+         </a>
+      @endif
 
-      <a href="{{ route('stats') }}"
-         class="list-group-item list-group-item-action p-1 {{ Route::is('stats*') ? 'active' : '' }}">
-         <i class="fas fa-chart-pie pl-2"></i>
-         Site Statistics
-      </a>
+      @if(checkPerm('site_stats'))
+         <a href="{{ route('stats') }}"
+            class="list-group-item list-group-item-action p-1 {{ Route::is('stats*') ? 'active' : '' }}">
+            <i class="fas fa-chart-pie pl-2"></i>
+            Site Statistics
+         </a>
+      @endif
 
       @if(checkPerm('user_index'))
          <a href="{{ route('users.index') }}"

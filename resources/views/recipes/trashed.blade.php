@@ -16,22 +16,24 @@
 		{!! csrf_field() !!}
 		
 		<div class="card mb-3 pb-0">
-			<div class="card-header">
-				<i class="fab fa-apple"></i>
-				Trashed Recipes
+			<div class="card-header card_header">
+				<span class="h5 align-middle pt-2">
+					<i class="{{ Config::get('buttons.trashed') }}"></i>
+					Trashed Recipes
+				</span>
 				<span class="float-right">
-					@include('recipes.buttons.help', ['bookmark'=>'recipes'])
+					@include('recipes.addins.links.help', ['bookmark'=>'recipes'])
 					{{-- @include('recipes::backend.trashed.help') --}}
-					@include('recipes.buttons.btn_deleteAll')
-					@include('recipes.buttons.btn_restoreAll')
-					@include('recipes.buttons.btn_publishAll')
+					@include('recipes.addins.buttons.deleteAll')
+					@include('recipes.addins.buttons.restoreAll')
+					@include('recipes.addins.buttons.publishAll')
 
-					@include('recipes.buttons.published')
-               @include('recipes.buttons.unpublished')
-               @include('recipes.buttons.new')
-               @include('recipes.buttons.future')
-               @include('recipes.buttons.mine')
-               @include('recipes.buttons.private')
+					@include('recipes.addins.pages.published')
+               @include('recipes.addins.pages.unpublished')
+               @include('recipes.addins.pages.new')
+               @include('recipes.addins.pages.future')
+               @include('recipes.addins.pages.mine')
+               @include('recipes.addins.pages.myPrivate')
 				</span>
 			</div>
 	</form>
@@ -67,8 +69,8 @@
 					         <td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'deleted_at'])</td>
 					         <td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'published_at'])</td>
 					         <td class="text-right">
-					            @include('recipes.buttons.restore', ['size'=>'xs'])
-					            @include('recipes.buttons.delete', ['size'=>'xs'])
+					            @include('recipes.addins.links.restore', ['size'=>'xs'])
+					            @include('recipes.addins.links.delete', ['size'=>'xs'])
 					         </td>
 					      </tr>
 					      @endforeach

@@ -1,4 +1,4 @@
-{{-- @if(checkPerm('recipe_favorite', $recipe)) --}}
+@auth
    @if(!$recipe->isFavorited())
       <a href="{{ route('recipes.favoriteAdd', $recipe->id) }}"
          class="btn btn-sm btn-primary"
@@ -12,4 +12,4 @@
          <i class="{{ Config::get('buttons.favorite') }} text-success"></i>
       </a>
    @endif
-{{-- @endif --}}
+@endauth

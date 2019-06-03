@@ -15,35 +15,25 @@
 @endsection
 
 @section('content')
-{{ Session::get('fromPage') }}
 
-	<div class="card mb-3">
+	<div class="card mb-3 bg-transparent">
 
-		<div class="card-header">
-			<i class="fab fa-apple"></i>
-			RECIPES
+		<div class="card-header card_header">
+			<span class="h5 align-middle pt-2">
+				<i class="fab fa-apple"></i>
+				Recipes
+			</span>
 			<span class="float-right">
-				@include('recipes.addins.links.help', ['bookmark'=>'recipes'])
-				@auth
-					@if(Request::is('recipes/all'))
-						<a href="{{ route('recipes.printAll', 'all') }}" class="btn btn-sm btn-primary" title="Print All">
-							<i class="{{ Config::get('buttons.print') }}"></i>
-						</a>
-					@else
-						<a href="{{ route('recipes.printAll', Request::segment(2)) }}" class="btn btn-sm btn-primary" title="Print All in Category">
-							<i class="{{ Config::get('buttons.print') }}"></i>
-						</a>
-					@endif
-					@include('recipes.addins.links.add')
-					@include('recipes.addins.pages.myFavorites')					
-					@include('recipes.addins.pages.published')
-					@include('recipes.addins.pages.unpublished')
-					@include('recipes.addins.pages.new')
-					@include('recipes.addins.pages.future')
-					@include('recipes.addins.pages.trashed')
-					@include('recipes.addins.pages.mine')
-					@include('recipes.addins.pages.myPrivate')
-				@endauth
+				@include('recipes.addins.links.printAll')
+				@include('recipes.addins.pages.myFavorites')
+				@include('recipes.addins.pages.published')
+				@include('recipes.addins.pages.unpublished')
+				@include('recipes.addins.pages.new')
+				@include('recipes.addins.pages.future')
+				@include('recipes.addins.pages.trashed')
+				@include('recipes.addins.pages.mine')
+				@include('recipes.addins.pages.myPrivate')
+				@include('recipes.addins.links.add')
 			</span>
 		</div>
 

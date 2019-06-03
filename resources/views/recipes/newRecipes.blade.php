@@ -15,9 +15,11 @@
       {!! csrf_field() !!}
       
       <div class="card">
-         <div class="card-header">
-            <i class="fa fa-address-card-o" aria-hidden="true"></i>
-            New Recipes
+         <div class="card-header card_header">
+            <span class="h5 align-middle pt-2">
+               <i class="{{ Config::get('buttons.new') }}"></i>
+               New Recipes
+            </span>
             <span class="float-right">
                @include('recipes.addins.links.help', ['bookmark'=>'recipes'])
                @include('recipes.addins.links.add')

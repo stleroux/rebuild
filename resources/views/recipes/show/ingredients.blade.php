@@ -5,10 +5,10 @@
 			@auth
 				{!! $recipe->ingredients !!}
 			@else
-				@if(strlen($recipe->ingredients > 50))
-					{!! str_limit($recipe->ingredients, $limit = 110, $end = ' [More...]') !!}
-				@else
-					{!! str_limit($recipe->ingredients, $limit = 50, $end = ' [More...]') !!}
+				@if(strlen($recipe->ingredients))
+					{{-- {!! str_limit($recipe->ingredients, $limit = 110, ' [More...]') !!}
+				@else --}}
+					{!! str_limit($recipe->ingredients, $limit = 52, ' [More...]') !!}
 				@endif
 			@endif
 		</div>

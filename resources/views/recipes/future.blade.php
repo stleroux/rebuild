@@ -15,9 +15,11 @@
 	{!! csrf_field() !!}
 	
 		<div class="card">
-			<div class="card-header">
-            <i class="fas fa-address-card"></i>
-            Future Recipes
+			<div class="card-header card_header">
+				<span class="h5 align-middle pt-2">
+	            <i class="{{ Config::get('buttons.future') }}"></i>
+	            Future Recipes
+	         </span>
             <span class="float-right">
                @include('recipes.addins.links.help', ['bookmark'=>'recipes'])
                @include('recipes.addins.links.add')
@@ -61,9 +63,9 @@
 					         <td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'created_at'])</td>
 					         <td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'published_at'])</td>
 					         <td class="text-right">
-					            @include('recipes.buttons.edit', ['size'=>'xs'])
-					            @include('recipes.buttons.publish', ['size'=>'xs'])
-					            @include('recipes.buttons.trash', ['size'=>'xs'])
+					            @include('recipes.addins.links.edit', ['size'=>'xs'])
+					            {{-- @include('recipes.addins.links.publish', ['size'=>'xs']) --}}
+					            @include('recipes.addins.links.trash', ['size'=>'xs'])
 					        	</td>
 					      </tr>
 					      @endforeach

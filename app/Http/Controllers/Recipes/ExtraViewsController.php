@@ -1,0 +1,483 @@
+<?php
+
+namespace App\Http\Controllers\Recipes;
+
+use App\Http\Controllers\Controller; // Required for validation
+use App\Http\Requests\CreateCommentRequest;
+use App\Http\Requests\CreateRecipeRequest;
+use App\Http\Requests\UpdateRecipeRequest;
+use App\Models\Category;
+use App\Models\Comment;
+use App\Models\User;
+use App\Models\Recipes\Recipe;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Input;
+use Auth;
+use DB;
+use Excel;
+use File;
+use Image;
+use JavaScript;
+use Log;
+use PDF;
+use Purifier;
+use Route;
+use Session;
+use Storage;
+use Table;
+use URL;
+
+class ExtraViewsController extends RecipesController
+{
+
+##################################################################################################################
+#  ██████╗ ██████╗ ███╗   ██╗███████╗████████╗██████╗ ██╗   ██╗ ██████╗████████╗
+# ██╔════╝██╔═══██╗████╗  ██║██╔════╝╚══██╔══╝██╔══██╗██║   ██║██╔════╝╚══██╔══╝
+# ██║     ██║   ██║██╔██╗ ██║███████╗   ██║   ██████╔╝██║   ██║██║        ██║   
+# ██║     ██║   ██║██║╚██╗██║╚════██║   ██║   ██╔══██╗██║   ██║██║        ██║   
+# ╚██████╗╚██████╔╝██║ ╚████║███████║   ██║   ██║  ██║╚██████╔╝╚██████╗   ██║   
+#  ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝  ╚═════╝   ╚═╝   
+##################################################################################################################
+   public function __construct()
+   {
+      // Only allow authenticated users access to these functions
+      $this->middleware('auth');
+      $this->enablePermissions = true;
+   }
+
+
+##################################################################################################################
+#  █████╗ ██████╗  ██████╗██╗  ██╗██╗██╗   ██╗███████╗
+# ██╔══██╗██╔══██╗██╔════╝██║  ██║██║██║   ██║██╔════╝
+# ███████║██████╔╝██║     ███████║██║██║   ██║█████╗  
+# ██╔══██║██╔══██╗██║     ██╔══██║██║╚██╗ ██╔╝██╔══╝  
+# ██║  ██║██║  ██║╚██████╗██║  ██║██║ ╚████╔╝ ███████╗
+# ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝  ╚══════╝
+# Display the archived resources
+##################################################################################################################
+   public function archives($year, $month)
+   {
+      // Get all categories related to Recipe Category (id=>1)
+      $categories = Category::where('parent_id',1)->get();
+
+      $archives = Recipe::with('user', 'category')
+         ->whereYear('published_at','=', $year)
+         ->whereMonth('published_at','=', $month)
+         ->where('published_at', '<=', Carbon::now())
+         ->orderBy('title')
+         ->get();
+
+      return view('recipes.archives', compact('archives','year','month','categories'));
+   }
+
+
+##################################################################################################################
+# ███████╗██╗   ██╗████████╗██╗   ██╗██████╗ ███████╗
+# ██╔════╝██║   ██║╚══██╔══╝██║   ██║██╔══██╗██╔════╝
+# █████╗  ██║   ██║   ██║   ██║   ██║██████╔╝█████╗  
+# ██╔══╝  ██║   ██║   ██║   ██║   ██║██╔══██╗██╔══╝  
+# ██║     ╚██████╔╝   ██║   ╚██████╔╝██║  ██║███████╗
+# ╚═╝      ╚═════╝    ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝
+// Display a list of resources that will be published at a later date
+##################################################################################################################
+   public function future(Request $request, $key=null)
+   {
+      // Set the session to the current page route
+      Session::put('fromPage', Route::currentRouteName());
+
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_future')) { abort(401, 'Unauthorized Access'); }
+      }
+
+      $alphas = DB::table('recipes')
+         ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
+         ->where('published_at','>', Carbon::Now())
+         ->orderBy('letter')
+         ->get();
+
+      $letters = [];
+      foreach($alphas as $alpha) {
+         $letters[] = $alpha->letter;
+      }
+
+      // If $key value is passed
+      if ($key) {
+         $recipes = Recipe::with('user','category')
+            ->future()
+            ->where('title', 'like', $key . '%')
+            ->orderBy('title', 'asc')
+            ->get();
+      } else {
+         // No $key value is passed
+         $recipes = Recipe::with('user','category')
+            ->future()
+            ->get();
+      }
+
+      return view('recipes.future', compact('recipes','letters'));
+   }
+
+
+##################################################################################################################
+# ███╗   ███╗██╗   ██╗    ███████╗ █████╗ ██╗   ██╗ ██████╗ ██████╗ ██╗████████╗███████╗███████╗
+# ████╗ ████║╚██╗ ██╔╝    ██╔════╝██╔══██╗██║   ██║██╔═══██╗██╔══██╗██║╚══██╔══╝██╔════╝██╔════╝
+# ██╔████╔██║ ╚████╔╝     █████╗  ███████║██║   ██║██║   ██║██████╔╝██║   ██║   █████╗  ███████╗
+# ██║╚██╔╝██║  ╚██╔╝      ██╔══╝  ██╔══██║╚██╗ ██╔╝██║   ██║██╔══██╗██║   ██║   ██╔══╝  ╚════██║
+# ██║ ╚═╝ ██║   ██║       ██║     ██║  ██║ ╚████╔╝ ╚██████╔╝██║  ██║██║   ██║   ███████╗███████║
+# ╚═╝     ╚═╝   ╚═╝       ╚═╝     ╚═╝  ╚═╝  ╚═══╝   ╚═════╝ ╚═╝  ╚═╝╚═╝   ╚═╝   ╚══════╝╚══════╝
+// MY FAVORITES :: Display a listing of the resource that have been favorited by a specific user.
+##################################################################################################################
+   public function myFavorites(Request $request, $key=null)
+   {
+      // Check if user has required permission
+      // if($this->enablePermissions) {
+      //    if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      // }
+
+      // Fake get categories needed for back button to work properly
+      $categories = [];
+
+      if(Auth::check()) {
+         $user = Auth::user();
+         $recipes = $user->favorite(Recipe::class)->sortBy('title');
+      }
+
+      return view('recipes.myFavorites', compact('recipes','categories'));
+   }
+
+
+##################################################################################################################
+# ███╗   ███╗██╗   ██╗    ██████╗ ██████╗ ██╗██╗   ██╗ █████╗ ████████╗███████╗    ██████╗ ███████╗ ██████╗██╗██████╗ ███████╗███████╗
+# ████╗ ████║╚██╗ ██╔╝    ██╔══██╗██╔══██╗██║██║   ██║██╔══██╗╚══██╔══╝██╔════╝    ██╔══██╗██╔════╝██╔════╝██║██╔══██╗██╔════╝██╔════╝
+# ██╔████╔██║ ╚████╔╝     ██████╔╝██████╔╝██║██║   ██║███████║   ██║   █████╗      ██████╔╝█████╗  ██║     ██║██████╔╝█████╗  ███████╗
+# ██║╚██╔╝██║  ╚██╔╝      ██╔═══╝ ██╔══██╗██║╚██╗ ██╔╝██╔══██║   ██║   ██╔══╝      ██╔══██╗██╔══╝  ██║     ██║██╔═══╝ ██╔══╝  ╚════██║
+# ██║ ╚═╝ ██║   ██║       ██║     ██║  ██║██║ ╚████╔╝ ██║  ██║   ██║   ███████╗    ██║  ██║███████╗╚██████╗██║██║     ███████╗███████║
+# ╚═╝     ╚═╝   ╚═╝       ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝  ╚═╝  ╚═╝   ╚═╝   ╚══════╝    ╚═╝  ╚═╝╚══════╝ ╚═════╝╚═╝╚═╝     ╚══════╝╚══════╝
+// Display a listing of the resource that belong to a specific user.
+##################################################################################################################
+   public function myPrivateRecipes($key=null)
+   {
+      // Set the session to the current page route
+      Session::put('fromPage', Route::currentRouteName());
+
+      // Check if user has required permission
+      // if($this->enablePermissions) {
+      //    if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      // }
+
+      if (Auth::check()) {
+         // Get list of recips by year and month
+         $recipelinks = DB::table('recipes')
+            ->select(DB::raw('YEAR(published_at) year, MONTH(published_at) month, MONTHNAME(published_at) month_name, COUNT(*) recipe_count'))
+            ->where('published_at', '<=', Carbon::now())
+            ->where('personal', '=', 1)
+            ->groupBy('year')
+            ->groupBy('month')
+            ->orderBy('year', 'desc')
+            ->orderBy('month', 'desc')
+            ->get();
+
+         $alphas = DB::table('recipes')
+            ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
+            ->where('user_id','=', Auth::user()->id)
+            ->where('personal', '=', 1)
+            ->orderBy('letter')
+            ->get();
+
+         $letters = [];
+         foreach($alphas as $alpha) {
+            $letters[] = $alpha->letter;
+         }
+
+         // If $key value is passed
+         if ($key) {
+            $recipes = Recipe::with('user','category')
+               ->myRecipes()
+               ->private()
+               ->where('title', 'like', $key . '%')
+               ->orderBy('title', 'asc')
+               ->paginate(18);
+         } else {
+            // No $key value is passed
+            $recipes = Recipe::with('user','category')
+               ->myRecipes()
+               ->private()
+               ->orderBy('title', 'asc')
+               ->paginate(18);
+         }
+
+         return view('recipes.myPrivateRecipes', compact('recipes','letters', 'recipelinks'));
+      } else {
+         return ('You need to be logged in');
+      }
+   }
+
+
+##################################################################################################################
+# ███╗   ███╗██╗   ██╗    ██████╗ ███████╗ ██████╗██╗██████╗ ███████╗███████╗
+# ████╗ ████║╚██╗ ██╔╝    ██╔══██╗██╔════╝██╔════╝██║██╔══██╗██╔════╝██╔════╝
+# ██╔████╔██║ ╚████╔╝     ██████╔╝█████╗  ██║     ██║██████╔╝█████╗  ███████╗
+# ██║╚██╔╝██║  ╚██╔╝      ██╔══██╗██╔══╝  ██║     ██║██╔═══╝ ██╔══╝  ╚════██║
+# ██║ ╚═╝ ██║   ██║       ██║  ██║███████╗╚██████╗██║██║     ███████╗███████║
+# ╚═╝     ╚═╝   ╚═╝       ╚═╝  ╚═╝╚══════╝ ╚═════╝╚═╝╚═╝     ╚══════╝╚══════╝
+// Display a listing of the resource that belong to a specific user.
+##################################################################################################################
+   public function myRecipes($key=null)
+   {
+      // Set the session to the current page route
+      Session::put('fromPage', Route::currentRouteName());
+
+      // Check if user has required permission
+      // if($this->enablePermissions) {
+      //    if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      // }
+
+      if (Auth::check()) {
+         $alphas = DB::table('recipes')
+            ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
+            ->where('user_id','=', Auth::user()->id)
+            ->orderBy('letter')
+            ->get();
+
+         $letters = [];
+         foreach($alphas as $alpha) {
+            $letters[] = $alpha->letter;
+         }
+
+         // If $key value is passed
+         if ($key) {
+            $recipes = Recipe::with('user','category')
+               ->myRecipes()
+               ->where('title', 'like', $key . '%')
+               ->orderBy('title', 'asc')
+               ->paginate(18);
+         } else {
+            // No $key value is passed
+            $recipes = Recipe::with('user','category')
+               ->myRecipes()
+               ->orderBy('title', 'asc')
+               ->paginate(18);
+         }
+
+         return view('recipes.myRecipes', compact('recipes','letters'));
+      } else {
+         return ('You need to be logged in');
+      }
+   }
+
+
+##################################################################################################################
+# ███╗   ██╗███████╗██╗    ██╗    ██████╗ ███████╗ ██████╗██╗██████╗ ███████╗███████╗
+# ████╗  ██║██╔════╝██║    ██║    ██╔══██╗██╔════╝██╔════╝██║██╔══██╗██╔════╝██╔════╝
+# ██╔██╗ ██║█████╗  ██║ █╗ ██║    ██████╔╝█████╗  ██║     ██║██████╔╝█████╗  ███████╗
+# ██║╚██╗██║██╔══╝  ██║███╗██║    ██╔══██╗██╔══╝  ██║     ██║██╔═══╝ ██╔══╝  ╚════██║
+# ██║ ╚████║███████╗╚███╔███╔╝    ██║  ██║███████╗╚██████╗██║██║     ███████╗███████║
+# ╚═╝  ╚═══╝╚══════╝ ╚══╝╚══╝     ╚═╝  ╚═╝╚══════╝ ╚═════╝╚═╝╚═╝     ╚══════╝╚══════╝
+// Display a listing of the resource that were created since the user's last login.
+##################################################################################################################
+   public function newRecipes(Request $request, $key=null)
+   {
+      // Set the session to the current page route
+      Session::put('fromPage', Route::currentRouteName());
+
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_new')) { abort(401, 'Unauthorized Access'); }
+      }
+
+      $alphas = DB::table('recipes')
+         ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
+         ->where('created_at', '>=' , Auth::user()->last_login_date)
+         ->orderBy('letter')
+         ->get();
+
+      $letters = [];
+      foreach($alphas as $alpha) {
+        $letters[] = $alpha->letter;
+      }
+
+      // If $key value is passed
+      if ($key) {
+         $recipes = Recipe::with('user','category')
+            ->newRecipes()
+            ->where('title', 'like', $key . '%')
+            ->paginate(18);
+      } else {
+         $recipes = Recipe::with('user','category')
+            ->newRecipes()
+            ->paginate(18);
+      }
+
+      return view('recipes.newRecipes', compact('recipes','letters'));
+   }
+
+
+##################################################################################################################
+# ██████╗ ██╗   ██╗██████╗ ██╗     ██╗███████╗██╗  ██╗███████╗██████╗ 
+# ██╔══██╗██║   ██║██╔══██╗██║     ██║██╔════╝██║  ██║██╔════╝██╔══██╗
+# ██████╔╝██║   ██║██████╔╝██║     ██║███████╗███████║█████╗  ██║  ██║
+# ██╔═══╝ ██║   ██║██╔══██╗██║     ██║╚════██║██╔══██║██╔══╝  ██║  ██║
+# ██║     ╚██████╔╝██████╔╝███████╗██║███████║██║  ██║███████╗██████╔╝
+# ╚═╝      ╚═════╝ ╚═════╝ ╚══════╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚═════╝ 
+##################################################################################################################
+   public function published(Request $request, $key=null)
+   {
+      Session::put('fromPage', 'recipes.published');
+
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_published')) { abort(401, 'Unauthorized Access'); }
+      }
+
+     $alphas = DB::table('recipes')
+      ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
+      ->where('published_at','<', Carbon::Now())
+      ->where('deleted_at','=', Null)
+      ->where('personal', '!=', 1)
+      ->orderBy('letter')
+      ->get();
+
+      $letters = [];
+      foreach($alphas as $alpha) {
+        $letters[] = $alpha->letter;
+      }
+
+      // If $key value is passed
+      if ($key) {
+         $recipes = Recipe::with('user','category')
+            ->published()
+            ->public()
+            ->where('title', 'like', $key . '%')
+            ->orderBy('title', 'asc')
+            ->get();
+      } else {
+         // No $key value is passed
+         $recipes = Recipe::with('user','category')
+            ->published()
+            ->public()
+            ->get();
+      }
+
+      return view('recipes.published', compact('recipes','letters'));
+   }
+
+
+##################################################################################################################
+# ████████╗██████╗  █████╗ ███████╗██╗  ██╗███████╗██████╗ 
+# ╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██║  ██║██╔════╝██╔══██╗
+#    ██║   ██████╔╝███████║███████╗███████║█████╗  ██║  ██║
+#    ██║   ██╔══██╗██╔══██║╚════██║██╔══██║██╔══╝  ██║  ██║
+#    ██║   ██║  ██║██║  ██║███████║██║  ██║███████╗██████╔╝
+#    ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚═════╝ 
+// Display a list of resources that have been trashed (Soft Deleted)
+##################################################################################################################
+   public function trashed(Request $request, $key=null)
+   {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_trashed')) { abort(401, 'Unauthorized Access'); }
+      }
+
+      $alphas = DB::table('recipes')
+         ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
+         ->where('deleted_at','!=', Null)
+         ->orderBy('letter')
+         ->get();
+
+      $letters = [];
+      foreach($alphas as $alpha) {
+        $letters[] = $alpha->letter;
+      }
+
+      // If $key value is passed
+      if ($key) {
+         $recipes = Recipe::with('user','category')
+            ->onlyTrashed()
+            ->where('title', 'like', $key . '%')
+            ->orderBy('title', 'asc')
+            ->get();
+      } else {
+         $recipes = Recipe::with('user','category')
+            ->onlyTrashed()
+            ->orderBy('id','desc')
+            ->get();
+      }
+      
+      return view('recipes.trashed', compact('recipes','letters'));
+   }
+
+
+##################################################################################################################
+# ████████╗██████╗  █████╗ ███████╗██╗  ██╗███████╗██████╗     ██╗   ██╗██╗███████╗██╗    ██╗
+# ╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██║  ██║██╔════╝██╔══██╗    ██║   ██║██║██╔════╝██║    ██║
+#    ██║   ██████╔╝███████║███████╗███████║█████╗  ██║  ██║    ██║   ██║██║█████╗  ██║ █╗ ██║
+#    ██║   ██╔══██╗██╔══██║╚════██║██╔══██║██╔══╝  ██║  ██║    ╚██╗ ██╔╝██║██╔══╝  ██║███╗██║
+#    ██║   ██║  ██║██║  ██║███████║██║  ██║███████╗██████╔╝     ╚████╔╝ ██║███████╗╚███╔███╔╝
+#    ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚═════╝       ╚═══╝  ╚═╝╚══════╝ ╚══╝╚══╝ 
+// Display the specified resource
+##################################################################################################################
+   // public function trashedView($id)
+   // {
+   //    $recipe = Recipe::withTrashed()->find($id);
+
+   //    // Check if user has required permission
+   //    if($this->enablePermissions) {
+   //       if(!checkPerm('recipe_trashed')) { abort(401, 'Unauthorized Access'); }
+   //    }
+
+   //    return view('recipes.trashedView', compact('recipe'));
+   // }
+
+
+##################################################################################################################
+# ██╗   ██╗███╗   ██╗██████╗ ██╗   ██╗██████╗ ██╗     ██╗███████╗██╗  ██╗███████╗██████╗ 
+# ██║   ██║████╗  ██║██╔══██╗██║   ██║██╔══██╗██║     ██║██╔════╝██║  ██║██╔════╝██╔══██╗
+# ██║   ██║██╔██╗ ██║██████╔╝██║   ██║██████╔╝██║     ██║███████╗███████║█████╗  ██║  ██║
+# ██║   ██║██║╚██╗██║██╔═══╝ ██║   ██║██╔══██╗██║     ██║╚════██║██╔══██║██╔══╝  ██║  ██║
+# ╚██████╔╝██║ ╚████║██║     ╚██████╔╝██████╔╝███████╗██║███████║██║  ██║███████╗██████╔╝
+#  ╚═════╝ ╚═╝  ╚═══╝╚═╝      ╚═════╝ ╚═════╝ ╚══════╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚═════╝ 
+// Display a list of resources that have not been published
+##################################################################################################################
+   public function unpublished(Request $request, $key=null)
+   {
+      // Set the session to the current page route
+      Session::put('fromPage', Route::currentRouteName());
+
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_published')) { abort(401, 'Unauthorized Access'); }
+      }
+
+     $alphas = DB::table('recipes')
+      ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
+      ->where('published_at','=', null)
+      ->orderBy('letter')
+      ->get();
+
+      $letters = [];
+      foreach($alphas as $alpha) {
+         $letters[] = $alpha->letter;
+      }
+
+      // If $key value is passed
+      if ($key) {
+         $recipes = Recipe::with('user','category')
+            ->unpublished()
+            ->where('title', 'like', $key . '%')
+            ->orderBy('title', 'asc')
+            ->get();
+      } else {
+         // No $key value is passed
+         $recipes = Recipe::with('user','category')
+            ->unpublished()
+            ->get();
+      }
+
+      return view('recipes.unpublished', compact('recipes','letters'));
+   }
+
+
+}

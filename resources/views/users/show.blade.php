@@ -2,6 +2,7 @@
 
 @section('stylesheets')
    {{ Html::style('css/switch.css') }}
+   {{ Html::style('css/users.css') }}
 @endsection
 
 @section('left_column')
@@ -20,10 +21,12 @@
       <div class="card mb-2">
          <!--CARD HEADER-->
          <div class="card-header card_header">
-            <i class="fas fa-user"></i>
-            View User
+            <span class="h5 align-middle pt-2">
+               <i class="fas fa-user"></i>
+               View User
+            </span>
             <span class="float-sm-right">
-               @include('common.buttons.cancel', ['model'=>'user', 'type'=>''])
+               @include('users.addins.back')
             </span>
          </div>
          <!--CARD BODY-->

@@ -1,6 +1,7 @@
 @extends ('layouts.recipes')
 
 @section('stylesheets')
+   {{ Html::style('css/recipes.css') }}
 @endsection
 
 @section('left_column')
@@ -11,27 +12,28 @@
 
 @section ('content')
 
-   <div class="card mb-2">
-      <div class="card-header">
-         <i class="fa fa-address-card-o" aria-hidden="true"></i>
-         Recipe Archives for 
-         @if ($month == 1) January 
-         @elseif ($month == 2) February 
-         @elseif ($month == 3) March 
-         @elseif ($month == 4) April 
-         @elseif ($month == 5) May 
-         @elseif ($month == 6) June 
-         @elseif ($month == 7) July 
-         @elseif ($month == 8) August 
-         @elseif ($month == 9) September 
-         @elseif ($month == 10) October 
-         @elseif ($month == 11) November 
-         @elseif ($month == 12) December 
-         @endif
-         {{ $year }}
+   <div class="card mb-3">
+      <div class="card-header card_header">
+         <span class="h5 align-middle pt-2">
+            <i class="fas fa-address-card" aria-hidden="true"></i>
+            Recipe Archives for 
+            @if ($month == 1) January 
+            @elseif ($month == 2) February 
+            @elseif ($month == 3) March 
+            @elseif ($month == 4) April 
+            @elseif ($month == 5) May 
+            @elseif ($month == 6) June 
+            @elseif ($month == 7) July 
+            @elseif ($month == 8) August 
+            @elseif ($month == 9) September 
+            @elseif ($month == 10) October 
+            @elseif ($month == 11) November 
+            @elseif ($month == 12) December 
+            @endif
+            {{ $year }}
+         </span>
          <span class="float-right">
-            {{-- @include('common.buttons.cancel', ['model'=>'recipe']) --}}
-            @include('recipes.buttons.back')
+            @include('recipes.addins.links.back')
          </span>
       </div>
       <div class="card-body">

@@ -5,8 +5,6 @@
 @endsection
 
 @section('left_column')
-   {{-- @include('blocks.adminNav') --}}
-   {{-- @include('users.sidebar') --}}
    @include('blocks.main_menu')
 @endsection
 
@@ -33,7 +31,9 @@
       <div class="card">
          <!--CARD HEADER-->
          <div class="card-header card_header">
-            CHANGE USER PASSWORD
+            <span class="h5 align-middle pt-2">
+               Change User Password
+            </span>
             <span class="float-sm-right">
                @include('common.buttons.cancel', ['model'=>'user', 'type'=>''])
 

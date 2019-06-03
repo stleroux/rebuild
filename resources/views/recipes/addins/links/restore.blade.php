@@ -10,6 +10,8 @@
 @endif
  --}}
 
- <a href="{{ route('recipes.restore', $recipe->id) }}"
-      class="btn btn-{{ $size }} btn-info"
-      title="Restore Recipe"><i class="{{ Config::get('buttons.restore') }}"></i></a>
+<a href="{{ route('recipes.restore', $recipe->id) }}"
+   class="btn btn-{{ $size }} btn-info"
+   title="Restore Recipe">
+   <i class="{{ Config::get('buttons.restore') }}"></i>
+</a>

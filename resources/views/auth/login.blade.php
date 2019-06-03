@@ -1,10 +1,20 @@
-@extends('layouts.login')
+@extends('layouts.master')
+
+@section ('stylesheets')
+   {{ Html::style('css/woodbarn.css') }}
+@endsection
+
+@section('left_column')
+@endsection
+
+@section('right_column')
+@endsection
 
 @section('content')
 
 <div class="container">
 	<div class="row justify-content-center">
-		<div class="col-md-8">
+		<div class="col-md-6">
 			<div class="card">
 				<div class="card-header card_header">{{ __('Login') }}</div>
 

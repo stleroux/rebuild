@@ -15,18 +15,21 @@
       {!! csrf_field() !!}
       
       <div class="card">
-         <div class="card-header">
-            <i class="fa fa-address-card-o" aria-hidden="true"></i>
-            My Private Recipes
+         <div class="card-header card_header">
+            <span class="h5 align-middle pt-2">
+               <i class="{{ Config::get('buttons.private') }}"></i>
+               My Private Recipes
+            </span>
             <span class="float-right">
-               @include('recipes.addins.links.help', ['bookmark'=>'recipes'])
-               @include('recipes.addins.links.add')
+               {{-- @include('recipes.addins.links.help', ['bookmark'=>'recipes']) --}}
+               @include('recipes.addins.links.recipes')
                @include('recipes.addins.pages.published')
                @include('recipes.addins.pages.unpublished')
                @include('recipes.addins.pages.new')
                @include('recipes.addins.pages.future')
                @include('recipes.addins.pages.trashed')
                @include('recipes.addins.pages.mine')
+               @include('recipes.addins.links.add')
             </span>
          </div>
 

@@ -1,12 +1,10 @@
 @extends('layouts.master')
 
 @section('stylesheets')
-{{--    {{ Html::style('css/recipes.css') }} --}}
+{{--    {{ Html::style('css/.css') }} --}}
 @endsection
 
 @section('left_column')
-	{{-- @include('blocks.adminNav') --}}
-	{{-- @include('users.sidebar') --}}
 	@include('blocks.main_menu')
 @endsection
 
@@ -20,11 +18,13 @@
 			<div class="card">
 				<!--CARD HEADER-->
 				<div class="card-header card_header">
-					<i class="fas fa-users"></i>
-					Users
+					<span class="h5 align-middle pt-2">
+						<i class="fas fa-users"></i>
+						Users
+					</span>
 					<span class="float-sm-right">
 						@if(checkPerm('user_create'))
-							@include('common.buttons.add', ['model'=>'user'])
+							@include('users.addins.add')
 						@endif
 					</span>
 				</div>
@@ -50,7 +50,7 @@
 									<td>{{ $user->created_at->format('M d, Y') }}</td>
 									<td class="text-right">
 										@if(checkPerm('user_show'))
-											@include('common.buttons.show', ['name'=>'user', 'model'=>$user])
+											@include('users.addins.show')
 										@endif
 
 										@if(checkPerm('change_user_pwd'))
@@ -62,11 +62,11 @@
 										@endif
 										
 										@if(checkPerm('user_edit'))
-											@include('common.buttons.edit', ['name'=>'user', 'model'=>$user])
+											@include('users.addins.edit')
 										@endif
 
 										@if(checkPerm('user_delete'))
-											@include('common.buttons.delete', ['name'=>'user', 'model'=>$user])
+											@include('users.addins.delete')
 										@endif
 									</td>
 								</tr>

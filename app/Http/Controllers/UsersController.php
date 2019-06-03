@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Artisan;
 use DB;
 use Hash;
+use Route;
 use Session;
 use App\Models\Permission;
 use App\Models\User;
@@ -39,8 +40,8 @@ class UsersController extends Controller
 ##################################################################################################################
 	public function index()
 	{
-		// Set the variable so we can use a button in other pages to come back to this page
-		Session::put('pageName', 'index');
+		// Set the session to the current page route
+      Session::put('fromPage', Route::currentRouteName());
 
 		// Check if user has required permission
 		if(!checkPerm('user_index')) { abort(401, 'Unauthorized Access'); }

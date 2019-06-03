@@ -1,7 +1,7 @@
 @extends('layouts.backend')
 
 @section('stylesheets')
-	{{ Html::style('css/posts.css') }}
+	{{-- {{ Html::style('css/woodbarn.css') }} --}}
 @stop
 
 @section('left_column')

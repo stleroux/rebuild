@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section ('stylesheets')
-   {{-- {{ Html::style('css/woodbarn.css') }} --}}
+   {{ Html::style('css/woodbarn.css') }}
 @stop    
 
 @section('left_column')
@@ -9,7 +9,6 @@
 @endsection
 
 @section('right_column')
-   @include('profiles.block_image')
    @include('profiles.block_contributions')
 @endsection
 
@@ -22,7 +21,7 @@
                Show Profile
                <span class="float-right">
                   @if($user->id === Auth::user()->id)
-                     <a href="{{ route('profile.edit', $user->id) }}" class="btn btn-sm btn-outline-secondary px-1 py-0">
+                     <a href="{{ route('profile.edit', $user->id) }}" class="btn btn-sm btn-primary px-1 py-0">
                         <i class="fa fa-edit"></i>
                         Edit Profile
                      </a>
@@ -34,7 +33,7 @@
 
                {{-- Profile Info --}}
                <div class="form-row">
-                  <div class="col">
+                  <div class="col-9">
                      <div class="card mb-2">
                         <div class="card-header card_header_2">Profile Info</div>
                         <div class="card-body card_body">
@@ -103,6 +102,9 @@
                            </div>
                         </div>
                      </div>
+                  </div>
+                  <div class="col-3">
+                     @include('profiles.block_image')
                   </div>
 
                </div>

@@ -1,6 +1,7 @@
 @extends ('layouts.recipes')
 
 @section ('stylesheets')
+   {{ Html::style('css/recipes.css') }}
    {{-- <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet"> --}}
 @stop
 
@@ -13,9 +14,11 @@
 @section ('content')
    {!! Form::model($recipe, ['route'=>['recipes.update', $recipe->id], 'method' => 'PUT', 'files' => true]) !!}
       <div class="card mb-3">
-         <div class="card-header">
-            <i class="fa fa-edit"></i>
-            Edit Recipe
+         <div class="card-header card_header">
+            <span class="h5 align-middle pt-2">
+               <i class="fa fa-edit"></i>
+               Edit Recipe
+            </span>
             <span class="float-right">
                @include('recipes.addins.links.help', ['bookmark'=>'recipes'])
                @include('recipes.addins.links.back')
@@ -39,8 +42,9 @@
                   <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}" >
                      {!! Form::label("category_id", "Category", ['class'=>'required']) !!}
                      <select name="category_id" class="custom-select form-control-sm">
+                        {{-- <option value="{{ $recipe->category->name }}">{{ $recipe->category->name }}</option> --}}
                         @foreach ($categories as $category)
-                           <option disabled>{{ ucfirst($category->name) }}</option>
+                           <option disabled>{{ ucfirst($recipe->category->name) }}</option>
                            @foreach ($category->children as $children)
                               <option value="{{ $children->id }}" {{ ($recipe->category_id == $children->id ) ? 'selected' : '' }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- {{ ucfirst($children->name) }}</option>
                            @endforeach

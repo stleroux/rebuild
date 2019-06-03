@@ -1,7 +1,7 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section ('stylesheets')
-   {{-- {{ Html::style('css/woodbarn.css') }} --}}
+   {{ Html::style('css/woodbarn.css') }}
 @stop 
 
 @section('left_column')
@@ -9,22 +9,19 @@
 @endsection
 
 @section('right_column')
-   
 @endsection
 
 @section('content')
    {!! Form::model($user, ['route'=>['profile.update', $user->id], 'method'=>'PUT', 'files'=>true]) !!}
 
-
-
       <div class="row">
-         <div class="col-10">
+         <div class="col-12">
             <div class="card mb-3">
                <div class="card-header card_header">
                   Edit Profile
                   <span class="float-right">
                      @include('common.buttons.cancel', ['model'=>'profile', 'type'=>''])
-                     {{ Form::button('<i class="fa fa-save"></i> Update Profile', array('type'=>'submit', 'class'=>'btn btn-sm btn-outline-secondary px-1 py-0')) }}
+                     {{ Form::button('<i class="fa fa-save"></i> Update Profile', array('type'=>'submit', 'class'=>'btn btn-sm btn-success px-1 py-0')) }}
                   </span>
                </div>
 
@@ -32,7 +29,7 @@
 
                   {{-- Profile Info --}}
                   <div class="form-row">
-                     <div class="col">
+                     <div class="col-9">
                         <div class="card mb-2">
                            <div class="card-header card_header_2">Profile Info</div>
                            <div class="card-body card_body">
@@ -117,10 +114,13 @@
                                  </div>
                               </div>
                            </div>
-                           <div class="card-footer px-1 py-0">
+                           <div class="card-footer card_footer px-1 py-0">
                               Fields marked with an <span class="required"></span> are required.
                            </div>
                         </div>
+                     </div>
+                     <div class="col-3">
+                        @include('profiles.block_edit_image')
                      </div>
                      
                   </div>
@@ -242,12 +242,12 @@
                                        <td></td>
                                        <td>Author Format</td>
                                        <td>
-                                          {{ Form::select('author_format', array(
+                                          {{-- {{ Form::select('author_format', array(
                                              '1' => 'Username (Default)' ,
                                              '2' => 'Last Name, First Name',
                                              '3' => 'First Name Last Name'
                                              ), $user->profile->author_format, array('class'=>'form-control form-control-sm'))
-                                          }}
+                                          }} --}}
                                        </td>
                                        <td>Changes the way the author's name will be displayed.</td>
                                     </tr>
@@ -366,9 +366,9 @@
                </div>
             </div>
          </div>
-         <div class="col-2">
+         {{-- <div class="col-2">
             @include('profiles.block_edit_image')
-         </div>
+         </div> --}}
       </div>
 
    {{ Form::close() }}

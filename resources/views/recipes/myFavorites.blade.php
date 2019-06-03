@@ -15,14 +15,16 @@
    {{-- <form style="display:inline;"> --}}
       {{-- {!! csrf_field() !!} --}}
       <div class="card mb-3">
-         <div class="card-header">
-            <i class="fas fa-heart"></i>
-            MY FAVORITE RECIPES
+         <div class="card-header card_header">
+            <span class="h5 align-middle pt-2">
+               <i class="fas fa-heart"></i>
+               My Favorite Recipes
+            </span>
             <span class="float-right">
-               @include('recipes.addins.links.help', ['model'=>'recipe', 'bookmark'=>''])
-               {{-- @include('recipes::myFavorites.help') --}}
-               @include('recipes.addins.links.back', ['model'=>'recipe'])
-               {{-- @include('common.buttons.myRecipes', ['model'=>'recipe']) --}}
+               {{-- @include('recipes.addins.links.help', ['bookmark'=>'']) --}}
+               @include('recipes.addins.links.back')
+               @include('recipes.addins.pages.mine')
+               @include('recipes.addins.pages.myPrivate')
             </span>
          </div>
 

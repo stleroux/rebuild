@@ -20,8 +20,10 @@
       <div class="card mb-2">
          <!--CARD HEADER-->
          <div class="card-header card_header">
-            <i class="fas fa-user"></i>
-            New User
+            <span class="h5 align-middle pt-2">
+               <i class="fas fa-user"></i>
+               New User
+            </span>
             <span class="float-sm-right">
                @include('common.buttons.cancel', ['model'=>'user', 'type'=>''])
                @if(checkPerm('user_create'))

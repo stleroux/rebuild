@@ -36,6 +36,8 @@ class RecipeServiceProvider extends ServiceProvider
          $recipelinks = DB::table('recipes')
             ->select(DB::raw('YEAR(published_at) year, MONTH(published_at) month, MONTHNAME(published_at) month_name, COUNT(*) recipe_count'))
             ->where('published_at', '<=', Carbon::now())
+            // ->where('personal', '=', 0)
+            ->where('deleted_at', null)
             ->groupBy('year')
             ->groupBy('month')
             ->orderBy('year', 'desc')

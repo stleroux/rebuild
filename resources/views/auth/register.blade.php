@@ -1,5 +1,16 @@
 @extends('layouts.master')
 
+@section ('stylesheets')
+   {{ Html::style('css/woodbarn.css') }}
+@endsection
+
+@section('left_column')
+
+@endsection
+
+@section('right_column')
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

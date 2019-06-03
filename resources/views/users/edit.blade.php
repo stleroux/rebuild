@@ -20,17 +20,19 @@
       <div class="card mb-2">
          <!--CARD HEADER-->
          <div class="card-header card_header">
-            <i class="fas fa-user"></i>
-            Edit User
+            <span class="h5 align-middle pt-2">
+               <i class="fas fa-user"></i>
+               Edit User
+            </span>
             <span class="float-sm-right">
-               @include('common.buttons.cancel', ['model'=>'user', 'type'=>''])
+               @include('users.addins.back')
 
                @if(checkPerm('user_edit'))
-                  <button type="submit" class="btn btn-sm btn-outline-bprimary" name="submit" value="continue" title="Update & Continue">
+                  <button type="submit" class="btn btn-sm btn-bprimary" name="submit" value="continue" title="Update & Continue">
                      <i class="far fa-hdd"></i>
                      {{-- Update & Continue --}}
                   </button>
-                  <button type="submit" class="btn btn-sm btn-outline-success" name="submit" value="close" title="Update & Close">
+                  <button type="submit" class="btn btn-sm btn-success" name="submit" value="close" title="Update & Close">
                      <i class="far fa-save"></i>
                      {{-- Update & Close --}}
                   </button>

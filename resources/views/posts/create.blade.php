@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section ('stylesheets')
-	{{ Html::style('css/woodbarn.css') }}
+	{{-- {{ Html::style('css/woodbarn.css') }} --}}
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" />
 @stop
 

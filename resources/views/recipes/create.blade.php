@@ -14,9 +14,11 @@
 {{-- {{ Session::get('fromPage') }} --}}
    {!! Form::open(['route' => 'recipes.store', 'files'=>'true']) !!}
       <div class="card mb-3">
-         <div class="card-header">
-            <i class="fa fa-plus-square"></i>
-            Create Recipe
+         <div class="card-header card_header">
+            <span class="h5 align-middle pt-2">
+               <i class="fa fa-plus-square"></i>
+               Create Recipe
+            </span>
             <span class="float-right">
                @include('recipes.addins.links.help', ['bookmark'=>'recipes'])
                @include('recipes.addins.links.back')

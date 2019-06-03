@@ -8,6 +8,7 @@
 @endsection
 
 @section('right_column')
+	{{-- @include('recipes.blocks.information') --}}
 	@include('recipes.show.leave_comment')
 @endsection
 
@@ -17,21 +18,23 @@
 
 	<div class="card mb-3 bg-transparent">
 		<div class="card-header card_header">
-			{{ $recipe->title }}
+			<span class="h5 align-middle pt-2">
+				{{ $recipe->title }}
+			</span>
 			<span class="float-right">
 				@include('recipes.addins.links.back')
 				@include('recipes.addins.links.print')
-				@include('recipes.addins.links.edit', ['size'=>'sm'])
 				@include('recipes.addins.links.favorite', ['size'=>'sm'])
-            @include('recipes.addins.links.privatize', ['size'=>'sm'])
+  	         @include('recipes.addins.links.privatize', ['size'=>'sm'])
 				@include('recipes.addins.links.publish', ['size'=>'sm'])
-				@include('recipes.addins.links.trash', ['size'=>'sm'])
 				@include('recipes.addins.pages.published')
 				@include('recipes.addins.pages.unpublished')
 				@include('recipes.addins.pages.new')
 				@include('recipes.addins.pages.trashed')
 				@include('recipes.addins.pages.mine')
 				@include('recipes.addins.pages.myPrivate')
+				@include('recipes.addins.links.edit', ['size'=>'sm'])
+				@include('recipes.addins.links.trash', ['size'=>'sm'])
 			</span>
 		</div>
 	
@@ -60,12 +63,16 @@
 					@include('recipes.show.personal')
 					@include('recipes.show.views')
 					@include('recipes.show.source')
-					@include('recipes.show.author')
+					{{-- @include('recipes.show.author') --}}
 				</div>
 
 				<div class="row">
 					@include('recipes.show.public_notes')
 					@include('recipes.show.private_notes')
+				</div>
+
+				<div class="row">
+					@include('recipes.show.information')
 				</div>
 
 			@endauth
