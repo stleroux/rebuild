@@ -15,7 +15,7 @@ body {
 }
 
 /* Card Headers */
-.card_header {
+.section_header {
    /*background-image: url("../images/1.jpg");*/
    /*background-color: yellow;*/
    color: white;
@@ -26,7 +26,7 @@ body {
 }
 
 /* Card Bodies */
-.card_body {
+.section_body {
    /*background-image: url('../images/14.jpg');*/
    /*background-repeat: no-repeat;*/
    /*background-color: green;*/
@@ -41,12 +41,11 @@ body {
 }
 
 /* Level 2 Card Headers */
-.card_header_2
+.card_header
  { 
    /*background-image: url("../images/birch.jpg");*/
-   background-color: purple;
-   font-weight: bolder;
-   color: white;
+   background-color: green;
+   color: black;
    padding-top: 8px;
    padding-bottom: 8px;
    padding-left: 10px;
@@ -59,7 +58,9 @@ body {
 .block_header {
    /*background-image: url("../images/10.jpg");*/
    /*background-color: blue;*/
-   color: yellow;
+   background-color: purple;
+   font-weight: bolder;
+   color: white;
    padding-top: 8px;
    padding-bottom: 8px;
    padding-left: 10px;

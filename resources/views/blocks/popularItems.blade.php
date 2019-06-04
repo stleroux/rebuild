@@ -3,7 +3,7 @@
       <i class="far fa-star" aria-hidden="true"></i>
       Most Popular Items
    </div>
-   <div class="list-group card_body px-2">
+   <div class="list-group card_body px-2 text-light">
       <p>Have a look at the most viewed items on the site.</p>
 
 {{--       <ul class="list-group">
@@ -39,8 +39,9 @@
                </div>
             </div>
          @endif --}}
-@include('blocks.popularPosts')
-@include('recipes.blocks.popularRecipes')
+{{-- @include('blog.blocks.projectsImageSlider')
+@include('blog.blocks.popularPosts')
+@include('recipes.blocks.popularRecipes') --}}
 
          {{-- @foreach ($popularWoodProject as $wp)
             <a class="list-group-item" href="{{ route('woodProjects.show', $wp->id) }}" role="button">

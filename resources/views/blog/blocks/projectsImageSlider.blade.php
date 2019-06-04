@@ -3,7 +3,7 @@
       <i class="fab fa-pagelines"></i>
       Popular Wood Projects
    </div>
-   <div class="card-body">
+   <div class="card-body p-0 m-0">
       <div id="carouselExampleIndicators" class="carousel slide mb-2" data-ride="carousel">
       <ol class="carousel-indicators">
       <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>

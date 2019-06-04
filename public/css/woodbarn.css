@@ -57,7 +57,7 @@ body {
 /* Block Headers */
 .block_header { 
 	background-image: url("../images/birch.jpg");
-	font-weight: bolder;
+	font-weight: bold;
 	color: black;
 	padding-top: 8px;
 	padding-bottom: 8px;
@@ -80,6 +80,10 @@ body {
 	background-attachment: fixed;
 }
 
+.card-footer {
+	color: white;
+}
+
 .table-hover tbody tr:hover, .table-hover tbody tr:hover th {
 	background-image: url("../images/9.jpg");
 	background-repeat: no-repeat;
@@ -88,7 +92,7 @@ body {
 }
 
 .table thead {
-	background-image: url("../images/11.jpg");
+	background-image: url("../images/1.jpg");
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 	color: white;

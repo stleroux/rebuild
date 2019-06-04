@@ -2,7 +2,7 @@
 {{-- @if(checkACL('user')) --}}
 	<div class="card mb-3">
 		
-		<div class="card-header card_header">
+		<div class="card-header block_header">
 			<i class="fa fa-comment" aria-hidden="true"></i>
 			Leave a comment
 		</div>

@@ -1,6 +1,7 @@
 <div class="card mb-2">
-   <div class="card-header card_header_2">
-      RECIPE ARCHIVES
+   <div class="card-header block_header">
+      <i class="far fa-file-archive"></i>
+      Archives
    </div>
    <div class="list-group py-0 px-0">
 		@if(count($recipelinks) > 0)

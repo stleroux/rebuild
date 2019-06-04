@@ -144,16 +144,17 @@ class BlogController extends Controller
 # ███████║███████╗██║  ██║██║  ██║╚██████╗██║  ██║
 # ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝
 ##################################################################################################################
-	 public function search(Request $request)
-	 {
-		  $this->validate($request, [
-				'search' => 'required'
-		  ]);
+	public function search(Request $request)
+	{
+		$this->validate($request, [
+			'search' => 'required'
+		]);
 
-		  $search = $request->get('search');
+		$search = $request->get('search');
 
 		$posts = Post::where('title', 'like', "%$search%")
 			 ->orWhere('body', 'like', "%$search%")
+			 ->published()
 			 ->paginate(10)
 			 ->appends(['search' => $search])
 		;

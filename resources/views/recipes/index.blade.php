@@ -5,7 +5,7 @@
 @stop
 
 @section('left_column')
-	@include('blocks.home_menu')
+	{{-- @include('blocks.home_menu') --}}
 	@include('recipes.sidebar')
 @endsection
 
@@ -112,8 +112,8 @@
 
 		@else
 			
-			<div class="card-body card_body">
-				{{ setting('no_records_found') }}
+			<div class="card-body card_body bg-danger text-dark">
+				<b>{{ setting('no_records_found') }}</b>
 			</div>
 
 		@endif

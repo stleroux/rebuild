@@ -1,7 +1,7 @@
 {{-- @if(\Module::enabled('Recipes')) --}}
    @if($popularRecipes->count() > 0)
       <div class="card mb-2">
-         <div class="card-header card_header">
+         <div class="card-header block_header">
             <i class="fab fa-apple"></i>
             Popular Recipes
          </div>

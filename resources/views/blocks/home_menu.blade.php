@@ -1,6 +1,6 @@
 <div class="card mb-2">
    <div class="card-header block_header">
-      MAIN MENU
+      Main Menu
    </div>
    <div class="list-group py-0 px-0">
       <a href="/"

@@ -10,7 +10,7 @@
 
 @section('right_column')
    @include('blog.blocks.search')
-   @include('blocks.popularPosts')
+   @include('blog.blocks.popularPosts')
    @include('blog.blocks.archives')
 @stop
 
@@ -38,14 +38,14 @@
                      <p>{!! substr(strip_tags($post->body), 0, 250) !!} {{ strlen(strip_tags($post->body)) > 250 ? ' [More]...' : '' }}</p>
                   </div>
                   <div class="col px-2 text text-right">
-                     <a href="{{ route('blog.single', $post->slug) }}" class="btn btn-sm btn-secondary">
-                        <i class="fa fa-chevron-right" aria-hidden="true"></i> Read More
+                     <a href="{{ route('blog.single', $post->slug) }}" class="btn btn-sm btn-primary">
+                        <i class="fa fa-chevron-right"></i> Read More
                      </a>
                   </div>
                </div>
                
             </div>
-            <div class="card-footer px-1 py-1">
+            <div class="card-footer bg-transparent px-1 py-1">
                Created by {{-- {{ ucfirst($post->user->username) }} --}}
                   @include('common.authorFormat', ['model'=>$post, 'field'=>'user'])
                on {{-- {{ $post->created_at->format('M d, Y') }} --}}

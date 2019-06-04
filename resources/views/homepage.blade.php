@@ -10,7 +10,9 @@
 
 @section('right_column')
    @include('blocks.popularItems')
-   @include('blocks.projectsImageSlider')
+   @include('blog.blocks.projectsImageSlider')
+   @include('blog.blocks.popularPosts')
+   @include('recipes.blocks.popularRecipes')
 @endsection
 
 @section('content')
@@ -118,13 +120,13 @@
                         <div class="col-sm-2">
                            <a href="{{ route('blog.single', $post->slug) }}" class="btn btn-sm btn-primary float-right">
                            <div class="text text-left">
-                              <i class="fa fa-chevron-right" aria-hidden="true"></i> Read More
+                              <i class="fa fa-chevron-right"></i> Read More
                            </div>
                            </a>
                         </div>
                         </div>
                      </div>
-                     <div class="card-footer bg-transparent px-1 py-1">
+                     <div class="card-footer px-1 py-1">
                         Created by
                         @include('common.authorFormat', ['model'=>$post, 'field'=>'user'])
                         on @include('common.dateFormat', ['model'=>$post, 'field'=>'created_at'])
