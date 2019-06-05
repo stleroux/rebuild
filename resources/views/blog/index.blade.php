@@ -45,7 +45,7 @@
                </div>
                
             </div>
-            <div class="card-footer bg-transparent px-1 py-1">
+            <div class="card-footer px-1 py-1">
                Created by {{-- {{ ucfirst($post->user->username) }} --}}
                   @include('common.authorFormat', ['model'=>$post, 'field'=>'user'])
                on {{-- {{ $post->created_at->format('M d, Y') }} --}}

@@ -17,7 +17,7 @@ body {
 /* Card Headers */
 .section_header {
    /*background-image: url("../images/1.jpg");*/
-   /*background-color: yellow;*/
+   background-color: blue;
    color: white;
    padding-top: 8px;
    padding-bottom: 8px;

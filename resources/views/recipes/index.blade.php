@@ -18,7 +18,7 @@
 
 	<div class="card mb-3 bg-transparent">
 
-		<div class="card-header card_header">
+		<div class="card-header section_header">
 			<span class="h5 align-middle pt-2">
 				<i class="fab fa-apple"></i>
 				Recipes
