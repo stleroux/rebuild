@@ -47,7 +47,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					{{-- {{ Form::submit('Add Comment', ['class' => 'btn btn-success btn-block', 'style' => 'margin-top:15px;']) }} --}}
-					{{ Form::button('<i class="fa fa-plus-circle"></i> Add Comment', ['type' => 'submit', 'class' => 'btn btn-success btn-block'] )  }}
+					{{ Form::button('<i class="fa fa-plus-circle"></i> Add Comment', ['type' => 'submit', 'class' => 'btn btn-sm btn-success btn-block'] )  }}
 				</div>
 			</div>
 			{{ Form::close() }}

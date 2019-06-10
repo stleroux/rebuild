@@ -111,7 +111,7 @@
                                  <td class="text-left">*************************</td>
                               @endif
                            @elseif($field == 'modifiedBy')
-                              @if($model->modifiedBy->public_email == 1)
+                              @if($model->modifiedBy->public_email === 1)
                                  <td class="text-left">{{ $model->modifiedBy->email }}</td>
                               @else
                                  <td class="text-left">*************************</td>
