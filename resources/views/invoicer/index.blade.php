@@ -4,7 +4,7 @@
 
 	<div class="card">
 		<div class="card-header">
-			Welcome to the Invoicer
+			<span class="h3">Welcome to the Invoicer</span>
 			<span class="float-right"><small>V {{ Config::get('invoicer.version') }}</small></span>
 		</div>
 		<div class="card-body">

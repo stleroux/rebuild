@@ -7,7 +7,7 @@
 	<div class="card">
 		
 		<div class="card-header">
-			Client Information
+			<span class="h3">Client Information</span>
 			<span class="float-right">
 				<a href="{{ route('invoicer.clients') }}" class="btn btn-sm btn-primary">
 					<i class="fas fa-list"></i>

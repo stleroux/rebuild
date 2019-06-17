@@ -1,16 +1,11 @@
-@extends('layouts.master')
+@extends('layouts.backend')
 
 @section('stylesheets')
    {{ Html::style('css/switch.css') }}
 @endsection
 
 @section('left_column')
-   {{-- @include('blocks.adminNav') --}}
-   {{-- @include('users.sidebar') --}}
    @include('blocks.main_menu')
-@endsection
-
-@section('right_column')
 @endsection
 
 @section('content')
@@ -83,7 +78,11 @@
                                  <div class="card-header card_header_2">{{ ucfirst($group) }}</div>
                                  <div class="card-body card_body pt-2 pb-1 px-1">
                                     @foreach($permissions as $permission)
-                                       <div class="form-group mb-0">
+                                       <div class="form-group mb-0 pt-1 pb-0 px-1"
+                                          onMouseOver="this.style.background='#ABA', this.style.color='#000', this.style.fontWeight='bold'"
+                                          onMouseOut="this.style.background='', this.style.color='', this.style.fontWeight=''"
+                                          style="vertical-align: middle;"
+                                       >
                                           <span class="switch switch-xs">
                                              {{ Form::checkbox('permission[]', $permission->id, false, ['id'=>$permission->id]) }}
                                              <label for="{{$permission->id}}">{{ ucfirst($permission->display_name) }}</label>
@@ -113,7 +112,10 @@
                                  <div class="card-header card_header_2">{{ ucfirst($group) }}</div>
                                  <div class="card-body card_body pt-2 pb-1 px-1">
                                     @foreach($permissions as $permission)
-                                       <div class="form-group mb-0">
+                                       <div class="form-group mb-0 pt-1 pb-0 px-1"
+                                          onMouseOver="this.style.background='#ABA', this.style.color='#000', this.style.fontWeight='bold'"
+                                          onMouseOut="this.style.background='', this.style.color='', this.style.fontWeight=''"
+                                          style="vertical-align: middle;">
                                           <span class="switch switch-xs">
                                              {{ Form::checkbox('permission[]', $permission->id, false, ['id'=>$permission->id]) }}
                                              <label for="{{$permission->id}}">{{ ucfirst($permission->display_name) }}</label>
@@ -143,7 +145,11 @@
                                  <div class="card-header card_header_2">{{ ucfirst($group) }}</div>
                                  <div class="card-body card_body pt-2 pb-1 px-1">
                                     @foreach($permissions as $permission)
-                                       <div class="form-group mb-0">
+                                       <div class="form-group mb-0 pt-1 pb-0 px-1"
+                                          onMouseOver="this.style.background='#ABA', this.style.color='#000', this.style.fontWeight='bold'"
+                                          onMouseOut="this.style.background='', this.style.color='', this.style.fontWeight=''"
+                                          style="vertical-align: middle;"
+                                       >
                                           <span class="switch switch-xs">
                                              {{ Form::checkbox('permission[]', $permission->id, false, ['id'=>$permission->id]) }}
                                              <label for="{{$permission->id}}">{{ ucfirst($permission->display_name) }}</label>

@@ -7,7 +7,7 @@
 		<div class="card">
 			
 			<div class="card-header">
-				Edit Invoice
+				<span class="h3">Edit Invoice</span>
 				<span class="float-right">
 					<a href="{{ route('invoicer.invoices') }}" class="btn btn-sm btn-outline-secondary">
 						<i class="fa fa-backward"></i>
@@ -129,7 +129,7 @@
 		<div class="card">
 
 			<div class="card-header">
-				Billable Items
+				<span class="h3">Billable Items</span>
 				@if(checkPerm('invoicer_invoice_edit'))
 					@if($invoice->status != 'paid')
 						<span class="float-right">

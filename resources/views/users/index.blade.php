@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.backend')
 
 @section('stylesheets')
 {{--    {{ Html::style('css/.css') }} --}}
@@ -6,9 +6,6 @@
 
 @section('left_column')
 	@include('blocks.main_menu')
-@endsection
-
-@section('right_column')
 @endsection
 
 @section('content')

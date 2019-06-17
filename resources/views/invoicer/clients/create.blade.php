@@ -8,7 +8,7 @@
 		<div class="card">
 			
 			<div class="card-header">
-				Create New Client
+				<span class="h3">Create New Client</span>
 				<span class="float-right">
 					<a href="{{ route('invoicer.clients') }}" class="btn btn-sm btn-outline-secondary">
 						<i class="fa fa-backward"></i>

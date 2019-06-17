@@ -6,7 +6,7 @@
 		<div class="col-sm-9">
 				<div class="card">
 					<div class="card-header">
-						Products
+						<span class="h3">Products</span>
 						@if(strpos($_SERVER['REQUEST_URI'], 'search?') !== false)
 							[Filtered]
 						@endif
@@ -93,7 +93,7 @@
 		<div class="col-sm-3">
 			<div class="card">
 				<div class="card-header">
-					Search
+					Filter
 				</div>
 				<div class="card-body pb-0">
 					<form action="{{ route('invoicer.products.search') }}" class="">
@@ -109,7 +109,7 @@
 						<div class="form-group text-center">
 							<button type="submit" value="Search" class="btn btn-sm btn-primary">
 								<i class="fa fa-binoculars"></i>
-								Search
+								Filter
 							</button>
 							<a href="{{ route('invoicer.products') }}" class="btn btn-sm btn-outline-secondary">
 								<i class="far fa-square"></i>

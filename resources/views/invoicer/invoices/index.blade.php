@@ -7,38 +7,40 @@
 			<a class="nav-link {{ (Request::is('invoicer/invoices') ? 'active' : '') }}" href="{{ route('invoicer.invoices') }}">
 				<i class="fas fa-list"></i>
 				All
-				{{-- <span class="badge badge-info">{{ App\Modules\Invoicer\Models\Invoice::all()->count() }}</span> --}}
+				<span class="badge badge-info">{{ App\Models\Invoicer\Invoice::all()->count() }}</span>
 			</a>
 		</li>
 		<li class="nav-item">
 			<a class="nav-link {{ (Request::is('invoicer/invoices/logged') ? 'active' : '') }}" href="{{ route('invoices.logged') }}">
 				<i class="fas fa-sign-out-alt"></i>
 				Logged
-				{{-- <span class="badge badge-info text-right">{{ App\Modules\Invoicer\Models\Invoice::where('status', 'logged')->count() }}</span> --}}
+				<span class="badge badge-info text-right">{{ App\Models\Invoicer\Invoice::where('status', 'logged')->count() }}</span>
 			</a>
 		</li>
 		<li class="nav-item">
 			<a class="nav-link {{ (Request::is('invoicer/invoices/invoiced') ? 'active' : '') }}" href="{{ route('invoices.invoiced') }}">
 				<i class="far fa-file-alt"></i>
 				Invoiced
-				{{-- <span class="badge badge-info text-right">{{ App\Modules\Invoicer\Models\Invoice::where('status', 'invoiced')->count() }}</span> --}}
+				<span class="badge badge-info text-right">{{ App\Models\Invoicer\Invoice::where('status', 'invoiced')->count() }}</span>
 			</a>
 		</li>
 		<li class="nav-item">
 			<a class="nav-link {{ (Request::is('invoicer/invoices/paid') ? 'active' : '') }}" href="{{ route('invoices.paid') }}">
 				<i class="far fa-money-bill-alt"></i>
 				Paid
-				{{-- <span class="badge badge-info text-right">{{ App\Modules\Invoicer\Models\Invoice::where('status', 'paid')->count() }}</span> --}}
+				<span class="badge badge-info text-right">{{ App\Models\Invoicer\Invoice::where('status', 'paid')->count() }}</span>
 			</a>
 		</li>
 	</ul>
 
 	<div class="card">
 		<div class="card-header">
-			Invoices
-			{{ (Request::is('invoicer/invoices/logged') ? '- Logged':'') }}
-			{{ (Request::is('invoicer/invoices/invoiced') ? '- Invoiced':'') }}
-			{{ (Request::is('invoicer/invoices/paid') ? '- Paid':'') }}
+			
+			<span class="h3">Invoices
+				{{ (Request::is('invoicer/invoices/logged') ? '- Logged':'') }}
+				{{ (Request::is('invoicer/invoices/invoiced') ? '- Invoiced':'') }}
+				{{ (Request::is('invoicer/invoices/paid') ? '- Paid':'') }}
+			</span>
 			
 			<span class="float-right">
 				@if(checkPerm('invoicer_invoice_edit'))

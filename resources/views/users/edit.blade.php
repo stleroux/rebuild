@@ -1,16 +1,11 @@
-@extends('layouts.master')
+@extends('layouts.backend')
 
 @section('stylesheets')
    {{ Html::style('css/switch.css') }}
 @endsection
 
 @section('left_column')
-   {{-- @include('blocks.adminNav') --}}
-   {{-- @include('users.sidebar') --}}
    @include('blocks.main_menu')
-@endsection
-
-@section('right_column')
 @endsection
 
 @section('content')

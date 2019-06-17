@@ -5,7 +5,7 @@
 		<div class="card">
 			
 			<div class="card-header">
-				Product Information
+				<span class="h3">Product Information</span>
 				<span class="float-right">
 					<a href="{{ route('invoicer.products') }}" class="btn btn-sm btn-primary">
 						<i class="fa fa-list"></i>

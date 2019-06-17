@@ -8,7 +8,7 @@
 		<div class="card">
 			
 			<div class="card-header">
-				Edit Product
+				<span class="h3">Edit Product</span>
 				<span class="float-right">
 					<a href="{{ route('invoicer.products') }}" class="btn btn-sm btn-outline-secondary">
 						<i class="fa fa-backward"></i>

@@ -8,7 +8,7 @@
 		<div class="card">
 			
 			<div class="card-header">
-				Create New Product
+				<span class="h3">Create New Product</span>
 				<span class="float-right">
 					<a href="{{ route('invoicer.products') }}" class="btn btn-sm btn-outline-secondary">
 						<i class="fa fa-backward"></i>

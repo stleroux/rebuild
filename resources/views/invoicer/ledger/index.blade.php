@@ -18,28 +18,28 @@
 			<a class="nav-link {{ (Request::is('invoicer/ledger') ? 'active' : '') }}" href="{{ route('invoicer.ledger') }}">
 				<i class="fas fa-list"></i>
 				All
-				{{-- <span class="badge badge-info text-right">{{ App\Modules\Invoicer\Models\Invoice::all()->count() }}</span> --}}
+				<span class="badge badge-info text-right">{{ App\Models\Invoicer\Invoice::all()->count() }}</span>
 			</a>
 		</li>
 		<li class="nav-item">
 			<a class="nav-link {{ (Request::is('invoicer/ledger/logged') ? 'active' : '') }}" href="{{ route('invoicer.ledger.logged') }}">
 				<i class="fas fa-sign-out-alt"></i>
 				Logged
-				{{-- <span class="badge badge-info text-right">{{ App\Modules\Invoicer\Models\Invoice::where('status', 'logged')->count() }}</span> --}}
+				<span class="badge badge-info text-right">{{ App\Models\Invoicer\Invoice::where('status', 'logged')->count() }}</span>
 			</a>
 		</li>
 		<li class="nav-item">
 			<a class="nav-link {{ (Request::is('invoicer/ledger/invoiced') ? 'active' : '') }}" href="{{ route('invoicer.ledger.invoiced') }}">
 				<i class="far fa-file-alt"></i>
 				Invoiced
-				{{-- <span class="badge badge-info text-right">{{ App\Modules\Invoicer\Models\Invoice::where('status', 'invoiced')->count() }}</span> --}}
+				<span class="badge badge-info text-right">{{ App\Models\Invoicer\Invoice::where('status', 'invoiced')->count() }}</span>
 			</a>
 		</li>
 		<li class="nav-item">
 			<a class="nav-link {{ (Request::is('invoicer/ledger/paid') ? 'active' : '') }}" href="{{ route('invoicer.ledger.paid') }}">
 				<i class="far fa-money-bill-alt"></i>
 				Paid
-				{{-- <span class="badge badge-info text-right">{{ App\Modules\Invoicer\Models\Invoice::where('status', 'paid')->count() }}</span> --}}
+				<span class="badge badge-info text-right">{{ App\Models\Invoicer\Invoice::where('status', 'paid')->count() }}</span>
 			</a>
 		</li>
 	</ul>
@@ -48,10 +48,11 @@
 
 	<div class="card">
 		<div class="card-header">
-			Ledger
-			{{ (Request::is('invoicer/ledger/logged') ? '- Logged':'') }}
-			{{ (Request::is('invoicer/ledger/invoiced') ? '- Invoiced':'') }}
-			{{ (Request::is('invoicer/ledger/paid') ? '- Paid':'') }}
+			<span class="h3">Ledger
+				{{ (Request::is('invoicer/ledger/logged') ? '- Logged':'') }}
+				{{ (Request::is('invoicer/ledger/invoiced') ? '- Invoiced':'') }}
+				{{ (Request::is('invoicer/ledger/paid') ? '- Paid':'') }}
+			</span>
 		</div>
 		{{-- <div class="card-body"> --}}
 			@if($invoices->count() > 0)

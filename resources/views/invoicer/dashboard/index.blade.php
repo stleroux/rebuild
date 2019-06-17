@@ -5,8 +5,10 @@
 	<div class="card">
 
 		<div class="card-header">
-			Welcome to the Invoicer Dashboard
-			<span class="float-right"><small>V {{ Config::get('invoicer.version') }}</small></span>
+			<span class="h3">Dashboard</span>
+			<span class="float-right">
+				<small>V {{ Config::get('invoicer.version') }}</small>
+			</span>
 		</div>
 
 		<div class="card-body">

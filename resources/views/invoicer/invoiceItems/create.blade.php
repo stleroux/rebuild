@@ -9,7 +9,7 @@
 		<div class="card">
 			
 			<div class="card-header">
-				Add Billable Item to Invoice : {{ $invoice->id }}
+				<span class="h3">Add Billable Item to Invoice : {{ $invoice->id }}</span>
 				<span class="float-right">
 					<a href="{{ route('invoicer.invoices.edit', $invoice->id) }}" class="btn btn-sm btn-outline-secondary">
 						<i class="fa fa-backward"></i>

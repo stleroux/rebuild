@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.backend')
 
 @section('stylesheets')
    {{-- {{ Html::style('css/recipes.css') }} --}}
@@ -6,9 +6,6 @@
 
 @section('left_column')
    @include('blocks.main_menu')
-@endsection
-
-@section('right_column')
 @endsection
 
 @section('content')
@@ -38,7 +35,7 @@
                @include('common.buttons.cancel', ['model'=>'user', 'type'=>''])
 
                @if(checkPerm('user_edit'))
-                  <button type="submit" class="btn btn-sm btn-outline-primary" title="Change Password">
+                  <button type="submit" class="btn btn-sm btn-info" title="Change Password">
                      <i class="far fa-save"></i>
                      {{-- Change Password --}}
                   </button>
@@ -49,7 +46,7 @@
          <!--CARD BODY-->
          <div class="card-body card_body">
             <div class="row">
-               <div class="col-xs-12 col-sm-12 col-md-12">
+               <div class="col-xs-12 col-sm-6 col-md-3">
                   <div class="form-group">
                      <strong>Password:</strong>
                      {!! Form::text('password', null, array('placeholder'=>'Password', 'class'=>'form-control form-control-sm', 'autofocus'=>'autofocus')) !!}
@@ -57,7 +54,7 @@
                </div>
             </div>
             <div class="row">
-               <div class="col-xs-12 col-sm-12 col-md-12">
+               <div class="col-xs-12 col-sm-6 col-md-3">
                   <div class="form-group">
                      <strong>Confirm Password:</strong>
                      {!! Form::text('password_confirmation', null, array('placeholder'=>'Confirm Password', 'class'=>'form-control form-control-sm')) !!}
