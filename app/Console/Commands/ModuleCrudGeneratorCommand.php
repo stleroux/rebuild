@@ -230,7 +230,7 @@ class ModuleCrudGeneratorCommand extends Command
         if(!file_exists($path = base_path("modules/".Str::plural($name)."/Http/Controllers"))) {
             mkdir($path, 0777, true);
         }
-        if(!file_exists($path = base_path("modules/".Str::plural($name)."/Http/Middkeware"))) {
+        if(!file_exists($path = base_path("modules/".Str::plural($name)."/Http/Middleware"))) {
             mkdir($path, 0777, true);
         }
         if(!file_exists($path = base_path("modules/".Str::plural($name)."/Http/Requests"))) {
