@@ -1,7 +1,7 @@
-@foreach($settings->chunk(2) as $chunk)
+@foreach($settings->chunk(3) as $chunk)
    <div class="card-deck">
       @foreach($chunk as $r)
-         <div class="col-6 p-0">
+         <div class="col-4 p-0">
             <div class="card my-3">
                <div class="card-body">
                   <div class="form-row">

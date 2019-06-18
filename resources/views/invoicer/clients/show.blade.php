@@ -107,17 +107,16 @@
 							<td>{{ $invoice->id }}</td>
 							<td>{{ $invoice->created_at->format('M d, Y') }}</td>
 							<td>{{ number_format($invoice->sub_total, 2, '.', ', ') }}$</td>
-							<td>{{ ucfirst($invoice->status) }}</td>
-							
+							<td>{{ ucfirst($invoice->status) }}</td>							
 							<form action="{{ route('invoicer.invoices.destroy',[$invoice->id]) }}" method="POST" onsubmit="return confirm('Do you really want to delete this invoice?');">
 								<input type="hidden" name="_method" value="DELETE" />
-								<td width="10px">										
+								<td width="76px">
 									<a href="{{ route('invoicer.invoices.show', $invoice->id) }}" class="btn btn-sm btn-outline-primary">
 										<i class="fa fa-eye"></i>
 										View
 									</a>
 								</td>
-								<td width="10px">
+								<td width="66px">
 									@if($invoice->status != "paid")
 										<a href="{{ route('invoicer.invoices.edit', $invoice->id) }}" class="btn btn-sm btn-primary">
 											<i class="fa fa-edit"></i>
@@ -125,7 +124,7 @@
 										</a>
 									@endif
 								</td>
-								<td width="10px">											
+								<td width="80px">
 									<button type="submit" class="btn btn-sm btn-danger">
 										<i class="fa fa-trash-alt"></i>
 										Delete

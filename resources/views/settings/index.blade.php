@@ -1,17 +1,11 @@
-@extends('layouts.master')
+@extends('layouts.backend')
 
 @section('stylesheets')
    {{-- {{ Html::style('css/recipes.css') }} --}}
 @endsection
 
 @section('left_column')
-   {{-- @include('blocks.adminNav') --}}
-   {{-- @include('settings.sidebar') --}}
    @include('blocks.main_menu')
-@endsection
-
-@section('right_column')
-   {{-- @include('settings.blocks.create') --}}
 @endsection
 
 @section('content')

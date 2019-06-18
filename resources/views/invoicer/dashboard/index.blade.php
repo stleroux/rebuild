@@ -7,7 +7,7 @@
 		<div class="card-header">
 			<span class="h3">Dashboard</span>
 			<span class="float-right">
-				<small>V {{ Config::get('invoicer.version') }}</small>
+				<small>V {{ Setting('invoicer.version') }}</small>
 			</span>
 		</div>
 
