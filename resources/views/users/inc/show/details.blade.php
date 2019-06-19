@@ -4,25 +4,25 @@
          <div class="col-sm-12 col-md-2">
             <div class="form-group {{ $errors->has('username') ? 'has-error' : '' }}">
                {{ Form::label('username', 'Username', ['class'=>'required']) }}
-               {!! Form::text('username', null, array('placeholder'=>'Username', 'class'=>'form-control form-control-sm', 'autofocus'=>'autofocus' )) !!}
+               {!! Form::text('username', null, array('placeholder'=>'Username', 'class'=>'form-control form-control-sm','disabled', 'autofocus'=>'autofocus' )) !!}
                <span class="text-danger">{{ $errors->first('username') }}</span>
             </div>
          </div>
 
-         <div class="col-sm-12 col-md-4">
+         <div class="col-sm-12 col-md-3">
             <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                {{ Form::label('email', 'Email', ['class'=>'required']) }}
-               {!! Form::text('email', null, array('placeholder'=>'Email', 'class'=>'form-control form-control-sm' )) !!}
+               {!! Form::text('email', null, array('placeholder'=>'Email', 'class'=>'form-control form-control-sm', 'disabled' => 'disabled')) !!}
                <span class="text-danger">{{ $errors->first('email') }}</span>
             </div>
          </div>
 
-         <div class="col-sm-12 col-md-3">
-            <div class="form-group">
-               {{ Form::label('password', 'Password', ['class'=>'required']) }}
-               {!! Form::text('password', null, array('placeholder'=>'Automatically set to :: password', 'class'=>'form-control form-control-sm', 'readonly'=>'readonly')) !!}
-            </div>
+         <div class="col-sm-12 col-md-2">
+            <label>Total assigned permissions</label>
+            <input type="text" class="form-control form-control-sm" value="{{ $user->permissions->count() }}" disabled>
+            <span class="badge badge-primary"></span>
          </div>
+
       </div>
    </div>
 </div>

@@ -60,19 +60,19 @@
 
             <div class="tab-content pb-0 mb-0" id="myTabContent">
                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                  @include('users.inc.details')
+                  @include('users.inc.create.details')
                </div>
                <div class="tab-pane fade" id="core" role="tabpanel" aria-labelledby="core-tab">
-                  @include('users.inc.core')
+                  @include('users.inc.create.core')
                </div>
                <div class="tab-pane fade" id="nonCore" role="tabpanel" aria-labelledby="nonCore-tab">
-                  @include('users.inc.nonCore')
+                  @include('users.inc.create.nonCore')
                </div>
                <div class="tab-pane fade" id="modules" role="tabpanel" aria-labelledby="modules-tab">
-                  @include('users.inc.modules')
+                  @include('users.inc.create.modules')
                </div>
                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                  @include('users.inc.profile')
+                  @include('users.inc.create.profile')
                </div>
             </div>
          </div>

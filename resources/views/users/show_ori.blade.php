@@ -2,6 +2,7 @@
 
 @section('stylesheets')
    {{ Html::style('css/switch.css') }}
+   {{ Html::style('css/users.css') }}
 @endsection
 
 @section('left_column')
@@ -10,90 +11,44 @@
 
 @section('content')
 
-   {!! Form::model($user, ['method' => 'PATCH', 'route' => ['users.update', $user->id]]) !!}
-      {{ Form::token() }}
-      
-      <div class="card">
+   {!! Form::model($user) !!}
+
+      <div class="card mb-2">
          <!--CARD HEADER-->
          <div class="card-header card_header">
-            <span class="h5 align-middle">
+            <span class="h5 align-middle pt-2">
                <i class="fas fa-user"></i>
-               Edit User
+               View User
             </span>
             <span class="float-sm-right">
                @include('users.addins.back')
-
-               @if(checkPerm('user_edit'))
-                  <button type="submit" class="btn btn-sm btn-bprimary" name="submit" value="continue" title="Update & Continue">
-                     <i class="far fa-hdd"></i>
-                     {{-- Update & Continue --}}
-                  </button>
-                  <button type="submit" class="btn btn-sm btn-success" name="submit" value="close" title="Update & Close">
-                     <i class="far fa-save"></i>
-                     {{-- Update & Close --}}
-                  </button>
-               @endif
             </span>
          </div>
-
          <!--CARD BODY-->
-         <div class="card-body card_body p-0">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-               <li class="nav-item">
-                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
-                     User Details
-                  </a>
-               </li>
-               <li class="nav-item">
-                  <a class="nav-link" id="core-tab" data-toggle="tab" href="#core" role="tab" aria-controls="core" aria-selected="true">
-                     Core Permissions
-                  </a>
-               </li>
-               <li class="nav-item">
-                  <a class="nav-link" id="nonCore-tab" data-toggle="tab" href="#nonCore" role="tab" aria-controls="nonCore" aria-selected="false">
-                     Non-Core Permissions
-                  </a>
-               </li>
-               <li class="nav-item">
-                  <a class="nav-link" id="modules-tab" data-toggle="tab" href="#modules" role="tab" aria-controls="modules" aria-selected="false">
-                     Modules Permissions
-                  </a>
-               </li>
-               <li class="nav-item">
-                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
-                     Profile
-                  </a>
-               </li>
-            </ul>
+         <div class="card-body card_body">
+            <div class="row">
+               <div class="col-sm-12 col-md-2">
+                  <div class="form-group {{ $errors->has('username') ? 'has-error' : '' }}">
+                     {{ Form::label('username', 'Username', ['class'=>'required']) }}
+                     {!! Form::text('username', null, array('placeholder'=>'Username', 'class'=>'form-control form-control-sm','disabled', 'autofocus'=>'autofocus' )) !!}
+                     <span class="text-danger">{{ $errors->first('username') }}</span>
+                  </div>
+               </div>
 
-            <div class="tab-content pb-0 mb-0" id="myTabContent">
-               <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                  @include('users.inc.edit.details')
-               </div>
-               <div class="tab-pane fade" id="core" role="tabpanel" aria-labelledby="core-tab">
-                  @include('users.inc.edit.core')
-               </div>
-               <div class="tab-pane fade" id="nonCore" role="tabpanel" aria-labelledby="nonCore-tab">
-                  @include('users.inc.edit.nonCore')
-               </div>
-               <div class="tab-pane fade" id="modules" role="tabpanel" aria-labelledby="modules-tab">
-                  @include('users.inc.edit.modules')
-               </div>
-               <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                  @include('users.inc.edit.profile')
+               <div class="col-sm-12 col-md-4">
+                  <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
+                     {{ Form::label('email', 'Email', ['class'=>'required']) }}
+                     {!! Form::text('email', null, array('placeholder'=>'Email', 'class'=>'form-control form-control-sm', 'disabled' => 'disabled')) !!}
+                     <span class="text-danger">{{ $errors->first('email') }}</span>
+                  </div>
                </div>
             </div>
          </div>
-
-         <!-- CARD FOOTER -->
-         <div class="card-footer pt-1 pb-1 pl-2">
-            Fields marked with an <span class="required"></span> are required
-         </div>
       </div>
-
-{{--       <div class="card mb-3">
+         
+      <div class="card mb-3">
          <div class="card-header card_header">
-            Select the permissions to assign to this user
+            Display the permissions assigned to this user
             <span class="float-right">
                <span class="badge badge-primary">{{ $user->permissions->count() }}</span>
             </span>
@@ -106,13 +61,13 @@
                      <div class="card-body p-2">
                         <div class="card-columns">
                            @foreach ($coreGroups as $group => $permissions)
-                              <div class="card mb-1">
+                              <div class="card mb-2">
                                  <div class="card-header card_header_2">{{ ucfirst($group) }}</div>
                                  <div class="card-body card_body pt-2 pb-1 px-1">
                                     @foreach($permissions as $permission)
                                        <div class="form-group mb-0">
                                           <span class="switch switch-xs">
-                                             {{ Form::checkbox('permission[]', $permission->id, in_array($permission->id, $userPermissions) ? true : false, ['id'=>$permission->id]) }}
+                                             {{ Form::checkbox('permission[]', $permission->id, in_array($permission->id, $userPermissions) ? true : false, ['id'=>$permission->id, 'disabled'=>'disabled']) }}
                                              <label for="{{$permission->id}}">{{ ucfirst($permission->display_name) }}</label>
                                           </span>
                                           <span class="float-right">
@@ -142,7 +97,7 @@
                                     @foreach($permissions as $permission)
                                        <div class="form-group mb-0">
                                           <span class="switch switch-xs">
-                                             {{ Form::checkbox('permission[]', $permission->id, in_array($permission->id, $userPermissions) ? true : false, ['id'=>$permission->id]) }}
+                                             {{ Form::checkbox('permission[]', $permission->id, in_array($permission->id, $userPermissions) ? true : false, ['id'=>$permission->id, 'disabled'=>'disabled']) }}
                                              <label for="{{$permission->id}}">{{ ucfirst($permission->display_name) }}</label>
                                           </span>
                                           <span class="float-right">
@@ -172,7 +127,7 @@
                                     @foreach($permissions as $permission)
                                        <div class="form-group mb-0">
                                           <span class="switch switch-xs">
-                                             {{ Form::checkbox('permission[]', $permission->id, in_array($permission->id, $userPermissions) ? true : false, ['id'=>$permission->id]) }}
+                                             {{ Form::checkbox('permission[]', $permission->id, in_array($permission->id, $userPermissions) ? true : false, ['id'=>$permission->id, 'disabled'=>'disabled']) }}
                                              <label for="{{$permission->id}}">{{ ucfirst($permission->display_name) }}</label>
                                           </span>
                                           <span class="float-right">
@@ -191,8 +146,8 @@
                </div>
             </div>
          </div>
-      </div> --}}
-
-   {!! Form::close() !!}
+      </div>
+      
+{{ Form::close() }}
 
 @endsection
