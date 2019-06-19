@@ -104,7 +104,15 @@
 								<td>{{ $invoice->paid_at->format('M d Y') }}</td>
 							@endif
 							@if(Request::is('invoicer/invoices'))
-								<td>{{ ucfirst($invoice->status) }}</td>
+								<td>
+									@if($invoice->status === 'logged')
+										<span class="badge badge-info" style="font-size: 13px">{{ ucfirst($invoice->status) }}</span>
+									@elseif($invoice->status === 'invoiced')
+										<span class="badge badge-warning" style="font-size: 13px">{{ ucfirst($invoice->status) }}</span>
+									@else($invoice->status === 'paid')
+										<span class="badge badge-success" style="font-size: 13px">{{ ucfirst($invoice->status) }}</span>
+									@endif
+								</td>
 							@endif
 							<td><a href="{{ route('invoicer.clients.show', $invoice->client->id) }}">{{ $invoice->client->company_name }}</a></td>
 							<td class="text-right">{{ number_format($invoice->sub_total, 2, '.', ', ') }}$</td>

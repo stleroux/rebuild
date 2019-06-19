@@ -108,13 +108,21 @@ div.sticky {
 /* Adjust the number of columns to display when using card-columns like in the permissions section of user management */
 /*@media (min-width: 34em) {
     .card-columns {
+        -webkit-column-count: 1;
+        -moz-column-count: 1;
+        column-count: 1;
+    }
+}
+
+@media (min-width: 48em) {
+    .card-columns {
         -webkit-column-count: 2;
         -moz-column-count: 2;
         column-count: 2;
     }
 }
 
-@media (min-width: 48em) {
+@media (min-width: 62em) {
     .card-columns {
         -webkit-column-count: 3;
         -moz-column-count: 3;
@@ -122,18 +130,10 @@ div.sticky {
     }
 }
 
-@media (min-width: 62em) {
+@media (min-width: 75em) {
     .card-columns {
         -webkit-column-count: 4;
         -moz-column-count: 4;
         column-count: 4;
-    }
-}
-
-@media (min-width: 75em) {
-    .card-columns {
-        -webkit-column-count: 5;
-        -moz-column-count: 5;
-        column-count: 5;
     }
 }*/

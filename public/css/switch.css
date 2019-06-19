@@ -39,7 +39,7 @@
 }
 .switch input + label::before {
    right: 0;
-   background-color: #dee2e6;
+   background-color: red;
    border-radius: calc(2.375rem * .8);
    transition: 0.2s all;
 }
@@ -53,7 +53,7 @@
    transition: 0.2s all;
 }
 .switch input:checked + label::before {
-   background-color: #08d;
+   background-color: blue;
 }
 .switch input:checked + label::after {
    margin-left: calc(2.375rem * .8);

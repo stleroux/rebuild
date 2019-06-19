@@ -10,7 +10,8 @@ use DB;
 class CrudGeneratorCommand extends Command
 {
 
-    protected $signature = 'crud:generator {name : Class (singular), e.g.: User}';
+    // protected $signature = 'crud:generator {name : Class (singular), e.g.: User}';
+    protected $signature = 'crud:generator';
 
     protected $description = 'Create CRUD operations';
 
@@ -23,7 +24,9 @@ class CrudGeneratorCommand extends Command
     public function handle()
     {
         // Get the name of the argument
-        $name = $this->argument('name');
+        // $name = $this->argument('name');
+        $name = $this->ask('What is the name of the model? (Must be Capitalized singular form: i.e.: User)');
+
 
         if ($this->confirm('Do you wish to create the Controller?')) {
             $this->controller($name);
