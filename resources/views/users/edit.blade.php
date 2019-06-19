@@ -13,7 +13,7 @@
    {!! Form::model($user, ['method' => 'PATCH', 'route' => ['users.update', $user->id]]) !!}
       {{ Form::token() }}
       
-      <div class="card">
+      <div class="card bg-secondary">
          <!--CARD HEADER-->
          <div class="card-header card_header">
             <span class="h5 align-middle">

@@ -13,7 +13,7 @@
 
    {!! Form::model($user) !!}
 
-      <div class="card mb-2">
+      <div class="card bg-secondary">
          <!--CARD HEADER-->
          <div class="card-header card_header">
             <span class="h5 align-middle pt-2">

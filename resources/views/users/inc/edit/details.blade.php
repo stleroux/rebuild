@@ -17,7 +17,7 @@
             </div>
          </div>
 
-         <div class="col-sm-12 col-md-2">
+         <div class="col-sm-12 col-md-2 offset-md-5">
             <label>Total assigned permissions</label>
             <input type="text" class="form-control form-control-sm" value="{{ $user->permissions->count() }}" disabled>
             <span class="badge badge-primary"></span>
