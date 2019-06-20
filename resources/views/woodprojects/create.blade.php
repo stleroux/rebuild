@@ -1,15 +1,10 @@
 @extends('layouts.backend')
 
 @section('stylesheets')
-   {{-- {{ Html::style('css/recipes.css') }} --}}
 @endsection
 
 @section('left_column')
-   {{-- @include('blocks.adminNav') --}}
-   {{-- @include('recipes::backend.sidebar') --}}
-@endsection
-
-@section('right_column')
+   @include('blocks.main_menu')
 @endsection
 
 @section('content')
@@ -23,7 +18,7 @@
             Create Woodproject
             <span class="float-right">
                @include('common.buttons.help', ['model'=>'woodproject', 'bookmark'=>'woodprojects'])
-               @include('common.buttons.cancel', ['model'=>'woodproject'])
+               @include('common.buttons.previous', ['model'=>'woodproject'])
                @include('common.buttons.save', ['model'=>'woodproject'])
             </span>
          </div>

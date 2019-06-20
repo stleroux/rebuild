@@ -5,6 +5,7 @@
 @endsection
 
 @section('left_column')
+   @include('blocks.main_menu')
 @endsection
 
 @section('right_column')

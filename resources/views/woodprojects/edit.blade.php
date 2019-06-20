@@ -1,12 +1,9 @@
 @extends ('layouts.backend')
 
 @section ('stylesheets')
-   {{-- {{ Html::style('css/recipes.css') }} --}}
 @stop
 
 @section('left_column')
-   {{-- @include('blocks.adminNav') --}}
-   {{-- @include('recipes::backend.sidebar') --}}
 @endsection
 
 @section('right_column')
@@ -26,7 +23,7 @@
             Edit Woodproject
             <span class="float-right">
                @include('common.buttons.help', ['model'=>'woodproject', 'bookmark'=>'woodprojects'])
-               @include('common.buttons.cancel', ['model'=>'woodproject'])
+               @include('common.buttons.previous', ['model'=>'woodproject'])
                @include('common.buttons.update', ['model'=>'woodproject'])
             </span>
          </div>

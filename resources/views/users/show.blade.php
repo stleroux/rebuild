@@ -2,7 +2,6 @@
 
 @section('stylesheets')
    {{ Html::style('css/switch.css') }}
-   {{ Html::style('css/users.css') }}
 @endsection
 
 @section('left_column')

@@ -1,6 +1,6 @@
 <div class="card p-1">
    <div class="card-body p-1">
-      <div class="card-columns">
+      <div class="card-columns-permissions">
          @foreach ($moduleGroups as $group => $permissions)
             <div class="card mb-2">
                <div class="card-header card_header_2 p-1">{{ ucfirst($group) }}</div>
@@ -13,12 +13,9 @@
                      >
                         <span class="switch switch-xs">
                            {{ Form::checkbox('permission[]', $permission->id, in_array($permission->id, $userPermissions) ? true : false, ['id'=>$permission->id, 'disabled'=>'disabled']) }}
-                           <label for="{{$permission->id}}">{{ ucfirst($permission->display_name) }}</label>
-                        </span>
-                        <span class="float-right">
-                           <a data-toggle="tooltip" title="Allow member to {{ strtolower($permission->description) }}">
-                              <i class="fas fa-info-circle"></i>
-                           </a>
+                           <label for="{{$permission->id}}" title="Allow member to {{ strtolower($permission->description) }}">
+                              {{ ucfirst($permission->display_name) }}
+                           </label>
                         </span>
                      </div>
                   @endforeach

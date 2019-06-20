@@ -298,7 +298,18 @@ class UsersController extends Controller
 			->pluck('permission_user.permission_id','permission_user.permission_id')
 			->all();
 
-		return view('users.show', compact('user','corePermissions','coreGroups','userPermissions','nonCorePermissions','nonCoreGroups','moduleGroups','modulePermissions'));
+		return view('users.show',
+			compact(
+				'user',
+				'corePermissions',
+				'coreGroups',
+				'userPermissions',
+				'nonCorePermissions',
+				'nonCoreGroups',
+				'moduleGroups',
+				'modulePermissions'
+			)
+		);
 	}
 
 

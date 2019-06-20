@@ -1,7 +1,6 @@
 @extends('layouts.backend')
 
 @section('stylesheets')
-{{--    {{ Html::style('css/.css') }} --}}
 @endsection
 
 @section('left_column')
@@ -34,6 +33,7 @@
 								<th>No</th>
 								<th>Username</th>
 								<th>Email</th>
+								<th>Permissions</th>
 								<th>Created</th>
 								<th class="no-sort"></th>
 							</tr>
@@ -44,6 +44,7 @@
 									<td>{{ $user->id }}</td>
 									<td>{{ $user->username }}</td>
 									<td>{{ $user->email }}</td>
+									<td>{{ $user->permissions->count() }}</td>
 									<td>{{ $user->created_at->format('M d, Y') }}</td>
 									<td class="text-right">
 										@if(checkPerm('user_show'))

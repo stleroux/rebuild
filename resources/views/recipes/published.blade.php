@@ -1,13 +1,11 @@
-@extends('layouts.recipes')
+@extends('layouts.backend')
 
 @section('stylesheets')
 	{{ Html::style('css/recipes.css') }}
 @stop
 
 @section('left_column')
-@endsection
-
-@section('right_column')
+	@include('blocks.main_menu')
 @endsection
 
 @section('content')

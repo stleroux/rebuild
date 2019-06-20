@@ -16,7 +16,7 @@
          @if($loop->first)
             <span class="float-right">
                {{-- @include('common.buttons.cancel') --}}
-               @include('recipes.buttons.back')
+               @include('common.buttons.previous')
                @include('common.buttons.print2')
             </span>
          @endif

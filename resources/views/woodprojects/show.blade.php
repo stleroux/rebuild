@@ -21,7 +21,7 @@
          Show Woodproject
          <span class="float-right">
             @include('common.buttons.help', ['model'=>'woodproject', 'bookmark'=>'woodprojects'])
-            @include('common.buttons.cancel', ['model'=>'category'])
+            @include('common.buttons.previous', ['model'=>'category'])
          </span>
       </div>
 

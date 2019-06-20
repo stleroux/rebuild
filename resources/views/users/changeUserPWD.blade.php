@@ -1,7 +1,6 @@
 @extends('layouts.backend')
 
 @section('stylesheets')
-   {{-- {{ Html::style('css/recipes.css') }} --}}
 @endsection
 
 @section('left_column')
