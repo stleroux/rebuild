@@ -18,7 +18,7 @@
          <div class="card-header card_header">
             <span class="h5 align-middle">
                <i class="fas fa-user"></i>
-               Edit User
+               Edit User :: {{ $user->username }}
             </span>
             <span class="float-sm-right">
                @include('users.addins.back')

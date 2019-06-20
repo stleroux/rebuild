@@ -28,22 +28,22 @@ class CrudGeneratorCommand extends Command
         $name = $this->ask('What is the name of the model? (Must be Capitalized singular form: i.e.: User)');
 
 
-        if ($this->confirm('Do you wish to create the Controller?')) {
+        if ($this->confirm('Do you wish to create the CONTROLLER?')) {
             $this->controller($name);
             $this->info('Controller created');
         }
         
-        if ($this->confirm('Do you wish to create the Model?')) {
+        if ($this->confirm('Do you wish to create the MODEL?')) {
             $this->model($name);
             $this->info('Model created');
         }
 
-        if ($this->confirm('Do you wish to create the Request?')) {
+        if ($this->confirm('Do you wish to create the REQUEST?')) {
             $this->request($name);
             $this->info('Request created');
         }
         
-        if ($this->confirm('Do you wish to create the views?')) {
+        if ($this->confirm('Do you wish to create the VIEWS and ASSOCIATED FILES?')) {
             $this->createFolders($name);
                 $this->info('Necessary folders created');
             $this->indexView($name);
@@ -60,18 +60,18 @@ class CrudGeneratorCommand extends Command
                 $this->info('Form view created');
         }
 
-        if ($this->confirm('Do you wish to add base permissions to the database?')) {
+        if ($this->confirm('Do you wish to add base PERMISSIONS to the database?')) {
             $this->addPermissions($name);
             $this->info('Base permissions added to database');
         }
 
-        if ($this->confirm('Do you wish to add related routes?')) {
+        if ($this->confirm('Do you wish to add related ROUTES?')) {
             File::append(base_path('routes/web.php'),'Route::get(\'' . strtolower(Str::plural($name)) . "/{test}/delete', '" . (Str::plural($name)) . "Controller@delete')->name('" . strtolower(Str::plural($name)) . ".delete');\n");
             File::append(base_path('routes/web.php'), 'Route::resource(\'' . strtolower(Str::plural($name)) . "', '" . (Str::plural($name)) . "Controller');\n");
             $this->info('Route resource added to web.php routes file');
         }
 
-        if ($this->confirm('Do you wish to create the migration file?')) {
+        if ($this->confirm('Do you wish to create the MIGRATION file?')) {
             // Create migration file using artisan command
             // \Artisan::call('make:migration', 
             //     [
@@ -80,9 +80,6 @@ class CrudGeneratorCommand extends Command
             //     ]
             // );
             $this->makeMigration($name);
-
-// dsdsdsd
-
             $this->info('Migration created');
             $this->info('Don\'t forget to update the migration file and then run "php artisan migrate"');
         }
@@ -209,6 +206,16 @@ class CrudGeneratorCommand extends Command
             mkdir($path, 0777, true);
         }
 
+        if(!file_exists($path = resource_path("/views/" . strtolower(Str::plural($name)) . "/addins/")))
+        {
+            mkdir($path, 0777, true);
+        }
+
+        if(!file_exists($path = resource_path("/views/" . strtolower(Str::plural($name)) . "/addins/links/")))
+        {
+            mkdir($path, 0777, true);
+        }
+
         if(!file_exists($path = app_path('/Http/Requests')))
         {
             mkdir($path, 0777, true);
@@ -219,13 +226,16 @@ class CrudGeneratorCommand extends Command
 
     protected function addPermissions($name)
     {
+        $type = $this->choice('What section do the permissions need to be added to?',
+            [0=>'Non-Core', 1=>'Core', 2=>'Module', ''=>'Select from above choices'], 2);
+
         DB::table('permissions')->insert([
             [
                 // index permission
                 'name' => strtolower($name).'_index',
                 'display_name' => 'index',
                 'model' => strtolower($name),
-                'type' => 0,
+                'type' => $type,
                 'description' => 'list '.strtolower($name)
             ],
             [
@@ -233,7 +243,7 @@ class CrudGeneratorCommand extends Command
                 'name' => strtolower($name).'_create',
                 'display_name' => 'create',
                 'model' => strtolower($name),
-                'type' => 0,
+                'type' => $type,
                 'description' => 'create '.strtolower($name)
             ],
             [
@@ -241,7 +251,7 @@ class CrudGeneratorCommand extends Command
                 'name' => strtolower($name).'_edit',
                 'display_name' => 'edit',
                 'model' => strtolower($name),
-                'type' => 0,
+                'type' => $type,
                 'description' => 'edit '.strtolower($name)
             ],
             [
@@ -249,7 +259,7 @@ class CrudGeneratorCommand extends Command
                 'name' => strtolower($name).'_show',
                 'display_name' => 'show',
                 'model' => strtolower($name),
-                'type' => 0,
+                'type' => $type,
                 'description' => 'view '.strtolower($name)
             ],
             [
@@ -257,7 +267,7 @@ class CrudGeneratorCommand extends Command
                 'name' => strtolower($name).'_delete',
                 'display_name' => 'delete',
                 'model' => strtolower($name),
-                'type' => 0,
+                'type' => $type,
                 'description' => 'delete '.strtolower($name)
             ]
         ]);
