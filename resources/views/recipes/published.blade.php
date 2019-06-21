@@ -22,8 +22,8 @@
 				<span class="float-right">
 					@include('recipes.addins.links.help', ['model'=>'recipe', 'bookmark'=>'recipes'])
 					@include('recipes.addins.links.add')
-						@include('recipes.addins.buttons.unpublishAll')
-						@include('recipes.addins.buttons.trashAll')
+					@include('recipes.addins.buttons.unpublishAll')
+					@include('recipes.addins.buttons.trashAll')
 					@include('recipes.addins.pages.unpublished')
 					@include('recipes.addins.pages.new')
 					@include('recipes.addins.pages.future')

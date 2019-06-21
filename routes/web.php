@@ -34,3 +34,5 @@ foreach (File::allFiles(__DIR__ . '/routes') as $route_file) {
 Route::get('woodprojects/{test}/delete', 'WoodprojectsController@delete')->name('woodprojects.delete');
 Route::resource('woodprojects', 'WoodprojectsController');
 
+Route::get('tests/{test}/delete', 'TestsController@delete')->name('tests.delete');
+Route::resource('tests', 'TestsController');

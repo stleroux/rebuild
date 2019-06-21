@@ -1,12 +1,11 @@
-@extends('layouts.master')
+@extends('layouts.backend')
 
 @section('stylesheets')
-   {{-- {{ Html::style('css/recipes.css') }} --}}
+   {{-- {{ Html::style('css/.css') }} --}}
 @endsection
 
 @section('left_column')
-   {{-- @include('blocks.adminNav') --}}
-   {{-- @include('tests.sidebar') --}}
+   @include('blocks.main_menu')
 @endsection
 
 @section('right_column')
@@ -22,8 +21,8 @@
                {{-- <i class="fa fa-sitemap"></i> --}}
                Tests
                <span class="float-right">
-                  @include('common.buttons.help', ['bookmark'=>'tests'])
-                  @include('common.buttons.add', ['model'=>'test'])
+                  @include('tests.addins.links.help', ['bookmark'=>'tests'])
+                  @include('tests.addins.links.add', ['model'=>'test'])
                </span>
             </div>
 
@@ -54,11 +53,11 @@
                               <td data-order="{{ $test->created_at}}">{{ $test->created_at ? $test->created_at->format('M d, Y') : 'no data found' }}</td>
                               <td class="text-right">
                                  {{-- @if(checkPerm('test_edit')) --}}
-                                    @include('common.buttons.edit', ['model'=>'test', 'id'=>$test->id])
+                                    @include('tests.addins.links.edit', ['size'=>'xs'])
                                  {{-- @endif --}}
 
                                  {{-- @if(checkPerm('test_delete')) --}}
-                                    @include('common.buttons.delete', ['model'=>'test', 'id'=>$test->id])
+                                    @include('tests.addins.links.delete', ['size'=>'xs'])
                                  {{-- @endif --}}
                               </td>
                            </tr>

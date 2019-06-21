@@ -136,4 +136,13 @@ div.sticky {
         -moz-column-count: 4;
         column-count: 4;
     }
+
+    .card-columns-permissions .card {
+    display: block;
+}
+}
+
+
+.card-columns-permissions .card {
+    display: block;
 }

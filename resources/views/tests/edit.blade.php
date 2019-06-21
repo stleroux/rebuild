@@ -1,12 +1,11 @@
 @extends ('layouts.backend')
 
 @section ('stylesheets')
-   {{-- {{ Html::style('css/recipes.css') }} --}}
+   {{-- {{ Html::style('css/.css') }} --}}
 @stop
 
 @section('left_column')
-   {{-- @include('blocks.adminNav') --}}
-   {{-- @include('recipes::backend.sidebar') --}}
+   @include('blocks.main_menu')
 @endsection
 
 @section('right_column')
@@ -25,9 +24,9 @@
             <i class="fa fa-edit"></i>
             Edit Test
             <span class="float-right">
-               @include('common.buttons.help', ['model'=>'test', 'bookmark'=>'tests'])
-               @include('common.buttons.cancel', ['model'=>'test'])
-               @include('common.buttons.update', ['model'=>'test'])
+               @include('tests.addins.links.help', ['model'=>'test', 'bookmark'=>'tests'])
+               @include('tests.addins.links.back', ['model'=>'test'])
+               @include('tests.addins.buttons.update', ['model'=>'test'])
             </span>
          </div>
 

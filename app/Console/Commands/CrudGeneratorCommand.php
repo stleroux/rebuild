@@ -45,19 +45,11 @@ class CrudGeneratorCommand extends Command
         
         if ($this->confirm('Do you wish to create the VIEWS and ASSOCIATED FILES?')) {
             $this->createFolders($name);
-                $this->info('Necessary folders created');
-            $this->indexView($name);
-                $this->info('Index view created');
-            $this->createView($name);
-                $this->info('Create view was created');
-            $this->showView($name);
-                $this->info('Show view created');
-            $this->editView($name);
-                $this->info('Edit view created');
-            $this->deleteView($name);
-                $this->info('Delete view was created');
-            $this->showForm($name);
-                $this->info('Form view created');
+                $this->info('Folders created');
+            $this->addViews($name);
+                $this->info('Views created');
+            $this->addButtons($name);
+                $this->info('Buttons added');
         }
 
         if ($this->confirm('Do you wish to add base PERMISSIONS to the database?')) {
@@ -118,51 +110,70 @@ class CrudGeneratorCommand extends Command
     }
 
 
-    protected function createView($name)
+    protected function addViews($name)
     {
         file_put_contents(
             resource_path("/views/".strtolower(Str::plural($name))."/create.blade.php"),
             $this->getTemplate('views/create', $name));
-    }
 
-
-    protected function deleteView($name)
-    {
         file_put_contents(
             resource_path("/views/".strtolower(Str::plural($name))."/delete.blade.php"),
             $this->getTemplate('views/delete', $name));
-    }
 
-
-    protected function editView($name)
-    {
         file_put_contents(
             resource_path("/views/".strtolower(Str::plural($name))."/edit.blade.php"),
             $this->getTemplate('views/edit', $name));
-    }
 
-
-    protected function indexView($name)
-    {
         file_put_contents(
             resource_path("/views/".strtolower(Str::plural($name))."/index.blade.php"),
             $this->getTemplate('views/index', $name));
-    }
 
-
-    protected function showView($name)
-    {
         file_put_contents(
             resource_path("/views/".strtolower(Str::plural($name))."/show.blade.php"),
             $this->getTemplate('views/show', $name));
-    }
 
-
-    protected function showForm($name)
-    {
         file_put_contents(
             resource_path("/views/".strtolower(Str::plural($name))."/form.blade.php"),
             $this->getTemplate('views/form', $name)
+        );
+    }
+
+
+    protected function addButtons($name)
+    {
+        file_put_contents(
+            resource_path("/views/".strtolower(Str::plural($name))."/addins/links/add.blade.php"),
+            $this->getTemplate('views/addins/links/add', $name)
+        );
+
+        file_put_contents(
+            resource_path("/views/".strtolower(Str::plural($name))."/addins/buttons/save.blade.php"),
+            $this->getTemplate('views/addins/buttons/save', $name)
+        );
+
+        file_put_contents(
+            resource_path("/views/".strtolower(Str::plural($name))."/addins/links/edit.blade.php"),
+            $this->getTemplate('views/addins/links/edit', $name)
+        );
+
+        file_put_contents(
+            resource_path("/views/".strtolower(Str::plural($name))."/addins/buttons/update.blade.php"),
+            $this->getTemplate('views/addins/buttons/update', $name)
+        );
+
+        file_put_contents(
+            resource_path("/views/".strtolower(Str::plural($name))."/addins/links/delete.blade.php"),
+            $this->getTemplate('views/addins/links/delete', $name)
+        );
+
+        file_put_contents(
+            resource_path("/views/".strtolower(Str::plural($name))."/addins/links/back.blade.php"),
+            $this->getTemplate('views/addins/links/back', $name)
+        );
+
+        file_put_contents(
+            resource_path("/views/".strtolower(Str::plural($name))."/addins/links/help.blade.php"),
+            $this->getTemplate('views/addins/links/help', $name)
         );
     }
 
@@ -212,6 +223,11 @@ class CrudGeneratorCommand extends Command
         }
 
         if(!file_exists($path = resource_path("/views/" . strtolower(Str::plural($name)) . "/addins/links/")))
+        {
+            mkdir($path, 0777, true);
+        }
+
+        if(!file_exists($path = resource_path("/views/" . strtolower(Str::plural($name)) . "/addins/buttons/")))
         {
             mkdir($path, 0777, true);
         }
@@ -271,6 +287,17 @@ class CrudGeneratorCommand extends Command
                 'description' => 'delete '.strtolower($name)
             ]
         ]);
+
+        // Find newly added permissions (ids)
+        $results = DB::select('select id from permissions where model = "' . strtolower($name) . '"');
+        // Add permissions to admin account
+        foreach($results as $r) {
+            DB::table('permission_user')->insert(
+                [
+                    'permission_id' => $r->id,
+                    'user_id' => 2
+                ]);
+        }
     }
 
 

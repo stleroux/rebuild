@@ -20,7 +20,7 @@
                New User
             </span>
             <span class="float-sm-right">
-               @include('common.buttons.cancel', ['model'=>'user', 'type'=>''])
+               @include('common.buttons.back', ['model'=>'user', 'type'=>''])
                @if(checkPerm('user_create'))
                   @include('common.buttons.reset', ['model'=>'user', 'type'=>''])
                   @include('common.buttons.save', ['model'=>'user', 'type'=>''])
