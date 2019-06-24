@@ -28,5 +28,9 @@ class DatabaseSeeder extends Seeder
         $this->call(MigrationsTableSeeder::class);
         $this->call(PostTagTableSeeder::class);
         $this->call(WoodprojectsTableSeeder::class);
+        $this->call(InvoicerClientsTableSeeder::class);
+        $this->call(InvoicerInvoiceitemsTableSeeder::class);
+        $this->call(InvoicerInvoicesTableSeeder::class);
+        $this->call(InvoicerProductsTableSeeder::class);
     }
 }
