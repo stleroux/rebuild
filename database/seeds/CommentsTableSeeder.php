@@ -83,6 +83,28 @@ class CommentsTableSeeder extends Seeder
                 'created_at' => '2019-02-12 12:20:40',
                 'updated_at' => '2019-02-12 12:20:40',
             ),
+            6 => 
+            array (
+                'id' => 7,
+                'user_id' => 2,
+                'comment' => 'First comment for this recipe',
+                'approved' => 0,
+                'commentable_type' => 'App\\Models\\Recipes\\Recipe',
+                'commentable_id' => 10,
+                'created_at' => '2019-06-10 13:15:07',
+                'updated_at' => '2019-06-10 13:15:07',
+            ),
+            7 => 
+            array (
+                'id' => 8,
+                'user_id' => 2,
+                'comment' => '22222222222222',
+                'approved' => 0,
+                'commentable_type' => 'App\\Models\\Recipes\\Recipe',
+                'commentable_id' => 10,
+                'created_at' => '2019-06-10 13:16:12',
+                'updated_at' => '2019-06-10 13:16:12',
+            ),
         ));
         
         

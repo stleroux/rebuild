@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ArticleUserTableSeeder extends Seeder
+class PostTagTableSeeder extends Seeder
 {
 
     /**
@@ -14,7 +14,7 @@ class ArticleUserTableSeeder extends Seeder
     {
         
 
-        \DB::table('article_user')->delete();
+        \DB::table('post_tag')->delete();
         
         
         

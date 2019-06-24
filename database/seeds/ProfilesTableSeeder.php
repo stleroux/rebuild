@@ -183,7 +183,7 @@ class ProfilesTableSeeder extends Seeder
                 'layout' => 1,
                 'deleted_at' => NULL,
                 'created_at' => '2018-06-05 18:40:29',
-                'updated_at' => '2018-06-08 12:47:23',                
+                'updated_at' => '2018-06-08 12:47:23',
             ),
             6 => 
             array (
@@ -212,6 +212,34 @@ class ProfilesTableSeeder extends Seeder
                 'deleted_at' => NULL,
                 'created_at' => '2018-06-05 18:40:15',
                 'updated_at' => '2018-06-05 18:40:15',
+            ),
+            7 => 
+            array (
+                'id' => 8,
+                'user_id' => 8,
+                'first_name' => NULL,
+                'last_name' => NULL,
+                'telephone' => NULL,
+                'image' => NULL,
+                'civic_number' => NULL,
+                'address1' => NULL,
+                'address2' => NULL,
+                'city' => NULL,
+                'province' => NULL,
+                'postal_code' => NULL,
+                'frontendStyle' => 'slate',
+                'backendStyle' => 'bootstrap',
+                'date_format' => 1,
+                'landing_page_id' => '41',
+                'rows_per_page' => 15,
+                'display_size' => 'normal',
+                'action_buttons' => '1',
+                'author_format' => '1',
+                'alert_fade_time' => 5000,
+                'layout' => 1,
+                'deleted_at' => NULL,
+                'created_at' => '2019-06-18 12:47:35',
+                'updated_at' => '2019-06-18 12:47:35',
             ),
         ));
         

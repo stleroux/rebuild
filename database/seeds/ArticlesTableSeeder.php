@@ -1,9 +1,6 @@
 <?php
 
-namespace Modules\Articles\Database\Seeders;
-
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Eloquent\Model;
 
 class ArticlesTableSeeder extends Seeder
 {
@@ -15,6 +12,7 @@ class ArticlesTableSeeder extends Seeder
      */
     public function run()
     {
+        
 
         \DB::table('articles')->delete();
         
@@ -30,10 +28,10 @@ class ArticlesTableSeeder extends Seeder
 ',
                 'description_fre' => '<p>French</p><p>line one</p><p>line two</p>',
                 'views' => 0,
-                'deleted_at' => NULL,
-                'published_at' => '2018-02-14 15:04:40',
                 'created_at' => '2017-01-01 00:00:00',
                 'updated_at' => '2018-02-14 15:04:40',
+                'published_at' => '2018-02-14 15:04:40',
+                'deleted_at' => NULL,
             ),
             1 => 
             array (
@@ -56,10 +54,10 @@ class ArticlesTableSeeder extends Seeder
 ',
                 'description_fre' => '<p>French text goes here</p>',
                 'views' => 0,
-                'deleted_at' => NULL,
-                'published_at' => NULL,
                 'created_at' => '2017-01-01 00:00:00',
                 'updated_at' => NULL,
+                'published_at' => NULL,
+                'deleted_at' => NULL,
             ),
             2 => 
             array (
@@ -88,10 +86,10 @@ class ArticlesTableSeeder extends Seeder
 ',
                 'description_fre' => '',
                 'views' => 0,
-                'deleted_at' => NULL,
-                'published_at' => NULL,
                 'created_at' => '2017-01-01 00:00:00',
                 'updated_at' => NULL,
+                'published_at' => NULL,
+                'deleted_at' => NULL,
             ),
             3 => 
             array (
@@ -103,11 +101,11 @@ class ArticlesTableSeeder extends Seeder
 <p>Open the application in question (Word, Excel, etc) from your desktop and then go to the File tab.<br />Then click on Options -&gt; Add-Ins.<br />At the bottom of the page is a dropdown called Manage.<br /> Select Disabled Items from the dropdown and click on the Go button.<br /> Enable all items listed here.<br /> Close the application and try to open your document again.</p>
 ',
                 'description_fre' => '',
-                'views' => 0,
-                'deleted_at' => NULL,
-                'published_at' => '2018-02-14 15:04:41',
+                'views' => 17,
                 'created_at' => '2016-11-08 14:01:27',
                 'updated_at' => '2018-02-14 15:04:41',
+                'published_at' => '2018-02-14 15:04:41',
+                'deleted_at' => NULL,
             ),
             4 => 
             array (
@@ -137,10 +135,10 @@ If the server(s) is/are listed in the Previously Connected DM section
 ',
                 'description_fre' => '',
                 'views' => 0,
-                'deleted_at' => NULL,
-                'published_at' => NULL,
                 'created_at' => '2016-11-08 14:02:03',
                 'updated_at' => NULL,
+                'published_at' => NULL,
+                'deleted_at' => NULL,
             ),
             5 => 
             array (
@@ -166,10 +164,10 @@ Click on Repair button in toolbar at top of screen
 ',
                 'description_fre' => '',
                 'views' => 0,
-                'deleted_at' => NULL,
-                'published_at' => NULL,
                 'created_at' => '2016-11-09 09:48:07',
                 'updated_at' => NULL,
+                'published_at' => NULL,
+                'deleted_at' => NULL,
             ),
             6 => 
             array (
@@ -186,10 +184,10 @@ Click on Repair button in toolbar at top of screen
 ',
                 'description_fre' => '',
                 'views' => 0,
-                'deleted_at' => NULL,
-                'published_at' => '2018-02-14 15:04:41',
                 'created_at' => '2016-11-09 10:03:31',
                 'updated_at' => '2018-02-14 15:04:41',
+                'published_at' => '2018-02-14 15:04:41',
+                'deleted_at' => NULL,
             ),
             7 => 
             array (
@@ -207,10 +205,10 @@ Make sure to disable the old groups after the scripts are ran
 ',
                 'description_fre' => '',
                 'views' => 0,
-                'deleted_at' => NULL,
-                'published_at' => NULL,
                 'created_at' => '2016-11-09 15:06:54',
                 'updated_at' => NULL,
+                'published_at' => NULL,
+                'deleted_at' => NULL,
             ),
             8 => 
             array (
@@ -229,10 +227,10 @@ Make sure to disable the old groups after the scripts are ran
 ',
                 'description_fre' => '',
                 'views' => 0,
-                'deleted_at' => NULL,
-                'published_at' => NULL,
                 'created_at' => '2016-11-09 15:13:43',
                 'updated_at' => NULL,
+                'published_at' => NULL,
+                'deleted_at' => NULL,
             ),
             9 => 
             array (
@@ -261,10 +259,10 @@ ccm eDocs Client
 ',
                 'description_fre' => '',
                 'views' => 0,
-                'deleted_at' => NULL,
-                'published_at' => NULL,
                 'created_at' => '2016-11-09 15:14:35',
                 'updated_at' => NULL,
+                'published_at' => NULL,
+                'deleted_at' => NULL,
             ),
             10 => 
             array (
@@ -285,10 +283,10 @@ Open Windows Explorer DM Extensions and see if the EKME folders now show up
 ',
                 'description_fre' => '',
                 'views' => 0,
-                'deleted_at' => NULL,
-                'published_at' => NULL,
                 'created_at' => '2016-11-10 10:08:30',
                 'updated_at' => NULL,
+                'published_at' => NULL,
+                'deleted_at' => NULL,
             ),
             11 => 
             array (
@@ -317,10 +315,10 @@ Open Windows Explorer DM Extensions and see if the EKME folders now show up
 - Enregistrer et redémarré EKME
 ',
                 'views' => 0,
-                'deleted_at' => NULL,
-                'published_at' => '2018-02-14 15:04:41',
                 'created_at' => '2016-11-10 10:09:47',
                 'updated_at' => '2018-02-14 15:04:41',
+                'published_at' => '2018-02-14 15:04:41',
+                'deleted_at' => NULL,
             ),
             12 => 
             array (
@@ -339,10 +337,10 @@ If DOCS_USERS, only EKME Search will show up
 ',
                 'description_fre' => '',
                 'views' => 0,
-                'deleted_at' => NULL,
-                'published_at' => NULL,
                 'created_at' => '2016-11-14 11:10:48',
                 'updated_at' => NULL,
+                'published_at' => NULL,
+                'deleted_at' => NULL,
             ),
             13 => 
             array (
@@ -358,10 +356,10 @@ If DOCS_USERS, only EKME Search will show up
 ',
                 'description_fre' => '',
                 'views' => 0,
-                'deleted_at' => NULL,
-                'published_at' => NULL,
                 'created_at' => '2016-11-14 11:11:50',
                 'updated_at' => NULL,
+                'published_at' => NULL,
+                'deleted_at' => NULL,
             ),
             14 => 
             array (
@@ -398,10 +396,10 @@ Once script is completed, send to Julien to run
 ',
             'description_fre' => '',
             'views' => 0,
-            'deleted_at' => NULL,
-            'published_at' => NULL,
             'created_at' => '2016-11-14 11:12:29',
             'updated_at' => NULL,
+            'published_at' => NULL,
+            'deleted_at' => NULL,
         ),
         15 => 
         array (
@@ -418,10 +416,10 @@ Add a new string value MAPI = 1
 ',
             'description_fre' => '',
             'views' => 0,
-            'deleted_at' => NULL,
-            'published_at' => NULL,
             'created_at' => '2016-11-14 11:13:07',
             'updated_at' => NULL,
+            'published_at' => NULL,
+            'deleted_at' => NULL,
         ),
         16 => 
         array (
@@ -441,10 +439,10 @@ Add a new string value MAPI = 1
 ',
             'description_fre' => '',
             'views' => 0,
-            'deleted_at' => NULL,
-            'published_at' => NULL,
             'created_at' => '2016-11-15 11:10:09',
             'updated_at' => NULL,
+            'published_at' => NULL,
+            'deleted_at' => NULL,
         ),
         17 => 
         array (
@@ -460,10 +458,10 @@ Add a new string value MAPI = 1
 ',
             'description_fre' => '',
             'views' => 0,
-            'deleted_at' => NULL,
-            'published_at' => NULL,
             'created_at' => '2017-01-05 13:38:42',
             'updated_at' => NULL,
+            'published_at' => NULL,
+            'deleted_at' => NULL,
         ),
         18 => 
         array (
@@ -483,10 +481,10 @@ Add a new string value MAPI = 1
 ',
             'description_fre' => '',
             'views' => 0,
-            'deleted_at' => NULL,
-            'published_at' => NULL,
             'created_at' => '2017-01-09 14:56:36',
             'updated_at' => NULL,
+            'published_at' => NULL,
+            'deleted_at' => NULL,
         ),
     ));
         

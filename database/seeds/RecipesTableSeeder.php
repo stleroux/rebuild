@@ -20,6 +20,7 @@ class RecipesTableSeeder extends Seeder
             0 => 
             array (
                 'id' => 1,
+                'status' => 0,
                 'title' => 'Oatmeal Buds',
                 'ingredients' => '<p>2 cups of sugar</p>
 <p>dash of salt</p>
@@ -46,14 +47,15 @@ class RecipesTableSeeder extends Seeder
                 'modified_by_id' => 2,
                 'last_viewed_by_id' => 2,
                 'last_viewed_on' => '2019-05-15 12:08:50',
-                'published_at' => '2019-05-15 12:12:19',
+                'published_at' => '2019-05-29 12:02:50',
                 'deleted_at' => NULL,
                 'created_at' => '2019-05-15 12:11:12',
-                'updated_at' => '2019-05-15 12:12:19',
+                'updated_at' => '2019-05-29 12:02:50',
             ),
             1 => 
             array (
                 'id' => 2,
+                'status' => 0,
                 'title' => 'Bouchees Aux Cacahuettes',
                 'ingredients' => '<p>1/2 cup of brown sugar - well packed</p>
 <p>1/2 cup of peanut butter</p>
@@ -71,8 +73,8 @@ class RecipesTableSeeder extends Seeder
                 'servings' => 0,
                 'prep_time' => 30,
                 'cook_time' => 0,
-                'personal' => 1,
-                'views' => 194,
+                'personal' => 0,
+                'views' => 200,
                 'source' => NULL,
                 'private_notes' => NULL,
                 'public_notes' => NULL,
@@ -83,11 +85,12 @@ class RecipesTableSeeder extends Seeder
                 'published_at' => '2019-02-13 14:13:21',
                 'deleted_at' => NULL,
                 'created_at' => '2019-02-21 07:03:32',
-                'updated_at' => '2019-05-16 12:42:18',
+                'updated_at' => '2019-05-28 13:12:32',
             ),
             2 => 
             array (
                 'id' => 4,
+                'status' => 0,
                 'title' => 'Banana Loaf',
                 'ingredients' => '<p>1 1/2 cups of sugar</p>
 <p>1/2 cup of butter</p>
@@ -106,22 +109,23 @@ class RecipesTableSeeder extends Seeder
                 'prep_time' => 20,
                 'cook_time' => 0,
                 'personal' => 0,
-                'views' => 20,
+                'views' => 32,
                 'source' => 'Recipe Box',
                 'private_notes' => '',
                 'public_notes' => '',
                 'user_id' => 3,
-                'modified_by_id' => NULL,
+                'modified_by_id' => 2,
                 'last_viewed_by_id' => 3,
                 'last_viewed_on' => '2016-10-02 12:27:03',
-                'published_at' => '2019-02-13 14:13:21',
+                'published_at' => '2019-05-28 11:49:09',
                 'deleted_at' => NULL,
                 'created_at' => '2019-02-21 07:03:32',
-                'updated_at' => '2019-02-28 22:53:57',
+                'updated_at' => '2019-05-28 11:49:09',
             ),
             3 => 
             array (
                 'id' => 5,
+                'status' => 0,
                 'title' => 'Pancakes',
                 'ingredients' => '<p>1 1/2 cups of flour</p>
 <p>3 teaspoons of baking powder</p>
@@ -152,6 +156,7 @@ class RecipesTableSeeder extends Seeder
             4 => 
             array (
                 'id' => 6,
+                'status' => 0,
                 'title' => 'Shortbread Cookies',
                 'ingredients' => '<p>1 pound of butter</p>
 <p>1 cup of fruit sugar</p>
@@ -182,6 +187,7 @@ class RecipesTableSeeder extends Seeder
             5 => 
             array (
                 'id' => 7,
+                'status' => 0,
                 'title' => 'Spinach Dip',
             'ingredients' => '<p>1 package of frozen spinach (cook as indicated and cool)</p>
 <p>1 cup of sour cream</p>
@@ -200,17 +206,18 @@ class RecipesTableSeeder extends Seeder
                 'private_notes' => '',
                 'public_notes' => '',
                 'user_id' => 2,
-                'modified_by_id' => NULL,
+                'modified_by_id' => 2,
                 'last_viewed_by_id' => 2,
                 'last_viewed_on' => '2016-10-02 11:19:13',
                 'published_at' => '2016-10-02 11:19:13',
                 'deleted_at' => NULL,
                 'created_at' => '2016-10-02 14:19:13',
-                'updated_at' => '2016-10-02 14:19:13',
+                'updated_at' => '2019-05-29 12:01:29',
             ),
             6 => 
             array (
                 'id' => 8,
+                'status' => 0,
                 'title' => 'French Toast',
                 'ingredients' => '<p>3 eggs</p>
 <p>1/2 teaspoon of salt</p>
@@ -224,7 +231,7 @@ class RecipesTableSeeder extends Seeder
                 'prep_time' => 10,
                 'cook_time' => 0,
                 'personal' => 0,
-                'views' => 25,
+                'views' => 30,
                 'source' => 'Recipe Box',
                 'private_notes' => NULL,
                 'public_notes' => NULL,
@@ -240,6 +247,7 @@ class RecipesTableSeeder extends Seeder
             7 => 
             array (
                 'id' => 9,
+                'status' => 0,
                 'title' => 'Peanut Butter Cookies',
                 'ingredients' => '<p>1 1/4 cups of Kraft Smooth Peanut Butter</p>
 <p>1/2 cup of margarine or butter</p>
@@ -260,12 +268,12 @@ class RecipesTableSeeder extends Seeder
                 'prep_time' => 30,
                 'cook_time' => 0,
                 'personal' => 0,
-                'views' => 54,
+                'views' => 56,
                 'source' => 'Recipe Box',
                 'private_notes' => '',
                 'public_notes' => '',
                 'user_id' => 3,
-                'modified_by_id' => NULL,
+                'modified_by_id' => 2,
                 'last_viewed_by_id' => 2,
                 'last_viewed_on' => '2016-10-02 11:22:47',
                 'published_at' => '2019-02-19 20:06:13',
@@ -276,6 +284,7 @@ class RecipesTableSeeder extends Seeder
             8 => 
             array (
                 'id' => 10,
+                'status' => 0,
                 'title' => 'Beef And Vegetable Pie',
                 'ingredients' => '<p>2 teaspoons of cooking oil</p>
 <p>1 pound of lean ground beef</p>
@@ -303,7 +312,7 @@ class RecipesTableSeeder extends Seeder
                 'prep_time' => 25,
                 'cook_time' => 0,
                 'personal' => 0,
-                'views' => 48,
+                'views' => 68,
                 'source' => 'Company\'s Coming',
                 'private_notes' => NULL,
                 'public_notes' => '<p>436 calories per wedge</p>',
@@ -319,6 +328,7 @@ class RecipesTableSeeder extends Seeder
             9 => 
             array (
                 'id' => 11,
+                'status' => 0,
                 'title' => 'Classic Meatloaf',
                 'ingredients' => '<p>1 egg</p>
 <p>3/4 cup of quick-cooking rolled oats</p>
@@ -347,7 +357,7 @@ class RecipesTableSeeder extends Seeder
                 'prep_time' => 35,
                 'cook_time' => 0,
                 'personal' => 0,
-                'views' => 135,
+                'views' => 136,
                 'source' => 'Company\'s Coming',
                 'private_notes' => NULL,
                 'public_notes' => NULL,
@@ -363,6 +373,7 @@ class RecipesTableSeeder extends Seeder
             10 => 
             array (
                 'id' => 13,
+                'status' => 0,
                 'title' => 'Fruity Burritos',
                 'ingredients' => '<p>2/3 cup of fresh raspberries</p>
 <p>1/3 cup of fresh blueberries (or frozen, thawed)</p>
@@ -384,7 +395,7 @@ class RecipesTableSeeder extends Seeder
                 'prep_time' => 25,
                 'cook_time' => 0,
                 'personal' => 0,
-                'views' => 19,
+                'views' => 25,
                 'source' => 'Company\'s Coming',
                 'private_notes' => NULL,
                 'public_notes' => NULL,
@@ -400,6 +411,7 @@ class RecipesTableSeeder extends Seeder
             11 => 
             array (
                 'id' => 14,
+                'status' => 0,
                 'title' => 'Lasagna',
                 'ingredients' => '<p>1 tablespoon vegetable oil</p>
 <p>1 medium onion, chopped</p>
@@ -424,12 +436,12 @@ class RecipesTableSeeder extends Seeder
                 'prep_time' => 35,
                 'cook_time' => 0,
                 'personal' => 0,
-                'views' => 35,
+                'views' => 36,
                 'source' => '',
                 'private_notes' => '',
                 'public_notes' => '',
                 'user_id' => 2,
-                'modified_by_id' => NULL,
+                'modified_by_id' => 2,
                 'last_viewed_by_id' => 2,
                 'last_viewed_on' => '2016-10-02 11:33:31',
                 'published_at' => '2019-02-13 14:13:21',
@@ -440,6 +452,7 @@ class RecipesTableSeeder extends Seeder
             12 => 
             array (
                 'id' => 15,
+                'status' => 0,
                 'title' => 'Carrot Muffins',
                 'ingredients' => '<p>4 cups of white sugar</p>
 <p>2 teaspoons of cinnamon</p>
@@ -457,12 +470,12 @@ class RecipesTableSeeder extends Seeder
                 'prep_time' => 30,
                 'cook_time' => 0,
                 'personal' => 0,
-                'views' => 20,
+                'views' => 23,
                 'source' => 'Recipe Box',
                 'private_notes' => '',
                 'public_notes' => '',
                 'user_id' => 2,
-                'modified_by_id' => NULL,
+                'modified_by_id' => 2,
                 'last_viewed_by_id' => 2,
                 'last_viewed_on' => '2016-10-02 11:35:01',
                 'published_at' => '2019-02-28 22:53:42',
@@ -473,6 +486,7 @@ class RecipesTableSeeder extends Seeder
             13 => 
             array (
                 'id' => 16,
+                'status' => 0,
                 'title' => 'Macaroni Salad',
                 'ingredients' => '<p>1 cup of real mayonnaise</p>
 <p>2 tablespoons of vinegar</p>
@@ -492,7 +506,7 @@ class RecipesTableSeeder extends Seeder
                 'prep_time' => 20,
                 'cook_time' => 0,
                 'personal' => 0,
-                'views' => 21,
+                'views' => 22,
                 'source' => 'Recipe Box',
                 'private_notes' => '<p>hghgfhgfhf</p>',
                 'public_notes' => NULL,
@@ -508,6 +522,7 @@ class RecipesTableSeeder extends Seeder
             14 => 
             array (
                 'id' => 17,
+                'status' => 0,
                 'title' => 'Macaroni And Cheese',
                 'ingredients' => '<p>2 cups of macaroni</p>
 <p>2 tablespoons of butter</p>
@@ -522,12 +537,12 @@ class RecipesTableSeeder extends Seeder
                 'prep_time' => 30,
                 'cook_time' => 0,
                 'personal' => 0,
-                'views' => 22,
+                'views' => 23,
                 'source' => 'Recipe Box',
                 'private_notes' => '',
             'public_notes' => '<p>Variations: add onions and peppers (sauteed), add sliced hot dog pieces topped with buttered bread crumbs.</p>',
                 'user_id' => 2,
-                'modified_by_id' => NULL,
+                'modified_by_id' => 2,
                 'last_viewed_by_id' => 2,
                 'last_viewed_on' => '2016-10-02 11:38:18',
                 'published_at' => '2019-02-13 14:13:21',
@@ -538,6 +553,7 @@ class RecipesTableSeeder extends Seeder
             15 => 
             array (
                 'id' => 18,
+                'status' => 0,
                 'title' => 'Pork Chops A La Ruth',
                 'ingredients' => '<p>Salt</p>
 <p>Pepper</p>
@@ -561,7 +577,7 @@ class RecipesTableSeeder extends Seeder
                 'public_notes' => '<p>You may increase the sauce depending on the number of chops. Each batch covers approximately 4 chops.</p>
 <p>From my experience the best type of chops to use for this recipe is boneless.</p>',
                 'user_id' => 2,
-                'modified_by_id' => NULL,
+                'modified_by_id' => 2,
                 'last_viewed_by_id' => 2,
                 'last_viewed_on' => '2016-10-02 11:40:16',
                 'published_at' => '2019-02-13 14:13:21',
@@ -572,6 +588,7 @@ class RecipesTableSeeder extends Seeder
             16 => 
             array (
                 'id' => 19,
+                'status' => 0,
                 'title' => 'Spiced Fruit Salad',
                 'ingredients' => '<p>2 cups of halved seedless grapes</p>
 <p>2 cups of cubed honeydew</p>
@@ -590,7 +607,7 @@ class RecipesTableSeeder extends Seeder
                 'prep_time' => 20,
                 'cook_time' => 0,
                 'personal' => 0,
-                'views' => 8,
+                'views' => 17,
                 'source' => 'Company\'s Coming',
                 'private_notes' => NULL,
                 'public_notes' => '<p>97 calories per serving</p>',
@@ -601,11 +618,12 @@ class RecipesTableSeeder extends Seeder
                 'published_at' => '2019-02-17 19:27:37',
                 'deleted_at' => NULL,
                 'created_at' => '2016-10-02 14:42:26',
-                'updated_at' => '2019-03-03 17:14:58',
+                'updated_at' => '2019-05-29 12:01:14',
             ),
             17 => 
             array (
                 'id' => 20,
+                'status' => 0,
                 'title' => 'Snow Angel Trifle',
                 'ingredients' => '<p>4 cups of milk</p>
 <p>2 boxes of instant white chocolate (or vanilla) pudding powder (4 serving size, each)</p>
@@ -630,12 +648,12 @@ class RecipesTableSeeder extends Seeder
                     'prep_time' => 45,
                     'cook_time' => 0,
                     'personal' => 0,
-                    'views' => 8,
+                    'views' => 15,
                     'source' => 'Company\'s Coming',
                     'private_notes' => '',
                     'public_notes' => '',
                     'user_id' => 2,
-                    'modified_by_id' => NULL,
+                    'modified_by_id' => 2,
                     'last_viewed_by_id' => 3,
                     'last_viewed_on' => '2016-10-02 12:32:00',
                     'published_at' => '2019-02-13 14:13:21',
@@ -646,6 +664,7 @@ class RecipesTableSeeder extends Seeder
                 18 => 
                 array (
                     'id' => 21,
+                    'status' => 0,
                     'title' => 'Chocolate And Pear Muffins',
                     'ingredients' => '<p>2 cups of all purpose flour</p>
 <p>1 1/3 chopped peeled fresh pear</p>
@@ -666,12 +685,12 @@ class RecipesTableSeeder extends Seeder
                     'prep_time' => 30,
                     'cook_time' => 0,
                     'personal' => 0,
-                    'views' => 28,
+                    'views' => 29,
                     'source' => 'Company\'s Coming',
                     'private_notes' => '',
                     'public_notes' => '<p>Muffins may be stored in an airtight container for up to 3 months.</p>',
                     'user_id' => 2,
-                    'modified_by_id' => NULL,
+                    'modified_by_id' => 2,
                     'last_viewed_by_id' => 2,
                     'last_viewed_on' => '2016-10-02 11:46:42',
                     'published_at' => '2019-02-13 14:13:21',
@@ -682,6 +701,7 @@ class RecipesTableSeeder extends Seeder
                 19 => 
                 array (
                     'id' => 22,
+                    'status' => 0,
                     'title' => 'Chocolate Peanut Butter Bars',
                     'ingredients' => '<p>2 cups of quick-cooking oats</p>
 <p>1 3/4 cups of firmly packed light brown sugar</p>
@@ -708,12 +728,12 @@ class RecipesTableSeeder extends Seeder
                     'prep_time' => 30,
                     'cook_time' => 30,
                     'personal' => 0,
-                    'views' => 12,
+                    'views' => 13,
                     'source' => 'Recipe Box',
                     'private_notes' => '',
                     'public_notes' => '',
                     'user_id' => 2,
-                    'modified_by_id' => NULL,
+                    'modified_by_id' => 2,
                     'last_viewed_by_id' => 2,
                     'last_viewed_on' => '2016-10-02 11:49:30',
                     'published_at' => '2019-02-28 22:53:42',
@@ -724,6 +744,7 @@ class RecipesTableSeeder extends Seeder
                 20 => 
                 array (
                     'id' => 23,
+                    'status' => 0,
                     'title' => 'Baked Soup',
                     'ingredients' => '<p>2 pounds of sausage</p>
 <p>3 cups of chopped carrots</p>
@@ -742,7 +763,7 @@ class RecipesTableSeeder extends Seeder
                     'prep_time' => 30,
                     'cook_time' => 180,
                     'personal' => 0,
-                    'views' => 52,
+                    'views' => 63,
                     'source' => 'Recipe Box',
                     'private_notes' => '',
                     'public_notes' => '',
@@ -758,6 +779,7 @@ class RecipesTableSeeder extends Seeder
                 21 => 
                 array (
                     'id' => 24,
+                    'status' => 0,
                     'title' => 'Chocolate Banana Crepes',
                     'ingredients' => '<p>1 cup of all-purpose flour</p>
 <p>3 tablespoon of unsweetened dutch cocoa powder</p>
@@ -784,7 +806,7 @@ class RecipesTableSeeder extends Seeder
                     'private_notes' => '',
                     'public_notes' => '<p>This batter will also keep in the refrigerator for up to a day.</p>',
                     'user_id' => 4,
-                    'modified_by_id' => NULL,
+                    'modified_by_id' => 2,
                     'last_viewed_by_id' => 3,
                     'last_viewed_on' => '2016-10-02 12:32:22',
                     'published_at' => '2019-02-13 14:13:21',
@@ -795,6 +817,7 @@ class RecipesTableSeeder extends Seeder
                 22 => 
                 array (
                     'id' => 25,
+                    'status' => 0,
                     'title' => 'Strawberry Cream Cheese Cobbler',
                 'ingredients' => '<p>1 stick (1/2 cup) of butter</p>
 <p>1 egg, lightly beaten</p>
@@ -820,7 +843,7 @@ class RecipesTableSeeder extends Seeder
                     'private_notes' => '',
                     'public_notes' => '',
                     'user_id' => 4,
-                    'modified_by_id' => NULL,
+                    'modified_by_id' => 2,
                     'last_viewed_by_id' => 2,
                     'last_viewed_on' => '2016-10-02 11:58:10',
                     'published_at' => '2019-02-13 14:13:21',
@@ -831,6 +854,7 @@ class RecipesTableSeeder extends Seeder
                 23 => 
                 array (
                     'id' => 26,
+                    'status' => 0,
                     'title' => 'Molasses Cake',
                     'ingredients' => '<p>2 cups of molasses</p>
 <p>2 tbsp of lard or shortening</p>
@@ -849,12 +873,12 @@ class RecipesTableSeeder extends Seeder
                     'prep_time' => 50,
                     'cook_time' => 40,
                     'personal' => 0,
-                    'views' => 29,
+                    'views' => 43,
                     'source' => 'Mom\'s recipe book',
                     'private_notes' => '',
                     'public_notes' => '',
                     'user_id' => 4,
-                    'modified_by_id' => NULL,
+                    'modified_by_id' => 2,
                     'last_viewed_by_id' => 2,
                     'last_viewed_on' => '2016-10-02 11:59:47',
                     'published_at' => '2019-02-13 14:13:21',
@@ -865,6 +889,7 @@ class RecipesTableSeeder extends Seeder
                 24 => 
                 array (
                     'id' => 27,
+                    'status' => 0,
                     'title' => 'Butter Tarts',
                     'ingredients' => '<p>2 eggs</p>
 <p>2 cups of brown sugar</p>
@@ -883,7 +908,7 @@ class RecipesTableSeeder extends Seeder
                     'prep_time' => 30,
                     'cook_time' => 20,
                     'personal' => 0,
-                    'views' => 13,
+                    'views' => 25,
                     'source' => 'Recipe Box',
                     'private_notes' => NULL,
                     'public_notes' => '<p>Old family recipe</p>',
@@ -899,6 +924,7 @@ class RecipesTableSeeder extends Seeder
                 25 => 
                 array (
                     'id' => 28,
+                    'status' => 0,
                     'title' => 'Pate Chomeur',
                     'ingredients' => '<p>1 cup of white sugar</p>
 <p>1 cup of milk</p>
@@ -916,7 +942,7 @@ class RecipesTableSeeder extends Seeder
                     'prep_time' => 20,
                     'cook_time' => 30,
                     'personal' => 0,
-                    'views' => 8,
+                    'views' => 10,
                     'source' => 'My mom\'s recipe book',
                     'private_notes' => NULL,
                     'public_notes' => NULL,
@@ -928,6 +954,61 @@ class RecipesTableSeeder extends Seeder
                     'deleted_at' => NULL,
                     'created_at' => '2019-03-05 12:33:14',
                     'updated_at' => '2019-03-05 12:33:14',
+                ),
+                26 => 
+                array (
+                    'id' => 29,
+                    'status' => 0,
+                    'title' => 'qqqqq',
+                    'ingredients' => '<p>asdasda</p>',
+                    'methodology' => '<p>vcxvxcvxcv</p>',
+                    'image' => NULL,
+                    'category_id' => 32,
+                    'servings' => 2,
+                    'prep_time' => 12,
+                    'cook_time' => 2,
+                    'personal' => 0,
+                    'views' => 0,
+                    'source' => NULL,
+                    'private_notes' => NULL,
+                    'public_notes' => NULL,
+                    'user_id' => 2,
+                    'modified_by_id' => 2,
+                    'last_viewed_by_id' => 2,
+                    'last_viewed_on' => '2019-05-29 12:17:40',
+                    'published_at' => NULL,
+                    'deleted_at' => NULL,
+                    'created_at' => '2019-05-29 12:17:40',
+                    'updated_at' => '2019-05-29 12:17:40',
+                ),
+                27 => 
+                array (
+                    'id' => 30,
+                    'status' => 0,
+                    'title' => 'wwwwww',
+                    'ingredients' => '<p>wqwqwqw</p>
+<p>cvccvc</p>
+<p>hghghghgh</p>',
+                    'methodology' => '<p>qtrtrtrtrt</p>
+<p>iuiuiuiu</p>',
+                    'image' => NULL,
+                    'category_id' => 7,
+                    'servings' => 5,
+                    'prep_time' => 2,
+                    'cook_time' => 4,
+                    'personal' => 0,
+                    'views' => 0,
+                    'source' => NULL,
+                    'private_notes' => NULL,
+                    'public_notes' => NULL,
+                    'user_id' => 3,
+                    'modified_by_id' => 3,
+                    'last_viewed_by_id' => 3,
+                    'last_viewed_on' => '2019-05-29 15:19:54',
+                    'published_at' => NULL,
+                    'deleted_at' => NULL,
+                    'created_at' => '2019-05-29 12:40:05',
+                    'updated_at' => '2019-05-29 15:19:54',
                 ),
             ));
         
