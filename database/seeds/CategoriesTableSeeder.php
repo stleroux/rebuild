@@ -163,7 +163,7 @@ class CategoriesTableSeeder extends Seeder
             13 => 
             array (
                 'id' => 14,
-                'parent_id' => 12,
+                'parent_id' => 0,
                 'name' => 'wood type',
                 'value' => NULL,
                 'description' => '',
@@ -174,7 +174,7 @@ class CategoriesTableSeeder extends Seeder
             14 => 
             array (
                 'id' => 15,
-                'parent_id' => 12,
+                'parent_id' => 0,
                 'name' => 'wood specie',
                 'value' => NULL,
                 'description' => NULL,
@@ -185,7 +185,7 @@ class CategoriesTableSeeder extends Seeder
             15 => 
             array (
                 'id' => 16,
-                'parent_id' => 12,
+                'parent_id' => 0,
                 'name' => 'stain type',
                 'value' => NULL,
                 'description' => NULL,
@@ -196,7 +196,7 @@ class CategoriesTableSeeder extends Seeder
             16 => 
             array (
                 'id' => 17,
-                'parent_id' => 12,
+                'parent_id' => 0,
                 'name' => 'stain color',
                 'value' => NULL,
                 'description' => NULL,
@@ -207,7 +207,7 @@ class CategoriesTableSeeder extends Seeder
             17 => 
             array (
                 'id' => 18,
-                'parent_id' => 12,
+                'parent_id' => 0,
                 'name' => 'stain sheen',
                 'value' => NULL,
                 'description' => NULL,
@@ -218,7 +218,7 @@ class CategoriesTableSeeder extends Seeder
             18 => 
             array (
                 'id' => 19,
-                'parent_id' => 12,
+                'parent_id' => 0,
                 'name' => 'finish type',
                 'value' => NULL,
                 'description' => NULL,
@@ -229,7 +229,7 @@ class CategoriesTableSeeder extends Seeder
             19 => 
             array (
                 'id' => 20,
-                'parent_id' => 12,
+                'parent_id' => 0,
                 'name' => 'finish sheen',
                 'value' => NULL,
                 'description' => NULL,
@@ -241,7 +241,7 @@ class CategoriesTableSeeder extends Seeder
             array (
                 'id' => 32,
                 'parent_id' => 4,
-                'name' => 'hot drinks',
+                'name' => 'hotDrinks',
                 'value' => NULL,
                 'description' => NULL,
                 'deleted_at' => NULL,
@@ -285,7 +285,7 @@ class CategoriesTableSeeder extends Seeder
             array (
                 'id' => 36,
                 'parent_id' => 3,
-                'name' => 'Fruit Dishes',
+                'name' => 'fruitDishes',
                 'value' => NULL,
                 'description' => NULL,
                 'deleted_at' => NULL,
@@ -307,12 +307,122 @@ class CategoriesTableSeeder extends Seeder
             array (
                 'id' => 39,
                 'parent_id' => 38,
-                'name' => 'hot soups',
+                'name' => 'hotSoups',
                 'value' => NULL,
                 'description' => NULL,
                 'deleted_at' => NULL,
                 'created_at' => '2019-03-03 21:57:02',
                 'updated_at' => '2019-03-03 21:57:02',
+            ),
+            27 => 
+            array (
+                'id' => 40,
+                'parent_id' => 4,
+                'name' => 'alcoholic',
+                'value' => NULL,
+                'description' => NULL,
+                'deleted_at' => NULL,
+                'created_at' => '2019-03-25 13:51:52',
+                'updated_at' => '2019-03-25 13:51:52',
+            ),
+            28 => 
+            array (
+                'id' => 41,
+                'parent_id' => 4,
+                'name' => 'coldDrinks',
+                'value' => NULL,
+                'description' => NULL,
+                'deleted_at' => NULL,
+                'created_at' => '2019-03-25 13:54:03',
+                'updated_at' => '2019-03-25 13:54:03',
+            ),
+            29 => 
+            array (
+                'id' => 59,
+                'parent_id' => 0,
+                'name' => 'posts',
+                'value' => NULL,
+                'description' => NULL,
+                'deleted_at' => NULL,
+                'created_at' => '2019-04-08 11:26:28',
+                'updated_at' => '2019-04-08 11:26:28',
+            ),
+            30 => 
+            array (
+                'id' => 60,
+                'parent_id' => 59,
+                'name' => 'site',
+                'value' => NULL,
+                'description' => NULL,
+                'deleted_at' => NULL,
+                'created_at' => '2019-04-08 11:26:58',
+                'updated_at' => '2019-04-08 11:28:16',
+            ),
+            31 => 
+            array (
+                'id' => 62,
+                'parent_id' => 60,
+                'name' => 'general',
+                'value' => NULL,
+                'description' => NULL,
+                'deleted_at' => NULL,
+                'created_at' => '2019-04-08 11:49:39',
+                'updated_at' => '2019-04-08 11:49:39',
+            ),
+            32 => 
+            array (
+                'id' => 64,
+                'parent_id' => 60,
+                'name' => '123456',
+                'value' => NULL,
+                'description' => NULL,
+                'deleted_at' => NULL,
+                'created_at' => '2019-04-08 12:39:41',
+                'updated_at' => '2019-04-08 12:39:41',
+            ),
+            33 => 
+            array (
+                'id' => 65,
+                'parent_id' => 13,
+                'name' => 'qwerty',
+                'value' => NULL,
+                'description' => NULL,
+                'deleted_at' => NULL,
+                'created_at' => '2019-04-08 12:40:10',
+                'updated_at' => '2019-04-08 12:40:10',
+            ),
+            34 => 
+            array (
+                'id' => 67,
+                'parent_id' => 12,
+                'name' => 'Type',
+                'value' => NULL,
+                'description' => 'Project types',
+                'deleted_at' => NULL,
+                'created_at' => '2019-06-24 08:37:48',
+                'updated_at' => '2019-06-24 08:37:48',
+            ),
+            35 => 
+            array (
+                'id' => 68,
+                'parent_id' => 67,
+                'name' => 'general',
+                'value' => NULL,
+                'description' => NULL,
+                'deleted_at' => NULL,
+                'created_at' => '2019-06-24 11:40:48',
+                'updated_at' => '2019-06-24 11:40:48',
+            ),
+            36 => 
+            array (
+                'id' => 69,
+                'parent_id' => 67,
+                'name' => 'furniture',
+                'value' => NULL,
+                'description' => NULL,
+                'deleted_at' => NULL,
+                'created_at' => '2019-06-24 11:44:08',
+                'updated_at' => '2019-06-24 11:44:08',
             ),
         ));
         
