@@ -11,7 +11,8 @@
 
    <script src="{{ asset('js/app.js') }}" defer></script>
    <!-- Font Awesome -->
-   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+   <link rel="stylesheet" href="/css/fontawesome/all.css">
+   <!--load all styles 5.9.0-->
 
    <!-- Styles -->
    {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/dt-1.10.18/datatables.min.css"/> --}}

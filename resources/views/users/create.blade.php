@@ -12,7 +12,7 @@
 
    {!! Form::open(array('route' => 'users.store','method'=>'POST')) !!}
 
-      <div class="card bg-secondary">
+      <div class="card">
          <!--CARD HEADER-->
          <div class="card-header card_header">
             <span class="h5 align-middle">

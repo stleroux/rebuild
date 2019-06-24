@@ -106,7 +106,7 @@ div.sticky {
 
 
 /* Adjust the number of columns to display when using card-columns like in the permissions section of user management */
-@media (min-width: 34em) {
+/*@media (min-width: 34em) {
     .card-columns-permissions {
         -webkit-column-count: 1;
         -moz-column-count: 1;
@@ -145,4 +145,4 @@ div.sticky {
 
 .card-columns-permissions .card {
     display: block;
-}
+}*/

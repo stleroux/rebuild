@@ -27,7 +27,7 @@
 				
 				<!--CARD BODY-->
 				<div class="card-body card_body">
-					<table id="datatable" class="table table-hover table-sm">
+					<table id="datatable" class="table table-hover table-sm text-light">
 						<thead>
 							<tr>
 								<th>No</th>
@@ -78,5 +78,9 @@
 			{{-- </div> --}}
 		</div>
 	</div>
+
+@endsection
+
+@section('scripts')
 
 @endsection

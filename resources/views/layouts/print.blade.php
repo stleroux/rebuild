@@ -12,7 +12,8 @@
    --}}
    
    <!-- Font Awesome -->
-   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+   <link rel="stylesheet" href="/css/fontawesome/all.css">
+   <!--load all styles 5.9.0-->
 
    {{-- {{ Html::style('css/font-awesome.css') }} --}}
    {{ Html::style('css/bootstrap_4/bootstrap.css') }}
@@ -28,11 +29,6 @@
    <![endif]-->
 </head>
    <body>
-{{--        pageName : {{ Session::get('pageName') }}
-   <br />
-   byCatName : {{ Session::get('byCatName') }}
-   <br />
-   byCatLetter : {{ Session::get('byCatLetter') }} --}}
       <div class="container">
          @yield ('content')
       </div>
