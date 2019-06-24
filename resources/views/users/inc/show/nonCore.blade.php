@@ -1,6 +1,6 @@
 <div class="card p-1">
    <div class="card-body p-1">
-      <div class="card-columns-permissions">
+      <div class="card-columns">
          @foreach ($nonCoreGroups as $group => $permissions)
             <div class="card mb-2">
                <div class="card-header card_header_2 p-1">{{ ucfirst($group) }}</div>

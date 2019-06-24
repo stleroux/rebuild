@@ -111,6 +111,7 @@ div.sticky {
         -webkit-column-count: 1;
         -moz-column-count: 1;
         column-count: 1;
+        display: block;
     }
 }
 
@@ -119,6 +120,7 @@ div.sticky {
         -webkit-column-count: 2;
         -moz-column-count: 2;
         column-count: 2;
+        display: block;
     }
 }
 
@@ -127,6 +129,7 @@ div.sticky {
         -webkit-column-count: 3;
         -moz-column-count: 3;
         column-count: 3;
+        display: block;
     }
 }
 
@@ -135,14 +138,11 @@ div.sticky {
         -webkit-column-count: 4;
         -moz-column-count: 4;
         column-count: 4;
+        display: block;
     }
-
-    .card-columns-permissions .card {
-    display: block;
-}
-}
+}*/
 
 
-.card-columns-permissions .card {
+/*.card-columns-permissions .card {
     display: block;
 }*/
