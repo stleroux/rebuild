@@ -1,9 +1,11 @@
 @extends ('layouts.backend')
 
 @section ('stylesheets')
+   {{-- {{ Html::style('css/.css') }} --}}
 @stop
 
 @section('left_column')
+   @include('blocks.main_menu')
 @endsection
 
 @section('right_column')
@@ -22,9 +24,9 @@
             <i class="fa fa-edit"></i>
             Edit Woodproject
             <span class="float-right">
-               @include('common.buttons.help', ['model'=>'woodproject', 'bookmark'=>'woodprojects'])
-               @include('common.buttons.previous', ['model'=>'woodproject'])
-               @include('common.buttons.update', ['model'=>'woodproject'])
+               @include('woodprojects.addins.links.help', ['model'=>'woodproject', 'bookmark'=>'woodprojects'])
+               @include('woodprojects.addins.links.back', ['model'=>'woodproject'])
+               @include('woodprojects.addins.buttons.update', ['model'=>'woodproject'])
             </span>
          </div>
 

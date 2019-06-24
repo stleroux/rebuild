@@ -1,4 +1,4 @@
-@if(checkPerm('{{modelNameSingularLowerCase}}_edit', ${{modelNameSingularLowerCase}}))
+@if(checkPerm('{{modelNamePluralLowerCase}}_edit', ${{modelNameSingularLowerCase}}))
    <a href="{{ route('{{modelNamePluralLowerCase}}.edit', ${{modelNameSingularLowerCase}}->id) }}"
       class="btn btn-{{ $size }} btn-info"
       title="Edit {{modelName}}">

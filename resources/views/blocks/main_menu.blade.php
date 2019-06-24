@@ -1,4 +1,4 @@
-<div class="card mb-2">
+<div class="card mb-3">
    <div class="card-header block_header">
       Main Menu
    </div>
@@ -110,13 +110,12 @@
          </a>
       @endif
 
-      <a href="#"
-         class="list-group-item list-group-item-action py-1 px-1 {{ Route::is('projects.*') ? 'active' : '' }}">
-         <i class="text-danger">
+      @if(checkPerm('woodprojects_index'))
+         <a href="{{ route('woodprojects.index') }}"
+            class="list-group-item list-group-item-action py-1 px-1 {{ Route::is('woodprojects.*') ? 'active' : '' }}">
             <i class="fab fa-pagelines pl-2"></i>
             Woodshop Projects
-         </i>
-      </a>
-
+         </a>
+      @endif
    </div>
 </div>

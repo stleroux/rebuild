@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\WoodprojectRequest;
+use App\Models\Category;
 use App\Models\Woodproject;
 use Session;
 
@@ -41,8 +42,11 @@ class WoodprojectsController extends Controller
         }
 
         $woodproject = New Woodproject();
+        // Get all categories related to Recipe Category (id=>1)
+        $categories = Category::where('parent_id',12)->get();
+        // dd($categories);
 
-        return view('woodprojects.create', compact('woodproject'));
+        return view('woodprojects.create', compact('woodproject','categories'));
     }
 
 

@@ -10,25 +10,29 @@ class Woodproject extends Model
 
 
    // Set the default value for the status field to 0
-   protected $attributes = [
-      'status' => 0,
-   ];
+   // protected $attributes = [
+   //    'category' => 0,
+   // ];
 
 
-   public function getStatusAttribute($attribute)
+   // public function getCategoryAttribute($attribute)
+   // {
+   //    return $this->categoriesOptions()[$attribute];
+   // }
+
+
+   // public function categoriesOptions()
+   // {
+   //    return [
+   //       0 => 'Select One',
+   //       1 => 'General',
+   //       2 => 'Furniture',
+   //    ];
+   // }
+
+   public function category()
    {
-      return $this->statusOptions()[$attribute];
+      return $this->belongsTo('App\Models\Category');
    }
-
-
-   public function statusOptions()
-   {
-      return [
-         1 => 'Active',
-         0 => 'Inactive',
-         2 => 'In-Progress',
-      ];
-   }
-
 
 }

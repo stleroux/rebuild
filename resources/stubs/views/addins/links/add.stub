@@ -1,4 +1,4 @@
-@if(checkPerm('{{modelNameSingularLowerCase}}_create'))
+@if(checkPerm('{{modelNamePluralLowerCase}}_create'))
    <a href="{{ route('{{modelNamePluralLowerCase}}.create') }}"
       class="btn btn-sm btn-success"
       title="Add {{modelName}}">

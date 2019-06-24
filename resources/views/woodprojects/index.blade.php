@@ -1,10 +1,14 @@
 @extends('layouts.backend')
 
 @section('stylesheets')
+   {{-- {{ Html::style('css/.css') }} --}}
 @endsection
 
 @section('left_column')
    @include('blocks.main_menu')
+@endsection
+
+@section('right_column')
 @endsection
 
 @section('content')
@@ -17,8 +21,8 @@
                {{-- <i class="fa fa-sitemap"></i> --}}
                Woodprojects
                <span class="float-right">
-                  @include('common.buttons.help', ['bookmark'=>'woodprojects'])
-                  @include('common.buttons.add', ['model'=>'woodproject'])
+                  @include('woodprojects.addins.links.help', ['bookmark'=>'woodprojects'])
+                  @include('woodprojects.addins.links.add', ['model'=>'woodproject'])
                </span>
             </div>
 
@@ -49,11 +53,11 @@
                               <td data-order="{{ $woodproject->created_at}}">{{ $woodproject->created_at ? $woodproject->created_at->format('M d, Y') : 'no data found' }}</td>
                               <td class="text-right">
                                  {{-- @if(checkPerm('woodproject_edit')) --}}
-                                    @include('woodprojects.addins.edit', ['model'=>$woodproject, 'size'=>'sm'])
+                                    @include('woodprojects.addins.links.edit', ['size'=>'xs'])
                                  {{-- @endif --}}
 
                                  {{-- @if(checkPerm('woodproject_delete')) --}}
-                                    {{-- @include('common.buttons.delete', ['model'=>'woodproject', 'id'=>$woodproject->id]) --}}
+                                    @include('woodprojects.addins.links.delete', ['size'=>'xs'])
                                  {{-- @endif --}}
                               </td>
                            </tr>

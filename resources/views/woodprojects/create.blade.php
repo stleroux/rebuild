@@ -1,10 +1,14 @@
 @extends('layouts.backend')
 
 @section('stylesheets')
+   {{-- {{ Html::style('css/.css') }} --}}
 @endsection
 
 @section('left_column')
    @include('blocks.main_menu')
+@endsection
+
+@section('right_column')
 @endsection
 
 @section('content')
@@ -17,9 +21,9 @@
             <i class="fa fa-plus-square"></i>
             Create Woodproject
             <span class="float-right">
-               @include('common.buttons.help', ['model'=>'woodproject', 'bookmark'=>'woodprojects'])
-               @include('common.buttons.previous', ['model'=>'woodproject'])
-               @include('common.buttons.save', ['model'=>'woodproject'])
+               @include('woodprojects.addins.links.help', ['model'=>'woodproject', 'bookmark'=>'woodprojects'])
+               @include('woodprojects.addins.links.back', ['model'=>'woodproject'])
+               @include('woodprojects.addins.buttons.save', ['model'=>'woodproject'])
             </span>
          </div>
 

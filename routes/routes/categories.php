@@ -11,8 +11,11 @@ Route::get('categories/{id?}',                    'CategoriesController@index') 
 Route::get('categories/{id}/edit',                'CategoriesController@edit')                 ->name('categories.edit');
 Route::put('categories/{id}',                     'CategoriesController@update')               ->name('categories.update');
 Route::delete('categories/{id}/destroy',          'CategoriesController@destroy')              ->name('categories.destroy');
+
 Route::get('/ajax-subcat',function () {
    $cat_id = Input::get('cat_id');
+   // dd($cat_id);
    $subcategories = DB::table('categories')->where('parent_id','=',$cat_id)->orderBy('name')->pluck('name');
+   // dd($subcategories);
    return Response::json($subcategories);
 });

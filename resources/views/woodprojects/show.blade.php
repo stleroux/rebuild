@@ -1,12 +1,11 @@
 @extends('layouts.backend')
 
 @section('stylesheets')
-   {{-- {{ Html::style('css/recipes.css') }} --}}
+   {{-- {{ Html::style('css/.css') }} --}}
 @endsection
 
 @section('left_column')
-   {{-- @include('blocks.adminNav') --}}
-   {{-- @include('recipes::backend.sidebar') --}}
+   @include('blocks.main_menu')
 @endsection
 
 @section('right_column')
@@ -20,8 +19,8 @@
          <i class="fa fa-plus-square"></i>
          Show Woodproject
          <span class="float-right">
-            @include('common.buttons.help', ['model'=>'woodproject', 'bookmark'=>'woodprojects'])
-            @include('common.buttons.previous', ['model'=>'category'])
+            @include('woodprojects.addins.links.help', ['model'=>'woodproject', 'bookmark'=>'woodprojects'])
+            @include('woodprojects.addins.links.back', ['model'=>'category'])
          </span>
       </div>
 
