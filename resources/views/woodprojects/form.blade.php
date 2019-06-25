@@ -1,67 +1,108 @@
 @csrf
-{{-- GENERAL INFORMATION --}}
-<div class="card">
-   <div class="card-header">
-      <div class="card-title">General Information</div>
-   </div>
-   <div class="card-body">
-      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-5">
-         <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-            {!! Form::label('name', 'Project Name', ['class'=>'required']) !!}
-            {!! Form::text('name', null, ['class' => 'form-control form-control-sm', 'autofocus', 'onfocus' => 'this.focus();this.select()']) !!}
-            <span class="text-danger">{{ $errors->first('name') }}</span>
-         </div>
-      </div>
 
-      <!-- Category -->
-      <div class="col-xs-12 col-sm-6 col-md-3">
-         <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}" >
-            {!! Form::label("category_id", "Category", ['class'=>'required']) !!}
-            <select name="category_id" id="catSelect" class="custom-select custom-select-sm">
-               <option selected>Select One</option>
-               @foreach ($categories as $category)
-                  <option disabled>{{ ucfirst($category->name) }}</option>
-                  @foreach ($category->children as $children)
-                     <option value="{{ $children->id}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- {{ ucfirst($children->name) }}</option>
-                  @endforeach
-               @endforeach
-            </select>
-         </div>
-      </div>
+<div class="card-body card_body p-0">
+   <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item">
+         <a
+            class="nav-link active"
+            id="general-tab"
+            data-toggle="tab"
+            href="#general"
+            role="tab"
+            aria-controls="general"
+            aria-selected="true">
+            General
+         </a>
+      </li>
+      <li class="nav-item">
+         <a
+            class="nav-link"
+            id="woodInfo-tab"
+            data-toggle="tab"
+            href="#woodInfo"
+            role="tab"
+            aria-controls="woodInfo"
+            aria-selected="true">
+            Wood Info
+         </a>
+      </li>
+      <li class="nav-item">
+         <a
+            class="nav-link"
+            id="dimensions-tab"
+            data-toggle="tab"
+            href="#dimensions"
+            role="tab"
+            aria-controls="dimensions"
+            aria-selected="false">
+            Dimensions
+         </a>
+      </li>
+      <li class="nav-item">
+         <a
+            class="nav-link"
+            id="modules-tab"
+            data-toggle="tab"
+            href="#modules"
+            role="tab"
+            aria-controls="modules"
+            aria-selected="false">
+            Modules Permissions
+         </a>
+      </li>
+      <li class="nav-item">
+         <a
+            class="nav-link"
+            id="profile-tab"
+            data-toggle="tab"
+            href="#profile"
+            role="tab"
+            aria-controls="profile"
+            aria-selected="false">
+            Profile
+         </a>
+      </li>
+   </ul>
 
-      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-         <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
-            {{ Form::label ('main_image', 'Main Image', ['class'=>'required']) }}
-            {{ Form::file('main_image', ['class'=>'form-control form-control-sm']) }}
-            <span class="text-danger">{{ $errors->first('main_image') }}</span>
-         </div>
+   <div class="tab-content pb-0 mb-0" id="myTabContent">
+      <div
+         class="tab-pane fade show active"
+         id="general"
+         role="tabpanel"
+         aria-labelledby="general-tab">
+         @include('woodprojects.partials.general')
       </div>
-
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-         <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
-            {!! Form::label('description', 'Project Description', ['class'=>'required']) !!}
-            {!! Form::textarea('description', null, ['class' => 'form-control form-control', 'rows'=>3]) !!}
-            <span class="text-danger">{{ $errors->first('description') }}</span>
-         </div>
+      <div
+         class="tab-pane fade"
+         id="woodInfo"
+         role="tabpanel"
+         aria-labelledby="woodInfo-tab">
+         @include('woodprojects.partials.woodInfo')
       </div>
-
-      <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
-         <div class="form-group {{ $errors->has('price') ? 'has-error' : '' }}">
-            {!! Form::label('price', 'Price') !!}
-            {!! Form::number('price', null, ['class' => 'form-control form-control-sm']) !!}
-            <span class="text-danger">{{ $errors->first('price') }}</span>
-         </div>
+      <div
+         class="tab-pane fade"
+         id="dimensions"
+         role="tabpanel"
+         aria-labelledby="dimensions-tab">
+         @include('woodprojects.partials.dimensions')
       </div>
-
-      <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
-         <div class="form-group {{ $errors->has('price') ? 'has-error' : '' }}">
-            {!! Form::label('time_invested', 'Shop Time') !!} <small>(Hrs)</small>
-            {!! Form::number('time_invested', null, ['class' => 'form-control form-control-sm']) !!}
-            <span class="text-danger">{{ $errors->first('time_invested') }}</span>
-         </div>
+      <div
+         class="tab-pane fade"
+         id="modules"
+         role="tabpanel"
+         aria-labelledby="modules-tab">
+         {{-- @include('users.inc.create.modules') --}}
+      </div>
+      <div
+         class="tab-pane fade"
+         id="profile"
+         role="tabpanel"
+         aria-labelledby="profile-tab">
+         {{-- @include('users.inc.create.profile') --}}
       </div>
    </div>
 </div>
 
-@include('woodprojects.partials.woodInfo')
-@include('woodprojects.partials.dimensions')
+{{-- @include('woodprojects.partials.general') --}}
+{{-- @include('woodprojects.partials.woodInfo') --}}
+{{-- @include('woodprojects.partials.dimensions') --}}

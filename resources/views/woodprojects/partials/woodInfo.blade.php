@@ -1,10 +1,11 @@
 {{-- WOOD INFORMATION --}}
-<div class="card">
+{{-- <div class="card">
    <div class="card-header">
       <div class="card-title">Wood Information</div>
    </div>
-   <div class="card-body">
+   <div class="card-body"> --}}
 
+   <div class="form-row p-2">
       <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
          <div class="form-group {{ $errors->has('wood_type_id') ? 'has-error' : '' }}">
             {{ Form::label('wood_type_id', 'Wood Type') }}
@@ -20,6 +21,7 @@
             <span class="text-danger">{{ $errors->first('wood_specie_id') }}</span>
          </div>
       </div>
-
    </div>
-</div>
+   
+  {{--  </div>
+</div> --}}

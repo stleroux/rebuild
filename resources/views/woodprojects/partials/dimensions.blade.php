@@ -1,9 +1,10 @@
 {{-- OVERALL DIMENSIONS --}}
-<div class="card">
+{{-- <div class="card">
    <div class="card-header">
       <div class="card-title">Overall Dimensions <small>(in inches)</small></div>
    </div>
-   <div class="card-body">
+   <div class="card-body"> --}}
+   <div class="form-row p-2">
       <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
          <div class="form-group {{ $errors->has('width') ? 'has-error' : '' }}">
             <a href="#" id="popover" data-toggle="popover" data-trigger="hover"
@@ -42,6 +43,6 @@
             <span class="text-danger">{{ $errors->first('height') }}</span>
          </div>
       </div>
-
    </div>
-</div>
+   {{-- </div>
+</div> --}}

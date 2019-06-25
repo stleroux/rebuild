@@ -20,7 +20,7 @@
    <link rel="stylesheet" href="{{ asset('css/bootstrap_4/slate_b431.css') }}">
    <link rel="stylesheet" href="/css/jquery.datetimepicker.min.css">
    {{-- <link rel="stylesheet" href="{{ asset('css/bootstrap-colors.css') }}" /> --}}
-   {{-- <link rel="stylesheet" href="{{ asset('css/styles.css') }}"> --}}
+   <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
    @yield('stylesheets')
 </head>
 <body>

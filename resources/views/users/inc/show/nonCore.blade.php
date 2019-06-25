@@ -9,7 +9,8 @@
                      <div class="form-group mb-0 pt-1 pb-0 px-1"
                         onMouseOver="this.style.background='#ABA', this.style.color='#000', this.style.fontWeight='bold'"
                         onMouseOut="this.style.background='', this.style.color='', this.style.fontWeight=''"
-                        style="vertical-align: middle;">
+                        style="vertical-align: middle;"
+                     >
                         <span class="switch switch-xs">
                            {{ Form::checkbox('permission[]', $permission->id, in_array($permission->id, $userPermissions) ? true : false, ['id'=>$permission->id, 'disabled'=>'disabled']) }}
                            <label for="{{$permission->id}}" title="Allow member to {{ strtolower($permission->description) }}">

@@ -4,7 +4,7 @@
    <i class="{{ Config::get('buttons.back') }}"></i>
 </a>
 
-@if(Session::get('fromPage')==='woodproject.index')
+{{-- @if(Session::get('fromPage')==='woodproject.index')
    <a href="{{ route('woodproject.index') }}"
       class="btn btn-sm btn-primary"
       title="Woodproject">
@@ -16,4 +16,4 @@
       title="Back">
       <i class="{{ Config::get('buttons.back') }}"></i>
    </a>
-@endif
+@endif --}}

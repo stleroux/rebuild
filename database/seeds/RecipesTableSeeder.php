@@ -20,7 +20,6 @@ class RecipesTableSeeder extends Seeder
             0 => 
             array (
                 'id' => 1,
-                'status' => 0,
                 'title' => 'Oatmeal Buds',
                 'ingredients' => '<p>2 cups of sugar</p>
 <p>dash of salt</p>
@@ -55,7 +54,6 @@ class RecipesTableSeeder extends Seeder
             1 => 
             array (
                 'id' => 2,
-                'status' => 0,
                 'title' => 'Bouchees Aux Cacahuettes',
                 'ingredients' => '<p>1/2 cup of brown sugar - well packed</p>
 <p>1/2 cup of peanut butter</p>
@@ -90,7 +88,6 @@ class RecipesTableSeeder extends Seeder
             2 => 
             array (
                 'id' => 4,
-                'status' => 0,
                 'title' => 'Banana Loaf',
                 'ingredients' => '<p>1 1/2 cups of sugar</p>
 <p>1/2 cup of butter</p>
@@ -125,7 +122,6 @@ class RecipesTableSeeder extends Seeder
             3 => 
             array (
                 'id' => 5,
-                'status' => 0,
                 'title' => 'Pancakes',
                 'ingredients' => '<p>1 1/2 cups of flour</p>
 <p>3 teaspoons of baking powder</p>
@@ -156,7 +152,6 @@ class RecipesTableSeeder extends Seeder
             4 => 
             array (
                 'id' => 6,
-                'status' => 0,
                 'title' => 'Shortbread Cookies',
                 'ingredients' => '<p>1 pound of butter</p>
 <p>1 cup of fruit sugar</p>
@@ -187,7 +182,6 @@ class RecipesTableSeeder extends Seeder
             5 => 
             array (
                 'id' => 7,
-                'status' => 0,
                 'title' => 'Spinach Dip',
             'ingredients' => '<p>1 package of frozen spinach (cook as indicated and cool)</p>
 <p>1 cup of sour cream</p>
@@ -217,7 +211,6 @@ class RecipesTableSeeder extends Seeder
             6 => 
             array (
                 'id' => 8,
-                'status' => 0,
                 'title' => 'French Toast',
                 'ingredients' => '<p>3 eggs</p>
 <p>1/2 teaspoon of salt</p>
@@ -247,7 +240,6 @@ class RecipesTableSeeder extends Seeder
             7 => 
             array (
                 'id' => 9,
-                'status' => 0,
                 'title' => 'Peanut Butter Cookies',
                 'ingredients' => '<p>1 1/4 cups of Kraft Smooth Peanut Butter</p>
 <p>1/2 cup of margarine or butter</p>
@@ -284,7 +276,6 @@ class RecipesTableSeeder extends Seeder
             8 => 
             array (
                 'id' => 10,
-                'status' => 0,
                 'title' => 'Beef And Vegetable Pie',
                 'ingredients' => '<p>2 teaspoons of cooking oil</p>
 <p>1 pound of lean ground beef</p>
@@ -328,7 +319,6 @@ class RecipesTableSeeder extends Seeder
             9 => 
             array (
                 'id' => 11,
-                'status' => 0,
                 'title' => 'Classic Meatloaf',
                 'ingredients' => '<p>1 egg</p>
 <p>3/4 cup of quick-cooking rolled oats</p>
@@ -373,7 +363,6 @@ class RecipesTableSeeder extends Seeder
             10 => 
             array (
                 'id' => 13,
-                'status' => 0,
                 'title' => 'Fruity Burritos',
                 'ingredients' => '<p>2/3 cup of fresh raspberries</p>
 <p>1/3 cup of fresh blueberries (or frozen, thawed)</p>
@@ -411,7 +400,6 @@ class RecipesTableSeeder extends Seeder
             11 => 
             array (
                 'id' => 14,
-                'status' => 0,
                 'title' => 'Lasagna',
                 'ingredients' => '<p>1 tablespoon vegetable oil</p>
 <p>1 medium onion, chopped</p>
@@ -452,7 +440,6 @@ class RecipesTableSeeder extends Seeder
             12 => 
             array (
                 'id' => 15,
-                'status' => 0,
                 'title' => 'Carrot Muffins',
                 'ingredients' => '<p>4 cups of white sugar</p>
 <p>2 teaspoons of cinnamon</p>
@@ -486,7 +473,6 @@ class RecipesTableSeeder extends Seeder
             13 => 
             array (
                 'id' => 16,
-                'status' => 0,
                 'title' => 'Macaroni Salad',
                 'ingredients' => '<p>1 cup of real mayonnaise</p>
 <p>2 tablespoons of vinegar</p>
@@ -522,7 +508,6 @@ class RecipesTableSeeder extends Seeder
             14 => 
             array (
                 'id' => 17,
-                'status' => 0,
                 'title' => 'Macaroni And Cheese',
                 'ingredients' => '<p>2 cups of macaroni</p>
 <p>2 tablespoons of butter</p>
@@ -553,7 +538,6 @@ class RecipesTableSeeder extends Seeder
             15 => 
             array (
                 'id' => 18,
-                'status' => 0,
                 'title' => 'Pork Chops A La Ruth',
                 'ingredients' => '<p>Salt</p>
 <p>Pepper</p>
@@ -588,7 +572,6 @@ class RecipesTableSeeder extends Seeder
             16 => 
             array (
                 'id' => 19,
-                'status' => 0,
                 'title' => 'Spiced Fruit Salad',
                 'ingredients' => '<p>2 cups of halved seedless grapes</p>
 <p>2 cups of cubed honeydew</p>
@@ -623,7 +606,6 @@ class RecipesTableSeeder extends Seeder
             17 => 
             array (
                 'id' => 20,
-                'status' => 0,
                 'title' => 'Snow Angel Trifle',
                 'ingredients' => '<p>4 cups of milk</p>
 <p>2 boxes of instant white chocolate (or vanilla) pudding powder (4 serving size, each)</p>
@@ -664,7 +646,6 @@ class RecipesTableSeeder extends Seeder
                 18 => 
                 array (
                     'id' => 21,
-                    'status' => 0,
                     'title' => 'Chocolate And Pear Muffins',
                     'ingredients' => '<p>2 cups of all purpose flour</p>
 <p>1 1/3 chopped peeled fresh pear</p>
@@ -701,7 +682,6 @@ class RecipesTableSeeder extends Seeder
                 19 => 
                 array (
                     'id' => 22,
-                    'status' => 0,
                     'title' => 'Chocolate Peanut Butter Bars',
                     'ingredients' => '<p>2 cups of quick-cooking oats</p>
 <p>1 3/4 cups of firmly packed light brown sugar</p>
@@ -744,7 +724,6 @@ class RecipesTableSeeder extends Seeder
                 20 => 
                 array (
                     'id' => 23,
-                    'status' => 0,
                     'title' => 'Baked Soup',
                     'ingredients' => '<p>2 pounds of sausage</p>
 <p>3 cups of chopped carrots</p>
@@ -779,7 +758,6 @@ class RecipesTableSeeder extends Seeder
                 21 => 
                 array (
                     'id' => 24,
-                    'status' => 0,
                     'title' => 'Chocolate Banana Crepes',
                     'ingredients' => '<p>1 cup of all-purpose flour</p>
 <p>3 tablespoon of unsweetened dutch cocoa powder</p>
@@ -817,7 +795,6 @@ class RecipesTableSeeder extends Seeder
                 22 => 
                 array (
                     'id' => 25,
-                    'status' => 0,
                     'title' => 'Strawberry Cream Cheese Cobbler',
                 'ingredients' => '<p>1 stick (1/2 cup) of butter</p>
 <p>1 egg, lightly beaten</p>
@@ -854,7 +831,6 @@ class RecipesTableSeeder extends Seeder
                 23 => 
                 array (
                     'id' => 26,
-                    'status' => 0,
                     'title' => 'Molasses Cake',
                     'ingredients' => '<p>2 cups of molasses</p>
 <p>2 tbsp of lard or shortening</p>
@@ -889,7 +865,6 @@ class RecipesTableSeeder extends Seeder
                 24 => 
                 array (
                     'id' => 27,
-                    'status' => 0,
                     'title' => 'Butter Tarts',
                     'ingredients' => '<p>2 eggs</p>
 <p>2 cups of brown sugar</p>
@@ -924,7 +899,6 @@ class RecipesTableSeeder extends Seeder
                 25 => 
                 array (
                     'id' => 28,
-                    'status' => 0,
                     'title' => 'Pate Chomeur',
                     'ingredients' => '<p>1 cup of white sugar</p>
 <p>1 cup of milk</p>
@@ -958,7 +932,6 @@ class RecipesTableSeeder extends Seeder
                 26 => 
                 array (
                     'id' => 29,
-                    'status' => 0,
                     'title' => 'qqqqq',
                     'ingredients' => '<p>asdasda</p>',
                     'methodology' => '<p>vcxvxcvxcv</p>',
@@ -984,7 +957,6 @@ class RecipesTableSeeder extends Seeder
                 27 => 
                 array (
                     'id' => 30,
-                    'status' => 0,
                     'title' => 'wwwwww',
                     'ingredients' => '<p>wqwqwqw</p>
 <p>cvccvc</p>
