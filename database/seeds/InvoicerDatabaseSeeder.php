@@ -1,9 +1,6 @@
 <?php
 
-namespace Modules\Invoicer\Database\Seeders;
-
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Eloquent\Model;
 
 class InvoicerDatabaseSeeder extends Seeder
 {
