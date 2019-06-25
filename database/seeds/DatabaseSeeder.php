@@ -27,10 +27,5 @@ class DatabaseSeeder extends Seeder
         $this->call(RecipeUserTableSeeder::class);
         $this->call(WoodprojectsTableSeeder::class);
 
-        // $this->call(InvoicerClientsTableSeeder::class);
-        // $this->call(InvoicerInvoicesTableSeeder::class);
-        // $this->call(InvoicerInvoiceItemsTableSeeder::class);
-        // $this->call(InvoicerProductsTableSeeder::class);
-        $this->call(InvoicerDatabaseSeeder::class);
     }
 }
