@@ -248,7 +248,7 @@ class CrudGeneratorCommand extends Command
         DB::table('permissions')->insert([
             [
                 // index permission
-                'name' => strtolower($name).'_index',
+                'name' => strtolower(Str::plural($name)).'_index',
                 'display_name' => 'index',
                 'model' => strtolower($name),
                 'type' => $type,
@@ -256,7 +256,7 @@ class CrudGeneratorCommand extends Command
             ],
             [
                 // create permission
-                'name' => strtolower($name).'_create',
+                'name' => strtolower(Str::plural($name)).'_create',
                 'display_name' => 'create',
                 'model' => strtolower($name),
                 'type' => $type,
@@ -264,7 +264,7 @@ class CrudGeneratorCommand extends Command
             ],
             [
                 // edit permission
-                'name' => strtolower($name).'_edit',
+                'name' => strtolower(Str::plural($name)).'_edit',
                 'display_name' => 'edit',
                 'model' => strtolower($name),
                 'type' => $type,
@@ -272,7 +272,7 @@ class CrudGeneratorCommand extends Command
             ],
             [
                 // show permission
-                'name' => strtolower($name).'_show',
+                'name' => strtolower(Str::plural($name)).'_show',
                 'display_name' => 'show',
                 'model' => strtolower($name),
                 'type' => $type,
@@ -280,7 +280,7 @@ class CrudGeneratorCommand extends Command
             ],
             [
                 // delete permission
-                'name' => strtolower($name).'_delete',
+                'name' => strtolower(Str::plural($name)).'_delete',
                 'display_name' => 'delete',
                 'model' => strtolower($name),
                 'type' => $type,

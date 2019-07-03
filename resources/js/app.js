@@ -9,6 +9,10 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+// Automatically resize textarea to accomodate long text
+import autosize from 'autosize';
+autosize(document.querySelectorAll('textarea'));
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
