@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class Projects-finishProjectTableSeeder extends Seeder
+class ProjectsImagesTableSeeder extends Seeder
 {
 
     /**
@@ -14,7 +14,7 @@ class Projects-finishProjectTableSeeder extends Seeder
     {
         
 
-        \DB::table('projects-finish_project')->delete();
+        \DB::table('projects-images')->delete();
         
         
         

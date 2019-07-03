@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class Projects-projectsTableSeeder extends Seeder
+class ProjectsProjectsTableSeeder extends Seeder
 {
 
     /**

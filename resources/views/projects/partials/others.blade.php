@@ -48,7 +48,7 @@
       </div>
       
       <div class="form-row">
-         <div class="col-xs-12 col-sm-6 col-md-3">
+         <div class="col-xs-12 col-sm-6 col-md-4">
             {!! Form::label('completed_at', 'Completed Date') !!}
             <div class="input-group input-group-sm {{ $errors->has('completed_at') ? 'has-error' : '' }}">
                {{ Form::text('completed_at', null, ['class'=>'form-control form-control-sm', 'id'=>'datetime']) }}
