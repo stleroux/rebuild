@@ -19,17 +19,17 @@
             <!--CARD HEADER-->
             <div class="card-header card_header">
                {{-- <i class="fa fa-sitemap"></i> --}}
-               Projects
+               Finishes
                <span class="float-right">
-                  <a href="{{ route('finishes.index') }}" class="btn btn-xs btn-primary">Finishes</a>
+                  <a href="{{ route('projects.index') }}" class="btn btn-xs btn-primary">Projects</a>
                   <a href="{{ route('materials.index') }}" class="btn btn-xs btn-primary">Materials</a>
-                  @include('projects.addins.links.help', ['bookmark'=>'projects'])
-                  @include('projects.addins.links.add', ['model'=>'project'])
+                  {{-- @include('projects.addins.links.help', ['bookmark'=>'projects']) --}}
+                  {{-- @include('projects.addins.links.add', ['model'=>'project']) --}}
                </span>
             </div>
 
             <!--CARD BODY-->
-            @if($projects->count() > 0)
+            @if($finishes->count() > 0)
                <div class="card-body card_body pb-0">
                   {{-- @include('common.alphabet', ['model'=>'woodproject', 'page'=>'index']) --}}
                   <table id="datatable" class="table table-hover table-sm">
@@ -45,22 +45,22 @@
                         </tr>
                      </thead>
                      <tbody>
-                        @foreach ($projects as $project)
+                        @foreach ($finishes as $finish)
                            <tr>
-                              <td>{{ $project->id }}</td>
-                              <td><a href="{{ route('projects.show', $project->id) }}">{{ $project->name }}</a></td>
-                              <td>{{ $project->category }}</td>
-                              <td>{{ $project->description }}</td>
+                              <td>{{ $finish->id }}</td>
+                              <td><a href="{{ route('finishes.show', $finish->id) }}">{{ $finish->name }}</a></td>
+                              <td>{{ $finish->category }}</td>
+                              <td>{{ $finish->description }}</td>
                               {{-- Add more columns here --}}
-                              <td data-order="{{ $project->created_at}}">{{ $project->created_at ? $project->created_at->format('M d, Y') : 'no data found' }}</td>
-                              <td data-order="{{ $project->updated_at}}">{{ $project->updated_at ? $project->updated_at->format('M d, Y') : 'no data found' }}</td>
+                              <td data-order="{{ $finish->created_at}}">{{ $finish->created_at ? $finish->created_at->format('M d, Y') : 'no data found' }}</td>
+                              <td data-order="{{ $finish->updated_at}}">{{ $finish->updated_at ? $finish->updated_at->format('M d, Y') : 'no data found' }}</td>
                               <td class="text-right">
                                  @if(checkPerm('projects_edit'))
-                                    @include('projects.addins.links.edit', ['size'=>'xs'])
+                                    {{-- @include('finishes.addins.links.edit', ['size'=>'xs']) --}}
                                  @endif
 
                                  @if(checkPerm('projects_delete'))
-                                    @include('projects.addins.links.delete', ['size'=>'xs'])
+                                    {{-- @include('finishes.addins.links.delete', ['size'=>'xs']) --}}
                                  @endif
                               </td>
                            </tr>
