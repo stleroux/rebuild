@@ -16,6 +16,24 @@ class ProjectsFinishProjectTableSeeder extends Seeder
 
         \DB::table('projects-finish_project')->delete();
         
+        \DB::table('projects-finish_project')->insert(array (
+            0 => 
+            array (
+                'id' => 1,
+                'project_id' => 4,
+                'finish_id' => 3,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            1 => 
+            array (
+                'id' => 2,
+                'project_id' => 4,
+                'finish_id' => 1,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+        ));
         
         
     }
