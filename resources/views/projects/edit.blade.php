@@ -2,6 +2,10 @@
 
 @section ('stylesheets')
    {{-- {{ Html::style('css/.css') }} --}}
+<style>
+
+</style>
+
 @stop
 
 @section('left_column')
