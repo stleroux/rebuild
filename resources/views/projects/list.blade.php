@@ -18,54 +18,55 @@
          <div class="card mb-2">
             <!--CARD HEADER-->
             <div class="card-header card_header">
-               <i class="fas fa-brush"></i>
-               Finishes
+               <i class="fab fa-pagelines"></i>
+               Projects
                <span class="float-right">
                   @include('projects.addins.links.help', ['bookmark'=>'projects'])
-                  @include('projects.addins.links.BEProjects')
-                  @if(checkPerm('projects_index'))
-                     @include('projects.materials.addins.links.materials')
-                  @endif
-                  @if(checkPerm('projects_create'))
-                     @include('projects.finishes.addins.links.add', ['model'=>'finish'])
-                  @endif
+                  @include('projects.finishes.addins.links.finishes')
+                  @include('projects.materials.addins.links.materials')
+                  @include('projects.addins.links.add', ['model'=>'project'])
                </span>
             </div>
 
             <!--CARD BODY-->
-            @if($finishes->count() > 0)
+            @if($projects->count() > 0)
                <div class="card-body card_body pb-1">
-                  {{-- @include('common.alphabet', ['model'=>'test', 'page'=>'index']) --}}
+                  {{-- @include('common.alphabet', ['model'=>'woodproject', 'page'=>'index']) --}}
                   <table id="datatable" class="table table-hover table-sm">
                      <thead>
                         <tr>
                            <th>ID</th>
                            <th>Name</th>
-                           <th>Type</th>
-                           <th>Color Name</th>
-                           <th>Sheen</th>
+                           <th>Category</th>
+                           <th>Description</th>
+                           <th>Images</th>
+                           <th>Finish(es)</th>
+                           <th>Material(s)</th>
                            <th>Created On</th>
                            <th>Updated On</th>
                            <th class="no-sort"></th>
                         </tr>
                      </thead>
                      <tbody>
-                        @foreach ($finishes as $finish)
+                        @foreach ($projects as $project)
                            <tr>
-                              <td>{{ $finish->id }}</td>
-                              <td><a href="{{ route('finishes.show', $finish->id) }}">{{ $finish->name }}</a></td>
-                              <td>{{ $finish->type }}</td>
-                              <td>{{ $finish->color_name }}</td>
-                              <td>{{ $finish->sheen }}</td>
+                              <td>{{ $project->id }}</td>
+                              <td><a href="{{ route('projects.show', $project->id) }}">{{ $project->name }}</a></td>
+                              <td>{{ $project->category }}</td>
+                              <td>{{ $project->description }}</td>
+                              <td>{{ $project->images()->count() }}</td>
+                              <td>{{ $project->finishes()->count() }}</td>
+                              <td>{{ $project->materials()->count() }}</td>
                               {{-- Add more columns here --}}
-                              <td data-order="{{ $finish->created_at}}">{{ $finish->created_at ? $finish->created_at->format('M d, Y') : 'no data found' }}</td>
-                              <td data-order="{{ $finish->updated_at}}">{{ $finish->updated_at ? $finish->updated_at->format('M d, Y') : 'no data found' }}</td>
+                              <td data-order="{{ $project->created_at}}">{{ $project->created_at ? $project->created_at->format('M d, Y') : 'no data found' }}</td>
+                              <td data-order="{{ $project->updated_at}}">{{ $project->updated_at ? $project->updated_at->format('M d, Y') : 'no data found' }}</td>
                               <td class="text-right">
                                  @if(checkPerm('projects_edit'))
-                                    @include('projects.finishes.addins.links.edit', ['size'=>'xs'])
+                                    @include('projects.addins.links.edit', ['size'=>'xs'])
                                  @endif
+
                                  @if(checkPerm('projects_delete'))
-                                    @include('projects.finishes.addins.links.delete', ['size'=>'xs'])
+                                    @include('projects.addins.links.delete', ['size'=>'xs'])
                                  @endif
                               </td>
                            </tr>
@@ -74,7 +75,7 @@
                   </table>
                </div>
             @else
-               <div class="card-body card_body">
+               <div class="card-body card_body pb-1">
                   {{ setting('no_records_found') }}
                </div>
             @endif

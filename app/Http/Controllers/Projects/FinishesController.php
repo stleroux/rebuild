@@ -42,11 +42,8 @@ class FinishesController extends Controller
         }
 
         $finish = New Finish();
-        // Get all categories
-        // $categories = Category::where('parent_id',12)->get();
-        // dd($categories);
 
-        return view('finishes.create', compact('finish'));
+        return view('projects.finishes.create', compact('finish'));
     }
 
 
@@ -94,7 +91,7 @@ class FinishesController extends Controller
             if(!checkPerm('projects_delete')) { abort(401, 'Unauthorized Access'); }
         }
 
-        return view('finishes.delete', compact('finish'));
+        return view('projects.finishes.delete', compact('finish'));
     }
 
 
@@ -115,10 +112,7 @@ class FinishesController extends Controller
             if(!checkPerm('projects_edit')) { abort(401, 'Unauthorized Access'); }
         }
 
-        // Get all categories
-        // $categories = Category::where('parent_id',12)->get();
-
-        return view('finishes.edit', compact('finish','categories'));
+        return view('projects.finishes.edit', compact('finish'));
     }
 
 
@@ -179,7 +173,9 @@ class FinishesController extends Controller
             if(!checkPerm('projects_show')) { abort(401, 'Unauthorized Access'); }
         }
 
-        return view('finishes.show', compact('finish'));
+        dd($project);
+
+        return view('projects.finishes.show', compact('finish'));
     }
 
 
@@ -213,11 +209,13 @@ class FinishesController extends Controller
     {
         return request()->validate([
             'name' => 'required',
-            'type' => 'required',
-            'notes' => 'required',
-            // 'width' => 'required',
-            // 'depth' => 'required',
-            // 'height' => 'required',
+            'type' => '',
+            'color_name' => '',
+            'color_code' => '',
+            'sheen' => '',
+            'manufacturer' => 'sometimes',
+            'upc' => 'sometimes',
+            'notes' => 'sometimes',
             
         ]);
     }

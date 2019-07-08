@@ -110,12 +110,12 @@
          </a>
       @endif
 
-      @if(checkPerm('projects_index'))
+      {{-- @if(checkPerm('projects_index')) --}}
          <a href="{{ route('projects.index') }}"
             class="list-group-item list-group-item-action py-1 px-1 {{ Route::is('projects.*') ? 'active' : '' }}">
             <i class="fab fa-pagelines pl-2"></i>
             Projects
          </a>
-      @endif
+      {{-- @endif --}}
    </div>
 </div>

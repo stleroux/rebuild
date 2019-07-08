@@ -14,12 +14,12 @@ class CreateProjectsMaterialsTable extends Migration {
 	{
 		Schema::create('projects-materials', function(Blueprint $table)
 		{
-			$table->integer('id', true);
+			$table->increments('id');
 			$table->string('name', 250);
-			$table->string('type', 250);
-			$table->text('notes', 65535);
-			$table->string('manufacturer', 250);
-			$table->string('UPC', 50);
+			$table->string('type', 250)->nullable();
+			$table->text('notes', 65535)->nullable();
+			$table->string('manufacturer', 250)->nullable();
+			$table->string('UPC', 50)->nullable();
 			$table->timestamps();
 		});
 	}

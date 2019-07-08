@@ -1,9 +1,10 @@
 {{-- GENERAL INFORMATION --}}
-<div class="card">
+<div class="card mb-2">
    <div class="card-header p-1">General Information</div>
    <div class="card-body p-2">
 
       <div class="form-row pt-2">
+         <!-- Name -->
          <div class="col-xs-12 col-sm-4">
             <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                {!! Form::label('name', 'Project Name', ['class'=>'required']) !!}
@@ -11,6 +12,7 @@
                <span class="text-danger">{{ $errors->first('name') }}</span>
             </div>
          </div>
+
          <!-- Category -->
          <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
             <div class="form-group">
@@ -26,6 +28,7 @@
       </div>
       
       <div class="form-row">
+         <!-- Description -->
          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
                {!! Form::label('description', 'Project Description', ['class'=>'required']) !!}

@@ -1,57 +1,32 @@
 {{-- IMAGES APPLIED --}}
-
-
-
-
 <div class="card mb-2">
+
    <div class="card-header p-1">
       Images Information
-      {{-- <span class="float-right">
-         <a class="" data-toggle="collapse" href="#addImage" role="button" aria-expanded="false" aria-controls="addImage">
-          <i class="{{ Config::get('buttons.add') }}"></i>
-        </a>
-      </span> --}}
-      <a id="showAddImage" class="btn-link"><i class="{{ Config::get('buttons.add') }}"></i></a>
+      <a id="showAddImage" class="btn btn-xs float-right"><i class="{{ Config::get('buttons.add') }}"></i></a>
    </div>
-   {{-- <div class="card-body p-2"> --}}
-      <div class="form-row pt-0">
-
-
-{{-- <p id="test">Hello</p>
-<p id="test" style="display: none">Good Bye</p> --}}
- 
-
-
-  
-<div class="col-xs-12 col-md-12" id="test" style="display: none;">
-   <div class="collapse pt-0">
-      <div class="card-body p-2">
-         <form action="{{ route('projects.addImage', $project->id) }}" method="post" enctype="multipart/form-data" class="form-inline">
-            <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-            {{ Form::file('image', ['class'=>'form-control form-control-sm p-0 col-10']) }}
-            <span class="text-danger">{{ $errors->first('image') }}</span>
-            <button type="submit" class="btn btn-sm btn-primary col-2 float-right">Add</button>
-         </form>
-      </div>
-   </div>
-</div>
-
-{{--          <div class="col-xs-12 col-md-12">
-            <div class="card p-0">
-               <div class="card-body p-2 text-center">
+   
+   <div class="card-body p-0">
+   
+      <div class="form-row">
+   
+         <div id="addImage" class="col-10 offset-1 pt-2" style="display: none;">
+            <div class="card mb-2">
+               <div class="card-header pl-2 pt-0 py-0">Add Image</div>
+               <div class="card-body p-2">
                   <form action="{{ route('projects.addImage', $project->id) }}" method="post" enctype="multipart/form-data" class="form-inline">
                      <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-                     {{ Form::file('image', ['class'=>'form-control form-control-sm p-0']) }}
+                     {{ Form::file('image', ['class'=>'form-control form-control-sm p-0 col-9']) }}
                      <span class="text-danger">{{ $errors->first('image') }}</span>
-                     <button type="submit" class="btn btn-sm btn-primary">Add</button>
+                     <button type="submit" class="btn btn-sm btn-primary col-2 float-right col-1 offset-1">Add</button>
                   </form>
                </div>
             </div>
-         </div> --}}
+         </div>
 
-         <div class="col-xs-12 col-md-12" id="test">
+         <div id="addImage" class="col-xs-12 col-md-12">
             @if(count($project->images) > 0)
-               <table class="table table-sm table-hover">
+               <table class="table table-sm table-hover mb-0">
                   <thead>
                      <tr>
                         <th>No</th>
@@ -83,26 +58,16 @@
             @endif
          </div>
 
-
-
-
-         {{-- <div class="col-xs-12 col-md-12">
-            <div class="card p-0">
-               <div class="card-header p-1">
-                  Add new image
-               </div>
-               <div class="card-body p-2 text-center">
-                  <form action="{{ route('projects.addImage', $project->id) }}" method="post" enctype="multipart/form-data">
-                     <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-                     {{ Form::file('image', ['class'=>'form-control form-control-sm p-0']) }}
-                     <span class="text-danger">{{ $errors->first('image') }}</span>
-                     <button type="submit" class="btn btn-sm btn-primary">Add New Image</button>
-                  </form>
-               </div>
-            </div>
-         </div> --}}
-
       </div>
-   {{-- </div> --}}
+
+   </div>
+
 </div>
 
+<script>
+   $(document).ready(function(){
+      $("a#showAddImage").click(function(){
+         $("div#addImage").toggle();
+      });
+   });
+</script>

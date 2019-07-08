@@ -14,15 +14,15 @@ class CreateProjectsFinishesTable extends Migration {
 	{
 		Schema::create('projects-finishes', function(Blueprint $table)
 		{
-			$table->integer('id', true);
+			$table->increments('id');
 			$table->string('name', 250);
-			$table->string('type', 250);
-			$table->string('color_name', 250);
-			$table->string('color_code', 250);
-			$table->string('sheen', 50);
-			$table->string('manufacturer', 250);
-			$table->string('upc', 250);
-			$table->text('notes', 65535);
+			$table->string('type', 250)->nullable();
+			$table->string('color_name', 250)->nullable();
+			$table->string('color_code', 250)->nullable();
+			$table->string('sheen', 50)->nullable();
+			$table->string('manufacturer', 250)->nullable();
+			$table->string('upc', 250)->nullable();
+			$table->text('notes', 65535)->nullable();
 			$table->timestamps();
 		});
 	}

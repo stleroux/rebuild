@@ -25,12 +25,12 @@ class DatabaseSeeder extends Seeder
         $this->call(PostTagTableSeeder::class);
         $this->call(RecipesTableSeeder::class);
         $this->call(RecipeUserTableSeeder::class);
+        $this->call(ProjectsProjectsTableSeeder::class);
+        $this->call(ProjectsImagesTableSeeder::class);
         $this->call(ProjectsFinishesTableSeeder::class);
         $this->call(ProjectsFinishProjectTableSeeder::class);
-        $this->call(ProjectsImagesTableSeeder::class);
         $this->call(ProjectsMaterialsTableSeeder::class);
         $this->call(ProjectsMaterialProjectTableSeeder::class);
-        $this->call(ProjectsProjectsTableSeeder::class);
         $this->call(ProjectsMaterialProjectTableSeeder::class);
         $this->call(ProjectsFinishProjectTableSeeder::class);
     }

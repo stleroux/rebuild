@@ -13,6 +13,7 @@ use DB;
 use File;
 use Image as Img;
 use Session;
+use URL;
 
 class ProjectsController extends Controller
 {
@@ -26,7 +27,7 @@ class ProjectsController extends Controller
 ##################################################################################################################
    public function __construct()
    {
-      $this->middleware('auth');
+      $this->middleware('auth')->except('index','show');
       $this->enablePermissions = false;
    }
 
@@ -58,33 +59,6 @@ class ProjectsController extends Controller
 
 
 ##################################################################################################################
-# ██████╗ ███████╗███████╗████████╗██████╗  ██████╗ ██╗   ██╗
-# ██╔══██╗██╔════╝██╔════╝╚══██╔══╝██╔══██╗██╔═══██╗╚██╗ ██╔╝
-# ██║  ██║█████╗  ███████╗   ██║   ██████╔╝██║   ██║ ╚████╔╝ 
-# ██║  ██║██╔══╝  ╚════██║   ██║   ██╔══██╗██║   ██║  ╚██╔╝  
-# ██████╔╝███████╗███████║   ██║   ██║  ██║╚██████╔╝   ██║   
-# ╚═════╝ ╚══════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝    ╚═╝   
-// Remove the specified resource from storage
-// Used in the index page and trashAll action to soft delete multiple records
-##################################################################################################################
-    public function destroy(Project $project)
-    {
-        // Check if user has required permission
-        if($this->enablePermissions)
-        {
-            if(!checkPerm('projects_delete')) { abort(401, 'Unauthorized Access'); }
-        }
-
-        $project->delete();
-
-        // Set flash data with success message
-        Session::flash('delete','The project was deleted successfully.');
-        // Redirect
-        return redirect()->route('projects.index');
-    }
-
-
-##################################################################################################################
 # ██████╗ ███████╗██╗     ███████╗████████╗███████╗
 # ██╔══██╗██╔════╝██║     ██╔════╝╚══██╔══╝██╔════╝
 # ██║  ██║█████╗  ██║     █████╗     ██║   █████╗  
@@ -102,6 +76,39 @@ class ProjectsController extends Controller
         }
 
         return view('projects.delete', compact('project'));
+    }
+
+
+##################################################################################################################
+# ██████╗ ███████╗███████╗████████╗██████╗  ██████╗ ██╗   ██╗
+# ██╔══██╗██╔════╝██╔════╝╚══██╔══╝██╔══██╗██╔═══██╗╚██╗ ██╔╝
+# ██║  ██║█████╗  ███████╗   ██║   ██████╔╝██║   ██║ ╚████╔╝ 
+# ██║  ██║██╔══╝  ╚════██║   ██║   ██╔══██╗██║   ██║  ╚██╔╝  
+# ██████╔╝███████╗███████║   ██║   ██║  ██║╚██████╔╝   ██║   
+# ╚═════╝ ╚══════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝    ╚═╝   
+// Remove the specified resource from storage
+// Used in the index page and trashAll action to soft delete multiple records
+##################################################################################################################
+    public function destroy(Project $project)
+    {
+        // Check if user has required permission
+        if($this->enablePermissions)
+        {
+            if(!checkPerm('projects_delete')) { abort(401, 'Unauthorized Access'); }
+        }
+
+        // Delete the associated images if any
+        foreach ($project->images as $image) {
+            File::delete('_projects/' . $image->name);
+        }
+
+        // Delete the project and related images, materials and finishes in the database
+        $project->delete();
+
+        // Set flash data with success message
+        Session::flash('delete','The project, related files and DB entries were deleted successfully.');
+        // Redirect
+        return redirect()->route('projects.index');
     }
 
 
@@ -158,8 +165,33 @@ class ProjectsController extends Controller
             if(!checkPerm('projects_index')) { abort(401, 'Unauthorized Access'); }
         }
 
-        $projects = Project::All();
+        // $projects = Project::All();
+        // $projects = Project::with('images')->get();
+        $projects = Project::with('images')->latest()->limit(20)->get();
+        // dd($projects);
         return view('projects.index', compact('projects'));
+    }
+
+
+##################################################################################################################
+# ██╗███╗   ██╗██████╗ ███████╗██╗  ██╗
+# ██║████╗  ██║██╔══██╗██╔════╝╚██╗██╔╝
+# ██║██╔██╗ ██║██║  ██║█████╗   ╚███╔╝ 
+# ██║██║╚██╗██║██║  ██║██╔══╝   ██╔██╗ 
+# ██║██║ ╚████║██████╔╝███████╗██╔╝ ██╗
+# ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝
+// Display a list of resources in Backend
+##################################################################################################################
+    public function list()
+    {
+        // Check if user has required permission
+        if($this->enablePermissions)
+        {
+            if(!checkPerm('projects_list')) { abort(401, 'Unauthorized Access'); }
+        }
+
+        $projects = Project::All();
+        return view('projects.list', compact('projects'));
     }
 
 
@@ -177,6 +209,7 @@ class ProjectsController extends Controller
         Project::create($this->validateRequest());
 
         return redirect('projects');
+        // return redirect('projects.edit', $project);
     }
 
 
@@ -189,7 +222,7 @@ class ProjectsController extends Controller
 # ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝ 
 // Display the specified resource
 ##################################################################################################################
-    public function show(Project $project)
+    public function show(Project $project, Request $request)
     {
         // Check if user has required permission
         if($this->enablePermissions)
@@ -197,7 +230,17 @@ class ProjectsController extends Controller
             if(!checkPerm('projects_show')) { abort(401, 'Unauthorized Access'); }
         }
 
-        return view('projects.show', compact('project'));
+        // Increase the view count since this is viewed from the frontend
+        // dd(url('') . '/projects');
+
+        if (url()->previous() == url('') . '/projects') {
+            DB::table('projects-projects')->where('id','=',$project->id)->increment('views',1);
+        }
+
+        $image = Image::where('project_id', '=', $project->id)->first();
+        // dd($image);
+
+        return view('projects.show', compact('project', 'image'));
     }
 
 

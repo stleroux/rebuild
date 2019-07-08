@@ -14,9 +14,9 @@ class CreateProjectsMaterialProjectTable extends Migration {
 	{
 		Schema::create('projects-material_project', function(Blueprint $table)
 		{
-			$table->integer('id', true);
-			$table->integer('project_id');
-			$table->integer('material_id');
+			$table->increments('id');
+			$table->integer('project_id')->unsigned()->index('project_id');
+			$table->integer('material_id')->unsigned();
 			$table->timestamps();
 		});
 	}

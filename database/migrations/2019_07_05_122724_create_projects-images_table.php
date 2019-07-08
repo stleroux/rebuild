@@ -14,7 +14,7 @@ class CreateProjectsImagesTable extends Migration {
 	{
 		Schema::create('projects-images', function(Blueprint $table)
 		{
-			$table->integer('id', true);
+			$table->increments('id');
 			$table->integer('project_id')->unsigned()->index('project_id');
 			$table->string('name', 250);
 			$table->text('description', 65535);

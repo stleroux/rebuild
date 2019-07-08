@@ -62,7 +62,7 @@
 
                </div>
                <!-- MAIN CARD FOOTER -->
-               <div class="card-footer p-1">
+               <div class="card-footer pt-1 pb-1 pl-2">
                   Fields marked with an <span class="required"></span> are required
                </div>
             </div>

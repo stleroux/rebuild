@@ -10,10 +10,11 @@ class Material extends Model
 
    protected $table = 'projects-materials';
 
+//////////////////////////////////////////////////////////////////////////////////////
+// ADD RELATIONSHIPS
+//////////////////////////////////////////////////////////////////////////////////////
    public function projects()
    {
-      // return $this->belongsToMany(App\Models\Projects\Project::class);
-      // return $this->belongsToMany(\App\Models\Projects\Project::class, 'projects-material_project');
       return $this->belongsToMany('App\Models\Projects\Project::class', 'projects-material_project');
    }
 

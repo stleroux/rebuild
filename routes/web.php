@@ -31,17 +31,19 @@ foreach (File::allFiles(__DIR__ . '/routes') as $route_file) {
 // Route::get('modules/{module}/delete', 'ModulesController@delete')->name('modules.delete');
 // Route::resource('modules', 'ModulesController');
 
-Route::get('projects/{finish}/delete', 'Projects\FinishesController@delete')->name('finishes.delete');
-Route::resource('finishes', 'Projects\FinishesController');
-
 Route::post('projects/{project}/addFinish', 'Projects\ProjectsController@addFinish')->name('projects.addFinish');
 Route::post('projects/{project}/addImage', 'Projects\ProjectsController@addImage')->name('projects.addImage');
 Route::post('projects/{project}/addMaterial', 'Projects\ProjectsController@addMaterial')->name('projects.addMaterial');
 Route::delete('projects/{finish}/removeFinish', 'Projects\ProjectsController@removeFinish')->name('projects.removeFinish');
 Route::delete('projects/{image}/removeImage', 'Projects\ProjectsController@removeImage')->name('projects.removeImage');
 Route::delete('projects/{material}/removeMaterial', 'Projects\ProjectsController@removeMaterial')->name('projects.removeMaterial');
+Route::get('projects/list', 'Projects\ProjectsController@list')->name('projects.list'); // Backend view
+
 Route::get('projects/{project}/delete', 'Projects\ProjectsController@delete')->name('projects.delete');
 Route::resource('projects', 'Projects\ProjectsController');
 
-Route::get('projects/{material}/delete', 'Projects\MaterialsController@delete')->name('materials.delete');
+Route::get('projects/{finish}/deleteFinish', 'Projects\FinishesController@delete')->name('finishes.delete');
+Route::resource('finishes', 'Projects\FinishesController');
+
+Route::get('projects/{material}/deleteMaterial', 'Projects\MaterialsController@delete')->name('materials.delete');
 Route::resource('materials', 'Projects\MaterialsController');
