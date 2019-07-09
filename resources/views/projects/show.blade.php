@@ -36,7 +36,10 @@
 
 @section('content')
    
-{{--    <div class="card mb-3">
+@include('projects.blocks.imageSlider')
+
+
+   <div class="card mb-3">
 
       <div class="card-header">
          <i class="fa fa-plus-square"></i>
@@ -64,7 +67,7 @@
          </p>
       </div>
 
-   </div> --}}
+   </div>
 
 
 

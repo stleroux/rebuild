@@ -309,6 +309,7 @@ class ProjectsController extends Controller
     public function addImage(Request $request, $id)
     {
         $project = Project::find($id);
+        // $image_count = $project->images()->count();
 
         // Check if a new image was submitted
         if ($request->hasFile('image')) {
@@ -320,6 +321,9 @@ class ProjectsController extends Controller
         }
       
         $img = New Image();
+            // if(!$image_count){
+            //     $img->main_image = 1;
+            // }
             $img->project_id = $id;
             $img->name = $filename;
         $img->save();

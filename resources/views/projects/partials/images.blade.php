@@ -31,6 +31,7 @@
                      <tr>
                         <th>No</th>
                         <th>Image</th>
+                        {{-- <th>Main</th> --}}
                         <th></th>
                      </tr>
                   </thead>
@@ -39,6 +40,7 @@
                         <tr>
                            <td>{{$key+1}}</td>
                            <td><a href="{{ asset('_projects/'.$image->name) }}">{{$image->name}}</a></td>
+                           {{-- <td>{{ $image->main_image ? 'Yes' : 'No' }}</td> --}}
                            <td>
                               <form action="{{ route('projects.removeImage', $image->id) }}" method="POST" class="float-right">
                                  {{csrf_field()}}

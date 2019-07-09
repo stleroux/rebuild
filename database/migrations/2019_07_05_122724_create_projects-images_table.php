@@ -21,7 +21,7 @@ class CreateProjectsImagesTable extends Migration {
 			$table->string('mine_type', 50);
 			$table->integer('size');
 			$table->string('path', 250);
-			$table->boolean('main_image');
+			$table->boolean('main_image')->unsigned()->default(0);
 			$table->timestamps();
 		});
 	}
