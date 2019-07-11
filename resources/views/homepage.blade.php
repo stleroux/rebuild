@@ -10,7 +10,7 @@
 
 @section('right_column')
    @include('blocks.popularItems')
-   @include('blog.blocks.projectsImageSlider')
+   @include('projects.blocks.popularProjects')
    @include('blog.blocks.popularPosts')
    @include('recipes.blocks.popularRecipes')
 @endsection

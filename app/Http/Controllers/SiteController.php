@@ -13,6 +13,7 @@ use Route;
 use Session;
 
 use App\Models\Post;
+use App\Models\Projects\Project;
 // use Modules\Recipes\Entities\Recipe;
 
 class SiteController extends Controller
@@ -54,10 +55,10 @@ class SiteController extends Controller
 		// dd($popularPosts);
 		// $popularRecipes = Recipe::published()->public()->get()->sortBy('title')->sortByDesc('views')->take(setting('homepage_favorite_recipe_count'));
 		// dd($popularRecipes);
-		// $popularWoodProject = WoodProject::get()->sortByDesc('views')->take(1);
+		$popularProjects = Project::get()->sortByDesc('views')->take(5);
 
 		// return view('homepage', compact('posts','popularPosts','popularRecipes'));
-		return view('homepage', compact('posts'));
+		return view('homepage', compact('posts','popularProjects'));
 	}
 
 

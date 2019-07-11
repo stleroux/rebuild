@@ -3,6 +3,7 @@ body {
    background-repeat: no-repeat;
    background-size: 100% 100%;
    background-attachment: fixed;
+   /*font-size: 11pt;*/
 }
 
 .navbar_background {
@@ -25,6 +26,7 @@ body {
 .section_header {
 	background-image: url("../images/1.jpg");
 	color: white;
+	font-weight: bold;
 	padding-top: 8px;
 	padding-bottom: 8px;
 	padding-left: 10px;
@@ -46,7 +48,8 @@ body {
 /* Level 2 Card Headers */
 .card_header {
 	background-image: url("../images/10.jpg");
-	color: white;
+	color: black;
+	font-weight: bold;
 	padding-top: 8px;
 	padding-bottom: 8px;
 	padding-left: 10px;

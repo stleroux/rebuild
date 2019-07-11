@@ -321,11 +321,9 @@ class ProjectsController extends Controller
         }
       
         $img = New Image();
-            // if(!$image_count){
-            //     $img->main_image = 1;
-            // }
             $img->project_id = $id;
             $img->name = $filename;
+            $img->description = $request->description;
         $img->save();
 
         return redirect()->back();

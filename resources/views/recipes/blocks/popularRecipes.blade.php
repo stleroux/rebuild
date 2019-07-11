@@ -7,7 +7,7 @@
          </div>
          <div class="card-body p-0 m-0">
             @foreach ($popularRecipes as $r)
-               <a class="list-group-item p-1 m-0" href="{{ route('recipes.show', $r->id) }}" role="button">
+               <a class="list-group-item p-1 m-0" href="{{ route('recipes.show', $r->id) }}" role="button" style="text-decoration: none">
                   <div class="text text-left">
                      <i class="far fa-address-card"></i>
                      {{ $r->title }}

@@ -1,7 +1,7 @@
 <div class="card mb-2">
    <div class="card-header block_header">
       <i class="fab fa-pagelines"></i>
-      Popular Projects
+      Project Images
    </div>
    <div class="card-body p-0 m-0">
       <div id="projectsImageSlider" class="carousel slide mb-0" data-ride="carousel">

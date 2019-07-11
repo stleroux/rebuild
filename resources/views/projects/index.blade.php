@@ -3,7 +3,7 @@
 @section('title','Woodshop Projects')
 
 @section('stylesheets')
-   {{ Html::style('css/frontend.css') }}
+   {{ Html::style('css/woodbarn.css') }}
 @stop
 
 @section('left_column')
@@ -17,7 +17,7 @@
 @section('content')
 
    <div class="card">
-      <div class="card-header">
+      <div class="card-header section_header">
          <i class="fab fa-pagelines"></i>
          Projects
          <span class="float-right">
