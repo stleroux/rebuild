@@ -157,7 +157,7 @@ class ProjectsController extends Controller
 # ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝
 // Display a list of resources
 ##################################################################################################################
-    public function index()
+    public function index($filter = null)
     {
         // Check if user has required permission
         if($this->enablePermissions)
@@ -165,9 +165,23 @@ class ProjectsController extends Controller
             if(!checkPerm('projects_index')) { abort(401, 'Unauthorized Access'); }
         }
 
+        $project = New Project();
+        // $cat = collect($project->categoriesOptions());
+        
+        // // $c = $cat->
+        // dd($cat);
+
+
+
+        if($filter){
+            $projects = Project::with('images')->where('category', '=', $filter)->paginate(3);
+            // dd($projects);
+        } else {
+            $projects = Project::with('images')->orderBy('name','asc')->paginate(3);
+        }
         // $projects = Project::with('images')->latest()->limit(20)->get();
-        $projects = Project::with('images')->orderBy('name','asc')->paginate(3);
-        return view('projects.index', compact('projects'));
+        
+        return view('projects.index', compact('projects','project'));
     }
 
 

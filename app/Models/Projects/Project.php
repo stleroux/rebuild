@@ -27,11 +27,21 @@ class Project extends Model
          1 => 'General',
          2 => 'Furniture',
          3 => 'Kitchen appliance',
+         4 => 'Furniture 4',
+         5 => 'Furniture 5',
+         6 => 'Furniture 6',
+         7 => 'Furniture 7',
+         8 => 'Furniture 8',
+         9 => 'Furniture 9',
+         10 => 'Furniture 10',
+         11 => 'Furniture 11',
+         12 => 'Furniture 12',
       ];
    }
 
+
 //////////////////////////////////////////////////////////////////////////////////////
-// ADD RELATIONSHIPS
+// RELATIONSHIPS
 //////////////////////////////////////////////////////////////////////////////////////
    public function finishes()
    {

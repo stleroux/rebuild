@@ -28,13 +28,17 @@
             @include('projects.addins.links.add', ['model'=>'project'])
          </span>
       </div>
-      <div class="card-body" style="background-image: url('../images/board_2.jpg');">
+      <div class="card-body section_body">
 
-
-<div class="col-xs-12">
-   Filters
+<div class="pb-2">
+   @foreach($project->categoriesOptions() as $categoryOptionKey => $categoryOptionValue)
+      @if($categoryOptionKey == 0)
+         <a href="{{ route('projects.index') }}" class="btn btn-sm btn-info">All Projects</a>
+      @else
+         <a href="{{ route('projects.index', $categoryOptionKey) }}" class="btn btn-sm btn-info">{{ $categoryOptionValue }}</a>
+      @endif
+   @endforeach
 </div>
-
 
          @if(count($projects) > 0)
 

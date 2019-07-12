@@ -40,7 +40,8 @@ Route::delete('projects/{material}/removeMaterial', 'Projects\ProjectsController
 Route::get('projects/list', 'Projects\ProjectsController@list')->name('projects.list'); // Backend view
 
 Route::get('projects/{project}/delete', 'Projects\ProjectsController@delete')->name('projects.delete');
-Route::resource('projects', 'Projects\ProjectsController');
+Route::get('projects/{filter?}', 'Projects\ProjectsController@index')->name('projects.index');
+Route::resource('projects', 'Projects\ProjectsController')->except('index');
 
 Route::get('projects/{finish}/deleteFinish', 'Projects\FinishesController@delete')->name('finishes.delete');
 Route::resource('finishes', 'Projects\FinishesController');
