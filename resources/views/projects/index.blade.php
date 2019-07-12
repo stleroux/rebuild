@@ -29,6 +29,13 @@
          </span>
       </div>
       <div class="card-body" style="background-image: url('../images/board_2.jpg');">
+
+
+<div class="col-xs-12">
+   Filters
+</div>
+
+
          @if(count($projects) > 0)
 
             @foreach ($projects->chunk(4) as $chunk)
@@ -84,6 +91,7 @@
                      </div>
                    @endforeach
                 </div>
+                {{ $projects->links() }}
             @endforeach
 
          @else

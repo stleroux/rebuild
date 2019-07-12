@@ -165,10 +165,8 @@ class ProjectsController extends Controller
             if(!checkPerm('projects_index')) { abort(401, 'Unauthorized Access'); }
         }
 
-        // $projects = Project::All();
-        // $projects = Project::with('images')->get();
-        $projects = Project::with('images')->latest()->limit(20)->get();
-        // dd($projects);
+        // $projects = Project::with('images')->latest()->limit(20)->get();
+        $projects = Project::with('images')->orderBy('name','asc')->paginate(3);
         return view('projects.index', compact('projects'));
     }
 
@@ -190,7 +188,8 @@ class ProjectsController extends Controller
             if(!checkPerm('projects_list')) { abort(401, 'Unauthorized Access'); }
         }
 
-        $projects = Project::All();
+        // $projects = Project::All();
+        $projects = Project::with('images')->orderBy('name','asc')->get();
         return view('projects.list', compact('projects'));
     }
 
