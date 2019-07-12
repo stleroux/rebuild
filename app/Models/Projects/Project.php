@@ -26,6 +26,7 @@ class Project extends Model
          0 => 'Select One',
          1 => 'General',
          2 => 'Furniture',
+         3 => 'Kitchen appliance',
       ];
    }
 

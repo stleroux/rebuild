@@ -19,7 +19,7 @@
                      <select name="finish" id="finish" class="form-control form-control-sm p-0 col-9">
                         <option value="">Select</option>
                         @foreach($finishes as $finish)
-                           <option value="{{$finish->id}}">{{$finish->name}}</option>
+                           <option value="{{ $finish->id }}">{{ $finish->name }} - {{ $finish->sheen }}</option>
                         @endforeach
                      </select>
                      <button type="submit" class="btn btn-sm btn-primary col-2 float-right col-1 offset-1">Add</button>

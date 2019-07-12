@@ -11,7 +11,7 @@
 @endsection
 
 @section('right_column')
-   most popular
+   @include('projects.blocks.popularProjects')
 @endsection
 
 @section('content')
@@ -32,7 +32,7 @@
          @if(count($projects) > 0)
 
             @foreach ($projects->chunk(4) as $chunk)
-               <div class="row">
+               <div class="row pb-4">
                   @foreach ($chunk as $project)
                      <div class="col-xs-12 col-sm-3">
                         <div class="thumbnail p-2 text text-center" style="background-image: url('../images/nav.jpg');">

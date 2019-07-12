@@ -1,6 +1,6 @@
 {{-- @if(checkACL('user')) --}}
    <div class="card mb-2">
-      <div class="card-header">
+      <div class="card-header block_header">
          
             <i class="fa fa-comment"></i>
             Leave a comment
@@ -52,8 +52,8 @@
          {{-- </div> --}}
          {{ Form::close() }}
       </div>
-      <div class="card-footer">
-         Be a sport and keep your comments clean, otherwise they will be removed and you risk being banned from the site.
+      <div class="card-footer p-1">
+         <small>Be a sport and keep your comments clean, otherwise they will be removed and you risk being banned from the site.</small>
       </div>
    </div>
 {{-- @endif  --}}

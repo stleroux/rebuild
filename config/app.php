@@ -177,6 +177,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\RecipeServiceProvider::class,
         App\Providers\PostServiceProvider::class,
+        App\Providers\ProjectServiceProvider::class,
 
     ],
 

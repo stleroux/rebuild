@@ -2,32 +2,32 @@
 
    @guest
       <li class="nav-item {{ Request::is('register*') ? 'active' : '' }}">
-         <a class="nav-link" href="{{ URL('/register') }}">Register Account</a>
+         <a class="nav-link p-2" href="{{ URL('/register') }}">Register Account</a>
       </li>
 
       <li class="nav-item {{ Request::is('login*') ? 'active' : '' }}">
-         <a class="nav-link" href="{{ URL('/login') }}">Login</a>
+         <a class="nav-link p-2" href="{{ URL('/login') }}">Login</a>
       </li>
    @endif
 
    @auth
       <li class="nav-item {{ Request::is('dashboard*') ? 'active' : '' }}">
-         <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
+         <a class="nav-link p-2" href="{{ route('dashboard') }}">Dashboard</a>
       </li>
    @endauth
 
    <li class="nav-item {{ Request::is('about*') ? 'active' : '' }}">
-      <a class="nav-link" href="{{ URL('/about') }}">About us</a>
+      <a class="nav-link p-2" href="{{ URL('/about') }}">About us</a>
    </li>
    
    <li class="nav-item {{ Request::is('contact*') ? 'active' : '' }}">
-      <a class="nav-link" href="{{ URL('/contact') }}">Contact us</a>
+      <a class="nav-link p-2" href="{{ URL('/contact') }}">Contact us</a>
    </li>
    
    <!-- Dropdown -->
    @auth
    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+      <a class="nav-link p-2 dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
          My Account
       </a>
       <div class="dropdown-menu dropdown-menu-right">
@@ -57,7 +57,7 @@
    </li>
    @endauth
    {{-- <li class="nav-item">
-      <a class="nav-link disabled" href="#">Disabled</a>
+      <a class="nav-link p-2 disabled" href="#">Disabled</a>
    </li> --}}
 
 </ul>

@@ -3,7 +3,7 @@
    <div class="card-header p-1">Other Information</div>
    <div class="card-body p-2">
 
-      <div class="form-row">
+      <div class="form-row pb-2">
 
          <div class="col-xs-12 col-sm-6 col-md-3">
             {!! Form::label('width', 'Width') !!} <small>(Inches)</small>
@@ -71,7 +71,7 @@
 
       </div>
       
-      <div class="form-row">
+      <div class="form-row pb-2">
          <div class="col-xs-12 col-sm-6 col-md-4">
             {!! Form::label('completed_at', 'Completed Date') !!}
             <div class="input-group input-group-sm {{ $errors->has('completed_at') ? 'has-error' : '' }}">

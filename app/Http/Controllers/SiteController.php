@@ -55,10 +55,13 @@ class SiteController extends Controller
 		// dd($popularPosts);
 		// $popularRecipes = Recipe::published()->public()->get()->sortBy('title')->sortByDesc('views')->take(setting('homepage_favorite_recipe_count'));
 		// dd($popularRecipes);
-		$popularProjects = Project::get()->sortByDesc('views')->take(5);
+		
+		// $popularProjects = Project::get()->sortByDesc('views')->take(5);
+
 
 		// return view('homepage', compact('posts','popularPosts','popularRecipes'));
-		return view('homepage', compact('posts','popularProjects'));
+		// return view('homepage', compact('posts','popularProjects'));
+		return view('homepage', compact('posts'));
 	}
 
 

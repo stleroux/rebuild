@@ -1,6 +1,6 @@
 <div class="card mb-2">
    <div class="card-header block_header">
-      <i class="fab fa-pagelines"></i>
+      <i class="far fa-image"></i>
       Project Images
    </div>
    <div class="card-body p-0 m-0">
