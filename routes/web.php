@@ -39,12 +39,19 @@ Route::delete('projects/{image}/removeImage', 'Projects\ProjectsController@remov
 Route::delete('projects/{material}/removeMaterial', 'Projects\ProjectsController@removeMaterial')->name('projects.removeMaterial');
 Route::get('projects/list', 'Projects\ProjectsController@list')->name('projects.list'); // Backend view
 
-Route::get('projects/{project}/delete', 'Projects\ProjectsController@delete')->name('projects.delete');
-Route::get('projects/{filter?}', 'Projects\ProjectsController@index')->name('projects.index');
-Route::resource('projects', 'Projects\ProjectsController')->except('index');
-
 Route::get('projects/{finish}/deleteFinish', 'Projects\FinishesController@delete')->name('finishes.delete');
 Route::resource('finishes', 'Projects\FinishesController');
 
 Route::get('projects/{material}/deleteMaterial', 'Projects\MaterialsController@delete')->name('materials.delete');
 Route::resource('materials', 'Projects\MaterialsController');
+
+
+
+Route::get('/projects/{project}/delete',  'Projects\ProjectsController@delete')     ->name('projects.delete');
+Route::get('/projects/{filter?}',         'Projects\ProjectsController@index')      ->name('projects.index');
+Route::get('/projects/create',            'Projects\ProjectsController@create')     ->name('projects.create');
+Route::post('/projects',                  'Projects\ProjectsController@store')      ->name('projects.store');
+Route::get('/projects/{project}/show',    'Projects\ProjectsController@show')       ->name('projects.show');
+Route::get('/projects/{project}/edit',    'Projects\ProjectsController@edit')       ->name('projects.edit');
+Route::put('/projects/{project}',         'Projects\ProjectsController@update')     ->name('projects.update');
+Route::delete('/projects/{project}',      'Projects\ProjectsController@destroy')    ->name('projects.delete');

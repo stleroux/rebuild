@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use DB;
 use File;
 use Image as Img;
+use Route;
 use Session;
 use URL;
 
@@ -165,19 +166,16 @@ class ProjectsController extends Controller
             if(!checkPerm('projects_index')) { abort(401, 'Unauthorized Access'); }
         }
 
+        // Set the session to the current page route
+        Session::put('fromPage', url()->full());
+
         $project = New Project();
-        // $cat = collect($project->categoriesOptions());
-        
-        // // $c = $cat->
-        // dd($cat);
-
-
 
         if($filter){
-            $projects = Project::with('images')->where('category', '=', $filter)->paginate(3);
+            $projects = Project::with('images')->where('category', '=', $filter)->paginate(12);
             // dd($projects);
         } else {
-            $projects = Project::with('images')->orderBy('name','asc')->paginate(3);
+            $projects = Project::with('images')->orderBy('name','asc')->paginate(12);
         }
         // $projects = Project::with('images')->latest()->limit(20)->get();
         
@@ -201,6 +199,9 @@ class ProjectsController extends Controller
         {
             if(!checkPerm('projects_list')) { abort(401, 'Unauthorized Access'); }
         }
+
+        // Set the session to the current page route
+        Session::put('fromPage', url()->full());
 
         // $projects = Project::All();
         $projects = Project::with('images')->orderBy('name','asc')->get();
@@ -246,7 +247,8 @@ class ProjectsController extends Controller
         // Increase the view count since this is viewed from the frontend
         // dd(url('') . '/projects');
 
-        if (url()->previous() == url('') . '/projects') {
+        // dd(url('/projects/list*'));
+        if (url()->previous() != url('/projects/list')) {
             DB::table('projects-projects')->where('id','=',$project->id)->increment('views',1);
         }
 

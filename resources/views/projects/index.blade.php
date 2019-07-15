@@ -30,15 +30,21 @@
       </div>
       <div class="card-body section_body">
 
-<div class="pb-2">
-   @foreach($project->categoriesOptions() as $categoryOptionKey => $categoryOptionValue)
-      @if($categoryOptionKey == 0)
-         <a href="{{ route('projects.index') }}" class="btn btn-sm btn-info">All Projects</a>
-      @else
-         <a href="{{ route('projects.index', $categoryOptionKey) }}" class="btn btn-sm btn-info">{{ $categoryOptionValue }}</a>
-      @endif
-   @endforeach
-</div>
+         <div class="pb-2">
+            @foreach($project->categoriesOptions() as $categoryOptionKey => $categoryOptionValue)
+               @if($categoryOptionKey == 0)
+                  <a href="{{ route('projects.index') }}"
+                     class="btn btn-xs btn-{{ request()->is('projects') ? 'primary' : 'secondary' }}">
+                     All Projects
+                  </a>
+               @else
+                  <a href="{{ route('projects.index', $categoryOptionKey) }}"
+                     class="btn btn-xs btn-{{ request()->is('projects/'.$categoryOptionKey) ? 'primary' : 'secondary' }} p-1">
+                     {{ $categoryOptionValue }}
+                  </a>
+               @endif
+            @endforeach
+         </div>
 
          @if(count($projects) > 0)
 
