@@ -38,13 +38,11 @@
                            <th>ID</th>
                            <th>Name</th>
                            <th>Category</th>
-                           <th>Description</th>
                            <th>Views</th>
                            <th>Images</th>
                            <th>Finish(es)</th>
                            <th>Material(s)</th>
                            <th>Created On</th>
-                           <th>Updated On</th>
                            <th class="no-sort"></th>
                         </tr>
                      </thead>
@@ -54,14 +52,12 @@
                               <td>{{ $project->id }}</td>
                               <td><a href="{{ route('projects.show', $project->id) }}">{{ $project->name }}</a></td>
                               <td>{{ $project->category }}</td>
-                              <td>{{ $project->description }}</td>
                               <td>{{ $project->views }}</td>
                               <td>{{ $project->images()->count() }}</td>
                               <td>{{ $project->finishes()->count() }}</td>
                               <td>{{ $project->materials()->count() }}</td>
                               {{-- Add more columns here --}}
                               <td data-order="{{ $project->created_at}}">{{ $project->created_at ? $project->created_at->format('M d, Y') : 'no data found' }}</td>
-                              <td data-order="{{ $project->updated_at}}">{{ $project->updated_at ? $project->updated_at->format('M d, Y') : 'no data found' }}</td>
                               <td class="text-right">
                                  @if(checkPerm('projects_edit'))
                                     @include('projects.addins.links.edit', ['size'=>'xs'])

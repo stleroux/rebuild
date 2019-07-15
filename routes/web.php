@@ -48,10 +48,11 @@ Route::resource('materials', 'Projects\MaterialsController');
 
 
 Route::get('/projects/{project}/delete',  'Projects\ProjectsController@delete')     ->name('projects.delete');
-Route::get('/projects/{filter?}',         'Projects\ProjectsController@index')      ->name('projects.index');
 Route::get('/projects/create',            'Projects\ProjectsController@create')     ->name('projects.create');
+Route::get('/projects/list',              'Projects\ProjectsController@list')       ->name('projects.list');
 Route::post('/projects',                  'Projects\ProjectsController@store')      ->name('projects.store');
 Route::get('/projects/{project}/show',    'Projects\ProjectsController@show')       ->name('projects.show');
 Route::get('/projects/{project}/edit',    'Projects\ProjectsController@edit')       ->name('projects.edit');
 Route::put('/projects/{project}',         'Projects\ProjectsController@update')     ->name('projects.update');
 Route::delete('/projects/{project}',      'Projects\ProjectsController@destroy')    ->name('projects.delete');
+Route::get('/projects/{filter?}',         'Projects\ProjectsController@index')      ->name('projects.index');

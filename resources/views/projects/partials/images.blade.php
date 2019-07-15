@@ -8,30 +8,30 @@
    
    <div class="card-body p-0">
    
-      {{-- <div class="form-row"> --}}
+      <div class="form-row">
    
          <div id="addImage" class="col-10 offset-1 pt-2" style="display: none;">
             <div class="card mb-2">
                <div class="card-header pl-2 pt-0 py-0">Add Image</div>
                <div class="card-body p-2">
-                  <form action="{{ route('projects.addImage', $project->id) }}" method="post" enctype="multipart/form-data" class="form-inline">
+                  <form action="{{ route('projects.addImage', $project->id) }}" method="post" enctype="multipart/form-data" >
                      <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
 
-   <div class="col-sm-12">
-      <div class="form-group">
-         {{ Form::label('image', 'Image', ['class'=>'col-2']) }}
-         {{ Form::file('image', ['class'=>'form-control form-control-sm p-0 col-10']) }}
-         <span class="text-danger">{{ $errors->first('image') }}</span>
-      </div>
-   </div>
+                     <div class="col-sm-12">
+                        <div class="form-group">
+                           {{ Form::label('image', 'Image', ['class'=>'required']) }}
+                           {{ Form::file('image', ['class'=>'form-control form-control-sm p-0']) }}
+                           <span class="text-danger">{{ $errors->first('image') }}</span>
+                        </div>
+                     </div>
 
-   <div class="col-sm-12">
-      <div class="form-group">
-         {{ Form::label('description', 'Desciption', ['class'=>'col-2']) }}
-         {{ Form::textarea('description', null, ['id' => 'description', 'rows' => 4, 'cols' => 20, 'class'=>'form-control form-control-sm p-0 col-10']) }}
-         <span class="text-danger">{{ $errors->first('description') }}</span>
-      </div>
-   </div>
+                     <div class="col-sm-12">
+                        <div class="form-group">
+                           {{ Form::label('description', 'Desciption', ['class'=>'required']) }}
+                           {{ Form::textarea('description', null, ['id' => 'description', 'rows' => 4, 'cols' => 20, 'class'=>'form-control form-control-sm p-0']) }}
+                           <span class="text-danger">{{ $errors->first('description') }}</span>
+                        </div>
+                     </div>
 
                      
                      <button type="submit" class="btn btn-sm btn-primary">Add</button>

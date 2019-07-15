@@ -28,7 +28,7 @@
                   <span class="float-right">
                      {!! Form::model($project, ['route'=>['projects.update', $project->id], 'method' => 'POST', 'files' => true]) !!}
                      @csrf
-                     @method("PATCH")
+                     @method("PUT")
                      @include('projects.addins.links.help', ['model'=>'project', 'bookmark'=>'projects'])
                      @include('projects.addins.links.back', ['model'=>'project'])
                      @include('projects.addins.buttons.update', ['model'=>'project'])
@@ -56,6 +56,7 @@
                         @include('projects.partials.finishes')
                      </div>
                      <div class="col-md-4">
+                        {{-- <span class="text-danger">{{ $errors->first('image') }}</span> --}}
                         @include('projects.partials.images')
                      </div>
                   </div>

@@ -14,15 +14,19 @@
             <div class="card mb-2">
                <div class="card-header pl-2 pt-0 py-0">Add Finish</div>
                <div class="card-body p-2">
-                  <form action="{{ route('projects.addFinish', $project->id) }}" method="post" class="form-inline">
+                  <form action="{{ route('projects.addFinish', $project->id) }}" method="post">
                      <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-                     <select name="finish" id="finish" class="form-control form-control-sm p-0 col-9">
-                        <option value="">Select</option>
-                        @foreach($finishes as $finish)
-                           <option value="{{ $finish->id }}">{{ $finish->name }} - {{ $finish->sheen }}</option>
-                        @endforeach
-                     </select>
-                     <button type="submit" class="btn btn-sm btn-primary col-2 float-right col-1 offset-1">Add</button>
+                     <div class="col-sm-12">
+                        <div class="form-group">
+                           <select name="finish" id="finish" class="form-control form-control-sm">
+                              <option value="">Select</option>
+                              @foreach($finishes as $finish)
+                                 <option value="{{ $finish->id }}">{{ $finish->name }} - {{ $finish->sheen }}</option>
+                              @endforeach
+                           </select>
+                        </div>
+                     </div>
+                     <button type="submit" class="btn btn-sm btn-primary">Add</button>
                   </form>
                </div>
             </div>

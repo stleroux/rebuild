@@ -222,7 +222,7 @@ class ProjectsController extends Controller
     {
         Project::create($this->validateRequest());
 
-        return redirect('projects');
+        return redirect()->route('projects.list');
         // return redirect('projects.edit', $project);
     }
 
@@ -323,6 +323,24 @@ class ProjectsController extends Controller
 ##################################################################################################################
     public function addImage(Request $request, $id)
     {
+        // $this->validate($request, [
+        //     'image' => 'required|image',
+        //     'description' => 'required',
+        // ]);
+
+        // $rules = [
+        //         'image' => 'required|image',
+        //         'description' => 'required',
+        //     ];
+
+        // $customMessages = [
+        //     'image.required' => 'Required',
+        //     'description.required' => 'Required',
+            
+        // ];
+
+        // $this->validate($request, $rules, $customMessages);
+
         $project = Project::find($id);
         // $image_count = $project->images()->count();
 
