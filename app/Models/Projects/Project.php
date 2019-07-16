@@ -8,7 +8,7 @@ class Project extends Model
 {
    protected $guarded = [];
 
-   protected $table = 'projects-projects';
+   protected $table = 'projects__projects';
 
    // Set the default value for the status field to 0
    protected $attributes = [
@@ -36,12 +36,12 @@ class Project extends Model
 //////////////////////////////////////////////////////////////////////////////////////
    public function finishes()
    {
-      return $this->belongsToMany(\App\Models\Projects\Finish::class, 'projects-finish_project');
+      return $this->belongsToMany(\App\Models\Projects\Finish::class, 'projects__finish_project');
    }
 
    public function materials()
    {
-      return $this->belongsToMany(\App\Models\Projects\Material::class, 'projects-material_project');
+      return $this->belongsToMany(\App\Models\Projects\Material::class, 'projects__material_project');
    }
 
    public function images()

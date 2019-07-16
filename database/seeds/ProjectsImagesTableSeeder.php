@@ -14,9 +14,9 @@ class ProjectsImagesTableSeeder extends Seeder
     {
         
 
-        \DB::table('projects-images')->delete();
+        \DB::table('projects__images')->delete();
         
-        \DB::table('projects-images')->insert(array (
+        \DB::table('projects__images')->insert(array (
             0 => 
             array (
                 'id' => 8,
@@ -107,6 +107,19 @@ class ProjectsImagesTableSeeder extends Seeder
                 'main_image' => 0,
                 'created_at' => '2019-07-11 21:18:07',
                 'updated_at' => '2019-07-11 21:18:07',
+            ),
+            7 => 
+            array (
+                'id' => 15,
+                'project_id' => 10,
+                'name' => '1563285704.jpg',
+                'description' => 'qwerty',
+                'mine_type' => '',
+                'size' => 0,
+                'path' => '',
+                'main_image' => 0,
+                'created_at' => '2019-07-16 10:01:44',
+                'updated_at' => '2019-07-16 10:01:44',
             ),
         ));
         

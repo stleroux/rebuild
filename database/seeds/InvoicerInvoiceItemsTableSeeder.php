@@ -14,9 +14,9 @@ class InvoicerInvoiceItemsTableSeeder extends Seeder
     {
         
 
-        \DB::table('invoicer_invoiceItems')->delete();
+        \DB::table('invoicer__invoice_items')->delete();
         
-        \DB::table('invoicer_invoiceItems')->insert(array (
+        \DB::table('invoicer__invoice_items')->insert(array (
             0 => 
             array (
                 'id' => 2,
@@ -68,6 +68,19 @@ class InvoicerInvoiceItemsTableSeeder extends Seeder
                 'work_date' => '2019-05-13 00:00:00',
                 'created_at' => '2019-05-13 14:26:38',
                 'updated_at' => '2019-05-13 14:26:38',
+            ),
+            4 => 
+            array (
+                'id' => 6,
+                'invoice_id' => 5,
+                'product_id' => 4,
+                'notes' => NULL,
+                'quantity' => 1.0,
+                'price' => '123.00',
+                'total' => '123.00',
+                'work_date' => '2019-07-18 00:00:00',
+                'created_at' => '2019-07-16 09:58:17',
+                'updated_at' => '2019-07-16 09:58:17',
             ),
         ));
         

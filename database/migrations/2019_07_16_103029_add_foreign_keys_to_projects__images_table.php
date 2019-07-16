@@ -12,9 +12,9 @@ class AddForeignKeysToProjectsImagesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('projects-images', function(Blueprint $table)
+		Schema::table('projects__images', function(Blueprint $table)
 		{
-			$table->foreign('project_id', 'projects-images')->references('id')->on('projects-projects')->onUpdate('RESTRICT')->onDelete('CASCADE');
+			$table->foreign('project_id', 'projects__images')->references('id')->on('projects__projects')->onUpdate('RESTRICT')->onDelete('CASCADE');
 		});
 	}
 
@@ -26,9 +26,9 @@ class AddForeignKeysToProjectsImagesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('projects-images', function(Blueprint $table)
+		Schema::table('projects__images', function(Blueprint $table)
 		{
-			$table->dropForeign('projects-images_ibfk_1');
+			$table->dropForeign('projects__images');
 		});
 	}
 

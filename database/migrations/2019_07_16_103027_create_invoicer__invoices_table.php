@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class CreateInvoicerInvoicesTable extends Migration
-{
+class CreateInvoicerInvoicesTable extends Migration {
+
 	/**
 	 * Run the migrations.
 	 *
@@ -13,10 +12,11 @@ class CreateInvoicerInvoicesTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('invoicer_invoices', function (Blueprint $table) {
+		Schema::create('invoicer__invoices', function(Blueprint $table)
+		{
 			$table->increments('id');
-			$table->integer('client_id')->unsigned();
-			$table->text('notes')->nullable();
+			$table->integer('client_id')->unsigned()->index('invoicer_invoices_client_id_foreign');
+			$table->text('notes', 65535)->nullable();
 			$table->string('status');
 			$table->decimal('amount_charged')->unsigned()->nullable();
 			$table->decimal('hst')->unsigned()->nullable();
@@ -25,16 +25,12 @@ class CreateInvoicerInvoicesTable extends Migration
 			$table->decimal('income_taxes')->unsigned()->nullable();
 			$table->decimal('total_deductions')->unsigned()->nullable();
 			$table->decimal('total')->unsigned()->nullable();
-			$table->timestamp('invoiced_at')->nullable();
-			$table->timestamp('paid_at')->nullable();
+			$table->dateTime('invoiced_at')->nullable();
+			$table->dateTime('paid_at')->nullable();
 			$table->timestamps();
-
-			// Add foreign key in the database manually
-			$table->foreign('client_id')->references('id')->on('invoicer_clients')->onDelete('cascade');
 		});
-
-		// Schema::table('invoicer_invoices', function (Blueprint $table) {});
 	}
+
 
 	/**
 	 * Reverse the migrations.
@@ -43,7 +39,7 @@ class CreateInvoicerInvoicesTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::disableForeignKeyConstraints();
-		Schema::dropIfExists('invoicer_invoices');
+		Schema::drop('invoicer__invoices');
 	}
+
 }

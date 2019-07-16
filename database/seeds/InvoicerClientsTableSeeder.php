@@ -14,9 +14,9 @@ class InvoicerClientsTableSeeder extends Seeder
     {
         
 
-        \DB::table('invoicer_clients')->delete();
+        \DB::table('invoicer__clients')->delete();
         
-        \DB::table('invoicer_clients')->insert(array (
+        \DB::table('invoicer__clients')->insert(array (
             0 => 
             array (
                 'id' => 1,
@@ -70,6 +70,24 @@ class InvoicerClientsTableSeeder extends Seeder
                 'notes' => NULL,
                 'created_at' => '2018-10-31 16:23:24',
                 'updated_at' => '2018-10-31 16:23:24',
+            ),
+            3 => 
+            array (
+                'id' => 4,
+                'company_name' => 'sdasdasd',
+                'contact_name' => 'asdasdasd',
+                'address' => NULL,
+                'city' => NULL,
+                'state' => NULL,
+                'zip' => NULL,
+                'telephone' => '3412231232',
+                'cell' => NULL,
+                'fax' => NULL,
+                'email' => 'asdasd@dsdsd.com',
+                'website' => NULL,
+                'notes' => NULL,
+                'created_at' => '2019-07-16 09:57:10',
+                'updated_at' => '2019-07-16 09:57:18',
             ),
         ));
         

@@ -14,9 +14,9 @@ class InvoicerProductsTableSeeder extends Seeder
     {
         
 
-        \DB::table('invoicer_products')->delete();
+        \DB::table('invoicer__products')->delete();
         
-        \DB::table('invoicer_products')->insert(array (
+        \DB::table('invoicer__products')->insert(array (
             0 => 
             array (
                 'id' => 1,
@@ -40,6 +40,14 @@ class InvoicerProductsTableSeeder extends Seeder
                 'details' => 'Trim',
                 'created_at' => '2018-10-30 16:41:52',
                 'updated_at' => '2018-10-30 16:41:52',
+            ),
+            3 => 
+            array (
+                'id' => 4,
+                'code' => 'sdsad',
+                'details' => 'sadasdasdasdasd',
+                'created_at' => '2019-07-16 09:54:01',
+                'updated_at' => '2019-07-16 09:54:01',
             ),
         ));
         

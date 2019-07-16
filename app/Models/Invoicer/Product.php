@@ -9,7 +9,7 @@ class Product extends Model
 {
 	use Sortable;
 
-	protected $table = 'invoicer_products';
+	protected $table = 'invoicer__products';
 
 	protected $fillable = [
 		'code',

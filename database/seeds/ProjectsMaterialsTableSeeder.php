@@ -14,9 +14,9 @@ class ProjectsMaterialsTableSeeder extends Seeder
     {
         
 
-        \DB::table('projects-materials')->delete();
+        \DB::table('projects__materials')->delete();
         
-        \DB::table('projects-materials')->insert(array (
+        \DB::table('projects__materials')->insert(array (
             0 => 
             array (
                 'id' => 1,
@@ -24,7 +24,7 @@ class ProjectsMaterialsTableSeeder extends Seeder
                 'type' => '',
                 'notes' => '',
                 'manufacturer' => '',
-                'upc' => '',
+                'UPC' => '',
                 'created_at' => '2019-06-30 05:16:22',
                 'updated_at' => '2019-06-30 05:16:22',
             ),
@@ -35,7 +35,7 @@ class ProjectsMaterialsTableSeeder extends Seeder
                 'type' => '',
                 'notes' => '',
                 'manufacturer' => '',
-                'upc' => '',
+                'UPC' => '',
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
@@ -46,7 +46,7 @@ class ProjectsMaterialsTableSeeder extends Seeder
                 'type' => '',
                 'notes' => '',
                 'manufacturer' => '',
-                'upc' => '',
+                'UPC' => '',
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
@@ -57,7 +57,7 @@ class ProjectsMaterialsTableSeeder extends Seeder
                 'type' => 'Hardwood',
                 'notes' => 'No notes for this product again',
                 'manufacturer' => 'ABC Company',
-                'upc' => '123123123123',
+                'UPC' => '123123123123',
                 'created_at' => '2019-07-06 21:00:05',
                 'updated_at' => '2019-07-06 21:16:33',
             ),
@@ -68,7 +68,7 @@ class ProjectsMaterialsTableSeeder extends Seeder
                 'type' => 'Fucked up wood',
                 'notes' => 'I don\'t give a crap',
                 'manufacturer' => 'NA',
-                'upc' => 'NA',
+                'UPC' => 'NA',
                 'created_at' => '2019-07-11 21:04:29',
                 'updated_at' => '2019-07-11 21:04:29',
             ),

@@ -8,7 +8,7 @@ class Finish extends Model
 {
    protected $guarded = [];
 
-   protected $table = 'projects-finishes';
+   protected $table = 'projects__finishes';
 
 // Set the default value for the sheen field to 0
    protected $attributes = [
@@ -36,6 +36,6 @@ class Finish extends Model
 //////////////////////////////////////////////////////////////////////////////////////
    public function projects()
    {
-      return $this->belongsToMany('App\Models\Projects\Project::class', 'projects-finish_project');
+      return $this->belongsToMany('App\Models\Projects\Project::class', 'projects__finish_project');
    }
 }

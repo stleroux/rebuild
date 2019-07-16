@@ -249,7 +249,7 @@ class ProjectsController extends Controller
 
         // dd(url('/projects/list*'));
         if (url()->previous() != url('/projects/list')) {
-            DB::table('projects-projects')->where('id','=',$project->id)->increment('views',1);
+            DB::table('projects__projects')->where('id','=',$project->id)->increment('views',1);
         }
 
         $image = Image::where('project_id', '=', $project->id)->first();
@@ -356,7 +356,7 @@ class ProjectsController extends Controller
         $img = New Image();
             $img->project_id = $id;
             $img->name = $filename;
-            $img->description = $request->description;
+            $img->description = $request->image_description;
         $img->save();
 
         return redirect()->back();

@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateRecipeUserTable extends Migration {
+class CreateProjectsMaterialProjectTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,11 +12,11 @@ class CreateRecipeUserTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('recipe_user', function(Blueprint $table)
+		Schema::create('projects__material_project', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('user_id')->unsigned()->index('favorite_recipe_user_id_foreign');
-			$table->integer('recipe_id')->unsigned()->index('recipe_id');
+			$table->integer('project_id')->unsigned()->index('project_id');
+			$table->integer('material_id')->unsigned();
 			$table->timestamps();
 		});
 	}
@@ -29,7 +29,7 @@ class CreateRecipeUserTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('recipe_user');
+		Schema::drop('projects__material_project');
 	}
 
 }

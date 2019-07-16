@@ -14,9 +14,9 @@ class ProjectsMaterialProjectTableSeeder extends Seeder
     {
         
 
-        \DB::table('projects-material_project')->delete();
+        \DB::table('projects__material_project')->delete();
         
-        \DB::table('projects-material_project')->insert(array (
+        \DB::table('projects__material_project')->insert(array (
             0 => 
             array (
                 'id' => 3,
@@ -45,6 +45,14 @@ class ProjectsMaterialProjectTableSeeder extends Seeder
             array (
                 'id' => 6,
                 'project_id' => 8,
+                'material_id' => 1,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            4 => 
+            array (
+                'id' => 7,
+                'project_id' => 10,
                 'material_id' => 1,
                 'created_at' => NULL,
                 'updated_at' => NULL,

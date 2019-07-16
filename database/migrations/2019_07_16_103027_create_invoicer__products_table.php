@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateCategoriesTable extends Migration {
+class CreateInvoicerProductsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,14 +12,11 @@ class CreateCategoriesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('categories', function(Blueprint $table)
+		Schema::create('invoicer__products', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('parent_id')->unsigned()->nullable();
-			$table->string('name');
-			$table->string('value')->nullable();
-			$table->text('description', 65535)->nullable();
-			$table->softDeletes();
+			$table->string('code');
+			$table->text('details', 65535);
 			$table->timestamps();
 		});
 	}
@@ -32,7 +29,7 @@ class CreateCategoriesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('categories');
+		Schema::drop('invoicer__products');
 	}
 
 }

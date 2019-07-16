@@ -9,7 +9,7 @@ class InvoiceItem extends Model
 {
 	use Sortable;
 
-	protected $table = 'invoicer_invoiceItems';
+	protected $table = 'invoicer__invoice_items';
 	protected $dates = ['work_date'];
 
 	protected $fillable = [

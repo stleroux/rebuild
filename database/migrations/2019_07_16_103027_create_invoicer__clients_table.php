@@ -12,7 +12,7 @@ class CreateInvoicerClientsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('invoicer_clients', function(Blueprint $table)
+		Schema::create('invoicer__clients', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->string('company_name');
@@ -39,7 +39,7 @@ class CreateInvoicerClientsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('invoicer_clients');
+		Schema::drop('invoicer__clients');
 	}
 
 }

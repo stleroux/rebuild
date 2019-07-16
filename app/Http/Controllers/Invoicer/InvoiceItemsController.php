@@ -115,7 +115,7 @@ class InvoiceItemsController extends Controller
 		// update invoice with totals
 		$invoice = Invoice::find($invID);
 			 // Perform required calculations
-			$inv_amount_charged = DB::table('invoicer_invoiceItems')->where('invoice_id', '=', $invoice->id)->sum('total');
+			$inv_amount_charged = DB::table('invoicer__invoice_items')->where('invoice_id', '=', $invoice->id)->sum('total');
 			$inv_hst = $inv_amount_charged * Setting('invoicer.hstRate');
 			$inv_sub_total = $inv_amount_charged + $inv_hst;
 			$inv_wsib = $inv_amount_charged * Setting('invoicer.wsibRate');

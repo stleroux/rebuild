@@ -12,9 +12,9 @@ class AddForeignKeysToProjectsMaterialProjectTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('projects-material_project', function(Blueprint $table)
+		Schema::table('projects__material_project', function(Blueprint $table)
 		{
-			$table->foreign('project_id', 'projects-material_project')->references('id')->on('projects-projects')->onUpdate('RESTRICT')->onDelete('CASCADE');
+			$table->foreign('project_id', 'projects__material_project')->references('id')->on('projects__projects')->onUpdate('RESTRICT')->onDelete('CASCADE');
 		});
 	}
 
@@ -26,9 +26,9 @@ class AddForeignKeysToProjectsMaterialProjectTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('projects-material_project', function(Blueprint $table)
+		Schema::table('projects__material_project', function(Blueprint $table)
 		{
-			$table->dropForeign('projects-material_project_ibfk_1');
+			$table->dropForeign('projects__material_project');
 		});
 	}
 

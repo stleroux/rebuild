@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateProjectsFinishProjectTable extends Migration {
+class CreateProjectsImagesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,11 +12,16 @@ class CreateProjectsFinishProjectTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('projects-finish_project', function(Blueprint $table)
+		Schema::create('projects__images', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->integer('project_id')->unsigned()->index('project_id');
-			$table->integer('finish_id')->unsigned();
+			$table->string('name', 250);
+			$table->text('description', 65535);
+			$table->string('mine_type', 50);
+			$table->integer('size');
+			$table->string('path', 250);
+			$table->boolean('main_image')->default(0);
 			$table->timestamps();
 		});
 	}
@@ -29,7 +34,7 @@ class CreateProjectsFinishProjectTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('projects-finish_project');
+		Schema::drop('projects__images');
 	}
 
 }

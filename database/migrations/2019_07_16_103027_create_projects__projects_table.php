@@ -12,7 +12,7 @@ class CreateProjectsProjectsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('projects-projects', function(Blueprint $table)
+		Schema::create('projects__projects', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->integer('category')->unsigned();
@@ -38,7 +38,7 @@ class CreateProjectsProjectsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('projects-projects');
+		Schema::drop('projects__projects');
 	}
 
 }

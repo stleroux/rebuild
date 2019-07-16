@@ -169,7 +169,7 @@ class ProductsController extends Controller
 	{
 		// validate the data
 		$this->validate($request, array(
-			'code' => 'required|unique:invoicer_products,code',
+			'code' => 'required|unique:invoicer__products,code',
 			'details' => 'required',
 		));
 
@@ -200,7 +200,7 @@ class ProductsController extends Controller
 	{
 		// validate the data
 		$this->validate($request, array(
-			'code' => 'required|unique:invoicer_products,code,' . $id,
+			'code' => 'required|unique:invoicer__products,code,' . $id,
 			// 'code' => 'required',
 			'details' => 'required',
 		));

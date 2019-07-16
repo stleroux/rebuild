@@ -12,9 +12,9 @@ class AddForeignKeysToProjectsFinishProjectTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('projects-finish_project', function(Blueprint $table)
+		Schema::table('projects__finish_project', function(Blueprint $table)
 		{
-			$table->foreign('project_id', 'projects-finish_project')->references('id')->on('projects-projects')->onUpdate('RESTRICT')->onDelete('CASCADE');
+			$table->foreign('project_id', 'projects__finish_project')->references('id')->on('projects__projects')->onUpdate('RESTRICT')->onDelete('CASCADE');
 		});
 	}
 
@@ -26,9 +26,9 @@ class AddForeignKeysToProjectsFinishProjectTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('projects-finish_project', function(Blueprint $table)
+		Schema::table('projects__finish_project', function(Blueprint $table)
 		{
-			$table->dropForeign('projects-finish_project_ibfk_1');
+			$table->dropForeign('projects__finish_project');
 		});
 	}
 

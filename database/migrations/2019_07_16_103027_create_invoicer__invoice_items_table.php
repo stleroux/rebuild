@@ -12,11 +12,11 @@ class CreateInvoicerInvoiceItemsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('invoicer_invoiceItems', function(Blueprint $table)
+		Schema::create('invoicer__invoice_items', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('invoice_id')->unsigned()->index('invoicer_invoiceitems_invoice_id_foreign');
-			$table->integer('product_id')->unsigned()->index('invoicer_invoiceitems_product_id_foreign');
+			$table->integer('invoice_id')->unsigned()->index('invoicer__invoice_items_invoice_id_foreign');
+			$table->integer('product_id')->unsigned()->index('invoicer__invoice_items_product_id_foreign');
 			$table->string('notes')->nullable();
 			$table->float('quantity')->unsigned();
 			$table->decimal('price')->unsigned();
@@ -34,7 +34,7 @@ class CreateInvoicerInvoiceItemsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('invoicer_invoiceItems');
+		Schema::drop('invoicer__invoice_items');
 	}
 
 }

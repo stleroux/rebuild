@@ -12,9 +12,9 @@ class AddForeignKeysToInvoicerInvoicesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('invoicer_invoices', function(Blueprint $table)
+		Schema::table('invoicer__invoices', function(Blueprint $table)
 		{
-			$table->foreign('client_id')->references('id')->on('invoicer_clients')->onUpdate('RESTRICT')->onDelete('CASCADE');
+			$table->foreign('client_id')->references('id')->on('invoicer__clients')->onUpdate('RESTRICT')->onDelete('CASCADE');
 		});
 	}
 
@@ -26,9 +26,9 @@ class AddForeignKeysToInvoicerInvoicesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('invoicer_invoices', function(Blueprint $table)
+		Schema::table('invoicer__invoices', function(Blueprint $table)
 		{
-			$table->dropForeign('invoicer_invoices_client_id_foreign');
+			$table->dropForeign('invoicer__invoices_client_id_foreign');
 		});
 	}
 

@@ -9,7 +9,7 @@ class Client extends Model
 {
 	use Sortable;
 
-	protected $table = 'invoicer_clients';
+	protected $table = 'invoicer__clients';
 
 	protected $fillable = [
 		'company_name',

@@ -9,7 +9,7 @@ class Invoice extends Model
 {
 	use Sortable;
 
-	protected $table = 'invoicer_invoices';
+	protected $table = 'invoicer__invoices';
 
 	protected $fillable = [
 		'client_id',

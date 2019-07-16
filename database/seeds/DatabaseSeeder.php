@@ -21,7 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ArticlesTableSeeder::class);
         
         $this->call(PermissionsTableSeeder::class);
-        
         $this->call(PermissionUserTableSeeder::class);
         
         $this->call(CommentsTableSeeder::class);
@@ -36,18 +35,21 @@ class DatabaseSeeder extends Seeder
         $this->call(RecipeUserTableSeeder::class);
 
         $this->call(ProjectsProjectsTableSeeder::class);
-        $this->call(ProjectsImagesTableSeeder::class);
         $this->call(ProjectsFinishesTableSeeder::class);
-        $this->call(ProjectsFinishProjectTableSeeder::class);
+        $this->call(ProjectsImagesTableSeeder::class);
         $this->call(ProjectsMaterialsTableSeeder::class);
-        $this->call(ProjectsMaterialProjectTableSeeder::class);
-        $this->call(ProjectsMaterialProjectTableSeeder::class);
+
         $this->call(ProjectsFinishProjectTableSeeder::class);
+        $this->call(ProjectsMaterialProjectTableSeeder::class);
 
         $this->call(InvoicerClientsTableSeeder::class);
         $this->call(InvoicerProductsTableSeeder::class);
         $this->call(InvoicerInvoicesTableSeeder::class);
         $this->call(InvoicerInvoiceItemsTableSeeder::class);
 
+        // $this->call(PasswordResetsTableSeeder::class);
+        $this->call(TelescopeEntriesTableSeeder::class);
+        $this->call(TelescopeEntriesTagsTableSeeder::class);
+        $this->call(TelescopeMonitoringTableSeeder::class);
     }
 }

@@ -116,7 +116,7 @@
 										View
 									</a>
 								</td>
-								<td width="66px">
+								<td width="68px">
 									@if($invoice->status != "paid")
 										<a href="{{ route('invoicer.invoices.edit', $invoice->id) }}" class="btn btn-sm btn-primary">
 											<i class="fa fa-edit"></i>

@@ -14,9 +14,9 @@ class ProjectsProjectsTableSeeder extends Seeder
     {
         
 
-        \DB::table('projects-projects')->delete();
+        \DB::table('projects__projects')->delete();
         
-        \DB::table('projects-projects')->insert(array (
+        \DB::table('projects__projects')->insert(array (
             0 => 
             array (
                 'id' => 3,
@@ -101,6 +101,23 @@ class ProjectsProjectsTableSeeder extends Seeder
                 'completed_at' => NULL,
                 'created_at' => '2019-07-11 21:17:01',
                 'updated_at' => '2019-07-11 21:17:01',
+            ),
+            5 => 
+            array (
+                'id' => 10,
+                'category' => 3,
+                'name' => 'qwerty',
+                'description' => 'qwerty qwerty qwerty',
+                'views' => 0,
+                'time_invested' => NULL,
+                'price' => NULL,
+                'width' => NULL,
+                'depth' => NULL,
+                'height' => NULL,
+                'weight' => NULL,
+                'completed_at' => NULL,
+                'created_at' => '2019-07-16 09:59:06',
+                'updated_at' => '2019-07-16 09:59:06',
             ),
         ));
         
