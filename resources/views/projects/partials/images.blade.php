@@ -27,9 +27,9 @@
 
                      <div class="col-sm-12">
                         <div class="form-group">
-                           {{ Form::label('description', 'Desciption', ['class'=>'required']) }}
-                           {{ Form::textarea('description', null, ['id' => 'description', 'rows' => 4, 'cols' => 20, 'class'=>'form-control form-control-sm p-0']) }}
-                           <span class="text-danger">{{ $errors->first('description') }}</span>
+                           {{ Form::label('image_description', 'Desciption', ['class'=>'required']) }}
+                           {{ Form::textarea('image_description', null, ['id' => 'image_description', 'rows' => 4, 'cols' => 20, 'class'=>'form-control form-control-sm p-0']) }}
+                           <span class="text-danger">{{ $errors->first('image_description') }}</span>
                         </div>
                      </div>
 

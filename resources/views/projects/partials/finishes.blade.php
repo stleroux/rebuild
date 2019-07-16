@@ -45,8 +45,8 @@
                   <tbody>
                      @foreach($project->finishes as $key => $value)
                         <tr>
-                           <td>{{$key+1}}</td>
-                           <td>{{$value->name}}</td>
+                           <td>{{ $key+1 }}</td>
+                           <td>{{ $value->name }} - {{ $value->sheen }}</td>
                            <td>
                               <form action="{{ route('projects.removeFinish', $value->id) }}" method="POST" class="float-right">
                                  {{csrf_field()}}

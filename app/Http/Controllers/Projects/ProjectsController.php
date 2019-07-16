@@ -272,7 +272,7 @@ class ProjectsController extends Controller
     {
         $project->update($this->validateRequest());
 
-        return redirect('projects');
+        return redirect()->route('projects.list');
     }
 
 
@@ -325,21 +325,21 @@ class ProjectsController extends Controller
     {
         // $this->validate($request, [
         //     'image' => 'required|image',
-        //     'description' => 'required',
+        //     'image_description' => 'required',
         // ]);
 
-        // $rules = [
-        //         'image' => 'required|image',
-        //         'description' => 'required',
-        //     ];
+        $rules = [
+                'image' => 'required|image',
+                'image_description' => 'required',
+            ];
 
-        // $customMessages = [
-        //     'image.required' => 'Required',
-        //     'description.required' => 'Required',
+        $customMessages = [
+            'image.required' => 'Required',
+            'image_description.required' => 'Required',
             
-        // ];
+        ];
 
-        // $this->validate($request, $rules, $customMessages);
+        $this->validate($request, $rules, $customMessages);
 
         $project = Project::find($id);
         // $image_count = $project->images()->count();

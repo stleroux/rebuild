@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class InvoicerInvoiceitemsTableSeeder extends Seeder
+class InvoicerInvoiceItemsTableSeeder extends Seeder
 {
 
     /**
@@ -14,9 +14,9 @@ class InvoicerInvoiceitemsTableSeeder extends Seeder
     {
         
 
-        \DB::table('invoicer_invoiceitems')->delete();
+        \DB::table('invoicer_invoiceItems')->delete();
         
-        \DB::table('invoicer_invoiceitems')->insert(array (
+        \DB::table('invoicer_invoiceItems')->insert(array (
             0 => 
             array (
                 'id' => 2,
