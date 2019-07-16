@@ -1,9 +1,11 @@
 {{-- FINISHES APPLIED --}}
 <div class="card mb-2">
 
-   <div class="card-header p-1">
+   <div class="card-header p-1" id="showAddFinish">
       Finishes Information
-      <a id="showAddFinish" class="btn btn-xs float-right"><i class="{{ Config::get('buttons.add') }}"></i></a>
+      <a class="btn btn-xs float-right">
+         <i id="icon" class="fas fa-sort-down"></i>
+      </a>
    </div>
    
    <div class="card-body p-0">
@@ -74,8 +76,9 @@
 
 <script>
    $(document).ready(function(){
-      $("a#showAddFinish").click(function(){
+      $("div#showAddFinish").click(function(){
          $("div#addFinish").toggle();
+         $("i#icon", this).toggleClass("fas fa-caret-up fas fa-sort-down");
       });
    });
 </script>

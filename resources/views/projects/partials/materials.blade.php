@@ -1,9 +1,12 @@
 {{-- MATERIALS USED --}}
 <div class="card mb-2">
 
-   <div class="card-header p-1">
+   <div class="card-header p-1" id="showAddMaterial">
       Materials Information
-      <a id="showAddMaterial" class="btn btn-xs float-right"><i class="{{ Config::get('buttons.add') }}"></i></a>
+{{--       <a class="btn btn-xs float-right"><i class="{{ Config::get('buttons.add') }}"></i></a> --}}
+      <a class="btn btn-xs float-right">
+         <i id="icon" class="fas fa-sort-down"></i>
+      </a>
    </div>
    
    <div class="card-body p-0">
@@ -74,8 +77,9 @@
 
 <script>
    $(document).ready(function(){
-      $("a#showAddMaterial").click(function(){
+      $("div#showAddMaterial").click(function(){
          $("div#addMaterial").toggle();
+         $("i#icon", this).toggleClass("fas fa-caret-up fas fa-sort-down");
       });
    });
 </script>
