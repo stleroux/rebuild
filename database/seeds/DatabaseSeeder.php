@@ -46,10 +46,6 @@ class DatabaseSeeder extends Seeder
         $this->call(InvoicerProductsTableSeeder::class);
         $this->call(InvoicerInvoicesTableSeeder::class);
         $this->call(InvoicerInvoiceItemsTableSeeder::class);
-
-        // $this->call(PasswordResetsTableSeeder::class);
-        $this->call(TelescopeEntriesTableSeeder::class);
-        $this->call(TelescopeEntriesTagsTableSeeder::class);
-        $this->call(TelescopeMonitoringTableSeeder::class);
     }
+
 }
