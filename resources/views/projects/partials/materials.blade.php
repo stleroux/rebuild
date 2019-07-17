@@ -1,7 +1,7 @@
 {{-- MATERIALS USED --}}
 <div class="card mb-2">
 
-   <div class="card-header p-1" id="showAddMaterial">
+   <div class="card-header p-1 {{ ($errors->first('material')) ? 'text-danger' : '' }}" id="showAddMaterial">
       Materials Information
 {{--       <a class="btn btn-xs float-right"><i class="{{ Config::get('buttons.add') }}"></i></a> --}}
       <a class="btn btn-xs float-right">
@@ -27,6 +27,7 @@
                                  <option value="{{$material->id}}">{{$material->name}}</option>
                               @endforeach
                            </select>
+                           <span class="text-danger">{{ $errors->first('material') }}</span>
                         </div>
                      </div>
                      <button type="submit" class="btn btn-sm btn-primary">Add</button>

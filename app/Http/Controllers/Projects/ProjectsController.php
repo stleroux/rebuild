@@ -279,6 +279,16 @@ class ProjectsController extends Controller
 ##################################################################################################################
     public function addMaterial(Request $request, $id)
     {
+        $rules = [
+            'material' => 'required',
+        ];
+
+        $customMessages = [
+            'material.required' => 'Required',
+        ];
+
+        $this->validate($request, $rules, $customMessages);
+
         $project = Project::find($id);
         $project->materials()->syncWithoutDetaching($request->material);
 
@@ -301,6 +311,16 @@ class ProjectsController extends Controller
 ##################################################################################################################
     public function addFinish(Request $request, $id)
     {
+        $rules = [
+            'finish' => 'required',
+        ];
+
+        $customMessages = [
+            'finish.required' => 'Required',
+        ];
+
+        $this->validate($request, $rules, $customMessages);
+
         $project = Project::find($id);
         $project->finishes()->syncWithoutDetaching($request->finish);
 
@@ -393,7 +413,7 @@ class ProjectsController extends Controller
     {
         return request()->validate([
             'name' => 'required',
-            'category' => 'required',
+            'category' => 'required|min:1',
             'description' => 'required',
             'width' => '',
             'depth' => '',

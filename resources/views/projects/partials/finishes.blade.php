@@ -1,7 +1,7 @@
 {{-- FINISHES APPLIED --}}
 <div class="card mb-2">
 
-   <div class="card-header p-1" id="showAddFinish">
+   <div class="card-header p-1 {{ ($errors->first('finish')) ? 'text-danger' : '' }}" id="showAddFinish">
       Finishes Information
       <a class="btn btn-xs float-right">
          <i id="icon" class="fas fa-sort-down"></i>
@@ -26,6 +26,7 @@
                                  <option value="{{ $finish->id }}">{{ $finish->name }} - {{ $finish->sheen }}</option>
                               @endforeach
                            </select>
+                           <span class="text-danger">{{ $errors->first('finish') }}</span>
                         </div>
                      </div>
                      <button type="submit" class="btn btn-sm btn-primary">Add</button>

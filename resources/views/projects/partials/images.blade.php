@@ -1,7 +1,8 @@
 {{-- IMAGES APPLIED --}}
 <div class="card mb-2">
 
-   <div class="card-header p-1" id="showAddImage">
+   <div class="card-header p-1 {{ (($errors->first('image')) || $errors->first('image_description')) ? 'text-danger' : '' }}" id="showAddImage">
+      
       Images Information
       {{-- <a class="btn btn-xs float-right"><i class="{{ Config::get('buttons.add') }}"></i></a> --}}
       <a class="btn btn-xs float-right">
