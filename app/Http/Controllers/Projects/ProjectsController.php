@@ -343,36 +343,42 @@ class ProjectsController extends Controller
 ##################################################################################################################
     public function addImage(Request $request, $id)
     {
-        // $this->validate($request, [
-        //     'image' => 'required|image',
-        //     'image_description' => 'required',
-        // ]);
-
         $rules = [
-                'image' => 'required|image',
-                'image_description' => 'required',
-            ];
+            'image' => 'required|image',
+            'image_description' => 'required',
+        ];
 
         $customMessages = [
             'image.required' => 'Required',
-            'image_description.required' => 'Required',
-            
+            'image_description.required' => 'Required',            
         ];
 
         $this->validate($request, $rules, $customMessages);
 
         $project = Project::find($id);
-        // $image_count = $project->images()->count();
 
         // Check if a new image was submitted
         if ($request->hasFile('image')) {
             //Add new photo
             $image = $request->file('image');
             $filename = time() . '.' . $image->getClientOriginalExtension();
-            $location = public_path('_projects/' . $filename);
-            Img::make($image)->resize(800, 400)->save($location);
+            
+            $image_location = public_path('_projects/' . $id . '/' . $filename);
+            $thumb_location = public_path('_projects/' . $id . '/thumbs/' . $filename);
+
+            if (!file_exists('_projects/' . $id)) {
+                mkdir('_projects/' . $id, 0777, true);
+            }
+            
+            // Check if Thumbs folder exists under Images
+            if (!file_exists('_projects/' . $id . '/thumbs/')) {
+               mkdir('_projects/'.$id.'/thumbs/', 0777, true);
+            }
+
+            Img::make($image)->resize(800, 400)->save($image_location);
+            Img::make($image)->resize(240, 160)->save($thumb_location);
         }
-      
+
         $img = New Image();
             $img->project_id = $id;
             $img->name = $filename;
@@ -390,8 +396,19 @@ class ProjectsController extends Controller
         $image = Image::find($id);
 
         // Delete file from storage
-        $image_path = public_path().'/_projects/'.$image->name;
+        $image_path = public_path().'/_projects/'.$request->project_id.'/'.$image->name;
+        $thumbs_path = public_path().'/_projects/'.$request->project_id.'/thumbs/'.$image->name;
+
         unlink($image_path);
+        unlink($thumbs_path);
+
+        // Check if there are any files left in the thumbs folder, if not, delete the folder
+        if (count(glob('_projects/' . $request->project_id . "/thumbs/*")) === 0 ) { // empty
+            // Delete the thumbs folder
+            File::deleteDirectory(public_path('_projects/'.$request->project_id.'/thumbs/'));
+            // Delete the main folder
+            File::deleteDirectory(public_path('_projects/' . $request->project_id));
+        }
 
         // Delete DB entry
         $image->delete($image->id);

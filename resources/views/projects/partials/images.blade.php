@@ -62,7 +62,7 @@
                            <td>{{$key+1}}</td>
                            <td>
                               <a href="javascript:;"
-                                 data-href="/_projects/{{ $image->name }}"
+                                 data-href="/_projects/{{ $image->project_id }}/{{ $image->name }}"
                                  data-name="{{ $image->name }}"
                                  data-description="{{ $image->description }}"
                                  class="openmodal">
