@@ -107,7 +107,7 @@
             </button>
          </div>
          <div class="modal-body text-center">
-            <img src="" width="100%" height="450px" />
+            <img src="" />
             <p id="description"></p>
          </div>
          <div class="modal-footer p-1">
