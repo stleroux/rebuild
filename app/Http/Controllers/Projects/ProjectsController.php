@@ -430,7 +430,7 @@ class ProjectsController extends Controller
     {
         return request()->validate([
             'name' => 'required',
-            'category' => 'required|min:1',
+            'category' => 'required|min:0|not_in:0',
             'description' => 'required',
             'width' => '',
             'depth' => '',
