@@ -2,7 +2,7 @@
    @if($popularProjects->count() > 0)
       <div class="card mb-2">
          <div class="card-header block_header">
-            <i class="fas fa-blog"></i>
+            <i class="fab fa-pagelines"></i>
             Popular Projects
          </div>
          <div class="card-body p-0 m-0">

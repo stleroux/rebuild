@@ -34,12 +34,12 @@
             @foreach($project->categoriesOptions() as $categoryOptionKey => $categoryOptionValue)
                @if($categoryOptionKey == 0)
                   <a href="{{ route('projects.index') }}"
-                     class="btn btn-xs btn-{{ request()->is('projects') ? 'primary' : 'secondary' }}">
+                     class="btn btn-sm btn-{{ request()->is('projects') ? 'primary' : 'secondary' }}">
                      All Projects
                   </a>
                @else
                   <a href="{{ route('projects.index', $categoryOptionKey) }}"
-                     class="btn btn-xs btn-{{ request()->is('projects/'.$categoryOptionKey) ? 'primary' : 'secondary' }} p-1">
+                     class="btn btn-sm btn-{{ request()->is('projects/'.$categoryOptionKey) ? 'primary' : 'secondary' }} p-1">
                      {{ $categoryOptionValue }}
                   </a>
                @endif
@@ -55,9 +55,8 @@
                         <div class="thumbnail p-2 text text-center" style="background-image: url('../images/nav.jpg');">
                            
                               <a href="{{ route('projects.show', $project->id) }}">
-                                 {{-- <img src="/_woodProjects/main_images/thumbs/{{ $project->main_image }}" alt="{{ $project->name}}"> --}}
                                  @if($project->images->count() > 0)
-                                    <img src="/_projects/{{ $project->images[0]->name }}" alt="{{ $project->name}}" height="150px" width="95%">
+                                    <img src="/_projects/{{ $project->id }}/thumbs/{{ $project->images[0]->name }}" alt="{{ $project->name}}" class="mx-auto mw-100" >
                                  @else
                                     <img src="/images/no_image.jpg" alt="No Image" height="150px" width="95%">
                                  @endif
@@ -76,27 +75,6 @@
                                  @endif
                               </span>
                            </div>
-                           {{-- <div class="caption text-center">
-                              <h3></h3>
-                              <p class="label label-default">{{ $project->category->name }}</p>
-                              <p class="badge">
-                                 @if(count($project->projectImages) > 0)
-                                    {{ count($project->projectImages) }} 
-                                       @if(count($project->projectImages) > 1)
-                                          images
-                                       @else
-                                          image
-                                       @endif
-                                    
-                                 @endif
-                              </p>
-
-                           </div> --}}
-                              {{-- <a href="{{ route('backend.photos.create', $album->id) }}" class="btn btn-xs btn-primary">Add Photo</a>
-                              {!! Form::open(['action' => ['Backend\AlbumsController@destroy', $album->id], 'method'=>'POST', 'style'=>'display:inline;', 'onsubmit' => 'return confirm("Are you sure you want to delete the Album AND all photos in it?")']) !!}
-                                 {{ Form::hidden('_method', 'DELETE') }}
-                                 {!! Form::submit('Delete Album', ['class'=>'btn btn-xs btn-danger pull-right']) !!}
-                              {!! Form::close() !!} --}}
                         </div>
                      </div>
                    @endforeach

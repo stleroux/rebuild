@@ -16,7 +16,7 @@
             <div class="card mb-2">
                <div class="card-header pl-2 pt-0 py-0">Add Finish</div>
                <div class="card-body p-2">
-                  <form action="{{ route('projects.addFinish', $project->id) }}" method="post">
+                  <form action="{{ route('projects.finish.store', $project->id) }}" method="post">
                      <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
                      <div class="col-sm-12">
                         <div class="form-group">
@@ -37,7 +37,7 @@
 
          <div id="addFinish" class="col-xs-12 col-md-12">
             @if($project->finishes()->count() > 0)
-               <table class="table table-sm table-hover mb-0">
+               <table class="table table-sm table-hover table-striped mb-0">
                   <thead>
                      <tr>
                         <th>No</th>
@@ -51,7 +51,7 @@
                            <td>{{ $key+1 }}</td>
                            <td>{{ $value->name }} - {{ $value->sheen }}</td>
                            <td>
-                              <form action="{{ route('projects.removeFinish', $value->id) }}" method="POST" class="float-right">
+                              <form action="{{ route('projects.finish.delete', $value->id) }}" method="POST" class="float-right">
                                  {{csrf_field()}}
                                  {{ method_field('DELETE') }}
                                  <input type="hidden" value="{{ $project->id }}" name="project_id">
@@ -81,5 +81,6 @@
          $("div#addFinish").toggle();
          $("i#icon", this).toggleClass("fas fa-caret-up fas fa-sort-down");
       });
+      $('div#showAddFinish').css('cursor', 'pointer');
    });
 </script>

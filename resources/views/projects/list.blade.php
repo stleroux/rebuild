@@ -73,7 +73,7 @@
                   </table>
                </div>
             @else
-               <div class="card-body card_body pb-1">
+               <div class="card-body card_body py-2">
                   {{ setting('no_records_found') }}
                </div>
             @endif

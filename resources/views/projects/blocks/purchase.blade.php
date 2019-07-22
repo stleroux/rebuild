@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card mb-2">
    <div class="card-header block_header">
       <i class="far fa-heart"></i>
       Like this item?
@@ -11,5 +11,6 @@
    </div>
    <div class="card-footer p-1">
       Click to order this project
+      <small class=" float-right text text-danger">Coming soon</small>
    </div>
 </div>

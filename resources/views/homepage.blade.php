@@ -83,7 +83,7 @@
                Recipes
             </div>
             <div class="card-body card_body">
-               <p>The title says it all. Access this section to see recipes contributed by some of our members.</p>
+               <p>The title says it all. Access this section to see recipes contributed by our members.</p>
             </div>
          </div>
 

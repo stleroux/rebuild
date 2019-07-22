@@ -46,7 +46,9 @@ class SiteController extends Controller
 	public function homepage()
 	{
 		// Set the variable so we can use a button in other pages to come back to this page
-      Session::put('fromPage', Route::currentRouteName());
+      // Session::put('fromPage', Route::currentRouteName());
+      // Set the session to the current page route
+      Session::put('fromPage', url()->full());
 
 		$posts = Post::published()->with('user')->orderBy('id','desc')->take(setting('homepage_blog_count'))->get();
 

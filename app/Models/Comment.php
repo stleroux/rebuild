@@ -30,6 +30,10 @@ class Comment extends Model
 		return $this->belongsTo('App\Models\Recipe');
 	}
 
+   public function project()
+   {
+      return $this->belongsTo('App\Models\Projects\Project');
+   }
 	// public function scopeNewComments($query)
  //   	{
  //    	return $query

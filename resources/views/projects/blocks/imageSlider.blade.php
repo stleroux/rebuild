@@ -1,7 +1,7 @@
 <div class="card mb-2">
    <div class="card-header block_header">
       <i class="far fa-image"></i>
-      Project Images
+      Project Image(s)
    </div>
    @if($project->images->count() >= 1)
       <div class="card-body p-0 m-0">
@@ -16,7 +16,7 @@
             <div class="carousel-inner">
                @foreach($project->images as $image)
                <div class="carousel-item {{ ($loop->first) ? 'active' : '' }}">
-                  <img class="d-block w-100" src="/_projects/{{ $image->name }}" height="auto" alt="{{ $image->name }}">
+                  <img class="d-block w-100" src="/_projects/{{ $project->id }}/thumbs/{{ $image->name }}" height="auto" alt="{{ $image->name }}">
                </div>
                @endforeach
             </div>

@@ -18,7 +18,8 @@
             <div class="card mb-2">
                <div class="card-header pl-2 pt-0 py-0">Add Image</div>
                <div class="card-body p-2">
-                  <form action="{{ route('projects.addImage', $project->id) }}" method="post" enctype="multipart/form-data" >
+                  {{-- <form action="{{ route('projects.addImage', $project->id) }}" method="post" enctype="multipart/form-data" > --}}
+                  <form action="{{ route('projects.image.store', $project->id) }}" method="post" enctype="multipart/form-data" >
                      <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
 
                      <div class="col-sm-12">
@@ -36,7 +37,6 @@
                            <span class="text-danger">{{ $errors->first('image_description') }}</span>
                         </div>
                      </div>
-
                      
                      <button type="submit" class="btn btn-sm btn-primary">Add</button>
 
@@ -47,7 +47,7 @@
 
          <div id="addImage" class="col-xs-12 col-md-12">
             @if(count($project->images) > 0)
-               <table class="table table-sm table-hover mb-0">
+               <table class="table table-sm table-hover table-striped mb-0">
                   <thead>
                      <tr>
                         <th>No</th>
@@ -71,7 +71,7 @@
                            </td>
                            {{-- <td>{{ $image->main_image ? 'Yes' : 'No' }}</td> --}}
                            <td>
-                              <form action="{{ route('projects.removeImage', $image->id) }}" method="POST" class="float-right">
+                              <form action="{{ route('projects.image.delete', $image->id) }}" method="POST" class="float-right">
                                  {{csrf_field()}}
                                  {{ method_field('DELETE') }}
                                  <input type="hidden" value="{{ $project->id }}" name="project_id">
@@ -107,7 +107,7 @@
             </button>
          </div>
          <div class="modal-body text-center">
-            <img src="" />
+            <img src="" class="mx-auto mw-100" />
             <p id="description"></p>
          </div>
          <div class="modal-footer p-1">
@@ -123,15 +123,16 @@
          $("div#addImage").toggle();
          $("i#icon", this).toggleClass("fas fa-caret-up fas fa-sort-down");
       });
+      $('div#showAddImage').css('cursor', 'pointer');
    });
 
    $(".openmodal").click(function(){
-        var href = $(this).data("href");
-        var name = $(this).data('name');
-        var description = $(this).data('description');
-        $("#imagemodal img").attr("src",href);
-        $(".modal-header #title").text(name);
-        $(".modal-body #description").text(description);
-        $("#imagemodal").modal("show");
+      var href = $(this).data("href");
+      var name = $(this).data('name');
+      var description = $(this).data('description');
+      $("#imagemodal img").attr("src",href);
+      $(".modal-header #title").text(name);
+      $(".modal-body #description").text(description);
+      $("#imagemodal").modal("show");
    });
 </script>

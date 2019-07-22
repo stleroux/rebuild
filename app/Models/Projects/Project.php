@@ -10,6 +10,8 @@ class Project extends Model
 
    protected $table = 'projects__projects';
 
+   protected $dates = ['completed_at'];
+
    // Set the default value for the status field to 0
    protected $attributes = [
       'category' => 0,
@@ -47,5 +49,10 @@ class Project extends Model
    public function images()
    {
       return $this->hasMany(\App\Models\Projects\Image::class);
+   }
+
+   public function comments()
+   {
+      return $this->morphMany('\App\Models\Comment', 'commentable')->orderBy('id','desc');
    }
 }

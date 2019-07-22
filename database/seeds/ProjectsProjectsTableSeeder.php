@@ -23,7 +23,7 @@ class ProjectsProjectsTableSeeder extends Seeder
                 'category' => 2,
                 'name' => 'Hallway table',
                 'description' => 'Slender and elegant hallway table with ceramic tile top',
-                'views' => 94,
+                'views' => 95,
                 'time_invested' => NULL,
                 'price' => 30,
                 'width' => 25,
@@ -71,7 +71,7 @@ class ProjectsProjectsTableSeeder extends Seeder
             3 => 
             array (
                 'id' => 8,
-                'category' => 3,
+                'category' => 1,
                 'name' => 'Testing',
                 'description' => 'Blah Blah Blah',
                 'views' => 7,
@@ -83,7 +83,7 @@ class ProjectsProjectsTableSeeder extends Seeder
                 'weight' => NULL,
                 'completed_at' => NULL,
                 'created_at' => '2019-07-11 20:51:24',
-                'updated_at' => '2019-07-15 19:45:01',
+                'updated_at' => '2019-07-16 18:22:16',
             ),
             4 => 
             array (
@@ -91,7 +91,7 @@ class ProjectsProjectsTableSeeder extends Seeder
                 'category' => 2,
                 'name' => 'Antique mirror',
                 'description' => 'From an old window',
-                'views' => 21,
+                'views' => 23,
                 'time_invested' => NULL,
                 'price' => NULL,
                 'width' => NULL,
@@ -108,7 +108,7 @@ class ProjectsProjectsTableSeeder extends Seeder
                 'category' => 3,
                 'name' => 'qwerty',
                 'description' => 'qwerty qwerty qwerty',
-                'views' => 0,
+                'views' => 1,
                 'time_invested' => NULL,
                 'price' => NULL,
                 'width' => NULL,

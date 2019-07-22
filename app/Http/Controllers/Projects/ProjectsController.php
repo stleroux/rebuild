@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Projects;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Projects\Project;
 use App\Models\Projects\Finish;
 use App\Models\Projects\Material;
 use App\Models\Projects\Image;
 use Illuminate\Http\Request;
+use Auth;
 use DB;
 use File;
 use Image as Img;
@@ -98,18 +100,43 @@ class ProjectsController extends Controller
             if(!checkPerm('projects_delete')) { abort(401, 'Unauthorized Access'); }
         }
 
-        // Delete the associated images if any
-        foreach ($project->images as $image) {
-            File::delete('_projects/' . $image->name);
+        // Delete images from file system
+        $images = DB::table('projects__images')->where('project_id', '=', $project->id)->get();
+
+        if($images) {
+            foreach($images as $image) {
+                // Delete the image(s) and thumbnail(s) from storage
+                $image_path = public_path().'/_projects/'.$project->id.'/'.$image->name;
+                $thumbs_path = public_path().'/_projects/'.$project->id.'/thumbs/'.$image->name;
+                unlink($image_path);
+                unlink($thumbs_path);
+            }
         }
 
-        // Delete the project and related images, materials and finishes in the database
+        // Check if there are any files left in the thumbs folder, if not, delete the folder
+        if (count(glob('_projects/' . $project->id . "/thumbs/*")) === 0 ) { // empty
+            // Delete the thumbs folder
+            File::deleteDirectory(public_path('_projects/'.$project->id.'/thumbs/'));
+            // Delete the main folder
+            File::deleteDirectory(public_path('_projects/' . $project->id));
+        }
+
+        // Delete related images from DB
+        DB::table('projects__images')->where('project_id', '=', $project->id)->delete();
+
+        // Delete related materials from DB
+        DB::table('projects__material_project')->where('project_id', '=', $project->id)->delete();
+
+        // Delete related finishes from DB
+        DB::table('projects__finish_project')->where('project_id', '=', $project->id)->delete();
+
+        // Delete the project from the database
         $project->delete();
 
         // Set flash data with success message
         Session::flash('delete','The project, related files and DB entries were deleted successfully.');
         // Redirect
-        return redirect()->route('projects.index');
+        return redirect()->route('projects.list');
     }
 
 
@@ -244,16 +271,13 @@ class ProjectsController extends Controller
             if(!checkPerm('projects_show')) { abort(401, 'Unauthorized Access'); }
         }
 
-        // Increase the view count since this is viewed from the frontend
-        // dd(url('') . '/projects');
-
-        // dd(url('/projects/list*'));
+        // Increase the view count if viewed from the frontend
         if (url()->previous() != url('/projects/list')) {
             DB::table('projects__projects')->where('id','=',$project->id)->increment('views',1);
         }
 
+        // Get the first image associated to this project
         $image = Image::where('project_id', '=', $project->id)->first();
-        // dd($image);
 
         return view('projects.show', compact('project', 'image'));
     }
@@ -277,144 +301,26 @@ class ProjectsController extends Controller
 
 
 ##################################################################################################################
-    public function addMaterial(Request $request, $id)
-    {
-        $rules = [
-            'material' => 'required',
-        ];
-
-        $customMessages = [
-            'material.required' => 'Required',
-        ];
-
-        $this->validate($request, $rules, $customMessages);
-
-        $project = Project::find($id);
-        $project->materials()->syncWithoutDetaching($request->material);
-
-        return redirect()->back();
-    }
-
-
+# ███████╗████████╗ ██████╗ ██████╗ ███████╗     ██████╗ ██████╗ ███╗   ███╗███╗   ███╗███████╗███╗   ██╗████████╗
+# ██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗██╔════╝    ██╔════╝██╔═══██╗████╗ ████║████╗ ████║██╔════╝████╗  ██║╚══██╔══╝
+# ███████╗   ██║   ██║   ██║██████╔╝█████╗      ██║     ██║   ██║██╔████╔██║██╔████╔██║█████╗  ██╔██╗ ██║   ██║   
+# ╚════██║   ██║   ██║   ██║██╔══██╗██╔══╝      ██║     ██║   ██║██║╚██╔╝██║██║╚██╔╝██║██╔══╝  ██║╚██╗██║   ██║   
+# ███████║   ██║   ╚██████╔╝██║  ██║███████╗    ╚██████╗╚██████╔╝██║ ╚═╝ ██║██║ ╚═╝ ██║███████╗██║ ╚████║   ██║   
+# ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝     ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝   ╚═╝   
 ##################################################################################################################
-    public function removeMaterial(Request $request, $id)
-    {
-        DB::table('projects-material_project')
-            ->where('project_id', '=', $request->project_id)
-            ->where('material_id', '=', $id)
-            ->delete();
+    // public function storeComment(CreateCommentRequest $request, $id)
+    // {
+    //     $project = project::find($id);
 
-        return redirect()->back();
-    }
+    //     $comment = new Comment();
+    //         $comment->user_id = Auth::user()->id;
+    //         $comment->comment = $request->comment;
+    //         $project->comments()->save($comment);
+    //     $comment->save();
 
-
-##################################################################################################################
-    public function addFinish(Request $request, $id)
-    {
-        $rules = [
-            'finish' => 'required',
-        ];
-
-        $customMessages = [
-            'finish.required' => 'Required',
-        ];
-
-        $this->validate($request, $rules, $customMessages);
-
-        $project = Project::find($id);
-        $project->finishes()->syncWithoutDetaching($request->finish);
-
-        return redirect()->back();
-    }
-
-
-##################################################################################################################
-    public function removeFinish(Request $request, $id)
-    {
-        DB::table('projects-finish_project')
-            ->where('project_id', '=', $request->project_id)
-            ->where('finish_id', '=', $id)
-            ->delete();
-
-        return redirect()->back();
-    }
-
-
-##################################################################################################################
-    public function addImage(Request $request, $id)
-    {
-        $rules = [
-            'image' => 'required|image',
-            'image_description' => 'required',
-        ];
-
-        $customMessages = [
-            'image.required' => 'Required',
-            'image_description.required' => 'Required',            
-        ];
-
-        $this->validate($request, $rules, $customMessages);
-
-        $project = Project::find($id);
-
-        // Check if a new image was submitted
-        if ($request->hasFile('image')) {
-            //Add new photo
-            $image = $request->file('image');
-            $filename = time() . '.' . $image->getClientOriginalExtension();
-            
-            $image_location = public_path('_projects/' . $id . '/' . $filename);
-            $thumb_location = public_path('_projects/' . $id . '/thumbs/' . $filename);
-
-            if (!file_exists('_projects/' . $id)) {
-                mkdir('_projects/' . $id, 0777, true);
-            }
-            
-            // Check if Thumbs folder exists under Images
-            if (!file_exists('_projects/' . $id . '/thumbs/')) {
-               mkdir('_projects/'.$id.'/thumbs/', 0777, true);
-            }
-
-            Img::make($image)->resize(800, 400)->save($image_location);
-            Img::make($image)->resize(240, 160)->save($thumb_location);
-        }
-
-        $img = New Image();
-            $img->project_id = $id;
-            $img->name = $filename;
-            $img->description = $request->image_description;
-        $img->save();
-
-        return redirect()->back();
-    }
-
-
-##################################################################################################################
-    public function removeImage(Request $request, $id)
-    {
-        // Find the image ID
-        $image = Image::find($id);
-
-        // Delete file from storage
-        $image_path = public_path().'/_projects/'.$request->project_id.'/'.$image->name;
-        $thumbs_path = public_path().'/_projects/'.$request->project_id.'/thumbs/'.$image->name;
-
-        unlink($image_path);
-        unlink($thumbs_path);
-
-        // Check if there are any files left in the thumbs folder, if not, delete the folder
-        if (count(glob('_projects/' . $request->project_id . "/thumbs/*")) === 0 ) { // empty
-            // Delete the thumbs folder
-            File::deleteDirectory(public_path('_projects/'.$request->project_id.'/thumbs/'));
-            // Delete the main folder
-            File::deleteDirectory(public_path('_projects/' . $request->project_id));
-        }
-
-        // Delete DB entry
-        $image->delete($image->id);
-
-        return redirect()->back();
-    }
+    //     Session::flash('success', 'Comment added succesfully.');
+    //     return redirect()->route('projects.show', $project->id);
+    // }
 
 
 ##################################################################################################################
