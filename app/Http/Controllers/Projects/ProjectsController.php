@@ -198,13 +198,17 @@ class ProjectsController extends Controller
 
         $project = New Project();
 
-        if($filter){
-            $projects = Project::with('images')->where('category', '=', $filter)->paginate(12);
-            // dd($projects);
+        if($filter) {
+            if($filter == 1000) {
+                $projects = Project::with('images')->orderBy('id','desc')->take(6)->paginate(6);
+                return view('projects.index', compact('projects','project'));
+            }
+
+            $projects = Project::with('images')->where('category', '=', $filter)->paginate(8);
+
         } else {
-            $projects = Project::with('images')->orderBy('name','asc')->paginate(12);
+            $projects = Project::with('images')->orderBy('name','asc')->paginate(8);
         }
-        // $projects = Project::with('images')->latest()->limit(20)->get();
         
         return view('projects.index', compact('projects','project'));
     }

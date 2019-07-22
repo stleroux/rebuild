@@ -1,7 +1,7 @@
 @extends('layouts.backend')
 
 @section('stylesheets')
-   {{-- {{ Html::style('css/.css') }} --}}
+   {{ Html::style('/css/woodbarn.css') }}
 @endsection
 
 @section('left_column')
@@ -17,7 +17,7 @@
       <div class="col">
          <div class="card mb-2">
             <!--CARD HEADER-->
-            <div class="card-header card_header">
+            <div class="card-header section_header">
                <i class="fab fa-pagelines"></i>
                Projects
                <span class="float-right">

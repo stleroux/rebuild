@@ -26,9 +26,12 @@ class Project extends Model
    {
       return [
          0 => 'Select One',
-         1 => 'General',
+         1 => 'Decoration',
          2 => 'Furniture',
-         3 => 'Kitchen appliance',
+         3 => 'General',
+         4 => 'Storage',
+         5 => 'Wall Hanging',
+         1000 => 'Lastest 5',
       ];
    }
 

@@ -111,7 +111,7 @@
       @endif
 
       <a href="{{ route('projects.index') }}"
-         class="list-group-item list-group-item-action py-1 px-1 {{ Route::is('projects.index') ? 'active' : '' }}">
+         class="list-group-item list-group-item-action py-1 px-1 {{ (Route::is('projects.index') || Route::is('projects.show')) ? 'active' : '' }}">
          <i class="fab fa-pagelines fa-fw"></i>
          Projects
       </a>
