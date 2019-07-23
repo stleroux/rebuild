@@ -50,7 +50,7 @@
             <div class="px-2">
                <div class="row mb-1">
                   @foreach($projects as $project)
-                     <div class="col-xs-12 col-md-3 p-1">
+                     <div id="card-hover" class="col-xs-12 col-md-3 p-1">
                         <div class="card h-100 w-100">
                            <div class="h-100 thumbnail p-2 text text-center" style="background-image: url('../images/nav.jpg');">
                               <a href="{{ route('projects.show', $project->id) }}">
@@ -78,16 +78,20 @@
                      </div>
                   @endforeach
                </div>
-               <div class="pb-1">
-                  {{ $projects->links() }}
-               </div>
+
+               @if(url()->current() != "http://192.168.0.12/projects/1000")
+                  <div class="pb-1">
+                     {{ $projects->links() }}
+                  </div>
+               @endif
+
             </div>
          @else
             <p>No projects found</p>
          @endif
       </div>
       <div class="card-footer pt-1 pb-1 pl-2">
-         Click a project to view it's details
+         Click a project's image to view it's details
       </div>
    </div>
 

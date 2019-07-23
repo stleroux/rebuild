@@ -200,7 +200,8 @@ class ProjectsController extends Controller
 
         if($filter) {
             if($filter == 1000) {
-                $projects = Project::with('images')->orderBy('id','desc')->take(6)->paginate(6);
+                // $projects = Project::with('images')->orderBy('id','desc')->take(5)->paginate(5);
+                $projects = Project::with('images')->orderBy('id','desc')->take(4)->get();
                 return view('projects.index', compact('projects','project'));
             }
 

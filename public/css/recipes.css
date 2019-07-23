@@ -4,21 +4,27 @@ body {
    background-size: 100% 100%;
    background-attachment: fixed;
 }
-
 .navbar_background {
    background-image: url('../images/6.jpg');
-   background-color: red;
    background-repeat: no-repeat;
    background-size: 100% 100%;
    background-attachment: fixed;
    font-weight: bold;
 }
 
+/* change the highlight on the active menu item */
+.active {
+   background-image: url('../images/5.jpg');
+   background-repeat: no-repeat;
+   background-size: 100% 100%;
+   background-attachment: fixed;
+}
+
 /* Card Headers */
 .section_header {
-   /*background-image: url("../images/1.jpg");*/
-   background-color: blue;
+   background-image: url("../images/1.jpg");
    color: white;
+   font-weight: bold;
    padding-top: 8px;
    padding-bottom: 8px;
    padding-left: 10px;
@@ -27,24 +33,32 @@ body {
 
 /* Card Bodies */
 .section_body {
-   /*background-image: url('../images/14.jpg');*/
-   /*background-repeat: no-repeat;*/
-   /*background-color: green;*/
+   background-image: url('../images/14.jpg');
    background-size: 100% 100%;
    background-attachment: fixed;
-   color: light;
+   color: white;
    padding-top: 8px;
    padding-bottom: 8px;
    padding-left: 10px;
    padding-right: 10px;
-   /*font-weight: 400;*/
 }
 
 /* Level 2 Card Headers */
-.card_header
- { 
-   /*background-image: url("../images/birch.jpg");*/
-   background-color: green;
+.card_header {
+   background-image: url("../images/10.jpg");
+   color: black;
+   font-weight: bold;
+   padding-top: 8px;
+   padding-bottom: 8px;
+   padding-left: 10px;
+   padding-right: 10px;
+   background-size: 100% 100%;
+}
+
+/* Block Headers */
+.block_header { 
+   background-image: url("../images/birch.jpg");
+   font-weight: bold;
    color: black;
    padding-top: 8px;
    padding-bottom: 8px;
@@ -55,36 +69,34 @@ body {
 }
 
 /* Block Headers */
-.block_header {
-   /*background-image: url("../images/10.jpg");*/
-   /*background-color: blue;*/
-   background-color: purple;
+.sub_block_header { 
+   /*background-image: url("../images/birch.jpg");*/
    font-weight: bolder;
-   color: white;
+   color: black;
    padding-top: 8px;
    padding-bottom: 8px;
    padding-left: 10px;
-   padding-right: 10px;
-   /*background-repeat: no-repeat;*/
+   background-repeat: no-repeat;
    background-size: 100% 100%;
-   /*background-attachment: fixed;*/
+   background-attachment: fixed;
+}
+
+.card-footer {
+   /*background-color: grey;*/
+   color: white;
 }
 
 .table-hover tbody tr:hover, .table-hover tbody tr:hover th {
-   /*background-image: url("../images/9.jpg");*/
-   /*background-color: gray;*/
+   background-image: url("../images/9.jpg");
    background-repeat: no-repeat;
    background-size: 100% 100%;
-   /*background-color: #003366;*/
    color: white;
 }
 
 .table thead {
-   /*background-image: url("../images/11.jpg");*/
-   /*background-color: indigo;*/
+   background-image: url("../images/1.jpg");
    background-repeat: no-repeat;
    background-size: 100% 100%;
-   /*background-color: #003366;*/
    color: white;
 }
 
@@ -95,7 +107,10 @@ body {
 }
 
 #card-hover:hover {
-   background-color: green;
+   /*background-color: green;*/
+   /*background-image: url("../images/9.jpg");*/
+   background-image: url("../images/17.jpg");
    color: white;
+   font-weight: bolder;
 }
 

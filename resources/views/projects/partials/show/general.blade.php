@@ -20,7 +20,7 @@
    <div class="col-sm-3 px-1">
       <div class="card text-light">
          <div class="card-header card_header p-1">Price</div>
-         <div class="card-body p-1">{{ $project->price ? '$ ' . $project->price . '.00' : 'N/A' }}</div>
+         <div class="card-body p-1">{{ $project->price ? '$ ' . $project->price . '.00' : 'Please contact us for details' }}</div>
       </div>
    </div>
    <div class="col-sm-3 pl-1">

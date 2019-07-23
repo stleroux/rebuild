@@ -16,7 +16,7 @@
 
 @section('content')
 
-	<div class="card mb-3 bg-transparent">
+	<div class="card mb-3">
 
 		<div class="card-header section_header">
 			<span class="h5 align-middle pt-2">
@@ -38,7 +38,7 @@
 		</div>
 
 		@if($recipes->count() > 0)
-			<div class="card-body p-1">
+			<div class="card-body section_body p-1">
 				<div class="my-1">
 					@include('recipes.alphabet')
 				</div>

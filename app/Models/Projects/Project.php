@@ -31,7 +31,7 @@ class Project extends Model
          3 => 'General',
          4 => 'Storage',
          5 => 'Wall Hanging',
-         1000 => 'Lastest 5',
+         1000 => 'Lastest 4',
       ];
    }
 
