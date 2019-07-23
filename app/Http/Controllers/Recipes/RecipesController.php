@@ -335,7 +335,7 @@ class RecipesController extends Controller
    {
       // Session::put('fromPage', 'recipes.published');
       
-      $recipe = Recipe::withTrashed()->find($id);
+      $recipe = Recipe::withTrashed()->findOrFail($id);
 
       // Increase the view count since this is viewed from the frontend
       DB::table('recipes')->where('id','=',$recipe->id)->increment('views',1);

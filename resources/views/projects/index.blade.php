@@ -50,7 +50,7 @@
             <div class="px-2">
                <div class="row mb-1">
                   @foreach($projects as $project)
-                     <div id="card-hover" class="col-xs-12 col-md-3 p-1">
+                     <div id="card-hover" class="col-xs-12 col-md-3 p-2">
                         <div class="card h-100 w-100">
                            <div class="h-100 thumbnail p-2 text text-center" style="background-image: url('../images/nav.jpg');">
                               <a href="{{ route('projects.show', $project->id) }}">

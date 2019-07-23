@@ -241,14 +241,14 @@
 
          <div class="row">
             <div class="col-12">
-               <div class="card mb-2">
-                  <div class="card-header card_header py-0 pl-1 pr-0">
+               <div class="card">
+                  <div class="card-header card_header py-0 pl-1">
                      <i class="fas fa-comments-o"></i>
                      Comments <small>({{ $post->comments()->count() }} total)</small>
                   </div>
-                  <div class="card-body section_body px-2 py-2">
+                  <div class="card-body card_body p-0 m-0">
                      @if($post->comments->count())
-                        <table class="table table-hover table-sm">
+                        <table class="table table-hover table-sm mb-0">
                            <thead>
                               <tr class="d-flex">
                                  <th class="col-2">Name</th>
