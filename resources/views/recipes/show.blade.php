@@ -1,14 +1,17 @@
-@extends ('layouts.recipes')
+@extends ('layouts.master')
 
 @section ('stylesheets')
 	{{ Html::style('css/recipes.css') }}
 @stop
 
 @section('left_column')
+	@include('recipes.sidebar')
 @endsection
 
 @section('right_column')
 	{{-- @include('recipes.blocks.information') --}}
+	@include('recipes.blocks.popularRecipes')
+	@include('recipes.blocks.archives')
 	@include('recipes.show.leave_comment')
 @endsection
 
@@ -16,8 +19,8 @@
 
 <form style="display:inline;">
 
-	<div class="card mb-3 bg-transparent">
-		<div class="card-header card_header">
+	<div class="card mb-3">
+		<div class="card-header section_header">
 			<span class="h5 align-middle pt-2">
 				{{ $recipe->title }}
 			</span>
@@ -38,16 +41,16 @@
 			</span>
 		</div>
 	
-		<div class="card-body card_body">
+		<div class="card-body section_body">
 	
 			<div class="row">
 				@include('recipes.show.ingredients')
 				@include('recipes.show.image')
 			</div>
 
-			<div class="row">
+			{{-- <div class="row pb-2"> --}}
 				@include('common.view_more', ['message'=>'If you would like to see the full recipe'])
-			</div>
+			{{-- </div> --}}
 
 			@auth
 

@@ -1,5 +1,5 @@
 {{-- @guest --}}
-   <div class="row p-0 pb-1">
+   <div class="row p-0 pb-2">
       <div class="col-sm-12">
          <div class="card text-light">
             <div class="card-header card_header p-1">

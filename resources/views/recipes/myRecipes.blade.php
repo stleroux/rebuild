@@ -1,4 +1,4 @@
-@extends('layouts.recipes')
+@extends('layouts.master')
 
 @section ('stylesheets')
    {{ Html::style('css/recipes.css') }}
@@ -9,6 +9,8 @@
 @endsection
 
 @section('right_column')
+   @include('recipes.blocks.popularRecipes')
+   @include('recipes.blocks.archives')
 @endsection
 
 @section('content')

@@ -1,10 +1,10 @@
 <div class="col">
 	<div class="card">
-		<div class="card-header card_header_2">
+		<div class="card-header card_header">
 			<i class="fa fa-comments-o" aria-hidden="true"></i>
 			Comments <small>({{ $recipe->comments()->count() }} total)</small>
 		</div>
-		<div class="card-body p-0">
+		<div class="card-body card_body p-1">
 			<table class="table table-hover table-sm mb-0">
 				@if($recipe->comments->count())
 					<thead>
@@ -32,7 +32,7 @@
 						@endforeach
 					</tbody>
 				@else
-					<div class="card-body card_body">
+					<div class="card-body card_body p-1">
 						No comments found
 					</div>
 				@endif

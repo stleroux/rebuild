@@ -38,7 +38,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }}">
-						{{ Form::label('comment', "Comment:") }}
+						{{-- {{ Form::label('comment', "Comment:") }} --}}
 						{{ Form::textarea('comment', null, ['class' => 'form-control', 'rows' => '5']) }}
 						<span class="text-danger">{{ $errors->first('comment') }}</span>
 				</div>

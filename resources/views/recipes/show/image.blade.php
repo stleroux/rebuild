@@ -1,7 +1,7 @@
-<div class="col-sm-4">
+<div class="col-sm-4 pl-1">
 	<div class="card mb-2">
 		
-		<div class="card-header card_header_2">Image</div>
+		<div class="card-header card_header">Image</div>
 		
 		<div class="card-body text text-center p-2 m-0">
 			@if($recipe->image)
