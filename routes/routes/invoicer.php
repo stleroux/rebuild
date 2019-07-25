@@ -11,6 +11,12 @@
 |
 */
 
+// Route::get('download/{filename}', function($filename)
+// {
+//     $file = public_path('invoices') . '/' . $filename . '.pdf'; // or wherever you have stored your PDF files
+//     return response()->download($file);
+// });
+
 Route::prefix('invoicer')->group(function() {
 
    Route::get('/',                                    'Invoicer\InvoicerController@index')               ->name('invoicer');
@@ -21,6 +27,7 @@ Route::prefix('invoicer')->group(function() {
    Route::get('ledger/invoiced',                      'Invoicer\LedgerController@invoiced')              ->name('invoicer.ledger.invoiced');
    Route::get('ledger/logged',                        'Invoicer\LedgerController@logged')                ->name('invoicer.ledger.logged');
 
+   Route::get('invoices/{inv_id}/downloadInvoice',    'Invoicer\InvoicesController@downloadInvoice')     ->name('invoices.downloadInvoice');
    Route::get('invoices/{inv_id}/status_invoiced',    'Invoicer\InvoicesController@status_invoiced')     ->name('invoices.status_invoiced');
    Route::get('invoices/{inv_id}/status_paid',        'Invoicer\InvoicesController@status_paid')         ->name('invoices.status_paid');
    Route::get('invoices/status_invoiced_all',         'Invoicer\InvoicesController@status_invoiced_all') ->name('invoices.status_invoiced_all');

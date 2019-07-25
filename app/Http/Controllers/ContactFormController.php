@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 
 use App\Mail\ContactFormMail;
-use App\Rules\Captcha;
 use App\Models\User;
-use Auth;
+use App\Rules\Captcha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Auth;
 use Session;
-
 
 class ContactFormController extends Controller
 {

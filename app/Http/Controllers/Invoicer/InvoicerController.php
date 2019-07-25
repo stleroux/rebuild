@@ -114,7 +114,4 @@ class InvoicerController extends Controller
 	}
 
 
-
-
-
 }

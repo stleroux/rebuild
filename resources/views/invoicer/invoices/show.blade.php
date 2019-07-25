@@ -11,6 +11,20 @@
 				</a>
 			@endif
 		@endif
+		
+
+
+
+		<a href="{{ route('invoices.downloadInvoice', $invoice->id) }}" class="btn btn-sm btn-outline-secondary d-print-none">
+			<i class="fa fa-list"></i>
+			Download PDF
+		</a>
+		
+		{{-- <a href="{{ asset('download/' . $invoice->id) }}">Download File</a> --}}
+
+
+
+
 		<button onClick="window.print()" class="btn btn-sm btn-outline-secondary d-print-none">
 			<i class="fa fa-print"></i>
 			Print this page

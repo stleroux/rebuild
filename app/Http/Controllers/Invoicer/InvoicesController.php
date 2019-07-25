@@ -16,6 +16,8 @@ use Config;
 use DB;
 use PDF;
 use Session;
+use Storage;
+
 
 class InvoicesController extends Controller
 {
@@ -88,6 +90,23 @@ class InvoicesController extends Controller
 	}
 
 
+
+
+
+
+	public function downloadInvoice($id)
+	{
+		// $invoice = Invoice::findOrfail($id);
+		// return Storage::download(public_path('invoices/'.$invoice->id . '.pdf'), $invoice->id);
+		$file = public_path('invoices') . '/' . $id . '.pdf'; // or wherever you have stored your PDF files
+   	return response()->download($file);
+	}
+
+
+
+
+
+
 ##################################################################################################################
 # ███████╗██████╗ ██╗████████╗
 # ██╔════╝██╔══██╗██║╚══██╔══╝
@@ -145,7 +164,10 @@ class InvoicesController extends Controller
 		// Check if user has required permission
 	  if(!checkPerm('invoicer_invoice_index')) { abort(401, 'Unauthorized Access'); }
 
-		$invoices = Invoice::sortable()->where('status','=','invoiced')->orderBy('id','desc')->paginate(Config::get('settings.rowsPerPage'));
+		$invoices = Invoice::sortable()
+			->where('status','=','invoiced')
+			->orderBy('id','desc')
+			->paginate(Config::get('settings.rowsPerPage'));
 
 		return view('invoicer.invoices.index', compact('invoices'));
 	}
@@ -412,6 +434,26 @@ class InvoicesController extends Controller
 
 		$invoice = Invoice::find($id);
 			// $invoice->work_date = $request->work_date;
+
+// $ori_status = $invoice->status;
+// // status goes from paid to invoiced
+// if($ori_status == 'paid' && $request->status == 'invoiced' ){
+// 	$invoice->paid_at = null;
+// }elseif($ori_status == 'paid' && $request->status == 'logged' ){
+// 	$invoice->paid_at = null;
+// 	$invoice->invoiced_at = null;
+// }elseif($ori_status == 'invoiced' && $request->status == 'logged' ){
+// 	$invoice->invoiced_at = null;
+// }elseif($ori_status == 'logged' && $request->status == 'invoiced' ){
+// 	$invoice->invoiced_at = $request->invoiced_at;
+// }elseif($ori_status == 'invoiced' && $request->status == 'paid' ){
+// 	$invoice->paid_at = $request->paid_at;
+// }
+// else{
+	
+// }
+
+
 			$invoice->client_id = $request->client_id;
 			$invoice->notes = $request->notes;
 			$invoice->status = $request->status;

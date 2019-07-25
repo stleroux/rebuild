@@ -86,13 +86,13 @@
          Recipes
       </a>
 
-      @if(checkPerm('site_settings'))
+      {{-- @if(checkPerm('site_settings')) --}}
          <a href="{{ route('settings.index') }}"
-            class="list-group-item list-group-item-action p-1 {{ Route::is('settings.*') ? 'active' : '' }}">
+            class="list-group-item list-group-item-action p-1 {{ Route::is('settings.*') ? 'active' : '' }} text-warning">
             <i class="fas fa-cog fa-fw"></i>
             Site Settings
          </a>
-      @endif
+      {{-- @endif --}}
 
       @if(checkPerm('site_stats'))
          <a href="{{ route('stats') }}"

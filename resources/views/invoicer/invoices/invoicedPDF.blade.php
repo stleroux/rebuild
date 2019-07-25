@@ -2,27 +2,70 @@
    <tr>
       <td colspan="6" width="50%"><h1>INVOICE</h1></td>
       <td colspan="6">
-         <table>
+{{--          <table>
             <tr align="center">
-               <td colspan="3"><h3 style="margin-top: 0px;margin-bottom: 0px">{{ Config::get('invoicer.companyName') }}</h3></td>
+               <td colspan="3"><h3 style="margin-top: 0px;margin-bottom: 0px">{{ Setting('invoicer.companyName') }}</h3></td>
             </tr>
             <tr>
-               <td align="right" width="50%">{{ Config::get('invoicer.companyTelephone') }}&nbsp;</td>
-               <td>&nbsp;{{ Config::get('invoicer.address_1') }}</td>
+               <td align="right" width="50%">{{ Setting('invoicer.telephone') }}&nbsp;</td>
+               <td>&nbsp;{{ Setting('invoicer.address_1') }}</td>
             </tr>
             <tr>
-               <td align="right">{{ Config::get('invoicer.companyEmail') }}&nbsp;</td>
-               <td>&nbsp;{{ Config::get('invoicer.address_2') }}</td>
+               <td align="right">{{ Setting('invoicer.email') }}&nbsp;</td>
+               <td>&nbsp;{{ Setting('invoicer.address_2') }}</td>
             </tr>
             <tr>
-               <td align="right">WSIB N<sup>o</sup>: {{ Config::get('invoicer.WSIB_no') }}&nbsp;</td>
-               <td>&nbsp;{{ Config::get('invoicer.companyCity') }}, {{ Config::get('invoicer.companyState') }}</td>
+               <td align="right">WSIB N<sup>o</sup>: {{ Setting('invoicer.wsibNo') }}&nbsp;</td>
+               <td>&nbsp;{{ Setting('invoicer.city') }}, {{ Setting('invoicer.state') }}</td>
             </tr>
             <tr>
-               <td align="right">HST N<sup>o</sup>: {{ Config::get('invoicer.HST_no') }}&nbsp;</td>
-               <td>&nbsp;{{ Config::get('invoicer.companyZip') }}</td>
+               <td align="right">HST N<sup>o</sup>: {{ Setting('invoicer.hstNo') }}&nbsp;</td>
+               <td>&nbsp;{{ Setting('invoicer.zip') }}</td>
             </tr>
-         </table>
+         </table> --}}
+         <div class="col-sm-12">
+            <h3 class="text-center">
+               {{ Setting('invoicer.companyName') }}
+            </h3>
+         </div>
+         <div class="row">
+            <div class="col-sm-12 text-center">
+               {{ Setting('invoicer.address_1') . ', ' }}
+               {{ (Setting('invoicer.address_2')) ? Setting('invoicer.address_2') . ', ' : '' }}
+               {{ (Setting('invoicer.city')) ? Setting('invoicer.city') . ', ' : '' }}
+               {{ (Setting('invoicer.state')) ? Setting('invoicer.state') . ', ' : '' }}
+               {{ (Setting('invoicer.zip')) ? Setting('invoicer.zip') : '' }}
+               <br />
+               @if(Setting('invoicer.telephone') && (Setting('invoicer.fax')))
+                  <i class='fas fa-phone'></i> {{ Setting('invoicer.telephone') }} &nbsp;
+                  <i class="fas fa-fax"></i> {{ Setting('invoicer.fax') }}
+               @elseif(Setting('invoicer.telephone'))
+                  <i class='fas fa-phone'></i> {{ Setting('invoicer.telephone') }}
+               @elseif (Setting('invoicer.fax'))
+                  <i class="fas fa-fax"></i> {{ Setting('invoicer.fax') }}
+               @endif
+
+               <br />
+               @if(Setting('invoicer.email') && (Setting('invoicer.website')))
+                  <i class="fas fa-at"></i> {{ Setting('invoicer.email') }} &nbsp;
+                  <i class="fas fa-newspaper"></i> {{ Setting('invoicer.website') }}
+               @elseif(Setting('invoicer.email'))
+                  <i class="fas fa-at"></i> {{ Setting('invoicer.email') }}
+               @elseif(Setting('invoicer.website'))
+                  <i class="fas fa-newspaper"></i> {{ Setting('invoicer.website') }}
+               @endif
+
+               <br />
+               @if(Setting('invoicer.wsibNo') && (Setting('invoicer.hstNo')))
+                  WSIB N<sup>o</sup>: {{ Setting('invoicer.wsibNo') }} &nbsp;
+                  HST N<sup>o</sup>: {{ Setting('invoicer.hstNo') }}
+               @elseif(Setting('invoicer.wsibNo'))
+                  WSIB N<sup>o</sup>: {{ Setting('invoicer.wsibNo') }}
+               @elseif(Setting('invoicer.hstNo'))
+                  HST N<sup>o</sup>: {{ Setting('invoicer.hstNo') }}
+               @endif
+            </div>
+         </div>
       </td>
    </tr>
    <tr>
