@@ -22,40 +22,55 @@ body {
    background-attachment: fixed;
 }
 
-/* Card Headers */
+
+/* SECTIONS */
 .section_header {
 	background-image: url("../images/1.jpg");
-	color: white;
-	font-weight: bold;
-	padding-top: 8px;
-	padding-bottom: 8px;
-	padding-left: 10px;
-	padding-right: 10px;
+	background-repeat: no-repeat;
+   background-size: 100% 100%;
+   color: white;
+   /*font-size: 12pt;*/
+	/*font-weight: bold;*/
+   font-size: 12pt;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	padding-left: 8px;
+	padding-right: 8px;
 }
 
-/* Card Bodies */
 .section_body {
 	background-image: url('../images/14.jpg');
+   /*background-image: url('../images/13.jpg');*/
 	background-size: 100% 100%;
 	background-attachment: fixed;
 	color: black;
-	padding-top: 8px;
-	padding-bottom: 8px;
+	padding-top: 10px;
+	padding-bottom: 0px;
 	padding-left: 10px;
 	padding-right: 10px;
 }
 
-/* Level 2 Card Headers */
+/* CARDS */
 .card_header {
 	background-image: url("../images/10.jpg");
-	color: black;
+	background-repeat: no-repeat;
+   background-size: 100% 100%;
+   color: black;
 	font-weight: bold;
-	padding-top: 8px;
-	padding-bottom: 8px;
-	padding-left: 10px;
-	padding-right: 10px;
-	background-size: 100% 100%;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	padding-left: 8px;
+	padding-right: 8px;
 }
+
+.card_body {
+   background: transparent;
+   padding-top: 7px;
+   padding-bottom: 0px;
+   padding-left: 8px;
+   padding-right: 8px;
+}
+
 
 /* Block Headers */
 .block_header { 
@@ -83,9 +98,10 @@ body {
 	background-attachment: fixed;
 }
 
-.card-footer {
-	/*background-color: grey;*/
-	color: white;
+.card_footer {
+	/*background-color: brown;*/
+   background-image: url("../images/18.jpg");
+	color: lightgrey;
 }
 
 .table-hover tbody tr:hover, .table-hover tbody tr:hover th {

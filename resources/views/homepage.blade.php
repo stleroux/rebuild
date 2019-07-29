@@ -19,8 +19,13 @@
 
    {{-- GREETING --}}
    <div class="card mb-2">
-      <div class="card-header section_header">Welcome to TheWoodBarn.ca</div>
-      <div class="card-body section_body">
+      <div class="section_header">
+         {{-- <span class="h5 align-middle pt-2"> --}}
+            <i class="fas fa-tree"></i>         
+            Welcome to TheWoodBarn.ca
+         {{-- </span> --}}
+      </div>
+      <div class="section_body">
          <p>Welcome to the newly redesigned TheWoodBarn.ca site.</p>
          <p>Note that the site now features a left hand side menu that will update based on your access privileges to the different sections of the site that you are currently visiting.</p>
       </div>
@@ -30,8 +35,8 @@
    @auth
       @if(auth::user()->login_count <= setting('login_count_warning'))
          <div class="card mb-2">
-            <div class="card-header section_header">New User</div>
-            <div class="card-body section_body">
+            <div class="section_header">New User</div>
+            <div class="section_body">
                <p>Welcome to the site new user.</p>
                <p>We hope you will enjoy your stay with us.</p>
                <p>Feel free to browse around.</p>
@@ -60,39 +65,39 @@
 
    {{-- INTERESTS --}}
    <div class="card mb-2">
-      <div class="card-header section_header">
-         <i class="fa fa-smile-o" aria-hidden="true"></i>
+      <div class="section_header">
+         <i class="fas fa-glasses"></i>
          Sections of interest on the site
       </div>
-      <div class="card-body section_body">
+      <div class="section_body">
          
          <div class="card bg-transparent mb-2">
-            <div class="card-header card_header">
+            <div class="card_header">
                <i class="fab fa-pagelines"></i>
                Wood Projects
             </div>
-            <div class="card-body card_body">
+            <div class="card_body">
                <p>Check out this area to feast your eyes on the woodworking projects we have worked on in our shop.</p>
                <p>There will be before and after pictures of the materials being used to create the different items as well as some info on the materials used in the finishing process and other relevant details.</p>
             </div>
          </div>
          
          <div class="card bg-transparent mb-2">
-            <div class="card-header card_header">
+            <div class="card_header">
                <i class="far fa-address-card"></i>
                Recipes
             </div>
-            <div class="card-body card_body">
+            <div class="card_body">
                <p>The title says it all. Access this section to see recipes contributed by our members.</p>
             </div>
          </div>
 
          <div class="card bg-transparent mb-2">
-            <div class="card-header card_header">
+            <div class="card_header">
                <i class="far fa-newspaper"></i>
                The Blog
             </div>
-            <div class="card-body card_body">
+            <div class="card_body">
                <p>Here you will find the latest news of the site. Keep an eye on this section to find out what is happening with the site.</p>
             </div>
          </div>
@@ -103,16 +108,16 @@
    {{-- BLOG --}}
    @if($posts->count() > 0)
       <div class="card mb-3">
-         <div class="card-header section_header">
-            <i class="far fa-newspaper" aria-hidden="true"></i>
+         <div class="section_header">
+            <i class="far fa-newspaper"></i>
             Latest Posts
          </div>
-         <div class="card-body section_body">
+         <div class="section_body">
             @if(count($posts) > 0)
                @foreach ($posts as $post)
                   <div class="card mb-2 bg-transparent">
-                     <div class="card-header card_header">{{ $post->title }}</div>
-                     <div class="card-body card_body">
+                     <div class="card_header">{{ $post->title }}</div>
+                     <div class="card_body">
                         <div class="row">
                         <div class="col-sm-10">
                            <p>{{ substr(strip_tags($post->body), 0, 250) }} {{ strlen(strip_tags($post->body)) > 250 ? " [More]..." : "" }}</p>
@@ -126,7 +131,7 @@
                         </div>
                         </div>
                      </div>
-                     <div class="card-footer px-1 py-1">
+                     <div class="card_footer px-1 py-1">
                         Created by
                         @include('common.authorFormat', ['model'=>$post, 'field'=>'user'])
                         on @include('common.dateFormat', ['model'=>$post, 'field'=>'created_at'])

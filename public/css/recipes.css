@@ -4,6 +4,7 @@ body {
    background-size: 100% 100%;
    background-attachment: fixed;
 }
+
 .navbar_background {
    background-image: url('../images/6.jpg');
    background-repeat: no-repeat;
