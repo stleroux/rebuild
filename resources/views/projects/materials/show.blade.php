@@ -1,7 +1,7 @@
 @extends('layouts.backend')
 
 @section('stylesheets')
-   {{-- {{ Html::style('css/.css') }} --}}
+   {{ Html::style('/css/woodbarn.css') }}
 @endsection
 
 @section('left_column')
@@ -15,18 +15,20 @@
    
    <div class="card mb-3">
 
-      <div class="card-header">
-         <i class="fa fa-plus-square"></i>
-         Show Material
+      <div class="card-header section_header p-1 m-0">
+         <span class="h5 align-middle pt-2">
+            <i class="fa fa-plus-square"></i>
+            Sow Material
+         </span>
          <span class="float-right">
-            @include('projects.materials.addins.links.help', ['model'=>'material', 'bookmark'=>'materials'])
-            @include('projects.materials.addins.links.back', ['model'=>'material'])
+            @include('projects.materials.addins.links.help', ['size'=>'sm', 'bookmark'=>'materials'])
+            @include('projects.materials.addins.links.back', ['size'=>'sm'])
          </span>
       </div>
 
-      <div class="card-body pb-0">
+      <div class="card-body section_body pb-0">
 
-         <table class="table table-sm table-striped table-hover">
+         <table class="table table-sm table-striped table-hover text-dark">
             <tbody>
                <tr>
                   <th class="col-2">ID</th>
@@ -58,8 +60,6 @@
                </tr>
             </tbody>
          </table>
-
-         <p></p>
       </div>
 
    </div>

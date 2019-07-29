@@ -42,6 +42,7 @@
 											<form action="{{ route('invoicer.clients.destroy',[$client->id]) }}" method="POST" 
 												onsubmit="return confirm('Do you really want to delete this client?');"
 												class="float-right">
+												<input type="hidden" name="_method" value="DELETE" />
 												{{ csrf_field() }}
 												
 												@if(checkPerm('invoicer_client_show'))
@@ -65,8 +66,6 @@
 													</a>
 												@endif
 
-												<input type="hidden" name="_method" value="DELETE" />
-												
 												@if(checkPerm('invoicer_client_delete'))
 													<button type="submit" class="btn btn-sm btn-danger">
 														<i class="fa fa-trash-alt"></i>

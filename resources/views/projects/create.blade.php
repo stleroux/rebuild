@@ -1,7 +1,7 @@
 @extends('layouts.backend')
 
 @section('stylesheets')
-   {{-- {{ Html::style('css/.css') }} --}}
+   {{ Html::style('/css/woodbarn.css') }}
 @endsection
 
 @section('left_column')
@@ -18,17 +18,19 @@
 
       <div class="card mb-3">
 
-         <div class="card-header">
-            <i class="fa fa-plus-square"></i>
-            Create Project
+         <div class="card-header section_header p-1 m-0">
+            <span class="h5 align-middle pt-2">
+               <i class="fa fa-plus-square"></i>
+               Create Project
+            </span>
             <span class="float-right">
-               @include('projects.addins.links.help', ['model'=>'project', 'bookmark'=>'projects'])
-               @include('projects.addins.links.back', ['model'=>'project'])
-               @include('projects.addins.buttons.save', ['model'=>'project'])
+               @include('projects.addins.links.help', ['size'=>'sm', 'bookmark'=>'projects'])
+               @include('projects.addins.links.back', ['size'=>'sm'])
+               @include('projects.addins.buttons.save', ['size'=>'sm'])
             </span>
          </div>
 
-         <div class="card-body p-2">
+         <div class="card-body section_body">
 
             <div class="form-row pt-2">
                <div class="col-xs-12 col-sm-4">

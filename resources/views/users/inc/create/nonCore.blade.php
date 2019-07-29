@@ -1,10 +1,10 @@
 <div class="card p-1">
-   <div class="card-body p-1">
+   <div class="card-body section_body p-1">
       <div class="card-columns">
          @foreach ($nonCoreGroups as $group => $permissions)
             <div class="card mb-2">
-               <div class="card-header card_header_2 p-1">{{ ucfirst($group) }}</div>
-               <div class="card-body card_body pt-0 pb-1 px-0">
+               <div class="card-header card_header p-1">{{ ucfirst($group) }}</div>
+               <div class="card-body section_body pt-0 pb-1 px-0">
                   @foreach($permissions as $permission)
                      <div class="form-group mb-0 pt-1 pb-0 px-1"
                         onMouseOver="this.style.background='#ABA', this.style.color='#000', this.style.fontWeight='bold'"

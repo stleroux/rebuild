@@ -1,12 +1,12 @@
 {{-- GENERAL INFORMATION --}}
 <div class="card mb-2">
-   <div class="card-header p-1
+   <div class="card-header card_header p-1
         {{ ($errors->first('name') ||
             $errors->first('category') ||
             $errors->first('description')) ? 'text-danger' : '' }}">
        General Information
    </div>
-   <div class="card-body p-2">
+   <div class="card-body section_body p-2">
 
       <div class="form-row pt-2">
          <!-- Name -->

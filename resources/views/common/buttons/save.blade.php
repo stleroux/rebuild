@@ -1,5 +1,5 @@
 <button
-   class="btn btn-sm btn-outline-success"
+   class="btn btn-sm btn-success"
    type="submit"
    {{-- formaction="{{ route($model.'s'.'.store') }}" --}}
    formmethod="POST"

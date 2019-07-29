@@ -1,7 +1,7 @@
 {{-- <div class="col-md-3"> --}}
                         <div class="card mb-2">
-                           <div class="card-header card_header_2">Profile Image</div>
-                           <div class="card-body card_body">
+                           <div class="card-header card_header">Profile Image</div>
+                           <div class="card-body section_body">
                               <div class="form-row">
                                  <div class="col text-center">
                                     @if ($user->profile->image)

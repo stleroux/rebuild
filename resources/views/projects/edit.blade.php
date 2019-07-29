@@ -1,12 +1,8 @@
-@extends ('layouts.backend')
+@extends('layouts.backend')
 
-@section ('stylesheets')
-   {{-- {{ Html::style('css/.css') }} --}}
-<style>
-
-</style>
-
-@stop
+@section('stylesheets')
+   {{ Html::style('/css/woodbarn.css') }}
+@endsection
 
 @section('left_column')
    @include('blocks.main_menu')
@@ -22,20 +18,22 @@
             <!-- MAIN CARD -->
             <div class="card">
                <!-- MAIN CARD HEADER -->
-               <div class="card-header">
-                  <i class="fa fa-edit"></i>
-                  Edit Project
+               <div class="card-header section_header p-1 m-0">
+                  <span class="h5 align-middle pt-2">
+                     <i class="fa fa-edit"></i>
+                     Edit Project
+                  </span>
                   <span class="float-right">
                      {!! Form::model($project, ['route'=>['projects.update', $project->id], 'method' => 'POST', 'files' => true]) !!}
                      @csrf
                      @method("PUT")
-                     @include('projects.addins.links.help', ['model'=>'project', 'bookmark'=>'projects'])
-                     @include('projects.addins.links.back', ['model'=>'project'])
-                     @include('projects.addins.buttons.update', ['model'=>'project'])
+                     @include('projects.addins.links.help', ['size'=>'sm', 'bookmark'=>'projects'])
+                     @include('projects.addins.links.back', ['size'=>'sm'])
+                     @include('projects.addins.buttons.update', ['size'=>'sm'])
                   </span>
                </div>
                <!-- MAIN CARD BODY -->
-               <div class="card-body p-2">
+               <div class="card-body section_body p-2">
                   
                      <div class="form-row">
 

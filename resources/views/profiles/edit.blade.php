@@ -17,22 +17,24 @@
       <div class="row">
          <div class="col-12">
             <div class="card mb-3">
-               <div class="card-header card_header">
-                  Edit Profile
+               <div class="card-header section_header p-1 m-0">
+                  <span class="h5 align-middle pt-2">
+                     Edit Profile
+                  </span>
                   <span class="float-right">
-                     @include('common.buttons.cancel', ['model'=>'profile', 'type'=>''])
+                     {{-- @include('common.buttons.back', ['size'=>'sm']) --}}
                      {{ Form::button('<i class="fa fa-save"></i> Update Profile', array('type'=>'submit', 'class'=>'btn btn-sm btn-success px-1 py-0')) }}
                   </span>
                </div>
 
-               <div class="card-body card_body">
+               <div class="card-body section_body p-2">
 
                   {{-- Profile Info --}}
                   <div class="form-row">
                      <div class="col-9">
                         <div class="card mb-2">
-                           <div class="card-header card_header_2">Profile Info</div>
-                           <div class="card-body card_body">
+                           <div class="card-header card_header">Profile Info</div>
+                           <div class="card-body section_body">
                               <div class="form-row">
                                  <div class="col-md-3">
                                     <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
@@ -129,8 +131,8 @@
                   <div class="form-row">
                      <div class="col">
                         <div class="card mb-2">
-                           <div class="card-header card_header_2">Address Info</div>
-                           <div class="card-body card_body">
+                           <div class="card-header card_header">Address Info</div>
+                           <div class="card-body section_body">
                               <div class="form-row">
                                  <div class="col-sm-2">
                                     <div class="form-group">
@@ -181,16 +183,21 @@
                   <div class="row">
                      <div class="col">
                         <div class="card mb-2">
-                           <div class="card-header card_header_2">
-                              User Preferences 
-                              <span class="text-dark">(Features marked with  <i class="far fa-check-square"></i> have been implemented in code)</span>
+                           <div class="card-header section_header p-1 m-0">
+                              <span class="h5 align-middle pt-2 pb-1">
+                                 User Preferences 
+                              </span>
+                              <span class="text-light align-bottom">
+                                    <small class="align-bottom">(Features marked with  <i class="far fa-check-square"></i> have been implemented in code)</small>
+                                 </span>
+                              
                               <span class="float-right">
                                  <a href="{{ route('profile.resetPreferences', $user->profile->id) }}" class="btn btn-sm btn-outline-primary px-1 py-0">Reset All Defaults</a>
                               </span>
                            </div>
 
-                           <div class="card-body card_body">
-                              <table class="table table-sm table-hover mb-2">
+                           <div class="card-body section_body">
+                              <table class="table table-sm table-hover text-dark mb-2">
                                  <thead>
                                     <tr>
                                        <td><i class="far fa-check-square"></i></td>

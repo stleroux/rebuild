@@ -1,7 +1,7 @@
 {{-- IMAGES APPLIED --}}
 <div class="card mb-2">
 
-   <div class="card-header p-1 {{ (($errors->first('image')) || $errors->first('image_description')) ? 'text-danger' : '' }}" id="showAddImage">
+   <div class="card-header card_header p-1 {{ (($errors->first('image')) || $errors->first('image_description')) ? 'text-danger' : '' }}" id="showAddImage">
       
       Images Information
       {{-- <a class="btn btn-xs float-right"><i class="{{ Config::get('buttons.add') }}"></i></a> --}}
@@ -10,7 +10,7 @@
       </a>
    </div>
    
-   <div class="card-body p-0">
+   <div class="card-body section_body p-0">
    
       <div class="form-row">
    
@@ -47,7 +47,7 @@
 
          <div id="addImage" class="col-xs-12 col-md-12">
             @if(count($project->images) > 0)
-               <table class="table table-sm table-hover table-striped mb-0">
+               <table class="table table-sm table-hover table-striped text-dark mb-0">
                   <thead>
                      <tr>
                         <th>No</th>
@@ -60,20 +60,18 @@
                      @foreach($project->images as $key => $image)
                         <tr>
                            <td>{{$key+1}}</td>
-                           <td>
-                              <a href="javascript:;"
-                                 data-href="/_projects/{{ $image->project_id }}/{{ $image->name }}"
-                                 data-name="{{ $image->name }}"
-                                 data-description="{{ $image->description }}"
-                                 class="openmodal">
-                                 {{ $image->name }}
-                              </a>
-                           </td>
-                           {{-- <td>{{ $image->main_image ? 'Yes' : 'No' }}</td> --}}
+                           <td>{{ $image->name }}</td>
                            <td>
                               <form action="{{ route('projects.image.delete', $image->id) }}" method="POST" class="float-right">
                                  {{csrf_field()}}
                                  {{ method_field('DELETE') }}
+                                 <a href="javascript:;"
+                                    data-href="/_projects/{{ $image->project_id }}/{{ $image->name }}"
+                                    data-name="{{ $image->name }}"
+                                    data-description="{{ $image->description }}"
+                                    class="openmodal btn btn-xs btn-primary">
+                                    <i class="far fa-eye"></i>
+                                 </a>
                                  <input type="hidden" value="{{ $project->id }}" name="project_id">
                                  <button type="submit" class="btn btn-xs btn-danger">
                                     <i class="fa fa-trash"></i>

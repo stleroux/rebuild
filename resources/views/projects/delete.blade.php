@@ -1,7 +1,7 @@
 @extends('layouts.backend')
 
 @section('stylesheets')
-   {{-- {{ Html::style('css/.css') }} --}}
+   {{ Html::style('/css/woodbarn.css') }}
 @endsection
 
 @section('left_column')
@@ -14,7 +14,7 @@
 @section('content')
 
    <div class="card">
-      <div class="card-header bg-danger text-white text-center">
+      <div class="card-header bg-danger text-white text-center p-2">
          <b>
             ARE YOU SURE YOU WANT TO PERMANENTLY DELETE THIS PROJECT?<br />
             {{-- Title : {{ $woodproject->title }}? --}}

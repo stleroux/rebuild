@@ -24,7 +24,7 @@
  --}}
 {{-- @if(Session::get('fromPage')==='projects.index') --}}
    <a href="{{ Session::get('fromPage') }}"
-      class="btn btn-sm btn-primary"
+      class="btn btn-{{ $size }} btn-primary"
       title="Back">
       <i class="{{ Config::get('buttons.back') }}"></i>
    </a>

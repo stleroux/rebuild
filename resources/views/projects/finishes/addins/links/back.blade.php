@@ -1,5 +1,5 @@
 <a href="{{ route('finishes.index') }}"
-   class="btn btn-sm btn-primary"
+   class="btn btn-{{ $size }} btn-primary"
    title="Finishes">
    <i class="{{ Config::get('buttons.back') }}"></i>
 </a>

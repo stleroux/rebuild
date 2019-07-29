@@ -1,11 +1,15 @@
 @extends('layouts.backend')
 
 @section('stylesheets')
+   {{ Html::style('/css/woodbarn.css') }}
    {{ Html::style('css/switch.css') }}
 @endsection
 
 @section('left_column')
    @include('blocks.main_menu')
+@endsection
+
+@section('right_column')
 @endsection
 
 @section('content')
@@ -15,8 +19,8 @@
       
       <div class="card">
          <!--CARD HEADER-->
-         <div class="card-header card_header">
-            <span class="h5 align-middle">
+         <div class="card-header section_header p-1 m-0">
+            <span class="h5 align-middle pt-2">
                <i class="fas fa-user"></i>
                Edit User :: {{ $user->username }}
             </span>
@@ -24,7 +28,7 @@
                @include('users.addins.back')
 
                @if(checkPerm('user_edit'))
-                  <button type="submit" class="btn btn-sm btn-bprimary" name="submit" value="continue" title="Update & Continue">
+                  <button type="submit" class="btn btn-sm btn-info" name="submit" value="continue" title="Update & Continue">
                      <i class="far fa-hdd"></i>
                      {{-- Update & Continue --}}
                   </button>

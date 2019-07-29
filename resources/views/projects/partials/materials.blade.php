@@ -1,7 +1,7 @@
 {{-- MATERIALS USED --}}
 <div class="card mb-2">
 
-   <div class="card-header p-1 {{ ($errors->first('material')) ? 'text-danger' : '' }}" id="showAddMaterial">
+   <div class="card-header card_header p-1 {{ ($errors->first('material')) ? 'text-danger' : '' }}" id="showAddMaterial">
       Materials Information
 {{--       <a class="btn btn-xs float-right"><i class="{{ Config::get('buttons.add') }}"></i></a> --}}
       <a class="btn btn-xs float-right">
@@ -9,7 +9,7 @@
       </a>
    </div>
    
-   <div class="card-body p-0">
+   <div class="card-body section_body p-0">
    
       <div class="form-row">
    

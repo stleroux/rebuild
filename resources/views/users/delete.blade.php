@@ -1,17 +1,21 @@
 @extends('layouts.backend')
 
 @section('stylesheets')
+   {{ Html::style('/css/woodbarn.css') }}
 @endsection
 
 @section('left_column')
    @include('blocks.main_menu')
 @endsection
 
+@section('right_column')
+@endsection
+
 @section('content')
 
    <div class="card">
-      <div class="card-header bg-danger text-white text-center"><b>ARE YOU SURE YOU WANT TO <span class="text-warning">PERMANENTLY</span> DELETE USER {{ strtoupper($user->username) }}?</b></div>
-      <div class="card-body card_body text-center">
+      <div class="card-header bg-danger text-white text-center p-2"><b>ARE YOU SURE YOU WANT TO <span class="text-warning">PERMANENTLY</span> DELETE USER {{ strtoupper($user->username) }}?</b></div>
+      <div class="card-body section_body text-center">
          <form
             action="{{ route('users.destroy', [$user->id]) }}"
             method="POST"

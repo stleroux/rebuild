@@ -1,6 +1,7 @@
 @extends('layouts.backend')
 
 @section('stylesheets')
+   {{ Html::style('/css/woodbarn.css') }}
    {{ Html::style('css/switch.css') }}
 @endsection
 
@@ -8,13 +9,16 @@
    @include('blocks.main_menu')
 @endsection
 
+@section('right_column')
+@endsection
+
 @section('content')
 
    {!! Form::model($user) !!}
 
-      <div class="card bg-secondary">
+      <div class="card">
          <!--CARD HEADER-->
-         <div class="card-header card_header">
+         <div class="card-header section_header p-1 m-0">
             <span class="h5 align-middle pt-2">
                <i class="fas fa-user"></i>
                View User

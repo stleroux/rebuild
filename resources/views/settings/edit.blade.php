@@ -1,12 +1,10 @@
-@extends('layouts.master')
+@extends('layouts.backend')
 
 @section('stylesheets')
-   {{-- {{ Html::style('css/recipes.css') }} --}}
+   {{ Html::style('/css/woodbarn.css') }}
 @endsection
 
 @section('left_column')
-   {{-- @include('blocks.adminNav') --}}
-   {{-- @include('settings.sidebar') --}}
    @include('blocks.main_menu')
 @endsection
 
@@ -20,22 +18,22 @@
       
       <div class="card">
          
-         <div class="card-header card_header">
+         <div class="card-header section_header">
             <i class="fas fa-shield-alt"></i>
             Edit Site Setting
             <div class="float-right">
-               <a class="btn btn-sm btn-outline-secondary px-1 py-0" href="{{ route('settings.index') }}">
+               <a class="btn btn-sm btn-secondary px-1 py-0" href="{{ route('settings.index') }}">
                   <i class="fas fa-angle-double-left"></i>
                   Cancel
                </a>
-                <button type="submit" class="btn btn-sm btn-outline-bprimary px-1 py-0">
+                <button type="submit" class="btn btn-sm btn-info px-1 py-0">
                   <i class="fa fa-save"></i>
                   Update
                </button>
             </div>
          </div>
          
-         <div class="card-body card_body">
+         <div class="card-body section_body">
             <div class="row">
                <div class="col-sm-4">
                   <div class="form-group {{ $errors->has('key') ? 'has-error' : '' }}">
@@ -54,7 +52,7 @@
                <div class="col-1">
                   <div class="form-group {{ $errors->has('tab') ? 'has-error' : '' }}">
                      {{ Form::label('tab', 'Tab', ['class'=>'required']) }}
-                     {!! Form::select('tab', ['general'=>'General', 'profile'=>'Profile'], $setting->tab) !!}
+                     {!! Form::select('tab', ['general'=>'General', 'profile'=>'Profile', 'invoicer'=>'Invoicer'], $setting->tab, ['class'=>'form-control form-control-sm']) !!}
                      <span class="text-danger">{{ $errors->first('tab') }}</span>
                   </div>
                </div>

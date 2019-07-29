@@ -17,8 +17,11 @@
    <div class="row">
       <div class="col">
          <div class="card mb-3">
-            <div class="card-header card_header">
-               Show Profile
+            <div class="card-header section_header p-1 m-0">
+               <span class="h5 align-middle pt-2">
+                  <i class="far fa-eye"></i>
+                  Show Profile
+               </span>
                <span class="float-right">
                   @if($user->id === Auth::user()->id)
                      <a href="{{ route('profile.edit', $user->id) }}" class="btn btn-sm btn-primary px-1 py-0">
@@ -29,14 +32,14 @@
                </span>
             </div>
 
-            <div class="card-body card_body">
+            <div class="card-body section_body">
 
                {{-- Profile Info --}}
                <div class="form-row">
                   <div class="col-9">
                      <div class="card mb-2">
-                        <div class="card-header card_header_2">Profile Info</div>
-                        <div class="card-body card_body">
+                        <div class="card-header card_header">Profile Info</div>
+                        <div class="card-body section_body">
                            <div class="form-row">
                               <div class="col-md-3">
                                  <div class="form-group">
@@ -113,8 +116,8 @@
                <div class="form-row">
                   <div class="col">
                      <div class="card mb-2">
-                        <div class="card-header card_header_2">Address Info</div>
-                        <div class="card-body card_body">
+                        <div class="card-header card_header">Address Info</div>
+                        <div class="card-body section_body">
                            <div class="form-row">
                               <div class="col-md-2">
                                  <div class="form-group">
@@ -165,8 +168,8 @@
                {{-- <div class="form-row">
                   <div class="col">
                      <div class="card mb-2">
-                        <div class="card-header card_header_2">Contributions</div>
-                        <div class="card-body card_body">
+                        <div class="card-header card_header">Contributions</div>
+                        <div class="card-body section_body">
                            <div class="form-row">
                               <div class="col-md-2">
                                  <div class="form-group">

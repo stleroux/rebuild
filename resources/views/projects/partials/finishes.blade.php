@@ -1,14 +1,14 @@
 {{-- FINISHES APPLIED --}}
 <div class="card mb-2">
 
-   <div class="card-header p-1 {{ ($errors->first('finish')) ? 'text-danger' : '' }}" id="showAddFinish">
+   <div class="card-header card_header p-1 {{ ($errors->first('finish')) ? 'text-danger' : '' }}" id="showAddFinish">
       Finishes Information
       <a class="btn btn-xs float-right">
          <i id="icon" class="fas fa-sort-down"></i>
       </a>
    </div>
    
-   <div class="card-body p-0">
+   <div class="card-body section_body p-0">
    
       <div class="form-row">
    

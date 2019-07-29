@@ -51,7 +51,7 @@
 							</div>
 							{{-- Invoiced Date --}}
 							<div class="col-sm-3">
-								<div class="form-group">
+								<div class="form-group {{ $errors->has('invoiced_at') ? 'has-error' : '' }}">
 									{{ Form::label ('invoiced_at', 'Invoiced Date') }}
 									<div class="input-group">
 										{{ Form::date ('invoiced_at', $invoice->invoiced_at, ['class'=>'form-control']) }}
@@ -60,12 +60,13 @@
 												<i class="far fa-calendar-alt"></i>
 											</span>
 										</div>
+										<span class="text-danger">{{ $errors->first('invoiced_at') }}</span>
 									</div>
 								</div>
 							</div>
 							{{-- Paid Date --}}
 							<div class="col-sm-3">
-								<div class="form-group">
+								<div class="form-group {{ $errors->has('paid_at') ? 'has-error' : '' }}">
 									{{ Form::label ('paid_at', 'Paid Date') }}
 									<div class="input-group">
 										{{ Form::date ('paid_at', $invoice->paid_at, ['class'=>'form-control']) }}
@@ -74,6 +75,7 @@
 												<i class="far fa-calendar-alt"></i>
 											</span>
 										</div>
+										<span class="text-danger">{{ $errors->first('paid_at') }}</span>
 									</div>
 								</div>
 							</div>
@@ -82,7 +84,7 @@
 					<div class="col-md-3">
 						<div class="form-group {{ $errors->has('status') ? 'has-error' : '' }}">
 							{{ Form::label ('status', 'Status', ['class'=>'required']) }}
-							{{ Form::select('status', ['logged'=>'Logged', 'invoiced'=>'Invoiced', 'paid'=>'Paid'], $invoice->status, ['class'=>'form-control']) }}
+							{{ Form::select('status', ['invoiced'=>'Invoiced', 'logged'=>'Logged', 'paid'=>'Paid'], $invoice->status, ['class'=>'form-control']) }}
 							<span class="text-danger">{{ $errors->first('status') }}</span>
 						</div>
 						{{-- Sub Total --}}

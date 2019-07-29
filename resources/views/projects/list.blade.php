@@ -17,22 +17,23 @@
       <div class="col">
          <div class="card mb-2">
             <!--CARD HEADER-->
-            <div class="card-header section_header">
-               <i class="fab fa-pagelines"></i>
-               Projects
+            <div class="card-header section_header p-1 m-0">
+               <span class="h5 align-middle pt-2">
+                  <i class="fab fa-pagelines"></i>
+                  Projects
+               </span>
                <span class="float-right">
-                  @include('projects.addins.links.help', ['bookmark'=>'projects'])
-                  @include('projects.finishes.addins.links.finishes')
-                  @include('projects.materials.addins.links.materials')
-                  @include('projects.addins.links.add', ['model'=>'project'])
+                  @include('projects.addins.links.help', ['size'=>'sm', 'bookmark'=>'projects'])
+                  @include('projects.finishes.addins.links.finishes', ['size'=>'sm'])
+                  @include('projects.materials.addins.links.materials', ['size'=>'sm'])
+                  @include('projects.addins.links.add', ['size'=>'sm'])
                </span>
             </div>
 
             <!--CARD BODY-->
             @if($projects->count() > 0)
-               <div class="card-body card_body pb-1">
-                  {{-- @include('common.alphabet', ['model'=>'woodproject', 'page'=>'index']) --}}
-                  <table id="datatable" class="table table-hover table-sm">
+               <div class="card-body section_body pb-1">
+                  <table id="datatable" class="table table-hover table-sm text-dark">
                      <thead>
                         <tr>
                            <th>ID</th>
@@ -50,7 +51,7 @@
                         @foreach ($projects as $project)
                            <tr>
                               <td>{{ $project->id }}</td>
-                              <td><a href="{{ route('projects.show', $project->id) }}">{{ $project->name }}</a></td>
+                              <td>{{ $project->name }}</td>
                               <td>{{ $project->category }}</td>
                               <td>{{ $project->views }}</td>
                               <td>{{ $project->images()->count() }}</td>
@@ -59,6 +60,7 @@
                               {{-- Add more columns here --}}
                               <td data-order="{{ $project->created_at}}">{{ $project->created_at ? $project->created_at->format('M d, Y') : 'no data found' }}</td>
                               <td class="text-right">
+                                 @include('projects.addins.links.show', ['size'=>'xs'])
                                  @if(checkPerm('projects_edit'))
                                     @include('projects.addins.links.edit', ['size'=>'xs'])
                                  @endif

@@ -428,61 +428,56 @@ class InvoicesController extends Controller
 		// validate the data
 		$this->validate($request,
 			[
-				'client_id' => 'required',
-				'status' => 'required',
+				'client_id'		=> 'required',
+				'status'			=> 'required',
+				'paid_at'		=> 'required_if:status,==,paid',
+				'invoiced_at'	=> 'required_if:status,==,invoiced',
 			]);
 
 		$invoice = Invoice::find($id);
-			// $invoice->work_date = $request->work_date;
+		
+			// Get value of original Status
+			$ori_status = $invoice->status;
 
-// $ori_status = $invoice->status;
-// // status goes from paid to invoiced
-// if($ori_status == 'paid' && $request->status == 'invoiced' ){
-// 	$invoice->paid_at = null;
-// }elseif($ori_status == 'paid' && $request->status == 'logged' ){
-// 	$invoice->paid_at = null;
-// 	$invoice->invoiced_at = null;
-// }elseif($ori_status == 'invoiced' && $request->status == 'logged' ){
-// 	$invoice->invoiced_at = null;
-// }elseif($ori_status == 'logged' && $request->status == 'invoiced' ){
-// 	$invoice->invoiced_at = $request->invoiced_at;
-// }elseif($ori_status == 'invoiced' && $request->status == 'paid' ){
-// 	$invoice->paid_at = $request->paid_at;
-// }
-// else{
-	
-// }
+			// If status is changed form Paid to Invoiced
+			if($ori_status == 'paid' && $request->status == 'invoiced' ) {
+				// Clear the value of paid_at field
+				$invoice->paid_at = null;
 
+			// If status is changed from Paid to Logged
+			}elseif($ori_status == 'paid' && $request->status == 'logged' ){
+				// Clear the value of the paid_at and invoiced_at fields
+				$invoice->paid_at = null;
+				$invoice->invoiced_at = null;
 
+			// If status is changed from Invoiced to Logged
+			}elseif($ori_status == 'invoiced' && $request->status == 'logged' ){
+				// Clear the value of the invoiced_at field
+				$invoice->invoiced_at = null;
+
+			// If status is cahnged form Logged to Invoiced
+			}elseif($ori_status == 'logged' && $request->status == 'invoiced' ){
+				// Set the value of invoiced_at to the value passed from the form
+				$invoice->invoiced_at = $request->invoiced_at;
+
+			// If status is changed from Invoiced to Paid
+			}elseif($ori_status == 'invoiced' && $request->status == 'paid' ){
+				// Set the value of paid_at to the value passed from the form
+				$invoice->paid_at = $request->paid_at;
+			}
+
+			// Update the rest of the fields
 			$invoice->client_id = $request->client_id;
 			$invoice->notes = $request->notes;
 			$invoice->status = $request->status;
-			$invoice->invoiced_at = $request->invoiced_at;
-			$invoice->paid_at = $request->paid_at;
 
-			// Perform required calculations
-			// $inv_amount_charged = DB::table('invoicer.invoiceitems')->where('invoice_id', '=', $invoice->id)->sum('total');
-			// $inv_hst = $inv_amount_charged * Config::get('invoicer.hst_rate');
-			// $inv_sub_total = $inv_amount_charged + $inv_hst;
-			// $inv_wsib = $inv_amount_charged * Config::get('invoicer.wsib_rate');
-			// $inv_income_taxes = $inv_amount_charged * Config::get('invoicer.income_tax_rate');
-			// $inv_total_deductions = $inv_wsib + $inv_income_taxes;
-			// $inv_total = $inv_amount_charged - $inv_total_deductions;
-			
-			// // Set the values to be updated
-			// $invoice->amount_charged = $inv_amount_charged;
-			// $invoice->hst = $inv_hst;
-			// $invoice->sub_total = $inv_sub_total;
-			// $invoice->wsib = $inv_wsib;
-			// $invoice->income_taxes = $inv_income_taxes;
-			// $invoice->total_deductions = $inv_total_deductions;
-			// $invoice->total = $inv_total;
+		// Update the invoice
 		$invoice->save();
 
 		// Set flash data with success message
 		Session::flash ('info', 'This invoice was successfully updated!');
 
-		// Redirect to posts.show
+		// Redirect to invoices.index
 		return redirect()->route('invoicer.invoices');
 	}
 

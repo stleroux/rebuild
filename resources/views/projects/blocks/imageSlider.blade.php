@@ -1,3 +1,11 @@
+{{-- <style>
+   .card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: contain;
+}
+</style> --}}
+
 <div class="card mb-2">
    <div class="card-header block_header">
       <i class="far fa-image"></i>
@@ -16,7 +24,9 @@
             <div class="carousel-inner">
                @foreach($project->images as $image)
                <div class="carousel-item {{ ($loop->first) ? 'active' : '' }}">
-                  <img class="d-block w-100" src="/_projects/{{ $project->id }}/thumbs/{{ $image->name }}" height="auto" alt="{{ $image->name }}">
+                  {{-- <div class="container-fluid p-0 m-0"> --}}
+                     <img class="w-100" src="/_projects/{{ $project->id }}/thumbs/{{ $image->name }}" alt="{{ $image->name }}">
+                  {{-- </div> --}}
                </div>
                @endforeach
             </div>

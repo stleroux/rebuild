@@ -1,7 +1,7 @@
 {{-- OTHER INFORMATION --}}
 <div class="card">
-   <div class="card-header p-1">Other Information</div>
-   <div class="card-body p-2">
+   <div class="card-header card_header p-1">Other Information</div>
+   <div class="card-body section_body p-2">
 
       <div class="form-row pb-2">
 

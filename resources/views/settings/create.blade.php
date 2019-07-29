@@ -1,8 +1,10 @@
-@extends('layouts.master')
+@extends('layouts.backend')
+
+@section('stylesheets')
+   {{ Html::style('/css/woodbarn.css') }}
+@endsection
 
 @section('left_column')
-   {{-- @include('blocks.adminNav') --}}
-   {{-- @include('settings.sidebar') --}}
    @include('blocks.main_menu')
 @endsection
 
@@ -18,20 +20,20 @@
             <i class="fas fa-cog"></i>
             New Site Setting
             <div class="float-right">
-               <a class="btn btn-sm btn-outline-secondary px-1 py-0" href="{{ route('settings.index') }}">
+               <a class="btn btn-sm btn-secondary px-1 py-0" href="{{ route('settings.index') }}">
                   <i class="fas fa-angle-double-left"></i>
                   Cancel
                </a>
-               <button type="submit" class="btn btn-sm btn-outline-bprimary px-1 py-0" name="submit" value="new">
+               <button type="submit" class="btn btn-sm btn-info px-1 py-0" name="submit" value="new">
                   <i class="far fa-hdd"></i> Save & New
                </button>
-               <button type="submit" class="btn btn-sm btn-outline-success px-1 py-0" name="submit" value="save">
+               <button type="submit" class="btn btn-sm btn-success px-1 py-0" name="submit" value="save">
                   <i class="far fa-save"></i> Save & Close
                </button>
             </div>
          </div>
          
-         <div class="card-body card_body">
+         <div class="card-body section_body">
             <div class="row">
                <div class="col-sm-4">
                   <div class="form-group {{ $errors->has('key') ? 'has-error' : '' }}">

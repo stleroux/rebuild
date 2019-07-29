@@ -94,13 +94,13 @@
          </a>
       {{-- @endif --}}
 
-      @if(checkPerm('site_stats'))
+      {{-- @if(checkPerm('site_stats')) --}}
          <a href="{{ route('stats') }}"
-            class="list-group-item list-group-item-action p-1 {{ Route::is('stats*') ? 'active' : '' }}">
+            class="list-group-item list-group-item-action p-1 {{ Route::is('stats*') ? 'active' : '' }} text-warning">
             <i class="fas fa-chart-pie fa-fw"></i>
             Site Statistics
          </a>
-      @endif
+      {{-- @endif --}}
 
       @if(checkPerm('user_index'))
          <a href="{{ route('users.index') }}"

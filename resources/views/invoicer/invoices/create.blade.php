@@ -55,7 +55,7 @@
 
 						<div class="form-group {{ $errors->has('status') ? 'has-error' : '' }}">
 							{{ Form::label ('status', 'Status', ['class'=>'required']) }}
-							{{ Form::select('status', ['logged'=>'Logged', 'invoiced'=>'Invoiced', 'paid'=>'Paid'], null, ['placeholder'=>'Pick one...', 'class'=>'form-control']) }}
+							{{ Form::select('status', ['invoiced'=>'Invoiced', 'logged'=>'Logged'], null, ['placeholder'=>'Pick one...', 'class'=>'form-control']) }}
 							<span class="text-danger">{{ $errors->first('status') }}</span>
 						</div>
 					</div>

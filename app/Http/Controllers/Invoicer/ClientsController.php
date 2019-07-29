@@ -40,7 +40,7 @@ class ClientsController extends Controller
 	public function create()
 	{
 		// Check if user has required permission
-	  if(!checkPerm('invoicer_client_create')) { abort(401, 'Unauthorized Access'); }
+		if(!checkPerm('invoicer_client_create')) { abort(401, 'Unauthorized Access'); }
 
 		return view('invoicer.clients.create');
 	}

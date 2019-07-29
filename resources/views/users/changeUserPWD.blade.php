@@ -1,10 +1,14 @@
 @extends('layouts.backend')
 
 @section('stylesheets')
+   {{ Html::style('/css/woodbarn.css') }}
 @endsection
 
 @section('left_column')
    @include('blocks.main_menu')
+@endsection
+
+@section('right_column')
 @endsection
 
 @section('content')
@@ -26,12 +30,12 @@
       {{-- <input type="text" name="id" value="{{ $user->id }}" /> --}}
       <div class="card">
          <!--CARD HEADER-->
-         <div class="card-header card_header">
+         <div class="card-header card_header p-1 m-0">
             <span class="h5 align-middle pt-2">
                Change User Password
             </span>
             <span class="float-sm-right">
-               @include('common.buttons.cancel', ['model'=>'user', 'type'=>''])
+               @include('common.buttons.back', ['model'=>'user', 'type'=>''])
 
                @if(checkPerm('user_edit'))
                   <button type="submit" class="btn btn-sm btn-info" title="Change Password">
@@ -43,7 +47,7 @@
          </div>
 
          <!--CARD BODY-->
-         <div class="card-body card_body">
+         <div class="card-body section_body">
             <div class="row">
                <div class="col-xs-12 col-sm-6 col-md-3">
                   <div class="form-group">

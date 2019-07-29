@@ -1,5 +1,5 @@
 <div class="card mb-2">
-	<div class="card-header card_header_2">My Contributions</div>
+	<div class="card-header block_header">My Contributions</div>
 	<table class="table table-sm table-hover mb-0">
 		<tr>
 			<td>

@@ -1,10 +1,14 @@
 @extends('layouts.backend')
 
 @section('stylesheets')
+   {{ Html::style('/css/woodbarn.css') }}
 @endsection
 
 @section('left_column')
-	@include('blocks.main_menu')
+   @include('blocks.main_menu')
+@endsection
+
+@section('right_column')
 @endsection
 
 @section('content')
@@ -13,7 +17,7 @@
 		<div class="col">
 			<div class="card">
 				<!--CARD HEADER-->
-				<div class="card-header card_header">
+				<div class="card-header section_header p-1 m-0">
 					<span class="h5 align-middle pt-2">
 						<i class="fas fa-users"></i>
 						Users
@@ -26,8 +30,8 @@
 				</div>
 				
 				<!--CARD BODY-->
-				<div class="card-body card_body">
-					<table id="datatable" class="table table-hover table-sm text-light">
+				<div class="card-body section_body">
+					<table id="datatable" class="table table-hover table-sm text-dark">
 						<thead>
 							<tr>
 								<th>No</th>
@@ -53,7 +57,7 @@
 
 										@if(checkPerm('change_user_pwd'))
 											<a href="{{ route('users.changeUserPWD', $user->id) }}"
-												class="btn btn-sm btn-outline-secondary"
+												class="btn btn-sm btn-secondary"
 												title="Reset User's Password">
 												<i class="fas fa-unlock-alt"></i>
 											</a>
