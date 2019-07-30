@@ -4,14 +4,25 @@
    {{ Html::style('css/woodbarn.css') }}
 @endsection
 
+@section('left_column')
+   @include('blocks.main_menu')
+@endsection
+
+@section('right_column')
+   @include('blocks.popularItems')
+   @include('projects.blocks.popularProjects')
+   @include('blog.blocks.popularPosts')
+   @include('recipes.blocks.popularRecipes')
+@endsection
+
 @section('content')
 
-   <div class="card mb-2">
-      <div class="card-header card_header">
+   <div class="card mb-3">
+      <div class="section_header">
          <i class="fas fa-user-secret"></i>
          Privacy Policy
       </div>
-      <div class="card-body card_body">
+      <div class="card-body">
          <h1>Privacy Policy</h1>
 
          <p>Effective date: December 11, 2018</p>

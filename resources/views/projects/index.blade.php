@@ -17,11 +17,11 @@
 @section('content')
 
    <div class="card mb-3">
-      <div class="card-header section_header p-1 pb-2 m-0">
-         <span class="h5 align-middle pt-2">
+      <div class="section_header">
+         {{-- <span class="h5 align-middle pt-2"> --}}
             <i class="fab fa-pagelines"></i>
             Projects
-         </span>
+         {{-- </span> --}}
          {{-- <span class="float-right">
             @include('projects.addins.links.help', ['bookmark'=>'projects'])
             @include('projects.addins.links.BEProjects')
@@ -92,7 +92,7 @@
             <p>No projects found</p>
          @endif
       </div>
-      <div class="card-footer pt-1 pb-1 pl-2">
+      <div class="card_footer">
          Click a project's image to view it's details
       </div>
    </div>

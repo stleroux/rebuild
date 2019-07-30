@@ -1,7 +1,7 @@
 <div class="row p-0 pb-2">
    <div class="col-sm-3 pr-1">
       <div class="card text-light">
-         <div class="card-header card_header p-1">Category</div>
+         <div class="card_header">Category</div>
          <div class="card-body p-1">{{ $project->category }}</div>
       </div>
    </div>

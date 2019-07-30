@@ -4,14 +4,25 @@
    {{ Html::style('css/woodbarn.css') }}
 @endsection
 
+@section('left_column')
+   @include('blocks.main_menu')
+@endsection
+
+@section('right_column')
+   @include('blocks.popularItems')
+   @include('projects.blocks.popularProjects')
+   @include('blog.blocks.popularPosts')
+   @include('recipes.blocks.popularRecipes')
+@endsection
+
 @section('content')
 
-   <div class="card mb-2">
-      <div class="card-header card_header">
+   <div class="card mb-3">
+      <div class="section_header">
          <i class="fas fa-scroll"></i>
          Terms And Conditions
       </div>
-      <div class="card-body card_body">
+      <div class="card-body">
          <h2>Welcome to thewoodbarn.ca</h2>
             <p>These terms and conditions outline the rules and regulations for the use of thewoodbarn.ca's Website.</p> <br /> 
             <span style="text-transform: capitalize;"> thewoodbarn.ca</span> is located at:<br /> 
