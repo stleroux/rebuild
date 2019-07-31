@@ -12,34 +12,34 @@
 	@include('blog.blocks.search')
    @include('blog.blocks.popularPosts')
    @include('blog.blocks.archives')
-@stop
+@endsection
 
 @section ('content')
-	<div class="row">
-		<div class="col">
+{{-- 	<div class="row">
+		<div class="col"> --}}
 			<div class="card mb-2">
-				<div class="card-header section_header">
+				<div class="card-header section_header p-2">
 					<i class="fas fa-blog"></i>
 					Blog Search Results
 					<span class="float-right">
 						<!-- Only show the Search Results button if coming from the search results page -->
 						@if (false !== stripos($_SERVER['HTTP_REFERER'], "/blog/search"))
-							<a href="{{ URL::previous() }}" class="btn btn-sm btn-primary">
+							<a href="{{ URL::previous() }}" class="btn btn-sm btn-primary px-1 py-0">
 								<i class="fa fa-arrow-left"></i> Search Results
 							</a>
 						@endif
 						@if (true !== stripos($_SERVER['HTTP_REFERER'], "/search/posts"))
-							<a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary">
+							<a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary px-1 py-0">
 								<i class="fas fa-blog"></i> Blog
 							</a>
 						@endif
 					</span>
 				</div>
-				<div class="card-body section_body">
+				<div class="card-body section_body p-2">
 					@if (count($posts) > 0)
 						{{-- <div class="row"> --}}
 							{{-- <div class="col-md-12"> --}}
-								<table class="table table-hover table-sm">
+								<table class="table table-hover table-sm text-dark">
 									<thead>
 										<th>Title</th>
 										{{-- <th>Body</th> --}}
@@ -76,9 +76,9 @@
 					@endif
 				</div>
 			</div>
-		</div>
-	</div>
-@stop
+		{{-- </div>
+	</div> --}}
+@endsection
 
 @section ('scripts')
 @stop

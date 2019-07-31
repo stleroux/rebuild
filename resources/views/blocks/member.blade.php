@@ -1,5 +1,5 @@
 <div class="card mb-2">
-   <div class="card-header block_header">ACCOUNT ({{ Auth::user()->username }})</div>
+   <div class="card-header block_header p-2">ACCOUNT ({{ Auth::user()->username }})</div>
    <div class="list-group pt-0 pb-0">
       
       <a href="{{ route('profile.show', Auth::User()->id) }}"

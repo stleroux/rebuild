@@ -18,16 +18,14 @@
    
    @if(count($posts) > 0)
       <div class="card mb-2">
-         <div class="card-header section_header py-2">
-            <span class="h5 align-middle">
-               <i class="fas fa-blog"></i>
-               Blog
-            </span>
+         <div class="card-header section_header p-2">
+            <i class="fas fa-blog"></i>
+            Blog
          </div>
          <div class="card-body section_body p-2">
             @foreach ($posts as $post)
                <div class="card mb-2">
-                  <div class="card-header card_header">
+                  <div class="card-header card_header p-2">
                      <i class="far fa-newspaper"></i>
                      {{ $post->title }}
                   </div>
@@ -53,7 +51,7 @@
                      </div>
                      
                   </div>
-                  <div class="card-footer px-1 py-1">
+                  <div class="card-footer card_footer p-1">
                      Created by {{-- {{ ucfirst($post->user->username) }} --}}
                         @include('common.authorFormat', ['model'=>$post, 'field'=>'user'])
                      on {{-- {{ $post->created_at->format('M d, Y') }} --}}

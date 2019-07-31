@@ -18,66 +18,66 @@
 @section('content')
 
    <div class="card mb-2">
-      <div class="card-header section_header">
+      <div class="card-header section_header p-2">
          {{ ucwords($post->title) }}
          <span class="float-right">
             @auth
-               <a href="" type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#printModal" data-link="{{ $post->slug }}">
+               <a href="" type="button" class="btn btn-sm btn-secondary px-1 py-0" data-toggle="modal" data-target="#printModal" data-link="{{ $post->slug }}">
                   <i class="fa fa-print"></i> Print
                </a>
             @endauth
 
             <!-- Only show if coming from the homepage -->
             @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'home')
-               <a href="{{ route('home') }}" class="btn btn-sm btn-primary">
+               <a href="{{ route('home') }}" class="btn btn-sm btn-primary px-1 py-0">
                   <i class="fas fa-home"></i> Home
                </a>
             @endif
 
             <!-- Only show if coming from the blog page -->
             @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.index')
-               <a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary">
+               <a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary px-1 py-0">
                   <i class="fas fa-blog"></i> Blog
                </a>
             @endif
 
             <!-- Show this button after posting a comment -->
             @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.single')
-               <a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary">
+               <a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary px-1 py-0">
                   <i class="fas fa-blog"></i> Blog
                </a>
             @endif
 
             <!-- Only show if coming from the blog print page -->
             @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.print')
-               <a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary">
+               <a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary px-1 py-0">
                   <i class="fas fa-blog"></i> Blog
                </a>
             @endif
 
             <!-- Only show if coming from the blog search page -->
             @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.search')
-               <a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary">
+               <a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary px-1 py-0">
                   <i class="fas fa-blog"></i> Blog
                </a>
-               <a href="{{ URL::previous() }}" class="btn btn-sm btn-primary">
+               <a href="{{ URL::previous() }}" class="btn btn-sm btn-primary px-1 py-0">
                   <i class="fas fa-blog"></i> Search
                </a>
             @endif              
 
             <!-- Only show if coming from the blog archive page -->
             @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.archive')
-               <a href="{{ route('blog.index') }}" class="btn btn-sm btn-outline-primary">
+               <a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary px-1 py-0">
                   <i class="fas fa-blog"></i> Blog
                </a>
-               <a href="{{ URL::previous() }}" class="btn btn-sm btn-outline-primary">
+               <a href="{{ URL::previous() }}" class="btn btn-sm btn-primary px-1 py-0">
                   <i class="fas fa-blog"></i> Archive
                </a>
             @endif
          </span>
       </div>
 
-      <div class="card-body section_body">
+      <div class="card-body section_body p-2">
          <div class="row">
             <div class="col-8 pr-1">
                <div class="row text-center">
@@ -241,14 +241,14 @@
 
          <div class="row">
             <div class="col-12">
-               <div class="card">
+               <div class="card bg-transparent">
                   <div class="card-header card_header py-0 pl-1">
                      <i class="fas fa-comments-o"></i>
                      Comments <small>({{ $post->comments()->count() }} total)</small>
                   </div>
                   <div class="card-body card_body p-0 m-0">
                      @if($post->comments->count())
-                        <table class="table table-hover table-sm mb-0">
+                        <table class="table table-hover table-sm text-dark mb-0">
                            <thead>
                               <tr class="d-flex">
                                  <th class="col-2">Name</th>
@@ -273,7 +273,9 @@
                            </tbody>
                         </table>
                      @else
-                        No comments found
+                        <div class="pl-2">
+                           No comments found
+                        </div>
                      @endif
                   </div>
                </div>

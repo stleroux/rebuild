@@ -6,14 +6,14 @@
 
 @section ('content')
    <div class="card mt-5">
-      <div class="card-header py-1">
+      <div class="card-header p-2">
          {{ $post->title }}
          <span class="float-right">
-            <a href="{{ route('blog.single', $post->slug) }}" class="btn btn-sm btn-outline-secondary d-print-none">Return</a>
-            <a href="" class="btn btn-sm btn-outline-primary d-print-none" onClick="window.print()">Print</a>
+            <a href="{{ route('blog.single', $post->slug) }}" class="btn btn-sm btn-outline-secondary d-print-none px-1 py-0">Return</a>
+            <a href="" class="btn btn-sm btn-outline-primary d-print-none px-1 py-0" onClick="window.print()">Print</a>
          </span>
       </div>
-      <div class="card-body card_body">
+      <div class="card-body card_body p-2">
          <div class="row">
             <div class="col-8 pr-1">
                <div class="row text-center">
@@ -169,7 +169,7 @@
 
          </div>
       </div> 
-      <div class="card-footer">
+      <div class="card-footer card_footer pl-2 p-1">
          From the Blog at TheWoodBarn.ca
       </div>
    </div>

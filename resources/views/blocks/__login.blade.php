@@ -1,10 +1,12 @@
 @guest
+<br /><br /><br /><br /><br /><br /><br />
+dssdsd
 	<div class="card mb-2">
 		<div class="card-header block_header">
 			<i class="fas fa-sign-in-alt"></i>
 			LOGIN
 		</div>
-		<div class="card-body card_body">
+		<div class="card-body card_body p-2">
 			<form method="POST" action="{{ route('login') }}">
 				@csrf
 

@@ -1,6 +1,6 @@
 <div class="card mb-2">
-   <div class="card-header block_header">
-      <i class="far fa-star" aria-hidden="true"></i>
+   <div class="card-header block_header p-2">
+      <i class="far fa-star"></i>
       Most Popular Items
    </div>
    <div class="list-group card_body px-2 text-light">
@@ -52,7 +52,7 @@
                </div>
             </a>
          @endforeach --}}
-      </ul>
+      {{-- </ul> --}}
 
    </div>
 </div>
