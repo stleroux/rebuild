@@ -76,7 +76,7 @@ class InvoicerInvoicesTableSeeder extends Seeder
                 'id' => 5,
                 'client_id' => 4,
                 'notes' => NULL,
-                'status' => 'paid',
+                'status' => 'logged',
                 'amount_charged' => '123.00',
                 'hst' => '15.99',
                 'sub_total' => '138.99',
@@ -84,10 +84,10 @@ class InvoicerInvoicesTableSeeder extends Seeder
                 'income_taxes' => '31.98',
                 'total_deductions' => '46.74',
                 'total' => '76.26',
-                'invoiced_at' => '2019-07-25 00:00:00',
-                'paid_at' => '2019-07-26 00:00:00',
+                'invoiced_at' => NULL,
+                'paid_at' => NULL,
                 'created_at' => '2019-07-16 09:57:47',
-                'updated_at' => '2019-07-25 20:48:30',
+                'updated_at' => '2019-07-16 09:58:17',
             ),
         ));
         

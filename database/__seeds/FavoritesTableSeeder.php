@@ -21,19 +21,11 @@ class FavoritesTableSeeder extends Seeder
             array (
                 'user_id' => 2,
                 'favoriteable_type' => 'App\\Models\\Recipes\\Recipe',
-                'favoriteable_id' => 1,
-                'created_at' => '2019-07-23 20:55:45',
-                'updated_at' => '2019-07-23 20:55:45',
-            ),
-            1 => 
-            array (
-                'user_id' => 2,
-                'favoriteable_type' => 'App\\Models\\Recipes\\Recipe',
                 'favoriteable_id' => 4,
                 'created_at' => '2019-05-28 15:23:07',
                 'updated_at' => '2019-05-28 15:23:07',
             ),
-            2 => 
+            1 => 
             array (
                 'user_id' => 2,
                 'favoriteable_type' => 'Modules\\Recipes\\Entities\\Recipe',
@@ -41,7 +33,7 @@ class FavoritesTableSeeder extends Seeder
                 'created_at' => '2019-01-29 21:54:59',
                 'updated_at' => '2019-01-29 21:54:59',
             ),
-            3 => 
+            2 => 
             array (
                 'user_id' => 2,
                 'favoriteable_type' => 'Modules\\Recipes\\Entities\\Recipe',
@@ -49,7 +41,7 @@ class FavoritesTableSeeder extends Seeder
                 'created_at' => '2019-01-29 19:10:13',
                 'updated_at' => '2019-01-29 19:10:13',
             ),
-            4 => 
+            3 => 
             array (
                 'user_id' => 2,
                 'favoriteable_type' => 'App\\Models\\Recipes\\Recipe',

@@ -47,11 +47,11 @@ class InvoicerClientsTableSeeder extends Seeder
                 'telephone' => '613 123 4567',
                 'cell' => '613 456 4566',
                 'fax' => NULL,
-                'email' => 'test2@hotmail.com',
+                'email' => NULL,
                 'website' => NULL,
                 'notes' => NULL,
                 'created_at' => '2018-10-30 16:45:03',
-                'updated_at' => '2019-07-25 23:38:10',
+                'updated_at' => '2018-10-30 16:45:03',
             ),
             2 => 
             array (
@@ -88,24 +88,6 @@ class InvoicerClientsTableSeeder extends Seeder
                 'notes' => NULL,
                 'created_at' => '2019-07-16 09:57:10',
                 'updated_at' => '2019-07-16 09:57:18',
-            ),
-            4 => 
-            array (
-                'id' => 5,
-                'company_name' => 'test',
-                'contact_name' => 'Stacie Haynes',
-                'address' => NULL,
-                'city' => NULL,
-                'state' => NULL,
-                'zip' => NULL,
-                'telephone' => NULL,
-                'cell' => NULL,
-                'fax' => NULL,
-                'email' => 'test123@test.com',
-                'website' => NULL,
-                'notes' => NULL,
-                'created_at' => '2019-07-25 23:28:07',
-                'updated_at' => '2019-07-25 23:38:26',
             ),
         ));
         

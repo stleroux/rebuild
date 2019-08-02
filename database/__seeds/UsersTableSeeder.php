@@ -39,11 +39,11 @@ class UsersTableSeeder extends Seeder
                 'public_email' => 1,
                 'email_verified_at' => NULL,
                 'password' => '$2y$10$a3VOdvKkx9i6yZ3soekk/uhxC8mX76Enn9KJeOCilynZhHQvzitFe',
-                'remember_token' => '3MbflIhg7EjmDHbqQjUgEZJQiUNEexuK8R7uQhrqCFcEbUCTcIAc7uRZfJIY',
+                'remember_token' => 'FqZUULp12dhFZrQtukB5Rvef4OhB3E78UzNc4fNQ0uZHRBBWY8jyWZme3gZy',
                 'created_at' => '2018-10-24 16:31:15',
-                'updated_at' => '2019-08-01 22:04:43',
-                'last_login_date' => '2019-08-01 22:04:43',
-                'login_count' => 25,
+                'updated_at' => '2019-02-12 11:23:57',
+                'last_login_date' => '2019-02-12 11:23:57',
+                'login_count' => 1,
             ),
             2 => 
             array (
