@@ -17,22 +17,20 @@
       {!! csrf_field() !!}
       
       <div class="card mb-3">
-         <div class="card-header card_header">
-            <span class="h5 align-middle pt-2">
-               <i class="{{ Config::get('buttons.unpublished') }}"></i>
-               Unpublished Recipes
-            </span>
+         <div class="card-header section_header p-2">
+            <i class="{{ Config::get('buttons.unpublished') }}"></i>
+            Unpublished Recipes
             <span class="float-right">
-               @include('recipes.addins.links.help', ['bookmark'=>'recipes'])
-               @include('recipes.addins.links.add')
-                  @include('recipes.addins.buttons.publishAll')
-                  @include('recipes.addins.buttons.trashAll')
-               @include('recipes.addins.pages.published')
-               @include('recipes.addins.pages.new')
-               @include('recipes.addins.pages.future')
-               @include('recipes.addins.pages.trashed')
-               @include('recipes.addins.pages.mine')
-               @include('recipes.addins.pages.myPrivate')
+               @include('recipes.addins.links.help', ['size'=>'xs', 'bookmark'=>'recipes'])
+               @include('recipes.addins.buttons.publishAll', ['size'=>'xs'])
+               @include('recipes.addins.buttons.trashAll', ['size'=>'xs'])
+               @include('recipes.addins.pages.published', ['size'=>'xs'])
+               @include('recipes.addins.pages.new', ['size'=>'xs'])
+               @include('recipes.addins.pages.future', ['size'=>'xs'])
+               @include('recipes.addins.pages.trashed', ['size'=>'xs'])
+               @include('recipes.addins.pages.mine', ['size'=>'xs'])
+               @include('recipes.addins.pages.myPrivate', ['size'=>'xs'])
+               @include('recipes.addins.links.add', ['size'=>'xs'])
             </span>
          </div>
          

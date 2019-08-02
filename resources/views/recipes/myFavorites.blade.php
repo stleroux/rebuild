@@ -1,4 +1,4 @@
-@extends('layouts.recipes')
+@extends('layouts.master')
 
 @section('stylesheets')
    {{ Html::style('css/recipes.css') }}
@@ -22,9 +22,9 @@
             </span>
             <span class="float-right">
                {{-- @include('recipes.addins.links.help', ['bookmark'=>'']) --}}
-               @include('recipes.addins.links.back')
-               @include('recipes.addins.pages.mine')
-               @include('recipes.addins.pages.myPrivate')
+               @include('recipes.addins.links.back', ['size'=>'xs'])
+               @include('recipes.addins.pages.mine', ['size'=>'xs'])
+               @include('recipes.addins.pages.myPrivate', ['size'=>'xs'])
             </span>
          </div>
 

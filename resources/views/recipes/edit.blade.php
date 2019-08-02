@@ -23,9 +23,9 @@
                Edit Recipe
             </span>
             <span class="float-right">
-               @include('recipes.addins.links.help', ['bookmark'=>'recipes'])
-               @include('recipes.addins.links.back')
-               @include('recipes.addins.buttons.update')
+               @include('recipes.addins.links.help', ['size'=>'xs', 'bookmark'=>'recipes'])
+               @include('recipes.addins.links.back', ['size'=>'xs'])
+               @include('recipes.addins.buttons.update', ['size'=>'xs'])
             </span>
          </div>
 

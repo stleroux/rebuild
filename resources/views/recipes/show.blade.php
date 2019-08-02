@@ -23,17 +23,17 @@
 		<div class="card-header section_header p-2">
 			{{ $recipe->title }}
 			<span class="float-right">
-				@include('recipes.addins.links.back')
-				@include('recipes.addins.links.print')
+				@include('recipes.addins.links.back', ['size'=>'xs'])
+				@include('recipes.addins.links.print', ['size'=>'xs'])
 				@include('recipes.addins.links.favorite', ['size'=>'sm'])
   	         @include('recipes.addins.links.privatize', ['size'=>'sm'])
 				@include('recipes.addins.links.publish', ['size'=>'sm'])
-				@include('recipes.addins.pages.published')
-				@include('recipes.addins.pages.unpublished')
-				@include('recipes.addins.pages.new')
-				@include('recipes.addins.pages.trashed')
-				@include('recipes.addins.pages.mine')
-				@include('recipes.addins.pages.myPrivate')
+				@include('recipes.addins.pages.published', ['size'=>'xs'])
+				@include('recipes.addins.pages.unpublished', ['size'=>'xs'])
+				@include('recipes.addins.pages.new', ['size'=>'xs'])
+				@include('recipes.addins.pages.trashed', ['size'=>'xs'])
+				@include('recipes.addins.pages.mine', ['size'=>'xs'])
+				@include('recipes.addins.pages.myPrivate', ['size'=>'xs'])
 				@include('recipes.addins.links.edit', ['size'=>'sm'])
 				@include('recipes.addins.links.trash', ['size'=>'sm'])
 			</span>

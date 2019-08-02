@@ -22,16 +22,16 @@
 			<i class="fab fa-apple"></i>
 			Recipes
 			<span class="float-right">
-				@include('recipes.addins.links.printAll')
-				@include('recipes.addins.pages.myFavorites')
-				@include('recipes.addins.pages.published')
-				@include('recipes.addins.pages.unpublished')
-				@include('recipes.addins.pages.new')
-				@include('recipes.addins.pages.future')
-				@include('recipes.addins.pages.trashed')
-				@include('recipes.addins.pages.mine')
-				@include('recipes.addins.pages.myPrivate')
-				@include('recipes.addins.links.add')
+				@include('recipes.addins.links.printAll', ['size'=>'xs'])
+				@include('recipes.addins.pages.myFavorites', ['size'=>'xs'])
+				@include('recipes.addins.pages.published', ['size'=>'xs'])
+				@include('recipes.addins.pages.unpublished', ['size'=>'xs'])
+				@include('recipes.addins.pages.new', ['size'=>'xs'])
+				@include('recipes.addins.pages.future', ['size'=>'xs'])
+				@include('recipes.addins.pages.trashed', ['size'=>'xs'])
+				@include('recipes.addins.pages.mine', ['size'=>'xs'])
+				@include('recipes.addins.pages.myPrivate', ['size'=>'xs'])
+				@include('recipes.addins.links.add', ['size'=>'xs'])
 			</span>
 		</div>
 
@@ -80,7 +80,7 @@
 								<div class="card-text pb-1 m-0">
 									<div class="align-self-end text-center">
 										{{-- @if(!$recipe->isFavorited()) --}}
-											@include('recipes.addins.links.favorite')
+											@include('recipes.addins.links.favorite', ['size'=>'xs'])
 										{{-- @else
 											@include('common.addins.links.favoriteRemove', ['name'=>'recipe', 'model'=>$recipe])
 										@endif --}}

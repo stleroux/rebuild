@@ -1,5 +1,5 @@
 <button
-   class="btn btn-sm btn-primary border border-light text-warning"
+   class="btn btn-{{ $size }} btn-primary border border-light text-warning"
    type="submit"
    formaction="{{ route('recipes.deleteAll') }}"
    formmethod="POST"

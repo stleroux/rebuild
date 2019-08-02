@@ -16,22 +16,20 @@
 	{!! csrf_field() !!}
 	
 		<div class="card">
-			<div class="card-header card_header">
-				<span class="h5 align-middle pt-2">
-	            <i class="{{ Config::get('buttons.future') }}"></i>
-	            Future Recipes
-	         </span>
+			<div class="card-header section_header p-2">
+	         <i class="{{ Config::get('buttons.future') }}"></i>
+	         Future Recipes
             <span class="float-right">
-               @include('recipes.addins.links.help', ['bookmark'=>'recipes'])
-               @include('recipes.addins.links.add')
-					@include('recipes.addins.buttons.unpublishAll')
-					@include('recipes.addins.buttons.trashAll')
-					@include('recipes.addins.pages.published')
-               @include('recipes.addins.pages.unpublished')
-               @include('recipes.addins.pages.new')
-               @include('recipes.addins.pages.trashed')
-               @include('recipes.addins.pages.mine')
-               @include('recipes.addins.pages.myPrivate')
+               @include('recipes.addins.links.help', ['size'=>'xs', 'bookmark'=>'recipes'])
+               @include('recipes.addins.links.add', ['size'=>'xs'])
+					@include('recipes.addins.buttons.unpublishAll', ['size'=>'xs'])
+					@include('recipes.addins.buttons.trashAll', ['size'=>'xs'])
+					@include('recipes.addins.pages.published', ['size'=>'xs'])
+               @include('recipes.addins.pages.unpublished', ['size'=>'xs'])
+               @include('recipes.addins.pages.new', ['size'=>'xs'])
+               @include('recipes.addins.pages.trashed', ['size'=>'xs'])
+               @include('recipes.addins.pages.mine', ['size'=>'xs'])
+               @include('recipes.addins.pages.myPrivate', ['size'=>'xs'])
 				</span>
 			</div>
 
@@ -74,7 +72,7 @@
 					</table>
 				</div>
 			@else
-				<div class="card-body card_body">
+				<div class="card-body card_body p-2">
                {{ setting('no_records_found') }}
               </div>
 			@endif

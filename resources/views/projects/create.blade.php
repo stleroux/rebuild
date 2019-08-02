@@ -14,7 +14,7 @@
 @section('content')
    
    {!! Form::open(['route' => 'projects.store', 'files'=>'true']) !!}
-      @csrf
+      {{-- @csrf --}}
 
       <div class="card mb-3">
 

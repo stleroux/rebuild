@@ -25,14 +25,14 @@
             </span>
             <span class="float-right">
                {{-- @include('recipes.addins.links.help', ['bookmark'=>'recipes']) --}}
-               @include('recipes.addins.links.recipes')
-               @include('recipes.addins.pages.published')
-               @include('recipes.addins.pages.unpublished')
-               @include('recipes.addins.pages.new')
-               @include('recipes.addins.pages.future')
-               @include('recipes.addins.pages.trashed')
-               @include('recipes.addins.pages.mine')
-               @include('recipes.addins.links.add')
+               @include('recipes.addins.links.recipes', ['size'=>'xs'])
+               @include('recipes.addins.pages.published', ['size'=>'xs'])
+               @include('recipes.addins.pages.unpublished', ['size'=>'xs'])
+               @include('recipes.addins.pages.new', ['size'=>'xs'])
+               @include('recipes.addins.pages.future', ['size'=>'xs'])
+               @include('recipes.addins.pages.trashed', ['size'=>'xs'])
+               @include('recipes.addins.pages.mine', ['size'=>'xs'])
+               @include('recipes.addins.links.add', ['size'=>'xs'])
             </span>
          </div>
 

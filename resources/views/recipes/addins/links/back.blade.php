@@ -1,12 +1,12 @@
 @if(Session::get('fromPage')==='recipes.index')
    <a href="{{ route('recipes.index','all') }}"
-      class="btn btn-sm btn-primary"
+      class="btn btn-{{ $size }} btn-primary"
       title="Recipes">
       <i class="{{ Config::get('buttons.recipes') }}"></i>
    </a>
 @elseif(Session::get('fromPage'))
    <a href="{{ route(Session::get('fromPage')) }}"
-      class="btn btn-sm btn-primary"
+      class="btn btn-{{ $size }} btn-primary"
       title="Back">
       <i class="{{ Config::get('buttons.back') }}"></i>
    </a>
@@ -15,7 +15,7 @@
 @foreach ($categories as $category)
    @if (false !== stripos($_SERVER['HTTP_REFERER'], "recipes/" . $category->name))
       <a href="{{ url('recipes/'.$category->name) }}"
-         class="btn btn-sm btn-primary"
+         class="btn btn-{{ $size }} btn-primary"
          title="Back">
          <i class="{{ Config::get('buttons.back') }}"></i>
       </a>
@@ -23,7 +23,7 @@
    @foreach ($category->children as $children)
       @if (false !== stripos($_SERVER['HTTP_REFERER'], "recipes/" . $children->name))
          <a href="{{ url('recipes/'.$children->name) }}"
-            class="btn btn-sm btn-primary"
+            class="btn btn-{{ $size }} btn-primary"
             title="Back">
             <i class="{{ Config::get('buttons.back') }}"></i>
          </a>

@@ -1,5 +1,5 @@
 <button
-   class="btn btn-sm btn-outline-secondary"
+   class="btn btn-{{ $size }} btn-outline-secondary"
    type="submit"
    formaction="{{ route('recipes.restoreAll') }}"
    formmethod="POST"

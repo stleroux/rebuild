@@ -1,33 +1,35 @@
-@extends('layouts.recipes')
+@extends('layouts.backend')
 
 @section('stylesheets')
    {{ Html::style('css/recipes.css') }}
 @endsection
 
 @section('left_column')
+   {{-- @include('blocks.home_menu') --}}
+   @include('recipes.sidebar')
 @endsection
 
 @section('right_column')
+   @include('recipes.blocks.popularRecipes')
+   @include('recipes.blocks.archives')
 @endsection
 
 @section('content')
 {{-- {{ Session::get('fromPage') }} --}}
    {!! Form::open(['route' => 'recipes.store', 'files'=>'true']) !!}
       <div class="card mb-3">
-         <div class="card-header card_header">
-            <span class="h5 align-middle pt-2">
-               <i class="fa fa-plus-square"></i>
-               Create Recipe
-            </span>
+         <div class="card-header section_header p-2">
+            <i class="fa fa-plus-square"></i>
+            Create Recipe
             <span class="float-right">
-               @include('recipes.addins.links.help', ['bookmark'=>'recipes'])
-               @include('recipes.addins.links.back')
-               @include('recipes.addins.buttons.save')
+               @include('recipes.addins.links.help', ['size'=>'xs', 'bookmark'=>'recipes'])
+               @include('recipes.addins.links.back', ['size'=>'xs'])
+               @include('recipes.addins.buttons.save', ['size'=>'xs'])
             </span>
          </div>
 
-         <div class="card-body">
-            <div class="row">
+         <div class="card-body section_body p-2">
+            <div class="form-row">
                <!-- Title -->
                <div class="col-xs-12 col-sm-12 col-md-6">
                   <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}" >
@@ -41,7 +43,7 @@
                <div class="col-xs-12 col-sm-6 col-md-3">
                   <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}" >
                      {!! Form::label("category_id", "Category", ['class'=>'required']) !!}
-                     <select name="category_id" id="catSelect" class="custom-select form-control-sm">
+                     <select name="category_id" id="catSelect" class="form-control form-control-sm">
                         <option selected>Select One</option>
                         @foreach ($categories as $category)
                            <option disabled>{{ ucfirst($category->name) }}</option>
