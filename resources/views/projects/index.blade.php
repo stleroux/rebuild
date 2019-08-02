@@ -17,7 +17,7 @@
 @section('content')
 
    <div class="card mb-3">
-      <div class="section_header">
+      <div class="card-header section_header p-2">
          {{-- <span class="h5 align-middle pt-2"> --}}
             <i class="fab fa-pagelines"></i>
             Projects
@@ -30,7 +30,7 @@
             @include('projects.addins.links.add', ['model'=>'project'])
          </span> --}}
       </div>
-      <div class="card-body section_body pb-0">
+      <div class="card-body section_body p-2">
 
          <div class="pb-1">
             @foreach($project->categoriesOptions() as $categoryOptionKey => $categoryOptionValue)
@@ -50,7 +50,7 @@
 
          @if(count($projects) > 0)
             <div class="px-2">
-               <div class="row mb-1">
+               <div class="row mb-0">
                   @foreach($projects as $project)
                      <div id="card-hover" class="col-xs-12 col-md-3 p-2">
                         <div class="card h-100 w-100">
@@ -89,10 +89,10 @@
 
             </div>
          @else
-            <p>No projects found</p>
+            <p class="p-2">No projects found</p>
          @endif
       </div>
-      <div class="card_footer">
+      <div class="card-footer card_footer px-2 py-1">
          Click a project's image to view it's details
       </div>
    </div>

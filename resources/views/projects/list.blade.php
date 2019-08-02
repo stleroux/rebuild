@@ -12,21 +12,19 @@
 @endsection
 
 @section('content')
-
+   
    <div class="row">
       <div class="col">
          <div class="card mb-2">
             <!--CARD HEADER-->
-            <div class="card-header section_header p-1 m-0">
-               <span class="h5 align-middle pt-2">
-                  <i class="fab fa-pagelines"></i>
-                  Projects
-               </span>
+            <div class="card-header section_header p-2">
+               <i class="fab fa-pagelines"></i>
+               Projects
                <span class="float-right">
-                  @include('projects.addins.links.help', ['size'=>'sm', 'bookmark'=>'projects'])
-                  @include('projects.finishes.addins.links.finishes', ['size'=>'sm'])
-                  @include('projects.materials.addins.links.materials', ['size'=>'sm'])
-                  @include('projects.addins.links.add', ['size'=>'sm'])
+                  @include('projects.addins.links.help', ['size'=>'xs', 'bookmark'=>'projects'])
+                  @include('projects.finishes.addins.links.finishes', ['size'=>'xs'])
+                  @include('projects.materials.addins.links.materials', ['size'=>'xs'])
+                  @include('projects.addins.links.add', ['size'=>'xs'])
                </span>
             </div>
 

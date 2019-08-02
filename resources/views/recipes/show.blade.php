@@ -20,10 +20,8 @@
 <form style="display:inline;">
 
 	<div class="card mb-3">
-		<div class="card-header section_header">
-			<span class="h5 align-middle pt-2">
-				{{ $recipe->title }}
-			</span>
+		<div class="card-header section_header p-2">
+			{{ $recipe->title }}
 			<span class="float-right">
 				@include('recipes.addins.links.back')
 				@include('recipes.addins.links.print')
@@ -41,7 +39,7 @@
 			</span>
 		</div>
 	
-		<div class="card-body section_body">
+		<div class="card-body section_body p-2">
 	
 			<div class="row">
 				@include('recipes.show.ingredients')

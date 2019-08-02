@@ -1,5 +1,5 @@
 <div class="card mb-2">
-   <div class="card-header card_header_2">
+   <div class="card-header card_header p-2">
    	<i class="fa fa-comment"></i>
       RECIPE INFORMATION
    </div>

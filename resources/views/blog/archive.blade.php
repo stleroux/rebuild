@@ -35,7 +35,7 @@
 
 			<span class="float-right">
 				@if (true !== stripos($_SERVER['HTTP_REFERER'], "/search/posts"))
-					<a href="{{ route('blog.index') }}" class="btn btn-sm btn-block btn-primary">
+					<a href="{{ route('blog.index') }}" class="btn btn-sm btn-block btn-primary px-2 py-0">
 						<i class="fas fa-blog"></i> Blog
 					</a>
 				@endif

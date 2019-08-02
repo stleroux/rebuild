@@ -123,7 +123,7 @@
                            <p>{{ substr(strip_tags($post->body), 0, 250) }} {{ strlen(strip_tags($post->body)) > 250 ? " [More]..." : "" }}</p>
                         </div>
                         <div class="col-sm-2">
-                           <a href="{{ route('blog.single', $post->slug) }}" class="btn btn-sm btn-primary float-right">
+                           <a href="{{ route('blog.single', $post->slug) }}" class="btn btn-xs btn-primary float-right">
                            <div class="text text-left">
                               <i class="fa fa-chevron-right"></i> Read More
                            </div>

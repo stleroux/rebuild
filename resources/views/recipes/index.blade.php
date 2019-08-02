@@ -2,7 +2,7 @@
 
 @section('stylesheets')
 	{{ Html::style('css/recipes.css') }}
-@stop
+@endsection
 
 @section('left_column')
 	{{-- @include('blocks.home_menu') --}}
@@ -18,11 +18,9 @@
 
 	<div class="card mb-3">
 
-		<div class="card-header section_header">
-			<span class="h5 align-middle pt-2">
-				<i class="fab fa-apple"></i>
-				Recipes
-			</span>
+		<div class="card-header section_header p-2">
+			<i class="fab fa-apple"></i>
+			Recipes
 			<span class="float-right">
 				@include('recipes.addins.links.printAll')
 				@include('recipes.addins.pages.myFavorites')
@@ -112,7 +110,7 @@
 
 		@else
 			
-			<div class="card-body card_body bg-danger text-dark">
+			<div class="card-body card_body p-2 bg-danger text-dark">
 				<b>{{ setting('no_records_found') }}</b>
 			</div>
 
@@ -120,4 +118,4 @@
 
 	</div>
 
-@stop
+@endsection
