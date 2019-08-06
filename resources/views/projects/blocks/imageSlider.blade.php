@@ -1,11 +1,3 @@
-{{-- <style>
-   .card-img-top {
-    width: 100%;
-    height: 15vw;
-    object-fit: contain;
-}
-</style> --}}
-
 <div class="card mb-2">
    <div class="card-header block_header">
       <i class="far fa-image"></i>

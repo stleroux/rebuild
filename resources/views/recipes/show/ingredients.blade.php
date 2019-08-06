@@ -1,7 +1,7 @@
 <div class="col-sm-8 pr-1">
 	<div class="card mb-2">
-		<div class="card-header card_header">Ingredients</div>
-		<div class="card-body card_body p-1">
+		<div class="card-header card_header p-2">Ingredients</div>
+		<div class="card-body p-1 text-light">
 			@auth
 				{!! $recipe->ingredients !!}
 			@else

@@ -125,7 +125,7 @@
                         <div class="col-sm-2">
                            <a href="{{ route('blog.single', $post->slug) }}" class="btn btn-xs btn-primary float-right">
                            <div class="text text-left">
-                              <i class="fa fa-chevron-right"></i> Read More
+                              <i class="fa fa-chevron-right"></i> More
                            </div>
                            </a>
                         </div>

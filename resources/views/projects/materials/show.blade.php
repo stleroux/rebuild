@@ -15,23 +15,21 @@
    
    <div class="card mb-3">
 
-      <div class="card-header section_header p-1 m-0">
-         <span class="h5 align-middle pt-2">
-            <i class="fa fa-plus-square"></i>
-            Sow Material
-         </span>
+      <div class="card-header section_header p-2">
+         <i class="fa fa-plus-square"></i>
+         Sow Material
          <span class="float-right">
-            @include('projects.materials.addins.links.help', ['size'=>'sm', 'bookmark'=>'materials'])
-            @include('projects.materials.addins.links.back', ['size'=>'sm'])
+            @include('projects.materials.addins.links.help', ['size'=>'xs', 'bookmark'=>'materials'])
+            @include('projects.materials.addins.links.back', ['size'=>'xs'])
          </span>
       </div>
 
-      <div class="card-body section_body pb-0">
+      <div class="card-body section_body p-2">
 
          <table class="table table-sm table-striped table-hover text-dark">
             <tbody>
                <tr>
-                  <th class="col-2">ID</th>
+                  <th class="col-sm-2">ID</th>
                   <td>{{ $material->id }}</td>
                </tr>
                <tr>

@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
    {{ Html::style('/css/woodbarn.css') }}
@@ -9,6 +9,7 @@
 @endsection
 
 @section('right_column')
+   @include('projects.blocks.popularProjects')
 @endsection
 
 @section('content')
@@ -17,26 +18,24 @@
       <div class="col">
          <div class="card mb-2">
             <!--CARD HEADER-->
-            <div class="card-header section_header p-1 m-0">
-               <span class="h5 align-middle pt-2">
-                  <i class="fa fa-hammer"></i>
-                  Materials
-               </span>
+            <div class="card-header section_header p-2">
+               <i class="fa fa-hammer"></i>
+               Materials
                <span class="float-right">
-                  @include('projects.addins.links.help', ['size'=>'sm', 'bookmark'=>'projects'])
-                  @include('projects.addins.links.BEProjects', ['size'=>'sm'])
-                  @if(checkPerm('projects_create', ['size'=>'sm']))
-                     @include('projects.finishes.addins.links.finishes', ['size'=>'sm'])
+                  @include('projects.addins.links.help', ['size'=>'xs', 'bookmark'=>'projects'])
+                  @include('projects.addins.links.BEProjects', ['size'=>'xs'])
+                  @if(checkPerm('projects_create', ['size'=>'xs']))
+                     @include('projects.finishes.addins.links.finishes', ['size'=>'xs'])
                   @endif
                   @if(checkPerm('projects_create'))
-                     @include('projects.materials.addins.links.add', ['size'=>'sm'])
+                     @include('projects.materials.addins.links.add', ['size'=>'xs'])
                   @endif
                </span>
             </div>
 
             <!--CARD BODY-->
             @if($materials->count() > 0)
-               <div class="card-body section_body pb-1">
+               <div class="card-body section_body p-2">
                   {{-- @include('common.alphabet', ['model'=>'woodproject', 'page'=>'index']) --}}
                   <table id="datatable" class="table table-hover table-sm text-dark">
                      <thead>

@@ -9,7 +9,7 @@
 @endsection
 
 @section('right_column')
-	{{-- @include('recipes.blocks.information') --}}
+	@include('recipes.blocks.information')
 	@include('recipes.blocks.popularRecipes')
 	@include('recipes.blocks.archives')
 	@include('recipes.show.leave_comment')
@@ -25,17 +25,17 @@
 			<span class="float-right">
 				@include('recipes.addins.links.back', ['size'=>'xs'])
 				@include('recipes.addins.links.print', ['size'=>'xs'])
-				@include('recipes.addins.links.favorite', ['size'=>'sm'])
-  	         @include('recipes.addins.links.privatize', ['size'=>'sm'])
-				@include('recipes.addins.links.publish', ['size'=>'sm'])
+				@include('recipes.addins.links.favorite', ['size'=>'xs'])
+  	         @include('recipes.addins.links.privatize', ['size'=>'xs'])
+				@include('recipes.addins.links.publish', ['size'=>'xs'])
 				@include('recipes.addins.pages.published', ['size'=>'xs'])
 				@include('recipes.addins.pages.unpublished', ['size'=>'xs'])
 				@include('recipes.addins.pages.new', ['size'=>'xs'])
 				@include('recipes.addins.pages.trashed', ['size'=>'xs'])
 				@include('recipes.addins.pages.mine', ['size'=>'xs'])
 				@include('recipes.addins.pages.myPrivate', ['size'=>'xs'])
-				@include('recipes.addins.links.edit', ['size'=>'sm'])
-				@include('recipes.addins.links.trash', ['size'=>'sm'])
+				@include('recipes.addins.links.edit', ['size'=>'xs'])
+				@include('recipes.addins.links.trash', ['size'=>'xs'])
 			</span>
 		</div>
 	
@@ -72,9 +72,9 @@
 					@include('recipes.show.private_notes')
 				</div>
 
-				<div class="row">
+				{{-- <div class="row">
 					@include('recipes.show.information')
-				</div>
+				</div> --}}
 
 			@endauth
 

@@ -1,8 +1,8 @@
-{{-- @guest --}}
+@guest
    <div class="row p-0 pb-2">
       <div class="col-sm-12">
          <div class="card text-light">
-            <div class="card-header card_header p-1">
+            <div class="card-header card_header p-2">
                <i class="fa fa-arrow-right"></i>
                Want to see more?
                <i class="fa fa-arrow-left"></i>
@@ -13,4 +13,4 @@
          </div>
       </div>
    </div>
-{{-- @endauth --}}
+@endauth

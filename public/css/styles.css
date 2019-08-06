@@ -98,6 +98,107 @@ div.sticky {
 
 
 
+.navbar_background {
+  background-image: url('../images/6.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-attachment: fixed;
+  font-weight: bold;
+}
+
+/* change the highlight on the active menu item */
+.menu_active {
+   background-image: url('../images/5.jpg');
+   background-repeat: no-repeat;
+   background-size: 100% 100%;
+   background-attachment: fixed;
+}
+
+
+/* SECTIONS */
+.section_header {
+  background-image: url("../images/1.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  color: white;
+  font-size: 12pt;
+}
+
+.section_body {
+  background-image: url('../images/14.jpg');
+   /*background-image: url('../images/13.jpg');*/
+  background-size: 100% 100%;
+  background-attachment: fixed;
+  color: black;
+}
+
+/* CARDS */
+.card_header {
+  background-image: url("../images/10.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  color: black;
+  /*font-weight: bold;*/
+}
+
+/*.card_body {}*/
+
+/* Block Headers */
+.block_header { 
+  background-image: url("../images/birch.jpg");
+  /*font-weight: bold;*/
+  color: black;
+   font-size: 12pt;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-attachment: fixed;
+}
+
+/* Block Headers */
+.sub_block_header { 
+  /*background-image: url("../images/birch.jpg");*/
+  /*font-weight: bolder;*/
+  color: black;
+/*  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 8px;*/
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-attachment: fixed;
+}
+
+.card_footer {
+   /*background-image: url("../images/18.jpg");*/
+   background-repeat: no-repeat;
+   background-size: 100% 100%;
+   /*background-attachment: fixed;*/
+  color: lightgrey;
+}
+
+.table-hover tbody tr:hover, .table-hover tbody tr:hover th {
+  background-image: url("../images/13.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  color: black;
+}
+
+.table thead {
+  background-image: url("../images/9.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  color: white;
+}
+
+.card-img{
+   width: 100% !important;
+   height: 200px !important;
+   object-fit: cover;
+}
+
+
+
+
+
 /* Adjust the number of columns to display when using card-columns like in the permissions section of user management */
 /*@media (min-width: 34em) {
     .card-columns-permissions {

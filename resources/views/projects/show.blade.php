@@ -17,14 +17,14 @@
 @section('content')
 
 <div class="card">
-	<div class="section_header">
+	<div class="card-header section_header p-2">
 		{{-- <span class="h5 align-middle pt-2"> --}}
          <i class="fab fa-pagelines"></i>
          {{ ucwords($project->name) }} Project Information
       {{-- </span> --}}
 		<span class="float-right">
-         @include('projects.addins.links.edit', ['size'=>'sm'])
-         @include('projects.addins.links.back', ['size'=>'sm'])
+         @include('projects.addins.links.edit', ['size'=>'xs'])
+         @include('projects.addins.links.back', ['size'=>'xs'])
       </span>
 	</div>
 	<div class="card-body section_body p-2">

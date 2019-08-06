@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
    {{ Html::style('/css/woodbarn.css') }}
@@ -9,29 +9,30 @@
 @endsection
 
 @section('right_column')
+   @include('projects.blocks.popularProjects')
 @endsection
 
 @section('content')
 
-   <div class="card">
-      <div class="card-header bg-danger text-white text-center p-2">
-         <b>
+   <div class="card mb-3">
+      <div class="card-header section_header text-center p-2">
+         <b class="text-danger">
             ARE YOU SURE YOU WANT TO PERMANENTLY DELETE THIS FINISH?<br />
             {{-- Title : {{ $test->title }}? --}}
          </b>
       </div>
-      <div class="card-body card_body text-center">
+      <div class="card-body bg-light p-2 text-center">
          {!! Form::open(['method'=>'POST', 'route'=>['finishes.destroy', $finish->id]]) !!}
             {{ csrf_field() }}
             <input type="hidden" name="_method" value="DELETE" />
 
-            <a href="{{ URL::previous() }}" class="btn btn-outline-secondary">
+            <a href="{{ URL::previous() }}" class="btn btn-secondary">
                <i class="fas fa-angle-double-left"></i>
                 No - Return To Previous Page
             </a>
             
             {{-- @if(checkPerm('post_delete')) --}}
-               <button type="submit" class="btn btn-outline-danger">
+               <button type="submit" class="btn btn-danger">
                   <i class="far fa-trash-alt"></i>
                   Yes - Permanently Delete This Recipe
                </button>

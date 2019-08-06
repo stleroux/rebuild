@@ -1,4 +1,4 @@
-<div class="text-center">
+<div class="text-center pb-2">
    <div class="btn-group" role="group">
       {{-- @if(Request::route('cat') == 'all')
          <a href="{{ route(Session::get('fromPage')) }}"

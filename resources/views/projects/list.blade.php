@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
    {{ Html::style('/css/woodbarn.css') }}
@@ -9,13 +9,14 @@
 @endsection
 
 @section('right_column')
+   @include('projects.blocks.popularProjects')
 @endsection
 
 @section('content')
    
    <div class="row">
       <div class="col">
-         <div class="card mb-2">
+         <div class="card mb-3">
             <!--CARD HEADER-->
             <div class="card-header section_header p-2">
                <i class="fab fa-pagelines"></i>
@@ -30,11 +31,11 @@
 
             <!--CARD BODY-->
             @if($projects->count() > 0)
-               <div class="card-body section_body pb-1">
+               <div class="card-body section_body p-2">
                   <table id="datatable" class="table table-hover table-sm text-dark">
                      <thead>
                         <tr>
-                           <th>ID</th>
+                           {{-- <th>ID</th> --}}
                            <th>Name</th>
                            <th>Category</th>
                            <th>Views</th>
@@ -48,7 +49,7 @@
                      <tbody>
                         @foreach ($projects as $project)
                            <tr>
-                              <td>{{ $project->id }}</td>
+                              {{-- <td>{{ $project->id }}</td> --}}
                               <td>{{ $project->name }}</td>
                               <td>{{ $project->category }}</td>
                               <td>{{ $project->views }}</td>

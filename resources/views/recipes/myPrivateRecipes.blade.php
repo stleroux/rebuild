@@ -18,11 +18,9 @@
       {!! csrf_field() !!}
       
       <div class="card">
-         <div class="card-header card_header">
-            <span class="h5 align-middle pt-2">
-               <i class="{{ Config::get('buttons.private') }}"></i>
-               My Private Recipes
-            </span>
+         <div class="card-header card_header p-2">
+            <i class="{{ Config::get('buttons.private') }}"></i>
+            My Private Recipes
             <span class="float-right">
                {{-- @include('recipes.addins.links.help', ['bookmark'=>'recipes']) --}}
                @include('recipes.addins.links.recipes', ['size'=>'xs'])
@@ -74,7 +72,7 @@
                </table>
             </div>
          @else
-            <div class="card-body card_body">
+            <div class="card-body card_body p-2">
                {{ setting('no_records_found') }}
               </div>
          @endif

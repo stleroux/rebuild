@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
    {{ Html::style('/css/woodbarn.css') }}
@@ -9,30 +9,29 @@
 @endsection
 
 @section('right_column')
+   @include('projects.blocks.popularProjects')
 @endsection
 
 @section('content')
    
    <div class="card mb-3">
 
-      <div class="card-header section_header p-1 m-0">
-         <span class="h5 align-middle pt-2">
-            <i class="fa fa-plus-square"></i>
-            Show Finish
-         </span>
+      <div class="card-header section_header p-2">
+         <i class="fa fa-plus-square"></i>
+         Show Finish
          <span class="float-right">
-            @include('projects.finishes..addins.links.help', ['model'=>'project', 'bookmark'=>'projects'])
-            @include('projects.finishes.addins.links.back')
+            @include('projects.finishes..addins.links.help', ['size'=>'xs', 'bookmark'=>'projects'])
+            @include('projects.finishes.addins.links.back', ['size'=>'xs'])
          </span>
       </div>
 
-      <div class="card-body pb-0">
+      <div class="card-body section_body p-2">
 
-         <table class="table table-sm table-striped table-hover">
-            <tbody>
+         <table class="table table-sm table-striped table-hover text-dark">
+            {{-- <tbody> --}}
                <tr>
-                  <th class="col-2">ID</th>
-                  <td>{{ $finish->id }}</td>
+                  <th class="w-25">ID</th>
+                  <td class="w-75">{{ $finish->id }}</td>
                </tr>
                <tr>
                   <th>Name</th>
@@ -70,7 +69,7 @@
                   <th>Updated On</th>
                   <td>{{ $finish->updated_at ? $finish->updated_at->format('M d, Y') : 'no data found' }}</td>
                </tr>
-            </tbody>
+            {{-- </tbody> --}}
          </table>
 
          <p></p>

@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
    {{ Html::style('/css/woodbarn.css') }}
@@ -9,34 +9,33 @@
 @endsection
 
 @section('right_column')
+   @include('projects.blocks.popularProjects')
 @endsection
 
 @section('content')
 
    <div class="row">
       <div class="col">
-         <div class="card mb-2">
+         <div class="card mb-3">
             <!--CARD HEADER-->
-            <div class="card-header section_header p-1 m-0">
-               <span class="h5 align-middle pt-2">
-                  <i class="fas fa-brush"></i>
-                  Finishes
-               </span>
+            <div class="card-header section_header p-2">
+               <i class="fas fa-brush"></i>
+               Finishes
                <span class="float-right">
-                  @include('projects.addins.links.help', ['size'=>'sm', 'bookmark'=>'projects'])
-                  @include('projects.addins.links.BEProjects', ['size'=>'sm'])
+                  @include('projects.addins.links.help', ['size'=>'xs', 'bookmark'=>'projects'])
+                  @include('projects.addins.links.BEProjects', ['size'=>'xs'])
                   @if(checkPerm('projects_index'))
-                     @include('projects.materials.addins.links.materials', ['size'=>'sm'])
+                     @include('projects.materials.addins.links.materials', ['size'=>'xs'])
                   @endif
                   @if(checkPerm('projects_create'))
-                     @include('projects.finishes.addins.links.add', ['size'=>'sm'])
+                     @include('projects.finishes.addins.links.add', ['size'=>'xs'])
                   @endif
                </span>
             </div>
 
             <!--CARD BODY-->
             @if($finishes->count() > 0)
-               <div class="card-body section_body pb-1">
+               <div class="card-body section_body p-2">
                   {{-- @include('common.alphabet', ['model'=>'test', 'page'=>'index']) --}}
                   <table id="datatable" class="table table-hover table-sm text-dark">
                      <thead>
@@ -47,7 +46,7 @@
                            <th>Color Name</th>
                            <th>Sheen</th>
                            <th>Created On</th>
-                           <th>Updated On</th>
+                           {{-- <th>Updated On</th> --}}
                            <th class="no-sort"></th>
                         </tr>
                      </thead>
@@ -61,7 +60,7 @@
                               <td>{{ $finish->sheen }}</td>
                               {{-- Add more columns here --}}
                               <td data-order="{{ $finish->created_at}}">{{ $finish->created_at ? $finish->created_at->format('M d, Y') : 'no data found' }}</td>
-                              <td data-order="{{ $finish->updated_at}}">{{ $finish->updated_at ? $finish->updated_at->format('M d, Y') : 'no data found' }}</td>
+                              {{-- <td data-order="{{ $finish->updated_at}}">{{ $finish->updated_at ? $finish->updated_at->format('M d, Y') : 'no data found' }}</td> --}}
                               <td class="text-right">
                                  @include('projects.finishes.addins.links.show', ['size'=>'xs'])
                                  @if(checkPerm('projects_edit'))
@@ -77,7 +76,7 @@
                   </table>
                </div>
             @else
-               <div class="card-body card_body">
+               <div class="card-body card_body p-2">
                   {{ setting('no_records_found') }}
                </div>
             @endif

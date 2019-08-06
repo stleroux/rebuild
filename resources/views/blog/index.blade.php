@@ -17,7 +17,7 @@
 @section('content')
    
    @if(count($posts) > 0)
-      <div class="card mb-2">
+      <div class="card mb-3">
          <div class="card-header section_header p-2">
             <i class="fas fa-blog"></i>
             Blog

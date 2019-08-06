@@ -5,9 +5,12 @@
 @endsection
 
 @section('left_column')
+   @include('recipes.sidebar')
 @endsection
 
 @section('right_column')
+   @include('recipes.blocks.popularRecipes')
+   @include('recipes.blocks.archives')
 @endsection
 
 @section('content')
@@ -15,11 +18,9 @@
    {{-- <form style="display:inline;"> --}}
       {{-- {!! csrf_field() !!} --}}
       <div class="card mb-3">
-         <div class="card-header card_header">
-            <span class="h5 align-middle pt-2">
-               <i class="fas fa-heart"></i>
-               My Favorite Recipes
-            </span>
+         <div class="card-header section_header p-2">
+            <i class="fas fa-heart"></i>
+            My Favorite Recipes
             <span class="float-right">
                {{-- @include('recipes.addins.links.help', ['bookmark'=>'']) --}}
                @include('recipes.addins.links.back', ['size'=>'xs'])
@@ -29,7 +30,7 @@
          </div>
 
       @if($recipes->count() > 0)
-         <div class="card-body card_body p-2 bg-transparent">
+         <div class="card-body section_body p-2">
             {{-- @include('recipes::alphabet', ['model'=>'recipe']) --}}
 
             @foreach($recipes->chunk(6) as $chunk)

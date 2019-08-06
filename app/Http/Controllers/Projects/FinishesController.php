@@ -173,8 +173,6 @@ class FinishesController extends Controller
             if(!checkPerm('projects_show')) { abort(401, 'Unauthorized Access'); }
         }
 
-        dd($project);
-
         return view('projects.finishes.show', compact('finish'));
     }
 
