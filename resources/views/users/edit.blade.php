@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
    {{ Html::style('/css/woodbarn.css') }}
@@ -10,6 +10,9 @@
 @endsection
 
 @section('right_column')
+   @include('users.blocks.mostPermissions')
+   @include('users.blocks.mostLogins')
+   @include('users.blocks.mostAssignedPermissions')
 @endsection
 
 @section('content')
@@ -17,22 +20,20 @@
    {!! Form::model($user, ['method' => 'PATCH', 'route' => ['users.update', $user->id]]) !!}
       {{ Form::token() }}
       
-      <div class="card">
+      <div class="card mb-3">
          <!--CARD HEADER-->
-         <div class="card-header section_header p-1 m-0">
-            <span class="h5 align-middle pt-2">
-               <i class="fas fa-user"></i>
-               Edit User :: {{ $user->username }}
-            </span>
+         <div class="card-header section_header p-2">
+            <i class="fas fa-user"></i>
+            Edit User :: {{ $user->username }}
             <span class="float-sm-right">
-               @include('users.addins.back')
+               @include('users.addins.back', ['size'=>'xs'])
 
                @if(checkPerm('user_edit'))
-                  <button type="submit" class="btn btn-sm btn-info" name="submit" value="continue" title="Update & Continue">
+                  <button type="submit" class="btn btn-xs btn-info" name="submit" value="continue" title="Update & Continue">
                      <i class="far fa-hdd"></i>
                      {{-- Update & Continue --}}
                   </button>
-                  <button type="submit" class="btn btn-sm btn-success" name="submit" value="close" title="Update & Close">
+                  <button type="submit" class="btn btn-xs btn-success" name="submit" value="close" title="Update & Close">
                      <i class="far fa-save"></i>
                      {{-- Update & Close --}}
                   </button>
@@ -41,7 +42,7 @@
          </div>
 
          <!--CARD BODY-->
-         <div class="card-body card_body p-0">
+         <div class="card-body section_body p-2">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                <li class="nav-item">
                   <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">

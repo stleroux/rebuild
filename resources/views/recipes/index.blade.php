@@ -5,7 +5,6 @@
 @endsection
 
 @section('left_column')
-	{{-- @include('blocks.home_menu') --}}
 	@include('recipes.sidebar')
 @endsection
 
@@ -38,7 +37,7 @@
 		@if($recipes->count() > 0)
 			<div class="card-body section_body p-1">
 				<div class="my-1">
-					@include('recipes.alphabet')
+					@include('recipes.alphabet_2')
 				</div>
 				
 				<div class="row justify-content-center">
@@ -59,7 +58,7 @@
 
 							<div class="card-body pt-1 pb-0">
 								{{-- <a href="{{ route('recipes.show', $recipe->id) }}" class="" style="text-decoration: none"> --}}
-									<h6 class="card-title text-center pb-2 m-0">
+									<h6 class="card-title text-center pb-2 m-0 text-light">
 										{{ ucwords($recipe->title) }}
 									</h6>
 								{{-- </a> --}}

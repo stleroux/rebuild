@@ -15,6 +15,7 @@ body {
    padding-bottom: 5rem;
    min-height: 100%;
    font-size: 14px;
+   color: white;
 }
 
 .footer {
@@ -125,11 +126,11 @@ div.sticky {
 }
 
 .section_body {
-  background-image: url('../images/14.jpg');
-   /*background-image: url('../images/13.jpg');*/
+  /*background-image: url('../images/14.jpg');*/
+   background-image: url('../images/16.jpg');
   background-size: 100% 100%;
   background-attachment: fixed;
-  color: black;
+  color: white;
 }
 
 /* CARDS */
@@ -137,7 +138,7 @@ div.sticky {
   background-image: url("../images/10.jpg");
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  color: black;
+  color: yellow;
   /*font-weight: bold;*/
 }
 
@@ -175,10 +176,19 @@ div.sticky {
   color: lightgrey;
 }
 
+.table {
+  color: white;
+}
+
 .table-hover tbody tr:hover, .table-hover tbody tr:hover th {
-  background-image: url("../images/13.jpg");
+  /*background-image: url("../images/13.jpg");*/
+  background-image: url("../images/14.jpg");
   background-repeat: no-repeat;
   background-size: 100% 100%;
+  color: black;
+}
+
+.table-hover tbody tr:hover a, .table-hover tbody tr:hover td a:hover {
   color: black;
 }
 

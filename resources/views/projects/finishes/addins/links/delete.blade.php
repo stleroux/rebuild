@@ -1,6 +1,6 @@
 @if(checkPerm('projects_delete'))
    <a href="{{ route('finishes.delete', $finish->id) }}"
-      class="btn btn-{{ $size }} btn-danger"
+      class="btn btn-{{ $size }} btn-danger text-light"
       title="Delete Finish">
       <i class="{{ Config::get('buttons.delete') }}"></i>
    </a>

@@ -21,7 +21,7 @@
                <!-- MAIN CARD HEADER -->
                <div class="card-header section_header p-2">
                   <i class="fa fa-edit"></i>
-                  Edit Project
+                  Edit {{ $project->name }} Project
                   <span class="float-right">
                      {!! Form::model($project, ['route'=>['projects.update', $project->id], 'method' => 'POST', 'files' => true]) !!}
                      @csrf
@@ -36,25 +36,25 @@
                   
                      <div class="form-row">
 
-                        <div class="col-md-7">
-                           @include('projects.partials.general')
+                        <div class="col-md-6">
+                           @include('projects.partials.edit.general')
                         </div>
-                        <div class="col-md-5">
-                           @include('projects.partials.others')
+                        <div class="col-md-6">
+                           @include('projects.partials.edit.others')
                         </div>
                      </div>
                   {!! Form::Close() !!}
                   
                   <div class="form-row">
                      <div class="col-md-4">
-                        @include('projects.partials.materials')
+                        @include('projects.partials.edit.materials')
                      </div>
                      <div class="col-md-4">
-                        @include('projects.partials.finishes')
+                        @include('projects.partials.edit.finishes')
                      </div>
                      <div class="col-md-4">
                         {{-- <span class="text-danger">{{ $errors->first('image') }}</span> --}}
-                        @include('projects.partials.images')
+                        @include('projects.partials.edit.images')
                      </div>
                   </div>
 

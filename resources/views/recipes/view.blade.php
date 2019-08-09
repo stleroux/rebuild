@@ -1,44 +1,44 @@
-@extends ('layouts.recipes')
+@extends ('layouts.master')
 
 @section ('stylesheets')
    {{ Html::style('css/recipes.css') }}
 @stop
 
 @section('left_column')
-   {{-- @include('blocks.main_menu') --}}
+   @include('blocks.main_menu')
 @endsection
 
 @section('right_column')
-   {{-- @include('recipes.blocks.popularRecipes') --}}
-   {{-- @include('recipes.blocks.archives') --}}
-   @include('recipes.show.leave_comment')
+   @include('recipes.blocks.popularRecipes')
+   @include('recipes.blocks.archives')
+   {{-- @include('recipes.show.leave_comment') --}}
 @endsection
 
 @section ('content')
 
 <form style="display:inline;">
 
-   <div class="card mb-3 bg-transparent">
-      <div class="card-header card_header">
+   <div class="card mb-3">
+      <div class="card-header section_header p-2">
          {{ $recipe->title }}
          <span class="float-right">
-            @include('recipes.addins.links.back')
-            @include('recipes.addins.links.print')
-            @include('recipes.addins.links.privatize', ['size'=>'sm'])
-            @include('recipes.addins.links.edit', ['size'=>'sm'])
-            @include('recipes.addins.links.favorite', ['size'=>'sm'])
-            @include('recipes.addins.links.publish', ['size'=>'sm'])
-            @include('recipes.addins.links.trash', ['size'=>'sm'])
-            @include('recipes.addins.pages.published')
-            @include('recipes.addins.pages.unpublished')
-            @include('recipes.addins.pages.new')
-            @include('recipes.addins.pages.trashed')
-            @include('recipes.addins.pages.mine')
-            @include('recipes.addins.pages.myPrivate')
+            @include('recipes.addins.links.back', ['size'=>'xs'])
+            @include('recipes.addins.links.print', ['size'=>'xs'])
+            @include('recipes.addins.links.privatize', ['size'=>'xs'])
+            @include('recipes.addins.links.edit', ['size'=>'xs'])
+            @include('recipes.addins.links.favorite', ['size'=>'xs'])
+            @include('recipes.addins.links.publish', ['size'=>'xs'])
+            @include('recipes.addins.links.trash', ['size'=>'xs'])
+            @include('recipes.addins.pages.published', ['size'=>'xs'])
+            @include('recipes.addins.pages.unpublished', ['size'=>'xs'])
+            @include('recipes.addins.pages.new', ['size'=>'xs'])
+            @include('recipes.addins.pages.trashed', ['size'=>'xs'])
+            @include('recipes.addins.pages.mine', ['size'=>'xs'])
+            @include('recipes.addins.pages.myPrivate', ['size'=>'xs'])
          </span>
       </div>
    
-      <div class="card-body card_body">
+      <div class="card-body section_body p-2">
    
          <div class="row">
             @include('recipes.show.ingredients')

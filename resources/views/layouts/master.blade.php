@@ -26,6 +26,11 @@
 <body>
 	
 	@include('layouts.navbar.navbar')
+
+<span class="bg-dark text-light">
+   fromPage : {{ Session::get('fromPage') }}
+</span>
+
 	@include('layouts.master.messages')
 
 	<main class="container-fluid">

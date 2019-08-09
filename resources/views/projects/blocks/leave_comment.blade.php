@@ -3,11 +3,11 @@
 {!! Form::model($project, ['route'=>['projects.comment.store', $project->id], 'method'=>'POST']) !!}
 
 <div class="card mb-2">
-   <div class="card-header block_header">
+   <div class="card-header block_header p-2">
       <i class="fa fa-comment"></i>
       Leave a comment
    </div>
-   <div class="card-body p-0 d-flex text text-center">
+   <div class="card-body p-2 d-flex text text-center">
       {{-- <form> --}}
          <div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }} pb-0 mb-0">
             {{ Form::textarea('comment', null, ['class' => 'form-control', 'rows' => '5', 'pb-0']) }}

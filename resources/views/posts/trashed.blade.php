@@ -1,11 +1,11 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
    {{-- {{ Html::style('css/woodbarn.css') }} --}}
 @stop
 
 @section('left_column')
-   @include('blocks.adminNav')
+   {{-- @include('blocks.adminNav') --}}
    @include('posts.sidebar')
 @endsection
 

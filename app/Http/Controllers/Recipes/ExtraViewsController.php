@@ -44,7 +44,7 @@ class ExtraViewsController extends RecipesController
    {
       // Only allow authenticated users access to these functions
       $this->middleware('auth');
-      $this->enablePermissions = true;
+      $this->enablePermissions = false;
    }
 
 
@@ -59,6 +59,15 @@ class ExtraViewsController extends RecipesController
 ##################################################################################################################
    public function archives($year, $month)
    {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_future')) { abort(401, 'Unauthorized Access'); }
+      }
+
+      // Set the session to the current page route
+      Session::put('fromLocation', 'recipes.archives'); // Required for Alphabet listing
+      Session::put('fromPage', url()->full());
+
       // Get all categories related to Recipe Category (id=>1)
       $categories = Category::where('parent_id',1)->get();
 
@@ -84,13 +93,17 @@ class ExtraViewsController extends RecipesController
 ##################################################################################################################
    public function future(Request $request, $key=null)
    {
-      // Set the session to the current page route
-      Session::put('fromPage', Route::currentRouteName());
-
       // Check if user has required permission
       if($this->enablePermissions) {
          if(!checkPerm('recipe_future')) { abort(401, 'Unauthorized Access'); }
       }
+
+      // Set the session to the current page route
+      Session::put('fromLocation', 'recipes.future'); // Required for Alphabet listing
+      Session::put('fromPage', url()->full());
+
+      // Get all categories related to Recipe Category (id=>1)
+      $categories = Category::where('parent_id',1)->get();
 
       $alphas = DB::table('recipes')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
@@ -117,7 +130,7 @@ class ExtraViewsController extends RecipesController
             ->get();
       }
 
-      return view('recipes.future', compact('recipes','letters'));
+      return view('recipes.future', compact('recipes','letters','categories'));
    }
 
 
@@ -133,9 +146,9 @@ class ExtraViewsController extends RecipesController
    public function myFavorites(Request $request, $key=null)
    {
       // Check if user has required permission
-      // if($this->enablePermissions) {
-      //    if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
-      // }
+      if($this->enablePermissions) {
+         if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      }
 
       // Fake get categories needed for back button to work properly
       $categories = [];
@@ -160,13 +173,14 @@ class ExtraViewsController extends RecipesController
 ##################################################################################################################
    public function myPrivateRecipes($key=null)
    {
-      // Set the session to the current page route
-      Session::put('fromPage', Route::currentRouteName());
-
       // Check if user has required permission
-      // if($this->enablePermissions) {
-      //    if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
-      // }
+      if($this->enablePermissions) {
+         if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      }
+
+      // Set the session to the current page route
+      Session::put('fromLocation', 'recipes.myPrivateRecipes'); // Required for Alphabet listing
+      Session::put('fromPage', url()->full());
 
       if (Auth::check()) {
          // Get list of recips by year and month
@@ -228,12 +242,16 @@ class ExtraViewsController extends RecipesController
    public function myRecipes($key=null)
    {
       // Set the session to the current page route
-      Session::put('fromPage', Route::currentRouteName());
+      // Session::put('fromPage', Route::currentRouteName());
 
       // Check if user has required permission
-      // if($this->enablePermissions) {
-      //    if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
-      // }
+      if($this->enablePermissions) {
+         if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      }
+
+      // Set the session to the current page route
+      Session::put('fromLocation', 'recipes.myRecipes'); // Required for Alphabet listing
+      Session::put('fromPage', url()->full());
 
       if (Auth::check()) {
          $alphas = DB::table('recipes')
@@ -280,13 +298,17 @@ class ExtraViewsController extends RecipesController
 ##################################################################################################################
    public function newRecipes(Request $request, $key=null)
    {
-      // Set the session to the current page route
-      Session::put('fromPage', Route::currentRouteName());
-
       // Check if user has required permission
       if($this->enablePermissions) {
          if(!checkPerm('recipe_new')) { abort(401, 'Unauthorized Access'); }
       }
+
+      // Set the session to the current page route
+      Session::put('fromLocation', 'recipes.newRecipes'); // Required for Alphabet listing
+      Session::put('fromPage', url()->full());
+
+      // Get all categories related to Recipe Category (id=>1)
+      $categories = Category::where('parent_id',1)->get();
 
       $alphas = DB::table('recipes')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
@@ -311,7 +333,7 @@ class ExtraViewsController extends RecipesController
             ->paginate(18);
       }
 
-      return view('recipes.newRecipes', compact('recipes','letters'));
+      return view('recipes.newRecipes', compact('recipes','letters','categories'));
    }
 
 
@@ -325,12 +347,17 @@ class ExtraViewsController extends RecipesController
 ##################################################################################################################
    public function published(Request $request, $key=null)
    {
-      Session::put('fromPage', 'recipes.published');
-
       // Check if user has required permission
       if($this->enablePermissions) {
          if(!checkPerm('recipe_published')) { abort(401, 'Unauthorized Access'); }
       }
+
+      // Set the session to the current page route
+      Session::put('fromLocation', 'recipes.published'); // Required for Alphabet listing
+      Session::put('fromPage', url()->full());
+
+      // Get all categories related to Recipe Category (id=>1)
+      $categories = Category::where('parent_id',1)->get();
 
      $alphas = DB::table('recipes')
       ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
@@ -361,7 +388,7 @@ class ExtraViewsController extends RecipesController
             ->get();
       }
 
-      return view('recipes.published', compact('recipes','letters'));
+      return view('recipes.published', compact('recipes','letters','categories'));
    }
 
 
@@ -380,6 +407,13 @@ class ExtraViewsController extends RecipesController
       if($this->enablePermissions) {
          if(!checkPerm('recipe_trashed')) { abort(401, 'Unauthorized Access'); }
       }
+
+      // Set the session to the current page route
+      Session::put('fromLocation', 'recipes.trashed'); // Required for Alphabet listing
+      Session::put('fromPage', url()->full());
+
+      // Get all categories related to Recipe Category (id=>1)
+      $categories = Category::where('parent_id',1)->get();
 
       $alphas = DB::table('recipes')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
@@ -406,7 +440,7 @@ class ExtraViewsController extends RecipesController
             ->get();
       }
       
-      return view('recipes.trashed', compact('recipes','letters'));
+      return view('recipes.trashed', compact('recipes','letters','categories'));
    }
 
 
@@ -443,13 +477,17 @@ class ExtraViewsController extends RecipesController
 ##################################################################################################################
    public function unpublished(Request $request, $key=null)
    {
-      // Set the session to the current page route
-      Session::put('fromPage', Route::currentRouteName());
-
       // Check if user has required permission
       if($this->enablePermissions) {
          if(!checkPerm('recipe_published')) { abort(401, 'Unauthorized Access'); }
       }
+
+      // Set the session to the current page route
+      Session::put('fromLocation', 'recipes.unpublished'); // Required for Alphabet listing
+      Session::put('fromPage', url()->full());
+
+      // Get all categories related to Recipe Category (id=>1)
+      $categories = Category::where('parent_id',1)->get();
 
      $alphas = DB::table('recipes')
       ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
@@ -476,7 +514,7 @@ class ExtraViewsController extends RecipesController
             ->get();
       }
 
-      return view('recipes.unpublished', compact('recipes','letters'));
+      return view('recipes.unpublished', compact('recipes','letters','categories'));
    }
 
 

@@ -19,7 +19,7 @@
 @endif --}}
 
    <a onclick="window.history.back();"
-      class="btn btn-sm btn-outline-secondary d-print-none"
+      class="btn btn-{{ $size }} btn-outline-secondary d-print-none text-light"
       title="Back to previous page">
       <i class="fas fa-angle-double-left"></i>
    </a>

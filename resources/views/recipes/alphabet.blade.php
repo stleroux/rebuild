@@ -1,27 +1,31 @@
-<div class="text-center">
+<div class="text-center pb-2">
    <div class="btn-group" role="group">
-      @if(Request::route('cat') == 'all')
-         <a href="{{ route('recipes.index', 'all') }}"
-            class="{{ Request::is('recipes/all') ? "btn-secondary": "btn-primary" }} btn btn-sm">
+      {{-- @if(Request::route('cat') == 'all')
+         <a href="{{ route(Session::get('fromPage')) }}"
+            class="{{ Request::is(Session::get('fromPage')) ? "btn-secondary": "btn-primary" }} btn btn-sm">
             All
          </a>
          @foreach($letters as $value)
-            <a href="{{ route('recipes.index', ['all', $value]) }}"
-               class="{{ Request::is('recipes/all/' . $value) ? "btn-secondary": "btn-primary" }} btn btn-sm">
+            <a href="{{ route(Session::get('fromPage')) }}"
+               class="{{ Request::is(Session::get('fromPage') . $value) ? "btn-secondary": "btn-primary" }} btn btn-sm">
                {{ strtoupper($value) }}
             </a>
          @endforeach
-      @else
-         <a href="{{ route('recipes.index', Request::route('cat')) }}"
-            class="{{ Request::is('recipes/' . Request::route('cat'), Request::route('key')) ? "btn-secondary": "btn-primary" }} btn btn-sm">
+      @else --}}
+         <a href="{{ route(Session::get('fromLocation')) }}"
+            class="{{ Request::is(str_replace('.', '/', Session::get('fromLocation'))) ? "btn-secondary": "btn-primary" }} btn btn-sm"
+         >
             All
          </a>
          @foreach($letters as $value)
-            <a href="{{ route('recipes.index', [Request::route('cat'), $value]) }}"
-               class="{{ Request::is('recipes/' . Request::route('cat') . '/' . $value) ? "btn-secondary": "btn-primary" }} btn btn-sm">
+            <a href="{{ route(Session::get('fromLocation'), $value) }}"
+               class="{{ Request::is(str_replace('.', '/', Session::get('fromLocation')) . '/' . $value) ? "btn-secondary": "btn-primary" }} btn btn-sm"
+            >
                {{ strtoupper($value) }}
             </a>
          @endforeach
-      @endif
+      {{-- @endif --}}
    </div>
 </div>
+
+{{-- {{str_replace('_', ' ', $str)}} --}}

@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
    {{ Html::style('/css/woodbarn.css') }}
@@ -10,26 +10,27 @@
 @endsection
 
 @section('right_column')
+   @include('users.blocks.mostPermissions')
+   @include('users.blocks.mostLogins')
+   @include('users.blocks.mostAssignedPermissions')
 @endsection
 
 @section('content')
 
    {!! Form::model($user) !!}
 
-      <div class="card">
+      <div class="card mb-3">
          <!--CARD HEADER-->
-         <div class="card-header section_header p-1 m-0">
-            <span class="h5 align-middle pt-2">
-               <i class="fas fa-user"></i>
-               View User
-            </span>
+         <div class="card-header section_header p-2">
+            <i class="fas fa-user"></i>
+            View User
             <span class="float-sm-right">
-               @include('users.addins.back')
+               @include('users.addins.back', ['size'=>'xs'])
             </span>
          </div>
          
          <!--CARD BODY-->
-         <div class="card-body card_body p-0">
+         <div class="card-body section_body p-2">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                <li class="nav-item">
                   <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
@@ -78,7 +79,7 @@
          </div>
 
          <!-- CARD FOOTER -->
-         <div class="card-footer pt-1 pb-1 pl-2">
+         <div class="card-footer p-1">
             Fields marked with an <span class="required"></span> are required
          </div>
       </div>

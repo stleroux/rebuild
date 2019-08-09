@@ -22,17 +22,22 @@
             <i class="fas fa-heart"></i>
             My Favorite Recipes
             <span class="float-right">
-               {{-- @include('recipes.addins.links.help', ['bookmark'=>'']) --}}
-               @include('recipes.addins.links.back', ['size'=>'xs'])
+               @include('recipes.addins.links.help', ['size'=>'xs', 'bookmark'=>'recipes'])
+               @include('recipes.addins.buttons.unpublishAll', ['size'=>'xs'])
+               @include('recipes.addins.buttons.trashAll', ['size'=>'xs'])
+               @include('recipes.addins.pages.published', ['size'=>'xs'])
+               @include('recipes.addins.pages.unpublished', ['size'=>'xs'])
+               @include('recipes.addins.pages.new', ['size'=>'xs'])
+               @include('recipes.addins.pages.future', ['size'=>'xs'])
+               @include('recipes.addins.pages.trashed', ['size'=>'xs'])
                @include('recipes.addins.pages.mine', ['size'=>'xs'])
                @include('recipes.addins.pages.myPrivate', ['size'=>'xs'])
+               @include('recipes.addins.links.add', ['size'=>'xs'])
             </span>
          </div>
 
       @if($recipes->count() > 0)
          <div class="card-body section_body p-2">
-            {{-- @include('recipes::alphabet', ['model'=>'recipe']) --}}
-
             @foreach($recipes->chunk(6) as $chunk)
                <div class="card-deck mb-0 px-2 bg-transparent">
                   @foreach($chunk as $recipe)

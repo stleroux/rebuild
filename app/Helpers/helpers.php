@@ -35,7 +35,8 @@ function checkPerm($pname, $model = null)
 }
 
 
-function getUser(){
+function getUser()
+{
 	return Auth::user();
 }
 

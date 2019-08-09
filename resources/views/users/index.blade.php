@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
    {{ Html::style('/css/woodbarn.css') }}
@@ -9,6 +9,9 @@
 @endsection
 
 @section('right_column')
+	@include('users.blocks.mostPermissions')
+	@include('users.blocks.mostLogins')
+	@include('users.blocks.mostAssignedPermissions')
 @endsection
 
 @section('content')
@@ -17,21 +20,19 @@
 		<div class="col">
 			<div class="card">
 				<!--CARD HEADER-->
-				<div class="card-header section_header p-1 m-0">
-					<span class="h5 align-middle pt-2">
-						<i class="fas fa-users"></i>
-						Users
-					</span>
+				<div class="card-header section_header p-2">
+					<i class="fas fa-users"></i>
+					Users
 					<span class="float-sm-right">
 						@if(checkPerm('user_create'))
-							@include('users.addins.add')
+							@include('users.addins.add', ['size'=>'xs'])
 						@endif
 					</span>
 				</div>
 				
 				<!--CARD BODY-->
-				<div class="card-body section_body">
-					<table id="datatable" class="table table-hover table-sm text-dark">
+				<div class="card-body section_body p-2">
+					<table id="datatable" class="table table-hover table-sm">
 						<thead>
 							<tr>
 								<th>No</th>
@@ -52,23 +53,23 @@
 									<td>{{ $user->created_at->format('M d, Y') }}</td>
 									<td class="text-right">
 										@if(checkPerm('user_show'))
-											@include('users.addins.show')
+											@include('users.addins.show', ['size'=>'xs'])
 										@endif
 
 										@if(checkPerm('change_user_pwd'))
 											<a href="{{ route('users.changeUserPWD', $user->id) }}"
-												class="btn btn-sm btn-secondary"
+												class="btn btn-xs btn-secondary text-light"
 												title="Reset User's Password">
 												<i class="fas fa-unlock-alt"></i>
 											</a>
 										@endif
 										
 										@if(checkPerm('user_edit'))
-											@include('users.addins.edit')
+											@include('users.addins.edit', ['size'=>'xs'])
 										@endif
 
 										@if(checkPerm('user_delete'))
-											@include('users.addins.delete')
+											@include('users.addins.delete', ['size'=>'xs'])
 										@endif
 									</td>
 								</tr>

@@ -1,5 +1,5 @@
 <a href="{{ route('posts.create') }}"
-   class="btn btn-sm btn-success"
+   class="btn btn-{{ $size }} btn-success text-light"
    title="Add Post">
    <i class="{{ Config::get('buttons.add') }}"></i>
 </a>

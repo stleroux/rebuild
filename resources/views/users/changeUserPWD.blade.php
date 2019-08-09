@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
    {{ Html::style('/css/woodbarn.css') }}
@@ -9,6 +9,9 @@
 @endsection
 
 @section('right_column')
+   @include('users.blocks.mostPermissions')
+   @include('users.blocks.mostLogins')
+   @include('users.blocks.mostAssignedPermissions')
 @endsection
 
 @section('content')
@@ -28,17 +31,15 @@
    {!! Form::open(array('route'=>['users.changeUserPWDPost', $user->id], 'method'=>'POST')) !!}
       {{ Form::token() }}
       {{-- <input type="text" name="id" value="{{ $user->id }}" /> --}}
-      <div class="card">
+      <div class="card mb-2">
          <!--CARD HEADER-->
-         <div class="card-header card_header p-1 m-0">
-            <span class="h5 align-middle pt-2">
-               Change User Password
-            </span>
+         <div class="card-header section_header p-2">
+            Change User Password
             <span class="float-sm-right">
-               @include('common.buttons.back', ['model'=>'user', 'type'=>''])
+               @include('users.addins.back', ['size'=>'xs'])
 
                @if(checkPerm('user_edit'))
-                  <button type="submit" class="btn btn-sm btn-info" title="Change Password">
+                  <button type="submit" class="btn btn-xs btn-info" title="Change Password">
                      <i class="far fa-save"></i>
                      {{-- Change Password --}}
                   </button>

@@ -17,11 +17,9 @@
 @section ('content')
    {!! Form::model($recipe, ['route'=>['recipes.update', $recipe->id], 'method' => 'PUT', 'files' => true]) !!}
       <div class="card mb-3">
-         <div class="card-header card_header">
-            <span class="h5 align-middle pt-2">
-               <i class="fa fa-edit"></i>
-               Edit Recipe
-            </span>
+         <div class="card-header section_header p-2">
+            <i class="fa fa-edit"></i>
+            Edit Recipe
             <span class="float-right">
                @include('recipes.addins.links.help', ['size'=>'xs', 'bookmark'=>'recipes'])
                @include('recipes.addins.links.back', ['size'=>'xs'])
@@ -29,7 +27,7 @@
             </span>
          </div>
 
-         <div class="card-body">
+         <div class="card-body section_body p-2">
             <div class="row">
                <!-- Title -->
                <div class="col-xs-12 col-sm-12 col-md-6">
@@ -44,10 +42,10 @@
                <div class="col-xs-12 col-sm-6 col-md-3">
                   <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}" >
                      {!! Form::label("category_id", "Category", ['class'=>'required']) !!}
-                     <select name="category_id" class="custom-select form-control-sm">
+                     <select name="category_id" id="catSelect" class="form-control form-control-sm">
                         {{-- <option value="{{ $recipe->category->name }}">{{ $recipe->category->name }}</option> --}}
                         @foreach ($categories as $category)
-                           <option disabled>{{ ucfirst($recipe->category->name) }}</option>
+                           <option disabled>{{ ucfirst($category->name) }}</option>
                            @foreach ($category->children as $children)
                               <option value="{{ $children->id }}" {{ ($recipe->category_id == $children->id ) ? 'selected' : '' }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- {{ ucfirst($children->name) }}</option>
                            @endforeach

@@ -1,9 +1,9 @@
 @if(Session::get('fromPage')==='users.index')
-   <a href="{{ route('users.index') }}" class="btn btn-sm btn-primary">
+   <a href="{{ route('users.index') }}" class="btn btn-{{ $size }} btn-primary">
       <i class="{{ Config::get('buttons.back') }}"></i>
    </a>
 @elseif(Session::get('fromPage'))
-   <a href="{{ route(Session::get('fromPage')) }}" class="btn btn-sm btn-primary">
+   <a href="{{ route(Session::get('fromPage')) }}" class="btn btn-{{ $size }} btn-primary">
       <i class="{{ Config::get('buttons.back') }}"></i>
    </a>
 @endif

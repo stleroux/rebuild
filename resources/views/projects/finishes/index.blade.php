@@ -24,9 +24,8 @@
                <span class="float-right">
                   @include('projects.addins.links.help', ['size'=>'xs', 'bookmark'=>'projects'])
                   @include('projects.addins.links.BEProjects', ['size'=>'xs'])
-                  @if(checkPerm('projects_index'))
-                     @include('projects.materials.addins.links.materials', ['size'=>'xs'])
-                  @endif
+                  @include('projects.finishes.addins.links.finishes', ['size'=>'xs'])
+                  @include('projects.materials.addins.links.materials', ['size'=>'xs'])
                   @if(checkPerm('projects_create'))
                      @include('projects.finishes.addins.links.add', ['size'=>'xs'])
                   @endif
@@ -37,7 +36,7 @@
             @if($finishes->count() > 0)
                <div class="card-body section_body p-2">
                   {{-- @include('common.alphabet', ['model'=>'test', 'page'=>'index']) --}}
-                  <table id="datatable" class="table table-hover table-sm text-dark">
+                  <table id="datatable" class="table table-hover table-sm">
                      <thead>
                         <tr>
                            <th>ID</th>

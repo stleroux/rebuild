@@ -216,7 +216,8 @@ class RecipesController extends Controller
    public function index(Request $request)
    {
       // Set the session to the current page route
-      Session::put('fromPage', Route::currentRouteName());
+      Session::put('fromLocation', 'recipes.index'); // Required for Alphabet listing
+      Session::put('fromPage', url()->full());
       // dd(Route::current()->parameters['cat']);
       
       if(!Route::current()->parameters['cat'] == '') {
@@ -226,6 +227,7 @@ class RecipesController extends Controller
       // Get all categories related to Recipe Category (id=>1)
       $categories = Category::where('parent_id',1)->get();
       $byCatName = Category::where('name', $request->cat)->first();
+      // dd($byCatName);
 
       if($request->cat == 'all'){
          $alphas = DB::table('recipes')

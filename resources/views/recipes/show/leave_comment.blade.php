@@ -2,12 +2,12 @@
 {{-- @if(checkACL('user')) --}}
 	<div class="card mb-3">
 		
-		<div class="card-header block_header">
+		<div class="card-header block_header p-2">
 			<i class="fa fa-comment" aria-hidden="true"></i>
 			Leave a comment
 		</div>
 		
-		<div class="card-body">
+		<div class="card-body p-2">
 			{{ Form::open(['route' => ['recipes.storeComment', $recipe->id], 'method' => 'POST']) }}
 {{-- 			<div class="row">
 				<div class="col-xs-12">
@@ -53,7 +53,7 @@
 			{{ Form::close() }}
 		</div>
 
-		<div class="card-footer px-1 py-0">
+		<div class="card-footer p-1">
 			Be a sport and keep your comments clean, otherwise they will be removed and you risk being banned from the site.
 		</div>
 		

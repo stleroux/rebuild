@@ -1,4 +1,4 @@
-<table class="table">
+{{-- <table class="table table-sm">
    <tr>
       <td colspan="2">Created</td>
       <td colspan="2">Updated</td>
@@ -20,7 +20,7 @@
       <td>@include('common.authorFormat', ['model'=>$recipe, 'field'=>'lastViewedBy'])</td>
       <td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'last_viewed_on'])</td>
    </tr>
-</table>
+</table> --}}
 
 <div class="col-md-2 pr-1">
    <div class="card mb-2">

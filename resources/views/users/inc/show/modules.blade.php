@@ -1,5 +1,5 @@
-<div class="card p-1">
-   <div class="card-body section_body p-1">
+<div class="card mb-2">
+   <div class="card-body section_body p-2">
       <div class="card-columns">
          @foreach ($moduleGroups as $group => $permissions)
             <div class="card mb-2">

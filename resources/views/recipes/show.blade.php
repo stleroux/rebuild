@@ -9,7 +9,7 @@
 @endsection
 
 @section('right_column')
-	@include('recipes.blocks.information')
+	{{-- @include('recipes.blocks.information') --}}
 	@include('recipes.blocks.popularRecipes')
 	@include('recipes.blocks.archives')
 	@include('recipes.show.leave_comment')
@@ -65,6 +65,7 @@
 					@include('recipes.show.views')
 					@include('recipes.show.source')
 					{{-- @include('recipes.show.author') --}}
+					@include('recipes.show.publishDate')
 				</div>
 
 				<div class="row">
@@ -72,9 +73,9 @@
 					@include('recipes.show.private_notes')
 				</div>
 
-				{{-- <div class="row">
+				<div class="row">
 					@include('recipes.show.information')
-				</div> --}}
+				</div>
 
 			@endauth
 

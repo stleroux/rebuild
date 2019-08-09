@@ -1,11 +1,16 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
 	{{ Html::style('css/recipes.css') }}
-@stop
+@endsection
 
 @section('left_column')
-	@include('blocks.main_menu')
+	@include('recipes.sidebar')
+@endsection
+
+@section('right_column')
+	@include('recipes.blocks.popularRecipes')
+	@include('recipes.blocks.archives')
 @endsection
 
 @section('content')
@@ -21,6 +26,7 @@
 					@include('recipes.addins.links.help', ['size'=>'xs', 'bookmark'=>'recipes'])
 					@include('recipes.addins.buttons.unpublishAll', ['size'=>'xs'])
 					@include('recipes.addins.buttons.trashAll', ['size'=>'xs'])
+					@include('recipes.addins.pages.published', ['size'=>'xs'])
 					@include('recipes.addins.pages.unpublished', ['size'=>'xs'])
 					@include('recipes.addins.pages.new', ['size'=>'xs'])
 					@include('recipes.addins.pages.future', ['size'=>'xs'])
@@ -32,9 +38,8 @@
 			</div>
 
 			@if($recipes->count() > 0)
-				<div class="card-body card_body p-2">
-					@include('recipes.alphabet_2', ['model'=>'recipe', 'page'=>'published'])
-					{{-- @include('recipes::frontend.alphabet', ['model'=>'recipe']) --}}
+				<div class="card-body section_body p-2">
+					@include('recipes.alphabet', ['model'=>'recipe', 'page'=>'published'])
 					<table id="datatable" class="table table-sm table-hover">
 						<thead>
 							<tr>
@@ -55,7 +60,7 @@
 								<td>
 									<input type="checkbox" onClick="checkbox_is_checked()" name="checked[]" value="{{$recipe->id}}" class="check-all">
 								</td>
-								<td><a href="{{ route('recipes.view', $recipe->id) }}">{{ ucwords($recipe->title) }}</a></td>
+								<td>{{ ucwords($recipe->title) }}</td>
 								<td>{{ ucwords($recipe->category->name) }}</td>
 								<td>{{ $recipe->views }}</td>
 								<td>{{ \App\Models\Recipes\Recipe::withTrashed()->find($recipe->id)->favoritesCount }}</td>
@@ -63,8 +68,8 @@
 								<td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'created_at'])</td>
 								<td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'published_at'])</td>
 								<td class="text-right">
+									@include('recipes.addins.links.view', ['size'=>'xs'])
 									@include('recipes.addins.links.edit', ['size'=>'xs'])
-									{{-- @include('recipes.addins.links.publish', ['size'=>'xs']) --}}
 									@include('recipes.addins.links.trash', ['size'=>'xs'])
 								</td>
 							</tr>
@@ -73,7 +78,7 @@
 					</table>
 				</div>
 			@else
-				<div class="card-body card_body">
+				<div class="card-body card_body p-2">
 					{{ setting('no_records_found') }}
 				 </div>
 			@endif

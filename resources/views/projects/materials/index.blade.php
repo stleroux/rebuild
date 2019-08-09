@@ -24,12 +24,9 @@
                <span class="float-right">
                   @include('projects.addins.links.help', ['size'=>'xs', 'bookmark'=>'projects'])
                   @include('projects.addins.links.BEProjects', ['size'=>'xs'])
-                  @if(checkPerm('projects_create', ['size'=>'xs']))
-                     @include('projects.finishes.addins.links.finishes', ['size'=>'xs'])
-                  @endif
-                  @if(checkPerm('projects_create'))
-                     @include('projects.materials.addins.links.add', ['size'=>'xs'])
-                  @endif
+                  @include('projects.finishes.addins.links.finishes', ['size'=>'xs'])
+                  @include('projects.materials.addins.links.materials', ['size'=>'xs'])
+                  @include('projects.materials.addins.links.add', ['size'=>'xs'])
                </span>
             </div>
 
@@ -37,7 +34,7 @@
             @if($materials->count() > 0)
                <div class="card-body section_body p-2">
                   {{-- @include('common.alphabet', ['model'=>'woodproject', 'page'=>'index']) --}}
-                  <table id="datatable" class="table table-hover table-sm text-dark">
+                  <table id="datatable" class="table table-hover table-sm">
                      <thead>
                         <tr>
                            <th>ID</th>

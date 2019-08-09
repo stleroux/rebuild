@@ -20,13 +20,19 @@
 			</table>
 
 			<table class="table table-sm table-hover" style="margin-bottom: 0px">
-				<tr>
-					<th>Created On</th>
-				</tr>
-				<tr>
-					<td class="text-right">@include('common.dateFormat', ['model'=>$recipe, 'field'=>'created_at'])</td>
-				</tr>
-
+				<thead>
+					<tr>
+						<th>Created On</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="text-right">@include('common.dateFormat', ['model'=>$recipe, 'field'=>'created_at'])</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<table class="table table-sm table-hover" style="margin-bottom: 0px">
 				@if ($recipe->modified_by_id)
 					<tr>
 						<th>Updated By</th>

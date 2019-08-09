@@ -1,14 +1,16 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
-@section ('stylesheets')
-	{{ Html::style('css/recipes.css') }}
+@section('stylesheets')
+   {{ Html::style('css/recipes.css') }}
 @endsection
 
 @section('left_column')
-	@include('blocks.main_menu')
+   @include('recipes.sidebar')
 @endsection
 
 @section('right_column')
+   @include('recipes.blocks.popularRecipes')
+   @include('recipes.blocks.archives')
 @endsection
 
 @section('content')
@@ -17,32 +19,33 @@
 		{!! csrf_field() !!}
 		
 		<div class="card mb-3 pb-0">
-			<div class="card-header card_header">
-				<span class="h5 align-middle pt-2">
-					<i class="{{ Config::get('buttons.trashed') }}"></i>
-					Trashed Recipes
-				</span>
+			<div class="card-header section_header p-2">
+				<i class="{{ Config::get('buttons.trashed') }}"></i>
+				Trashed Recipes
 				<span class="float-right">
 					@include('recipes.addins.links.help', ['size'=>'xs', 'bookmark'=>'recipes'])
 					{{-- @include('recipes::backend.trashed.help') --}}
 					@include('recipes.addins.buttons.deleteAll', ['size'=>'xs'])
 					@include('recipes.addins.buttons.restoreAll', ['size'=>'xs'])
 					@include('recipes.addins.buttons.publishAll', ['size'=>'xs'])
-
+					@include('recipes.addins.buttons.unpublishAll', ['size'=>'xs'])
+					@include('recipes.addins.buttons.trashAll', ['size'=>'xs'])
 					@include('recipes.addins.pages.published', ['size'=>'xs'])
-               @include('recipes.addins.pages.unpublished', ['size'=>'xs'])
-               @include('recipes.addins.pages.new', ['size'=>'xs'])
-               @include('recipes.addins.pages.future', ['size'=>'xs'])
-               @include('recipes.addins.pages.mine', ['size'=>'xs'])
-               @include('recipes.addins.pages.myPrivate', ['size'=>'xs'])
+					@include('recipes.addins.pages.unpublished', ['size'=>'xs'])
+					@include('recipes.addins.pages.new', ['size'=>'xs'])
+					@include('recipes.addins.pages.future', ['size'=>'xs'])
+					@include('recipes.addins.pages.trashed', ['size'=>'xs'])
+					@include('recipes.addins.pages.mine', ['size'=>'xs'])
+					@include('recipes.addins.pages.myPrivate', ['size'=>'xs'])
+					@include('recipes.addins.links.add', ['size'=>'xs'])
 				</span>
 			</div>
 	</form>
 			
 			@if($recipes->count() > 0)
-				<div class="card-body card_body p-2">
-					@include('recipes.alphabet_2', ['model'=>'recipe', 'page'=>'trashed'])
-					<table id="datatable" class="table table-sm table-hover">
+				<div class="card-body section_body p-2 text-light">
+					@include('recipes.alphabet', ['model'=>'recipe', 'page'=>'trashed'])
+					<table id="datatable" class="table table-sm table-hover text-light">
 					   <thead>
 					      <tr>
 					         <th><input type="checkbox" id="selectall" class="checked" /></th>
@@ -79,7 +82,7 @@
 					</table>
 				</div>
 			@else
-				<div class="card-body card_body">
+				<div class="card-body card_body p-2">
 					{{ setting('no_records_found') }}
 				</div>
 			@endif

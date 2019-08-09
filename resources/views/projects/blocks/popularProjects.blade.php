@@ -10,7 +10,7 @@
                <a class="list-group-item list-group-item-action p-1" href="{{ route('projects.show', $p->id) }}" role="button" style="text-decoration: none">
                   <div class="text text-left">
                      <i class="far fa-address-card"></i>
-                     {{ $p->name }}
+                     {{ ucwords($p->name) }}
                      <span class="badge badge-danger float-right">{{ $p->views }}</span>
                   </div>
                </a>

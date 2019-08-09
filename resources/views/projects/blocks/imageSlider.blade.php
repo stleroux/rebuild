@@ -1,5 +1,5 @@
 <div class="card mb-2">
-   <div class="card-header block_header">
+   <div class="card-header block_header p-2">
       <i class="far fa-image"></i>
       Project Image(s)
    </div>

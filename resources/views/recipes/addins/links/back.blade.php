@@ -1,4 +1,11 @@
-@if(Session::get('fromPage')==='recipes.index')
+<a href="{{ Session::get('fromPage') }}"
+   class="btn btn-{{ $size }} btn-primary"
+   title="Back">
+   <i class="{{ Config::get('buttons.back') }}"></i>
+</a>
+
+
+{{-- @if(Session::get('fromPage')==='recipes.index')
    <a href="{{ route('recipes.index','all') }}"
       class="btn btn-{{ $size }} btn-primary"
       title="Recipes">
@@ -30,7 +37,7 @@
       @endif
    @endforeach
 @endforeach
-
+ --}}
 
 {{-- @if (false !== stripos($_SERVER['HTTP_REFERER'], "/recipes/all"))
    <a href="{{ route('recipes.index', 'all') }}" class="btn btn-sm btn-outline-secondary">
