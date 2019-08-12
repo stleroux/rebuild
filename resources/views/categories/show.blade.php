@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
    {{-- {{ Html::style('css/woodbarn.css') }} --}}
@@ -13,14 +13,14 @@
 
 @section('content')
    <div class="card">
-      <div class="card-header card_header">
+      <div class="card-header section_header p-2">
          <i class="fa fa-sitemap" aria-hidden="true"></i>
          Category Details
          <span class="float-right">
-            @include('categories.buttons.back')
+            @include('categories.buttons.back', ['size'=>'xs'])
          </span>
       </div>
-      <div class="card-body card_body">
+      <div class="card-body section_body p-2">
          <div class="row">
             <div class="col">
                <p><b>Category Name</b></p>

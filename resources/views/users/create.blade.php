@@ -37,7 +37,12 @@
          <div class="card-body section_body p-2">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                <li class="nav-item">
-                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+                  <a class="nav-link active" id="intro-tab" data-toggle="tab" href="#intro" role="tab" aria-controls="intro" aria-selected="true">
+                     Introduction
+                  </a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" id="details-tab" data-toggle="tab" href="#details" role="tab" aria-controls="details" aria-selected="true">
                      User Details
                   </a>
                </li>
@@ -64,7 +69,10 @@
             </ul>
 
             <div class="tab-content pb-0 mb-0" id="myTabContent">
-               <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+               <div class="tab-pane fade show active" id="intro" role="tabpanel" aria-labelledby="intro-tab">
+                  @include('users.inc.create.intro')
+               </div>
+               <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
                   @include('users.inc.create.details')
                </div>
                <div class="tab-pane fade" id="core" role="tabpanel" aria-labelledby="core-tab">

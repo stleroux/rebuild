@@ -44,21 +44,18 @@ class ProjectsController extends Controller
 #  ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝
 // Show the form for creating a new resource
 ##################################################################################################################
-    public function create()
-    {
-        // Check if user has required permission
-        if($this->enablePermissions)
-        {
-            if(!checkPerm('projects_create')) { abort(401, 'Unauthorized Access'); }
-        }
+   public function create()
+   {
+      // Check if user has required permission
+      if($this->enablePermissions)
+      {
+         if(!checkPerm('projects_create')) { abort(401, 'Unauthorized Access'); }
+      }
 
-        $project = New Project();
-        // Get all categories
-        $categories = Category::where('parent_id',12)->get();
-        // dd($categories);
+      $project = New Project();
 
-        return view('projects.create', compact('project','categories'));
-    }
+      return view('projects.create', compact('project'));
+   }
 
 
 ##################################################################################################################

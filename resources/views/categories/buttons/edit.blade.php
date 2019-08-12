@@ -1,6 +1,6 @@
 {{-- @if(checkPerm('categories_edit', $category)) --}}
    <a href="{{ route('categories.edit', $category->id) }}"
-      class="btn btn-sm btn-primary"
+      class="btn btn-{{ $size }} btn-info text-light"
       title="Edit Category">
       <i class="far fa-edit"></i>
    </a>

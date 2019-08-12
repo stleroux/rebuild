@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
    {{-- {{ Html::style('css/woodbarn.css') }} --}}
@@ -20,20 +20,20 @@
 			<div class="col">
 				<div class="card">
 					<!--CARD HEADER-->
-					<div class="card-header card_header">
+					<div class="card-header section_header p-2">
 						<i class="fa fa-sitemap" aria-hidden="true"></i>
 						Edit Category
 						<span class="float-right">
 							{{-- @include('common.buttons.help', ['model'=>'category', 'type'=>'', 'part'=>'category']) --}}
 							{{-- @include('help.categories.edit.category', ['model'=>'category', 'type'=>'']) --}}
-							@include('categories.buttons.help', ['bookmark'=>'categories_edit_category'])
-							@include('categories.buttons.back')
-							@include('categories.buttons.reset')
-							@include('categories.buttons.update')
+							@include('categories.buttons.help', ['size'=>'xs', 'bookmark'=>'categories_edit_category'])
+							@include('categories.buttons.back', ['size'=>'xs'])
+							@include('categories.buttons.reset', ['size'=>'xs'])
+							@include('categories.buttons.update', ['size'=>'xs'])
 						</span>
 					</div>
 
-					<div class="card-body card_body">
+					<div class="card-body section_body p-2">
 						<div class="row">
 							<div class="col-3">
 								<div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">

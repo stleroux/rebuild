@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
    {{-- {{ Html::style('css/woodbarn.css') }} --}}
@@ -16,15 +16,15 @@
    {!! Form::open(array('route' => 'permissions.store')) !!}
       <div class="card">
          
-         <div class="card-header card_header">
+         <div class="card-header section_header p-2">
             <i class="fas fa-shield-alt"></i>
             New Permission
             <div class="float-right">
                {{-- @include('common.buttons.cancel', ['model'=>'permission']) --}}
-               @include('permissions.buttons.back')
-               @include('permissions.buttons.reset')
-               @include('permissions.buttons.save&new')
-               @include('permissions.buttons.save')
+               @include('permissions.buttons.back', ['size'=>'xs'])
+               @include('permissions.buttons.reset', ['size'=>'xs'])
+               @include('permissions.buttons.save&new', ['size'=>'xs'])
+               @include('permissions.buttons.save', ['size'=>'xs'])
                {{-- <button type="submit" class="btn btn-sm btn-primary" name="submit" value="new" title="Save & New"> --}}
                   {{-- <i class="far fa-hdd"></i> --}}
                   {{-- Update & Continue --}}
@@ -36,7 +36,7 @@
             </div>
          </div>
          
-         <div class="card-body card_body">
+         <div class="card-body section_body p-2">
             <div class="row">
                <div class="col-sm-4">
                   <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
@@ -64,9 +64,12 @@
                </div>
                <div class="col-sm-4">
                   <div class="form-group {{ $errors->has('type') ? 'has-error' : '' }}">
-                     {{ Form::label('type', 'Core Module?', ['class'=>'required']) }}
-                     {{ Form::select('type', ['0'=>'Non-Core', '1'=>'Core', '2'=>'Module'], 0, ['class'=>'form-control form-control-sm']) }}
-                     <small class="form-text"></small>
+                     <label for="type">Core Module?</label>
+                        <select name="type" value="{{ old('type') ?? $permission->type }}" id="type" class="form-control form-control-sm">
+                           @foreach($permission->typesOptions() as $typeOptionKey => $typeOptionValue)
+                              <option value="{{ $typeOptionKey }}" {{ $permission->type == $typeOptionValue ? 'selected' : '' }}>{{ $typeOptionValue }}</option>
+                           @endforeach
+                        </select>
                      <span class="text-danger">{{ $errors->first('type') }}</span>
                   </div>
                </div>
@@ -81,7 +84,7 @@
             </div>
          </div>
 
-         <div class="card-footer pt-1 pb-1 pl-2">
+         <div class="card-footer p-1">
             Fields marked with an <span class="required"></span> are required
          </div>
 

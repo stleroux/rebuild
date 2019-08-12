@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
    {{-- {{ Html::style('css/woodbarn.css') }} --}}
@@ -18,17 +18,17 @@
       
       <div class="card">
          
-         <div class="card-header card_header">
+         <div class="card-header section_header p-2">
             <i class="fas fa-shield-alt"></i>
             Edit Permission
             <div class="float-right">
-               @include('permissions.buttons.back')
-               @include('permissions.buttons.update')
+               @include('permissions.buttons.back', ['size'=>'xs'])
+               @include('permissions.buttons.update', ['size'=>'xs'])
 {{--                @include('common.buttons.update', ['model'=>'permission']) --}}
             </div>
          </div>
          
-         <div class="card-body card_body">
+         <div class="card-body section_body p-2">
             <div class="row">
                <div class="col-sm-4">
                   <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
@@ -53,9 +53,12 @@
                </div>
                <div class="col-sm-4">
                   <div class="form-group {{ $errors->has('type') ? 'has-error' : '' }}">
-                     {{ Form::label('type', 'Core Module?', ['class'=>'required']) }}
-                     {{-- {{ Form::select('core', [ '0' => 'No', '1' => 'Yes'], null, ['class' => 'form-control form-control-sm', 'placeholder' => '']) }} --}}
-                     {{ Form::select('type', ['0'=>'Non-Core', '1'=>'Core', '2'=>'Module'], $permission->type, ['class'=>'form-control form-control-sm']) }}
+                     <label for="type">Core Module?</label>
+                        <select name="type" value="{{ old('type') ?? $permission->type }}" id="type" class="form-control form-control-sm">
+                           @foreach($permission->typesOptions() as $typeOptionKey => $typeOptionValue)
+                              <option value="{{ $typeOptionKey }}" {{ $permission->type == $typeOptionValue ? 'selected' : '' }}>{{ $typeOptionValue }}</option>
+                           @endforeach
+                        </select>
                      <span class="text-danger">{{ $errors->first('type') }}</span>
                   </div>
                </div>
@@ -72,7 +75,7 @@
             </div>
          </div>
 
-         <div class="card-footer pt-1 pb-1 pl-2">
+         <div class="card-footer p-1">
             Fields marked with an <span class="required"></span> are required
          </div>
 

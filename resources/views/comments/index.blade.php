@@ -17,7 +17,7 @@
       {!! csrf_field() !!}
          
       <div class="card">
-         <div class="card-header card_header">
+         <div class="card-header section_header p-2">
             <i class="fas fa-comments"></i>
             Comments
             {{-- <button
@@ -42,7 +42,7 @@
             </button> --}}
          </div>
 
-         <div class="card-body card_body">
+         <div class="card-body section_body p-2">
             @if($comments->count() > 0)
                <table id="datatable" class="table table-hover table-sm">
                   <thead>
@@ -75,13 +75,13 @@
                               </a> --}}
 
                               {{-- @if(checkPerm('post_edit', $post)) --}}
-                              @include('comments.buttons.edit')
+                              @include('comments.buttons.edit', ['size'=>'xs'])
                               {{-- @endif --}}
                               {{-- @if(checkPerm('post_delete', $post)) --}}
                               {{-- <a href="{{ route('comments.delete', $comment->id) }}" class="btn btn-sm btn-outline-danger px-1 py-0" title="Delete Comment">
                                  <i class="far fa-trash-alt"></i>
                               </a> --}}
-                              @include('comments.buttons.delete')
+                              @include('comments.buttons.delete', ['size'=>'xs'])
                               {{-- @endif --}}
                            </td>
                         </tr>

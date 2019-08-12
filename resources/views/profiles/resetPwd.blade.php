@@ -17,15 +17,15 @@
 	{{ csrf_field() }}
 	<div class="col">
 		<div class="card mb-2">
-			<div class="card-header card_header">
+			<div class="card-header section_header p-2">
 				<i class="fas fa-user-lock"></i>
 				Reset My Password
 				<span class="float-right">
-					{{ Form::button('<i class="fa fa-save"></i> Reset Password', array('type'=>'submit', 'class'=>'btn btn-sm btn-outline-secondary px-1 py-0')) }}
+					{{ Form::button('<i class="fa fa-save"></i> Reset Password', array('type'=>'submit', 'class'=>'btn btn-xs btn-primary')) }}
 				</span>
 			</div>
 
-			<div class="card-body card_body">
+			<div class="card-body section_body p-2">
 				<div class="row">
 					<div class="col-xs-12 col-sm-4">
 						<div class="form-group{{ $errors->has('current-password') ? ' has-error' : '' }}">

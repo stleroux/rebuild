@@ -42,7 +42,9 @@ class PermissionsController extends Controller
 			if(!checkPerm('permission_create')) { abort(401, 'Unauthorized Access'); }
 		}
 
-		return view('permissions.create'); 
+		$permission = New Permission();
+
+		return view('permissions.create', compact('permission'));
 	}
 
 

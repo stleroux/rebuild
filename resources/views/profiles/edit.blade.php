@@ -9,6 +9,8 @@
 @endsection
 
 @section('right_column')
+   @include('blocks.member')
+   @include('profiles.block_contributions')
 @endsection
 
 @section('content')
@@ -17,10 +19,8 @@
       <div class="row">
          <div class="col-12">
             <div class="card mb-3">
-               <div class="card-header section_header p-1 m-0">
-                  <span class="h5 align-middle pt-2">
-                     Edit Profile
-                  </span>
+               <div class="card-header section_header p-2">
+                  Edit Profile
                   <span class="float-right">
                      {{-- @include('common.buttons.back', ['size'=>'sm']) --}}
                      {{ Form::button('<i class="fa fa-save"></i> Update Profile', array('type'=>'submit', 'class'=>'btn btn-sm btn-success px-1 py-0')) }}
@@ -33,13 +33,13 @@
                   <div class="form-row">
                      <div class="col-9">
                         <div class="card mb-2">
-                           <div class="card-header card_header">Profile Info</div>
-                           <div class="card-body section_body">
+                           <div class="card-header card_header p-2">Profile Info</div>
+                           <div class="card-body section_body p-2">
                               <div class="form-row">
                                  <div class="col-md-3">
                                     <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
                                        <label for="first_name" class="required">First Name</label>
-                                       <input id="first_name" type="text" class="form-control form-control-sm" autofocus="autofocus" name="first_name" value="{{ $user->profile->first_name }}">
+                                       <input id="first_name" type="text" class="form-control form-control-sm" autofocus="autofocus" name="first_name" value="{{ $user->first_name }}">
                                        @if ($errors->has('first_name'))
                                           <span class="text-danger small">
                                              {{ $errors->first('first_name') }}
@@ -50,7 +50,7 @@
                                  <div class="col-md-3">
                                     <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
                                        <label for="last_name" class="required">Last Name</label>
-                                       <input id="last_name" type="text" class="form-control form-control-sm" name="last_name" value="{{ $user->profile->last_name }}">
+                                       <input id="last_name" type="text" class="form-control form-control-sm" name="last_name" value="{{ $user->last_name }}">
                                        @if ($errors->has('last_name'))
                                           <span class="text-danger small">
                                              {{ $errors->first('last_name') }}
@@ -61,7 +61,7 @@
                                  <div class="col-md-2">
                                     <div class="form-group{{ $errors->has('telephone') ? ' has-error' : '' }}">
                                        <label for="telephone">Telephone</label>
-                                       <input id="telephone" type="text" class="form-control form-control-sm" name="telephone" value="{{ $user->profile->telephone }}">
+                                       <input id="telephone" type="text" class="form-control form-control-sm" name="telephone" value="{{ $user->telephone }}">
                                     </div>
                                  </div>
                               </div>
@@ -116,7 +116,7 @@
                                  </div>
                               </div>
                            </div>
-                           <div class="card-footer card_footer px-1 py-0">
+                           <div class="card-footer card_footer p-1">
                               Fields marked with an <span class="required"></span> are required.
                            </div>
                         </div>
@@ -124,32 +124,31 @@
                      <div class="col-3">
                         @include('profiles.block_edit_image')
                      </div>
-                     
                   </div>
 
                   {{-- Address Info --}}
                   <div class="form-row">
                      <div class="col">
                         <div class="card mb-2">
-                           <div class="card-header card_header">Address Info</div>
-                           <div class="card-body section_body">
+                           <div class="card-header card_header p-2">Address Info</div>
+                           <div class="card-body section_body p-2">
                               <div class="form-row">
                                  <div class="col-sm-2">
                                     <div class="form-group">
                                        <label for="civic_number" class=" control-label">Civic/Unit N<sup>o</sup></label>
-                                       <input id="civic_number" type="text" class="form-control form-control-sm" name="civic_number" value="{{ $user->profile->civic_number }}">
+                                       <input id="civic_number" type="text" class="form-control form-control-sm" name="civic_number" value="{{ $user->civic_number }}">
                                     </div>
                                  </div>
                                  <div class="col-sm-5">
                                     <div class="form-group">
                                        <label for="address1" class=" control-label">Address 1</label>
-                                       <input id="address1" type="text" class="form-control form-control-sm" name="address1" value="{{ $user->profile->address1 }}">
+                                       <input id="address1" type="text" class="form-control form-control-sm" name="address1" value="{{ $user->address1 }}">
                                     </div>
                                  </div>
                                  <div class="col-sm-5">
                                     <div class="form-group">
                                        <label for="address2" class=" control-label">Address 2</label>
-                                       <input id="address2" type="text" class="form-control form-control-sm" name="address2" value="{{ $user->profile->address2 }}">
+                                       <input id="address2" type="text" class="form-control form-control-sm" name="address2" value="{{ $user->address2 }}">
                                     </div>
                                  </div>
                               </div>
@@ -158,19 +157,19 @@
                                  <div class="col-sm-2">
                                     <div class="form-group">
                                        <label for="city" class=" control-label">City</label>
-                                       <input id="city" type="text" class="form-control form-control-sm" name="city" value="{{ $user->profile->city }}">
+                                       <input id="city" type="text" class="form-control form-control-sm" name="city" value="{{ $user->city }}">
                                     </div>
                                  </div>
                                  <div class="col-sm-2">
                                     <div class="form-group">
                                        <label for="province" class=" control-label">Province/State</label>
-                                       <input id="province" type="text" class="form-control form-control-sm" name="province" value="{{ $user->profile->province }}">
+                                       <input id="province" type="text" class="form-control form-control-sm" name="province" value="{{ $user->province }}">
                                     </div>                                    
                                  </div>
                                  <div class="col-sm-2">
                                     <div class="form-group">
                                        <label for="postal_code" class=" control-label">Postal/Zip Code</label>
-                                       <input id="postal_code" type="text" class="form-control form-control-sm" name="postal_code" value="{{ $user->profile->postal_code }}">
+                                       <input id="postal_code" type="text" class="form-control form-control-sm" name="postal_code" value="{{ $user->postal_code }}">
                                     </div>
                                  </div>
                               </div>
@@ -192,7 +191,7 @@
                                  </span>
                               
                               <span class="float-right">
-                                 <a href="{{ route('profile.resetPreferences', $user->profile->id) }}" class="btn btn-sm btn-outline-primary px-1 py-0">Reset All Defaults</a>
+                                 <a href="{{ route('profile.resetPreferences', $user->id) }}" class="btn btn-sm btn-outline-primary px-1 py-0">Reset All Defaults</a>
                               </span>
                            </div>
 
@@ -216,7 +215,7 @@
                                              '1' => 'Icons and Text (Default)',
                                              '2' => 'Icons only',
                                              '3' => 'Text Only',
-                                             ), $user->profile->action_buttons, array('class'=>'form-control form-control-sm'))
+                                             ), $user->action_buttons, array('class'=>'form-control form-control-sm'))
                                           }}
                                        </td>
                                        <td>Changes the appearance of some buttons (Edit & Delete only at the moment).</td>
@@ -239,7 +238,7 @@
                                              '15000' => '15 seconds',
                                              '20000' => '20 seconds',
                                              '1000000000' => 'Forever',
-                                             ), $user->profile->alert_fade_time, array('class'=>'form-control form-control-sm'))
+                                             ), $user->alert_fade_time, array('class'=>'form-control form-control-sm'))
                                           }}
                                        </td>
                                        <td>Changes the length of time the alerts will be displayed.</td>
@@ -253,7 +252,7 @@
                                              '1' => 'Username (Default)' ,
                                              '2' => 'Last Name, First Name',
                                              '3' => 'First Name Last Name'
-                                             ), $user->profile->author_format, array('class'=>'form-control form-control-sm'))
+                                             ), $user->author_format, array('class'=>'form-control form-control-sm'))
                                           }} --}}
                                        </td>
                                        <td>Changes the way the author's name will be displayed.</td>
@@ -272,7 +271,7 @@
                                              '6' => '1 Jan 2017',
                                              '7' => '01/01/2017 (D-M-Y)',
                                              '8' => '1/01/2017 (D-M-Y)',
-                                             ), $user->profile->date_format, array('class'=>'form-control form-control-sm'))
+                                             ), $user->date_format, array('class'=>'form-control form-control-sm'))
                                           }}
                                        </td>
                                        <td>Changes the way the dates are displayed.</td>
@@ -282,7 +281,7 @@
                                        <td></td>
                                        <td>Landing Page</td>
                                        <td>
-                                          {{-- {{ Form::select('landing_page_id', $landingPages, $user->profile->landing_page_id , ['class' => 'form-control form-control-sm']) }} --}}
+                                          {{-- {{ Form::select('landing_page_id', $landingPages, $user->landing_page_id , ['class' => 'form-control form-control-sm']) }} --}}
                                        </td>
                                        <td>The page you will be redirected to when you log in to the site.</td>
                                     </tr>
@@ -299,7 +298,7 @@
                                              '25' => '25',
                                              '50' => '50',
                                              '100' => '100'
-                                             ), $user->profile->rows_per_page, array('class'=>'form-control form-control-sm'))
+                                             ), $user->rows_per_page, array('class'=>'form-control form-control-sm'))
                                           }}
                                        </td>
                                        <td>Changes the number of entries displayed in grids.</td>
@@ -327,7 +326,7 @@
                                              'superhero'=>'SuperHero',
                                              'united'=>'United',
                                              'yeti'=>'Yeti',
-                                             ), $user->profile->frontendStyle, array('class'=>'form-control form-control-sm'))
+                                             ), $user->frontendStyle, array('class'=>'form-control form-control-sm'))
                                           }}
                                        </td>
                                        <td>Choosing a different style will change the apperance of the whole site.</td>
@@ -355,7 +354,7 @@
                                              'superhero'=>'SuperHero',
                                              'united'=>'United',
                                              'yeti'=>'Yeti',
-                                             ), $user->profile->backendStyle, array('class'=>'form-control form-control-sm'))
+                                             ), $user->backendStyle, array('class'=>'form-control form-control-sm'))
                                           }}
                                        </td>
                                        <td>Choosing a different style will change the apperance of the whole site.</td>
@@ -364,7 +363,7 @@
                               </table>
                            </div>
                            {{-- BACKEND STYLE --}}
-                           <input type="hidden" name="backendStyle" value="{{ $user->profile->backendStyle }}">
+                           <input type="hidden" name="backendStyle" value="{{ $user->backendStyle }}">
 
                         </div>
                      </div>

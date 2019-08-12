@@ -1,17 +1,17 @@
    {!! Form::open(['route' => 'categories.store']) !!}
       <input type="hidden" name="part" value="main">
       <div class="card mb-3">
-         <div class="card-header card_header">
+         <div class="card-header section_header p-2">
             <i class="fa fa-plus" aria-hidden="true"></i>
             New Parent Category
             <span class="float-right">
-               @include('categories.buttons.help', ['bookmark'=>'categories_add_mainCategory'])
-               @include('categories.buttons.back')
-               @include('categories.buttons.reset')
-               @include('categories.buttons.save')
+               @include('categories.buttons.help', ['size'=>'xs', 'bookmark'=>'categories_add_mainCategory'])
+               @include('categories.buttons.back', ['size'=>'xs'])
+               @include('categories.buttons.reset', ['size'=>'xs'])
+               @include('categories.buttons.save', ['size'=>'xs'])
             </span>
          </div>
-         <div class="card-body card_body pb-0">
+         <div class="card-body section_body p-2">
             <div class="row">
                {{-- <div class="col-3">
                   <div class="form-group {{ $errors->has('category') ? 'has-error' : '' }}">

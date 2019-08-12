@@ -48,9 +48,9 @@
    {{-- WARNING --}}
    @auth
       @if(
-         (Auth::user()->profile->first_name == '') OR
-         (Auth::user()->profile->last_name == '') OR
-         (Auth::user()->profile->telephone == ''))
+         (Auth::user()->first_name == '') OR
+         (Auth::user()->last_name == '') OR
+         (Auth::user()->telephone == ''))
             <div class="card mb-2">
                <div class="card-header text-white bg-danger p-2">
                   <i class="fa fa-exclamation" aria-hidden="true"></i>

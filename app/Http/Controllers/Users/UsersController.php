@@ -1,16 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Users;
 
 use Artisan;
 use DB;
+use File;
 use Hash;
+use Image;
 use Route;
 use Session;
+use App\Http\Controllers\Controller; 
 use App\Models\Permission;
 use App\Models\User;
 use App\Models\Profile;
 use Illuminate\Http\Request;
+
 
 class UsersController extends Controller
 {
@@ -68,6 +72,12 @@ class UsersController extends Controller
 		return view('users.changeUserPWD', compact('user'));
 	}
 
+
+##################################################################################################################
+##################################################################################################################
+# Change User PWD Post
+##################################################################################################################
+##################################################################################################################
 	public function changeUserPWDPost(Request $request, $id)
 	{
 		// Allows an admin to change user account passwords
@@ -117,22 +127,24 @@ class UsersController extends Controller
 		// $modulePermissions = Permission::whereIn('model', $moduleGroups)->orderBy('name')->get();
 		// $moduleGroups = $modulePermissions->groupBy('model');
 
+		$user = new User();
+
 		// Get permissions of groups identified as module
-		$moduleGroups = Permission::select('model')->distinct()->where('type',2)->orderBy('model','asc')->get();
+		$moduleGroups = Permission::select('model')->distinct()->where('type',3)->orderBy('model','asc')->get();
 		$modulePermissions = Permission::whereIn('model', $moduleGroups)->orderBy('model')->orderBy('display_name')->get();
 		$moduleGroups = $modulePermissions->groupBy('model');
 		
 		// Get permissions of groups identified as core
-		$coreGroups = Permission::select('model')->distinct()->where('type',1)->orderBy('model','asc')->get();
+		$coreGroups = Permission::select('model')->distinct()->where('type',2)->orderBy('model','asc')->get();
 		$corePermissions = Permission::whereIn('model', $coreGroups)->orderBy('model')->orderBy('display_name')->get();
 		$coreGroups = $corePermissions->groupBy('model');
 
 		// Get permissions of groups identified as NON core
-		$nonCoreGroups = Permission::select('model')->distinct()->where('type',0)->orderBy('model','asc')->get();
+		$nonCoreGroups = Permission::select('model')->distinct()->where('type',1)->orderBy('model','asc')->get();
 		$nonCorePermissions = Permission::whereIn('model', $nonCoreGroups)->orderBy('model')->orderBy('display_name')->get();
 		$nonCoreGroups = $nonCorePermissions->groupBy('model');
 
-		return view('users.create', compact('modulePermissions','moduleGroups','corePermissions','coreGroups','nonCorePermissions','nonCoreGroups'));
+		return view('users.create', compact('modulePermissions','moduleGroups','corePermissions','coreGroups','nonCorePermissions','nonCoreGroups','user'));
 	}
 
 
@@ -222,17 +234,17 @@ class UsersController extends Controller
 		// $moduleGroups = $modulePermissions->groupBy('model');
 
 		// Get permissions of groups identified as module
-		$moduleGroups = Permission::select('model')->distinct()->where('type',2)->orderBy('model','asc')->get();
+		$moduleGroups = Permission::select('model')->distinct()->where('type',3)->orderBy('model','asc')->get();
 		$modulePermissions = Permission::whereIn('model', $moduleGroups)->orderBy('model')->orderBy('display_name')->get();
 		$moduleGroups = $modulePermissions->groupBy('model');
 
 		// Get permissions of groups identified as core
-		$coreGroups = Permission::select('model')->distinct()->where('type',1)->orderBy('model','asc')->get();
+		$coreGroups = Permission::select('model')->distinct()->where('type',2)->orderBy('model','asc')->get();
 		$corePermissions = Permission::whereIn('model', $coreGroups)->orderBy('model')->orderBy('display_name')->get();
 		$coreGroups = $corePermissions->groupBy('model');
 
 		// Get permissions of groups identified as NON core
-		$nonCoreGroups = Permission::select('model')->distinct()->where('type',0)->orderBy('model','asc')->get();
+		$nonCoreGroups = Permission::select('model')->distinct()->where('type',1)->orderBy('model','asc')->get();
 		$nonCorePermissions = Permission::whereIn('model', $nonCoreGroups)->orderBy('model')->orderBy('display_name')->get();
 		$nonCoreGroups = $nonCorePermissions->groupBy('model');
 
@@ -278,17 +290,17 @@ class UsersController extends Controller
 		// $moduleGroups = $modulePermissions->groupBy('model');
 
 		// Get permissions of groups identified as module
-		$moduleGroups = Permission::select('model')->distinct()->where('type',2)->orderBy('model','asc')->get();
+		$moduleGroups = Permission::select('model')->distinct()->where('type',3)->orderBy('model','asc')->get();
 		$modulePermissions = Permission::whereIn('model', $moduleGroups)->orderBy('model')->orderBy('display_name')->get();
 		$moduleGroups = $modulePermissions->groupBy('model');
 
 		// Get permissions of groups identified as core
-		$coreGroups = Permission::select('model')->distinct()->where('type',1)->orderBy('model','asc')->get();
+		$coreGroups = Permission::select('model')->distinct()->where('type',2)->orderBy('model','asc')->get();
 		$corePermissions = Permission::whereIn('model', $coreGroups)->orderBy('model')->orderBy('display_name')->get();
 		$coreGroups = $corePermissions->groupBy('model');
 
 		// Get permissions of groups identified as NON core
-		$nonCoreGroups = Permission::select('model')->distinct()->where('type',0)->orderBy('model','asc')->get();
+		$nonCoreGroups = Permission::select('model')->distinct()->where('type',1)->orderBy('model','asc')->get();
 		$nonCorePermissions = Permission::whereIn('model', $nonCoreGroups)->orderBy('model')->orderBy('display_name')->get();
 		$nonCoreGroups = $nonCorePermissions->groupBy('model');
 
@@ -365,9 +377,52 @@ class UsersController extends Controller
 		$user = User::findOrFail($user->id);
 			$user->username = $request->input('username');
 			$user->email = $request->input('email');
+         $user->public_email = $request->input('public_email');
+         $user->first_name = $request->input('first_name');
+         $user->last_name = $request->input('last_name');
+         $user->telephone = $request->input('telephone');
+         $user->cell = $request->input('cell');
+         $user->fax = $request->input('fax');
+         $user->website = $request->input('website');
+         $user->civic_number = $request->input('civic_number');
+         $user->address_1 = $request->input('address_1');
+         $user->address_2 = $request->input('address_2');
+         $user->city = $request->input('city');
+         $user->province = $request->input('province');
+         $user->postal_code = $request->input('postal_code');
+         $user->notes = $request->input('notes');
+         $user->action_buttons = $request->input('action_buttons');
+         $user->alert_fade_time = $request->input('alert_fade_time');
+         $user->author_format = $request->input('author_format');
+         $user->date_format = $request->input('date_format');
+         $user->landing_page_id = $request->input('landing_page_id');
+         $user->rows_per_page = $request->input('rows_per_page');
+
+         // Check if a new image was submitted
+         if ($request->hasFile('image')) {
+            //Add new photo
+            $image = $request->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('_profiles/' . $filename);
+            Image::make($image)->resize(800, 400)->save($location);
+               
+            // get name of old image
+            $oldImageName = $user->image;
+               
+            // Update database
+            $user->image = $filename;
+
+            // Delete old photo
+            //Storage::delete($oldImageName);
+            File::delete('_profiles/' . $oldImageName);
+          }
+
 		$user->save();
+		// $user->profile->save();
 
 		$user->permissions()->sync($request->input('permission'));
+
+
 
 		if($request->submit == "close")
 		{

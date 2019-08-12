@@ -27,20 +27,20 @@
             <div class="row mb-3">
                <div class="col text-center">
                   @if($field == 'user')
-                     @if(!empty($model->user->profile->image))
-                        <img src="/_profiles/{{ $model->user->profile->image }}" height="100" width="100">
+                     @if(!empty($model->user->image))
+                        <img src="/_profiles/{{ $model->user->image }}" height="100" width="100">
                      @else
                         <img src="/_profiles/no_photo.jpg" height="100" width="100">
                      @endif
                   @elseif($field == 'modifiedBy')
-                     @if(!empty($model->modifiedBy->profile->image))
-                        <img src="/_profiles/{{ $model->modifiedBy->profile->image }}" height="100" width="100">
+                     @if(!empty($model->modifiedBy->image))
+                        <img src="/_profiles/{{ $model->modifiedBy->image }}" height="100" width="100">
                      @else
                         <img src="/_profiles/no_photo.jpg" height="100" width="100">
                      @endif
                   @elseif($field == 'lastViewedBy')
-                     @if($model->lastViewedBy->profile->image)
-                        <img src="/_profiles/{{ $model->lastViewedBy->profile->image }}" height="100" width="100">
+                     @if($model->lastViewedBy->image)
+                        <img src="/_profiles/{{ $model->lastViewedBy->image }}" height="100" width="100">
                      @else
                         <img src="/_profiles/no_photo.jpg" height="100" width="100">
                      @endif
@@ -73,15 +73,15 @@
                         <th class="text-right">First Name</th>
                         <td class="text-left">
                            @if($field == 'user')
-                              {{ $model->user->profile->first_name }}
+                              {{ $model->user->first_name }}
                            @elseif($field == 'modifiedBy')
                               @if(!empty($model->modified_by_id))
-                                 {{ $model->modifiedBy->profile->first_name }}
+                                 {{ $model->modifiedBy->first_name }}
                               @else
                                  N/A
                               @endif
                            @elseif($field == 'lastViewedBy')
-                              {{ $model->lastViewedBy->profile->first_name }}
+                              {{ $model->lastViewedBy->first_name }}
                            @endif
 
                         </td>
@@ -90,15 +90,15 @@
                         <th class="text-right">Last Name</th>
                         <td class="text-left">
                            @if($field == 'user')
-                              {{ $model->user->profile->last_name }}
+                              {{ $model->user->last_name }}
                            @elseif($field == 'modifiedBy')
                               @if(!empty($model->modified_by_id))
-                                 {{ $model->modifiedBy->profile->last_name }}
+                                 {{ $model->modifiedBy->last_name }}
                               @else
                                  N/A
                               @endif
                            @elseif($field == 'lastViewedBy')
-                              {{ $model->lastViewedBy->profile->last_name }}
+                              {{ $model->lastViewedBy->last_name }}
                            @endif
                         </td>
                      </tr>

@@ -3,7 +3,8 @@
       <i class="fa fa-home"></i>
    </a>
 @endif --}}
-<a href="{{ route('categories.index') }}" class="btn btn-sm btn-secondary">
+<a href="{{ route('categories.index') }}"
+   class="btn btn-{{ $size }} btn-primary text-light">
    <i class="fas fa-angle-double-left"></i>
 </a>
 

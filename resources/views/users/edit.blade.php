@@ -17,7 +17,8 @@
 
 @section('content')
 
-   {!! Form::model($user, ['method' => 'PATCH', 'route' => ['users.update', $user->id]]) !!}
+   {{-- {!! Form::model($user, ['method' => 'PATCH', 'files'=>true, 'route' => ['users.update', $user->id]]) !!} --}}
+   {!! Form::model($user, ['route'=>['users.update', $user->id], 'method'=>'PUT', 'files'=>true]) !!}
       {{ Form::token() }}
       
       <div class="card mb-3">
@@ -45,12 +46,12 @@
          <div class="card-body section_body p-2">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                <li class="nav-item">
-                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
-                     User Details
+                  <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
+                     User Profile
                   </a>
                </li>
                <li class="nav-item">
-                  <a class="nav-link" id="core-tab" data-toggle="tab" href="#core" role="tab" aria-controls="core" aria-selected="true">
+                  <a class="nav-link" id="core-tab" data-toggle="tab" href="#core" role="tab" aria-controls="core" aria-selected="false">
                      Core Permissions
                   </a>
                </li>
@@ -65,15 +66,15 @@
                   </a>
                </li>
                <li class="nav-item">
-                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
-                     Profile
+                  <a class="nav-link" id="instructions-tab" data-toggle="tab" href="#instructions" role="tab" aria-controls="instructions" aria-selected="false">
+                     Instructions
                   </a>
                </li>
             </ul>
 
             <div class="tab-content pb-0 mb-0" id="myTabContent">
-               <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                  @include('users.inc.edit.details')
+               <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                  @include('users.inc.edit.profile')
                </div>
                <div class="tab-pane fade" id="core" role="tabpanel" aria-labelledby="core-tab">
                   @include('users.inc.edit.core')
@@ -84,8 +85,8 @@
                <div class="tab-pane fade" id="modules" role="tabpanel" aria-labelledby="modules-tab">
                   @include('users.inc.edit.modules')
                </div>
-               <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                  @include('users.inc.edit.profile')
+               <div class="tab-pane fade" id="instructions" role="tabpanel" aria-labelledby="instructions-tab">
+                  @include('users.inc.edit.instructions')
                </div>
             </div>
          </div>

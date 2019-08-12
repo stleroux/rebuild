@@ -34,7 +34,7 @@
       <div class="card mb-2">
          <!--CARD HEADER-->
          <div class="card-header section_header p-2">
-            Change User Password
+            Change Password for {{ ucfirst($user->username) }}
             <span class="float-sm-right">
                @include('users.addins.back', ['size'=>'xs'])
 

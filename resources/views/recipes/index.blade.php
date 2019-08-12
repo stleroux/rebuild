@@ -90,8 +90,8 @@
 							<div class="card-footer px-1 py-0 text-center">
 								<small class="">
 									By
-									@if($recipe->user->profile->first_name && $recipe->user->profile->last_name)
-										{{ ucwords($recipe->user->profile->first_name) }} {{ ucwords($recipe->user->profile->last_name) }}
+									@if($recipe->user->first_name && $recipe->user->last_name)
+										{{ ucwords($recipe->user->first_name) }} {{ ucwords($recipe->user->last_name) }}
 									@else
 										{{ $recipe->user->username }}
 									@endif

@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
    {{-- {{ Html::style('css/woodbarn.css') }} --}}
@@ -14,8 +14,10 @@
 @section('content')
 
    <div class="card">
-      <div class="card-header bg-danger text-white text-center"><b>ARE YOU SURE YOU WANT TO DELETE THIS CATEGORY?</b></div>
-      <div class="card-body card_body text-center">
+      <div class="card-header section_header text-center p-2">
+         <b class="text-danger">ARE YOU SURE YOU WANT TO PERMANENTLY DELETE THIS CATEGORY</b>
+      </div>
+      <div class="card-body bg-light p-2 text-center">
          <form
             action="{{ route('categories.destroy', [$category->id]) }}"
             method="POST"

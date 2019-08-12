@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
    {{-- {{ Html::style('css/woodbarn.css') }} --}}
@@ -16,16 +16,16 @@
 	<div class="row">
 		<div class="col">
 			<div class="card">
-				<div class="card-header card_header">
+				<div class="card-header section_header p-2">
 					<i class="fas fa-shield-alt"></i>
 					Permissions
 					@if(checkPerm('permission_create'))
 						<span class="float-sm-right">
-							@include('permissions.buttons.add')
+							@include('permissions.buttons.add', ['size'=>'xs'])
 						</span>
 					@endif
 				</div>
-				<div class="card-body card_body">
+				<div class="card-body section_body p-2">
 					<table id="datatable" class="table table-hover table-sm">
 						<thead>
 							<tr>
@@ -47,15 +47,15 @@
 									<td>{{ ucwords($permission->description) }}</td>
 									<td class="text-right" nowrap="nowrap">
 										@if(checkPerm('permission_show'))
-											@include('permissions.buttons.show')
+											@include('permissions.buttons.show', ['size'=>'xs'])
 										@endif
 
 										@if(checkPerm('permission_edit'))
-											@include('permissions.buttons.edit')
+											@include('permissions.buttons.edit', ['size'=>'xs'])
 										@endif
 
 										@if(checkPerm('permission_delete'))
-											@include('permissions.buttons.delete')
+											@include('permissions.buttons.delete', ['size'=>'xs'])
 										@endif
 									</td>
 								</tr>

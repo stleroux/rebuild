@@ -1,17 +1,17 @@
    {!! Form::open(['route' => 'categories.store']) !!}
       <input type="hidden" name="part" value="sub">
-      <div class="card mb-3">
-         <div class="card-header card_header">
+      <div class="card mb-2">
+         <div class="card-header section_header p-2">
             <i class="fa fa-plus" aria-hidden="true"></i>
             New Sub Category
             <span class="float-right">
-               @include('categories.buttons.help', ['bookmark'=>'categories_add_subCategory'])
-               @include('categories.buttons.back')
-               @include('categories.buttons.reset')
-               @include('categories.buttons.save')
+               @include('categories.buttons.help', ['size'=>'xs', 'bookmark'=>'categories_add_subCategory'])
+               @include('categories.buttons.back', ['size'=>'xs'])
+               @include('categories.buttons.reset', ['size'=>'xs'])
+               @include('categories.buttons.save', ['size'=>'xs'])
             </span>
          </div>
-         <div class="card-body card_body pb-0">
+         <div class="card-body section_body p-2">
             <div class="row">
                <div class="col-3">
                   <div class="form-group {{ $errors->has('sSubs') ? 'has-error' : '' }}">
@@ -61,7 +61,7 @@
             </div>
          </div>
 
-         <div class="card-footer px-1 py-1">
+         <div class="card-footer p-1">
             <div>Fields with <i class="fa fa-star" style="color:#ff0000" aria-hidden="true"></i> are required</div>
          </div>
       </div>

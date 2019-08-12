@@ -23,7 +23,7 @@
 			<div class="col">
 				<div class="card">
 					<!--CARD HEADER-->
-					<div class="card-header card_header">
+					<div class="card-header section_header p-2">
 						<i class="fas fa-comments"></i>
 						Comments
 						<span class="float-right">
@@ -42,16 +42,16 @@
 							   </a>
 							@endif --}}
 
-							@include('comments.buttons.back')
-							@include('comments.buttons.reset')
-							@include('comments.buttons.save')
+							@include('comments.buttons.back', ['size'=>'xs'])
+							@include('comments.buttons.reset', ['size'=>'xs'])
+							@include('comments.buttons.save', ['size'=>'xs'])
 
 							{{-- {{ Form::button('<i class="fas fa-sync-alt"></i> Reset Form', ['type'=>'reset', 'class'=>'btn btn-sm btn-outline-secondary px-1 py-0']) }} --}}
 							{{-- {{ Form::button('<i class="fa fa-save"></i> Update ', ['type' => 'submit', 'class' => 'btn btn-sm btn-outline-bprimary px-1 py-0'])  }} --}}
 						</span>
 					</div>
 
-					<div class="card-body card_body">
+					<div class="card-body section_body p-2">
 
 						<div class="row">
 							<div class="col">

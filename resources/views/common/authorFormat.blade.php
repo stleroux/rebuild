@@ -29,12 +29,12 @@
 		@if($field == 'user')
 			<i class="fas fa-sm fa-link"></i>
 			<a href="" data-toggle="modal" data-target="#view{{ $field }}Modal{{ $model->id }}">
-				{{ $model->user->profile->last_name }}, {{ $model->user->profile->first_name }}</a>
+				{{ $model->user->last_name }}, {{ $model->user->first_name }}</a>
 		@elseif($field == 'modifiedBy')
 			@if($model->modified_by_id)
 				<i class="fas fa-sm fa-link"></i>
 				<a href="" data-toggle="modal" data-target="#view{{ $field }}Modal{{ $model->id }}">
-					{{ $model->modifiedBy->profile->last_name }}, {{ $model->modifiedBy->profile->first_name }}</a>
+					{{ $model->modifiedBy->last_name }}, {{ $model->modifiedBy->first_name }}</a>
 			@else
 				N/A
 			@endif
@@ -42,7 +42,7 @@
 			@if($model->last_viewed_by_id)
 				<i class="fas fa-sm fa-link"></i>
 				<a href="" data-toggle="modal" data-target="#view{{ $field }}Modal{{ $model->id }}">
-					{{ $model->lastViewedBy->profile->last_name }}, {{ $model->lastViewedBy->profile->first_name }}</a>
+					{{ $model->lastViewedBy->last_name }}, {{ $model->lastViewedBy->first_name }}</a>
 			@else
 				N/A
 			@endif
@@ -52,12 +52,12 @@
 		@if($field == 'user')
 			<i class="fas fa-sm fa-link"></i>
 			<a href="" data-toggle="modal" data-target="#view{{ $field }}Modal{{ $model->id }}">
-				 {{ $model->user->profile->first_name }} {{ $model->user->profile->last_name }}</a>
+				 {{ $model->user->first_name }} {{ $model->user->last_name }}</a>
 		@elseif($field == 'modifiedBy')
 			@if($model->modified_by_id)
 				<i class="fas fa-sm fa-link"></i>
 				<a href="" data-toggle="modal" data-target="#view{{ $field }}Modal{{ $model->id }}">
-					{{ $model->modifiedBy->profile->first_name }} {{ $model->modifiedBy->profile->last_name }}</a>
+					{{ $model->modifiedBy->first_name }} {{ $model->modifiedBy->last_name }}</a>
 			@else
 				N/A
 			@endif
@@ -65,7 +65,7 @@
 			@if($model->last_viewed_by_id)
 				<i class="fas fa-sm fa-link"></i>
 				<a href="" data-toggle="modal" data-target="#view{{ $field }}Modal{{ $model->id }}">
-					{{ $model->lastViewedBy->profile->first_name }} {{ $model->lastViewedBy->profile->last_name }}</a>
+					{{ $model->lastViewedBy->first_name }} {{ $model->lastViewedBy->last_name }}</a>
 			@else
 				N/A
 			@endif
