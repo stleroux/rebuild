@@ -31,11 +31,11 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Permission');
     }
 
-    public function profile()
-    {
-        return $this->hasOne('App\Models\Profile');
-        // ->withTrashed();
-    }
+    // public function profile()
+    // {
+    //     return $this->hasOne('App\Models\Profile');
+    //     // ->withTrashed();
+    // }
 
     // public function comments()
     // {

@@ -27,7 +27,10 @@
             <i class="fas fa-user"></i>
             Edit User :: {{ $user->username }}
             <span class="float-sm-right">
-               @include('users.addins.back', ['size'=>'xs'])
+               @include('users.buttons.addAllPermissions', ['size'=>'xs'])
+               @include('users.buttons.removeAllPermissions', ['size'=>'xs'])
+
+               @include('users.buttons.back', ['size'=>'xs'])
 
                @if(checkPerm('user_edit'))
                   <button type="submit" class="btn btn-xs btn-info" name="submit" value="continue" title="Update & Continue">

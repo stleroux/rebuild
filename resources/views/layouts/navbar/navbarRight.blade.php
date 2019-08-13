@@ -37,8 +37,8 @@
             My Profile
          </a>
 
-         <a href="{{ route('profile.resetPwd', Auth::user()->id) }}"
-            class="dropdown-item {{ Route::is('profile.resetPwd') ? 'active' : '' }} p-2">
+         <a href="{{ route('resetPassword.edit', Auth::user()->id) }}"
+            class="dropdown-item {{ Route::is('resetPassword.edit') ? 'active' : '' }} p-2">
             <i class="fas fa-user-lock"></i>
             Reset My Password
          </a>

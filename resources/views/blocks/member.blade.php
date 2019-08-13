@@ -8,8 +8,8 @@
          My Profile
       </a>
 
-      <a href="{{ route('profile.resetPwd', Auth::user()->id) }}"
-         class="list-group-item list-group-item-action px-1 py-1 {{ Route::is('profile.resetPwd') ? 'active' : '' }}">
+      <a href="{{ route('resetPassword.edit', Auth::user()->id) }}"
+         class="list-group-item list-group-item-action px-1 py-1 {{ Route::is('resetPassword.edit') ? 'active' : '' }}">
          <i class="fas fa-user-lock pl-2"></i>
          Reset My Password
       </a>

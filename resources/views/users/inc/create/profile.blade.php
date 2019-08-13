@@ -1,347 +1,167 @@
 <div class="card mb-2">
    <div class="card-body section_body p-2">
       
-
-                  {{-- Profile Info --}}
+      <div class="form-row">
+         <div class="col-9">
+            {{-- Account Info --}}
+            <div class="card mb-2">
+               <div class="card-header card_header p-2">Account Info</div>
+               <div class="card-body section_body p-2">
                   <div class="form-row">
-                     <div class="col-9">
-                        <div class="card mb-2">
-                           <div class="card-header card_header p-2">Profile Info</div>
-                           <div class="card-body section_body p-2">
-                              <div class="form-row">
-                                 <div class="col-md-3">
-                                    <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
-                                       <label for="first_name" class="required">First Name</label>
-                                       <input id="first_name" type="text" class="form-control form-control-sm" autofocus="autofocus" name="first_name" value="{{ $user->first_name }}">
-                                       @if ($errors->has('first_name'))
-                                          <span class="text-danger small">
-                                             {{ $errors->first('first_name') }}
-                                          </span>
-                                       @endif
-                                    </div>
-                                 </div>
-                                 <div class="col-md-3">
-                                    <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
-                                       <label for="last_name" class="required">Last Name</label>
-                                       <input id="last_name" type="text" class="form-control form-control-sm" name="last_name" value="{{ $user->last_name }}">
-                                       @if ($errors->has('last_name'))
-                                          <span class="text-danger small">
-                                             {{ $errors->first('last_name') }}
-                                          </span>
-                                       @endif
-                                    </div>
-                                 </div>
-                                 <div class="col-md-2">
-                                    <div class="form-group{{ $errors->has('telephone') ? ' has-error' : '' }}">
-                                       <label for="telephone">Telephone</label>
-                                       <input id="telephone" type="text" class="form-control form-control-sm" name="telephone" value="{{ $user->telephone }}">
-                                    </div>
-                                 </div>
-                              </div>
-
-                              <div class="form-row">
-                                 <div class="col-sm-3">
-                                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                       {{ Form::label('email', 'Email Address', ['class'=>'required']) }}
-                                       {{ Form::text('email', null, ['class' => 'form-control form-control-sm']) }}
-                                       @if ($errors->has('email'))
-                                          <span class="text-danger small">{{ $errors->first('email') }}</span>
-                                       @endif
-                                    </div>
-                                 </div>
-                                 <div class="col-sm-2">
-                                    <div class="form-group">
-                                       <label for="public_email">Public Email</label>
-                                       <i class="far fa-question-circle float-right" data-toggle="tooltip" data-placement="top" title="Do you want to show your email address to all users?"></i>
-                                       {{ Form::select('public_email', ['No','Yes'], null, ['class'=>'form-control form-control-sm']) }}
-                                    </div>
-                                 </div>
-                              </div>
-
-                              <div class="form-row">
-                                 <div class="col-sm-2">
-                                    <div class="form-group">
-                                       <label for="username">Username</label>
-                                       <input id="username" type="text" class="form-control form-control-sm" name="username" readonly="readonly" value="{{ $user->username }}">
-                                    </div>
-                                 </div>
-                                 <div class="col-sm-2">
-                                    <div class="form-group">
-                                       <label for="created_at">Created On</label>
-                                       @if($user->created_at)
-                                          <input id="created_at" type="text" class="form-control form-control-sm" name="created_at" readonly="readonly" value="{{ $user->created_at }}">
-                                       @else
-                                          <input id="created_at" type="text" class="form-control form-control-sm" name="created_at" readonly="readonly" value="Unknown">
-                                       @endif
-                                    </div>
-                                 </div>
-                                 <div class="col-sm-2">
-                                    <div class="form-group">
-                                       <label for="last_login_date">Last Login Date</label>
-                                       {{-- <input id="last_login_date" type="text" class="form-control form-control-sm" name="last_login_date" readonly="readonly" value="{{ $user->last_login_date->format('M d, Y') }}"> --}}
-                                    </div>
-                                 </div>
-                                 <div class="col-sm-2">
-                                    <div class="form-group">
-                                       <label for="login_count">Login Count</label>
-                                       <input id="login_count" type="text" class="form-control form-control-sm" name="login_count" readonly="readonly" value="{{ $user->login_count }}">
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="card-footer card_footer p-1">
-                              Fields marked with an <span class="required"></span> are required.
-                           </div>
+                     <div class="col-md-3">
+                        <div class="form-group {{ $errors->has('username') ? 'has-error' : '' }}">
+                           <label for="username" class="required">Username</label>
+                           <input name="username" type="text" class="form-control form-control-sm" value="{{ old('username') }}">
+                           <span class="bg-danger text-dark">{{ $errors->first('username') }}</span>
                         </div>
                      </div>
-                     <div class="col-3">
-                        @include('users.blocks.edit_image')
+                     <div class="col-md-3">
+                        <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
+                           <label for="password" class="required">Password</label>
+                           <input name="password" type="text" class="form-control form-control-sm" value="" placeholder="Auto set to password or specify">
+                           {{-- {!! Form::text('password', null, array('placeholder'=>'Automatically set to :: password', 'class'=>'form-control form-control-sm', 'readonly'=>'readonly')) !!} --}}
+                        </div>
                      </div>
                   </div>
-
-                  {{-- Address Info --}}
+               </div>
+            </div>
+            {{-- Profile Info --}}
+            <div class="card mb-2">
+               <div class="card-header card_header p-2">Profile Info</div>
+               <div class="card-body section_body p-2">
                   <div class="form-row">
-                     <div class="col">
-                        <div class="card mb-2">
-                           <div class="card-header card_header p-2">Address Info</div>
-                           <div class="card-body section_body p-2">
-                              <div class="form-row">
-                                 <div class="col-sm-2">
-                                    <div class="form-group">
-                                       <label for="civic_number" class=" control-label">Civic/Unit N<sup>o</sup></label>
-                                       <input id="civic_number" type="text" class="form-control form-control-sm" name="civic_number" value="{{ $user->civic_number }}">
-                                    </div>
-                                 </div>
-                                 <div class="col-sm-5">
-                                    <div class="form-group">
-                                       <label for="address1" class=" control-label">Address 1</label>
-                                       <input id="address1" type="text" class="form-control form-control-sm" name="address1" value="{{ $user->address1 }}">
-                                    </div>
-                                 </div>
-                                 <div class="col-sm-5">
-                                    <div class="form-group">
-                                       <label for="address2" class=" control-label">Address 2</label>
-                                       <input id="address2" type="text" class="form-control form-control-sm" name="address2" value="{{ $user->address2 }}">
-                                    </div>
-                                 </div>
-                              </div>
+                     <div class="col-md-3">
+                        <div class="form-group">
+                           <label for="first_name">First Name</label>
+                           <input name="first_name" type="input-text" class="form-control form-control-sm" value="{{ old('first_name') }}">
+                        </div>
+                     </div>
+                     <div class="col-md-3">
+                        <div class="form-group">
+                           <label for="last_name">Last Name</label>
+                           <input name="last_name" type="text" class="form-control form-control-sm" value="{{ old('last_name') }}">
+                        </div>
+                     </div>
+                     <div class="col-md-4">
+                        <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
+                           <label for="email" class="required">Email Address</label>
+                           <input name="email" type="text" class="form-control form-control-sm" value="{{ old('email') }}">
+                           <span class="bg-danger text-dark">{{ $errors->first('email') }}</span>
+                        </div>
+                     </div>
+                     <div class="col-md-2">
+                        <div class="form-group">
+                           <label for="public_email">Public Email</label>
+                           <i class="far fa-question-circle float-right" data-toggle="tooltip" data-placement="top" title="Do you want to show your email address to all users?"></i>
+                           {{ Form::select('public_email', ['No','Yes'], null, ['class'=>'form-control form-control-sm']) }}
+                        </div>
+                     </div>
+                  </div>
+                  <div class="form-row">
+                     <div class="col-md-2">
+                        <div class="form-group">
+                           <label for="telephone">Telephone</label>
+                           <input name="telephone" type="text" class="form-control form-control-sm" value="{{ old('telephone') }}">
+                        </div>
+                     </div>
+                     <div class="col-md-2">
+                        <div class="form-group">
+                           <label for="cell">Cell Phone</label>
+                           <input name="cell" type="text" class="form-control form-control-sm" value="{{ old('cell') }}">
+                        </div>
+                     </div>
+                     <div class="col-md-2">
+                        <div class="form-group">
+                           <label for="fax">Fax</label>
+                           <input name="fax" type="text" class="form-control form-control-sm" value="{{ old('fax') }}">
+                        </div>
+                     </div>
+                     <div class="col-md-3">
+                        <div class="form-group">
+                           <label for="website">Website</label>
+                           <input name="website" type="text" class="form-control form-control-sm" value="{{ old('website') }}">
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
 
-                              <div class="form-row">
-                                 <div class="col-sm-2">
-                                    <div class="form-group">
-                                       <label for="city" class=" control-label">City</label>
-                                       <input id="city" type="text" class="form-control form-control-sm" name="city" value="{{ $user->city }}">
-                                    </div>
-                                 </div>
-                                 <div class="col-sm-2">
-                                    <div class="form-group">
-                                       <label for="province" class=" control-label">Province/State</label>
-                                       <input id="province" type="text" class="form-control form-control-sm" name="province" value="{{ $user->province }}">
-                                    </div>                                    
-                                 </div>
-                                 <div class="col-sm-2">
-                                    <div class="form-group">
-                                       <label for="postal_code" class=" control-label">Postal/Zip Code</label>
-                                       <input id="postal_code" type="text" class="form-control form-control-sm" name="postal_code" value="{{ $user->postal_code }}">
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
+         <div class="col-3">
+            @include('users.blocks.edit_image')
+         </div>
+      </div>
+
+      {{-- Address Info --}}
+      <div class="form-row">
+         <div class="col">
+            <div class="card mb-2">
+               <div class="card-header card_header p-2">Address Info</div>
+               <div class="card-body section_body p-2">
+                  <div class="form-row">
+                     <div class="col-md-1">
+                        <div class="form-group">
+                           <label for="civic_number" class="control-label">Civic/Unit N<sup>o</sup></label>
+                           <input name="civic_number" type="text" class="form-control form-control-sm" value="{{ old('civic_number') }}">
+                        </div>
+                     </div>
+                     <div class="col-md-4">
+                        <div class="form-group">
+                           <label for="address_1" class="control-label">Address 1</label>
+                           <input name="address_1" type="text" class="form-control form-control-sm" value="{{ old('address_1') }}">
+                        </div>
+                     </div>
+                     <div class="col-md-4">
+                        <div class="form-group">
+                           <label for="address_2" class="control-label">Address 2</label>
+                           <input name="address_2" type="text" class="form-control form-control-sm" value="{{ old('address_2') }}">
                         </div>
                      </div>
                   </div>
 
-                  {{-- Preferences Info --}}
-                  <div class="row">
-                     <div class="col">
-                        <div class="card mb-2">
-                           <div class="card-header section_header p-1 m-0">
-                              <span class="h5 align-middle pt-2 pb-1">
-                                 User Preferences 
-                              </span>
-                              <span class="text-light align-bottom">
-                                    <small class="align-bottom">(Features marked with  <i class="far fa-check-square"></i> have been implemented in code)</small>
-                                 </span>
-                              
-                              <span class="float-right">
-                                 <a href="{{-- {{ route('profile.resetPreferences', $user->id) }} --}}" class="btn btn-sm btn-outline-primary px-1 py-0">Reset All Defaults</a>
-                              </span>
-                           </div>
-
-                           <div class="card-body section_body">
-                              <table class="table table-sm table-hover text-dark mb-2">
-                                 <thead>
-                                    <tr>
-                                       <td><i class="far fa-check-square"></i></td>
-                                       <th>Title</th>
-                                       <th>Option</th>
-                                       <th>Description</th>
-                                    </tr>
-                                 </thead>
-                                 <tbody>
-                                    {{-- ACTION BUTTONS --}}
-                                    <tr>
-                                       <td></td>
-                                       <td>Action Buttons</td>
-                                       <td>
-                                          {{ Form::select('action_buttons', array(
-                                             '1' => 'Icons and Text (Default)',
-                                             '2' => 'Icons only',
-                                             '3' => 'Text Only',
-                                             ), $user->action_buttons, array('class'=>'form-control form-control-sm'))
-                                          }}
-                                       </td>
-                                       <td>Changes the appearance of some buttons (Edit & Delete only at the moment).</td>
-                                    </tr>
-                                    {{-- ALERT FADE TIME --}}
-                                    <tr>
-                                       <td><i class="far fa-check-square"></i></td>
-                                       <td>Alert Fade Time</td>
-                                       <td>
-                                          {{ Form::select('alert_fade_time', array(
-                                             '2000' => '2 seconds',
-                                             '3000' => '3 seconds',
-                                             '4000' => '4 seconds',
-                                             '5000' => '5 seconds (Default)',
-                                             '6000' => '6 seconds',
-                                             '7000' => '7 seconds',
-                                             '8000' => '8 seconds',
-                                             '9000' => '9 seconds',
-                                             '10000' => '10 seconds',
-                                             '15000' => '15 seconds',
-                                             '20000' => '20 seconds',
-                                             '1000000000' => 'Forever',
-                                             ), $user->alert_fade_time, array('class'=>'form-control form-control-sm'))
-                                          }}
-                                       </td>
-                                       <td>Changes the length of time the alerts will be displayed.</td>
-                                    </tr>
-                                    {{-- AUTHOR FORMAT --}}
-                                    <tr>
-                                       <td></td>
-                                       <td>Author Format</td>
-                                       <td>
-                                          {{-- {{ Form::select('author_format', array(
-                                             '1' => 'Username (Default)' ,
-                                             '2' => 'Last Name, First Name',
-                                             '3' => 'First Name Last Name'
-                                             ), $user->author_format, array('class'=>'form-control form-control-sm'))
-                                          }} --}}
-                                       </td>
-                                       <td>Changes the way the author's name will be displayed.</td>
-                                    </tr>
-                                    {{-- DATE FORMAT --}}
-                                    <tr>
-                                       <td></td>
-                                       <td>Date Format</td>
-                                       <td>
-                                          {{ Form::select('date_format', array(
-                                             '1' => 'Jan 01, 2017 (Default)',
-                                             '2' => 'Jan 1, 2017',
-                                             '3' => '01/01/2017 (M-D-Y)',
-                                             '4' => '1/01/2017 (M-D-Y)',
-                                             '5' => '01 Jan 2017',
-                                             '6' => '1 Jan 2017',
-                                             '7' => '01/01/2017 (D-M-Y)',
-                                             '8' => '1/01/2017 (D-M-Y)',
-                                             ), $user->date_format, array('class'=>'form-control form-control-sm'))
-                                          }}
-                                       </td>
-                                       <td>Changes the way the dates are displayed.</td>
-                                    </tr>
-                                    {{-- LANDING PAGE --}}
-                                    <tr>
-                                       <td></td>
-                                       <td>Landing Page</td>
-                                       <td>
-                                          {{-- {{ Form::select('landing_page_id', $landingPages, $user->landing_page_id , ['class' => 'form-control form-control-sm']) }} --}}
-                                       </td>
-                                       <td>The page you will be redirected to when you log in to the site.</td>
-                                    </tr>
-                                    {{-- ROWS PER PAGE --}}
-                                    <tr>
-                                       <td></td>
-                                       <td>Rows Per Page</td>
-                                       <td>
-                                          {{ Form::select('rows_per_page', array(
-                                             '5' => '5',
-                                             '10' => '10',
-                                             '15' => '15 (Default)',
-                                             '20' => '20',
-                                             '25' => '25',
-                                             '50' => '50',
-                                             '100' => '100'
-                                             ), $user->rows_per_page, array('class'=>'form-control form-control-sm'))
-                                          }}
-                                       </td>
-                                       <td>Changes the number of entries displayed in grids.</td>
-                                    </tr>
-                                    {{-- FRONTEND STYLE --}}
-                                    <tr>
-                                       <td></td>
-                                       <td>Frontend Style</td>
-                                       <td>
-                                          {{ Form::select('frontendStyle', array(
-                                             'bootstrap' => 'Bootstrap',
-                                             'cerulean' => 'Cerulean',
-                                             'cosmo' => 'Cosmo',
-                                             'cyborg'=>'Cyborg',
-                                             'darkly'=>'Darkly',
-                                             'flatly'=>'Flatly',
-                                             'journal'=>'Journal',
-                                             'lumen'=>'Lumen',
-                                             'paper'=>'Paper',
-                                             'readable'=>'Readable',
-                                             'sandstone'=>'Sandstone',
-                                             'simplex'=>'Simplex',
-                                             'slate'=>'Slate (Default)',
-                                             'spacelab'=>'SpaceLab',
-                                             'superhero'=>'SuperHero',
-                                             'united'=>'United',
-                                             'yeti'=>'Yeti',
-                                             ), $user->frontendStyle, array('class'=>'form-control form-control-sm'))
-                                          }}
-                                       </td>
-                                       <td>Choosing a different style will change the apperance of the whole site.</td>
-                                    </tr>
-                                    {{-- BACKEND STYLE --}}
-                                    <tr>
-                                       <td></td>
-                                       <td>Backend Style</td>
-                                       <td>
-                                          {{ Form::select('backendStyle', array(
-                                             'bootstrap' => 'Bootstrap (Default)',
-                                             'cerulean' => 'Cerulean',
-                                             'cosmo' => 'Cosmo',
-                                             'cyborg'=>'Cyborg',
-                                             'darkly'=>'Darkly',
-                                             'flatly'=>'Flatly',
-                                             'journal'=>'Journal',
-                                             'lumen'=>'Lumen',
-                                             'paper'=>'Paper',
-                                             'readable'=>'Readable',
-                                             'sandstone'=>'Sandstone',
-                                             'simplex'=>'Simplex',
-                                             'slate'=>'Slate',
-                                             'spacelab'=>'SpaceLab',
-                                             'superhero'=>'SuperHero',
-                                             'united'=>'United',
-                                             'yeti'=>'Yeti',
-                                             ), $user->backendStyle, array('class'=>'form-control form-control-sm'))
-                                          }}
-                                       </td>
-                                       <td>Choosing a different style will change the apperance of the whole site.</td>
-                                    </tr>
-                                 </tbody>
-                              </table>
-                           </div>
-                           {{-- BACKEND STYLE --}}
-                           <input type="hidden" name="backendStyle" value="{{ $user->backendStyle }}">
-
+                  <div class="form-row">
+                     <div class="col-md-2">
+                        <div class="form-group">
+                           <label for="city" class="control-label">City</label>
+                           <input name="city" type="text" class="form-control form-control-sm" value="{{ old('city') }}">
+                        </div>
+                     </div>
+                     <div class="col-md-2">
+                        <div class="form-group">
+                           <label for="province" class="control-label">Province/State</label>
+                           <input name="province" type="text" class="form-control form-control-sm" value="{{ old('province') }}">
+                        </div>                                    
+                     </div>
+                     <div class="col-md-2">
+                        <div class="form-group">
+                           <label for="postal_code" class="control-label">Postal/Zip Code</label>
+                           <input name="postal_code" type="text" class="form-control form-control-sm" value="{{ old('postal_code') }}">
                         </div>
                      </div>
                   </div>
+               </div>
+            </div>
+         </div>
+      </div>
 
+      {{-- Other Info --}}
+      <div class="form-row">
+         <div class="col">
+            <div class="card mb-2">
+               <div class="card-header card_header p-2">Other Info</div>
+               <div class="card-body section_body p-2">
+                  <div class="form-row">
+                     <div class="col-sm-12">
+                        <div class="form-group">
+                           <label for="notes" class="control-label">Notes</label>
+                           <textarea name="notes" class="form-control form-control-sm" rows="2">{{ old('notes') }} </textarea>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
 
    </div>
 </div>

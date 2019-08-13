@@ -25,7 +25,7 @@
 					Users
 					<span class="float-sm-right">
 						@if(checkPerm('user_create'))
-							@include('users.addins.add', ['size'=>'xs'])
+							@include('users.buttons.add', ['size'=>'xs'])
 						@endif
 					</span>
 				</div>
@@ -53,11 +53,11 @@
 									<td>{{ $user->created_at->format('M d, Y') }}</td>
 									<td class="text-right">
 										@if(checkPerm('user_show'))
-											@include('users.addins.show', ['size'=>'xs'])
+											@include('users.buttons.show', ['size'=>'xs'])
 										@endif
 
 										@if(checkPerm('change_user_pwd'))
-											<a href="{{ route('users.changeUserPWD', $user->id) }}"
+											<a href="{{ route('changePassword.edit', $user->id) }}"
 												class="btn btn-xs btn-secondary text-light"
 												title="Reset User's Password">
 												<i class="fas fa-unlock-alt"></i>
@@ -65,11 +65,11 @@
 										@endif
 										
 										@if(checkPerm('user_edit'))
-											@include('users.addins.edit', ['size'=>'xs'])
+											@include('users.buttons.edit', ['size'=>'xs'])
 										@endif
 
 										@if(checkPerm('user_delete'))
-											@include('users.addins.delete', ['size'=>'xs'])
+											@include('users.buttons.delete', ['size'=>'xs'])
 										@endif
 									</td>
 								</tr>

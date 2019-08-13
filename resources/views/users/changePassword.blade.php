@@ -28,7 +28,7 @@
    @endif
 
    {{-- {!! Form::open(['method'=>'post', 'route'=>['users.changeUserPWDPost', $user->id]]) !!} --}}
-   {!! Form::open(array('route'=>['users.changeUserPWDPost', $user->id], 'method'=>'POST')) !!}
+   {!! Form::open(array('route'=>['changePassword.update', $user->id], 'method'=>'PUT')) !!}
       {{ Form::token() }}
       {{-- <input type="text" name="id" value="{{ $user->id }}" /> --}}
       <div class="card mb-2">
@@ -36,7 +36,7 @@
          <div class="card-header section_header p-2">
             Change Password for {{ ucfirst($user->username) }}
             <span class="float-sm-right">
-               @include('users.addins.back', ['size'=>'xs'])
+               @include('users.buttons.back', ['size'=>'xs'])
 
                @if(checkPerm('user_edit'))
                   <button type="submit" class="btn btn-xs btn-info" title="Change Password">

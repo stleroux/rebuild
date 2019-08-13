@@ -3,10 +3,10 @@
    <div class="card-body section_body p-2">
       <div class="form-row">
          <div class="col text-center">
-            @if ($user->profile->image)
-               {{ Html::image("_profiles/" . $user->profile->image, "",array('height'=>'115','width'=>'115')) }}
+            @if ($user->image)
+               {{ Html::image("_profiles/" . $user->image, "",array('height'=>'125','width'=>'125')) }}
             @else
-               {{ Html::image("_profiles/no_photo.jpg", "", array('height'=>'100','width'=>'100')) }}
+               {{ Html::image("_profiles/no_photo.jpg", "", array('height'=>'125','width'=>'125')) }}
             @endif
          </div>
       </div>

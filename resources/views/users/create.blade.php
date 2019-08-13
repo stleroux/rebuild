@@ -17,18 +17,20 @@
 
 @section('content')
 
-   {!! Form::open(array('route' => 'users.store','method'=>'POST')) !!}
-
+   {!! Form::open(['route' => 'users.store', 'files'=>'true']) !!}
+   
       <div class="card mb-3">
          <!--CARD HEADER-->
          <div class="card-header section_header p-2">
             <i class="fas fa-user"></i>
             New User
             <span class="float-sm-right">
-               @include('users.addins.back', ['size'=>'xs'])
+               {{-- @include('users.buttons.addAllPermissions', ['size'=>'xs'])
+               @include('users.buttons.removeAllPermissions', ['size'=>'xs']) --}}
+               @include('users.buttons.back', ['size'=>'xs'])
                @if(checkPerm('user_create'))
-                  @include('users.addins.reset', ['size'=>'xs'])
-                  @include('users.addins.save', ['size'=>'xs'])
+                  @include('users.buttons.reset', ['size'=>'xs'])
+                  @include('users.buttons.save', ['size'=>'xs'])
                @endif
             </span>
          </div>
@@ -37,15 +39,15 @@
          <div class="card-body section_body p-2">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                <li class="nav-item">
-                  <a class="nav-link active" id="intro-tab" data-toggle="tab" href="#intro" role="tab" aria-controls="intro" aria-selected="true">
-                     Introduction
+                  <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
+                     Profile
                   </a>
                </li>
-               <li class="nav-item">
+{{--                <li class="nav-item">
                   <a class="nav-link" id="details-tab" data-toggle="tab" href="#details" role="tab" aria-controls="details" aria-selected="true">
                      User Details
                   </a>
-               </li>
+               </li> --}}
                <li class="nav-item">
                   <a class="nav-link" id="core-tab" data-toggle="tab" href="#core" role="tab" aria-controls="core" aria-selected="true">
                      Core Permissions
@@ -62,19 +64,19 @@
                   </a>
                </li>
                <li class="nav-item">
-                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
-                     Profile
+                  <a class="nav-link" id="instructions-tab" data-toggle="tab" href="#instructions" role="tab" aria-controls="instructions" aria-selected="true">
+                     Instructions
                   </a>
                </li>
             </ul>
 
             <div class="tab-content pb-0 mb-0" id="myTabContent">
-               <div class="tab-pane fade show active" id="intro" role="tabpanel" aria-labelledby="intro-tab">
-                  @include('users.inc.create.intro')
+               <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                  @include('users.inc.create.profile')
                </div>
-               <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
+{{--                <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
                   @include('users.inc.create.details')
-               </div>
+               </div> --}}
                <div class="tab-pane fade" id="core" role="tabpanel" aria-labelledby="core-tab">
                   @include('users.inc.create.core')
                </div>
@@ -84,9 +86,9 @@
                <div class="tab-pane fade" id="modules" role="tabpanel" aria-labelledby="modules-tab">
                   @include('users.inc.create.modules')
                </div>
-               <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                  @include('users.inc.create.profile')
-               </div>
+               <div class="tab-pane fade" id="instructions" role="tabpanel" aria-labelledby="instructions-tab">
+                  @include('users.inc.create.instructions')
+               </div>               
             </div>
          </div>
 

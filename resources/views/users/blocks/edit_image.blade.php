@@ -4,9 +4,9 @@
       <div class="form-row">
          <div class="col text-center">
             @if ($user->image)
-               {{ Html::image("_profiles/" . $user->image, "",array('height'=>'115','width'=>'115')) }}
+               {{ Html::image("_profiles/" . $user->image, "", array('height'=>'125','width'=>'125')) }}
             @else
-               {{ Html::image("_profiles/no_photo.jpg", "", array('height'=>'100','width'=>'100')) }}
+               {{ Html::image("_profiles/no_photo.jpg", "", array('height'=>'125','width'=>'125')) }}
             @endif
          </div>
       </div>

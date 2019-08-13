@@ -33,8 +33,8 @@
 									   name="login" value="{{ old('username') ?: old('email') }}" required autofocus>
 						 
 								@if ($errors->has('username') || $errors->has('email'))
-									<span class="invalid-feedback">
-										<strong>{{ $errors->first('username') ?: $errors->first('email') }}</strong>
+									<span class="invalid-feedback bg-danger text-dark">
+										{{ $errors->first('username') ?: $errors->first('email') }}
 									</span>
 								@endif
 							</div>

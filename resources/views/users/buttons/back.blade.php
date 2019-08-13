@@ -1,4 +1,9 @@
-@if(Session::get('fromPage')==='users.index')
+<a href="{{ Session::get('fromPage') }}"
+   class="btn btn-{{ $size }} btn-primary"
+   title="Back">
+   <i class="{{ Config::get('buttons.back') }}"></i>
+</a>
+{{-- @if(Session::get('fromPage')==='users.index')
    <a href="{{ route('users.index') }}" class="btn btn-{{ $size }} btn-primary">
       <i class="{{ Config::get('buttons.back') }}"></i>
    </a>
@@ -6,7 +11,7 @@
    <a href="{{ route(Session::get('fromPage')) }}" class="btn btn-{{ $size }} btn-primary">
       <i class="{{ Config::get('buttons.back') }}"></i>
    </a>
-@endif
+@endif --}}
 
 {{-- @foreach ($categories as $category)
    @if (false !== stripos($_SERVER['HTTP_REFERER'], "recipes/" . $category->name))

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section ('stylesheets')
-   {{-- {{ Html::style('css/woodbarn.css') }} --}}
+   {{ Html::style('css/woodbarn.css') }}
 @stop 
 
 @section('left_column')
@@ -13,8 +13,10 @@
 @endsection
 
 @section('content')
-<form method="POST" action="{{ route('profile.resetPwdPost', $user->id) }}">
-	{{ csrf_field() }}
+<form method="POST" action="{{ route('resetPassword.update', $user->id) }}">
+	@method('PUT')
+   @csrf
+
 	<div class="col">
 		<div class="card mb-2">
 			<div class="card-header section_header p-2">
@@ -22,6 +24,7 @@
 				Reset My Password
 				<span class="float-right">
 					{{ Form::button('<i class="fa fa-save"></i> Reset Password', array('type'=>'submit', 'class'=>'btn btn-xs btn-primary')) }}
+					{{-- @include('users.buttons.save', ['size'=>'xs']) --}}
 				</span>
 			</div>
 
@@ -56,6 +59,12 @@
 					</div>
 				</div>
 			</div>
+
+			<!-- CARD FOOTER -->
+         <div class="card-footer pt-1 pb-1 pl-2">
+            Fields marked with an <span class="required"></span> are required
+         </div>
+
 		</div>
 	</div>
 </form>

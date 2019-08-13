@@ -22,5 +22,6 @@ return [
    'trash'        => 'far fa-trash-alt fa-fw',
    'trashed'      => 'fas fa-trash fa-fw',
    'unpublished'  => 'fas fa-ban fa-fw',
+   'permissions'  => 'fas fa-user-shield fa-fw'
    
 ];

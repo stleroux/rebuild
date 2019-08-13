@@ -33,6 +33,11 @@ function checkPerm($pname, $model = null)
 				{
 					return true;
 				}
+
+				if($model->id == auth::user()->id)
+				{
+					return true;
+				}
 			}
 		}
 	}

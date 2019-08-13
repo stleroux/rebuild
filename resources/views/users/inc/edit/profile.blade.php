@@ -10,9 +10,10 @@
                   <div class="form-row">
                      {{-- <div class="col-md-3"> --}}
                         <div class="col-md-2">
-                           <div class="form-group">
+                           <div class="form-group {{ $errors->has('username') ? 'has-error' : '' }}">
                               <label for="username" class="required">Username</label>
                               <input name="username" type="text" class="form-control form-control-sm" value="{{ $user->username }}">
+                              <span class="bg-danger text-dark">{{ $errors->first('username') }}</span>
                            </div>
                         </div>
                         <div class="col-md-2">
@@ -65,11 +66,19 @@
                         </div>
                      </div>
                      <div class="col-md-4">
-                        <div class="form-group">
-                           {{ Form::label('email', 'Email Address', ['class'=>'required']) }}
-                           {{ Form::text('email', $user->email, ['class'=>'form-control form-control-sm']) }}
+                        <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
+                           <label for="email" class="required">Email Address</label>
+                           <input name="email" type="text" class="form-control form-control-sm" value="{{ $user->email }}">
+                           <span class="bg-danger text-dark">{{ $errors->first('email') }}</span>
                         </div>
-                     </div>                              
+                     </div>
+                     <div class="col-md-2">
+                        <div class="form-group">
+                           <label for="public_email">Public Email</label>
+                           <i class="far fa-question-circle float-right" data-toggle="tooltip" data-placement="top" title="Do you want to show your email address to all users?"></i>
+                           {{ Form::select('public_email', ['No','Yes'], $user->public_email, ['class'=>'form-control form-control-sm']) }}
+                        </div>
+                     </div>
                   </div>
                   <div class="form-row">
                      <div class="col-md-2">

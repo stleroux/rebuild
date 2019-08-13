@@ -25,7 +25,7 @@
             <i class="fas fa-user"></i>
             View User :: {{ $user->first_name }} {{ $user->last_name }}
             <span class="float-sm-right">
-               @include('users.addins.back', ['size'=>'xs'])
+               @include('users.buttons.back', ['size'=>'xs'])
             </span>
          </div>
          
@@ -33,13 +33,8 @@
          <div class="card-body section_body p-2">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                <li class="nav-item">
-                  <a class="nav-link active" id="intro-tab" data-toggle="tab" href="#intro" role="tab" aria-controls="intro" aria-selected="true">
-                     Introduction
-                  </a>
-               </li>
-               <li class="nav-item">
-                  <a class="nav-link" id="details-tab" data-toggle="tab" href="#details" role="tab" aria-controls="details" aria-selected="true">
-                     User Details
+                  <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
+                     Profile
                   </a>
                </li>
                <li class="nav-item">
@@ -58,18 +53,15 @@
                   </a>
                </li>
                <li class="nav-item">
-                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
-                     Profile
+                  <a class="nav-link" id="instructions-tab" data-toggle="tab" href="#instructions" role="tab" aria-controls="instructions" aria-selected="true">
+                     Instructions
                   </a>
                </li>
             </ul>
 
             <div class="tab-content pb-0 mb-0" id="myTabContent">
-               <div class="tab-pane fade show active" id="intro" role="tabpanel" aria-labelledby="intro-tab">
-                  @include('users.inc.show.intro')
-               </div>
-               <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
-                  @include('users.inc.show.details')
+               <div class="tab-pane fade" id="instructions" role="tabpanel" aria-labelledby="instructions-tab">
+                  @include('users.inc.show.instructions')
                </div>
                <div class="tab-pane fade" id="core" role="tabpanel" aria-labelledby="core-tab">
                   @include('users.inc.show.core')
@@ -80,16 +72,16 @@
                <div class="tab-pane fade" id="modules" role="tabpanel" aria-labelledby="modules-tab">
                   @include('users.inc.show.modules')
                </div>
-               <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+               <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                   @include('users.inc.show.profile')
                </div>
             </div>
          </div>
 
          <!-- CARD FOOTER -->
-         <div class="card-footer p-1">
+         {{-- <div class="card-footer p-1">
             Fields marked with an <span class="required"></span> are required
-         </div>
+         </div> --}}
       </div>
       
 {{ Form::close() }}
