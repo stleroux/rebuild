@@ -514,8 +514,10 @@ class PostsController extends Controller
 
 		$post = Post::find($id);
 
-		// Add 1 to views column
-		DB::table('posts')->where('id','=',$post->id)->increment('views',1);
+	  // Increase the view count if viewed from the frontend
+     if (url()->previous() == url('/blog/')) {
+         DB::table('posts')->where('id','=',$post->id)->increment('views',1);
+     }
 
 		// // find all categories in the categories table and pass them to the view
 		// $categories = Category::whereHas('module', function ($query) {

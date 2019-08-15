@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('stylesheets')
-   {{-- {{ Html::style('css/woodbarn.css') }} --}}
+   {{ Html::style('css/woodbarn.css') }}
 @endsection
 
 @section('left_column')
@@ -86,7 +86,7 @@
 		</div>
 
 	{{ Form::close() }}
-@stop
+@endsection
 
 @section ('scripts')
-@stop
+@endsection

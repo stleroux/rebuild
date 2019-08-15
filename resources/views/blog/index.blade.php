@@ -2,7 +2,7 @@
 
 @section ('stylesheets')
    {{ Html::style('css/woodbarn.css') }}
-@stop
+@endsection
 
 @section('left_column')
    @include('blocks.main_menu')
@@ -12,7 +12,7 @@
    @include('blog.blocks.search')
    @include('blog.blocks.popularPosts')
    @include('blog.blocks.archives')
-@stop
+@endsection
 
 @section('content')
    
@@ -35,7 +35,7 @@
                      
                         <div class="col-1 px-3">
                            @if ($post->user->image)
-                              {{ Html::image("images/profiles/" . $post->user->image, "",array('height'=>'60','width'=>'60')) }}
+                              {{ Html::image("_profiles/" . $post->user->image, "",array('height'=>'60','width'=>'60')) }}
                            @else
                               <i class="fa fa-3x fa-user" aria-hidden="true"></i>
                            @endif                  
@@ -49,7 +49,7 @@
                            </a>
                         </div>
                      </div>
-                     
+
                   </div>
                   <div class="card-footer card_footer p-1">
                      Created by {{-- {{ ucfirst($post->user->username) }} --}}
@@ -79,7 +79,7 @@
          </div>
       </div>
    @endif
-@stop
+@endsection
 
 @section ('scripts')
-@stop
+@endsection

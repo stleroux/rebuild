@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('stylesheets')
-   {{-- {{ Html::style('css/woodbarn.css') }} --}}
+   {{ Html::style('css/woodbarn.css') }}
 @endsection
 
 @section('left_column')
@@ -14,29 +14,29 @@
 @section('content')
    
    <div class="card mb-2">
-      <div class="card-header card_header">
+      <div class="card-header card_header p-2">
          <i class="far fa-newspaper"></i>
          {{ ucwords($post->title) }}
          <span class="float-right">
-            @include('posts.buttons.back')
+            @include('posts.buttons.back', ['size'=>'xs'])
          </span>
       </div>
-      <div class="card-body card_body">
+      <div class="card-body section_body p-2">
          <div class="row">
             <div class="col-8 pr-1">
                <div class="row text-center">
                   <div class="col-3 pr-1">
                      <div class="card mb-2 bg-transparent">
-                        <div class="card-header card_header_2 py-0 pl-1 pr-0">Category</div>
-                        <div class="card-body px-1 py-0">
-                           {{ $post->category->name }}
+                        <div class="card-header card_header p-1">Category</div>
+                        <div class="card-body p-1">
+                           {{ ucfirst($post->category->name) }}
                         </div>
                      </div>
                   </div>
                   <div class="col-3 px-1">
                      <div class="card mb-2 bg-transparent">
-                        <div class="card-header card_header_2 py-0 pl-1 pr-0">Publish(ed) On</div>
-                        <div class="card-body px-1 py-0">
+                        <div class="card-header card_header p-1">Publish(ed) On</div>
+                        <div class="card-body p-1">
                            @if($post->published_at)
                               @if($post->published_at > Carbon\Carbon::Now())
                                  <div class="text-danger"><b>{{ $post->published_at->format('M d, Y') }}</b></div>
@@ -51,8 +51,8 @@
                   </div>
                   <div class="col-3 px-1">
                      <div class="card mb-2 bg-transparent">
-                        <div class="card-header card_header_2 py-0 pl-1 pr-0">Views</div>
-                        <div class="card-body px-1 py-0">
+                        <div class="card-header card_header p-1">Views</div>
+                        <div class="card-body p-1">
                            {{ $post->views }}
                         </div>
                      </div>
@@ -61,8 +61,8 @@
                <div class="row">
                   <div class="col">
                      <div class="card mb-2 bg-transparent">
-                        <div class="card-header card_header_2 py-0 pl-1 pr-0">Content</div>
-                        <div class="card-body px-1 py-0">
+                        <div class="card-header card_header p-1">Content</div>
+                        <div class="card-body p-1">
                            @if(checkPerm('post_show'))
                               {!! $post->body !!}
                            @else
@@ -75,8 +75,8 @@
                <div class="row">
                   <div class="col">
                      <div class="card mb-2 bg-transparent">
-                        <div class="card-header card_header_2 py-0 pl-1 pr-0">Tags</div>
-                        <div class="card-body px-1 py-0">
+                        <div class="card-header card_header p-1">Tags</div>
+                        <div class="card-body p-1">
                            @if($post->tags->count() > 0)
                               @foreach ($post->tags as $tag)
                                  <span class="badge badge-secondary">{{ $tag->name }}</span>
@@ -93,8 +93,8 @@
                <div class="row">
                   <div class="col-12">
                      <div class="card mb-2 bg-transparent">
-                        <div class="card-header card_header_2 py-0 pl-1 pr-0">Image</div>
-                        <div class="card-body px-0 py-0">
+                        <div class="card-header card_header p-1">Image</div>
+                        <div class="card-body p-1">
                            @if ($post->image)
                               @if(checkPerm('post_show'))
                                  <a href="" data-toggle="modal" data-target="#imageModal">
@@ -115,113 +115,64 @@
          <div class="row text-center">
             <div class="col-2 pr-1">
                <div class="card bg-transparent">
-                  <div class="card-header card_header_2 py-0 pl-1 pr-0">Created By</div>
-                  <div class="card-body px-1 py-0">
-                     {{ ucfirst($post->user->username) }}
+                  <div class="card-header card_header p-1">Created By</div>
+                  <div class="card-body p-1">
+                     @include('common.authorFormat', ['model'=>$post, 'field'=>'user'])
+                     {{-- {{ ucfirst($post->user->username) }} --}}
                   </div>
                </div>
             </div>
             <div class="col-2 px-1">
                <div class="card bg-transparent">
-                  <div class="card-header card_header_2 py-0 pl-1 pr-0">Created On</div>
-                  <div class="card-body px-1 py-0">
-                     {{ $post->created_at->format('M d, Y') }}
+                  <div class="card-header card_header p-1">Created On</div>
+                  <div class="card-body p-1">
+                     @include('common.dateFormat', ['model'=>$post, 'field'=>'user'])
+                     {{-- {{ $post->created_at->format('M d, Y') }} --}}
                   </div>
                </div>
             </div>
             <div class="col-2 px-1">
                <div class="card bg-transparent">
-                  <div class="card-header card_header_2 py-0 pl-1 pr-0">Updated By</div>
-                  <div class="card-body px-1 py-0">
-                     @if($post->updated_by_id)
+                  <div class="card-header card_header p-1">Updated By</div>
+                  <div class="card-body p-1">
+                     @include('common.authorFormat', ['model'=>$post, 'field'=>'modifiedBy'])
+                     {{-- @if($post->updated_by_id)
                         {{ ucfirst($post->updated_by->username) }}
                      @else
                         {{ ucfirst($post->user->username) }}
-                     @endif
+                     @endif --}}
                   </div>
                </div>
             </div>
             <div class="col-2 px-1">
                <div class="card bg-transparent">
-                  <div class="card-header card_header_2 py-0 pl-1 pr-0">Updated On</div>
-                  <div class="card-body px-1 py-0">
-                     {{ $post->updated_at->format('M d, Y') }}
+                  <div class="card-header card_header p-1">Updated On</div>
+                  <div class="card-body p-1">
+                     @include('common.dateFormat', ['model'=>$post, 'field'=>'updated_at'])
+                     {{-- {{ $post->updated_at->format('M d, Y') }} --}}
                   </div>
                </div>
             </div>
             <div class="col-2 px-1">
                <div class="card bg-transparent">
-                  <div class="card-header card_header_2 py-0 pl-1 pr-0">Last Viewed By</div>
-                  <div class="card-body px-1 py-0">
+                  <div class="card-header card_header p-1">Last Viewed By</div>
+                  <div class="card-body p-1">
                      [LerouxH]
                   </div>
                </div>
             </div>
             <div class="col-2 pl-1">
                <div class="card bg-transparent">
-                  <div class="card-header card_header_2 py-0 pl-1 pr-0">Last Viewed On</div>
-                  <div class="card-body px-1 py-0">
+                  <div class="card-header card_header p-1">Last Viewed On</div>
+                  <div class="card-body p-1">
                      [Dec 15, 2018]
                   </div>
                </div>
             </div>
          </div>
 
-         @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'posts.index')
-            <div class="row mt-2">
-               <div class="col-12">
-                  <div class="card mb-2">
-                     <div class="card-header card_header_2 py-0 pl-1 pr-0">
-                        <i class="fa fa-comments-o" aria-hidden="true"></i>
-                        Comments <small>({{ $post->comments()->count() }} total)</small>
-                     </div>
-                     <div class="card-body card_body">
-                        @if($post->comments->count())
-                           <table class="table table-hover table-sm">
-                              <thead>
-                                 <tr>
-                                    <th>Name</th>
-                                    <th>Comment</th>
-                                    <th>Posted On</th>
-                                    <th></th>
-                                 </tr>
-                              </thead>
-                              <tbody>
-                                 @foreach($post->comments as $comment)
-                                    <tr>
-                                       <td class="col-sm-1">
-                                          {{-- @include('common.authorFormat', ['model'=>$comment, 'field'=>'user']) --}}
-                                          {{ ucfirst($post->user->username) }}
-                                       </td>
-                                       <td>{!! $comment->comment !!}</td>
-                                       <td class="col-sm-1">
-                                          {{-- @include('common.dateFormat', ['model'=>$comment, 'field'=>'created_at']) --}}
-                                          {{ $post->created_at->format('M d, Y') }}
-                                       </td>
-                                       <td class="col-sm-1 text-right">
-                                          {{-- @if(checkPerm('post_edit', $post)) --}}
-                                          <a href="{{ route('comments.edit', $comment->id) }}" class="btn btn-sm btn-outline-bprimary px-1 py-0" title="Edit Comment">
-                                             <i class="far fa-edit"></i>
-                                          </a>
-                                          {{-- @endif --}}
-                                          {{-- @if(checkPerm('post_delete', $post)) --}}
-                                          <a href="{{ route('comments.delete', $comment->id) }}" class="btn btn-sm btn-outline-danger px-1 py-0" title="Delete Comment">
-                                             <i class="far fa-trash-alt"></i>
-                                          </a>
-                                          {{-- @endif --}}
-                                       </td>
-                                    </tr>
-                                 @endforeach
-                              </tbody>
-                           @else
-                              No comments found
-                           @endif
-                        </table>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         @endif
+         @include('common.comments', ['model'=>$post])
+
       </div>
    </div>
 
@@ -255,7 +206,7 @@
       </div>
    </div>
 
-@stop
+@endsection
 
 @section('blocks')
    {{-- @include('blog.single.controls') --}}
@@ -264,7 +215,7 @@
    {{-- @include('common.information', ['model'=>$post, 'title'=>'Blog Post']) --}}
    {{-- @include('blog.blocks.archives') --}}
    {{-- @include('blog.single.leaveComment') --}}
-@stop
+@endsection
 
 
 
@@ -272,4 +223,4 @@
 
 
 @section ('scripts')
-@stop
+@endsection

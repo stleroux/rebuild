@@ -8,7 +8,7 @@
    <div class="modal-dialog" role="document">
       <div class="modal-content">
             
-         <div class="modal-header">
+         <div class="modal-header text-light">
             <h5 class="modal-title" id="printModalLabel">
                @if($field == 'user')
                   Author Details
@@ -23,9 +23,9 @@
             </button>
          </div>
 
-         <div class="modal-body">
+         <div class="modal-body text-light">
             <div class="row mb-3">
-               <div class="col text-center">
+               <div class="col text-center text-light">
                   @if($field == 'user')
                      @if(!empty($model->user->image))
                         <img src="/_profiles/{{ $model->user->image }}" height="100" width="100">
@@ -50,60 +50,71 @@
                </div>
             </div>
 
-            <div class="row">
-               <div class="col">
-                  <table class="table table-sm table-hover mb-0">
+            {{-- <div class="row"> --}}
+               {{-- <div class="col"> --}}
+                  <table class="table table-sm table-hover mb-0 text-light">
                      <tr>
-                        <th class="text-right">Username</th>
+                        <th class="text-right text-light">Username</th>
                         <td class="text-left">
                            @if($field == 'user')
                               {{ $model->user->username }}
                            @elseif($field == 'modifiedBy')
-                              @if(!empty($model->modified_by_id))
-                                 {{ $model->modifiedBy->username }}
-                              @else
-                                 N/A
-                              @endif
+                              {{ $model->modifiedBy->username }}
                            @elseif($field == 'lastViewedBy')
                               {{ $model->lastViewedBy->username }}
                            @endif
                         </td>
                      </tr>
                      <tr>
-                        <th class="text-right">First Name</th>
+                        <th class="text-right text-light">First Name</th>
                         <td class="text-left">
                            @if($field == 'user')
-                              {{ $model->user->first_name }}
+                              @if(isset($model->user->first_name))
+                                 {{ $model->user->first_name }}
+                              @else
+                                 N/A
+                              @endif
                            @elseif($field == 'modifiedBy')
-                              @if(!empty($model->modified_by_id))
+                              @if(isset($model->modifiedBy->first_name))
                                  {{ $model->modifiedBy->first_name }}
                               @else
                                  N/A
                               @endif
                            @elseif($field == 'lastViewedBy')
-                              {{ $model->lastViewedBy->first_name }}
+                              @if(isset($model->lastViewedBy->first_name))
+                                 {{ $model->lastViewedBy->first_name }}
+                              @else
+                                 N/A
+                              @endif
                            @endif
-
                         </td>
                      </tr>
                      <tr>
-                        <th class="text-right">Last Name</th>
+                        <th class="text-right text-light">Last Name</th>
                         <td class="text-left">
                            @if($field == 'user')
-                              {{ $model->user->last_name }}
+                              @if(isset($model->user->last_name))
+                                 {{ $model->user->last_name }}
+                              @else
+                                 N/A
+                              @endif
                            @elseif($field == 'modifiedBy')
-                              @if(!empty($model->modified_by_id))
+                              @if(isset($model->modifiedBy->last_name))
                                  {{ $model->modifiedBy->last_name }}
                               @else
                                  N/A
                               @endif
                            @elseif($field == 'lastViewedBy')
-                              {{ $model->lastViewedBy->last_name }}
+                              @if(isset($model->lastViewedBy->last_name))
+                                 {{ $model->lastViewedBy->last_name }}
+                              @else
+                                 N/A
+                              @endif
                            @endif
                         </td>
                      </tr>
                      <tr>
-                        <th class="text-right">Email Address</th>
+                        <th class="text-right text-light">Email Address</th>
                            @if($field == 'user')
                               @if($model->user->public_email === 1)
                                  <td class="text-left">{{ $model->user->email }}</td>
@@ -125,7 +136,7 @@
                            @endif
                      </tr>
                      <tr>
-                        <th class="text-right">Member Since</th>
+                        <th class="text-right text-light">Member Since</th>
                         <td class="text-left">
                             @if($field == 'user')
                               @if($model->user->created_at)
@@ -149,8 +160,8 @@
                         </td>
                      </tr>
                   </table>
-               </div>
-            </div>
+               {{-- </div> --}}
+            {{-- </div> --}}
          </div>
 
          <div class="modal-footer p-1">

@@ -182,7 +182,8 @@ div.sticky {
 
 .table-hover tbody tr:hover, .table-hover tbody tr:hover th {
   /*background-image: url("../images/13.jpg");*/
-  background-image: url("../images/14.jpg");
+  /*background-image: url("../images/14.jpg");*/
+  /* Adding the above code also adds it to the author modal window causing the modal to look weird */
   background-repeat: no-repeat;
   background-size: 100% 100%;
   color: black;

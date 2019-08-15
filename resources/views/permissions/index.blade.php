@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('stylesheets')
-   {{-- {{ Html::style('css/woodbarn.css') }} --}}
+   {{ Html::style('css/woodbarn.css') }}
 @endsection
 
 @section('left_column')
@@ -15,7 +15,7 @@
 
 	<div class="row">
 		<div class="col">
-			<div class="card">
+			<div class="card mb-3">
 				<div class="card-header section_header p-2">
 					<i class="fas fa-shield-alt"></i>
 					Permissions

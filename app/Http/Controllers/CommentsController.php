@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Models\Comment;
-use App\Models\Post;
+// use App\Models\Post;
 use DB;
 use Session;
 use Log;

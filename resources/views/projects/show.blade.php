@@ -37,7 +37,8 @@
       @guest
          @include('common.view_more')
       @endguest
-		@include('projects.partials.show.comments')
+		{{-- @include('projects.partials.show.comments') --}}
+      @include('common.comments', ['model'=>$project])
 	</div>
 </div>
 

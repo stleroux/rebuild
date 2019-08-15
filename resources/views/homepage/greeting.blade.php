@@ -1,10 +1,8 @@
 {{-- GREETING --}}
 <div class="card mb-2">
    <div class="card-header section_header p-2">
-      {{-- <span class="h5 align-middle"> --}}
-         <i class="fas fa-tree"></i>         
-         Welcome to TheWoodBarn.ca
-      {{-- </span> --}}
+      <i class="fas fa-tree"></i>         
+      Welcome to TheWoodBarn.ca
    </div>
    <div class="card-body section_body p-2">
       <p>Welcome to the newly redesigned TheWoodBarn.ca site.</p>

@@ -25,6 +25,16 @@ class Comment extends Model
       return $this->belongsTo('App\Models\User');
    }
 
+   // public function modifiedBy()
+   // {
+   //    return $this->belongsTo('App\Models\User');
+   // }
+
+   // public function lastViewedBy()
+   // {
+   //    return $this->belongsTo('App\Models\User');
+   // }
+
 	public function recipe()
 	{
 		return $this->belongsTo('App\Models\Recipe');

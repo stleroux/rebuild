@@ -79,8 +79,11 @@
 
 			@endauth
 
-			<div class="row">
-				@include('recipes.show.comments')
+			<div class="row m-0 p-0">
+				<div class="col m-0 p-0">
+					{{-- @include('recipes.show.comments') --}}
+					@include('common.comments', ['model'=>$recipe])
+				</div>
 			</div>
 
 		</div>

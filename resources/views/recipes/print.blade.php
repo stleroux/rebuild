@@ -17,7 +17,7 @@
 				{{-- @include('common.buttons.cancel') --}}
 				{{-- @include('common.buttons.cancel', ['model'=>'recipe']) --}}
 				@include('recipes.addins.links.back', ['size'=>'xs'])
-				@include('common.buttons.print2')
+				@include('recipes.addins.links.print2', ['size'=>'xs'])
 			</span>
 		</div>
 		
@@ -84,7 +84,7 @@
 								</tr>
 								<tr>
 									<th>Created By</th>
-									<td>{{ $recipe->user->profile->first_name }} {{ $recipe->user->profile->last_name }}</td>
+									<td>{{ $recipe->user->first_name }} {{ $recipe->user->last_name }}</td>
 								</tr>
 								<tr>
 									<th>Created On</th>

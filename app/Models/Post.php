@@ -58,7 +58,17 @@ class Post extends Model
       return $this->belongsTo('App\Models\User');
    }
 
-   public function updated_by()
+   // public function updated_by()
+   // {
+   //    return $this->belongsTo('App\Models\User');
+   // }
+
+   public function modifiedBy()
+   {
+      return $this->belongsTo('App\Models\User');
+   }
+
+   public function lastViewedBy()
    {
       return $this->belongsTo('App\Models\User');
    }

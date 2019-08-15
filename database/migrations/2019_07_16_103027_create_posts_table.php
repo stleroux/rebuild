@@ -24,7 +24,7 @@ class CreatePostsTable extends Migration {
 			$table->integer('views')->unsigned()->default(0);
 			$table->timestamps();
 			$table->dateTime('published_at')->nullable();
-			$table->dateTime('modified_by_id')->nullable();
+			$table->integer('modified_by_id')->unsigned()->nullable();
 			$table->softDeletes();
 		});
 	}
