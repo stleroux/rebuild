@@ -243,46 +243,8 @@
             </div>
          </div>
 
-         <div class="row">
-            <div class="col-12">
-               {{-- <div class="card bg-transparent">
-                  <div class="card-header card_header p-1">
-                     <i class="fas fa-comments-o"></i>
-                     Comments <small>({{ $post->comments()->count() }} total)</small>
-                  </div>
-                  <div class="card-body card_body text-light p-0">
-                     @if($post->comments->count())
-                        <table class="table table-hover table-sm text-light mb-0">
-                           <thead>
-                              <tr class="d-flex">
-                                 <th class="col-2">Name</th>
-                                 <th class="col-8">Comment</th>
-                                 <th class="col-2">Posted On</th>
-                              </tr>
-                           </thead>
-                           <tbody>
-                              @foreach($post->comments as $comment)
-                                 <tr class="d-flex">
-                                    <td class="col-2">
-                                       @include('common.authorFormat', ['model'=>$comment, 'field'=>'user'])
-                                    </td>
-                                    <td class="col-8">
-                                       {!! $comment->comment !!}
-                                    </td>
-                                    <td class="col-2">
-                                       @include('common.dateFormat', ['model'=>$comment, 'field'=>'created_at'])
-                                    </td>
-                                 </tr>
-                              @endforeach
-                           </tbody>
-                        </table>
-                     @else
-                        <div class="pl-2">
-                           No comments found
-                        </div>
-                     @endif
-                  </div>
-               </div> --}}
+         <div class="row m-0 p-0">
+            <div class="col m-0 p-0">
                @include('common.comments', ['model'=>$post])
             </div>
          </div>

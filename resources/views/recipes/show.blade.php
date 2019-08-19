@@ -5,6 +5,7 @@
 @stop
 
 @section('left_column')
+	@include('blocks.main_menu')
 	@include('recipes.sidebar')
 @endsection
 

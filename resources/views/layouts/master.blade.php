@@ -9,8 +9,7 @@
 
    <title>{{ config('app.name', 'TheWoodBarn.ca') }}</title>
 
-   <!-- Scripts -->
-   <script src="{{ asset('js/app.js') }}"></script>
+   
 
    <!-- Styles -->
    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -24,35 +23,40 @@
    @yield('stylesheets')
 </head>
 <body>
-	
-	@include('layouts.navbar.navbar')
+	<div id="app">
+      
+	  @include('layouts.navbar.navbar')
 
-{{-- <span class="bg-dark text-light">
-   fromPage : {{ Session::get('fromPage') }}
-</span> --}}
+      {{-- <span class="bg-dark text-light">
+         fromPage : {{ Session::get('fromPage') }}
+      </span> --}}
 
-	@include('layouts.master.messages')
+   	@include('layouts.master.messages')
 
-	<main class="container-fluid">
-		<div id="app" class="py-0 px-0">
-			<div class="row py-0 px-2">
-				<div class="col-sm-3 col-md-2 py-0 px-0">
-					@yield('left_column')
-				</div>
-				<div class="col-sm-6 col-md-8 py-0 px-2">
-					@yield('content')
-				</div>
-				<div class="col-sm-3 col-md-2 py-0 px-0">
-					@yield('right_column')
-				</div>
-			</div>
-		</div>
-	</main>
-		
-	<footer class="footer">
-		@include('layouts.master.footer')
-	</footer>
+   	<main class="container-fluid">
+   		{{-- <div id="" class="py-0 px-0"> --}}
+   			<div class="row py-0 px-2">
+   				<div class="col-sm-3 col-md-2 py-0 px-0">
+   					@yield('left_column')
+   				</div>
+   				<div class="col-sm-6 col-md-8 py-0 px-2">
+                  {{-- <example-component></example-component> --}}
+   					@yield('content')
+   				</div>
+   				<div class="col-sm-3 col-md-2 py-0 px-0">
+   					@yield('right_column')
+   				</div>
+   			</div>
+   		{{-- </div> --}}
+   	</main>
+   		
+   	<footer class="footer">
+   		@include('layouts.master.footer')
+   	</footer>
+   </div>
 
+<!-- Scripts -->
+   <script src="{{ asset('js/app.js') }}"></script>
 	<!-- Optional JavaScript -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
    <script src="https://www.google.com/recaptcha/api.js"></script>

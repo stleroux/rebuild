@@ -29,9 +29,9 @@
 					</a>
 					{{ Form::button('<i class="fas fa-sync-alt"></i> Reset Form', ['type'=>'reset', 'class'=>'btn btn-sm btn-outline-secondary px-1 py-0']) }}
 					{{ Form::button('<i class="fa fa-save"></i> Save ', ['type' => 'submit', 'class' => 'btn btn-sm btn-outline-success px-1 py-0'])  }} --}}
-					@include('posts.buttons.back')
-					@include('posts.buttons.reset')
-					@include('posts.buttons.save')
+					@include('posts.buttons.back', ['size'=>'xs'])
+					@include('posts.buttons.reset', ['size'=>'xs'])
+					@include('posts.buttons.save', ['size'=>'xs'])
 		  		</div>
 			</div>
 

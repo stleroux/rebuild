@@ -54,7 +54,7 @@
                   @foreach($projects as $project)
                      <div id="card-hover" class="col-xs-12 col-md-3 p-2">
                         <div class="card h-100 w-100">
-                           <div class="h-100 thumbnail p-2 text text-center" style="background-image: url('../images/nav.jpg');">
+                           <div class="h-100 thumbnail p-2 text-center" style="background-image: url('../images/nav.jpg');">
                               <a href="{{ route('projects.show', $project->id) }}">
                                  @if($project->images->count() > 0)
                                     <img src="/_projects/{{ $project->id }}/thumbs/{{ $project->images[0]->name }}" alt="{{ $project->name}}" class="mx-auto mw-100" />
@@ -62,14 +62,15 @@
                                     <img src="/images/no_image.jpg" alt="No Image" height="150px" width="95%" />
                                  @endif
                               </a>
-                              <h4 class="text-center" style="color:black">{{ $project->name}}</h4>
-                              <div class="text-center" style="color:black"><strong>Category</strong> : {{ $project->category }}</div>
-                              <div class="text-center" style="color:black"><strong>Views</strong> : {{ $project->views }}</div>
-                              <div class="text text-center">
-                                 <span class="badge text text-center" style="color:black">
+                              <h4 class="text-light badge-dark p-1">{{ $project->name}}</h4>
+                              <div class="text-dark"><strong>Category</strong> : {{ $project->category }}</div>
+                              <div class="text-dark"><strong>Views</strong> : {{ $project->views }}</div>
+                              <div class="text-dark"><strong>Comments</strong> : {{ $project->comments->count() }}</div>
+                              <div class="text-dark">
+                                 <span>
                                     @if(count($project->images) > 0)
+                                       <strong>{{ count($project->images) > 1 ? 'Images' : 'Image' }} : </strong>
                                        {{ count($project->images) }} 
-                                       {{ count($project->images) > 1 ? 'images' : 'image' }}
                                     @else
                                        No Images
                                     @endif
@@ -80,13 +81,9 @@
                      </div>
                   @endforeach
                </div>
-
-               @if(url()->current() != "http://192.168.0.12/projects/1000")
-                  <div class="pb-1">
-                     {{ $projects->links() }}
-                  </div>
+               @if (strpos($_SERVER['REQUEST_URI'], "1000") === false)
+                  {{ $projects->links() }}
                @endif
-
             </div>
          @else
             <p class="p-2">No projects found</p>
