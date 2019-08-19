@@ -1,9 +1,9 @@
 <div class="card mb-3">
    <div class="card-header block_header p-2">
-      Recipes Menu
+      Recipes
    </div>
 
-      <a href="/"
+{{--       <a href="/"
          class="list-group-item list-group-item-action py-1 px-1 {{ Request::is('/') ? 'menu_active' : '' }}">
          <i class="fas fa-home pl-2"></i>
          Home
@@ -13,7 +13,7 @@
          class="list-group-item list-group-item-action py-1 px-1 {{ Request::is('recipes/all') ? 'menu_active' : '' }} {{ Request::is('recipes/all/*') ? 'menu_active' : '' }}">
          <i class="fab fa-apple pl-2"></i>
          Recipes
-      </a>
+      </a> --}}
       
    @foreach ($categories as $category)
       <a href="{{ route('recipes.index', $category->name) }}"
