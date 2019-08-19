@@ -40,12 +40,15 @@ class CommentController extends Controller
 ##################################################################################################################
     public function destroy(Request $request, $id)
     {
-        DB::table('projects__finish_project')
-            ->where('project_id', '=', $request->project_id)
-            ->where('finish_id', '=', $id)
-            ->delete();
+      // Check if user has required module
+      if(!checkPerm('comment_delete')) { abort(401, 'Unauthorized Access'); }
+    
+      DB::table('projects__finish_project')
+          ->where('project_id', '=', $request->project_id)
+          ->where('finish_id', '=', $id)
+          ->delete();
 
-        return redirect()->back();
+      return redirect()->back();
     }
 
 
@@ -60,15 +63,18 @@ class CommentController extends Controller
 ##################################################################################################################
     public function store(CreateCommentRequest $request, $id)
     {
-        $project = project::find($id);
+      // Check if user has required module
+      if(!checkPerm('comment_store')) { abort(401, 'Unauthorized Access'); }
 
-        $comment = new Comment();
-            $comment->user_id = Auth::user()->id;
-            $comment->comment = $request->comment;
-            $project->comments()->save($comment);
-        $comment->save();
+      $project = project::find($id);
 
-        Session::flash('success', 'Comment added succesfully.');
-        return redirect()->route('projects.show', $project->id);
+      $comment = new Comment();
+          $comment->user_id = Auth::user()->id;
+          $comment->comment = $request->comment;
+          $project->comments()->save($comment);
+      $comment->save();
+
+      Session::flash('success', 'Comment added succesfully.');
+      return redirect()->route('projects.show', $project->id);
     }
 }

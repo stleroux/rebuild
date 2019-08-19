@@ -1,18 +1,18 @@
 <div class="row py-1">
    <div class="col-sm-12">
       <div class="card">
-         <div class="card-header card_header p-1">
+         <div class="card-header card_header p-2">
             <i class="fa fa-comments-o"></i>
             Comments <small>({{ $model->comments()->count() }} total)</small>
          </div>
-         <div class="card-body section_body text-light p-0">
+         <div class="card-body card_body text-light p-0">
             @if($model->comments->count())
                <table class="table table-sm table-hover mb-0 text-light">
                   <thead>
                      <tr>
-                        <th class="col-md-2">Name</th>
+                        <th class="col-sm-2">Name</th>
                         <th>Comment</th>
-                        <th class="col-md-2">Posted On</th>
+                        <th class="col-sm-2">Posted On</th>
                      </tr>
                   </thead>
                   <tbody>

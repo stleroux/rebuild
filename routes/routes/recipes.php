@@ -13,6 +13,8 @@ Route::group(['prefix' => 'recipes'], function()
    // Route::get('trashedView/{id}',         'Recipes\ExtraViewsController@trashedView')          ->name('recipes.trashedView');
 
    // Route::get('bycat/{key}',              'Recipes\RecipesController@bycat')                ->name('recipes.bycat');
+Route::get('{id}/printPDF',               'Recipes\FunctionsController@printPDF')            ->name('recipes.printPDF');
+
 
    Route::get('import',                   'Recipes\RecipesController@import')               ->name('recipes.import');
    Route::get('pdfview',                  'Recipes\RecipesController@pdfview')              ->name('recipes.pdfview');

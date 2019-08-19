@@ -37,7 +37,7 @@
                         <a class="nav-link active" id="general-tab" data-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="true">General</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+                        <a class="nav-link" id="site-tab" data-toggle="tab" href="#site" role="tab" aria-controls="site" aria-selected="false">Site</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" id="invoicer-tab" data-toggle="tab" href="#invoicer" role="tab" aria-controls="invoicer" aria-selected="false">Invoicer</a>
@@ -50,8 +50,8 @@
                      <div class="tab-pane px-2 py-0 fade show active section_body" id="general" role="tabpanel" aria-labelledby="general-tab">
                         @include('settings.tab_general')
                      </div>
-                     <div class="tab-pane px-2 py-0 fade section_body" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        @include('settings.tab_profile')
+                     <div class="tab-pane px-2 py-0 fade section_body" id="site" role="tabpanel" aria-labelledby="site-tab">
+                        @include('settings.tab_site')
                      </div>
                      <div class="tab-pane px-2 py-0 fade section_body" id="invoicer" role="tabpanel" aria-labelledby="invoicer-tab">
                         @include('settings.tab_invoicer')

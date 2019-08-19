@@ -109,8 +109,8 @@
 
 		@else
 			
-			<div class="card-body card_body p-2 bg-danger text-dark">
-				<b>{{ setting('no_records_found') }}</b>
+			<div class="card-body card_body p-2">
+				{{ setting('no_records_found') }}
 			</div>
 
 		@endif

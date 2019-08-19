@@ -1,4 +1,4 @@
-{{-- @if(checkPerm('recipe_print')) --}}
+@if(checkPerm('recipe_print'))
    @if(Request::is('recipes/all'))
       <a href="{{ route('recipes.printAll', 'all') }}" class="btn btn-{{ $size }} btn-primary" title="Print All">
          <i class="{{ Config::get('buttons.print') }}"></i>
@@ -8,4 +8,4 @@
          <i class="{{ Config::get('buttons.print') }}"></i>
       </a>
    @endif
-{{-- @endif --}}
+@endif

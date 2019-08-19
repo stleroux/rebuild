@@ -10,21 +10,25 @@
          Home
       </a>
       
-      <a href="#"
-         class="list-group-item list-group-item-action p-1 {{ Request::is('albums*') ? 'menu_active' : '' }}">
-         <i class="text-danger">
-            <i class="fas fa-camera-retro fa-fw"></i>
-            Albums
-         </i>
-      </a>
+      @if(checkPerm('albums_index'))
+         <a href="#"
+            class="list-group-item list-group-item-action p-1 {{ Request::is('albums*') ? 'menu_active' : '' }}">
+            <i class="text-danger">
+               <i class="fas fa-camera-retro fa-fw"></i>
+               Albums
+            </i>
+         </a>
+      @endif
 
-      <a href="{{ route('articles.index') }}"
-         class="list-group-item list-group-item-action p-1 {{ Route::is('articles.*') ? 'menu_active' : '' }}">
-         <i class="text-danger">
-            <i class="far fa-newspaper fa-fw"></i>
-            Articles
-         </i>
-      </a>
+      @if(checkPerm('article_index'))
+         <a href="{{ route('articles.index') }}"
+            class="list-group-item list-group-item-action p-1 {{ Route::is('articles.*') ? 'menu_active' : '' }}">
+            <i class="text-danger">
+               <i class="far fa-newspaper fa-fw"></i>
+               Articles
+            </i>
+         </a>
+      @endif
 
       <a href="{{ route('blog.index') }}"
          class="list-group-item list-group-item-action p-1 {{ Request::is('blog*') ? 'menu_active' : '' }}">
@@ -48,13 +52,15 @@
          </a>
       @endif
 
-      <a href="#"
-         class="list-group-item list-group-item-action p-1 {{ Route::is('darts.*') ? 'menu_active' : '' }}">
-         <i class="text-danger">
-            <i class="fas fa-bullseye fa-fw"></i>
-            Darts
-         </i>
-      </a>
+      @if(checkPerm('dart_index'))
+         <a href="#"
+            class="list-group-item list-group-item-action p-1 {{ Route::is('darts.*') ? 'menu_active' : '' }}">
+            <i class="text-danger">
+               <i class="fas fa-bullseye fa-fw"></i>
+               Darts
+            </i>
+         </a>
+      @endif
 
       @if(checkPerm('invoicer_index'))
          <a href="{{ route('invoicer') }}"
@@ -86,21 +92,21 @@
          Recipes
       </a>
 
-      {{-- @if(checkPerm('site_settings')) --}}
+      @if(checkPerm('site_settings'))
          <a href="{{ route('settings.index') }}"
             class="list-group-item list-group-item-action p-1 {{ Route::is('settings.*') ? 'menu_active' : '' }} text-warning">
             <i class="fas fa-cog fa-fw"></i>
             Site Settings
          </a>
-      {{-- @endif --}}
+      @endif
 
-      {{-- @if(checkPerm('site_stats')) --}}
+      @if(checkPerm('site_stats'))
          <a href="{{ route('stats') }}"
             class="list-group-item list-group-item-action p-1 {{ Route::is('stats*') ? 'menu_active' : '' }} text-warning">
             <i class="fas fa-chart-pie fa-fw"></i>
             Site Statistics
          </a>
-      {{-- @endif --}}
+      @endif
 
       @if(checkPerm('user_index'))
          <a href="{{ route('users.index') }}"

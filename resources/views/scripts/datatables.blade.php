@@ -9,6 +9,8 @@
                "targets"  : 'no-sort',
                "orderable": false,
             }],
+            "lengthMenu": [[10, 15, 25, 50, -1], [10, 15, 25, 50, "All"]],
+            "pageLength": 15,
             "drawCallback": function () {
                $('.dataTables_paginate > .pagination').addClass('pagination-sm');
             }

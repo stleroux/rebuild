@@ -25,6 +25,8 @@
 			<span class="float-right">
 				@include('recipes.addins.links.back', ['size'=>'xs'])
 				@include('recipes.addins.links.print', ['size'=>'xs'])
+				@include('recipes.addins.links.printPDF', ['size'=>'xs'])
+				{{-- <a href="{{route('recipes.printPDF')}}">Print PDF</a> --}}
 				@include('recipes.addins.links.favorite', ['size'=>'xs'])
   	         @include('recipes.addins.links.privatize', ['size'=>'xs'])
 				@include('recipes.addins.links.publish', ['size'=>'xs'])

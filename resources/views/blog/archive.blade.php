@@ -41,8 +41,8 @@
 				@endif
 			</span>
 		</div>
-		<div class="card-body section_body p-2">
-			<table class="table table-sm table-hover text-dark">
+		<div class="card-body section_body p-2 text-light">
+			<table class="table table-sm table-hover text-light">
 				<thead>
 					<tr>
 						<th>Title</th>
@@ -62,7 +62,7 @@
 								@include('common.authorFormat', ['model'=>$archive, 'field'=>'user'])
 							</td>
 							<td class="text-right">
-								<a href="{{ route('blog.single', $archive->slug) }}" class="btn btn-sm btn-primary" title="View Blog">
+								<a href="{{ route('blog.single', $archive->slug) }}" class="btn btn-sm btn-primary text-light" title="View Blog">
 									<i class="fa fa-eye"></i>
 								</a>
 							</td>

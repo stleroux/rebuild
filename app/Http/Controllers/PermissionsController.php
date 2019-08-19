@@ -7,6 +7,7 @@ use App\Http\Requests\UpdatePermissionRequest;
 use App\Models\Permission;
 use Illuminate\Http\Request;
 use Session;
+use Illuminate\Support\Str;
 
 class PermissionsController extends Controller
 {
@@ -126,7 +127,7 @@ class PermissionsController extends Controller
 		// Check if user has required permission
 		if(!checkPerm('permission_index')) { abort(401, 'Unauthorized Access'); }
 
-		$permissions = Permission::All();
+		$permissions = Permission::orderBy('name')->get();
 		return view('permissions.index', compact('permissions'));
 	}
 
@@ -159,16 +160,64 @@ class PermissionsController extends Controller
 # ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝
 // Store a newly created resource in storage
 ##################################################################################################################
-	public function store(CreatePermissionRequest $request, Permission $permission)
+	// public function store(CreatePermissionRequest $request, Permission $permission)
+	public function store(Request $request, Permission $permission)
 	{
-		// save the data in the database
-		$permission = new Permission;
-			$permission->name = $request->name;
-			$permission->display_name = $request->display_name;
-			$permission->model = $request->model;
-			$permission->type = $request->type;
-			$permission->description = $request->description;
-		$permission->save();
+		if($request->bread){
+			$rules = [
+            'b_model' => 'required',
+            'b_type' => 'required',
+      	];
+
+        	$customMessages = [
+            'b_model.required' => 'The model field can not be left blank.',
+            'b_type.required' => 'The type field is required.',
+        	];
+
+        	$this->validate($request, $rules, $customMessages);
+
+        	$bread = ['browse','read','edit','add','delete'];
+
+        	// save the data in the database
+			foreach($bread as $b){
+				$permission = new Permission;
+					$permission->name = str::singular($request->b_model) . "_" . $b;
+					$permission->display_name = ucfirst($b);
+					$permission->model = str::singular($request->b_model);
+					$permission->type = $request->b_type;
+					$permission->description = $b . " " . $request->b_model;
+				$permission->save();
+			}
+
+		} else {
+			
+			$rules = [
+            'name' => 'required',
+            'display_name' => 'required',
+            'model' => 'required',
+            'type' => 'required',
+            'description' => 'required',
+      	];
+
+        	$customMessages = [
+            'name.required' => 'The :attribute field can not be left blank.',
+            'display_name.required' => 'The :attribute field is required.',
+            'model.required' => 'The :attribute field is required.',
+            'type.required' => 'The :attribute field is required.',
+            'description.required' => 'The :attribute field is required.',
+        	];
+
+        	$this->validate($request, $rules, $customMessages);
+
+			// save the data in the database
+			$permission = new Permission;
+				$permission->name = $request->name;
+				$permission->display_name = $request->display_name;
+				$permission->model = str::singular($request->model);
+				$permission->type = $request->type;
+				$permission->description = $request->description;
+			$permission->save();
+		}
 
 		// set a flash message to be displayed on screen
 		Session::flash('store','The permission was successfully saved!');

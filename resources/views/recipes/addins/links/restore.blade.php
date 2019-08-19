@@ -9,9 +9,10 @@
    </button>
 @endif
  --}}
-
-<a href="{{ route('recipes.restore', $recipe->id) }}"
-   class="btn btn-{{ $size }} btn-info"
-   title="Restore Recipe">
-   <i class="{{ Config::get('buttons.restore') }}"></i>
-</a>
+@if(checkPerm('recipe_restore'))
+   <a href="{{ route('recipes.restore', $recipe->id) }}"
+      class="btn btn-{{ $size }} btn-info"
+      title="Restore Recipe">
+      <i class="{{ Config::get('buttons.restore') }}"></i>
+   </a>
+@endif

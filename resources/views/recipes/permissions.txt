@@ -24,3 +24,22 @@ Recipes Permissions:
 - unpublished (view)
 - new (view)
 - future (view)
+
+
+
+delete
+publish / unpublish
+restore
+trash
+edit
+create
+favorite
+help
+print
+private / public
+show / view
+
+manage
+
+
+admin
