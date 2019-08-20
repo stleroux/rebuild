@@ -50,7 +50,7 @@
                         </button>
 
                         @include('posts.buttons.add', ['size'=>'xs'])
-                        @include('posts.buttons.unpublished', ['size'=>'xs'])
+                        @include('posts.buttons.published', ['size'=>'xs'])
                         {{-- @include('posts.buttons.trashed', ['size'=>'xs']) --}}
                         {{-- @include('posts.buttons.newPosts', ['size'=>'xs']) --}}
                      @endif

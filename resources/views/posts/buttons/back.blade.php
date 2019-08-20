@@ -1,4 +1,5 @@
-<a href="{{ route('posts.index') }}" class="btn btn-{{ $size }} btn-primary text-light">
-   <i class="fas fa-angle-double-left"></i>
+<a href="{{ Session::get('fromPage') }}"
+   class="btn btn-{{ $size }} btn-primary d-print-none"
+   title="Back">
+   <i class="{{ Config::get('buttons.back') }}"></i>
 </a>
-

@@ -51,9 +51,9 @@
 								</button>
 
 								@include('posts.buttons.unpublished', ['size'=>'xs'])
+								@include('posts.buttons.trashed', ['size'=>'xs'])
+								@include('posts.buttons.newPosts', ['size'=>'xs'])
 								@include('posts.buttons.add', ['size'=>'xs'])
-								{{-- @include('posts.buttons.trashed', ['size'=>'xs']) --}}
-								{{-- @include('posts.buttons.newPosts', ['size'=>'xs']) --}}
 							@endif
 						</div>
 					</div>

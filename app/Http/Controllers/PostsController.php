@@ -263,8 +263,8 @@ class PostsController extends Controller
 		// Check if user has required permission
 		if(!checkPerm('post_index')) { abort(401, 'Unauthorized Access'); }
 
-		// Set the variable so we can use a button in other pages to come back to this page
-      Session::put('pageName', 'index');
+      // Set the session to the current page route
+      Session::put('fromPage', url()->full());
 
 		//$alphas = range('A', 'Z');
 		$alphas = DB::table('posts')
@@ -327,8 +327,8 @@ class PostsController extends Controller
 		//     return view('posts.errors.403');
 		// }
 
-		// Set the variable so we can use a button in other pages to come back to this page
-      Session::put('pageName', 'newPosts');
+      // Set the session to the current page route
+      Session::put('fromPage', url()->full());
 
 		//$alphas = range('A', 'Z');
 		$alphas = DB::table('posts')
@@ -754,8 +754,8 @@ class PostsController extends Controller
 		// Check if user has required permission
 		if(!checkPerm('post_index')) { abort(401, 'Unauthorized Access'); }
 
-		// Set the variable so we can use a button in other pages to come back to this page
-      Session::put('pageName', 'trashed');
+      // Set the session to the current page route
+      Session::put('fromPage', url()->full());
 
 		//$alphas = range('A', 'Z');
 		$alphas = DB::table('posts')
@@ -854,8 +854,8 @@ class PostsController extends Controller
 		// Check if user has required permission
 		if(!checkPerm('post_index')) { abort(401, 'Unauthorized Access'); }
 
-		// Set the variable so we can use a button in other pages to come back to this page
-      Session::put('pageName', 'unpublished');
+		// Set the session to the current page route
+      Session::put('fromPage', url()->full());
 
 		//$alphas = range('A', 'Z');
 		$alphas = DB::table('posts')

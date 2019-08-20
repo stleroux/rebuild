@@ -71,7 +71,7 @@
                         </div>
                         <div class="col-md-2">
                            <div class="form-group">
-                              <label>Total permissions</label>
+                              <label>Total Permissions</label>
                               <input type="text" class="form-control form-control-sm" value="{{ $user->permissions->count() }}" disabled>
                            </div>
                         </div>
@@ -154,7 +154,7 @@
                      <div class="form-row">
                         <div class="col-md-1">
                            <div class="form-group">
-                              <label for="civic_number" class="control-label">Civic/Unit N<sup>o</sup></label>
+                              <label for="civic_number" class="control-label">Unit N<sup>o</sup></label>
                               <input name="civic_number" type="text" class="form-control form-control-sm" value="{{ $user->civic_number }}" disabled>
                            </div>
                         </div>

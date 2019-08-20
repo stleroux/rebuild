@@ -26,7 +26,7 @@
             <div class="col-8 pr-1">
                <div class="row text-center">
                   <div class="col-3 pr-1">
-                     <div class="card mb-2 bg-transparent">
+                     <div class="card mb-2">
                         <div class="card-header card_header p-1">Category</div>
                         <div class="card-body p-1">
                            {{ ucfirst($post->category->name) }}
@@ -34,7 +34,7 @@
                      </div>
                   </div>
                   <div class="col-3 px-1">
-                     <div class="card mb-2 bg-transparent">
+                     <div class="card mb-2">
                         <div class="card-header card_header p-1">Publish(ed) On</div>
                         <div class="card-body p-1">
                            @if($post->published_at)
@@ -50,7 +50,7 @@
                      </div>
                   </div>
                   <div class="col-3 px-1">
-                     <div class="card mb-2 bg-transparent">
+                     <div class="card mb-2">
                         <div class="card-header card_header p-1">Views</div>
                         <div class="card-body p-1">
                            {{ $post->views }}
@@ -60,7 +60,7 @@
                </div>
                <div class="row">
                   <div class="col">
-                     <div class="card mb-2 bg-transparent">
+                     <div class="card mb-2">
                         <div class="card-header card_header p-1">Content</div>
                         <div class="card-body p-1">
                            @if(checkPerm('post_show'))
@@ -74,7 +74,7 @@
                </div>
                <div class="row">
                   <div class="col">
-                     <div class="card mb-2 bg-transparent">
+                     <div class="card mb-2">
                         <div class="card-header card_header p-1">Tags</div>
                         <div class="card-body p-1">
                            @if($post->tags->count() > 0)
@@ -92,7 +92,7 @@
             <div class="col-4 pl-1">
                <div class="row">
                   <div class="col-12">
-                     <div class="card mb-2 bg-transparent">
+                     <div class="card mb-2">
                         <div class="card-header card_header p-1">Image</div>
                         <div class="card-body p-1">
                            @if ($post->image)
@@ -112,9 +112,9 @@
                </div>
             </div>
          </div>
-         <div class="row text-center">
+         <div class="row text-center mb-2">
             <div class="col-2 pr-1">
-               <div class="card bg-transparent">
+               <div class="card">
                   <div class="card-header card_header p-1">Created By</div>
                   <div class="card-body p-1">
                      @include('common.authorFormat', ['model'=>$post, 'field'=>'user'])
@@ -123,7 +123,7 @@
                </div>
             </div>
             <div class="col-2 px-1">
-               <div class="card bg-transparent">
+               <div class="card">
                   <div class="card-header card_header p-1">Created On</div>
                   <div class="card-body p-1">
                      @include('common.dateFormat', ['model'=>$post, 'field'=>'user'])
@@ -132,7 +132,7 @@
                </div>
             </div>
             <div class="col-2 px-1">
-               <div class="card bg-transparent">
+               <div class="card">
                   <div class="card-header card_header p-1">Updated By</div>
                   <div class="card-body p-1">
                      @include('common.authorFormat', ['model'=>$post, 'field'=>'modifiedBy'])
@@ -145,7 +145,7 @@
                </div>
             </div>
             <div class="col-2 px-1">
-               <div class="card bg-transparent">
+               <div class="card">
                   <div class="card-header card_header p-1">Updated On</div>
                   <div class="card-body p-1">
                      @include('common.dateFormat', ['model'=>$post, 'field'=>'updated_at'])
@@ -154,7 +154,7 @@
                </div>
             </div>
             <div class="col-2 px-1">
-               <div class="card bg-transparent">
+               <div class="card">
                   <div class="card-header card_header p-1">Last Viewed By</div>
                   <div class="card-body p-1">
                      [LerouxH]
@@ -162,7 +162,7 @@
                </div>
             </div>
             <div class="col-2 pl-1">
-               <div class="card bg-transparent">
+               <div class="card">
                   <div class="card-header card_header p-1">Last Viewed On</div>
                   <div class="card-body p-1">
                      [Dec 15, 2018]

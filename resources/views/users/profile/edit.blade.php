@@ -152,7 +152,7 @@
                         <div class="form-row">
                            <div class="col-md-1">
                               <div class="form-group">
-                                 <label for="civic_number" class="control-label">Civic/Unit N<sup>o</sup></label>
+                                 <label for="civic_number" class="control-label">Unit N<sup>o</sup></label>
                                  <input name="civic_number" type="text" class="form-control form-control-sm" value="{{ $user->civic_number }}">
                               </div>
                            </div>
