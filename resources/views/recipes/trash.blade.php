@@ -20,12 +20,12 @@
                 No - Return To Previous Page
             </a>
             
-            @if(checkPerm('post_delete'))
+            {{-- @if(checkPerm('post_delete')) --}}
                <button type="submit" class="btn btn-outline-danger">
                   <i class="far fa-trash-alt"></i>
                   Yes - Trash This Recipe
                </button>
-            @endif
+            {{-- @endif --}}
             
          </form>
       </div>

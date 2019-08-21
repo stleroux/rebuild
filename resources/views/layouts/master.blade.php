@@ -27,9 +27,10 @@
       
 	  @include('layouts.navbar.navbar')
 
-      {{-- <span class="bg-dark text-light">
-         fromPage : {{ Session::get('fromPage') }}
-      </span> --}}
+      <span class="bg-dark text-light">
+         fromPage : {{ Session::get('fromPage') }} <br />
+         fromLocation : {{ Session::get('fromLocation') }}
+      </span>
 
    	@include('layouts.master.messages')
 

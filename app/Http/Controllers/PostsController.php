@@ -240,6 +240,7 @@ class PostsController extends Controller
 
       // Set the session to the current page route
       Session::put('fromPage', url()->full());
+      // Session::put('fromLocation', 'index');
 
 		//$alphas = range('A', 'Z');
 		$alphas = DB::table('posts')
@@ -269,7 +270,7 @@ class PostsController extends Controller
 				->get();
 		}
 		
-		return view('posts.index', compact('posts','letters', 'postlinks'));
+		return view('posts.index', compact('posts','letters'));
 	}
 
 
@@ -358,8 +359,8 @@ class PostsController extends Controller
 		$post->save();
 
 		Session::flash ('success','The post was successfully published.');
-
-		return redirect()->route('posts.'. Session::get('pageName'));
+		// return redirect(Session::get('fromPage'));
+		return redirect()->back();
 	}
 
 
@@ -384,7 +385,8 @@ class PostsController extends Controller
 
 		Session::flash('success','The recipes were published successfully.');
 
-		return redirect()->route('posts.'. Session::get('pageName'));
+		// return redirect()->route('posts.'. Session::get('pageName'));
+		return redirect(Session::get('fromPage'));
 	}
 
 
@@ -404,7 +406,8 @@ class PostsController extends Controller
 		$post->restore();
 
 		Session::flash ('success','The post was successfully restored.');
-		return redirect()->route('posts.trashed');
+		// return redirect()->route('posts.trashed');
+		return redirect(Session::get('fromPage'));
 	}
 
 
@@ -428,7 +431,8 @@ class PostsController extends Controller
 		Post::withTrashed()->restore($checked);
 
 		Session::flash('success','The posts have been restored successfully.');
-		return redirect()->route('posts.'. Session::get('pageName'));
+		// return redirect()->route('posts.'. Session::get('pageName'));
+		return redirect(Session::get('fromPage'));
 	}
 
 
@@ -598,7 +602,8 @@ class PostsController extends Controller
 		Post::destroy($checked);
 
 		Session::flash('success','The posts were trashed successfully.');
-		return redirect()->route('posts.'. Session::get('pageName'));
+		// return redirect()->route('posts.'. Session::get('pageName'));
+		return redirect(Session::get('fromPage'));
 	}
 
 
@@ -629,7 +634,9 @@ class PostsController extends Controller
 		// );
 
 		Session::flash('success', 'The post was successfully trashed!');
-		return redirect()->route('posts.'. Session::get('pageName'));
+		// return redirect()->route('posts.'. Session::get('pageName'));
+		// return redirect()->back();
+		return redirect(Session::get('fromPage'));
 	}
 
 
@@ -669,7 +676,7 @@ class PostsController extends Controller
 			$posts = Post::with('user','category')->onlyTrashed()->orderBy('id','desc')->get();
 		}
 		
-		return view('posts.trashed', compact('posts','letters', 'postlinks'));
+		return view('posts.trashed', compact('posts','letters'));
 	}
 
 
