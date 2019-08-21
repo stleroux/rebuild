@@ -1,15 +1,17 @@
 @extends('layouts.master')
 
 @section('stylesheets')
-   {{-- {{ Html::style('css/woodbarn.css') }} --}}
+  {{ Html::style('css/woodbarn.css') }}
 @stop
 
 @section('left_column')
-   {{-- @include('blocks.adminNav') --}}
-   @include('posts.sidebar')
+   @include('blocks.main_menu')
 @endsection
 
 @section('right_column')
+   @include('posts.sidebar')
+   @include('blog.blocks.popularPosts')
+   @include('blog.blocks.archives')
 @endsection
 
 @section('content')
@@ -19,39 +21,19 @@
       
       <div class="row">
          <div class="col">
-            <div class="card">
-               <div class="card-header card_header">
+            <div class="card mb-3">
+               <div class="card-header card_header p-2">
                   <i class="far fa-trash-alt"></i>
                   Trashed Posts
                   <div class="float-right">
-                     @if(checkPerm('post_create'))
-                        <button
-                           class="btn btn-sm btn-outline-danger px-1 py-0"
-                           type="submit"
-                           formaction="{{ route('posts.deleteAll') }}"
-                           formmethod="POST"
-                           id="bulk-delete"
-                           style="display:none; margin-left:2px"
-                           onclick="return confirm('Are you sure you want to trash these posts?')">
-                           <i class="far fa-trash-alt"></i>
-                           Delete Selected
-                        </button>
-                                          
-                        <button
-                           class = "btn btn-sm btn-outline-secondary px-1 py-0"
-                           type="submit"
-                           formaction="{{ route('posts.restoreAll') }}"
-                           formmethod="POST"
-                           id="bulk-restore"
-                           style="display:none; margin-left:2px"
-                           onclick="return confirm('Are you sure you want to restore these posts?')">
-                           <i class="fa fa-download"></i>
-                           Restore Selected
-                        </button>
-                     @endif
+                     @include('posts.buttons.deleteAll', ['size'=>'xs'])
+                     @include('posts.buttons.published', ['size'=>'xs'])
+                     @include('posts.buttons.unpublished', ['size'=>'xs'])
+                     @include('posts.buttons.newPosts', ['size'=>'xs'])
+                     @include('posts.buttons.trashed', ['size'=>'xs'])
+                     @include('posts.buttons.add', ['size'=>'xs'])
                   </div>
                </div>
-
 
                @if($posts->count() > 0)
                   <div class="card-body card_body p-2">
@@ -103,7 +85,7 @@
                      </table>
                   </div>
                @else
-                  <div class="card-body">
+                  <div class="card-body p-2">
                      {{ setting('no_records_found') }}
                   </div>
                @endif
@@ -112,7 +94,7 @@
       </div>
    </form>
 
-@stop
+@endsection
 
 @section('scripts')
       <script>
@@ -156,4 +138,4 @@
 
       </script>
 
-@stop
+@endsection

@@ -5,15 +5,6 @@
    </div>
    
    <div class="list-group pt-0 pb-0">
-{{--       @if(App\Category::newCategories()->count() > 0)
-      <a href="{{ route('categories.newCategories') }}" class="list-group-item {{ Nav::isRoute('categories.newCategories') }}">
-         <i class="fa fa-sitemap"></i>
-         New Categories
-         <div class="badge pull-right">
-            {{ App\Category::newCategories()->count() }}
-         </div>
-      </a>
-      @endif --}}
 
       <a href="{{ route('posts.index') }}"
          class="list-group-item list-group-item-action p-1 {{ Route::is('posts.index', 'posts.index.*') ? 'active' : '' }}"
@@ -21,6 +12,14 @@
          <i class="fas fa-upload pl-2"></i>
          Published Posts
          <span class="badge badge-secondary border float-right">{{ App\Models\Post::published()->count() }}</span>
+      </a>
+
+      <a href="{{ route('posts.unpublished') }}"
+         class="list-group-item list-group-item-action p-1 {{ Route::is('posts.unpublished', 'posts.unpublished.*') ? 'active' : '' }}"
+         data-parent="#sub_posts">
+         <i class="fas fa-download pl-2"></i>
+         Unpublished Posts
+         <span class="badge badge-secondary border float-right">{{ App\Models\Post::unpublished()->count() }}</span>
       </a>
 
       <a href="{{ route('posts.newPosts') }}"
@@ -39,14 +38,6 @@
          <span class="badge badge-secondary border float-right">{{ App\Models\Post::trashedCount()->count() }}</span>
       </a>
       
-      <a href="{{ route('posts.unpublished') }}"
-         class="list-group-item list-group-item-action p-1 {{ Route::is('posts.unpublished', 'posts.unpublished.*') ? 'active' : '' }}"
-         data-parent="#sub_posts">
-         <i class="fas fa-download pl-2"></i>
-         Unpublished Posts
-         <span class="badge badge-secondary border float-right">{{ App\Models\Post::unpublished()->count() }}</span>
-      </a>
-
    </div>
 
 </div>

@@ -9,47 +9,47 @@ use DB;
 
 class RecipeServiceProvider extends ServiceProvider
 {
-   /**
-    * Register services.
-    *
-    * @return void
-    */
-   public function register()
-   {
-      //
-   }
+	/**
+		* Register services.
+		*
+		* @return void
+		*/
+	public function register()
+	{
+		//
+	}
 
-   /**
-    * Bootstrap services.
-    *
-    * @return void
-    */
-   public function boot()
-   {
-      //
-      view()->composer('recipes.blocks.popularRecipes', function ($view) {
-         $popularRecipes = Recipe::published()
-            ->public()
-            ->orderBy('views', 'desc')
-            ->orderBy('title')            
-            ->take(setting('homepage_favorite_recipe_count'))
-            ->get()
-            ;
-         $view->with('popularRecipes', $popularRecipes);
-      });
+	/**
+		* Bootstrap services.
+		*
+		* @return void
+		*/
+	public function boot()
+	{
+		//
+		view()->composer('recipes.blocks.popularRecipes', function ($view) {
+			 $popularRecipes = Recipe::published()
+					->public()
+					->orderBy('views', 'desc')
+					->orderBy('title')            
+					->take(setting('homepage_favorite_recipe_count'))
+					->get();
+			 $view->with('popularRecipes', $popularRecipes);
+		});
 
-      view()->composer('recipes.blocks.archives', function ($view) {
-         $recipelinks = DB::table('recipes')
-            ->select(DB::raw('YEAR(published_at) year, MONTH(published_at) month, MONTHNAME(published_at) month_name, COUNT(*) recipe_count'))
-            ->where('published_at', '<=', Carbon::now())
-            // ->where('personal', '=', 0)
-            ->where('deleted_at', null)
-            ->groupBy('year')
-            ->groupBy('month')
-            ->orderBy('year', 'desc')
-            ->orderBy('month', 'desc')
-            ->get();
-         $view->with('recipelinks', $recipelinks);
-      });
-   }
+		view()->composer('recipes.blocks.archives', function ($view) {
+			 $recipelinks = DB::table('recipes')
+					->select(DB::raw('YEAR(published_at) year, MONTH(published_at) month, MONTHNAME(published_at) month_name, COUNT(*) recipe_count'))
+					->where('published_at', '<=', Carbon::now())
+					// ->where('personal', '=', 0)
+					->where('deleted_at', null)
+					->groupBy('year')
+					->groupBy('month')
+					->orderBy('year', 'desc')
+					->orderBy('month', 'desc')
+					->get();
+			 $view->with('recipelinks', $recipelinks);
+		});
+	}
+
 }

@@ -110,7 +110,6 @@ class PostsController extends Controller
 		$checked = $request->input('checked');
 
 		Post::whereIn('id', $checked)->forceDelete();
-		// Post::whereIn('id', $checked)->deleteDestroy();
 
 		Session::flash('delete','The posts were deleted successfully.');
 		return redirect()->route('posts.trashed');
@@ -138,7 +137,6 @@ class PostsController extends Controller
 		$post->tags()->detach();
 
 		// Delete the associated image if any
-		//Storage::delete($post->image_path);
 		File::delete('_posts/' . $post->image_path);
 
 		$post->forceDelete();
@@ -170,18 +168,6 @@ class PostsController extends Controller
 		// Check if user has required permission
 		if(!checkPerm('post_edit', $post)) { abort(401, 'Unauthorized Access'); }
 
-		// // find the categories
-		// $categories = Category::whereHas('module', function ($query) {
-		// 	$query->where('name', '=', 'posts');
-		// })->get();
-
-		// // Create an empty array to store the categories
-		// $cats = [];
-		// // Store the category values into the $cats array
-		// foreach ($categories as $category) {
-		// 	$cats[$category->id] = $category->name;
-		// }
-
 		// Get all categories related to Posts Category
 		$cats = Category::where('name','posts')->first();
 		$categories = Category::where('parent_id', $cats->id)->get();
@@ -189,11 +175,6 @@ class PostsController extends Controller
 
 		// find the associated tags
 		$tags = Tag::all()->pluck('id','name');
-		// Create an empty array to store the tags
-		// $tags = [];
-		// foreach ($tags2 as $tag) {
-		// 	$tags[$tag->id] = $tag->name;
-		// }
 
 		return view('posts.edit', compact('post','categories','tags'));
 	}
@@ -223,12 +204,6 @@ class PostsController extends Controller
 		Session::flash ('success', 'The post\'s image was successfully removed!');
 
 		// Send the user back to the Show page
-		//$modifiedBy = User::find($recipe->modified_by);
-		//$lastViewedBy = User::find($recipe->last_viewed_by);
-
-		//$createdBy = User::find($post->user_id);
-		//$modifiedBy = User::find($post->modified_by);
-		// return view ('edit')->withPost($post);
 		return redirect()->route('posts.edit', compact('post'));
 	}
 
@@ -279,20 +254,6 @@ class PostsController extends Controller
 		  $letters[] = $alpha->letter;
 		}
 
-		// Get list of posts by year and month
-		$postlinks = DB::table('posts')
-			->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) post_count'))
-			->where('published_at', '<=', Carbon::now())
-			//->where('created_at', '<=', Carbon::now()->subMonth(3))
-			->groupBy('year')
-			->groupBy('month')
-			->orderBy('year', 'desc')
-			->orderBy('month', 'desc')
-			->get();
-		// dd($postlinks);
-
-		Session::put('pageName', 'index');
-
 		// If $key value is passed
 		if ($key) {
 			$posts = Post::published()
@@ -334,12 +295,8 @@ class PostsController extends Controller
 		$alphas = DB::table('posts')
 			->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
 			->where('created_at', '>=' , Auth::user()->last_login_date)
-			//->where('user_id', '=', Auth::user()->id)
-			// ->where('personal', '!=', 1)
-			// ->where('published_at','=', null)
 			->orderBy('letter')
 			->get();
-			// dd($alphas);
 
 		$letters = [];
 		foreach($alphas as $alpha) {
@@ -416,32 +373,17 @@ class PostsController extends Controller
 ##################################################################################################################
 	public function publishAll(Request $request)
 	{
-		// Pass along the ROUTE value of the previous page
-		// $ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
-
-		//dd('TEST_DELETE');
-		// $this->validate($request, [
-		//    'checked' => 'required',
-		// ]);
-		//dd('TEST_DELETE');
-
 		$checked = $request->input('checked');
-		//dd($checked);
 
-		// $article = Article::withTrashed()->findOrFail($checked);
-		//Article::destroy($checked);
-		//Article::whereIn('id', $checked)->publish();
 		foreach ($checked as $item) {
-			//dd($item);
 			$post = Post::withTrashed()->find($item);
-			//dd($article);
 				$post->published_at = Carbon::now();
 				$post->deleted_at = Null;
 			$post->save();
 		}
 
 		Session::flash('success','The recipes were published successfully.');
-		// return redirect()->route($ref);
+
 		return redirect()->route('posts.'. Session::get('pageName'));
 	}
 
@@ -459,8 +401,6 @@ class PostsController extends Controller
 	{
 		$post = Post::withTrashed()->findOrFail($id);
 
-		//$article->deleted_at = NULL;
-		//$article->save();
 		$post->restore();
 
 		Session::flash ('success','The post was successfully restored.');
@@ -483,17 +423,11 @@ class PostsController extends Controller
 		// Pass along the ROUTE value of the previous page
 		// $ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
 
-		// $this->validate($request, [
-		//    'checked' => 'required',
-		// ]);
-
 		$checked = $request->input('checked');
-		//dd($checked);
 
 		Post::withTrashed()->restore($checked);
 
 		Session::flash('success','The posts have been restored successfully.');
-		// return redirect()->route($ref);
 		return redirect()->route('posts.'. Session::get('pageName'));
 	}
 
@@ -519,22 +453,9 @@ class PostsController extends Controller
          DB::table('posts')->where('id','=',$post->id)->increment('views',1);
      }
 
-		// // find all categories in the categories table and pass them to the view
-		// $categories = Category::whereHas('module', function ($query) {
-		// 	$query->where('name', 'like', 'posts');
-		// })->get();
-
-		// // Create an empty array to store the categories
-		// $cats = [];
-		// // Store the category values into the $cats array
-		// foreach ($categories as $category) {
-		// 	$cats[$category->id] = $category->name;
-		// }
-
 		// Get all categories related to Posts Category
 		$cats = Category::where('name','posts')->first();
 		$categories = Category::where('parent_id', $cats->id)->get();
-		$tags = Tag::all();
 
 		$tags = Tag::all();
 
@@ -567,6 +488,7 @@ class PostsController extends Controller
 
 		// Create an empty array to store the categories
 		$cats = [];
+
 		// Store the category values into the $cats array
 		foreach ($categories as $category) {
 			$cats[$category->id] = $category->name;
@@ -617,8 +539,6 @@ class PostsController extends Controller
 
 		// save the tags in the post_tag table
 		// false required as default (otherwise override existing association)
-		//$post->tags()->sync($request->tags, false);
-		
 		if (isset($request->tags))
 		{
 			 $post->tags()->sync($request->tags, false);
@@ -633,9 +553,7 @@ class PostsController extends Controller
 
 		// set a flash message to be displayed on screen
 		Session::flash('success','The post was successfully saved!');
-
 		// redirect to another page
-		// return redirect()->route('posts.show', $post->id);
 		return redirect()->route('posts.index');
 	}
 
@@ -655,19 +573,7 @@ class PostsController extends Controller
 
 		$post = Post::findOrFail($id);
 
-		// Set the $page variable so we can come back to the calling page		
-		// if (app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'posts.index') {
-		// 	$page = 'index';
-		// }elseif (app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'posts.unpublished') {
-		// 	$page = 'unpublished';
-		// }elseif (app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'posts.newPosts') {
-		// 	$page = 'newPosts';
-		// }
-
-		// Session::put('pageName', 'trashed');
-
 		return view('posts.trash', compact('post'));
-		
 	}
 
 
@@ -683,16 +589,11 @@ class PostsController extends Controller
 ##################################################################################################################
 	public function trashAll(Request $request)
 	{
-		// dd($request);
-		// Pass along the ROUTE value of the previous page
-		// $ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
-
 		$this->validate($request, [
 		   'checked' => 'required',
 		]);
 
 		$checked = $request->input('checked');
-		//dd($checked);
 
 		Post::destroy($checked);
 
@@ -728,15 +629,7 @@ class PostsController extends Controller
 		// );
 
 		Session::flash('success', 'The post was successfully trashed!');
-		
-		// if ($page === 'newPost') {
-		// 	return redirect()->route('posts.newPosts');
-		// }elseif ($page === 'unpublished'){
-		// 	return redirect()->route('posts.unpublished');
-		// }
-		// return redirect()->route('posts.index');
 		return redirect()->route('posts.'. Session::get('pageName'));
-		
 	}
 
 
@@ -754,9 +647,6 @@ class PostsController extends Controller
 		// Check if user has required permission
 		if(!checkPerm('post_index')) { abort(401, 'Unauthorized Access'); }
 
-      // Set the session to the current page route
-      Session::put('fromPage', url()->full());
-
 		//$alphas = range('A', 'Z');
 		$alphas = DB::table('posts')
 			->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
@@ -770,18 +660,6 @@ class PostsController extends Controller
 		  $letters[] = $alpha->letter;
 		}
 
-		// Get list of posts by year and month
-		$postlinks = DB::table('posts')
-			->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) post_count'))
-			->where('published_at', '<=', Carbon::now())
-			//->where('created_at', '<=', Carbon::now()->subMonth(3))
-			->groupBy('year')
-			->groupBy('month')
-			->orderBy('year', 'desc')
-			->orderBy('month', 'desc')
-			->get();
-		// dd($postlinks);
-
 		// If $key value is passed
 		if ($key) {
 			$posts = Post::with('user','category')->onlyTrashed()->where('title', 'like', $key . '%')
@@ -792,17 +670,6 @@ class PostsController extends Controller
 		}
 		
 		return view('posts.trashed', compact('posts','letters', 'postlinks'));
-
-
-		 //   public function trashed(Request $request)
-	// {
-		// if(!checkACL('guest')) {
-		//     return view('posts.errors.403');
-		// }
-
-	//    $recipes = Recipe::with('user','category')->onlyTrashed()->get();
-	//    return view('posts.recipes.trashed', compact('recipes'));
-	// }
 	}
 
 
@@ -821,21 +688,9 @@ class PostsController extends Controller
 
 	  $post = Post::find($id);
 		 $post->published_at = NULL;
-		 // $article->favoriteArticles()->delete(); // Remove associated rows from article_user (favorites table)
-		
-		 // $favorites = DB::select('select * from post_user where post_id = '. $id, [1]);
-		 // //dd ($favorites);
-		 // foreach($favorites as $favorite) {
-		 //    //dd($favorite);
-		 //    $post->favorites()->detach($favorite);
-		 // }
 	  $post->save();
 
 	  Session::flash ('success','The post was successfully unpublished.');
-	  //return redirect()->route($ref);
-	  // return redirect()->route('posts.show', $id);
-	  // return redirect()->route('posts.index');
-	  // return redirect()->route('posts.'. Session::get('pageName'));
 	  return redirect()->back();
 	}
 
@@ -871,19 +726,6 @@ class PostsController extends Controller
 		  $letters[] = $alpha->letter;
 		}
 
-		// Get list of posts by year and month
-		$postlinks = DB::table('posts')
-			->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) post_count'))
-			// ->where('published_at', '<=', Carbon::now())
-			->whereNull('published_at')
-			//->where('created_at', '<=', Carbon::now()->subMonth(3))
-			->groupBy('year')
-			->groupBy('month')
-			->orderBy('year', 'desc')
-			->orderBy('month', 'desc')
-			->get();
-		// dd($postlinks);
-
 		// If $key value is passed
 		if ($key) {
 			$posts = Post::unpublished()
@@ -891,15 +733,12 @@ class PostsController extends Controller
 				->where('title', 'like', $key . '%')
 				->orderBy('title', 'asc')
 				->get();
-
-			// return view('posts.unpublished', compact('posts','letters', 'postlinks'));
 		} else {
-
-		// No $key value is passed
-		$posts = Post::unpublished()
-			->with('user','category')
-			->orderBy('id','desc')
-			->get();
+			// No $key value is passed
+			$posts = Post::unpublished()
+				->with('user','category')
+				->orderBy('id','desc')
+				->get();
 		}
 
 		return view('posts.unpublished', compact('posts','letters', 'postlinks'));
@@ -916,36 +755,19 @@ class PostsController extends Controller
 ##################################################################################################################
 	public function unpublishAll(Request $request)
 	{
-	  // Pass along the ROUTE value of the previous page
-	  // $ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
-	  //dd($ref);
-
-	  // $this->validate($request, [
-	  //    'checked' => 'required',
-	  // ]);
 		$validatedData = $request->validate([
 			'checked' => 'required',
 		]);
 
 	  $checked = $request->input('checked');
-	  //dd($checked);
 
 	  foreach ($checked as $item) {
-		 //dd($item);
-		 // $post = Post::withTrashed()->find($item);
 		$post = Post::find($item);
 			$post->published_at = Null;
-
-			// Delete related favorites
-			// $favorites = DB::select('select * from post_user where post_id = '. $post->id, [1]);
-			//    foreach($favorites as $favorite) {
-			//       $post->favoriteposts()->detach($favorite);
-			//    }
 		 $post->save();
 	  }
 
 	  Session::flash('success','The posts were unpublished successfully.');
-	  // return redirect()->route($ref);
 	  return redirect()->route('posts.'. Session::get('pageName'));
 	}
 
@@ -970,7 +792,6 @@ class PostsController extends Controller
 			$post->category_id = $request->input('category_id');
 			// $post->body = Purifier::clean($request->input('body'));
 			$post->body = $request->body;
-			// $post->modified_by_id = Auth::user()->id;
 
 			// Check if a new image was submitted
 			if ($request->hasFile('image')) {
@@ -1009,12 +830,6 @@ class PostsController extends Controller
 
 		// Set flash data with success message
 		Session::flash ('success', 'This post was successfully updated!');
-
-		// Redirect to posts.show
-		// if($request->page === 'unpublished'){
-		// 	return redirect()->route('posts.unpublished');
-		// }
-
 		// return redirect()->route('posts.index');
 		return redirect()->route('posts.'. Session::get('pageName'));
 	}

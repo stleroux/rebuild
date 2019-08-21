@@ -1,14 +1,17 @@
 @extends('layouts.master')
 
 @section('stylesheets')
-   {{-- {{ Html::style('css/woodbarn.css') }} --}}
-@stop
+   {{ Html::style('css/woodbarn.css') }}
+@endsection
 
 @section('left_column')
    @include('blocks.main_menu')
 @endsection
 
 @section('right_column')
+   @include('posts.sidebar')
+   @include('blog.blocks.popularPosts')
+   @include('blog.blocks.archives')
 @endsection
 
 @section('content')
@@ -24,36 +27,13 @@
                   Unpublished Posts
                      
                   <div class="float-right">
-                     @if(checkPerm('post_create'))
-                        <button
-                           class="btn btn-xs btn-danger px-1 py-0"
-                           type="submit"
-                           formaction="{{ route('posts.trashAll') }}"
-                           formmethod="POST"
-                           id="bulk-delete"
-                           style="display:none; margin-left:2px"
-                           onclick="return confirm('Are you sure you want to trash these posts?')">
-                           <i class="far fa-trash-alt"></i>
-                           Trash Selected
-                        </button>
-                                          
-                        <button
-                           class = "btn btn-xs btn-secondary px-1 py-0"
-                           type="submit"
-                           formaction="{{ route('posts.publishAll') }}"
-                           formmethod="POST"
-                           id="bulk-publish"
-                           style="display:none; margin-left:2px"
-                           onclick="return confirm('Are you sure you want to publish these posts?')">
-                           <i class="fa fa-download"></i>
-                           Publish Selected
-                        </button>
-
-                        @include('posts.buttons.add', ['size'=>'xs'])
-                        @include('posts.buttons.published', ['size'=>'xs'])
-                        {{-- @include('posts.buttons.trashed', ['size'=>'xs']) --}}
-                        {{-- @include('posts.buttons.newPosts', ['size'=>'xs']) --}}
-                     @endif
+                     @include('posts.buttons.trashAll', ['size'=>'xs'])
+                     @include('posts.buttons.publishAll', ['size'=>'xs'])
+                     @include('posts.buttons.published', ['size'=>'xs'])
+                     @include('posts.buttons.unpublished', ['size'=>'xs'])
+                     @include('posts.buttons.newPosts', ['size'=>'xs'])
+                     @include('posts.buttons.trashed', ['size'=>'xs'])
+                     @include('posts.buttons.add', ['size'=>'xs'])
                   </div>
                </div>
 
@@ -134,8 +114,8 @@
       </div>
    </form>
 
-@stop
+@endsection
 
 @section('scripts')
    @include('scripts.bulkButtons')
-@stop
+@endsection
