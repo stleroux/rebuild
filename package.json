@@ -20,6 +20,7 @@
         "vue": "^2.5.17"
     },
     "dependencies": {
+        "@ttskch/select2-bootstrap4-theme": "^1.2.3",
         "autosize": "^4.0.2"
     }
 }

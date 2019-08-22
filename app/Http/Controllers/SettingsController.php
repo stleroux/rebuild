@@ -60,10 +60,10 @@ class SettingsController extends Controller
     public function index()
     {
         $invoicer = Setting::where('tab','=','invoicer')->get();
-        $profiles = Setting::where('tab','=','profile')->get();
+        $site = Setting::where('tab','=','site')->get();
         $settings = Setting::where('tab','=','general')->get();
 
-        return view('settings.index', compact('invoicer','profiles','settings'));
+        return view('settings.index', compact('invoicer','site','settings'));
     }
 
 

@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
    {{ Html::style('/css/woodbarn.css') }}
@@ -32,7 +32,7 @@
                      {{-- @endif --}}
                   </div>
                   
-                  <ul class="nav nav-tabs card-header-tabs p-0">
+                  <ul class="nav nav-tabs card-header-tabs p-2">
                      <li class="nav-item">
                         <a class="nav-link active" id="general-tab" data-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="true">General</a>
                      </li>

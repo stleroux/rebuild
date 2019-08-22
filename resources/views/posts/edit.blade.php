@@ -1,16 +1,15 @@
-@extends ('layouts.backend')
+@extends ('layouts.master')
 
 @section ('stylesheets')
-   {{-- {{ Html::style('css/woodbarn.css') }} --}}
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" />
-@stop
+   {{ Html::style('css/woodbarn.css') }}
+@endsection
 
 @section('left_column')
-   @include('blocks.adminNav')
-   @include('posts.sidebar')
+   @include('blocks.main_menu')
 @endsection
 
 @section('right_column')
+   @include('posts.sidebar')
 @endsection
 
 @section ('content')
@@ -20,17 +19,17 @@
    <div class="row">
       <div class="col">
          <div class="card">
-            <div class="card-header card_header">
+            <div class="card-header card_header p-2">
                Edit Post
                <div class="float-right">
                   @if($post->image)
-                     @include('common.buttons.deleteImage', ['model'=>'post', 'id'=>$post->id, 'type'=>''])
+                     @include('posts.buttons.deleteImage', ['size'=>'xs'])
                   @endif
-                  @include('common.buttons.cancel', ['model'=>'post', 'type'=>''])
-                  @include('common.buttons.update', ['model'=>'post', 'type'=>''])
+                  @include('posts.buttons.cancel', ['size'=>'xs'])
+                  @include('posts.buttons.update', ['size'=>'xs'])
                </div>
             </div>
-            <div class="card-body card_body">
+            <div class="card-body card_body p-2">
                   <div class="row">
                      <div class="col-md-4">
                         <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
@@ -44,7 +43,7 @@
                      <div class="col-xs-12 col-sm-6 col-md-3">
                         <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}" >
                            {!! Form::label("category_id", "Category", ['class'=>'required']) !!}
-                           <select name="category_id" class="custom-select">
+                           <select name="category_id" class="form-control form-control-sm">
                               @foreach ($categories as $category)
                                  <option disabled>{{ ucfirst($category->name) }}</option>
                                  @foreach ($category->children as $children)
@@ -57,7 +56,7 @@
                      <div class="col-md-3">
                         <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
                            {{ Form::label ('image', 'Update image') }}
-                           {{ Form::file('image', ['class'=>'border', 'value'=>'Image']) }}
+                           {{ Form::file('image', ['class'=>'', 'value'=>'Image']) }}
                         <span class="text-danger">{{ $errors->first('image') }}</span>
                         </div>
                      </div>
@@ -76,7 +75,7 @@
                      <div class="col-md-6">
                         <div class="form-group">
                            {{ Form::label('tag', 'Tags') }}
-                           {{ Form::select('tags[]', $tags, null, ['class'=>'form-control select2-multi', 'multiple'=>'multiple']) }}
+                           {{ Form::select('tags[]', $tags, null, ['class'=>'form-control form-control-sm chosen-select', 'multiple'=>'multiple']) }}
                         </div>
                      </div>
                      <div class="col-md-12">
@@ -93,12 +92,12 @@
    </div>
 {!! Form::close() !!}
 
-@stop
+@endsection
 
 @section ('scripts')
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-   
    <script type="text/javascript">
-      $('.select2-multi').select2();
+      $(document).ready( function () {
+         $(".chosen-select").chosen()
+      });
    </script>
-@stop
+@endsection
