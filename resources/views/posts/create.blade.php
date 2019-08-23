@@ -1,9 +1,9 @@
 @extends('layouts.master')
 
 @section ('stylesheets')
-	{{-- {{ Html::style('css/woodbarn.css') }} --}}
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" />
-@stop
+	{{ Html::style('css/woodbarn.css') }}
+   <link rel="stylesheet" href="/css/bootstrap-select.css">
+@endsection
 
 @section('left_column')
    @include('blocks.main_menu')
@@ -36,7 +36,7 @@
 			</div>
 
 			<div class="card-body card_body">
-		  		<div class="row">
+   	  		<div class="row">
 			 		<div class="col-6">
 						<div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
 				  			{{ Form::label ('title', 'Title', ['class'=>'required'])}}
@@ -73,7 +73,7 @@
 			 		<div class="col">
 						<div class="form-group {{ $errors->has('tag') ? 'has-error' : '' }}">
 							{{ Form::label('tag_id', 'Tags') }}
-							<select class="form-control form-control-sm select2-multi" id="tags" name="tags[]" multiple style="width: 99%;">
+							<select class="form-control form-control-sm selectpicker" id="tags" name="tags[]" multiple>
 								@foreach ($tags as $tag)
 									<option value="{{ $tag->id }}">{{ $tag->name }}</option>
 								@endforeach
@@ -97,12 +97,14 @@
       </div>
   	{!! Form::close() !!}
 
-@stop
+@endsection
 
 @section ('scripts')
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+	<script type="text/javascript" src="/js/bootstrap-select.js"></script>
 	
 	<script type="text/javascript">
-		$('.select2-multi').select2();
+      $(function () {
+         $('.selectpicker').selectpicker();
+      });
 	</script>
-@stop
+@endsection

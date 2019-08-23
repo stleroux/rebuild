@@ -171,7 +171,7 @@ class PostsController extends Controller
 		// Get all categories related to Posts Category
 		$cats = Category::where('name','posts')->first();
 		$categories = Category::where('parent_id', $cats->id)->get();
-		$tags = Tag::all();
+		// $tags = Tag::all();
 
 		// find the associated tags
 		$tags = Tag::all()->pluck('id','name');

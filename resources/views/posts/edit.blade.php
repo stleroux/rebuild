@@ -2,6 +2,7 @@
 
 @section ('stylesheets')
    {{ Html::style('css/woodbarn.css') }}
+   <link rel="stylesheet" href="/css/bootstrap-select.css">
 @endsection
 
 @section('left_column')
@@ -71,13 +72,31 @@
                      </div> --}}
                      
                   </div>
+                  
                   <div class="row">
-                     <div class="col-md-6">
+                     <div class="col-md-12">
                         <div class="form-group">
                            {{ Form::label('tag', 'Tags') }}
-                           {{ Form::select('tags[]', $tags, null, ['class'=>'form-control form-control-sm chosen-select', 'multiple'=>'multiple']) }}
+                           {{ Form::select('tags[]', $tags, null, ['class'=>'form-control form-control-sm selectpicker', 'multiple'=>'multiple']) }}
                         </div>
                      </div>
+                  </div>
+
+                  {{-- <div class="row">
+                     <div class="col">
+                        <div class="form-group {{ $errors->has('tag') ? 'has-error' : '' }}">
+                           {{ Form::label('tag_id', 'Tags') }}
+                           <select class="form-control form-control-sm selectpicker" id="tags" name="tags[]" multiple>
+                              @foreach ($tags as $tag)
+                                 <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                              @endforeach
+                           </select>
+                           <span class="text-danger">{{ $errors->first('tag') }}</span>
+                        </div>
+                     </div>
+                  </div> --}}
+            
+                  <div class="row">
                      <div class="col-md-12">
                         <div class="form-group {{ $errors->has('slug') ? 'has-error' : '' }}">
                            {{ Form::label ('body', 'Body', ['class' => 'required']) }}
@@ -95,9 +114,11 @@
 @endsection
 
 @section ('scripts')
+   <script type="text/javascript" src="/js/bootstrap-select.js"></script>
+   
    <script type="text/javascript">
-      $(document).ready( function () {
-         $(".chosen-select").chosen()
+      $(function () {
+         $('.selectpicker').selectpicker();
       });
    </script>
 @endsection
