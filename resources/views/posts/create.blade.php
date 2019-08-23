@@ -73,7 +73,7 @@
 			 		<div class="col">
 						<div class="form-group {{ $errors->has('tag') ? 'has-error' : '' }}">
 							{{ Form::label('tag_id', 'Tags') }}
-							<select class="form-control form-control-sm selectpicker" id="tags" name="tags[]" multiple>
+							<select class="selectpicker w-100" id="tags" name="tags[]" multiple>
 								@foreach ($tags as $tag)
 									<option value="{{ $tag->id }}">{{ $tag->name }}</option>
 								@endforeach
@@ -104,7 +104,9 @@
 	
 	<script type="text/javascript">
       $(function () {
-         $('.selectpicker').selectpicker();
+         $('.selectpicker').selectpicker({
+            style: "btn-light btn-sm"
+         });
       });
 	</script>
 @endsection

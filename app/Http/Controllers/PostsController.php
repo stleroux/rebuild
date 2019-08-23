@@ -163,7 +163,7 @@ class PostsController extends Controller
 	public function edit($id)
 	{
 		// find the post in the db and save it to a variable
-		$post = Post::find($id);
+		$post = Post::findOrFail($id);
 
 		// Check if user has required permission
 		if(!checkPerm('post_edit', $post)) { abort(401, 'Unauthorized Access'); }
@@ -171,10 +171,12 @@ class PostsController extends Controller
 		// Get all categories related to Posts Category
 		$cats = Category::where('name','posts')->first();
 		$categories = Category::where('parent_id', $cats->id)->get();
-		// $tags = Tag::all();
+		$tags = Tag::all();
+		// dd($tags);
 
 		// find the associated tags
-		$tags = Tag::all()->pluck('id','name');
+		// $tags = Tag::all()->pluck('name','id');
+		// dd($tags);
 
 		return view('posts.edit', compact('post','categories','tags'));
 	}
@@ -840,7 +842,8 @@ class PostsController extends Controller
 		// Set flash data with success message
 		Session::flash ('success', 'This post was successfully updated!');
 		// return redirect()->route('posts.index');
-		return redirect()->route('posts.'. Session::get('pageName'));
+		// return redirect()->route('posts.'. Session::get('pageName'));
+		return redirect()->route('posts.index');
 	}
 
 

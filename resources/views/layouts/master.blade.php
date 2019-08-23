@@ -9,8 +9,6 @@
 
    <title>{{ config('app.name', 'TheWoodBarn.ca') }}</title>
 
-   
-
    <!-- Styles -->
    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
@@ -20,8 +18,6 @@
    <link rel="stylesheet" href="/css/jquery.datetimepicker.min.css">
    {{-- <link rel="stylesheet" href="{{ asset('css/bootstrap-colors.css') }}" /> --}}
    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-   <link href="/css/component-chosen.css" rel="stylesheet">
-
    @yield('stylesheets')
 </head>
 <body>
@@ -29,10 +25,10 @@
       
 	  @include('layouts.navbar.navbar')
 
-      <span class="bg-dark text-light">
+{{--       <span class="bg-dark text-light">
          fromPage : {{ Session::get('fromPage') }} <br />
          fromLocation : {{ Session::get('fromLocation') }}
-      </span>
+      </span> --}}
 
    	@include('layouts.master.messages')
 
@@ -64,7 +60,6 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
    <script src="https://www.google.com/recaptcha/api.js"></script>
    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.6/chosen.jquery.min.js"></script>
 
    @include('scripts.datatables')
    @include('scripts.bulkButtons')

@@ -24,7 +24,7 @@
                Edit Post
                <div class="float-right">
                   @if($post->image)
-                     @include('posts.buttons.deleteImage', ['size'=>'xs'])
+                     {{-- @include('posts.buttons.deleteImage', ['size'=>'xs']) --}}
                   @endif
                   @include('posts.buttons.cancel', ['size'=>'xs'])
                   @include('posts.buttons.update', ['size'=>'xs'])
@@ -73,28 +73,19 @@
                      
                   </div>
                   
-                  <div class="row">
-                     <div class="col-md-12">
-                        <div class="form-group">
-                           {{ Form::label('tag', 'Tags') }}
-                           {{ Form::select('tags[]', $tags, null, ['class'=>'form-control form-control-sm selectpicker', 'multiple'=>'multiple']) }}
-                        </div>
-                     </div>
-                  </div>
-
-                  {{-- <div class="row">
+                   <div class="row">
                      <div class="col">
                         <div class="form-group {{ $errors->has('tag') ? 'has-error' : '' }}">
-                           {{ Form::label('tag_id', 'Tags') }}
-                           <select class="form-control form-control-sm selectpicker" id="tags" name="tags[]" multiple>
-                              @foreach ($tags as $tag)
-                                 <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                           {{ Form::label('tags', 'Tags') }}<br />
+                           <select class="selectpicker w-100" data-style="btn-sm btn-light" id="tags" name="tags[]" multiple>
+                              @foreach($tags as $tag)
+                                 <option value="{{$tag->id}}" {{$post->tags->contains($tag->id)?"selected='selected":""}}>{{$tag->name}}</option>
                               @endforeach
                            </select>
                            <span class="text-danger">{{ $errors->first('tag') }}</span>
                         </div>
                      </div>
-                  </div> --}}
+                  </div>
             
                   <div class="row">
                      <div class="col-md-12">
@@ -117,8 +108,12 @@
    <script type="text/javascript" src="/js/bootstrap-select.js"></script>
    
    <script type="text/javascript">
-      $(function () {
-         $('.selectpicker').selectpicker();
+      $(document).ready( function () {
+         $(function () {
+            $('.selectpicker').selectpicker({
+               // style: "btn-default btn-sm"
+            });
+         });
       });
    </script>
 @endsection

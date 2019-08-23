@@ -7,6 +7,7 @@ Sublime packages
 
 https://packagist.org/packages/artem-schander/l5-modular
 https://github.com/orangehill/iseed
+https://developer.snapappointments.com/bootstrap-select/
 
 
 #################################################################################################################################

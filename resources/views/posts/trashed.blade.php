@@ -67,10 +67,10 @@
                               <td>{{ $post->deleted_at->format('M d, Y') }}</td>
                               {{-- @if(checkACL('author')) --}}
                               <td class="text-right">
-                                 @include('posts.buttons.show', ['size'=>'xs', 'id'=>$post->id])
-                                 {{-- @include('posts.buttons.restore', ['size'=>'xs', 'id'=>$post->id]) --}}
+                                 @include('posts.buttons.show', ['size'=>'xs'])
+                                 @include('posts.buttons.restore', ['size'=>'xs'])
                                  @if(checkPerm('post_delete', $post))
-                                    {{-- @include('posts.buttons.delete', ['size'=>'xs', 'id'=>$post->id]) --}}
+                                    @include('posts.buttons.delete', ['size'=>'xs'])
                                  @endif
 
                               </td>
