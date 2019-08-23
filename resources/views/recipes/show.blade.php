@@ -6,10 +6,11 @@
 
 @section('left_column')
 	@include('blocks.main_menu')
-	@include('recipes.sidebar')
+	@include('recipes.menu')
 @endsection
 
 @section('right_column')
+	@include('recipes.sidebar')
 	{{-- @include('recipes.blocks.information') --}}
 	@include('recipes.blocks.popularRecipes')
 	@include('recipes.blocks.archives')
@@ -31,12 +32,12 @@
 				@include('recipes.addins.links.favorite', ['size'=>'xs'])
   	         @include('recipes.addins.links.privatize', ['size'=>'xs'])
 				@include('recipes.addins.links.publish', ['size'=>'xs'])
-				@include('recipes.addins.pages.published', ['size'=>'xs'])
-				@include('recipes.addins.pages.unpublished', ['size'=>'xs'])
-				@include('recipes.addins.pages.new', ['size'=>'xs'])
-				@include('recipes.addins.pages.trashed', ['size'=>'xs'])
-				@include('recipes.addins.pages.mine', ['size'=>'xs'])
-				@include('recipes.addins.pages.myPrivate', ['size'=>'xs'])
+				{{-- @include('recipes.addins.pages.published', ['size'=>'xs']) --}}
+				{{-- @include('recipes.addins.pages.unpublished', ['size'=>'xs']) --}}
+				{{-- @include('recipes.addins.pages.new', ['size'=>'xs']) --}}
+				{{-- @include('recipes.addins.pages.trashed', ['size'=>'xs']) --}}
+				{{-- @include('recipes.addins.pages.mine', ['size'=>'xs']) --}}
+				{{-- @include('recipes.addins.pages.myPrivate', ['size'=>'xs']) --}}
 				@include('recipes.addins.links.edit', ['size'=>'xs'])
 				@include('recipes.addins.links.trash', ['size'=>'xs'])
 			</span>

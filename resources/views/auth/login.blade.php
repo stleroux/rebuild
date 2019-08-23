@@ -30,7 +30,7 @@
 							<div class="col-md-6">
 								<input id="login" type="text"
 									   class="form-control form-control-sm {{ $errors->has('username') || $errors->has('email') ? ' is-invalid' : '' }}"
-									   name="login" value="{{ old('username') ?: old('email') }}" required autofocus>
+									   name="login" value="{{ old('username') ?: old('email') }}" required autofocus />
 						 
 								@if ($errors->has('username') || $errors->has('email'))
 									<span class="invalid-feedback bg-danger text-dark">
@@ -83,4 +83,10 @@
 		</div>
 	</div>
 </div>
+@endsection
+
+@section ('scripts')
+	<script type="text/javascript">
+		$('#login').focus();
+	</script>
 @endsection

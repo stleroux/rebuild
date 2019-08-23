@@ -13,26 +13,26 @@
    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
    {{-- Removed above because it interferes with DataTable --}}
 
-   <link rel="stylesheet" href="/css/jquery.datetimepicker.min.css">
+   {{-- <link rel="stylesheet" href="/css/jquery.datetimepicker.min.css"> --}}
 
    <!-- Font Awesome -->
-   <link rel="stylesheet" href="/css/fontawesome/all.css">
+   {{-- <link rel="stylesheet" href="/css/fontawesome/all.css"> --}}
    <!--load all styles 5.9.0-->
 
    <!-- Styles -->
    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
-   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/dt-1.10.18/datatables.min.css"/>
+   {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/dt-1.10.18/datatables.min.css"/> --}}
    {{-- <link rel="stylesheet" href="{{ asset('css/bootstrap_4/slate.css') }}"> --}}
-   <link rel="stylesheet" href="{{ asset('css/bootstrap-colors.css') }}" />
+   {{-- <link rel="stylesheet" href="{{ asset('css/bootstrap-colors.css') }}" /> --}}
    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-   @yield('stylesheets')
+   {{-- @yield('stylesheets') --}}
 </head>
 <body>
    @include('layouts.navbar.navbar')
-   <main class="container-fluid">
+   {{-- <main class="container-fluid"> --}}
       
-      <div id="app" class="py-2">
-         <div class="row pt-0 pr-2 pl-2 pb-0">
+      {{-- <div id="app" class="py-2"> --}}
+         {{-- <div class="row pt-0 pr-2 pl-2 pb-0"> --}}
             <div class="col-sm-3 col-md-2 pt-0 pr-0 pl-0 pb-0">
                {{-- @include('blocks.main_menu') --}}
                {{-- @include('blocks.admin_menu') --}}
@@ -45,15 +45,15 @@
                {{-- @include('blocks.login') --}}
                @yield('right_column')
             </div>
-         </div>
-      </div>
-   </main>
+         {{-- </div> --}}
+      {{-- </div> --}}
+   {{-- </main> --}}
       
    <footer class="footer fixed-bottom">
       @include('layouts.master.footer')
    </footer>
 
-</div>
+
    
    <!-- Optional JavaScript -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

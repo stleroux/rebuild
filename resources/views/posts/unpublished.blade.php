@@ -29,11 +29,6 @@
                   <div class="float-right">
                      @include('posts.buttons.trashAll', ['size'=>'xs'])
                      @include('posts.buttons.publishAll', ['size'=>'xs'])
-                     {{-- @include('posts.buttons.published', ['size'=>'xs']) --}}
-                     {{-- @include('posts.buttons.unpublished', ['size'=>'xs']) --}}
-                     {{-- @include('posts.buttons.newPosts', ['size'=>'xs']) --}}
-                     {{-- @include('posts.buttons.trashed', ['size'=>'xs']) --}}
-                     {{-- @include('posts.buttons.back', ['size'=>'xs']) --}}
                      @include('posts.buttons.add', ['size'=>'xs'])
                   </div>
                </div>
@@ -41,7 +36,7 @@
                
                @if($posts->count() > 0)
                   <div class="card-body section_body p-2">
-                     {{-- @include('common.alphabet', ['model'=>'post', 'page'=>'unpublished']) --}}
+                     @include('common.alphabet', ['model'=>'post', 'page'=>'unpublished'])
                      <table id="datatable" class="table table-hover table-sm">
                         <thead>
                            <tr>

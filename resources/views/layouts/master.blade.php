@@ -83,7 +83,7 @@
 			$('#success-empty').show();
 		}, 5000); // <-- time in milliseconds
 	</script>
-
+   @yield('scripts')
 	
 </body>
 </html>

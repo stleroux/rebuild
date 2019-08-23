@@ -240,6 +240,7 @@ class PostsController extends Controller
 
       // Set the session to the current page route
       Session::put('fromPage', url()->full());
+      // Session::put('fromLocation', 'posts.index'); // Required for Alphabet listing
       // Session::put('fromLocation', 'index');
 
 		//$alphas = range('A', 'Z');
@@ -717,6 +718,7 @@ class PostsController extends Controller
 		if(!checkPerm('post_index')) { abort(401, 'Unauthorized Access'); }
 
 		// Set the session to the current page route
+		// Session::put('fromLocation', 'posts.unpublished'); // Required for Alphabet listing
       Session::put('fromPage', url()->full());
 
 		//$alphas = range('A', 'Z');

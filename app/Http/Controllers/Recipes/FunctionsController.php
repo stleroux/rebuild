@@ -502,7 +502,8 @@ return $pdf->download('generatepdf.pdf');
       Recipe::destroy($checked);
 
       Session::flash('success','The recipes were trashed successfully.');
-      return redirect()->route('recipes.'. Session::get('pageName'));
+      // return redirect()->route('recipes.'. Session::get('pageName'));
+      return redirect()->back();
    }
 
 
@@ -531,7 +532,8 @@ return $pdf->download('generatepdf.pdf');
       $recipe->delete();
 
       Session::flash('success', 'The recipe was successfully deleted!');
-      return redirect()->route('recipes.'. Session::get('pageName'));
+      // return redirect()->route('recipes.'. Session::get('pageName'));
+      return redirect()->back();
    }
 
 

@@ -1,4 +1,4 @@
-@extends('layouts.recipes')
+@extends('layouts.master')
 
 @section('stylesheets')
    {{ Html::style('css/recipes.css') }}

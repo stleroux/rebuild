@@ -6,7 +6,7 @@
 
 @section('left_column')
    {{-- @include('blocks.home_menu') --}}
-   @include('recipes.sidebar')
+   @include('recipes.menu')
 @endsection
 
 @section('right_column')

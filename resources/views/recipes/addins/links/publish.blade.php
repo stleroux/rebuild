@@ -12,7 +12,7 @@
    @else
       {{-- @if(checkPerm('recipe_publish', $recipe)) --}}
          <a href="{{ route('recipes.publish', $recipe->id) }}"
-            class="btn btn-{{ $size }} btn-warning"
+            class="btn btn-{{ $size }} btn-primary"
             title="Publish Recipe"><i class="{{ Config::get('buttons.publish') }} text-success"></i></a>
       {{-- @else
          <a href="#"

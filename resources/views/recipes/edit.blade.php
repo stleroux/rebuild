@@ -7,9 +7,11 @@
 
 @section('left_column')
    @include('blocks.main_menu')
+   @include('recipes.menu')
 @endsection
 
 @section('right_column')
+   @include('recipes.sidebar')
    @include('recipes.blocks.popularRecipes')
    @include('recipes.blocks.archives')
 @endsection
