@@ -13,11 +13,10 @@
 		<div class="card-header">
 			<span class="h3">{{ ucwords($recipe->title) }}</span>
 			<span class="float-right">
-				{{-- <a href="{{ route('recipes.show', $recipe->id) }}" class="btn btn-sm btn-outline-secondary d-print-none">Return</a> --}}
-				{{-- @include('common.buttons.cancel') --}}
-				{{-- @include('common.buttons.cancel', ['model'=>'recipe']) --}}
-				@include('recipes.addins.links.back', ['size'=>'xs'])
-				@include('recipes.addins.links.print2', ['size'=>'xs'])
+				<div class="btn-group">
+					@include('recipes.buttons.back', ['size'=>'xs'])
+					@include('recipes.buttons.print2', ['size'=>'xs'])
+				</div>
 			</span>
 		</div>
 		

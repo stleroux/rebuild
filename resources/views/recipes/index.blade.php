@@ -23,16 +23,10 @@
 			<i class="fab fa-apple"></i>
 			Recipes
 			<span class="float-right">
-				@include('recipes.addins.links.printAll', ['size'=>'xs'])
-				{{-- @include('recipes.addins.pages.myFavorites', ['size'=>'xs']) --}}
-				{{-- @include('recipes.addins.pages.published', ['size'=>'xs']) --}}
-				{{-- @include('recipes.addins.pages.unpublished', ['size'=>'xs']) --}}
-				{{-- @include('recipes.addins.pages.new', ['size'=>'xs']) --}}
-				{{-- @include('recipes.addins.pages.future', ['size'=>'xs']) --}}
-				{{-- @include('recipes.addins.pages.trashed', ['size'=>'xs']) --}}
-				{{-- @include('recipes.addins.pages.mine', ['size'=>'xs']) --}}
-				{{-- @include('recipes.addins.pages.myPrivate', ['size'=>'xs']) --}}
-				@include('recipes.addins.links.add', ['size'=>'xs'])
+				<div class="btn-group">
+					@include('recipes.buttons.printAll', ['size'=>'xs'])
+					@include('recipes.buttons.add', ['size'=>'xs'])
+				</div>
 			</span>
 		</div>
 
@@ -81,9 +75,9 @@
 								<div class="card-text pb-1 m-0">
 									<div class="align-self-end text-center">
 										{{-- @if(!$recipe->isFavorited()) --}}
-											@include('recipes.addins.links.favorite', ['size'=>'xs'])
+											@include('recipes.buttons.favorite', ['size'=>'xs'])
 										{{-- @else
-											@include('common.addins.links.favoriteRemove', ['name'=>'recipe', 'model'=>$recipe])
+											@include('common.buttons.favoriteRemove', ['name'=>'recipe', 'model'=>$recipe])
 										@endif --}}
 									</div>
 								</div>

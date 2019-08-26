@@ -51,7 +51,7 @@
 
          <div id="addImage" class="col-xs-12 col-md-12">
             @if(count($project->images) > 0)
-               <table class="table table-sm table-hover table-striped text-dark mb-0">
+               <table class="table table-sm table-hover table-striped text-light mb-0">
                   <thead>
                      <tr>
                         <th>No</th>
@@ -69,17 +69,19 @@
                               <form action="{{ route('projects.image.delete', $image->id) }}" method="POST" class="float-right">
                                  {{csrf_field()}}
                                  {{ method_field('DELETE') }}
-                                 <a href="javascript:;"
-                                    data-href="/_projects/{{ $image->project_id }}/{{ $image->name }}"
-                                    data-name="{{ $image->name }}"
-                                    data-description="{{ $image->description }}"
-                                    class="openmodal btn btn-xs btn-primary">
-                                    <i class="far fa-eye"></i>
-                                 </a>
-                                 <input type="hidden" value="{{ $project->id }}" name="project_id">
-                                 <button type="submit" class="btn btn-xs btn-danger">
-                                    <i class="fa fa-trash"></i>
-                                 </button>
+                                 <div class="btn-group">
+                                    <a href="javascript:;"
+                                       data-href="/_projects/{{ $image->project_id }}/{{ $image->name }}"
+                                       data-name="{{ $image->name }}"
+                                       data-description="{{ $image->description }}"
+                                       class="openmodal btn btn-xs btn-primary text-light">
+                                       <i class="far fa-eye"></i>
+                                    </a>
+                                    <input type="hidden" value="{{ $project->id }}" name="project_id">
+                                    <button type="submit" class="btn btn-xs btn-danger text-light">
+                                       <i class="fa fa-trash"></i>
+                                    </button>
+                                 </div>
                               </form>
                            </td>
                         </tr>

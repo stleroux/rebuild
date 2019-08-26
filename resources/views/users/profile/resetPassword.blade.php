@@ -23,8 +23,9 @@
 				<i class="fas fa-user-lock"></i>
 				Reset My Password
 				<span class="float-right">
-					{{ Form::button('<i class="fa fa-save"></i> Reset Password', array('type'=>'submit', 'class'=>'btn btn-xs btn-primary')) }}
-					{{-- @include('users.buttons.save', ['size'=>'xs']) --}}
+					<div class="btn-group">
+						{{ Form::button('<i class="fa fa-save"></i> Reset Password', array('type'=>'submit', 'class'=>'btn btn-xs btn-primary')) }}
+					</div>
 				</span>
 			</div>
 

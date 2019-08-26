@@ -4,5 +4,5 @@
    {{-- formaction="{{ route($model.'s'.'.store') }}" --}}
    formmethod="POST"
    title="Save">
-   <i class="fa fa-save"></i>
+   <i class="fa fa-fw fa-save"></i>
 </button>

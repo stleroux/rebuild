@@ -23,11 +23,13 @@
             <div class="card-header card_header p-2">
                Edit Post
                <div class="float-right">
-                  @if($post->image)
-                     {{-- @include('posts.buttons.deleteImage', ['size'=>'xs']) --}}
-                  @endif
-                  @include('posts.buttons.cancel', ['size'=>'xs'])
-                  @include('posts.buttons.update', ['size'=>'xs'])
+                  <div class="btn-group">
+                     @if($post->image)
+                        {{-- @include('posts.buttons.deleteImage', ['size'=>'xs']) --}}
+                     @endif
+                     @include('posts.buttons.cancel', ['size'=>'xs'])
+                     @include('posts.buttons.update', ['size'=>'xs'])
+                  </div>
                </div>
             </div>
             <div class="card-body card_body p-2">

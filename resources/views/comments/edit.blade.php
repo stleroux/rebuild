@@ -27,27 +27,11 @@
 						<i class="fas fa-comments"></i>
 						Comments
 						<span class="float-right">
-							<!-- Only show if coming from the comments page -->
-							{{-- @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'comments.index')
-							   <a href="{{ route('comments.index') }}" class="btn btn-sm btn-outline-secondary px-1 py-0">
-									<i class="fas fa-angle-double-left"></i>
-									Cancel
-								</a>
-							@endif --}}
-
-							<!-- Only show if coming from the blog search page -->
-							{{-- @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'posts.show')
-							   <a href="{{ URL::previous() }}" class="btn btn-sm btn-outline-secondary px-1 py-0">
-								  <i class="fa fa-arrow-left"></i> Previous
-							   </a>
-							@endif --}}
-
-							@include('comments.buttons.back', ['size'=>'xs'])
-							@include('comments.buttons.reset', ['size'=>'xs'])
-							@include('comments.buttons.save', ['size'=>'xs'])
-
-							{{-- {{ Form::button('<i class="fas fa-sync-alt"></i> Reset Form', ['type'=>'reset', 'class'=>'btn btn-sm btn-outline-secondary px-1 py-0']) }} --}}
-							{{-- {{ Form::button('<i class="fa fa-save"></i> Update ', ['type' => 'submit', 'class' => 'btn btn-sm btn-outline-bprimary px-1 py-0'])  }} --}}
+							<div class="btn-group">
+								@include('comments.buttons.back', ['size'=>'xs'])
+								@include('comments.buttons.reset', ['size'=>'xs'])
+								@include('comments.buttons.save', ['size'=>'xs'])
+							</div>								
 						</span>
 					</div>
 

@@ -20,8 +20,10 @@
          <i class="fa fa-plus-square"></i>
          Show Finish
          <span class="float-right">
-            @include('projects.finishes..addins.links.help', ['size'=>'xs', 'bookmark'=>'projects'])
-            @include('projects.finishes.addins.links.back', ['size'=>'xs'])
+            <div class="btn-group">
+               @include('projects.finishes..addins.links.help', ['size'=>'xs', 'bookmark'=>'projects'])
+               @include('projects.finishes.addins.links.back', ['size'=>'xs'])
+            </div>
          </span>
       </div>
 

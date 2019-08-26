@@ -27,21 +27,17 @@
             <i class="fas fa-user"></i>
             Edit User :: {{ $user->username }}
             <span class="float-sm-right">
-               @include('users.buttons.addAllPermissions', ['size'=>'xs'])
-               @include('users.buttons.removeAllPermissions', ['size'=>'xs'])
-
-               @include('users.buttons.back', ['size'=>'xs'])
-
-               @if(checkPerm('user_edit'))
+               <div class="btn-group">
+                  @include('users.buttons.addAllPermissions', ['size'=>'xs'])
+                  @include('users.buttons.removeAllPermissions', ['size'=>'xs'])
+                  @include('users.buttons.back', ['size'=>'xs'])
                   <button type="submit" class="btn btn-xs btn-info" name="submit" value="continue" title="Update & Continue">
                      <i class="far fa-hdd"></i>
-                     {{-- Update & Continue --}}
                   </button>
                   <button type="submit" class="btn btn-xs btn-success" name="submit" value="close" title="Update & Close">
                      <i class="far fa-save"></i>
-                     {{-- Update & Close --}}
                   </button>
-               @endif
+               </div>
             </span>
          </div>
 

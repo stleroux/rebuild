@@ -22,9 +22,10 @@
             <i class="fas fa-shield-alt"></i>
             Edit Permission
             <div class="float-right">
-               @include('permissions.buttons.back', ['size'=>'xs'])
-               @include('permissions.buttons.update', ['size'=>'xs'])
-{{--                @include('common.buttons.update', ['model'=>'permission']) --}}
+               <div class="btn-group">
+                  @include('permissions.buttons.back', ['size'=>'xs'])
+                  @include('permissions.buttons.update', ['size'=>'xs'])
+               </div>
             </div>
          </div>
          

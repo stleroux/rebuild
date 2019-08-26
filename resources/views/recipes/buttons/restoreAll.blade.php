@@ -1,6 +1,6 @@
 @if(checkPerm('recipe_restore'))
    <button
-      class="btn btn-{{ $size }} btn-outline-secondary"
+      class="btn btn-{{ $size }} btn-primary text-light"
       type="submit"
       formaction="{{ route('recipes.restoreAll') }}"
       formmethod="POST"

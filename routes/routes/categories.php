@@ -1,21 +1,21 @@
 <?php
 use Illuminate\Support\Facades\Input;
 
-Route::get('categories/{cat}/delete',             'CategoriesController@delete')               ->name('categories.delete');
-Route::get('categories/getSubs/{id}',             'CategoriesController@getSubs')               ->name('categories.getSubs');
-Route::get('categories/create',                   'CategoriesController@create')               ->name('categories.create');
-Route::post('categories/store',                   'CategoriesController@store')                ->name('categories.store');
-Route::post('categories/saveModal',               'CategoriesController@saveModal')            ->name('categories.saveModal');
-Route::get('categories/{id}/show',                'CategoriesController@show')                 ->name('categories.show');
-Route::get('categories/{id?}',                    'CategoriesController@index')                ->name('categories.index');
-Route::get('categories/{id}/edit',                'CategoriesController@edit')                 ->name('categories.edit');
-Route::put('categories/{id}',                     'CategoriesController@update')               ->name('categories.update');
-Route::delete('categories/{id}/destroy',          'CategoriesController@destroy')              ->name('categories.destroy');
+Route::prefix('categories')->name('categories.')->group(function() {
+   Route::get('{cat}/delete',             'CategoriesController@delete')               ->name('delete');
+   Route::get('getSubs/{id}',             'CategoriesController@getSubs')              ->name('getSubs');
+   Route::get('create',                   'CategoriesController@create')               ->name('create');
+   Route::post('store',                   'CategoriesController@store')                ->name('store');
+   Route::post('saveModal',               'CategoriesController@saveModal')            ->name('saveModal');
+   Route::get('{id}/show',                'CategoriesController@show')                 ->name('show');
+   Route::get('{id?}',                    'CategoriesController@index')                ->name('index');
+   Route::get('{id}/edit',                'CategoriesController@edit')                 ->name('edit');
+   Route::put('{id}',                     'CategoriesController@update')               ->name('update');
+   Route::delete('{id}/destroy',          'CategoriesController@destroy')              ->name('destroy');
+});
 
 Route::get('/ajax-subcat',function () {
    $cat_id = Input::get('cat_id');
-   // dd($cat_id);
    $subcategories = DB::table('categories')->where('parent_id','=',$cat_id)->orderBy('name')->pluck('name');
-   // dd($subcategories);
    return Response::json($subcategories);
 });

@@ -26,9 +26,11 @@
                      {!! Form::model($project, ['route'=>['projects.update', $project->id], 'method' => 'POST', 'files' => true]) !!}
                      @csrf
                      @method("PUT")
-                     @include('projects.addins.links.help', ['size'=>'xs', 'bookmark'=>'projects'])
-                     @include('projects.addins.links.back', ['size'=>'xs'])
-                     @include('projects.addins.buttons.update', ['size'=>'xs'])
+                     <div class="btn-group">
+                        @include('projects.addins.links.help', ['size'=>'xs', 'bookmark'=>'projects'])
+                        @include('projects.addins.links.back', ['size'=>'xs'])
+                        @include('projects.addins.buttons.update', ['size'=>'xs'])
+                     </div>
                   </span>
                </div>
                <!-- MAIN CARD BODY -->

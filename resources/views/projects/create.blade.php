@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
    {{ Html::style('/css/woodbarn.css') }}
@@ -24,9 +24,11 @@
                Create Project
             </span>
             <span class="float-right">
-               @include('projects.addins.links.help', ['size'=>'sm', 'bookmark'=>'projects'])
-               @include('projects.addins.links.back', ['size'=>'sm'])
-               @include('projects.addins.buttons.save', ['size'=>'sm'])
+               <div class="btn-group">
+                  @include('projects.addins.links.help', ['size'=>'sm', 'bookmark'=>'projects'])
+                  @include('projects.addins.links.back', ['size'=>'sm'])
+                  @include('projects.addins.buttons.save', ['size'=>'sm'])
+               </div>
             </span>
          </div>
 

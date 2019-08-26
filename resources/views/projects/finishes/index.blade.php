@@ -22,13 +22,13 @@
                <i class="fas fa-brush"></i>
                Finishes
                <span class="float-right">
-                  @include('projects.addins.links.help', ['size'=>'xs', 'bookmark'=>'projects'])
-                  @include('projects.addins.links.BEProjects', ['size'=>'xs'])
-                  @include('projects.finishes.addins.links.finishes', ['size'=>'xs'])
-                  @include('projects.materials.addins.links.materials', ['size'=>'xs'])
-                  @if(checkPerm('projects_create'))
+                  <div class="btn-group">
+                     @include('projects.addins.links.help', ['size'=>'xs', 'bookmark'=>'projects'])
+                     @include('projects.addins.links.BEProjects', ['size'=>'xs'])
+                     @include('projects.finishes.addins.links.finishes', ['size'=>'xs'])
+                     @include('projects.materials.addins.links.materials', ['size'=>'xs'])
                      @include('projects.finishes.addins.links.add', ['size'=>'xs'])
-                  @endif
+                  </div>
                </span>
             </div>
 
@@ -61,13 +61,11 @@
                               <td data-order="{{ $finish->created_at}}">{{ $finish->created_at ? $finish->created_at->format('M d, Y') : 'no data found' }}</td>
                               {{-- <td data-order="{{ $finish->updated_at}}">{{ $finish->updated_at ? $finish->updated_at->format('M d, Y') : 'no data found' }}</td> --}}
                               <td class="text-right">
-                                 @include('projects.finishes.addins.links.show', ['size'=>'xs'])
-                                 @if(checkPerm('projects_edit'))
+                                 <div class="btn-group">
+                                    @include('projects.finishes.addins.links.show', ['size'=>'xs'])
                                     @include('projects.finishes.addins.links.edit', ['size'=>'xs'])
-                                 @endif
-                                 @if(checkPerm('projects_delete'))
                                     @include('projects.finishes.addins.links.delete', ['size'=>'xs'])
-                                 @endif
+                                 </div>
                               </td>
                            </tr>
                         @endforeach

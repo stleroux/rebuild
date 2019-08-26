@@ -25,13 +25,13 @@
             <i class="fas fa-user"></i>
             New User
             <span class="float-sm-right">
-               {{-- @include('users.buttons.addAllPermissions', ['size'=>'xs'])
-               @include('users.buttons.removeAllPermissions', ['size'=>'xs']) --}}
-               @include('users.buttons.back', ['size'=>'xs'])
-               @if(checkPerm('user_create'))
+               <div class="btn-group">
+                  {{-- @include('users.buttons.addAllPermissions', ['size'=>'xs'])
+                  @include('users.buttons.removeAllPermissions', ['size'=>'xs']) --}}
+                  @include('users.buttons.back', ['size'=>'xs'])
                   @include('users.buttons.reset', ['size'=>'xs'])
                   @include('users.buttons.save', ['size'=>'xs'])
-               @endif
+               </div>
             </span>
          </div>
 

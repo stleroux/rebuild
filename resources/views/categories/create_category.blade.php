@@ -5,11 +5,12 @@
             <i class="fa fa-plus" aria-hidden="true"></i>
             New Category
             <span class="float-right">
-               @include('categories.buttons.help', ['size'=>'xs', 'bookmark'=>'categories_add_category'])
-               {{-- @include('categories.buttons.cancel', ['name'=>'category', 'model'=>$category]) --}}
-               @include('categories.buttons.back', ['size'=>'xs'])
-               @include('categories.buttons.reset', ['size'=>'xs'])
-               @include('categories.buttons.save', ['size'=>'xs'])
+               <div class="btn-group">
+                  @include('categories.buttons.help', ['size'=>'xs', 'bookmark'=>'categories_add_category'])
+                  @include('categories.buttons.back', ['size'=>'xs'])
+                  @include('categories.buttons.reset', ['size'=>'xs'])
+                  @include('categories.buttons.save', ['size'=>'xs'])
+               </div>
             </span>
          </div>
          <div class="card-body section_body p-2">

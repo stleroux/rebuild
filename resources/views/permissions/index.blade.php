@@ -21,7 +21,9 @@
 					Permissions
 					@if(checkPerm('permission_create'))
 						<span class="float-sm-right">
-							@include('permissions.buttons.add', ['size'=>'xs'])
+							<div class="btn-group">
+								@include('permissions.buttons.add', ['size'=>'xs'])
+							</div>
 						</span>
 					@endif
 				</div>
@@ -45,18 +47,12 @@
 									<td>{{ ucfirst($permission->model) }}</td>
 									<td>{{ $permission->type }}</td>
 									<td>{{ ucwords($permission->description) }}</td>
-									<td class="text-right" nowrap="nowrap">
-										@if(checkPerm('permission_show'))
+									<td class="text-right">
+										<div class="btn-group">
 											@include('permissions.buttons.show', ['size'=>'xs'])
-										@endif
-
-										@if(checkPerm('permission_edit'))
 											@include('permissions.buttons.edit', ['size'=>'xs'])
-										@endif
-
-										@if(checkPerm('permission_delete'))
 											@include('permissions.buttons.delete', ['size'=>'xs'])
-										@endif
+										</div>
 									</td>
 								</tr>
 							@endforeach

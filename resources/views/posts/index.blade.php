@@ -26,15 +26,17 @@
                   <i class="fas fa-upload"></i>
                   Published Posts
                   <div class="float-right">
-                     @include('posts.buttons.trashAll', ['size'=>'xs'])
-                     @include('posts.buttons.publishAll', ['size'=>'xs'])
-                     @include('posts.buttons.add', ['size'=>'xs'])
+                     <div class="btn-group">
+                        @include('posts.buttons.trashAll', ['size'=>'xs'])
+                        @include('posts.buttons.publishAll', ['size'=>'xs'])
+                        @include('posts.buttons.add', ['size'=>'xs'])
+                     </div>
                   </div>
                </div>
 
                @if($posts->count() > 0)
                   <div class="card-body section_body p-2">
-                     @include('common.alphabet', ['model'=>'post', 'page'=>'index'])
+                     @include('posts.alphabet', ['model'=>'post', 'page'=>'index'])
                      <table id="datatable" class="table table-hover table-sm">
                         <thead>
                            <tr>
@@ -67,35 +69,19 @@
                                  <td>@include('common.authorFormat', ['model'=>$post, 'field'=>'user'])</td>
                                  <td>@include('common.dateFormat', ['model'=>$post, 'field'=>'created_at'])</td>
                                  <td>
-                                    {{-- {{ $post->published_at ? $post->published_at->format('M d Y') : '' }} --}}
                                     @include('common.dateFormat', ['model'=>$post, 'field'=>'published_at'])
-                                    {{-- {{ date('M d Y', strtotime($post->published_at) ?? 'N/A')  }} --}}
-                                    {{-- {{ \Carbon\Carbon::parse($post->published_at)->format('M d Y')}} --}}
                                  </td>
-                                 {{-- <td>{{ $post->slug }}</td> --}}
-                                 {{-- <td>{{ $post->category->name }}</td> --}}
-                                 {{-- <td>{{ $post->views }}</td> --}}
                                  <td class="text-right">
-                                    {{-- <a href="{{ route('posts.publish', $post->id) }}" class="btn btn-sm btn-outline-secondary px-1 py-0" title="Publish Post">
-                                       <i class="fa fa-upload"></i>
-                                    </a> --}}
-
-                                    {{-- <a href="{{ route('posts.unpublish', $post->id) }}" class="btn btn-sm btn-outline-secondary px-1 py-0" title="Unpublish Post">
-                                       <i class="fa fa-download"></i>
-                                    </a> --}}
-                                    @include('posts.buttons.publish', ['size'=>'xs'])
-
-                                    {{-- <a href="{{ route('posts.show', $post->id) }}" class="btn btn-sm btn-outline-secondary px-1 py-0" title="View Post">
-                                       <i class="fa fa-eye"></i>
-                                    </a> --}}
-                                    @include('posts.buttons.show', ['size'=>'xs'])
-
-                                    @if(checkPerm('post_edit', $post))
-                                       @include('posts.buttons.edit', ['size'=>'xs'])
-                                    @endif
-                                    @if(checkPerm('post_delete', $post))
-                                       @include('posts.buttons.trash', ['size'=>'xs'])
-                                    @endif
+                                    <div class="btn-group">
+                                       @include('posts.buttons.publish', ['size'=>'xs'])
+                                       @include('posts.buttons.show', ['size'=>'xs'])
+                                       @if(checkPerm('post_edit', $post))
+                                          @include('posts.buttons.edit', ['size'=>'xs'])
+                                       @endif
+                                       @if(checkPerm('post_delete', $post))
+                                          @include('posts.buttons.trash', ['size'=>'xs'])
+                                       @endif
+                                    </div>
                                  </td>
                               </tr>
                            @endforeach

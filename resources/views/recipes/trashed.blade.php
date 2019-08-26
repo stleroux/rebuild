@@ -24,21 +24,15 @@
 				<i class="{{ Config::get('buttons.trashed') }}"></i>
 				Trashed Recipes
 				<span class="float-right">
-					@include('recipes.addins.links.help', ['size'=>'xs', 'bookmark'=>'recipes'])
-					{{-- @include('recipes::backend.trashed.help') --}}
-					@include('recipes.addins.buttons.deleteAll', ['size'=>'xs'])
-					@include('recipes.addins.buttons.restoreAll', ['size'=>'xs'])
-					@include('recipes.addins.buttons.publishAll', ['size'=>'xs'])
-					@include('recipes.addins.buttons.unpublishAll', ['size'=>'xs'])
-					@include('recipes.addins.buttons.trashAll', ['size'=>'xs'])
-					{{-- @include('recipes.addins.pages.published', ['size'=>'xs']) --}}
-					{{-- @include('recipes.addins.pages.unpublished', ['size'=>'xs']) --}}
-					{{-- @include('recipes.addins.pages.new', ['size'=>'xs']) --}}
-					{{-- @include('recipes.addins.pages.future', ['size'=>'xs']) --}}
-					{{-- @include('recipes.addins.pages.trashed', ['size'=>'xs']) --}}
-					{{-- @include('recipes.addins.pages.mine', ['size'=>'xs']) --}}
-					{{-- @include('recipes.addins.pages.myPrivate', ['size'=>'xs']) --}}
-					@include('recipes.addins.links.add', ['size'=>'xs'])
+					<div class="btn-group">
+						@include('recipes.buttons.help', ['size'=>'xs', 'bookmark'=>'recipes'])
+						@include('recipes.buttons.deleteAll', ['size'=>'xs'])
+						@include('recipes.buttons.restoreAll', ['size'=>'xs'])
+						@include('recipes.buttons.publishAll', ['size'=>'xs'])
+						@include('recipes.buttons.unpublishAll', ['size'=>'xs'])
+						@include('recipes.buttons.trashAll', ['size'=>'xs'])
+						@include('recipes.buttons.add', ['size'=>'xs'])
+					</div>
 				</span>
 			</div>
 	</form>
@@ -74,8 +68,10 @@
 					         <td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'deleted_at'])</td>
 					         <td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'published_at'])</td>
 					         <td class="text-right">
-					            @include('recipes.addins.links.restore', ['size'=>'xs'])
-					            @include('recipes.addins.links.delete', ['size'=>'xs'])
+					         	<div class="btn-group">
+						            @include('recipes.buttons.restore', ['size'=>'xs'])
+						            @include('recipes.buttons.delete', ['size'=>'xs'])
+						         </div>
 					         </td>
 					      </tr>
 					      @endforeach

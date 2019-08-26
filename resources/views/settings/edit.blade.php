@@ -22,14 +22,16 @@
             <i class="fas fa-shield-alt"></i>
             Edit Site Setting
             <div class="float-right">
-               <a class="btn btn-sm btn-secondary px-1 py-0" href="{{ route('settings.index') }}">
-                  <i class="fas fa-angle-double-left"></i>
-                  Cancel
-               </a>
-                <button type="submit" class="btn btn-sm btn-info px-1 py-0">
-                  <i class="fa fa-save"></i>
-                  Update
-               </button>
+               <div class="btn-group">
+                  <a class="btn btn-sm btn-secondary px-1 py-0" href="{{ route('settings.index') }}">
+                     <i class="fas fa-angle-double-left"></i>
+                     Cancel
+                  </a>
+                   <button type="submit" class="btn btn-sm btn-info px-1 py-0">
+                     <i class="fa fa-save"></i>
+                     Update
+                  </button>
+               </div>
             </div>
          </div>
          

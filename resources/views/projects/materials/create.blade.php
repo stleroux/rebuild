@@ -22,9 +22,11 @@
             <i class="fa fa-plus-square"></i>
             Create Material
             <span class="float-right">
-               @include('projects.materials.addins.links.help', ['size'=>'xs', 'bookmark'=>'materials'])
-               @include('projects.materials.addins.links.back', ['size'=>'xs'])
-               @include('projects.materials.addins.buttons.save', ['size'=>'xs'])
+               <div class="btn-group">
+                  @include('projects.materials.addins.links.help', ['size'=>'xs', 'bookmark'=>'materials'])
+                  @include('projects.materials.addins.links.back', ['size'=>'xs'])
+                  @include('projects.materials.addins.buttons.save', ['size'=>'xs'])
+               </div>
             </span>
          </div>
 

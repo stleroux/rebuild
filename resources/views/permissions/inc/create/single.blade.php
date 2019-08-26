@@ -6,10 +6,12 @@
          <i class="fas fa-user"></i>
          Add Single Permission
          <span class="float-sm-right">
-            @include('permissions.buttons.back', ['size'=>'xs'])
-            @include('permissions.buttons.reset', ['size'=>'xs'])
-            @include('permissions.buttons.save&new', ['size'=>'xs'])
-            @include('permissions.buttons.save', ['size'=>'xs'])
+            <div class="btn-group">
+               @include('permissions.buttons.back', ['size'=>'xs'])
+               @include('permissions.buttons.reset', ['size'=>'xs'])
+               @include('permissions.buttons.save&new', ['size'=>'xs'])
+               @include('permissions.buttons.save', ['size'=>'xs'])
+            </div>
          </span>
       </div>
       <div class="card-body section_body p-2">

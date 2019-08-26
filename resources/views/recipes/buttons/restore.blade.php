@@ -11,7 +11,7 @@
  --}}
 @if(checkPerm('recipe_restore'))
    <a href="{{ route('recipes.restore', $recipe->id) }}"
-      class="btn btn-{{ $size }} btn-info"
+      class="btn btn-{{ $size }} btn-info text-light"
       title="Restore Recipe">
       <i class="{{ Config::get('buttons.restore') }}"></i>
    </a>

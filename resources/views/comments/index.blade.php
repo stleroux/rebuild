@@ -16,7 +16,7 @@
    {{-- <form method="POST" action="{{ route('backend.recipes.trashAll') }}"> --}}
       {!! csrf_field() !!}
          
-      <div class="card">
+      <div class="card mb-3">
          <div class="card-header section_header p-2">
             <i class="fas fa-comments"></i>
             Comments
@@ -70,19 +70,10 @@
                            <td>{{ $comment->commentable_type }}</td>
                            <td>{{ $comment->commentable_id }}</td>
                            <td class="text-right">
-                              {{-- <a href="{{ route('comments.show', $comment->id) }}" class="btn btn-sm btn-outline-secondary px-1 py-0" title="View Comment">
-                                 <i class="fas fa-eye"></i>
-                              </a> --}}
-
-                              {{-- @if(checkPerm('post_edit', $post)) --}}
-                              @include('comments.buttons.edit', ['size'=>'xs'])
-                              {{-- @endif --}}
-                              {{-- @if(checkPerm('post_delete', $post)) --}}
-                              {{-- <a href="{{ route('comments.delete', $comment->id) }}" class="btn btn-sm btn-outline-danger px-1 py-0" title="Delete Comment">
-                                 <i class="far fa-trash-alt"></i>
-                              </a> --}}
-                              @include('comments.buttons.delete', ['size'=>'xs'])
-                              {{-- @endif --}}
+                              <div class="btn-group">
+                                 @include('comments.buttons.edit', ['size'=>'xs'])
+                                 @include('comments.buttons.delete', ['size'=>'xs'])
+                              </div>
                            </td>
                         </tr>
                      @endforeach

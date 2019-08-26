@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
    {{ Html::style('/css/woodbarn.css') }}
@@ -20,16 +20,18 @@
             <i class="fas fa-cog"></i>
             New Site Setting
             <div class="float-right">
-               <a class="btn btn-sm btn-secondary px-1 py-0" href="{{ route('settings.index') }}">
-                  <i class="fas fa-angle-double-left"></i>
-                  Cancel
-               </a>
-               <button type="submit" class="btn btn-sm btn-info px-1 py-0" name="submit" value="new">
-                  <i class="far fa-hdd"></i> Save & New
-               </button>
-               <button type="submit" class="btn btn-sm btn-success px-1 py-0" name="submit" value="save">
-                  <i class="far fa-save"></i> Save & Close
-               </button>
+               <div class="btn-group">
+                  <a class="btn btn-sm btn-secondary px-1 py-0" href="{{ route('settings.index') }}">
+                     <i class="fas fa-angle-double-left"></i>
+                     Cancel
+                  </a>
+                  <button type="submit" class="btn btn-sm btn-info px-1 py-0" name="submit" value="new">
+                     <i class="far fa-hdd"></i> Save & New
+                  </button>
+                  <button type="submit" class="btn btn-sm btn-success px-1 py-0" name="submit" value="save">
+                     <i class="far fa-save"></i> Save & Close
+                  </button>
+               </div>
             </div>
          </div>
          

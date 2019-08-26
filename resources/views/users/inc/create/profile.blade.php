@@ -18,8 +18,18 @@
                      <div class="col-md-3">
                         <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
                            <label for="password" class="required">Password</label>
-                           <input name="password" type="text" class="form-control form-control-sm" value="" placeholder="Auto set to password or specify">
-                           {{-- {!! Form::text('password', null, array('placeholder'=>'Automatically set to :: password', 'class'=>'form-control form-control-sm', 'readonly'=>'readonly')) !!} --}}
+                           <input name="password" type="text" class="form-control form-control-sm" value="" placeholder="Auto set to password if not set">
+                        </div>
+                     </div>
+                     <div class="col-md-2">
+                        <div class="form-group">
+                           <label for="status">Invoicer Client</label>
+                           <select name="invoicer_client" id="invoicer_client" class="form-control form-control-sm">
+                              @foreach($user->invoicerclientOptions() as $invoicerclientOptionKey => $invoicerclientOptionValue)
+                                 <option value="{{$invoicerclientOptionKey}}" {{ $user->invoicerclientClient == $invoicerclientOptionValue ? 'selected' : '' }}>{{ $invoicerclientOptionValue }}</option>
+                              @endforeach
+                           </select>
+                           <div class="text-danger">{{ $errors->first('invoicer_client') }}</div>
                         </div>
                      </div>
                   </div>

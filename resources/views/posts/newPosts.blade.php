@@ -26,20 +26,17 @@
                   <i class="{{ Config::get('buttons.new') }}"></i>
                   New Posts
                   <div class="float-right">
-                     @include('posts.buttons.trashAll', ['size'=>'xs'])
-                     @include('posts.buttons.publishAll', ['size'=>'xs'])
-                     {{-- @include('posts.buttons.published', ['size'=>'xs']) --}}
-                     {{-- @include('posts.buttons.unpublished', ['size'=>'xs']) --}}
-                     {{-- @include('posts.buttons.newPosts', ['size'=>'xs']) --}}
-                     {{-- @include('posts.buttons.trashed', ['size'=>'xs']) --}}
-                     {{-- @include('posts.buttons.back', ['size'=>'xs']) --}}
-                     @include('posts.buttons.add', ['size'=>'xs'])
+                     <div class="btn-group">
+                        @include('posts.buttons.trashAll', ['size'=>'xs'])
+                        @include('posts.buttons.publishAll', ['size'=>'xs'])
+                        @include('posts.buttons.add', ['size'=>'xs'])
+                     </div>
                   </div>
                </div>
 
                <div class="card-body card_body p-2">
                   @if($posts->count() > 0)
-                     {{-- @include('common.alphabet', ['model'=>'post', 'page'=>'newPosts']) --}}
+                     @include('posts.alphabet', ['model'=>'post', 'page'=>'newPosts'])
                      <table id="datatable" class="table table-hover table-sm">
                         <thead>
                            <tr>
@@ -69,14 +66,16 @@
                               <td>{{ $post->created_at->format('M d, Y') }}</td>                            
                               {{-- @if(checkACL('author')) --}}
                               <td class="text-right">
-                                 @include('posts.buttons.show', ['size'=>'xs'])
-                                 @include('posts.buttons.publish', ['size'=>'xs'])
-                                 @if(checkPerm('post_edit', $post))
-                                    @include('posts.buttons.edit', ['size'=>'xs'])
-                                 @endif
-                                 @if(checkPerm('post_delete', $post))
-                                    @include('posts.buttons.trash', ['size'=>'xs'])
-                                 @endif
+                                 <div class="btn-group">
+                                    @include('posts.buttons.show', ['size'=>'xs'])
+                                    @include('posts.buttons.publish', ['size'=>'xs'])
+                                    @if(checkPerm('post_edit', $post))
+                                       @include('posts.buttons.edit', ['size'=>'xs'])
+                                    @endif
+                                    @if(checkPerm('post_delete', $post))
+                                       @include('posts.buttons.trash', ['size'=>'xs'])
+                                    @endif
+                                 </div>
                               </td>
                               {{-- @endif --}}
                            </tr>

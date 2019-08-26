@@ -25,21 +25,16 @@
 		<div class="card-header section_header p-2">
 			{{ $recipe->title }}
 			<span class="float-right">
-				@include('recipes.addins.links.back', ['size'=>'xs'])
-				@include('recipes.addins.links.print', ['size'=>'xs'])
-				@include('recipes.addins.links.printPDF', ['size'=>'xs'])
-				{{-- <a href="{{route('recipes.printPDF')}}">Print PDF</a> --}}
-				@include('recipes.addins.links.favorite', ['size'=>'xs'])
-  	         @include('recipes.addins.links.privatize', ['size'=>'xs'])
-				@include('recipes.addins.links.publish', ['size'=>'xs'])
-				{{-- @include('recipes.addins.pages.published', ['size'=>'xs']) --}}
-				{{-- @include('recipes.addins.pages.unpublished', ['size'=>'xs']) --}}
-				{{-- @include('recipes.addins.pages.new', ['size'=>'xs']) --}}
-				{{-- @include('recipes.addins.pages.trashed', ['size'=>'xs']) --}}
-				{{-- @include('recipes.addins.pages.mine', ['size'=>'xs']) --}}
-				{{-- @include('recipes.addins.pages.myPrivate', ['size'=>'xs']) --}}
-				@include('recipes.addins.links.edit', ['size'=>'xs'])
-				@include('recipes.addins.links.trash', ['size'=>'xs'])
+				<div class="btn-group">
+					@include('recipes.buttons.back', ['size'=>'xs'])
+					@include('recipes.buttons.print', ['size'=>'xs'])
+					@include('recipes.buttons.printPDF', ['size'=>'xs'])
+					@include('recipes.buttons.favorite', ['size'=>'xs'])
+  		         @include('recipes.buttons.privatize', ['size'=>'xs'])
+					@include('recipes.buttons.publish', ['size'=>'xs'])
+					@include('recipes.buttons.edit', ['size'=>'xs'])
+					@include('recipes.buttons.trash', ['size'=>'xs'])
+				</div>
 			</span>
 		</div>
 	

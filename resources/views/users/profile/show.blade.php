@@ -20,14 +20,16 @@
       <div class="card-header section_header p-2">
          Show Profile
          <span class="float-right">
-            {{-- @include('projects.addins.links.help', ['size'=>'xs', 'bookmark'=>'projects']) --}}
-            {{-- @include('users.buttons.back', ['size'=>'xs']) --}}
-            @if($user->id === Auth::user()->id)
-               <a href="{{ route('profile.edit', $user->id) }}" class="btn btn-xs btn-primary">
-                  <i class="fa fa-edit"></i>
-                  Edit Profile
-               </a>
-            @endif
+            <div class="btn-group">
+               {{-- @include('projects.addins.links.help', ['size'=>'xs', 'bookmark'=>'projects']) --}}
+               {{-- @include('users.buttons.back', ['size'=>'xs']) --}}
+               @if($user->id === Auth::user()->id)
+                  <a href="{{ route('profile.edit', $user->id) }}" class="btn btn-xs btn-primary">
+                     <i class="fa fa-edit"></i>
+                     Edit Profile
+                  </a>
+               @endif
+            </div>
          </span>
       </div>
 

@@ -18,7 +18,7 @@
 
    <div class="card mb-2">
       <div class="card-header section_header text-center p-2">
-         <b class="text-danger">ARE YOU SURE YOU WANT TO DELETE USER {{ strtoupper($user->username) }}?</b>
+         <b class="text-danger">ARE YOU SURE YOU WANT TO PERMANENTLY DELETE USER {{ strtoupper($user->username) }}?</b>
       </div>
 
       <div class="card-body bg-light text-center">

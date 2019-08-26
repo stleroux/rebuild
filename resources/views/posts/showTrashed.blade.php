@@ -19,10 +19,12 @@
          <i class="far fa-newspaper"></i>
          {{ ucwords($post->title) }}
          <span class="float-right">
-            <a href="{{ route('posts.trashed') }}" class="btn btn-outline-secondary btn-sm px-1 py-0">
-               <i class="fas fa-angle-double-left"></i>
-               Back
-            </a>
+            <div class="btn-group">
+               <a href="{{ route('posts.trashed') }}" class="btn btn-outline-secondary btn-sm px-1 py-0">
+                  <i class="fas fa-angle-double-left"></i>
+                  Back
+               </a>
+            </div>
          </span>
       </div>
       <div class="card-body card_body">

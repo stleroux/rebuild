@@ -21,59 +21,64 @@
       <div class="card-header section_header p-2">
          {{ ucwords($post->title) }}
          <span class="float-right">
-            @auth
-               <a href="" type="button" class="btn btn-sm btn-secondary px-1 py-0" data-toggle="modal" data-target="#printModal" data-link="{{ $post->slug }}">
-                  <i class="fa fa-print"></i> Print
-               </a>
-            @endauth
+            {{-- <div class="btn-group"> --}}
+               @include('blog.buttons.previous', ['size'=>'xs'])
+               @include('blog.buttons.next', ['size'=>'xs'])
+               {{-- @include('blog.buttons.back', ['size'=>'xs']) --}}
+               @auth
+                  <a href="" type="button" class="btn btn-sm btn-primary px-1 py-0" data-toggle="modal" data-target="#printModal" data-link="{{ $post->slug }}">
+                     <i class="fa fa-print"></i> Print
+                  </a>
+               @endauth
 
-            <!-- Only show if coming from the homepage -->
-            @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'home')
-               <a href="{{ route('home') }}" class="btn btn-sm btn-primary px-1 py-0">
-                  <i class="fas fa-home"></i> Home
-               </a>
-            @endif
+               <!-- Only show if coming from the homepage -->
+               @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'home')
+                  <a href="{{ route('home') }}" class="btn btn-sm btn-primary px-1 py-0">
+                     <i class="fas fa-home"></i> Home
+                  </a>
+               @endif
 
-            <!-- Only show if coming from the blog page -->
-            @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.index')
-               <a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary px-1 py-0">
-                  <i class="fas fa-blog"></i> Blog
-               </a>
-            @endif
+               <!-- Only show if coming from the blog page -->
+               @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.index')
+                  <a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary px-1 py-0">
+                     <i class="fas fa-blog"></i> Blog
+                  </a>
+               @endif
 
-            <!-- Show this button after posting a comment -->
-            @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.single')
-               <a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary px-1 py-0">
-                  <i class="fas fa-blog"></i> Blog
-               </a>
-            @endif
+               <!-- Show this button after posting a comment -->
+               @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.single')
+                  <a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary px-1 py-0">
+                     <i class="fas fa-blog"></i> Blog
+                  </a>
+               @endif
 
-            <!-- Only show if coming from the blog print page -->
-            @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.print')
-               <a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary px-1 py-0">
-                  <i class="fas fa-blog"></i> Blog
-               </a>
-            @endif
+               <!-- Only show if coming from the blog print page -->
+               @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.print')
+                  <a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary px-1 py-0">
+                     <i class="fas fa-blog"></i> Blog
+                  </a>
+               @endif
 
-            <!-- Only show if coming from the blog search page -->
-            @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.search')
-               <a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary px-1 py-0">
-                  <i class="fas fa-blog"></i> Blog
-               </a>
-               <a href="{{ URL::previous() }}" class="btn btn-sm btn-primary px-1 py-0">
-                  <i class="fas fa-blog"></i> Search
-               </a>
-            @endif              
+               <!-- Only show if coming from the blog search page -->
+               @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.search')
+                  <a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary px-1 py-0">
+                     <i class="fas fa-blog"></i> Blog
+                  </a>
+                  <a href="{{ URL::previous() }}" class="btn btn-sm btn-primary px-1 py-0">
+                     <i class="fas fa-blog"></i> Search
+                  </a>
+               @endif              
 
-            <!-- Only show if coming from the blog archive page -->
-            @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.archive')
-               <a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary px-1 py-0">
-                  <i class="fas fa-blog"></i> Blog
-               </a>
-               <a href="{{ URL::previous() }}" class="btn btn-sm btn-primary px-1 py-0">
-                  <i class="fas fa-blog"></i> Archive
-               </a>
-            @endif
+               <!-- Only show if coming from the blog archive page -->
+               @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.archive')
+                  <a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary px-1 py-0">
+                     <i class="fas fa-blog"></i> Blog
+                  </a>
+                  <a href="{{ URL::previous() }}" class="btn btn-sm btn-primary px-1 py-0">
+                     <i class="fas fa-blog"></i> Archive
+                  </a>
+               @endif
+            {{-- </div> --}}
          </span>
       </div>
 
@@ -82,7 +87,7 @@
             <div class="col-8 pr-1">
                <div class="row text-center">
                   <div class="col-3 pr-1">
-                     <div class="card mb-2 bg-transparent">
+                     <div class="card mb-2">
                         <div class="card-header card_header p-1">Category</div>
                         <div class="card-body p-1">
                            {{ ucfirst($post->category->name) }}
@@ -90,7 +95,7 @@
                      </div>
                   </div>
                   <div class="col-3 px-1">
-                     <div class="card mb-2 bg-transparent">
+                     <div class="card mb-2">
                         <div class="card-header card_header p-1">Published On</div>
                         <div class="card-body p-1">
                            {{ $post->published_at->format('M d, Y') }}
@@ -98,7 +103,7 @@
                      </div>
                   </div>
                   <div class="col-3 pl-1">
-                     <div class="card mb-2 bg-transparent">
+                     <div class="card mb-2">
                         <div class="card-header card_header p-1">Views</div>
                         <div class="card-body p-1">
                            {{ $post->views }}
@@ -108,7 +113,7 @@
                </div>
                <div class="row">
                   <div class="col">
-                     <div class="card mb-2 bg-transparent">
+                     <div class="card mb-2">
                         <div class="card-header card_header p-1">Content</div>
                         <div class="card-body p-1">
                            {{-- @if(checkPerm('post_show')) --}}
@@ -129,7 +134,7 @@
             <div class="col-4 pl-1">
                <div class="row">
                   <div class="col-12">
-                     <div class="card mb-2 bg-transparent">
+                     <div class="card mb-2">
                         <div class="card-header card_header p-1">Image</div>
                         <div class="card-body p-1">
                            @if ($post->image)
@@ -151,13 +156,13 @@
 
          <div class="row text-center">
             <div class="col-4 pr-1">
-               <div class="card bg-transparent mb-2">
+               <div class="card mb-2">
                   <div class="card-header card_header p-1">Created</div>
                   <div class="card-body p-0">
                      <div class="col">
                         <div class="row">
                            <div class="col-6 px-0">
-                              <div class="card bg-transparent">
+                              <div class="card">
                                  <div class="card-header card_header p-1">By</div>
                                  <div class="card-body p-1">
                                     {{ ucfirst($post->user->username) }}
@@ -165,7 +170,7 @@
                               </div>
                            </div>
                            <div class="col-6 px-0">
-                              <div class="card bg-transparent">
+                              <div class="card">
                                  <div class="card-header card_header p-1">Date</div>
                                  <div class="card-body p-1">
                                     {{ $post->created_at->format('M d, Y') }}
@@ -179,13 +184,13 @@
             </div>
 
             <div class="col-4 px-1">
-               <div class="card bg-transparent mb-2">
+               <div class="card mb-2">
                   <div class="card-header card_header p-1">Last Updated</div>
                   <div class="card-body p-0">
                      <div class="col">
                         <div class="row">
                            <div class="col-6 px-0">
-                              <div class="card bg-transparent">
+                              <div class="card">
                                  <div class="card-header card_header p-1">By</div>
                                  <div class="card-body p-1">
                                     @if($post->updated_by_id)
@@ -197,7 +202,7 @@
                               </div>
                            </div>
                            <div class="col-6 px-0">
-                              <div class="card bg-transparent">
+                              <div class="card">
                                  <div class="card-header card_header p-1">Date</div>
                                  <div class="card-body p-1">
                                     @if($post->updated_by_id)
@@ -215,13 +220,13 @@
             </div>
 
             <div class="col-4 pl-1">
-               <div class="card bg-transparent mb-2">
+               <div class="card mb-2">
                   <div class="card-header card_header p-1">Last Viewed</div>
                   <div class="card-body p-0">
                      <div class="col">
                         <div class="row">
                            <div class="col-6 px-0">
-                              <div class="card bg-transparent">
+                              <div class="card">
                                  <div class="card-header card_header p-1">By</div>
                                  <div class="card-body p-1">
                                     Not Tracked
@@ -229,7 +234,7 @@
                               </div>
                            </div>
                            <div class="col-6 px-0">
-                              <div class="card bg-transparent">
+                              <div class="card">
                                  <div class="card-header card_header p-1">Date</div>
                                  <div class="card-body p-1">
                                     Not Tracked

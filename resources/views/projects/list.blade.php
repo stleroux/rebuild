@@ -22,11 +22,13 @@
                <i class="fab fa-pagelines"></i>
                Projects
                <span class="float-right">
-                  @include('projects.addins.links.help', ['size'=>'xs', 'bookmark'=>'projects'])
-                  @include('projects.addins.links.BEProjects', ['size'=>'xs'])
-                  @include('projects.finishes.addins.links.finishes', ['size'=>'xs'])
-                  @include('projects.materials.addins.links.materials', ['size'=>'xs'])
-                  @include('projects.addins.links.add', ['size'=>'xs'])
+                  <div class="btn-group">
+                     @include('projects.addins.links.help', ['size'=>'xs', 'bookmark'=>'projects'])
+                     @include('projects.addins.links.BEProjects', ['size'=>'xs'])
+                     @include('projects.finishes.addins.links.finishes', ['size'=>'xs'])
+                     @include('projects.materials.addins.links.materials', ['size'=>'xs'])
+                     @include('projects.addins.links.add', ['size'=>'xs'])
+                  </div>
                </span>
             </div>
 
@@ -60,14 +62,11 @@
                               {{-- Add more columns here --}}
                               <td data-order="{{ $project->created_at}}">{{ $project->created_at ? $project->created_at->format('M d, Y') : 'no data found' }}</td>
                               <td class="text-right">
-                                 @include('projects.addins.links.show', ['size'=>'xs'])
-                                 @if(checkPerm('projects_edit'))
+                                 <div class="btn-group">
+                                    @include('projects.addins.links.show', ['size'=>'xs'])
                                     @include('projects.addins.links.edit', ['size'=>'xs'])
-                                 @endif
-
-                                 @if(checkPerm('projects_delete'))
                                     @include('projects.addins.links.delete', ['size'=>'xs'])
-                                 @endif
+                                 </div>
                               </td>
                            </tr>
                         @endforeach

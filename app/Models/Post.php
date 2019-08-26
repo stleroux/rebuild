@@ -35,9 +35,11 @@ class Post extends Model
       }
       $this->attributes['slug'] = $slug;
    }
-   
-// 1 category belongs to many posts
-   // a related entry needs to be added to the category model
+
+//////////////////////////////////////////////////////////////////////////////////////
+// RELATIONSHIPS
+//////////////////////////////////////////////////////////////////////////////////////
+// 1 category belongs to many posts // a related entry needs to be added to the category model
    public function category()
    {
       return $this->belongsTo('App\Models\Category');
@@ -73,6 +75,9 @@ class Post extends Model
       return $this->belongsTo('App\Models\User');
    }
 
+//////////////////////////////////////////////////////////////////////////////////////
+// SCOPES
+//////////////////////////////////////////////////////////////////////////////////////
    public function scopeBlog($query)
    {
       return $query

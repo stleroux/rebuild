@@ -5,10 +5,12 @@
             <i class="fa fa-plus" aria-hidden="true"></i>
             New Sub Category
             <span class="float-right">
-               @include('categories.buttons.help', ['size'=>'xs', 'bookmark'=>'categories_add_subCategory'])
-               @include('categories.buttons.back', ['size'=>'xs'])
-               @include('categories.buttons.reset', ['size'=>'xs'])
-               @include('categories.buttons.save', ['size'=>'xs'])
+               <div class="btn-group">
+                  @include('categories.buttons.help', ['size'=>'xs', 'bookmark'=>'categories_add_subCategory'])
+                  @include('categories.buttons.back', ['size'=>'xs'])
+                  @include('categories.buttons.reset', ['size'=>'xs'])
+                  @include('categories.buttons.save', ['size'=>'xs'])
+               </div>
             </span>
          </div>
          <div class="card-body section_body p-2">
@@ -25,17 +27,6 @@
                      <span class="text-danger">{{ $errors->first('sSubs') }} </span>
                   </div>
                </div>
-
-{{--                <div class="col-3">
-                  <div class="form-group {{ $errors->has('subcategory') ? 'has-error' : '' }}">
-                     {!! Form::label('subs','Sub Category') !!}
-                     <select name="subs" id="subs" class="form-control input-sm">
-                        <option value=""></option>
-                     </select>
-                     <span class="text-danger">{{ $errors->first('subcategory') }} </span>
-                  </div>
-               </div> --}}
-
                <div class="col-3">
                   <div class="form-group {{ $errors->has('sName') ? 'has-error' : '' }}">
                      {{ Form::label('sName', 'Sub Category', ['class'=>'required']) }}

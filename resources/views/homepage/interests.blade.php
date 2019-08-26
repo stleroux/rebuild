@@ -6,7 +6,7 @@
    </div>
    <div class="card-body section_body p-2">
       
-      <div class="card bg-transparent mb-2">
+      <div class="card mb-2">
          <div class="card_header p-2">
             <i class="fab fa-pagelines"></i>
             Wood Projects
@@ -17,7 +17,7 @@
          </div>
       </div>
       
-      <div class="card bg-transparent mb-2">
+      <div class="card mb-2">
          <div class="card-header card_header p-2">
             <i class="far fa-address-card"></i>
             Recipes
@@ -27,7 +27,7 @@
          </div>
       </div>
 
-      <div class="card bg-transparent mb-2">
+      <div class="card mb-2">
          <div class="card-header card_header p-2">
             <i class="far fa-newspaper"></i>
             The Blog

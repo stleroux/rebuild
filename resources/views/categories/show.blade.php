@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('stylesheets')
-   {{-- {{ Html::style('css/woodbarn.css') }} --}}
+   {{ Html::style('css/woodbarn.css') }}
 @endsection
 
 @section('left_column')
@@ -43,18 +43,11 @@
          </div>
       </div>
    </div>
-@stop
-
-@section('blocks')
-   {{-- @include('categories.show.controls') --}}
-   {{-- @include('common.information', ['model'=>$category, 'title'=>'Category']) --}}
-   {{-- @include('common.2_information', ['model'=>$category, 'title'=>'Category']) --}}
-@stop
+@endsection
 
 @section ('scripts')
-
-      <script type="text/javascript">
-            (function() {
+   <script type="text/javascript">
+      (function() {
 
          'use strict';
 
@@ -87,5 +80,5 @@
             }
          }
       })();
-      </script>
-@stop
+   </script>
+@endsection

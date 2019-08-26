@@ -24,26 +24,27 @@
    @yield('stylesheets')
 </head>
 <body>
-   
-   @include('layouts.navbar.navbar')
-   @include('layouts.master.messages')
+   <div id="app">
+      @include('layouts.navbar.navbar')
+      @include('layouts.master.messages')
 
-   <main class="container-fluid">
-      <div id="app" class="py-0 px-0">
-         <div class="row py-0 px-2">
-            <div class="col-sm-3 col-md-2 py-0 px-0">
-               @yield('left_column')
-            </div>
-            <div class="col-sm-9 col-md-10 py-0 px-2 mb-2">
-               @yield('content')
+      <main class="container-fluid">
+         <div id="app" class="py-0 px-0">
+            <div class="row py-0 px-2">
+               <div class="col-sm-3 col-md-2 py-0 px-0">
+                  @yield('left_column')
+               </div>
+               <div class="col-sm-9 col-md-10 py-0 px-2 mb-2">
+                  @yield('content')
+               </div>
             </div>
          </div>
-      </div>
-   </main>
-      
-   <footer class="footer">
-      @include('layouts.master.footer')
-   </footer>
+      </main>
+         
+      <footer class="footer">
+         @include('layouts.master.footer')
+      </footer>
+   </div>
 
    <!-- Optional JavaScript -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

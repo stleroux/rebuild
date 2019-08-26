@@ -22,17 +22,12 @@
             <i class="fas fa-heart"></i>
             My Favorite Recipes
             <span class="float-right">
-               @include('recipes.addins.links.help', ['size'=>'xs', 'bookmark'=>'recipes'])
-               @include('recipes.addins.buttons.unpublishAll', ['size'=>'xs'])
-               @include('recipes.addins.buttons.trashAll', ['size'=>'xs'])
-               @include('recipes.addins.pages.published', ['size'=>'xs'])
-               @include('recipes.addins.pages.unpublished', ['size'=>'xs'])
-               @include('recipes.addins.pages.new', ['size'=>'xs'])
-               @include('recipes.addins.pages.future', ['size'=>'xs'])
-               @include('recipes.addins.pages.trashed', ['size'=>'xs'])
-               @include('recipes.addins.pages.mine', ['size'=>'xs'])
-               @include('recipes.addins.pages.myPrivate', ['size'=>'xs'])
-               @include('recipes.addins.links.add', ['size'=>'xs'])
+               <div class="btn-group">
+                  @include('recipes.buttons.help', ['size'=>'xs', 'bookmark'=>'recipes'])
+                  @include('recipes.buttons.unpublishAll', ['size'=>'xs'])
+                  @include('recipes.buttons.trashAll', ['size'=>'xs'])
+                  @include('recipes.buttons.add', ['size'=>'xs'])
+               </div>
             </span>
          </div>
 

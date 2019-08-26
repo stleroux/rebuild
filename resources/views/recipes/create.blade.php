@@ -22,9 +22,11 @@
             <i class="fa fa-plus-square"></i>
             Create Recipe
             <span class="float-right">
-               @include('recipes.addins.links.help', ['size'=>'xs', 'bookmark'=>'recipes'])
-               @include('recipes.addins.links.back', ['size'=>'xs'])
-               @include('recipes.addins.buttons.save', ['size'=>'xs'])
+               <div class="btn-group">
+                  @include('recipes.buttons.help', ['size'=>'xs', 'bookmark'=>'recipes'])
+                  @include('recipes.buttons.back', ['size'=>'xs'])
+                  @include('recipes.buttons.save', ['size'=>'xs'])
+               </div>
             </span>
          </div>
 

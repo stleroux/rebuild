@@ -34,11 +34,12 @@
 			{{ $year }}
 
 			<span class="float-right">
-				@if (true !== stripos($_SERVER['HTTP_REFERER'], "/search/posts"))
+				@if (true == stripos($_SERVER['HTTP_REFERER'], "/search/posts"))
 					<a href="{{ route('blog.index') }}" class="btn btn-sm btn-block btn-primary px-2 py-0">
 						<i class="fas fa-blog"></i> Blog
 					</a>
 				@endif
+				{{-- @include('blog.buttons.back', ['size'=>'xs']) --}}
 			</span>
 		</div>
 		<div class="card-body section_body p-2 text-light">
@@ -62,9 +63,9 @@
 								@include('common.authorFormat', ['model'=>$archive, 'field'=>'user'])
 							</td>
 							<td class="text-right">
-								<a href="{{ route('blog.single', $archive->slug) }}" class="btn btn-sm btn-primary text-light" title="View Blog">
-									<i class="fa fa-eye"></i>
-								</a>
+								<div class="btn-group">
+									@include('blog.buttons.archiveShow', ['size'=>'xs'])
+								</div>
 							</td>
 						</tr>
 					@endforeach

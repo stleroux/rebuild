@@ -25,18 +25,19 @@
                <div class="card-header section_header p-2">
                   <i class="fa fa-download"></i>
                   Unpublished Posts
-                     
                   <div class="float-right">
-                     @include('posts.buttons.trashAll', ['size'=>'xs'])
-                     @include('posts.buttons.publishAll', ['size'=>'xs'])
-                     @include('posts.buttons.add', ['size'=>'xs'])
+                     <div class="btn-group">
+                        @include('posts.buttons.trashAll', ['size'=>'xs'])
+                        @include('posts.buttons.publishAll', ['size'=>'xs'])
+                        @include('posts.buttons.add', ['size'=>'xs'])
+                     </div>
                   </div>
                </div>
 
                
                @if($posts->count() > 0)
                   <div class="card-body section_body p-2">
-                     @include('common.alphabet', ['model'=>'post', 'page'=>'unpublished'])
+                     @include('posts.alphabet', ['model'=>'post', 'page'=>'unpublished'])
                      <table id="datatable" class="table table-hover table-sm">
                         <thead>
                            <tr>
@@ -66,35 +67,18 @@
                               <td>{{ $post->created_at->format('M d, Y') }}</td>                              
                               {{-- @if(checkACL('author')) --}}
                               <td class="text-right">
-                                 {{-- <a href="{{ route('posts.publish', $post->id) }}" class="btn btn-sm btn-outline-secondary px-1 py-0" title="Publish Post">
-                                    <i class="fa fa-upload"></i>
-                                 </a> --}}
-                                 @include('posts.buttons.show', ['size'=>'xs'])
-                                 @include('posts.buttons.publish', ['size'=>'xs'])
-
-                                 {{-- <a href="{{ route('posts.unpublish', $post->id) }}" class="btn btn-sm btn-outline-secondary px-1 py-0" title="Unpublish Post">
-                                    <i class="fa fa-download"></i>
-                                 </a> --}}
-
-                                 {{-- <a href="{{ route('posts.show', $post->id) }}" class="btn btn-sm btn-outline-secondary px-1 py-0" title="View Post">
-                                    <i class="fa fa-eye"></i>
-                                 </a> --}}
-
-
-                                 @if(checkPerm('post_edit', $post))
-                                    {{-- <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-sm btn-outline-bprimary px-1 py-0" title="Edit Post">
-                                       <i class="far fa-edit"></i>
-                                    </a> --}}
-                                    @include('posts.buttons.edit', ['size'=>'xs'])
-                                 @endif
-                                 @if(checkPerm('post_delete', $post))
-                                    {{-- <a href="{{ route('posts.trash', $post->id) }}" class="btn btn-sm btn-outline-danger px-1 py-0" title="Trash Post">
-                                       <i class="far fa-trash-alt"></i>
-                                    </a> --}}
-                                    @include('posts.buttons.trash', ['size'=>'xs'])
-                                 @endif
+                                 <div class="btn-group">
+                                    @include('posts.buttons.show', ['size'=>'xs'])
+                                    @include('posts.buttons.publish', ['size'=>'xs'])
+                                    @if(checkPerm('post_edit', $post))
+                                       @include('posts.buttons.edit', ['size'=>'xs'])
+                                    @endif
+                                    @if(checkPerm('post_delete', $post))
+                                       @include('posts.buttons.trash', ['size'=>'xs'])
+                                    @endif
+                                 </div>
                               </td>
-                              {{-- @endif --}}
+
                            </tr>
                            @endforeach
                         </tbody>

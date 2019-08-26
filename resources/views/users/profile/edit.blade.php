@@ -20,9 +20,10 @@
          <div class="card-header section_header p-2">
             Edit Profile
             <span class="float-right">
-               {{-- @include('projects.addins.links.help', ['size'=>'xs', 'bookmark'=>'projects']) --}}
-               @include('users.buttons.back', ['size'=>'xs'])
-               @include('users.buttons.update', ['size'=>'xs'])
+               <div class="btn-group">
+                  @include('users.buttons.back', ['size'=>'xs'])
+                  @include('users.buttons.update', ['size'=>'xs'])
+               </div>
             </span>
          </div>
 

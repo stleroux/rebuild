@@ -21,5 +21,5 @@
    <a onclick="window.history.back();"
       class="btn btn-{{ $size }} btn-primary d-print-none text-light"
       title="Back to previous page">
-      <i class="fas fa-angle-double-left"></i>
+      <i class="fas fa-fw fa-angle-double-left"></i>
    </a>

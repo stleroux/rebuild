@@ -15,7 +15,7 @@
 
 	<div class="card">
       <div class="card-header section_header text-center p-2">
-         <b class="text-danger">ARE YOU SURE YOU WANT TO PERMANENTLY DELETE THIS COMMENT</b>
+         <b class="text-danger">ARE YOU SURE YOU WANT TO PERMANENTLY DELETE THIS COMMENT?</b>
       </div>
       <div class="card-body bg-light p-2 text-center">
 			<form action="{{ route('comments.destroy', [$comment->id]) }}" method="POST">

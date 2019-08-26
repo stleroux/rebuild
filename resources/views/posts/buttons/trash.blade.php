@@ -1,7 +1,7 @@
 <a href="{{ route('posts.trash', $post->id) }}"
    class="btn btn-{{ $size }} btn-danger text-light"
    title="Trash Post">
-   <i class="far fa-trash-alt"></i>
+   <i class="far fa-fw fa-trash-alt"></i>
 </a>
 
 {{-- @if(!$post->deleted_at)

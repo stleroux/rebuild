@@ -24,9 +24,9 @@
 					<i class="fas fa-users"></i>
 					Users
 					<span class="float-sm-right">
-						@if(checkPerm('user_create'))
+						<div class="btn-group">
 							@include('users.buttons.add', ['size'=>'xs'])
-						@endif
+						</div>
 					</span>
 				</div>
 				
@@ -52,25 +52,27 @@
 									<td>{{ $user->permissions->count() }}</td>
 									<td>{{ $user->created_at->format('M d, Y') }}</td>
 									<td class="text-right">
-										@if(checkPerm('user_show'))
-											@include('users.buttons.show', ['size'=>'xs'])
-										@endif
+										<div class="btn-group">
+											@if(checkPerm('user_show'))
+												@include('users.buttons.show', ['size'=>'xs'])
+											@endif
 
-										@if(checkPerm('change_user_pwd'))
-											<a href="{{ route('changePassword.edit', $user->id) }}"
-												class="btn btn-xs btn-secondary text-light"
-												title="Reset User's Password">
-												<i class="fas fa-unlock-alt"></i>
-											</a>
-										@endif
-										
-										@if(checkPerm('user_edit'))
-											@include('users.buttons.edit', ['size'=>'xs'])
-										@endif
+											@if(checkPerm('change_user_pwd'))
+												<a href="{{ route('changePassword.edit', $user->id) }}"
+													class="btn btn-xs btn-secondary text-light"
+													title="Reset User's Password">
+													<i class="fas fa-unlock-alt"></i>
+												</a>
+											@endif
+											
+											@if(checkPerm('user_edit'))
+												@include('users.buttons.edit', ['size'=>'xs'])
+											@endif
 
-										@if(checkPerm('user_delete'))
-											@include('users.buttons.delete', ['size'=>'xs'])
-										@endif
+											@if(checkPerm('user_delete'))
+												@include('users.buttons.delete', ['size'=>'xs'])
+											@endif
+										</div>
 									</td>
 								</tr>
 							@endforeach

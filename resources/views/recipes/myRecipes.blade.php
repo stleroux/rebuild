@@ -24,17 +24,12 @@
             <i class="{{ Config::get('buttons.mine') }}"></i>
             My Recipes
             <span class="float-right">
-               @include('recipes.addins.links.help', ['size'=>'xs', 'bookmark'=>'recipes'])
-               @include('recipes.addins.buttons.unpublishAll', ['size'=>'xs'])
-               @include('recipes.addins.buttons.trashAll', ['size'=>'xs'])
-               {{-- @include('recipes.addins.pages.published', ['size'=>'xs']) --}}
-               {{-- @include('recipes.addins.pages.unpublished', ['size'=>'xs']) --}}
-               {{-- @include('recipes.addins.pages.new', ['size'=>'xs']) --}}
-               {{-- @include('recipes.addins.pages.future', ['size'=>'xs']) --}}
-               {{-- @include('recipes.addins.pages.trashed', ['size'=>'xs']) --}}
-               {{-- @include('recipes.addins.pages.mine', ['size'=>'xs']) --}}
-               {{-- @include('recipes.addins.pages.myPrivate', ['size'=>'xs']) --}}
-               @include('recipes.addins.links.add', ['size'=>'xs'])
+               <div class="btn-group">
+                  @include('recipes.buttons.help', ['size'=>'xs', 'bookmark'=>'recipes'])
+                  @include('recipes.buttons.unpublishAll', ['size'=>'xs'])
+                  @include('recipes.buttons.trashAll', ['size'=>'xs'])
+                  @include('recipes.buttons.add', ['size'=>'xs'])
+               </div>
             </span>
          </div>
 
@@ -67,14 +62,16 @@
                         <td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'created_at'])</td>
                         <td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'published_at'])</td>
                         <td class="text-right">
-                           @include('recipes.addins.links.view', ['size'=>'xs'])
-                           @include('recipes.addins.links.edit', ['size'=>'xs'])
-                           {{-- @if(!$recipe->personal) --}}
-                              {{-- @include('recipes.addins.links.privatize', ['size'=>'xs']) --}}
-                           {{-- @else
-                              @include('recipes.addins.links.makePublic', ['size'=>'xs'])
-                           @endif --}}
-                           @include('recipes.addins.links.trash', ['size'=>'xs'])
+                           <div class="btn-group">
+                              @include('recipes.buttons.view', ['size'=>'xs'])
+                              @include('recipes.buttons.edit', ['size'=>'xs'])
+                              {{-- @if(!$recipe->personal) --}}
+                                 {{-- @include('recipes.buttons.privatize', ['size'=>'xs']) --}}
+                              {{-- @else
+                                 @include('recipes.buttons.makePublic', ['size'=>'xs'])
+                              @endif --}}
+                              @include('recipes.buttons.trash', ['size'=>'xs'])
+                           </div>
                         </td>
                      </tr>
                      @endforeach

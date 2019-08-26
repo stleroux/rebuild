@@ -15,9 +15,10 @@
          <span class="h3">{{ ucwords($recipe->title) }}</span>
          @if($loop->first)
             <span class="float-right">
-               {{-- @include('common.buttons.cancel') --}}
-               @include('common.buttons.previous')
-               @include('common.buttons.print2')
+               <div class="btn-group">
+                  @include('recipes.buttons.previous')
+                  @include('recipes.buttons.print2')
+               </div>
             </span>
          @endif
       </div>
@@ -91,8 +92,8 @@
                            <th>Created On</th>
       
                            <td>
-                              {{-- @include('common.dateFormat', ['dateFormat'=>Auth::user()->dateFormat, 'model'=>$recipe, 'field'=>'created_at']) --}}
-                              @include('common.dateFormat', ['model'=>$recipe, 'field'=>'created_at'])
+                              {{-- @include('recipes.dateFormat', ['dateFormat'=>Auth::user()->dateFormat, 'model'=>$recipe, 'field'=>'created_at']) --}}
+                              @include('recipes.dateFormat', ['model'=>$recipe, 'field'=>'created_at'])
                            </td>
                         </tr>
                         <tr>

@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 
 use App\Models\Comment;
 use App\Models\Post;
-// use App\Post;
-// use App\Http\Requests;
 use DB;
 use Session;
 use Carbon\Carbon;
@@ -47,15 +45,15 @@ class BlogController extends Controller
 	{
 
 		// Get list of posts by year and month
-		$postlinks = DB::table('posts')
-			->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) post_count'))
-			->where('published_at', '<=', Carbon::now())
-			//->where('created_at', '<=', Carbon::now()->subMonth(3))
-			->groupBy('year')
-			->groupBy('month')
-			->orderBy('year', 'desc')
-			->orderBy('month', 'desc')
-			->get();
+		// $postlinks = DB::table('posts')
+		// 	->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) post_count'))
+		// 	->where('published_at', '<=', Carbon::now())
+		// 	//->where('created_at', '<=', Carbon::now()->subMonth(3))
+		// 	->groupBy('year')
+		// 	->groupBy('month')
+		// 	->orderBy('year', 'desc')
+		// 	->orderBy('month', 'desc')
+		// 	->get();
 
 		$archives = Post::published()->with('user')
 			->whereYear('created_at','=', $year)
@@ -66,7 +64,7 @@ class BlogController extends Controller
 		// Save the URL in a varibale so it can be used in the blog.single page to redirect the user to the archives list page
 		Session::flash('backUrl', \Request::fullUrl());
 
-		return view('blog.archive', compact('archives','postlinks'))->withYear($year)->withMonth($month);
+		return view('blog.archive', compact('archives'))->withYear($year)->withMonth($month);
 	}
 
 
@@ -91,23 +89,9 @@ class BlogController extends Controller
 		// 	Log::info(getClientIP() . " accessed :: Blog");
 		// }
 
-		// $popularPost = Post::get()->sortByDesc('views')->take(1);
-		//dd($popularPost);
 		$posts = Post::published()->with('user')->orderBy('created_at','desc')->paginate(5);//->get();
 
-		// Get list of posts by year and month
-		$postlinks = DB::table('posts')
-			->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) post_count'))
-			->where('published_at', '<=', Carbon::now())
-			//->where('created_at', '<=', Carbon::now()->subMonth(3))
-			->groupBy('year')
-			->groupBy('month')
-			->orderBy('year', 'desc')
-			->orderBy('month', 'desc')
-			->get();
-
-		// return view ('blog.index', compact('posts','popularPost'));
-		return view ('blog.index', compact('posts','postlinks'));
+		return view ('blog.index', compact('posts'));
 	}
 
 
@@ -160,15 +144,15 @@ class BlogController extends Controller
 		;
 
 		// Get list of posts by year and month
-		$postlinks = DB::table('posts')
-			->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) post_count'))
-			->where('published_at', '<=', Carbon::now())
-			//->where('created_at', '<=', Carbon::now()->subMonth(3))
-			->groupBy('year')
-			->groupBy('month')
-			->orderBy('year', 'desc')
-			->orderBy('month', 'desc')
-			->get();
+		// $postlinks = DB::table('posts')
+		// 	->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) post_count'))
+		// 	->where('published_at', '<=', Carbon::now())
+		// 	//->where('created_at', '<=', Carbon::now()->subMonth(3))
+		// 	->groupBy('year')
+		// 	->groupBy('month')
+		// 	->orderBy('year', 'desc')
+		// 	->orderBy('month', 'desc')
+		// 	->get();
 
 		  // Save entry to log file using built-in Monolog
 		  // if (Auth::check()) {
@@ -202,7 +186,7 @@ class BlogController extends Controller
 # ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝ 
 // Display the specified resource
 ##################################################################################################################
-	public function getSingle($slug)
+	public function show($slug)
 	{
 		// fetch from database based on slug
 		$post = Post::where('slug', '=', $slug)->first();
@@ -213,6 +197,7 @@ class BlogController extends Controller
 		// get slug if record exists
 		if($previous = Post::published()->find($previous)) {
 			$previous = $previous->slug;
+			// dd($previous);
 		}
 
 		// get next post id
@@ -226,15 +211,15 @@ class BlogController extends Controller
 		DB::table('posts')->where('slug', '=', $slug)->increment('views', 1);
 
 		// Get list of posts by year and month
-		$postlinks = DB::table('posts')
-			->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) post_count'))
-			->where('published_at', '<=', Carbon::now())
-			//->where('created_at', '<=', Carbon::now()->subMonth(3))
-			->groupBy('year')
-			->groupBy('month')
-			->orderBy('year', 'desc')
-			->orderBy('month', 'desc')
-			->get();
+		// $postlinks = DB::table('posts')
+		// 	->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) post_count'))
+		// 	->where('published_at', '<=', Carbon::now())
+		// 	//->where('created_at', '<=', Carbon::now()->subMonth(3))
+		// 	->groupBy('year')
+		// 	->groupBy('month')
+		// 	->orderBy('year', 'desc')
+		// 	->orderBy('month', 'desc')
+		// 	->get();
 
 		//$post->save();
 
@@ -247,7 +232,7 @@ class BlogController extends Controller
 		// }
 
 		// return the view and pass in the post object
-		return view('blog.single', compact('post','postlinks','next','previous'));
+		return view('blog.show', compact('post','next','previous'));
 	}
 
 
@@ -282,7 +267,7 @@ class BlogController extends Controller
 		  // }
 
 		  Session::flash('success', 'Comment added succesfully.');
-		  return redirect()->route('blog.single', [$post->slug]);
+		  return redirect()->route('blog.show', [$post->slug]);
 	 }
 
 

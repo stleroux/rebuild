@@ -44,6 +44,17 @@
                               <input type="text" class="form-control form-control-sm" value="{{ $user->permissions->count() }}" disabled>
                            </div>
                         </div>
+                        <div class="col-md-2">
+                           <div class="form-group">
+                              <label for="status">Invoicer Client</label>
+                              <select name="invoicer_client" id="invoicer_client" class="form-control form-control-sm">
+                                 @foreach($user->invoicerclientOptions() as $invoicerclientOptionKey => $invoicerclientOptionValue)
+                                    <option value="{{$invoicerclientOptionKey}}" {{ $user->invoicer_client == $invoicerclientOptionValue ? 'selected' : '' }}>{{ $invoicerclientOptionValue }}</option>
+                                 @endforeach
+                              </select>
+                              <div class="text-danger">{{ $errors->first('invoicer_client') }}</div>
+                           </div>
+                        </div>
                      {{-- </div> --}}
                   </div>
                </div>

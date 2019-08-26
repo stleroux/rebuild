@@ -13,7 +13,6 @@
 
 @section('content')
 
-{{-- {{ $settings }} --}}
    {!! Form::model($settings, ['route'=>['settings.updateAll'], 'method'=>'PUT']) !!}
    {{ Form::token() }}
    
@@ -22,14 +21,10 @@
             <div class="card mb-2">
                <div class="card-header section_header p-1 m-0">
                   <div class="float-right">
-                     {{-- <button type="submit" class="btn btn-sm btn-outline-bprimary">
-                     <i class="fa fa-save"></i>
-                     Update Site Settings
-                     </button> --}}
-                     {{-- @if(checkPerm('permission_create')) --}}
+                     <div class="btn-group">
                         @include('common.buttons.update', ['model'=>'setting'])
                         @include('common.buttons.add', ['model'=>'setting'])
-                     {{-- @endif --}}
+                     </div>
                   </div>
                   
                   <ul class="nav nav-tabs card-header-tabs p-2">
@@ -58,14 +53,6 @@
                      </div>
                   </div>
                </div>
-
-{{--                <div class="card-footer p-1">
-                  <button type="submit" class="btn btn-sm btn-outline-bprimary px-1 py-0 float-right">
-                     <i class="fa fa-save"></i>
-                     Update Site Settings
-                  </button>
-               </div> --}}
-               
             </div>
          </div>
       </div>

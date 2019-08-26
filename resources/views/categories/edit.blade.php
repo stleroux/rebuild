@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('stylesheets')
-   {{-- {{ Html::style('css/woodbarn.css') }} --}}
+   {{ Html::style('css/woodbarn.css') }}
 @endsection
 
 @section('left_column')
@@ -24,12 +24,12 @@
 						<i class="fa fa-sitemap" aria-hidden="true"></i>
 						Edit Category
 						<span class="float-right">
-							{{-- @include('common.buttons.help', ['model'=>'category', 'type'=>'', 'part'=>'category']) --}}
-							{{-- @include('help.categories.edit.category', ['model'=>'category', 'type'=>'']) --}}
-							@include('categories.buttons.help', ['size'=>'xs', 'bookmark'=>'categories_edit_category'])
-							@include('categories.buttons.back', ['size'=>'xs'])
-							@include('categories.buttons.reset', ['size'=>'xs'])
-							@include('categories.buttons.update', ['size'=>'xs'])
+							<div class="btn-group">
+								@include('categories.buttons.help', ['size'=>'xs', 'bookmark'=>'categories_edit_category'])
+								@include('categories.buttons.back', ['size'=>'xs'])
+								@include('categories.buttons.reset', ['size'=>'xs'])
+								@include('categories.buttons.update', ['size'=>'xs'])
+							</div>
 						</span>
 					</div>
 

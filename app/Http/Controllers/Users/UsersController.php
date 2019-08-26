@@ -389,6 +389,7 @@ class UsersController extends Controller
          $user->province         = $request->province;
          $user->postal_code      = $request->postal_code;
          $user->notes            = $request->notes;
+         $user->invoicer_client  = $request->invoicer_client;
          $user->action_buttons   = $request->action_buttons;
          $user->alert_fade_time	= $request->alert_fade_time;
          $user->author_format    = $request->author_format;
@@ -451,6 +452,7 @@ class UsersController extends Controller
 			$user->username = $request->input('username');
 			$user->email = $request->input('email');
          $user->public_email = $request->input('public_email');
+         $user->invoicer_client = $request->input('invoicer_client');
          $user->first_name = $request->input('first_name');
          $user->last_name = $request->input('last_name');
          $user->telephone = $request->input('telephone');

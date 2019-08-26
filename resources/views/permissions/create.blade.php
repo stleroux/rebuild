@@ -24,12 +24,6 @@
          <div class="card-header section_header p-2">
             <i class="fas fa-user"></i>
             Permissions
-{{--             <span class="float-sm-right">
-               @include('permissions.buttons.back', ['size'=>'xs'])
-               @include('permissions.buttons.reset', ['size'=>'xs'])
-               @include('permissions.buttons.save&new', ['size'=>'xs'])
-               @include('permissions.buttons.save', ['size'=>'xs'])
-            </span> --}}
          </div>
          
          <!--CARD BODY-->
@@ -71,6 +65,4 @@
          </div> --}}
       </div>
       
-{{-- {{ Form::close() }} --}}
-
 @endsection

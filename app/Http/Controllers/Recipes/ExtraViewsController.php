@@ -43,7 +43,8 @@ class ExtraViewsController extends RecipesController
    public function __construct()
    {
       // Only allow authenticated users access to these functions
-      $this->middleware('auth');
+      // $this->middleware('auth')->except('archives','myFavorites','myPrivateRecipes','myRecipes');
+      $this->middleware('auth')->except('archives');
       $this->enablePermissions = false;
    }
 

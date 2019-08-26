@@ -1,5 +1,5 @@
 <button
-   class="btn btn-{{ $size }} btn-secondary"
+   class="btn btn-{{ $size }} btn-primary"
    type="reset"
    {{-- formaction="" --}}
    formmethod="POST"

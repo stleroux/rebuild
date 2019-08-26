@@ -7,5 +7,5 @@
    style="display:none; margin-left:2px"
    title="Trashed Selected"
    onclick="return confirm('Are you sure you want to trash these posts?')">
-   <i class="far fa-trash-alt"></i>
+   <i class="far fa-fw fa-trash-alt"></i>
 </button>

@@ -4,7 +4,7 @@
       title="Publish Post">
       {{-- <i class="fas fa-upload"></i> --}}
       {{-- <i class="fas fa-circle text-success"></i> --}}
-      <i class="fas fa-lightbulb text-success"></i>
+      <i class="fas fa-fw fa-lightbulb text-success"></i>
    </a>
 @else
    <a href="{{ route('posts.unpublish', $post->id) }}"
@@ -12,6 +12,6 @@
       title="Unpublish Post">
       {{-- <i class="fas fa-download"></i> --}}
       {{-- <i class="fas fa-circle text-danger"></i> --}}
-      <i class="fas fa-lightbulb text-danger"></i>
+      <i class="fas fa-fw fa-lightbulb text-danger"></i>
    </a>
 @endif

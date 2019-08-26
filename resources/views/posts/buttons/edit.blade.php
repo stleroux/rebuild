@@ -1,5 +1,5 @@
 <a href="{{ route('posts.edit', $post->id) }}"
-   class="btn btn-{{ $size }} btn-primary text-light"
+   class="btn btn-{{ $size }} btn-info text-light"
    title="Edit Post">
-   <i class="far fa-edit"></i>
+   <i class="far fa-fw fa-edit"></i>
 </a>

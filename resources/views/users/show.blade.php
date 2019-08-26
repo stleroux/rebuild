@@ -25,7 +25,9 @@
             <i class="fas fa-user"></i>
             View User :: {{ $user->first_name }} {{ $user->last_name }}
             <span class="float-sm-right">
-               @include('users.buttons.back', ['size'=>'xs'])
+               <div class="btn-group">
+                  @include('users.buttons.back', ['size'=>'xs'])
+               </div>
             </span>
          </div>
          

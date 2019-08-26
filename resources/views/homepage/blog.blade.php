@@ -8,7 +8,7 @@
       <div class="card-body section_body p-2">
          @if(count($posts) > 0)
             @foreach ($posts as $post)
-               <div class="card mb-2 bg-transparent">
+               <div class="card mb-2">
                   <div class="card_header p-2">{{ $post->title }}</div>
                   <div class="card_body p-2">
                      <div class="row">
@@ -16,7 +16,7 @@
                         <p>{{ substr(strip_tags($post->body), 0, 250) }} {{ strlen(strip_tags($post->body)) > 250 ? " [More]..." : "" }}</p>
                      </div>
                      <div class="col-sm-2">
-                        <a href="{{ route('blog.single', $post->slug) }}" class="btn btn-xs btn-primary float-right">
+                        <a href="{{ route('blog.show', $post->slug) }}" class="btn btn-xs btn-primary float-right">
                         <div class="text text-left">
                            <i class="fa fa-chevron-right"></i> More
                         </div>

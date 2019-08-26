@@ -19,19 +19,11 @@
 			<div class="card-header card_header py-1">
 				New Post
 				<div class="float-right">
-					{{-- <a href="{{ route('posts.index') }}" class="btn btn-sm btn-outline-secondary px-1 py-0">
-						<i class="fas fa-angle-double-left"></i>
-						Cancel
-					</a> --}}
-					{{-- <a href="{{ route('posts.'. Session::get('pageName')) }}" class="btn btn-sm btn-outline-secondary px-1 py-0">
-						<i class="fas fa-angle-double-left"></i>
-						Cancel
-					</a>
-					{{ Form::button('<i class="fas fa-sync-alt"></i> Reset Form', ['type'=>'reset', 'class'=>'btn btn-sm btn-outline-secondary px-1 py-0']) }}
-					{{ Form::button('<i class="fa fa-save"></i> Save ', ['type' => 'submit', 'class' => 'btn btn-sm btn-outline-success px-1 py-0'])  }} --}}
-					@include('posts.buttons.back', ['size'=>'xs'])
-					@include('posts.buttons.reset', ['size'=>'xs'])
-					@include('posts.buttons.save', ['size'=>'xs'])
+               <div class="btn-group">
+   					@include('posts.buttons.back', ['size'=>'xs'])
+	  			      @include('posts.buttons.reset', ['size'=>'xs'])
+		 			   @include('posts.buttons.save', ['size'=>'xs'])
+               </div>
 		  		</div>
 			</div>
 

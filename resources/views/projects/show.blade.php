@@ -23,8 +23,10 @@
          {{ ucwords($project->name) }} Project Information
       {{-- </span> --}}
 		<span class="float-right">
-         @include('projects.addins.links.edit', ['size'=>'xs'])
-         @include('projects.addins.links.back', ['size'=>'xs'])
+         <div class="btn-group">
+            @include('projects.addins.links.edit', ['size'=>'xs'])
+            @include('projects.addins.links.back', ['size'=>'xs'])
+         </div>
       </span>
 	</div>
 	<div class="card-body section_body p-2">

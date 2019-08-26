@@ -176,14 +176,17 @@ class ProfileController extends Controller
       
       $user = User::findOrFail($id);
          $user->username = $request->input('username');
-         $user->email = $request->input('email');
-         $user->public_email = $request->input('public_email');
+         $user->invoicer_client = $request->input('invocier_client');         
+
          $user->first_name = $request->input('first_name');
          $user->last_name = $request->input('last_name');
+         $user->email = $request->input('email');
+         $user->public_email = $request->input('public_email');
          $user->telephone = $request->input('telephone');
          $user->cell = $request->input('cell');
          $user->fax = $request->input('fax');
          $user->website = $request->input('website');
+
          $user->civic_number = $request->input('civic_number');
          $user->address_1 = $request->input('address_1');
          $user->address_2 = $request->input('address_2');
@@ -191,6 +194,7 @@ class ProfileController extends Controller
          $user->province = $request->input('province');
          $user->postal_code = $request->input('postal_code');
          $user->notes = $request->input('notes');
+
          $user->action_buttons = $request->input('action_buttons');
          $user->alert_fade_time = $request->input('alert_fade_time');
          $user->author_format = $request->input('author_format');

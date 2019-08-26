@@ -23,9 +23,11 @@
             <i class="fa fa-edit"></i>
             Edit Finish
             <span class="float-right">
-               @include('projects.finishes.addins.links.help', ['size'=>'xs', 'bookmark'=>'finishes'])
-               @include('projects.finishes.addins.links.back', ['size'=>'xs'])
-               @include('projects.finishes.addins.buttons.update', ['size'=>'xs'])
+               <div class="btn-group">
+                  @include('projects.finishes.addins.links.help', ['size'=>'xs', 'bookmark'=>'finishes'])
+                  @include('projects.finishes.addins.links.back', ['size'=>'xs'])
+                  @include('projects.finishes.addins.buttons.update', ['size'=>'xs'])
+               </div>
             </span>
          </div>
 

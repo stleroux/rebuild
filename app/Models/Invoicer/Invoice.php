@@ -49,36 +49,9 @@ class Invoice extends Model
 		'paid_at'
 	];
 
-	// public function getHST() {
-	// 	return number_format((float)$this->amount_charged * 0.13, 2, '.', ' ');
-	// }
-
-	// public function getTotal() {
-	// 	$result = DB::table('invoices')->selectRaw('sum(hst)')->get();
-	// 	return $result;
-	// }
-
-	// public function getWSIB() {
-	// 	return $this->amount_charged * 0.06;
-	// }
-
-	// public function getIncomeTaxes() {
-	// 	return $this->amount_charged * 0.26;
-	// }
-
-	// public function getSubTotal() {
-	// 	return number_format((float)$this->amount_charged + $this->hst, 2, '.', ' ');		
-	// }
-
-	// public function getTotalDeductions() {
-	// 	return number_format((float)$this->wsib + $this->income_taxes, 2, '.', ' ');
-
-	// }
-
-	// public function getNetTotal() {
-	// 	return number_format((float)$this->amount_charged - $this->wsib - $this->income_taxes, 2, '.', ' ');
-	// }
-
+//////////////////////////////////////////////////////////////////////////////////////
+// RELATIONSHIPS
+//////////////////////////////////////////////////////////////////////////////////////
 	// An invoice belongs to a client
 	public function client()
 	{
@@ -91,3 +64,33 @@ class Invoice extends Model
 	}
 
 }
+
+// public function getHST() {
+// 	return number_format((float)$this->amount_charged * 0.13, 2, '.', ' ');
+// }
+
+// public function getTotal() {
+// 	$result = DB::table('invoices')->selectRaw('sum(hst)')->get();
+// 	return $result;
+// }
+
+// public function getWSIB() {
+// 	return $this->amount_charged * 0.06;
+// }
+
+// public function getIncomeTaxes() {
+// 	return $this->amount_charged * 0.26;
+// }
+
+// public function getSubTotal() {
+// 	return number_format((float)$this->amount_charged + $this->hst, 2, '.', ' ');		
+// }
+
+// public function getTotalDeductions() {
+// 	return number_format((float)$this->wsib + $this->income_taxes, 2, '.', ' ');
+
+// }
+
+// public function getNetTotal() {
+// 	return number_format((float)$this->amount_charged - $this->wsib - $this->income_taxes, 2, '.', ' ');
+// }

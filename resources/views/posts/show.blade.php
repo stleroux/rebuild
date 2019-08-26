@@ -18,7 +18,9 @@
          <i class="far fa-newspaper"></i>
          {{ ucwords($post->title) }}
          <span class="float-right">
-            @include('posts.buttons.back', ['size'=>'xs'])
+            <div class="btn-group">
+               @include('posts.buttons.back', ['size'=>'xs'])
+            </div>
          </span>
       </div>
       <div class="card-body section_body p-2">
