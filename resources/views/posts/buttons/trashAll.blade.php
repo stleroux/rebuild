@@ -4,8 +4,8 @@
    formaction="{{ route('posts.trashAll') }}"
    formmethod="POST"
    id="bulk-trash"
-   style="display:none; margin-left:2px"
-   title="Trashed Selected"
+   style="display:none;"
+   title="Trash Selected"
    onclick="return confirm('Are you sure you want to trash these posts?')">
-   <i class="far fa-fw fa-trash-alt"></i>
+   <i class="{{ Config::get('buttons.trash') }}"></i>
 </button>

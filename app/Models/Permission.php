@@ -33,3 +33,9 @@ class Permission extends Model
    }
 
 }
+
+
+// Admin
+// Module
+// Other
+// Backend

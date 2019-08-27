@@ -1,5 +1,5 @@
 <a href="{{ route('permissions.index') }}"
-   class="btn btn-{{ $size }} btn-primary text-light">
-   <i class="fas fa-angle-double-left"></i>
+   class="btn btn-{{ $size }} btn-primary text-light"
+   title="Back">
+   <i class="{{ Config::get('buttons.back') }}"></i>
 </a>
-

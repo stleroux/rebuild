@@ -25,9 +25,9 @@
             </span>
             <span class="float-right">
                <div class="btn-group">
-                  @include('projects.addins.links.help', ['size'=>'sm', 'bookmark'=>'projects'])
-                  @include('projects.addins.links.back', ['size'=>'sm'])
-                  @include('projects.addins.buttons.save', ['size'=>'sm'])
+                  @include('projects.buttons.help', ['size'=>'xs', 'bookmark'=>'projects'])
+                  @include('projects.buttons.back', ['size'=>'xs'])
+                  @include('projects.buttons.save', ['size'=>'xs'])
                </div>
             </span>
          </div>

@@ -4,5 +4,5 @@
    {{-- formaction="{{ route($model.'s'.'.store') }}" --}}
    formmethod="POST"
    title="Save & New">
-   <i class="far fa-hdd"></i>
+   <i class="{{ Config::get('buttons.save&new') }}"></i>
 </button>

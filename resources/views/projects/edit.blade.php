@@ -27,9 +27,9 @@
                      @csrf
                      @method("PUT")
                      <div class="btn-group">
-                        @include('projects.addins.links.help', ['size'=>'xs', 'bookmark'=>'projects'])
-                        @include('projects.addins.links.back', ['size'=>'xs'])
-                        @include('projects.addins.buttons.update', ['size'=>'xs'])
+                        @include('projects.buttons.help', ['size'=>'xs', 'bookmark'=>'projects'])
+                        @include('projects.buttons.back', ['size'=>'xs'])
+                        @include('projects.buttons.update', ['size'=>'xs'])
                      </div>
                   </span>
                </div>

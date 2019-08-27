@@ -4,5 +4,5 @@
    {{-- formaction="{{ route($model.'s'.'.update') }}" --}}
    formmethod="POST"
    title="Update Post">
-   <i class="{{ Config::get('buttons.save') }}"></i>
+   <i class="{{ Config::get('buttons.update') }}"></i>
 </button>

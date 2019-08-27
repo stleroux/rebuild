@@ -4,8 +4,8 @@
    formaction="{{ route('posts.publishAll') }}"
    formmethod="POST"
    id="bulk-publish"
-   style="display:none; margin-left:2px"
+   style="display:none;"
    title="Publish Selected"
-   onclick="return confirm('Are you sure you want to unpublish these posts?')">
-   <i class="fa fa-fw fa-download"></i>
+   onclick="return confirm('Are you sure you want to publish these posts?')">
+   <i class="{{ Config::get('buttons.publish') }} text-success"></i>
 </button>

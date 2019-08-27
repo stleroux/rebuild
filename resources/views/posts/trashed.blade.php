@@ -28,6 +28,7 @@
 						<div class="float-right">
 							<div class="btn-group">
 								@include('posts.buttons.deleteAll', ['size'=>'xs'])
+								@include('posts.buttons.restoreAll', ['size'=>'xs'])
 								@include('posts.buttons.add', ['size'=>'xs'])
 							</div>
 						</div>
@@ -92,6 +93,10 @@
 @endsection
 
 @section('scripts')
+   @include('scripts.bulkButtons')
+@endsection
+
+{{-- @section('scripts')
 
 	<script>
 		$(function () {
@@ -128,4 +133,4 @@
 
 	</script>
 
-@endsection
+@endsection --}}

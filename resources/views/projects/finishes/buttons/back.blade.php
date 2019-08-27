@@ -1,5 +1,5 @@
-<a href="{{ route('comments.index') }}"
+<a href="{{ route('finishes.index') }}"
    class="btn btn-{{ $size }} btn-primary text-light"
-   title="Back">
+   title="Finishes">
    <i class="{{ Config::get('buttons.back') }}"></i>
 </a>

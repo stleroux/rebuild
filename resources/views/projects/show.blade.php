@@ -24,8 +24,8 @@
       {{-- </span> --}}
 		<span class="float-right">
          <div class="btn-group">
-            @include('projects.addins.links.edit', ['size'=>'xs'])
-            @include('projects.addins.links.back', ['size'=>'xs'])
+            @include('projects.buttons.edit', ['size'=>'xs'])
+            @include('projects.buttons.back', ['size'=>'xs'])
          </div>
       </span>
 	</div>

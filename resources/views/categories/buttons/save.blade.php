@@ -4,5 +4,5 @@
    {{-- formaction="{{ route($model.'s'.'.store') }}" --}}
    formmethod="POST"
    title="Save Category">
-   <i class="fa fa-save"></i>
+   <i class="{{ Config::get('buttons.save') }}"></i>
 </button>

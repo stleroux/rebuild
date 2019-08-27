@@ -11,8 +11,9 @@
             $("#bulk-unpublish").show();
             $("#bulk-publish").show();
             $(".selectmenu").hide();
-
-         } else {
+         }
+         else
+         {
             $("input[type=checkbox]").each(function () {
                $(this).attr("checked", false);
             });

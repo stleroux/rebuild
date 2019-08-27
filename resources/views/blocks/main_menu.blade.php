@@ -86,6 +86,27 @@
          </a>
       @endif
 
+      <a href="{{ route('projects.index') }}"
+         class="list-group-item list-group-item-action p-1 {{ (Route::is('projects.index') || Route::is('projects.show')) ? 'menu_active' : '' }}">
+         <i class="fab fa-pagelines fa-fw"></i>
+         Projects
+      </a>
+
+      @if(checkPerm('projects_index'))
+         <a href="{{ route('projects.list') }}"
+            class="list-group-item list-group-item-action p-1 {{
+            (
+               Route::is('projects.list') ||
+               Route::is('projects.edit') ||
+               Route::is('projects.create') ||
+               Route::is('finishes*') ||
+               Route::is('materials*')
+            ) ? 'menu_active' : '' }}">
+            <i class="fas fa-list-ol fa-fw"></i>
+            Projects List
+         </a>
+      @endif
+
       <a href="{{ route('recipes.index', 'all') }}"
          class="list-group-item list-group-item-action p-1 {{ Route::is('recipes.*') ? 'menu_active' : '' }}">
          <i class="fab fa-apple fa-fw"></i>
@@ -116,18 +137,5 @@
          </a>
       @endif
 
-      <a href="{{ route('projects.index') }}"
-         class="list-group-item list-group-item-action p-1 {{ (Route::is('projects.index') || Route::is('projects.show')) ? 'menu_active' : '' }}">
-         <i class="fab fa-pagelines fa-fw"></i>
-         Projects
-      </a>
-
-      @if(checkPerm('projects_index'))
-         <a href="{{ route('projects.list') }}"
-            class="list-group-item list-group-item-action p-1 {{ Route::is('projects.list') ? 'menu_active' : '' }}">
-            <i class="fas fa-list-ol fa-fw"></i>
-            Projects List
-         </a>
-      @endif
    </div>
 </div>

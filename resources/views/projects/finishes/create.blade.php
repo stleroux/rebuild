@@ -23,9 +23,9 @@
             Create Finish
             <span class="float-right">
                <div class="btn-group">
-                  @include('projects.finishes.addins.links.help', ['size'=>'xs', 'bookmark'=>'finishes'])
-                  @include('projects.finishes.addins.links.back', ['size'=>'xs'])
-                  @include('projects.finishes.addins.buttons.save', ['size'=>'xs'])
+                  @include('projects.finishes.buttons.help', ['size'=>'xs', 'bookmark'=>'finishes'])
+                  @include('projects.finishes.buttons.back', ['size'=>'xs'])
+                  @include('projects.finishes.buttons.save', ['size'=>'xs'])
                </div>
             </span>
          </div>

@@ -4,5 +4,5 @@
    {{-- formaction="" --}}
    formmethod="POST"
    title="Reset Form">
-   <i class="fas fa-sync-alt"></i>
+   <i class="{{ Config::get('buttons.reset') }}"></i>
 </button>

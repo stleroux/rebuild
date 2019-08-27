@@ -20,8 +20,8 @@
          Sow Material
          <span class="float-right">
             <div class="btn-group">
-               @include('projects.materials.addins.links.help', ['size'=>'xs', 'bookmark'=>'materials'])
-               @include('projects.materials.addins.links.back', ['size'=>'xs'])
+               @include('projects.materials.buttons.help', ['size'=>'xs', 'bookmark'=>'materials'])
+               @include('projects.materials.buttons.back', ['size'=>'xs'])
             </div>
          </span>
       </div>

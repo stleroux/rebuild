@@ -3,6 +3,6 @@
    type="submit"
    {{-- formaction="{{ route($model.'s'.'.store') }}" --}}
    formmethod="POST"
-   title="Save">
-   <i class="fa fa-fw fa-save"></i>
+   title="Save Post">
+   <i class="{{ Config::get('buttons.save') }}"></i>
 </button>

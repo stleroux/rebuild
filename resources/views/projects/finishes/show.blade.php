@@ -21,8 +21,8 @@
          Show Finish
          <span class="float-right">
             <div class="btn-group">
-               @include('projects.finishes..addins.links.help', ['size'=>'xs', 'bookmark'=>'projects'])
-               @include('projects.finishes.addins.links.back', ['size'=>'xs'])
+               @include('projects.finishes.buttons.help', ['size'=>'xs', 'bookmark'=>'projects'])
+               @include('projects.finishes.buttons.back', ['size'=>'xs'])
             </div>
          </span>
       </div>

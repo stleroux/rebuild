@@ -3,6 +3,6 @@
    type="submit"
    {{-- formaction="{{ route($model.'s'.'.update') }}" --}}
    formmethod="POST"
-   title="Update Permission">
+   title="Update Woodproject">
    <i class="{{ Config::get('buttons.update') }}"></i>
 </button>

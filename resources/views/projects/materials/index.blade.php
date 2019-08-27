@@ -23,11 +23,11 @@
                Materials
                <span class="float-right">
                   <div class="btn-group">
-                     @include('projects.addins.links.help', ['size'=>'xs', 'bookmark'=>'projects'])
-                     @include('projects.addins.links.BEProjects', ['size'=>'xs'])
-                     @include('projects.finishes.addins.links.finishes', ['size'=>'xs'])
-                     @include('projects.materials.addins.links.materials', ['size'=>'xs'])
-                     @include('projects.materials.addins.links.add', ['size'=>'xs'])
+                     @include('projects.buttons.help', ['size'=>'xs', 'bookmark'=>'projects'])
+                     @include('projects.buttons.BEProjects', ['size'=>'xs'])
+                     @include('projects.finishes.buttons.finishes', ['size'=>'xs'])
+                     @include('projects.materials.buttons.materials', ['size'=>'xs'])
+                     @include('projects.materials.buttons.add', ['size'=>'xs'])
                   </div>
                </span>
             </div>
@@ -58,9 +58,9 @@
                               <td data-order="{{ $material->updated_at}}">{{ $material->updated_at ? $material->updated_at->format('M d, Y') : 'no data found' }}</td>
                               <td class="text-right">
                                  <div class="btn-group">
-                                    @include('projects.materials.addins.links.show', ['size'=>'xs'])
-                                    @include('projects.materials.addins.links.edit', ['size'=>'xs'])
-                                    @include('projects.materials.addins.links.delete', ['size'=>'xs'])
+                                    @include('projects.materials.buttons.show', ['size'=>'xs'])
+                                    @include('projects.materials.buttons.edit', ['size'=>'xs'])
+                                    @include('projects.materials.buttons.delete', ['size'=>'xs'])
                                  </div>
                               </td>
                            </tr>
