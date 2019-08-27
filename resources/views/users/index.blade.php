@@ -47,7 +47,17 @@
 							@foreach ($users as $user)
 								<tr>
 									<td>{{ $user->id }}</td>
-									<td>{{ $user->username }}</td>
+									<td>
+										{{ $user->username }}
+										@if(
+												$user->username === Setting('admin_user_account') ||
+												$user->username === 'lerouxs' ||
+												$user->username === 'administrator'
+											)
+											<small>(Super Admin)</small>
+										@endif
+										
+									</td>
 									<td>{{ $user->email }}</td>
 									<td>{{ $user->permissions->count() }}</td>
 									<td>{{ $user->created_at->format('M d, Y') }}</td>

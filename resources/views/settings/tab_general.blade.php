@@ -22,4 +22,28 @@
          </div>
       @endforeach
    </div>
+
+{{-- <div class="row p-0">
+   <table class="table table-sm table-hover">
+      <thead>
+         <tr class="d-flex">
+            <th class="col-1">ID</th>
+            <th class="col-2">Name</th>
+            <th class="col-2">Value</th>
+            <th class="col-7">Description</th>
+         </tr>
+      </thead>
+      <tbody>
+         @foreach($settings as $s)
+            <tr class="d-flex">
+               <td class="col-1">{{ $s->id }}</td>
+               <td class="col-2">{{ $s->key }}</td>
+               <td class="col-2">{{ $s->value }}</td>
+               <td class="col-7">{{ $s->description }}</td>
+            </tr>
+         @endforeach
+      </tbody>
+   </table>
+</div> --}}
+
 </div>

@@ -21,12 +21,12 @@
             <div class="card mb-3">
             
                <div class="card-header section_header p-0">
-{{--                   <div class="float-right">
-                     <div class="btn-group">
+                  <div class="float-right pt-2">
+                     <div class="btn-group pr-2">
                         @include('settings.buttons.update', ['size'=>'xs'])
                         @include('settings.buttons.add', ['size'=>'xs'])
                      </div>
-                  </div> --}}
+                  </div>
                   
                   <ul class="nav nav-tabs">
                      <li class="nav-item">
