@@ -18,7 +18,7 @@
 
 	<div class="row">
 		<div class="col">
-			<div class="card">
+			<div class="card mb-3">
 				<!--CARD HEADER-->
 				<div class="card-header section_header p-2">
 					<i class="fas fa-users"></i>
@@ -89,7 +89,11 @@
 						</tbody>
 					</table>
 				</div> {{-- End of card-body --}}
+				<div class="card-footer p-1">
+					<b>Note : </b> Super Admin users do not require any access permissions as they have GOD like powers on the site.
+				</div>
 			</div>
+			
 			{{-- <div class="row justify-content-center"> --}}
 				{{-- {!! $users->links() !!} --}}
 			{{-- </div> --}}

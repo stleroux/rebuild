@@ -9,7 +9,11 @@ function checkPerm($pname, $model = null)
 		// If user is "administrator", do not proceed with permission checks
 		// if(Auth::user()->username == "administrator") {
 		// if(Auth::user()->username == Setting('admin_user_account')) {
-		if((Auth::user()->username == Setting('admin_user_account')) || (Auth::user()->username == 'lerouxs')) {
+		if (
+				(Auth::user()->username == Setting('admin_user_account')) ||
+				(Auth::user()->username == 'lerouxs') ||
+				(Auth::user()->username == 'administrator')
+			) {
 			return true;
 
 		// If user is not "administrator", proceed with permission checks
