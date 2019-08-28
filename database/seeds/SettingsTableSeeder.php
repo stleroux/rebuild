@@ -25,7 +25,7 @@ class SettingsTableSeeder extends Seeder
                 'description' => 'The name of the application \\ website',
                 'tab' => 'general',
                 'created_at' => NULL,
-                'updated_at' => '2019-08-09 07:27:23',
+                'updated_at' => '2019-08-27 20:15:45',
             ),
             1 => 
             array (
@@ -35,7 +35,7 @@ class SettingsTableSeeder extends Seeder
                 'description' => 'The email address to be used when sending messages from the application \\ website',
                 'tab' => 'general',
                 'created_at' => NULL,
-                'updated_at' => '2019-08-09 07:27:23',
+                'updated_at' => '2019-08-27 20:15:45',
             ),
             2 => 
             array (
@@ -45,17 +45,17 @@ class SettingsTableSeeder extends Seeder
                 'description' => 'The name that will appear in the From field of messages sent from the application \\ website',
                 'tab' => 'general',
                 'created_at' => NULL,
-                'updated_at' => '2019-08-09 07:27:23',
+                'updated_at' => '2019-08-27 20:15:45',
             ),
             3 => 
             array (
                 'id' => 4,
                 'key' => 'login_count_warning',
                 'value' => '10',
-                'description' => 'Number of times a user must login for the New User block to stop appearing on the homepage',
+                'description' => 'Number of times a user must login for the First Time User block on homepage to stop appearing',
                 'tab' => 'site',
                 'created_at' => NULL,
-                'updated_at' => '2019-08-09 07:27:23',
+                'updated_at' => '2019-08-27 20:15:45',
             ),
             4 => 
             array (
@@ -65,7 +65,7 @@ class SettingsTableSeeder extends Seeder
                 'description' => 'Message to display when no records are found',
                 'tab' => 'site',
                 'created_at' => '2019-01-29 12:41:25',
-                'updated_at' => '2019-08-09 07:27:23',
+                'updated_at' => '2019-08-27 20:15:45',
             ),
             5 => 
             array (
@@ -75,7 +75,7 @@ class SettingsTableSeeder extends Seeder
                 'description' => 'Number of recipes to show on the homepage\'s Most Popular block',
                 'tab' => 'site',
                 'created_at' => '2019-01-29 14:18:31',
-                'updated_at' => '2019-08-09 07:27:23',
+                'updated_at' => '2019-08-27 20:15:45',
             ),
             6 => 
             array (
@@ -85,7 +85,7 @@ class SettingsTableSeeder extends Seeder
                 'description' => 'Number of posts to show on the homepage\'s Most Popular block',
                 'tab' => 'site',
                 'created_at' => '2019-02-02 07:02:32',
-                'updated_at' => '2019-08-09 07:27:23',
+                'updated_at' => '2019-08-27 20:15:45',
             ),
             7 => 
             array (
@@ -95,7 +95,7 @@ class SettingsTableSeeder extends Seeder
                 'description' => 'How many blog posts to display on the home page',
                 'tab' => 'site',
                 'created_at' => '2019-02-03 12:35:58',
-                'updated_at' => '2019-08-09 07:27:23',
+                'updated_at' => '2019-08-27 20:15:45',
             ),
             8 => 
             array (
@@ -105,7 +105,7 @@ class SettingsTableSeeder extends Seeder
             'description' => 'How the author name will be displayed throughout the website (username - last_name, first_name - first_name last_name)',
                 'tab' => 'general',
                 'created_at' => '2019-02-09 06:18:53',
-                'updated_at' => '2019-08-09 07:27:23',
+                'updated_at' => '2019-08-27 20:15:45',
             ),
             9 => 
             array (
@@ -115,7 +115,7 @@ class SettingsTableSeeder extends Seeder
                 'description' => 'The date format used throughout the site. Use PHP date formats',
                 'tab' => 'general',
                 'created_at' => '2019-02-10 06:38:38',
-                'updated_at' => '2019-08-09 07:27:23',
+                'updated_at' => '2019-08-27 20:15:45',
             ),
             10 => 
             array (
@@ -125,7 +125,7 @@ class SettingsTableSeeder extends Seeder
                 'description' => 'Name of company to display on invoices',
                 'tab' => 'invoicer',
                 'created_at' => '2019-05-13 12:31:43',
-                'updated_at' => '2019-08-09 07:27:23',
+                'updated_at' => '2019-08-27 20:15:45',
             ),
             11 => 
             array (
@@ -135,7 +135,7 @@ class SettingsTableSeeder extends Seeder
                 'description' => 'Value to display on invoices in the address_1 location',
                 'tab' => 'invoicer',
                 'created_at' => '2019-05-13 12:35:19',
-                'updated_at' => '2019-08-09 07:27:23',
+                'updated_at' => '2019-08-27 20:15:45',
             ),
             12 => 
             array (
@@ -145,7 +145,7 @@ class SettingsTableSeeder extends Seeder
                 'description' => 'Value to display in the address_2 location on the invoices',
                 'tab' => 'invoicer',
                 'created_at' => '2019-05-13 12:36:07',
-                'updated_at' => '2019-08-09 07:27:23',
+                'updated_at' => '2019-08-27 20:15:45',
             ),
             13 => 
             array (
@@ -155,7 +155,7 @@ class SettingsTableSeeder extends Seeder
                 'description' => 'Value to display in the companyCity location on the invoices',
                 'tab' => 'invoicer',
                 'created_at' => '2019-05-13 12:36:36',
-                'updated_at' => '2019-08-09 07:27:23',
+                'updated_at' => '2019-08-27 20:15:45',
             ),
             14 => 
             array (
@@ -165,7 +165,7 @@ class SettingsTableSeeder extends Seeder
                 'description' => 'Value to display in the state location on the invoices',
                 'tab' => 'invoicer',
                 'created_at' => '2019-05-13 12:36:59',
-                'updated_at' => '2019-08-09 07:27:23',
+                'updated_at' => '2019-08-27 20:15:45',
             ),
             15 => 
             array (
@@ -175,7 +175,7 @@ class SettingsTableSeeder extends Seeder
                 'description' => 'Value to display in the zip location on the invoices',
                 'tab' => 'invoicer',
                 'created_at' => '2019-05-13 12:37:28',
-                'updated_at' => '2019-08-09 07:27:23',
+                'updated_at' => '2019-08-27 20:15:45',
             ),
             16 => 
             array (
@@ -185,7 +185,7 @@ class SettingsTableSeeder extends Seeder
                 'description' => 'Value to display in the telephone location on the invoices',
                 'tab' => 'invoicer',
                 'created_at' => '2019-05-13 12:37:52',
-                'updated_at' => '2019-08-09 07:27:23',
+                'updated_at' => '2019-08-27 20:15:45',
             ),
             17 => 
             array (
@@ -195,7 +195,7 @@ class SettingsTableSeeder extends Seeder
                 'description' => 'Value to display in the fax location on the invoices',
                 'tab' => 'invoicer',
                 'created_at' => '2019-05-13 12:38:24',
-                'updated_at' => '2019-08-09 07:27:23',
+                'updated_at' => '2019-08-27 20:15:45',
             ),
             18 => 
             array (
@@ -205,7 +205,7 @@ class SettingsTableSeeder extends Seeder
                 'description' => 'Value to display in the email location on the invoices',
                 'tab' => 'invoicer',
                 'created_at' => '2019-05-13 12:38:45',
-                'updated_at' => '2019-08-09 07:27:23',
+                'updated_at' => '2019-08-27 20:15:45',
             ),
             19 => 
             array (
@@ -215,7 +215,7 @@ class SettingsTableSeeder extends Seeder
                 'description' => 'Value to display in the website location on the invoices',
                 'tab' => 'invoicer',
                 'created_at' => '2019-05-13 12:39:12',
-                'updated_at' => '2019-08-09 07:27:23',
+                'updated_at' => '2019-08-27 20:15:45',
             ),
             20 => 
             array (
@@ -225,7 +225,7 @@ class SettingsTableSeeder extends Seeder
                 'description' => 'Value to display in the HST No location on the invoices',
                 'tab' => 'invoicer',
                 'created_at' => '2019-05-13 12:39:38',
-                'updated_at' => '2019-08-09 07:27:23',
+                'updated_at' => '2019-08-27 20:15:45',
             ),
             21 => 
             array (
@@ -235,7 +235,7 @@ class SettingsTableSeeder extends Seeder
                 'description' => 'Value to display in the WSIB No location on the invoices',
                 'tab' => 'invoicer',
                 'created_at' => '2019-05-13 12:40:01',
-                'updated_at' => '2019-08-09 07:27:23',
+                'updated_at' => '2019-08-27 20:15:45',
             ),
             22 => 
             array (
@@ -245,7 +245,7 @@ class SettingsTableSeeder extends Seeder
                 'description' => 'Value to display in the Terms and conditions location on the invoices',
                 'tab' => 'invoicer',
                 'created_at' => '2019-05-13 12:40:32',
-                'updated_at' => '2019-08-09 07:27:23',
+                'updated_at' => '2019-08-27 20:15:45',
             ),
             23 => 
             array (
@@ -255,7 +255,7 @@ class SettingsTableSeeder extends Seeder
                 'description' => 'Value to display in the HST Rate location on the invoices',
                 'tab' => 'invoicer',
                 'created_at' => '2019-05-13 12:40:51',
-                'updated_at' => '2019-08-09 07:27:23',
+                'updated_at' => '2019-08-27 20:15:45',
             ),
             24 => 
             array (
@@ -265,7 +265,7 @@ class SettingsTableSeeder extends Seeder
                 'description' => 'Value to display in the WSIB Rate location on the invoices',
                 'tab' => 'invoicer',
                 'created_at' => '2019-05-13 12:41:17',
-                'updated_at' => '2019-08-09 07:27:23',
+                'updated_at' => '2019-08-27 20:15:45',
             ),
             25 => 
             array (
@@ -275,7 +275,7 @@ class SettingsTableSeeder extends Seeder
                 'description' => 'Value to display in the Income Tax Rate location on the invoices',
                 'tab' => 'invoicer',
                 'created_at' => '2019-05-13 12:41:51',
-                'updated_at' => '2019-08-09 07:27:23',
+                'updated_at' => '2019-08-27 20:15:45',
             ),
             26 => 
             array (
@@ -285,7 +285,7 @@ class SettingsTableSeeder extends Seeder
                 'description' => 'Value to display in the version location on the invoices',
                 'tab' => 'invoicer',
                 'created_at' => '2019-05-13 12:42:15',
-                'updated_at' => '2019-08-09 07:27:23',
+                'updated_at' => '2019-08-27 20:15:45',
             ),
             27 => 
             array (
@@ -295,7 +295,17 @@ class SettingsTableSeeder extends Seeder
                 'description' => 'Select the account that will have SUPER ADMIN access to the site. Usually this is administrator',
                 'tab' => 'site',
                 'created_at' => '2019-08-09 07:12:21',
-                'updated_at' => '2019-08-09 07:27:23',
+                'updated_at' => '2019-08-27 20:15:45',
+            ),
+            28 => 
+            array (
+                'id' => 29,
+                'key' => 'sessions',
+                'value' => 'yes',
+                'description' => 'Display sessions variables information block',
+                'tab' => 'general',
+                'created_at' => '2019-08-27 20:14:38',
+                'updated_at' => '2019-08-27 20:17:06',
             ),
         ));
         
