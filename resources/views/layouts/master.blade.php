@@ -25,19 +25,14 @@
 <body>
 	<div id="app">
       
-	  @include('layouts.navbar.navbar')
-
-      <span class="bg-dark text-light">
-         fromPage : {{ Session::get('fromPage') }} <br />
-         fromLocation : {{ Session::get('fromLocation') }}
-      </span>
-
-   	@include('layouts.master.messages')
+      @include('layouts.navbar.navbar')
+      @include('layouts.master.messages')
 
    	<main class="container-fluid">
    		{{-- <div id="" class="py-0 px-0"> --}}
    			<div class="row py-0 px-2">
    				<div class="col-sm-3 col-md-2 py-0 px-0">
+                  @include('blocks.sessions')
    					@yield('left_column')
    				</div>
    				<div class="col-sm-6 col-md-8 py-0 px-2">

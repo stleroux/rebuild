@@ -14,7 +14,7 @@
                         <span class="switch switch-xs">
                            {{ Form::checkbox('permission[]', $permission->id, in_array($permission->id, $userPermissions) ? true : false, ['id'=>$permission->id]) }}
                            <label for="{{$permission->id}}" title="Allow member to {{ strtolower($permission->description) }}">
-                              {{ ucfirst($permission->display_name) }}
+                              {{ ucwords($permission->display_name) }}
                            </label>
                         </span>
                      </div>
