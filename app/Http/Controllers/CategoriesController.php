@@ -37,11 +37,9 @@ class CategoriesController extends Controller
 ##################################################################################################################
 	public function __construct()
 	{
-		// Only allow authenticated users access to these functions
 		$this->middleware('auth');
-      $this->enablePermissions = false;
-		// Session::forget('byCatName');
-
+      $this->enablePermissions = true;
+      // If set to false, users will be able to access the different functions using the address bar
 		//Log::useFiles(storage_path().'/logs/audits.log');
 	}
 
@@ -57,6 +55,11 @@ class CategoriesController extends Controller
 ##################################################################################################################
 	public function create()
 	{
+		// Check if user has required permission
+		if($this->enablePermissions) {
+			if(!checkPerm('category_create')) { abort(401, 'Unauthorized Access'); }
+		}
+
 		$categories = Category::with('children')->where('parent_id','=',0)->orderBy('name')->get();
 		
 		return view('categories.create', compact('categories'));
@@ -74,10 +77,12 @@ class CategoriesController extends Controller
 ##################################################################################################################
 	public function delete($id)
 	{
-		// Check if user has required module
-		if(!checkPerm('category_delete')) { abort(401, 'Unauthorized Access'); }
-
 		$category = Category::findOrFail($id);
+
+		// Check if user has required permission
+		if($this->enablePermissions) {
+			if(!checkPerm('category_delete')) { abort(401, 'Unauthorized Access'); }
+		}
 
 		return view('categories.delete', compact('category'));
 	}
@@ -95,8 +100,13 @@ class CategoriesController extends Controller
 ##################################################################################################################
 	public function destroy($id)
 	{
-
 		$category = Category::find($id);
+
+		// Check if user has required permission
+		if($this->enablePermissions) {
+			if(!checkPerm('category_delete')) { abort(401, 'Unauthorized Access'); }
+		}
+
 		$category->forceDelete();
 
 		Session::flash('delete', 'The category was successfully deleted!');
@@ -114,10 +124,6 @@ class CategoriesController extends Controller
 ##################################################################################################################
 	public function downloadExcel($type)
 	{
-		if(!checkACL('manager')) {
-			return view('errors.403');
-		}
-
 		$data = Category::get()->toArray();
 		return Excel::create('Categories_List', function($excel) use ($data) {
 			$excel->sheet('mySheet', function($sheet) use ($data)
@@ -141,6 +147,11 @@ class CategoriesController extends Controller
 	{
 		$category = Category::find($id);
 
+		// Check if user has required permission
+		if($this->enablePermissions) {
+			if(!checkPerm('category_edit', $category)) { abort(401, 'Unauthorized Access'); }
+		}
+
 		return  view('categories.edit', compact('category'));
 	}
 
@@ -154,11 +165,7 @@ class CategoriesController extends Controller
 # ╚══════╝╚═╝  ╚═╝╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝       ╚═╝     ╚═════╝ ╚═╝     
 ##################################################################################################################
 	public function exportPDF()
-		{
-		if(!checkACL('manager')) {
-			return view('errors.403');
-		}
-
+	{
 		$data = Category::get()->toArray();
 		return Excel::create('Categories_List', function($excel) use ($data) {
 			$excel->sheet('mySheet', function($sheet) use ($data)
@@ -180,10 +187,6 @@ class CategoriesController extends Controller
 ##################################################################################################################
 	public function import()
 	{
-		if(!checkACL('manager')) {
-			return view('errors.403');
-		}
-
 		return view('categories.import');
 	}
 
@@ -198,10 +201,6 @@ class CategoriesController extends Controller
 ##################################################################################################################
 	public function importExcel()
 	{
-		if(!checkACL('admin')) {
-			return view('errors.403');
-		}
-
 		if(Input::hasFile('import_file')){
 			$path = Input::file('import_file')->getRealPath();
 			$data = Excel::load($path, function($reader) {})->get();
@@ -240,7 +239,9 @@ class CategoriesController extends Controller
 	public function index(Request $request, $key=null)
 	{
 		// Check if user has required permission
-	  if(!checkPerm('category_index')) { abort(401, 'Unauthorized Access'); }
+		if($this->enablePermissions) {
+			if(!checkPerm('category_index')) { abort(401, 'Unauthorized Access'); }
+		}
 
 		$alphas = DB::table('categories')
 			->select(DB::raw('DISTINCT LEFT(name, 1) as letter'))
@@ -277,6 +278,11 @@ class CategoriesController extends Controller
 ##################################################################################################################
 	public function newCategories(Request $request, $key=null)
 	{
+		// Check if user has required permission
+		if($this->enablePermissions) {
+			if(!checkPerm('category_new')) { abort(401, 'Unauthorized Access'); }
+		}
+
 		//$alphas = range('A', 'Z');
 		$alphas = DB::table('categories')
 			->select(DB::raw('DISTINCT LEFT(name, 1) as letter'))
@@ -315,6 +321,11 @@ class CategoriesController extends Controller
 	{
 		$category = Category::findOrFail($id);
 
+		// Check if user has required permission
+		if($this->enablePermissions) {
+			if(!checkPerm('category_show')) { abort(401, 'Unauthorized Access'); }
+		}
+
 		return view('categories.show', compact('category'));
 	}
 
@@ -330,6 +341,11 @@ class CategoriesController extends Controller
 ##################################################################################################################
 	public function store(Request $request)
 	{
+		// Check if user has required module
+		if($this->enablePermissions) {
+			if(!checkPerm('category_create')) { abort(401, 'Unauthorized Access'); }
+		}
+
 		if($request->part === 'main')
 		{
 			$rules = [
@@ -430,9 +446,14 @@ class CategoriesController extends Controller
 ##################################################################################################################
 	public function update(Request $request, $id)
 	{
-
 		// Get the category value from the database
 		$category = Category::find($id);
+
+		// Check if user has required module
+		if($this->enablePermissions) {
+			if(!checkPerm('category_edit')) { abort(401, 'Unauthorized Access'); }
+		}
+
 			$category->name = $request->input('name');
 			$category->value = $request->input('value');
 			$category->description = $request->input('description');

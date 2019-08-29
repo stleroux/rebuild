@@ -34,7 +34,13 @@
       </div>
 
       <div class="card-body section_body p-2">
-         
+{{-- 
+
+@foreach($user->permissions as $p)
+   <li>{{ $p->name }}</li>
+@endforeach
+
+ --}}         
          <div class="form-row">
             <div class="col-9">
 
@@ -75,6 +81,12 @@
                            <div class="form-group">
                               <label>Total Permissions</label>
                               <input type="text" class="form-control form-control-sm" value="{{ $user->permissions->count() }}" disabled>
+                           </div>
+                        </div>
+                        <div class="col-md-2">
+                           <div class="form-group">
+                              <label>Invocier Client</label>
+                              <input type="text" class="form-control form-control-sm" value="{{ $user->invoicer_client ?? "Yes" }}" disabled>
                            </div>
                         </div>
                      </div>
@@ -221,6 +233,75 @@
       </div>
 
    </div>
+
+<hr>
+<hr>
+
+   <div class="card mb-5">
+
+      <div class="card-header section_header p-2">
+         Show Profile
+         <span class="float-right">
+            <div class="btn-group">
+               @if($user->id === Auth::user()->id)
+                  <a href="{{ route('profile.edit', $user->id) }}" class="btn btn-xs btn-primary">
+                     <i class="fa fa-edit"></i>
+                     Edit Profile
+                  </a>
+               @endif
+            </div>
+         </span>
+      </div>
+
+      <!--CARD BODY-->
+      <div class="card-body section_body p-2">
+         <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item p-0">
+               <a class="nav-link py-1 px-2 active" id="tab-1" data-toggle="tab" href="#tab_1" role="tab" aria-controls="tab_1" aria-selected="true">
+                  Account Info
+               </a>
+            </li>
+            <li class="nav-item p-0">
+               <a class="nav-link py-1 px-2" id="tab-2" data-toggle="tab" href="#tab_2" role="tab" aria-controls="tab_2" aria-selected="false">
+                  Profile Info
+               </a>
+            </li>
+            <li class="nav-item p-0">
+               <a class="nav-link py-1 px-2" id="tab-3" data-toggle="tab" href="#tab_3" role="tab" aria-controls="tab_3" aria-selected="false">
+                  Address info
+               </a>
+            </li>
+            <li class="nav-item p-0">
+               <a class="nav-link py-1 px-2" id="tab-4" data-toggle="tab" href="#tab_4" role="tab" aria-controls="tab_4" aria-selected="false">
+                  Permissions
+               </a>
+            </li>
+         </ul>
+
+         <div class="tab-content pb-0 mb-0" id="myTabContent">
+            <div class="tab-pane fade show active" id="tab_1" role="tabpanel" aria-labelledby="tab_1">
+               TAB_1 Content
+            </div>
+            <div class="tab-pane fade" id="tab_2" role="tabpanel" aria-labelledby="tab_2">
+               TAB_2 content
+            </div>
+            <div class="tab-pane fade" id="tab_3" role="tabpanel" aria-labelledby="tab_2">
+               TAB_3 content
+            </div>
+            <div class="tab-pane fade" id="tab_4" role="tabpanel" aria-labelledby="tab_2">
+               @include('users.profile.tab_4_content')
+            </div>
+         </div>
+      </div>
+   </div>
+      
+
+
+
+
+
+
+
 
 @endsection
 

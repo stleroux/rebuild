@@ -34,28 +34,28 @@
          <!--CARD BODY-->
          <div class="card-body section_body p-2">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
-               <li class="nav-item">
-                  <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
+               <li class="nav-item p-0">
+                  <a class="nav-link py-1 px-2 active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">
                      Profile
                   </a>
                </li>
-               <li class="nav-item">
-                  <a class="nav-link" id="core-tab" data-toggle="tab" href="#core" role="tab" aria-controls="core" aria-selected="true">
+               <li class="nav-item p-0">
+                  <a class="nav-link py-1 px-2" id="core-tab" data-toggle="tab" href="#core" role="tab" aria-controls="core" aria-selected="false">
                      Core Permissions
                   </a>
                </li>
-               <li class="nav-item">
-                  <a class="nav-link" id="nonCore-tab" data-toggle="tab" href="#nonCore" role="tab" aria-controls="nonCore" aria-selected="false">
+               <li class="nav-item p-0">
+                  <a class="nav-link py-1 px-2" id="nonCore-tab" data-toggle="tab" href="#nonCore" role="tab" aria-controls="nonCore" aria-selected="false">
                      Non-Core Permissions
                   </a>
                </li>
-               <li class="nav-item">
-                  <a class="nav-link" id="modules-tab" data-toggle="tab" href="#modules" role="tab" aria-controls="modules" aria-selected="false">
+               <li class="nav-item p-0">
+                  <a class="nav-link py-1 px-2" id="modules-tab" data-toggle="tab" href="#modules" role="tab" aria-controls="modules" aria-selected="false">
                      Modules Permissions
                   </a>
                </li>
-               <li class="nav-item">
-                  <a class="nav-link" id="instructions-tab" data-toggle="tab" href="#instructions" role="tab" aria-controls="instructions" aria-selected="true">
+               <li class="nav-item p-0">
+                  <a class="nav-link py-1 px-2" id="instructions-tab" data-toggle="tab" href="#instructions" role="tab" aria-controls="instructions" aria-selected="false">
                      Instructions
                   </a>
                </li>
