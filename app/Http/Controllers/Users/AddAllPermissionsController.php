@@ -32,7 +32,6 @@ class AddAllPermissionsController extends Controller
             ]);
         }
         
-        // return redirect()->back()->with("success","Password changed successfully!");
         Session::flash ('success', 'All permissions successfully added!');
         return redirect()->route('users.edit', $user->id);
     }

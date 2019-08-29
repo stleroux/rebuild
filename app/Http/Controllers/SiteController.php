@@ -2,19 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-//use App\Category;
-//use App\Comment;
-//use App\Module;
-//use App\Permission;
-//use App\User;
-//use Auth;
-use Route;
-use Session;
-
 use App\Models\Post;
 use App\Models\Projects\Project;
-// use Modules\Recipes\Entities\Recipe;
+use Illuminate\Http\Request;
+use Route;
+use Session;
 
 class SiteController extends Controller
 {
@@ -30,8 +22,6 @@ class SiteController extends Controller
 	public function __construct()
 	{
 		// $this->middleware('auth');
-		// Session::forget('byCatName');
-		// Session::forget('byCatLetter');
 	}
 
 
@@ -45,24 +35,11 @@ class SiteController extends Controller
 ##################################################################################################################
 	public function homepage()
 	{
-		// Set the variable so we can use a button in other pages to come back to this page
-      // Session::put('fromPage', Route::currentRouteName());
       // Set the session to the current page route
       Session::put('fromPage', url()->full());
 
 		$posts = Post::published()->with('user')->orderBy('id','desc')->take(setting('homepage_blog_count'))->get();
 
-		// $popularArticle = Article::published()->get()->sortByDesc('views')->take(1);
-		// $popularPosts = Post::published()->get()->sortByDesc('views')->take(setting('homepage_favorite_post_count'));
-		// dd($popularPosts);
-		// $popularRecipes = Recipe::published()->public()->get()->sortBy('title')->sortByDesc('views')->take(setting('homepage_favorite_recipe_count'));
-		// dd($popularRecipes);
-		
-		// $popularProjects = Project::get()->sortByDesc('views')->take(5);
-
-
-		// return view('homepage', compact('posts','popularPosts','popularRecipes'));
-		// return view('homepage', compact('posts','popularProjects'));
 		return view('homepage', compact('posts'));
 	}
 
@@ -79,20 +56,6 @@ class SiteController extends Controller
 	{
 		return view('about');
 	}
-
-
-##################################################################################################################
-#  ██████╗ ██████╗ ███╗   ██╗████████╗ █████╗  ██████╗████████╗
-# ██╔════╝██╔═══██╗████╗  ██║╚══██╔══╝██╔══██╗██╔════╝╚══██╔══╝
-# ██║     ██║   ██║██╔██╗ ██║   ██║   ███████║██║        ██║   
-# ██║     ██║   ██║██║╚██╗██║   ██║   ██╔══██║██║        ██║   
-# ╚██████╗╚██████╔╝██║ ╚████║   ██║   ██║  ██║╚██████╗   ██║   
-#  ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝   ╚═╝   
-##################################################################################################################
-	// public function contact()
-	// {
-	// 	return view('contact');
-	// }
 
 
 ##################################################################################################################
@@ -121,7 +84,6 @@ class SiteController extends Controller
 	{
 		return view('privacyPolicy');
 	}
-
 
 
 }

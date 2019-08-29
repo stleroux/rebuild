@@ -69,17 +69,12 @@ class DashboardController extends Controller
     public function stats()
     {
         $categoryCount = Category::count();
-        // dd($categoryCount);
         $commentCount = Comment::count();
-        // $componentCount = \Module::count();
-        // $moduleCount = \Module::count();
         $permissionCount = Permission::count();
         $postCount = Post::count();
         $recipeCount = Recipe::count();
         $userCount = User::count();
-
         $comments = Comment::all();
-        // $modules = \Module::all();
 
         return view('stats.index', compact(
             'categoryCount','commentCount','permissionCount','postCount','recipeCount','userCount','comments'

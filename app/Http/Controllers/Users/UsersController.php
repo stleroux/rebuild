@@ -57,52 +57,6 @@ class UsersController extends Controller
 
 
 ##################################################################################################################
-#  ██████╗██╗  ██╗ █████╗ ███╗   ██╗ ██████╗ ███████╗    ██████╗ ██╗    ██╗██████╗ 
-# ██╔════╝██║  ██║██╔══██╗████╗  ██║██╔════╝ ██╔════╝    ██╔══██╗██║    ██║██╔══██╗
-# ██║     ███████║███████║██╔██╗ ██║██║  ███╗█████╗      ██████╔╝██║ █╗ ██║██║  ██║
-# ██║     ██╔══██║██╔══██║██║╚██╗██║██║   ██║██╔══╝      ██╔═══╝ ██║███╗██║██║  ██║
-# ╚██████╗██║  ██║██║  ██║██║ ╚████║╚██████╔╝███████╗    ██║     ╚███╔███╔╝██████╔╝
-#  ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚══════╝    ╚═╝      ╚══╝╚══╝ ╚═════╝
-##################################################################################################################
-	// public function changeUserPWD($id)
-	// {
-	// 	if($this->enablePermissions)
- //      {
- //         if(!checkPerm('change_user_pwd')) { abort(401, 'Unauthorized Access'); }
- //      }
-
-	// 	$user = User::findOrFail($id);
-	// 	return view('users.changeUserPWD', compact('user'));
-	// }
-
-
-##################################################################################################################
-##################################################################################################################
-# Change User PWD Post
-##################################################################################################################
-##################################################################################################################
-	// public function changeUserPWDPost(Request $request, $id)
-	// {
-	// 	// Allows an admin to change user account passwords
-
-	// 	if($this->enablePermissions)
- //      {
- //         if(!checkPerm('change_user_pwd')) { abort(401, 'Unauthorized Access'); }
- //      }
-
-	// 	$this->validate($request, [
-	// 		'password' => 'required|confirmed|min:6',
-	// 	]);
-
-	// 	$user = User::findOrFail($id);
-	// 		$user->password = Hash::make($request->password);
-	// 	$user->save();
-
-	// 	return redirect()->route('users.index')->with('success','User\'s password updated successfully');
-	// }
-
-
-##################################################################################################################
 #  ██████╗██████╗ ███████╗ █████╗ ████████╗███████╗
 # ██╔════╝██╔══██╗██╔════╝██╔══██╗╚══██╔══╝██╔════╝
 # ██║     ██████╔╝█████╗  ███████║   ██║   █████╗  
@@ -190,11 +144,7 @@ class UsersController extends Controller
 		// Find the user to be deleted
 		$user = User::find($user->id);
 		
-		// Delete the permissions assigned to this user
-		// $user->permissions()->delete(); No need to do this as this is done in the migration file with the foreign key
-
 		// Delete the user
-		// $user->profile->delete();
 		$user->delete();
 
 		// Set flash data with success message

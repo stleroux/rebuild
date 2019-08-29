@@ -4,17 +4,11 @@ namespace App\Http\Controllers\Users;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
-// use Hash;
 use Auth;
 use Session;
-// use App\Models\Category;
-// use App\Models\Profile;
 use App\Models\User;
 use Image;
 use File;
-
-// use App\Http\Requests\UpdateProfileAccountRequest;
 
 class ProfileController extends Controller
 {

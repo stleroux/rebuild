@@ -16,18 +16,10 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Input;
 use Auth;
 use DB;
-// use Excel;
-// use File;
 use Image;
-// use JavaScript;
-// use Log;
-// use PDF;
-// use Purifier;
 use Route;
 use Session;
 use Storage;
-// use Table;
-// use URL;
 
 class RecipesController extends Controller
 {
@@ -218,7 +210,6 @@ class RecipesController extends Controller
       // Set the session to the current page route
       Session::put('fromLocation', 'recipes.index'); // Required for Alphabet listing
       Session::put('fromPage', url()->full());
-      // dd(Route::current()->parameters['cat']);
       
       if(!Route::current()->parameters['cat'] == '') {
          Session::put('cat', Route::current()->parameters['cat']);
@@ -227,7 +218,6 @@ class RecipesController extends Controller
       // Get all categories related to Recipe Category (id=>1)
       $categories = Category::where('parent_id',1)->get();
       $byCatName = Category::where('name', $request->cat)->first();
-      // dd($byCatName);
 
       if($request->cat == 'all'){
          $alphas = DB::table('recipes')
@@ -238,7 +228,6 @@ class RecipesController extends Controller
             ->orderBy('letter')
             ->get();
 
-         // echo "All recipes";
          $recipes = Recipe::with('user','category')
             ->published()
             ->public()
@@ -246,7 +235,6 @@ class RecipesController extends Controller
             ->paginate(15);
 
          if($request->key){
-            // echo " and grouped by " .$request->key;
             $recipes = Recipe::with('user','category')
                ->published()
                ->public()
@@ -255,7 +243,6 @@ class RecipesController extends Controller
                ->paginate(15);
          }
       } else {
-         // echo "Recipes categorized by " .$request->cat;
          if($byCatName->parent_id != 1) {
             $alphas = DB::table('recipes')
                ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
@@ -274,7 +261,6 @@ class RecipesController extends Controller
                ->paginate(15);
 
             if($request->key){
-               // echo " and grouped by " .$request->key;
                $recipes = Recipe::with('user','category')
                   ->published()
                   ->public()
@@ -303,7 +289,6 @@ class RecipesController extends Controller
                ->paginate(15);
 
             if($request->key){
-               // echo " and grouped by " .$request->key;
                $recipes = Recipe::with('user','category')
                   ->published()
                   ->public()
@@ -335,8 +320,6 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function show($id)
    {
-      // Session::put('fromPage', 'recipes.published');
-      
       $recipe = Recipe::withTrashed()->findOrFail($id);
 
       // Increase the view count since this is viewed from the frontend
@@ -396,9 +379,7 @@ class RecipesController extends Controller
       $recipe->save();
 
       Session::flash('success','Recipe created successfully!');
-      // return redirect()->route('recipes.'. Session::get('pageName'));
       return redirect()->back();
-      // return redirect()->route('recipes.index');
    }
 
 
@@ -415,67 +396,60 @@ class RecipesController extends Controller
    {
       // Get the recipe values from the database
       $recipe = Recipe::find($id);
-      // dd($recipe);
 
       // Check if user has required permission
       if($this->enablePermissions) {
          if(!checkPerm('recipe_edit', $recipe)) { abort(401, 'Unauthorized Access'); }
       }
 
-      
+         // save the data in the database
+         $recipe->title = $request->title;
+         // $recipe->ingredients = Purifier::clean($request->ingredients);
+         $recipe->ingredients = $request->ingredients;
+         // $recipe->methodology = Purifier::clean($request->methodology);
+         $recipe->methodology = $request->methodology;
+         $recipe->category_id = $request->category_id;
+         $recipe->published_at = $request->published_at;
+         $recipe->servings = $request->servings;
+         $recipe->prep_time = $request->prep_time;
+         $recipe->cook_time = $request->cook_time;
+         $recipe->personal = $request->personal;
+         $recipe->source = $request->source;
+         $recipe->private_notes = $request->private_notes;
+         $recipe->public_notes = $request->public_notes;
+         $recipe->modified_by_id = Auth::user()->id;
+         $recipe->last_viewed_by_id = Auth::user()->id;
+         $recipe->last_viewed_on = Carbon::Now();
 
-      // save the data in the database
-      $recipe->title = $request->title;
-      // $recipe->ingredients = Purifier::clean($request->ingredients);
-      $recipe->ingredients = $request->ingredients;
-      // $recipe->methodology = Purifier::clean($request->methodology);
-      $recipe->methodology = $request->methodology;
-      $recipe->category_id = $request->category_id;
-      $recipe->published_at = $request->published_at;
-      $recipe->servings = $request->servings;
-      $recipe->prep_time = $request->prep_time;
-      $recipe->cook_time = $request->cook_time;
-      $recipe->personal = $request->personal;
-      $recipe->source = $request->source;
-      $recipe->private_notes = $request->private_notes;
-      $recipe->public_notes = $request->public_notes;
-      $recipe->modified_by_id = Auth::user()->id;
-      $recipe->last_viewed_by_id = Auth::user()->id;
-      $recipe->last_viewed_on = Carbon::Now();
+         // Check if a new image was submitted
+         if ($request->hasFile('image')) {
+            //Add new photo
+            $image = $request->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('_recipes/' . $filename);
+            Image::make($image)->resize(800, 400)->save($location);
 
-      // Check if a new image was submitted
-      if ($request->hasFile('image')) {
-         //Add new photo
-         $image = $request->file('image');
-         $filename = time() . '.' . $image->getClientOriginalExtension();
-         $location = public_path('_recipes/' . $filename);
-         Image::make($image)->resize(800, 400)->save($location);
+            // get name of old image
+            $oldImageName = $recipe->image;
 
-         // get name of old image
-         $oldImageName = $recipe->image;
+            // Update database
+            $recipe->image = $filename;
 
-         // Update database
-         $recipe->image = $filename;
-
-         // Delete old photo
-         //Storage::delete($oldImageName);
-         File::delete('_recipes/'.$oldImageName);
-      }
+            // Delete old photo
+            //Storage::delete($oldImageName);
+            File::delete('_recipes/'.$oldImageName);
+         }
 
       $recipe->save();
 
       // set a flash message to be displayed on screen
       Session::flash('success','The recipe was successfully updated!');
-      // dd(Session::get('fromPage'));
+
       if(Session::get('fromPage') === 'recipes.index') {
          return redirect()->route('recipes.index', 'all');
       } else {
          return redirect()->route(Session::get('fromPage'));
       }
-
-      // return redirect()->route(Session::get('fromPage'));
-      // return redirect()->route('recipes.index', 'all');
-
   }
 
 
@@ -503,29 +477,4 @@ class RecipesController extends Controller
    }
 
 
-
-
-
-
-
-
-
-
-
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
 }
-

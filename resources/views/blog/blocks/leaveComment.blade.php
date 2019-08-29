@@ -1,4 +1,4 @@
-@if(checkPerm('post_index'))
+@if(checkPerm('comment_store'))
 	<div class="card mb-3">
 		<div class="card-header block_header p-2">
 			<i class="fa fa-comment"></i>

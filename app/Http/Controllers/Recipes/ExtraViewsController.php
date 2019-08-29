@@ -242,9 +242,6 @@ class ExtraViewsController extends RecipesController
 ##################################################################################################################
    public function myRecipes($key=null)
    {
-      // Set the session to the current page route
-      // Session::put('fromPage', Route::currentRouteName());
-
       // Check if user has required permission
       if($this->enablePermissions) {
          if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }

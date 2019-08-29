@@ -26,55 +26,55 @@
                @include('blog.buttons.next', ['size'=>'xs'])
                {{-- @include('blog.buttons.back', ['size'=>'xs']) --}}
                @auth
-                  <a href="" type="button" class="btn btn-sm btn-primary px-1 py-0" data-toggle="modal" data-target="#printModal" data-link="{{ $post->slug }}">
+                  <a href="" type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#printModal" data-link="{{ $post->slug }}">
                      <i class="fa fa-print"></i> Print
                   </a>
                @endauth
 
                <!-- Only show if coming from the homepage -->
                @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'home')
-                  <a href="{{ route('home') }}" class="btn btn-sm btn-primary px-1 py-0">
+                  <a href="{{ route('home') }}" class="btn btn-xs btn-primary">
                      <i class="fas fa-home"></i> Home
                   </a>
                @endif
 
                <!-- Only show if coming from the blog page -->
                @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.index')
-                  <a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary px-1 py-0">
+                  <a href="{{ route('blog.index') }}" class="btn btn-xs btn-primary">
                      <i class="fas fa-blog"></i> Blog
                   </a>
                @endif
 
                <!-- Show this button after posting a comment -->
-               @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.single')
-                  <a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary px-1 py-0">
+               @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.show')
+                  <a href="{{ route('blog.index') }}" class="btn btn-xs btn-primary">
                      <i class="fas fa-blog"></i> Blog
                   </a>
                @endif
 
                <!-- Only show if coming from the blog print page -->
                @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.print')
-                  <a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary px-1 py-0">
+                  <a href="{{ route('blog.index') }}" class="btn btn-xs btn-primary">
                      <i class="fas fa-blog"></i> Blog
                   </a>
                @endif
 
                <!-- Only show if coming from the blog search page -->
                @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.search')
-                  <a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary px-1 py-0">
+                  <a href="{{ route('blog.index') }}" class="btn btn-xs btn-primary">
                      <i class="fas fa-blog"></i> Blog
                   </a>
-                  <a href="{{ URL::previous() }}" class="btn btn-sm btn-primary px-1 py-0">
+                  <a href="{{ URL::previous() }}" class="btn btn-xs btn-primary">
                      <i class="fas fa-blog"></i> Search
                   </a>
                @endif              
 
                <!-- Only show if coming from the blog archive page -->
                @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.archive')
-                  <a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary px-1 py-0">
+                  <a href="{{ route('blog.index') }}" class="btn btn-xs btn-primary">
                      <i class="fas fa-blog"></i> Blog
                   </a>
-                  <a href="{{ URL::previous() }}" class="btn btn-sm btn-primary px-1 py-0">
+                  <a href="{{ URL::previous() }}" class="btn btn-xs btn-primary">
                      <i class="fas fa-blog"></i> Archive
                   </a>
                @endif

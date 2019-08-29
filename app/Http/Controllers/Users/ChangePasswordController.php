@@ -80,7 +80,4 @@ class ChangePasswordController extends Controller
    }
 
 
-
-
-
 }

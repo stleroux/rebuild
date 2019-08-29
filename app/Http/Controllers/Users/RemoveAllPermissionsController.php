@@ -29,7 +29,6 @@ class RemoveAllPermissionsController extends Controller
             DB::table('permission_user')->where('user_id', '=', $user->id)->delete();
         }
         
-        // return redirect()->back()->with("success","Password changed successfully!");
         Session::flash ('success', 'All permissions successfully removed!');
         return redirect()->route('users.edit', $user->id);
     }

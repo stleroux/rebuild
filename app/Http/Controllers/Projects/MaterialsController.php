@@ -42,9 +42,6 @@ class MaterialsController extends Controller
         }
 
         $material = New Material();
-        // Get all categories
-        // $categories = Category::where('parent_id',12)->get();
-        // dd($categories);
 
         return view('projects.materials.create', compact('material'));
     }
@@ -137,7 +134,7 @@ class MaterialsController extends Controller
         }
 
         $materials = Material::All();
-        // dd($materials);
+
         return view('projects.materials.index', compact('materials'));
     }
 

@@ -54,6 +54,7 @@
 <!-- Scripts -->
    
 	<!-- Optional JavaScript -->
+   @include('scripts.alertTimeout')
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
    <script src="https://www.google.com/recaptcha/api.js"></script>
    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
@@ -68,13 +69,7 @@
 			$('[data-toggle="tooltip"]').tooltip()
 		});
 	</script> --}}
-	<script>
-		$('#success-empty').hide();
-		setTimeout(function() {
-			$('#success-alert').remove();
-			$('#success-empty').show();
-		}, 5000); // <-- time in milliseconds
-	</script>
+
    @yield('scripts')
 	
 </body>

@@ -92,12 +92,9 @@ class ImagesController extends Controller
 ##################################################################################################################
    public function index($id)
    {
-      //dd($id);
-      //$projects = Project::with('Images')->get();
-      // $projects = WoodProject::orderBy('name','asc')->get();
       $project = WoodProject::findOrFail($id);
       $images = WoodProjectImage::where('wood_project_id', $id)->get();
-      //dd($images);
+
       return view('woodProjectImages.index', compact('project','images'));
    }
 
@@ -114,7 +111,7 @@ class ImagesController extends Controller
    public function show($id)
    {
       $image = woodProjectImage::find($id);
-      //dd($image);
+
       return view('woodProjectImages.show', compact('image'));
    }
 
@@ -130,12 +127,6 @@ class ImagesController extends Controller
 ##################################################################################################################
    public function store(Request $request)
    {
-      // $this->validate($request, [
-      //    'ori_name' => 'required',
-      //    'new_name' => 'image|max:1999'
-      // ]);
-
-      //dd($request->input('album_id'));
       // Get the file object
       $file = $request->file('image');
 
@@ -182,10 +173,5 @@ class ImagesController extends Controller
       Session::flash('success','Image uploaded.');
       return redirect('/woodProjectImages/'. $request->input('project_id').'/manageImages');
    }
-
-
-
-
-
 
 }

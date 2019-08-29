@@ -154,22 +154,12 @@ class ProjectsController extends Controller
             if(!checkPerm('projects_edit')) { abort(401, 'Unauthorized Access'); }
         }
 
-        // dd($project);
         $project = Project::with('finishes')->with('materials')->with('images')->find($project->id);
-        // ->get();
-        // dd($project);
 
-        // Get all categories
-        // $categories = Category::where('parent_id',12)->get();
         $materials = Material::all();
-        // dd($materials);
         $finishes = Finish::all();
-        // $images = Image::where('project_id', 3)->get();
-        // dd($images);
 
-        // return view('projects.edit', compact('project','categories','materials'));
         return view('projects.edit', compact('project','finishes','materials'));
-        // return view('projects.edit', compact('project'));
     }
 
 
@@ -197,7 +187,6 @@ class ProjectsController extends Controller
 
         if($filter) {
             if($filter == 1000) {
-                // $projects = Project::with('images')->orderBy('id','desc')->take(5)->paginate(5);
                 $projects = Project::with('images')->orderBy('id','desc')->take(4)->get();
                 return view('projects.index', compact('projects','project'));
             }
@@ -232,8 +221,8 @@ class ProjectsController extends Controller
         // Set the session to the current page route
         Session::put('fromPage', url()->full());
 
-        // $projects = Project::All();
         $projects = Project::with('images')->orderBy('name','asc')->get();
+
         return view('projects.list', compact('projects'));
     }
 
@@ -252,7 +241,6 @@ class ProjectsController extends Controller
         Project::create($this->validateRequest());
 
         return redirect()->route('projects.list');
-        // return redirect('projects.edit', $project);
     }
 
 
@@ -300,29 +288,6 @@ class ProjectsController extends Controller
 
         return redirect()->route('projects.list');
     }
-
-
-##################################################################################################################
-# ███████╗████████╗ ██████╗ ██████╗ ███████╗     ██████╗ ██████╗ ███╗   ███╗███╗   ███╗███████╗███╗   ██╗████████╗
-# ██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗██╔════╝    ██╔════╝██╔═══██╗████╗ ████║████╗ ████║██╔════╝████╗  ██║╚══██╔══╝
-# ███████╗   ██║   ██║   ██║██████╔╝█████╗      ██║     ██║   ██║██╔████╔██║██╔████╔██║█████╗  ██╔██╗ ██║   ██║   
-# ╚════██║   ██║   ██║   ██║██╔══██╗██╔══╝      ██║     ██║   ██║██║╚██╔╝██║██║╚██╔╝██║██╔══╝  ██║╚██╗██║   ██║   
-# ███████║   ██║   ╚██████╔╝██║  ██║███████╗    ╚██████╗╚██████╔╝██║ ╚═╝ ██║██║ ╚═╝ ██║███████╗██║ ╚████║   ██║   
-# ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝     ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝   ╚═╝   
-##################################################################################################################
-    // public function storeComment(CreateCommentRequest $request, $id)
-    // {
-    //     $project = project::find($id);
-
-    //     $comment = new Comment();
-    //         $comment->user_id = Auth::user()->id;
-    //         $comment->comment = $request->comment;
-    //         $project->comments()->save($comment);
-    //     $comment->save();
-
-    //     Session::flash('success', 'Comment added succesfully.');
-    //     return redirect()->route('projects.show', $project->id);
-    // }
 
 
 ##################################################################################################################

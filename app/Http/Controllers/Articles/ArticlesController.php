@@ -60,8 +60,6 @@ class ArticlesController extends Controller
       $article->favorites()->sync([$user], false);
 
       Session::flash ('success','The article was successfully added to your Favorites list!');
-      // Session::flash('backUrl', \Request::fullUrl());
-
       return redirect()->back();
    }
 
@@ -82,7 +80,6 @@ class ArticlesController extends Controller
       $articlelinks = DB::table('articles')
          ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) article_count'))
          ->where('published_at', '<=', Carbon::now())
-         //->where('created_at', '<=', Carbon::now()->subMonth(3))
          ->groupBy('year')
          ->groupBy('month')
          ->orderBy('year', 'desc')
@@ -93,11 +90,6 @@ class ArticlesController extends Controller
          ->whereMonth('created_at','=', $month)
          ->where('published_at', '<=', Carbon::now())
          ->get();
-
-      // Set the variable so we can use a button in other pages to come back to this page
-      // Session::flash('archiveUrl', \Request::fullUrl());
-      //Session::put('archiveUrl', \Request::fullUrl());
-      //Session::flush('archiveUrl');
 
       return view('articles.archive', compact('archives','articlelinks'))->withYear($year)->withMonth($month);
    }
@@ -114,9 +106,6 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function create()
    {
-      // if(!checkACL('author')) {
-      //     return view('errors.403');
-      // }
 
       // Set the variable so we can use a button in other pages to come back to this page
       if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'articles.index') {
@@ -141,22 +130,8 @@ class ArticlesController extends Controller
          Session::put('backURL', 'articles.trashed');
       }
 
-      // find all categories in the categories table and pass them to the view
-      // $categories = Category::whereHas('module', function ($query) {
-      //    $query->where('name', '=', 'articles');
-      // })->orderBy('name','asc')->get();
-
       $categories = Category::where('parent_id',11)->get();
 
-      // Create an empty array to store the categories
-      // $cats = [];
-
-      // Store the category values into the $cats array
-      // foreach ($categories as $category) {
-      //    $cats[$category->id] = $category->name;
-      // }
-
-      // return view('articles.create')->withCategories($cats);
       return view('articles.create', compact('categories'));
    }
 
@@ -172,24 +147,15 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function deleteAll(Request $request)
    {
-      // Pass along the ROUTE value of the previous page
-      //$ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
-
-      //dd('TEST_DELETE');
       $this->validate($request, [
          'checked' => 'required',
       ]);
-      //dd('TEST_DELETE');
 
       $checked = $request->input('checked');
-      //dd($checked);
 
-      // $article = Article::withTrashed()->findOrFail($checked);
-      //Article::destroy($checked);
       Article::whereIn('id', $checked)->forceDelete();
 
       Session::flash('success','The selected articles were deleted successfully.');
-      //return redirect()->route($ref);
       return redirect()->back();
    }
 
@@ -205,12 +171,8 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public static function deleteTrashed($id)
    {
-      // if(!checkACL('manager')) {
-         // return view('errors.403');
-      // }
-      //dd($id);
       $article = Article::withTrashed()->findorFail($id);
-      //dd($article);
+
       $article->forceDelete();
 
       Session::flash ('success','The article was deleted successfully.');
@@ -230,35 +192,17 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function destroy($id)
    {
-      // if(!checkACL('author')) {
-      //     return view('errors.403');
-      // }
-
-      // Pass along the ROUTE value of the previous page
-      //$ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
-
       $article = Article::findOrFail($id);
          $article->published_at = Null;
             // Delete related favorites
             $favorites = DB::select('select * from article_user where article_id = '. $id, [1]);
-            //dd($favorites);
-              foreach($favorites as $favorite) {
-               $article->favorites()->detach($favorite);
-              }
+               foreach($favorites as $favorite) {
+                  $article->favorites()->detach($favorite);
+               }
          $article->save();
       $article->delete();
 
-      // Save entry to log file using built-in Monolog
-      //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") DELETED article (" . $article->id . ")\r\n",
-      //    [json_decode($article, true)]
-      //);
-
       Session::flash('success','The article was trashed successfully.');
-      //return redirect()->route($ref);
-      //return redirect()->route($request->ref);
-      //return redirect()->route('backend.articles.index');
-      //return redirect()->back();
-      //return redirect()->route('articles.index');
       return redirect(Route( Session::get('backURL')));
    }
 
@@ -273,10 +217,6 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function downloadExcel($type)
    {
-      if(!checkACL('manager')) {
-         return view('errors.403');
-      }
-
       if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'articles.index') {
             $data = Article::published()->get()->toArray();
       }
@@ -295,19 +235,6 @@ class ArticlesController extends Controller
       if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'articles.trashed') {
             $data = Article::trashedCount()->get()->toArray();
       }
-
-      // $referrer = request()->headers->get('referer');
-      // //dd($referrer);
-      // if ($referrer == 'http://localhost:8000/backend/articles/myArticles') {
-      //    $data = Article::myArticles()->get()->toArray();
-      // } elseif ($referrer == 'http://localhost:8000/backend/articles/published'){
-      //    $data = Article::published()->get()->toArray();
-      // } else {
-      //    $data = Article::get()->toArray();
-      // }
-
-      // Save entry to log file of failure
-      //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") downloaded :: articles");
 
 
       return Excel::create('Articles_List', function($excel) use ($data) {
@@ -330,12 +257,6 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function duplicate($id)
    {
-      //if(!checkACL('manager')) {
-      //  // Save entry to log file of failure
-      //  Log::warning(Auth::user()->username . " (" . Auth::user()->id . ") tried to access :: Articles / Duplicate");
-      //  return view('errors.403');
-      //}
-
       // Pass along the ROUTE value of the previous page
       $ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
 
@@ -344,18 +265,8 @@ class ArticlesController extends Controller
         $newArticle->user_id = Auth::user()->id;
       $newArticle->save();
 
-      // change the user_id field to be that of the user that is currently logged in
-      
-      //$newArticle->views = 0;
-      //$newArticle->save();
-
-      // Save entry to log file using built-in Monolog
-      //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") duplicated :: article " . $article->id . " to article ". $newArticle->id);
-
       Session::flash ('success','The article was duplicated successfully!');
-      //return redirect()->route($ref);
       return redirect()->back();
-
    }
 
 
@@ -370,10 +281,6 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function edit($id)
    {
-      if(!checkACL('author')) {
-         return view('errors.403');
-      }
-
       // Find the article to edit
       $article = Article::findOrFail($id);
 
@@ -404,21 +311,15 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function future(Request $request, $key=null)
    {
-      if(!checkACL('publisher')) {
-         return view('errors.403');
-      }
-
       // Set the variable so we can use a button in other pages to come back to this page
       Session::put('backURL', Route::currentRouteName());
 
       //$alphas = range('A', 'Z');
       $alphas = DB::table('articles')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
-         // ->where('personal', '!=', 1)
          ->where('published_at','>', Carbon::Now())
          ->orderBy('letter')
          ->get();
-         //dd($alphas);
 
       $letters = [];
       foreach($alphas as $alpha) {
@@ -451,15 +352,8 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function import()
    {
-      if(!checkACL('manager')) {
-         return view('errors.403');
-      }
-
       // Pass along the ROUTE value of the previous page
       $ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
-
-      // Save entry to log file of failure
-      //Log::warning(Auth::user()->username . " (" . Auth::user()->id . ") accessed :: Articles / Import");
 
       return view('articles.import')->withRef($ref);
    }
@@ -475,12 +369,6 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function importExcel()
    {
-      // if(!checkACL('manager')) {
-      //   // Save entry to log file of failure
-      //   Log::warning(Auth::user()->username . " (" . Auth::user()->id . ") tried to access :: Admin / Articles / Import");
-      //   return view('errors.403');
-      // }
-
       if(Input::hasFile('import_file')) {
             $path = Input::file('import_file')->getRealPath();
             $data = Excel::load($path, function($reader) {
@@ -528,12 +416,6 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function index(Request $request, $key=null)
    {
-      // if(!checkACL('guest')) {
-      //     return view('errors.403');
-      // }
-
-      //dd($key);
-
       // Set the variable so we can use a button in other pages to come back to this page
       Session::put('backURL', Route::currentRouteName());
       
@@ -542,14 +424,12 @@ class ArticlesController extends Controller
       $articlelinks = DB::table('articles')
          ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) article_count'))
          ->where('published_at', '<=', Carbon::now())
-         //->where('created_at', '<=', Carbon::now()->subMonth(3))
          ->groupBy('year')->groupBy('month')->orderBy('year', 'desc')->orderBy('month', 'desc')->get();
 
       //$alphas = range('A', 'Z');
       $alphas = DB::table('articles')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
          ->where('published_at','<', Carbon::Now())
-         //->where('deleted_at', '=', Null)
          ->orderBy('letter')
          ->get();
 
@@ -557,7 +437,6 @@ class ArticlesController extends Controller
       foreach($alphas as $alpha) {
          $letters[] = $alpha->letter;
       }
-      //dd($letters);
 
       // If $key value is passed
       if ($key) {
@@ -565,13 +444,11 @@ class ArticlesController extends Controller
             ->where('title', 'like', $key . '%')
             ->orderBy('title', 'asc')
             ->get();
-         //dd($articles);
          return view('articles.index', compact('articles','letters', 'articlelinks'));
       }
 
       // No $key value is passed
       $articles = Article::with('user','category')->published()->get();
-      //dd($articles);
       return view('articles.index', compact('articles','letters', 'articlelinks'));
    }
 
@@ -586,18 +463,11 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function makeprivate($id)
    {
-      // Pass along the ROUTE value of the previous page
-      //$ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
-
       $article = Article::find($id);
          $article->personal = 1;
       $article->save();
 
-      // Save entry to log file using built-in Monolog
-      //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") MADE recipe (" . $recipe->id . ") PRIVATE \r\n", [json_decode($recipe, true)]);
-
       Session::flash('success','The article was made private successfully');
-      //return redirect()->route($ref);
       return redirect()->back();
    }
 
@@ -613,10 +483,6 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function myArticles(Request $request, $key=null)
    {
-      if(!checkACL('author')) {
-         return view('errors.403');
-      }
-
       // Set the variable so we can use a button in other pages to come back to this page
       Session::put('backURL', Route::currentRouteName());
 
@@ -624,12 +490,9 @@ class ArticlesController extends Controller
       $alphas = DB::table('articles')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
          ->where('user_id', '=', Auth::user()->id)
-         // ->where('personal', '!=', 1)
-         // ->where('published_at','!=', null)
          ->where('deleted_at', '=', NULL)
          ->orderBy('letter')
          ->get();
-      //dd($alphas);
 
       $letters = [];
       foreach($alphas as $alpha) {
@@ -660,51 +523,26 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function myFavorites()
    {
-
-      if(!checkACL('user')) {
-         return view('errors.403');
-      }
-
       // Set the variable so we can use a button in other pages to come back to this page
       Session::put('backURL', Route::currentRouteName());
 
-      // $alphas = DB::table('recipes')
-      //   ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
-      //   //->where('user_id','=',Auth::user()->id)
-      //   ->where('user_id','=',-1)
-      //   ->orderBy('letter')
-      //   ->get();
-      // //dd($alphas);
-
-      //$letters = [];
-      //   foreach($alphas as $alpha) {
-      //     $letters[] = $alpha->letter;
-      //   }
-      // //dd($letters);
-
       // find the favorites
       $favs = DB::table('article_user')->where('user_id','=',Auth::user()->id)->get();
-      //dd($favs);
-      //$favs = Recipe::with('user','category')->where('recipe_user.user_id','=',Auth::user()->id)->get();
-      //$recipes = Recipe::with('user','category')->where('user_id','=', Auth::user()->id)->orderBy('title', 'asc')->get();
 
-      // // Create an empty array to store the recipes        
+      // Create an empty array to store the recipes        
       $articles = [];
 
-      // // Store the recipe values into the $recipes array
+      // Store the recipe values into the $recipes array
       foreach ($favs as $fav)
       {
         $articles[$fav->id] = Article::with('user','category')->find($fav->article_id);
       }
-      //dd($articles);
-      // // Sort the recipes array by title
+      
+      // Sort the recipes array by title
       $articles = array_values(array_sort($articles, function ($value) {
          return $value['title'];
       }));
-      //dd($articles);
-      // return view('recipes.viewfavorites')->withRecipes($recipes);
-      //return view('recipes.myFavorites', compact('recipes','letters'));
-      //return view('recipes.index', compact('recipes','letters'));
+      
       return view('articles.myFavorites', compact('articles'));
    }
 
@@ -720,10 +558,6 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function newArticles(Request $request, $key=null)
    {
-      if(!checkACL('user')) {
-         return view('errors.403');
-      }
-
       // Set the variable so we can use a button in other pages to come back to this page
       Session::put('backURL', Route::currentRouteName());
 
@@ -731,12 +565,8 @@ class ArticlesController extends Controller
       $alphas = DB::table('articles')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
          ->where('created_at', '>=' , Auth::user()->last_login_date)
-         //->where('user_id', '=', Auth::user()->id)
-         // ->where('personal', '!=', 1)
-         // ->where('published_at','!=', null)
          ->orderBy('letter')
          ->get();
-      //dd($alphas);
 
       $letters = [];
       foreach($alphas as $alpha) {
@@ -833,16 +663,7 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function print($id)
    {
-      if(!checkACL('author')) {
-         return view('errors.403');
-      }
-
       $article = Article::find($id);
-
-      // Save entry to log file using built-in Monolog
-      // Log::info(Auth::user()->username . " (" . Auth::user()->id . ") PRINTED article (" . $article->id . ")\r\n", 
-      //    [json_decode($article, true)]
-      // );
 
       return view('articles.print')->withArticle($article);
    }
@@ -858,22 +679,13 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function publish($id)
    {
-      // Pass along the ROUTE value of the previous page
-      //$ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
-
       $article = Article::withTrashed()->find($id);
-      //dd($id);
-         //dd($article);
-        //$article->published = 1;
         $article->published_at = Carbon::now();
         $article->deleted_at = Null;
       $article->save();
 
       Session::flash ('success','The article was published successfully!');
-      // return redirect()->route($ref);
       return redirect()->back();
-      // return redirect()->route('articles.trashed');
-
    }
 
 
@@ -887,10 +699,6 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function published(Request $request, $key=null)
    {
-      // if(!checkACL('user')) {
-      //    return view('errors.403');
-      // }
-
       //$alphas = range('A', 'Z');
         $alphas = DB::table('articles')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
@@ -929,9 +737,6 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function publishAll(Request $request)
    {
-      // Pass along the ROUTE value of the previous page
-      //$ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
-
       $this->validate($request, [
          'checked' => 'required',
       ]);
@@ -946,7 +751,6 @@ class ArticlesController extends Controller
       }
 
       Session::flash('success','The selected articles were published successfully.');
-      //return redirect()->route($ref);
       return redirect()->back();
    }
 
@@ -961,20 +765,13 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function removefavorite($id)
    {
-      // Pass along the ROUTE value of the previous page
-      //$ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
-
       $user = Auth::user()->id;
       $article = Article::find($id);
 
       $article->favorites()->detach($user);
 
       Session::flash ('success','The article was successfully removed to your Favorites list!');
-      // return redirect()->route('recipes.index','all');
-      // return redirect()->route('.articles.myFavorites');
-      //return redirect()->route($ref, $article->id);
       return redirect()->back();
-
    }
 
 
@@ -988,20 +785,11 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function removeprivate($id)
    {
-      // Pass along the ROUTE value of the previous page
-      //$ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
-
       $article = Article::find($id);
          $article->personal = 0;
       $article->save();
 
-      // Save entry to log file using built-in Monolog
-      //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") REMOVE PRIVATE from recipe (" . $recipe->id . ")\r\n", 
-      //    [json_decode($recipe, true)]
-      //);
-
       Session::flash('success','The article was removed from private successfully');
-      //return redirect()->route($ref);
       return redirect()->back();
    }
 
@@ -1017,18 +805,11 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function resetViews($id)
    {
-      // Pass along the ROUTE value of the previous page
-      //$ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
-
       $article = Article::find($id);
          $article->views = 0;
       $article->save();
 
-      // Save entry to log file using built-in Monolog
-      //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") MADE recipe (" . $recipe->id . ") PRIVATE \r\n", [json_decode($recipe, true)]);
-
       Session::flash('success','The article\'s views count was reset to 0.');
-      // return redirect()->route($ref);
       return redirect()->back();
    }
 
@@ -1046,14 +827,9 @@ class ArticlesController extends Controller
    {
       $article = Article::withTrashed()->findOrFail($id);
 
-      //$article->deleted_at = NULL;
-      //$article->save();
       $article->restore();
 
       Session::flash ('success','The article was successfully restored.');
-      //return redirect()->route('backend.articles.trashed');
-      // return redirect()->route('articles.trashed');
-      // return redirect()->back();
       return redirect()->route('articles.trashed');
    }
 
@@ -1069,18 +845,8 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function restoreAll(Request $request)
    {
-      //dd('TEST_RESTORE');
-      //dd($request);
-      //$this->validate($request, [
-      //    'checked' => 'required',
-      //]);
-      //dd('TEST_RESTORE');
-
       $checked = $request->input('checked');
-      //dd($checked);
 
-      // $article = new Article();
-      // $article->restore($checked);
       Article::whereIn('id', $checked)->restore();
 
       Session::flash('success','The selected articles were restored successfully.');
@@ -1099,15 +865,6 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function show($id)
    {
-      // if(!checkACL('guest')) {
-      //     return view('errors.403');
-      // }
-
-      // Set the variable so we can use a button in other pages to come back to this page
-      //Session::put('backURL', Route::currentRouteName());
-      // Save the URL in a varibale so it can be used in the blog.single page to redirect the user to the archives list page
-      // Session::put('backUrl', \Request::fullUrl());
-
       $article = Article::findOrFail($id);
 
       // get previous article id
@@ -1123,19 +880,11 @@ class ArticlesController extends Controller
       $articlelinks = DB::table('articles')
          ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) article_count'))
          ->where('published_at', '<=', Carbon::now())
-         //->where('created_at', '<=', Carbon::now()->subMonth(3))
          ->groupBy('year')
          ->groupBy('month')
          ->orderBy('year', 'desc')
          ->orderBy('month', 'desc')
          ->get();
-
-      // Save entry to log file using built-in Monolog
-      // if (Auth::check()) {
-      //     Log::info(Auth::user()->username . " (" . Auth::user()->id . ") VIEWED article (" . $article->id . ")");
-      // } else {
-      //     Log::info('Guest viewed article (' . $article->id) . ')';
-      // }
 
       return view('articles.show', compact('article','articlelinks','next','previous'));
    }
@@ -1152,38 +901,7 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function showTrashed($id)
    {
-      // if(!checkACL('guest')) {
-      //     return view('errors.403');
-      // }
-
       $article = Article::withTrashed()->findOrFail($id);
-
-      // get previous article id
-      //$previous = Article::published()->where('id', '<', $article->id)->max('id');
-
-      // get next article id
-      //$next = Article::published()->where('id', '>', $article->id)->min('id');
-
-      // Add 1 to views column
-      //DB::table('articles')->where('id','=',$article->id)->increment('views',1);
-
-      // Get list of articles by year and month
-      // $articlelinks = DB::table('articles')
-      //    ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) article_count'))
-      //    ->where('published_at', '<=', Carbon::now())
-         //->where('created_at', '<=', Carbon::now()->subMonth(3))
-         // ->groupBy('year')
-         // ->groupBy('month')
-         // ->orderBy('year', 'desc')
-         // ->orderBy('month', 'desc')
-         // ->get();
-
-      // Save entry to log file using built-in Monolog
-      // if (Auth::check()) {
-      //     Log::info(Auth::user()->username . " (" . Auth::user()->id . ") VIEWED article (" . $article->id . ")");
-      // } else {
-      //     Log::info('Guest viewed article (' . $article->id) . ')';
-      // }
 
       return view('articles.showTrashed', compact('article'));
    }
@@ -1200,10 +918,6 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function store(CreateArticleRequest $request)
    {
-      // if(!checkACL('author')) {
-      //     return view('errors.403');
-      // }
-
       $article = new Article;
          $article->title             = $request->title;
          $article->category_id       = $request->category_id;
@@ -1213,12 +927,7 @@ class ArticlesController extends Controller
          $article->user_id           = Auth::user()->id;
       $article->save();
 
-      // Save entry to log file using built-in Monolog
-      //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") CREATED article (" . $article->id . ")\r\n", [json_decode($article, true)]
-      //);
-
       Session::flash('success','The article has been created successfully!');
-      // return redirect()->route($request->ref);
       return redirect()->route('articles.index');
    }
 
@@ -1233,20 +942,12 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function storeComment(CreateCommentRequest $request, $id)
    {
-
       $article = Article::find($id);
 
       $comment = new Comment();
          $comment->user_id = Auth::user()->id;
          $comment->comment = $request->comment;
       $article->comments()->save($comment);
-
-      // Save entry to log file using built-in Monolog
-      // if (Auth::check()) {
-      //     Log::info(Auth::user()->username . " (" . Auth::user()->id . ") commented on post (" . $post->id . ")\r\n", [json_decode($comment, true)]);
-      // } else {
-      //     Log::info(Request::ip() . " commented on post " . $post->id);
-      // }
 
       Session::flash('success', 'Comment added succesfully.');
       return redirect()->route('articles.show', $article->id);
@@ -1264,15 +965,11 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function trashed(Request $request)
    {
-      // if(!checkACL('manager')) {
-      //    return view('errors.403');
-      // }
-
       // Set the variable so we can use a button in other pages to come back to this page
       Session::put('backURL', Route::currentRouteName());
 
       $articles = Article::with('user','category')->onlyTrashed()->get();
-      //dd($articles);
+
       return view('articles.trashed', compact('articles'));
    }
 
@@ -1289,27 +986,21 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function trashAll(Request $request)
    {
-      // Pass along the ROUTE value of the previous page
-      //$ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
-
       $this->validate($request, [
          'checked' => 'required',
       ]);
 
       $checked = $request->input('checked');
-      //dd($checked);
 
       foreach($checked as $article) {
          $article = Article::findOrFail($article);
          $article->published_at = Null;
          $article->save();
-         //dd($article);
       }
 
       Article::destroy($checked);
 
       Session::flash('success','The selected articles were trashed successfully.');
-      //return redirect()->route($ref);
       return redirect()->back();
    }
 
@@ -1324,24 +1015,17 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function unpublish($id)
    {
-   // Pass along the ROUTE value of the previous page
-   //$ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
+      $article = Article::find($id);
+         $article->published_at = NULL;
+         $favorites = DB::select('select * from article_user where article_id = '. $id, [1]);
 
-   $article = Article::find($id);
-      $article->published_at = NULL;
-      // $article->favoriteArticles()->delete(); // Remove associated rows from article_user (favorites table)
-     
-      $favorites = DB::select('select * from article_user where article_id = '. $id, [1]);
-      //dd ($favorites);
-      foreach($favorites as $favorite) {
-         //dd($favorite);
-         $article->favorites()->detach($favorite);
-      }
+         foreach($favorites as $favorite) {
+            $article->favorites()->detach($favorite);
+         }
 
       $article->save();
 
       Session::flash ('success','The article was successfully unpublished');
-      // return redirect()->route($ref);
       return redirect()->back();
    }
 
@@ -1367,12 +1051,10 @@ class ArticlesController extends Controller
       //$alphas = range('A', 'Z');
         $alphas = DB::table('articles')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
-         // ->where('personal', '!=', 1)
          ->where('published_at','=', null)
          ->where('deleted_at','=', null)
          ->orderBy('letter')
          ->get();
-         //dd($alphas);
 
       $letters = [];
       foreach($alphas as $alpha) {
@@ -1404,9 +1086,6 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function unpublishAll(Request $request)
    {
-      // Pass along the ROUTE value of the previous page
-      //$ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
-
       $this->validate($request, [
          'checked' => 'required',
       ]);
@@ -1414,7 +1093,6 @@ class ArticlesController extends Controller
       $checked = $request->input('checked');
 
       foreach ($checked as $item) {
-         //dd($item);
          $article = Article::withTrashed()->find($item);
             $article->published_at = Null;
 
@@ -1423,12 +1101,12 @@ class ArticlesController extends Controller
                foreach($favorites as $favorite) {
                   $article->favorites()->detach($favorite);
                }
+
          $article->save();
       }
       
 
       Session::flash('success','The selected articles were unpublished successfully.');
-      //return redirect()->route($ref);
       return redirect()->back();
    }
 
@@ -1453,11 +1131,6 @@ class ArticlesController extends Controller
          $article->description_fre   = $request->description_fre;
       $article->save();
       
-      // Save entry to log file using built-in Monolog
-      //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") UPDATED article (" . $article->id . ")\r\n",
-      //    [json_decode($article, true)]
-      //);
-
       Session::flash('success','The article has been updated successfully.');
       return redirect()->route('articles.show', $article);
    }

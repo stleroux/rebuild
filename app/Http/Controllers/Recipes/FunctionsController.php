@@ -123,7 +123,6 @@ class FunctionsController extends RecipesController
       $recipe->addFavorite();
 
       Session::flash ('success','The recipe was successfully added to your Favorites list!');
-      // return redirect()->route('recipes.'. Session::get('pageName'));
       return redirect()->back();
    }
 
@@ -147,7 +146,6 @@ class FunctionsController extends RecipesController
       $recipe->removeFavorite();
 
       Session::flash ('success','The recipe was successfully removed to your Favorites list!');
-      // return redirect()->route('recipes.'. Session::get('pageName'));
       return redirect()->back();
    }
 
@@ -192,9 +190,7 @@ class FunctionsController extends RecipesController
          $recipes = Recipe::orderBy('title', 'asc')->get();
       } else {
          $cCat = Category::where('name', $category)->pluck('id');
-         // dd($cName);
          $sCats = Category::where('parent_id', $cCat)->pluck('id');
-         // dd($sCats);
 
          if($sCats->count() <= 0){
             $recipes = Recipe::where('category_id', $cCat)->orderBy('title', 'asc')->get();
@@ -205,7 +201,6 @@ class FunctionsController extends RecipesController
 
       return view('recipes.printAll', compact('recipes'));
    }
-
 
 
 ##################################################################################################################
@@ -273,7 +268,6 @@ return $pdf->download('generatepdf.pdf');
       }
 
       $recipe->personal = 1;
-      // $recipe->published_at = '';
       $recipe->save();
 
       // Delete this recipe's favorites
@@ -302,7 +296,6 @@ return $pdf->download('generatepdf.pdf');
       }
 
       $recipe->personal = 0;
-      // $recipe->published_at = Carbon::now();
       $recipe->save();
 
       Session::flash('success','The recipe was successfully made public');
@@ -327,8 +320,8 @@ return $pdf->download('generatepdf.pdf');
          if(!checkPerm('recipe_publish', $recipe)) { abort(401, 'Unauthorized Access'); }
       }
 
-      $recipe->published_at = Carbon::now();
-      $recipe->deleted_at = Null;
+         $recipe->published_at = Carbon::now();
+         $recipe->deleted_at = Null;
       $recipe->save();
 
       Session::flash ('success','The recipe was successfully published.');
@@ -518,7 +511,6 @@ return $pdf->download('generatepdf.pdf');
       Recipe::destroy($checked);
 
       Session::flash('success','The recipes were trashed successfully.');
-      // return redirect()->route('recipes.'. Session::get('pageName'));
       return redirect()->back();
    }
 
@@ -548,7 +540,6 @@ return $pdf->download('generatepdf.pdf');
       $recipe->delete();
 
       Session::flash('success', 'The recipe was successfully deleted!');
-      // return redirect()->route('recipes.'. Session::get('pageName'));
       return redirect()->back();
    }
 
@@ -570,9 +561,9 @@ return $pdf->download('generatepdf.pdf');
          if(!checkPerm('recipe_publish', $recipe)) { abort(401, 'Unauthorized Access'); }
       }
 
-      $recipe->published_at = NULL;
-      // Delete this recipe's favorites
-      DB::table('favorites')->where('favoriteable_id', '=', $recipe->id)->delete();
+         $recipe->published_at = NULL;
+         // Delete this recipe's favorites
+         DB::table('favorites')->where('favoriteable_id', '=', $recipe->id)->delete();
       $recipe->save();
 
       Session::flash ('success','The recipe was successfully unpublished.');
@@ -612,14 +603,6 @@ return $pdf->download('generatepdf.pdf');
       Session::flash('success','The recipes were unpublished successfully.');
       return redirect()->route('recipes.'. Session::get('pageName'));
    }
-
-
-
-
-
-
-
-
 
 
 }

@@ -12,8 +12,6 @@ use Auth;
 use Session;
 use App\Models\User;
 
-// use App\Http\Requests\UpdateProfileAccountRequest;
-
 class ResetPasswordController extends Controller
 {
 
@@ -89,10 +87,9 @@ class ResetPasswordController extends Controller
           $user->password = bcrypt($request->get('new-password'));
       $user->save();
       
-      // return redirect()->back()->with("success","Password changed successfully!");
       Session::flash ('success', 'Password changed successfully!');
       return redirect()->route('profile.show', $user->id);
-      // return redirect()->route('home');
    }
+
 
 }
