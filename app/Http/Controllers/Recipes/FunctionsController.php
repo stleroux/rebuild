@@ -448,7 +448,7 @@ return $pdf->download('generatepdf.pdf');
    {
       // Check if user has required permission
       if($this->enablePermissions) {
-         if(!checkPerm('comment_store')) { abort(401, 'Unauthorized Access'); }
+         if(!checkPerm('comment_create')) { abort(401, 'Unauthorized Access'); }
       }
 
       $recipe = Recipe::find($id);
@@ -539,8 +539,11 @@ return $pdf->download('generatepdf.pdf');
       // Delete the recipe
       $recipe->delete();
 
-      Session::flash('success', 'The recipe was successfully deleted!');
-      return redirect()->back();
+      Session::flash('success', 'The recipe was successfully trashed!');
+      // return redirect()->back();
+      // return redirect()->route('recipes.'. Session::get('pageName'));
+      // return redirect()->route(Session::get('fromPage'));
+      return redirect(Session::get('fromPage'));
    }
 
 

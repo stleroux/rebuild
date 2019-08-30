@@ -1,7 +1,27 @@
 <div class="row">
    <div class="col-2">
       <div class="nav flex-column nav-tabs" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-         <a class="nav-link py-1 px-2 active"
+@foreach ($groups as $g=>$a)
+   @if($loop->first)
+      @php
+         $class = "nav-link py-1 px-2 active";
+      @endphp
+   @else
+      @php
+         $class = "nav-link py-1 px-2";
+      @endphp
+   @endif
+   <a class="{{ $class }}"
+      id="v-pills-{{ $a->model }}-tab"
+      data-toggle="tab"
+      href="#v-pills-{{ $g->model }}"
+      role="tab"
+      aria-controls="v-pills-{{ $g->model }}"
+      aria-selected="false">
+      {{ ucwords($g->model) }}
+   </a>
+@endforeach
+         {{-- <a class="nav-link py-1 px-2 active"
             id="v-pills-home-tab"
             data-toggle="tab"
             href="#v-pills-home"
@@ -36,19 +56,33 @@
             aria-controls="v-pills-settings"
             aria-selected="false">
             Settings
-         </a>
+         </a> --}}
       </div>
    </div>
    <div class="col-9">
       <div class="tab-content" id="v-pills-tabContent">
-         <div
-            class="tab-pane fade show active"
-            id="v-pills-home"
-            role="tabpanel"
-            aria-labelledby="v-pills-home-tab">
-            Home
-         </div>
-         <div
+         @foreach($models as $m)
+            @if($loop->first)
+               @php
+                  $class = "tab-pane fade show active";
+               @endphp
+            @else
+               @php
+                  $class = "tab-pane fade";
+               @endphp
+            @endif
+            <div
+               class="{{ $class }}"
+               id="v-pills-{{ $m->model }}"
+               role="tabpanel"
+               aria-labelledby="v-pills-{{ $m->model }}-tab">
+               {{-- {{ ucwords($m->model) }} --}}
+               @foreach($permissions as $p)
+                  <li>{{ $p->name }}</li>
+               @endforeach
+            </div>
+         @endforeach
+         {{-- <div
             class="tab-pane fade"
             id="v-pills-profile"
             role="tabpanel"
@@ -68,7 +102,7 @@
             role="tabpanel"
             aria-labelledby="v-pills-settings-tab">
             Settings
-         </div>
+         </div> --}}
       </div>
    </div>
 </div>

@@ -168,7 +168,7 @@ class BlogController extends Controller
 	public function storeComment(CreateCommentRequest $request, $id)
 	{
 		// Check if user has required permission
-      if(!checkPerm('comment_store')) { abort(401, 'Unauthorized Access'); }
+      if(!checkPerm('comment_create')) { abort(401, 'Unauthorized Access'); }
 
 		$post = Post::find($id);
 

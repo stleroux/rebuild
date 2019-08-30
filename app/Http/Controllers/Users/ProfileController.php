@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Users;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
-use DB;
 use Session;
 use App\Models\User;
 use Image;
@@ -134,16 +133,10 @@ class ProfileController extends Controller
          if(!checkPerm('profile_show', $user)) { abort(401, 'Unauthorized Access'); }
       }
 
-      // Get the permissions currently assigned to this user
-      $userPermissions = DB::table("permission_user")
-         ->where("permission_user.user_id",$id)
-         ->pluck('permission_user.permission_id','permission_user.permission_id')
-         ->all();
-
       // Set the session to the current page route
       Session::put('fromPage', url()->full());
 
-      return view('users.profile.show', compact('user','userPermissions')); // ->withLandingPages($landingPages);
+      return view('users.profile.show', compact('user')); // ->withLandingPages($landingPages);
    }
 
 

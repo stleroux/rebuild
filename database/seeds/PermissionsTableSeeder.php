@@ -647,8 +647,8 @@ class PermissionsTableSeeder extends Seeder
             57 => 
             array (
                 'id' => 65,
-                'name' => 'comment_store',
-                'display_name' => 'Store',
+                'name' => 'comment_create',
+                'display_name' => 'Create',
                 'model' => 'comment',
                 'type' => 3,
                 'description' => 'add comments to items on the site',
