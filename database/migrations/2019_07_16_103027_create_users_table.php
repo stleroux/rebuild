@@ -45,7 +45,8 @@ class CreateUsersTable extends Migration {
 			$table->integer('alert_fade_time')->unsigned()->default(5000);
 			$table->integer('layout')->unsigned()->default(1);
 			$table->string('remember_token', 100)->nullable();
-			$table->dateTime('last_login_date');
+			$table->dateTime('previous_login_date')->nullable();
+			$table->dateTime('last_login_date')->nullable();
 			$table->integer('login_count')->unsigned()->default(0);
 			$table->dateTime('email_verified_at')->nullable();
 			$table->timestamps();

@@ -56,7 +56,7 @@ class PostsController extends Controller
 	public function create()
 	{
 		// Check if user has required permission
-		if(!checkPerm('post_create')) { abort(401, 'Unauthorized Access'); }
+		if(!checkPerm('post_add')) { abort(401, 'Unauthorized Access'); }
 
 		// Get all categories related to Posts Category
 		$cats = Category::where('name','posts')->first();

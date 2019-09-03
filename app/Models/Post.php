@@ -93,7 +93,7 @@ class Post extends Model
    public function scopeNewPosts($query)
    {
       return $query
-         ->where('created_at', '>=' , Auth::user()->last_login_date)
+         ->where('created_at', '>=' , Auth::user()->previous_login_date)
          ->orderBy('title','DESC');
    }
 
@@ -118,7 +118,7 @@ class Post extends Model
    public function scopeNewPostsCount($query)
    {
       return $query
-         ->where('created_at', '>=' , Auth::user()->last_login_date);
+         ->where('created_at', '>=' , Auth::user()->previous_login_date);
    }
 
    public function scopeTrashedCount($query)
