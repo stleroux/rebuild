@@ -75,19 +75,52 @@ class UsersController extends Controller
 		$user = new User();
 
 		// Get permissions of groups identified as module
-		$moduleGroups = Permission::select('model')->distinct()->where('type',3)->orderBy('model','asc')->get();
-		$modulePermissions = Permission::whereIn('model', $moduleGroups)->orderBy('model')->orderBy('display_name')->get();
+		$moduleGroups = Permission::select('model')
+         ->distinct()
+         ->where('type',3)
+         ->orderBy('model','asc')
+         ->get();
+		$modulePermissions = Permission::whereIn('model', $moduleGroups)
+         ->orderBy('model')
+         ->orderBy('display_name')
+         ->get();
 		$moduleGroups = $modulePermissions->groupBy('model');
 		
 		// Get permissions of groups identified as core
-		$coreGroups = Permission::select('model')->distinct()->where('type',2)->orderBy('model','asc')->get();
-		$corePermissions = Permission::whereIn('model', $coreGroups)->orderBy('model')->orderBy('display_name')->get();
+		$coreGroups = Permission::select('model')
+         ->distinct()
+         ->where('type',2)
+         ->orderBy('model','asc')
+         ->get();
+		$corePermissions = Permission::whereIn('model', $coreGroups)
+         ->orderBy('model')
+         ->orderBy('display_name')
+         ->get();
 		$coreGroups = $corePermissions->groupBy('model');
 
 		// Get permissions of groups identified as NON core
-		$nonCoreGroups = Permission::select('model')->distinct()->where('type',1)->orderBy('model','asc')->get();
-		$nonCorePermissions = Permission::whereIn('model', $nonCoreGroups)->orderBy('model')->orderBy('display_name')->get();
+		$nonCoreGroups = Permission::select('model')
+         ->distinct()
+         ->where('type',1)
+         ->orderBy('model','asc')
+         ->get();
+		$nonCorePermissions = Permission::whereIn('model', $nonCoreGroups)
+         ->orderBy('model')
+         ->orderBy('display_name')
+         ->get();
 		$nonCoreGroups = $nonCorePermissions->groupBy('model');
+
+
+      // Get all permissions of groups
+      $groups = Permission::select('model')
+         ->distinct()
+         ->orderBy('model','asc')
+         ->get();
+      $permissions = Permission::whereIn('model', $groups)
+         ->orderBy('model')
+         ->orderBy('display_name')
+         ->get();
+      $groups = $permissions->groupBy('model');
 
 		return view('users.create',
          compact(
@@ -97,7 +130,9 @@ class UsersController extends Controller
             'coreGroups',
             'nonCorePermissions',
             'nonCoreGroups',
-            'user'
+            'user',
+            'groups',
+            'permissions'
          )
       );
 	}
@@ -208,6 +243,19 @@ class UsersController extends Controller
          ->get();
 		$nonCoreGroups = $nonCorePermissions->groupBy('model');
 
+
+      // Get all permissions
+      $groups = Permission::select('model')
+         ->distinct()
+         // ->where('type',1)
+         ->orderBy('model','asc')
+         ->get();
+      $permissions = Permission::whereIn('model', $groups)
+         ->orderBy('model')
+         ->orderBy('display_name')
+         ->get();
+      $groups = $permissions->groupBy('model');
+
 		// Get the permissions currently assigned to this user
 		$userPermissions = DB::table("permission_user")
 			->where("permission_user.user_id",$id)
@@ -223,7 +271,9 @@ class UsersController extends Controller
             'moduleGroups',
             'userPermissions',
             'nonCorePermissions',
-            'nonCoreGroups'
+            'nonCoreGroups',
+            'groups',
+            'permissions'
          )
       );
 	}

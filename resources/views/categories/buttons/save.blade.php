@@ -1,4 +1,4 @@
-@if(checkPerm('category_create'))
+@if(checkPerm('category_add'))
    <button
       class="btn btn-{{ $size }} btn-success text-light"
       type="submit"

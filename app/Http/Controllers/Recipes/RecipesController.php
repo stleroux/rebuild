@@ -327,7 +327,21 @@ class RecipesController extends Controller
 
       $categories = Category::where('parent_id',1)->get();
 
-      return view('recipes.show', compact('recipe','categories'));
+      // get previous project
+      $previous = Recipe::where('title', '<', $recipe->title)->orderBy('title','asc')->max('title');
+      if($previous){
+         $p = Recipe::where('title',$previous)->get();
+         $previous = $p[0]->id;
+      }
+
+      // get next project
+      $next = Recipe::where('title', '>', $recipe->title)->orderBy('title','desc')->min('title');
+      if($next){
+         $n = Recipe::where('title',$next)->get();
+         $next = $n[0]->id;
+      }
+
+      return view('recipes.show', compact('recipe','categories','previous','next'));
    }
 
 

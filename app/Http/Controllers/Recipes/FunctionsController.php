@@ -448,17 +448,16 @@ return $pdf->download('generatepdf.pdf');
    {
       // Check if user has required permission
       if($this->enablePermissions) {
-         if(!checkPerm('comment_create')) { abort(401, 'Unauthorized Access'); }
+         if(!checkPerm('comment_add')) { abort(401, 'Unauthorized Access'); }
       }
 
       $recipe = Recipe::find($id);
-
-      $comment = new Comment();
-      $comment->user_id = Auth::user()->id;
-      $comment->comment = $request->comment;
+         $comment = new Comment();
+         $comment->user_id = Auth::user()->id;
+         $comment->comment = $request->comment;
       $recipe->comments()->save($comment);
 
-      Session::flash('success', 'Comment added succesfully.');
+      Session::flash('success','Comment added succesfully.');
       // return redirect()->route('recipes.show', $recipe->id);
       return redirect()->back();
    }

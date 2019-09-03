@@ -1,4 +1,4 @@
-@if(checkPerm('post_delete'))
+@if(checkPerm('post_delete', $post))
    <a href="{{ route('posts.delete', $post->id) }}"
       class="btn btn-{{ $size }} btn-danger text-light"
       title="Delete Post">

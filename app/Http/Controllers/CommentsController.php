@@ -28,7 +28,7 @@ class CommentsController extends Controller
 	public function __construct()
 	{
 		$this->middleware('auth', ['except' => 'store']);
-	   $this->enablePermissions = false;
+	   $this->enablePermissions = true;
 	}
 
 
@@ -43,6 +43,11 @@ class CommentsController extends Controller
 ##################################################################################################################
 	public function delete($id)
 	{
+		// Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('comment_delete')) { abort(401, 'Unauthorized Access'); }
+      }
+
 		$comment = Comment::find($id);
 
 		return view('comments.delete')->withComment($comment);
@@ -61,6 +66,11 @@ class CommentsController extends Controller
 ##################################################################################################################
 	public function destroy($id)
 	{
+		// Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('comment_delete')) { abort(401, 'Unauthorized Access'); }
+      }
+
 		$comment = Comment::find($id);
 
 		$comment->delete();
@@ -81,6 +91,11 @@ class CommentsController extends Controller
 ##################################################################################################################
 	public function edit($id)
 	{
+		// Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('comment_edit')) { abort(401, 'Unauthorized Access'); }
+      }
+
 		$comment = Comment::find($id);
 
 		return view('comments.edit')->withComment($comment);
@@ -97,6 +112,11 @@ class CommentsController extends Controller
 ##################################################################################################################
 	public function index()
 	{
+		// Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('comment_browse')) { abort(401, 'Unauthorized Access'); }
+      }
+
 		// Set the variable so we can use a button in other pages to come back to this page
       Session::put('pageName', 'index');
 
@@ -117,6 +137,11 @@ class CommentsController extends Controller
 ##################################################################################################################
 	public function newComments(Request $request, $key=null)
 	{
+		// Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('comment_edit')) { abort(401, 'Unauthorized Access'); }
+      }
+
 		$comments = Comment::where('created_at', '>=' , Auth::user()->last_login_date)->get();
 
 		return view('comments.newComments', compact('comments'));
@@ -134,6 +159,11 @@ class CommentsController extends Controller
 ##################################################################################################################
 	public function show($id)
 	{
+		// Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('comment_read')) { abort(401, 'Unauthorized Access'); }
+      }
+
 		$comment = Comment::find($id);
 
 		return view('comments.show')->withComment($comment);
@@ -151,6 +181,11 @@ class CommentsController extends Controller
 ##################################################################################################################
 	public function update(UpdateCommentRequest $request, $id)
 	{
+		// Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('comment_edit')) { abort(401, 'Unauthorized Access'); }
+      }
+
 		$comment = Comment::find($id);
 			$comment->comment = $request->comment;
 		$comment->save();

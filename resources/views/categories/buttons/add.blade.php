@@ -1,4 +1,4 @@
-@if(checkPerm('category_create'))
+@if(checkPerm('category_add'))
    <a href="{{ route('categories.create') }}"
       class="btn btn-{{ $size }} btn-success text-light"
       title="Add Category">

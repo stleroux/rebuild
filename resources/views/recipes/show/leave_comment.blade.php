@@ -1,4 +1,4 @@
-@auth
+@if(checkPerm('comment_add'))
 {{-- @if(checkACL('user')) --}}
 	<div class="card mb-3">
 		
@@ -59,4 +59,4 @@
 		
 	</div>
 {{-- @endif --}}
-@endauth
+@endif

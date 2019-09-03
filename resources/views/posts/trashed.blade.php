@@ -35,7 +35,7 @@
 					</div>
 
 					@if($posts->count() > 0)
-						<div class="card-body card_body p-2">
+						<div class="card-body section_body p-2">
 							 @include('posts.alphabet', ['model'=>'post', 'page'=>'trashed'])
 							 <table id="datatable" class="table table-hover table-sm">
 								<thead>

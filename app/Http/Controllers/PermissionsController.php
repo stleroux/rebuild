@@ -177,6 +177,7 @@ class PermissionsController extends Controller
         	$this->validate($request, $rules, $customMessages);
 
         	$bread = ['browse','read','edit','add','delete'];
+        	// $bread = ['index','create','read','update','delete'];
 
         	// save the data in the database
 			foreach($bread as $b){
@@ -222,12 +223,12 @@ class PermissionsController extends Controller
 		// set a flash message to be displayed on screen
 		Session::flash('store','The permission was successfully saved!');
 
-		if($request->submit == "new")
+		// if($request->submit == "new")
+		if($request->single)
 		{
-			return redirect()->route('permissions.create');
-		} else {
-			// redirect to another page
 			return redirect()->route('permissions.index');
+		} else {
+			return redirect()->route('permissions.create');
 		}
 		
 	}

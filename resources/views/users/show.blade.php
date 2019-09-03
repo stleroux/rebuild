@@ -54,17 +54,17 @@
                      Modules Permissions
                   </a>
                </li>
-               <li class="nav-item p-0">
+{{--                <li class="nav-item p-0">
                   <a class="nav-link py-1 px-2" id="instructions-tab" data-toggle="tab" href="#instructions" role="tab" aria-controls="instructions" aria-selected="false">
                      Instructions
                   </a>
-               </li>
+               </li> --}}
             </ul>
 
             <div class="tab-content pb-0 mb-0" id="myTabContent">
-               <div class="tab-pane fade" id="instructions" role="tabpanel" aria-labelledby="instructions-tab">
+{{--                <div class="tab-pane fade" id="instructions" role="tabpanel" aria-labelledby="instructions-tab">
                   @include('users.inc.show.instructions')
-               </div>
+               </div> --}}
                <div class="tab-pane fade" id="core" role="tabpanel" aria-labelledby="core-tab">
                   @include('users.inc.show.core')
                </div>

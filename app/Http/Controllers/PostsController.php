@@ -38,7 +38,7 @@ class PostsController extends Controller
 	public function __construct() {
 		// only allow authenticated users to access these pages
 		$this->middleware('auth');
-      $this->enablePermissions = false;
+      // $this->enablePermissions = true;
 
 		//Log::useFiles(storage_path().'/logs/posts.log');
 	}
@@ -238,7 +238,7 @@ class PostsController extends Controller
 	public function index(Request $request, $key=null)
 	{
 		// Check if user has required permission
-		if(!checkPerm('post_index')) { abort(401, 'Unauthorized Access'); }
+		if(!checkPerm('post_browse')) { abort(401, 'Unauthorized Access'); }
 
       // Set the session to the current page route
       Session::put('fromPage', url()->full());
@@ -450,10 +450,10 @@ class PostsController extends Controller
 ##################################################################################################################
 	public function show($id)
 	{
-		// Check if user has required permission
-		if(!checkPerm('post_show')) { abort(401, 'Unauthorized Access'); }
-
 		$post = Post::find($id);
+
+		// Check if user has required permission
+		if(!checkPerm('post_read', $post)) { abort(401, 'Unauthorized Access'); }
 
 	  // Increase the view count if viewed from the frontend
      if (url()->previous() == url('/blog/')) {
@@ -779,7 +779,8 @@ class PostsController extends Controller
 	  }
 
 	  Session::flash('success','The posts were unpublished successfully.');
-	  return redirect()->route('posts.'. Session::get('pageName'));
+	  // return redirect()->route('posts.'. Session::get('pageName'));
+	  return redirect()->back();
 	}
 
 

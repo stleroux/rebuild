@@ -19,67 +19,73 @@
 
    <div class="card mb-3">
       <div class="card-header section_header p-2">
-         {{ ucwords($post->title) }}
-         <span class="float-right">
-            {{-- <div class="btn-group"> --}}
+         <div class="row d-flex justify-content-center">
+            <div class="col-sm-4 float-left">
+               {{ ucwords($post->title) }}
+            </div>
+            <div class="col-sm-4 text-center">
                @include('blog.buttons.previous', ['size'=>'xs'])
                @include('blog.buttons.next', ['size'=>'xs'])
-               {{-- @include('blog.buttons.back', ['size'=>'xs']) --}}
-               @auth
-                  <a href="" type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#printModal" data-link="{{ $post->slug }}">
-                     <i class="fa fa-print"></i> Print
-                  </a>
-               @endauth
+            </div>
+            <div class="col-sm-4 text text-right">
+               {{-- <div class="btn-group"> --}}
 
-               <!-- Only show if coming from the homepage -->
-               @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'home')
-                  <a href="{{ route('home') }}" class="btn btn-xs btn-primary">
-                     <i class="fas fa-home"></i> Home
-                  </a>
-               @endif
+                  @auth
+                     <a href="" type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#printModal" data-link="{{ $post->slug }}">
+                        <i class="fa fa-print"></i> Print
+                     </a>
+                  @endauth
 
-               <!-- Only show if coming from the blog page -->
-               @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.index')
-                  <a href="{{ route('blog.index') }}" class="btn btn-xs btn-primary">
-                     <i class="fas fa-blog"></i> Blog
-                  </a>
-               @endif
+                  <!-- Only show if coming from the homepage -->
+                  @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'home')
+                     <a href="{{ route('home') }}" class="btn btn-xs btn-primary">
+                        <i class="fas fa-home"></i> Home
+                     </a>
+                  @endif
 
-               <!-- Show this button after posting a comment -->
-               @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.show')
-                  <a href="{{ route('blog.index') }}" class="btn btn-xs btn-primary">
-                     <i class="fas fa-blog"></i> Blog
-                  </a>
-               @endif
+                  <!-- Only show if coming from the blog page -->
+                  @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.index')
+                     <a href="{{ route('blog.index') }}" class="btn btn-xs btn-primary">
+                        <i class="fas fa-blog"></i> Blog
+                     </a>
+                  @endif
 
-               <!-- Only show if coming from the blog print page -->
-               @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.print')
-                  <a href="{{ route('blog.index') }}" class="btn btn-xs btn-primary">
-                     <i class="fas fa-blog"></i> Blog
-                  </a>
-               @endif
+                  <!-- Show this button after posting a comment -->
+                  @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.show')
+                     <a href="{{ route('blog.index') }}" class="btn btn-xs btn-primary">
+                        <i class="fas fa-blog"></i> Blog
+                     </a>
+                  @endif
 
-               <!-- Only show if coming from the blog search page -->
-               @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.search')
-                  <a href="{{ route('blog.index') }}" class="btn btn-xs btn-primary">
-                     <i class="fas fa-blog"></i> Blog
-                  </a>
-                  <a href="{{ URL::previous() }}" class="btn btn-xs btn-primary">
-                     <i class="fas fa-blog"></i> Search
-                  </a>
-               @endif              
+                  <!-- Only show if coming from the blog print page -->
+                  @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.print')
+                     <a href="{{ route('blog.index') }}" class="btn btn-xs btn-primary">
+                        <i class="fas fa-blog"></i> Blog
+                     </a>
+                  @endif
 
-               <!-- Only show if coming from the blog archive page -->
-               @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.archive')
-                  <a href="{{ route('blog.index') }}" class="btn btn-xs btn-primary">
-                     <i class="fas fa-blog"></i> Blog
-                  </a>
-                  <a href="{{ URL::previous() }}" class="btn btn-xs btn-primary">
-                     <i class="fas fa-blog"></i> Archive
-                  </a>
-               @endif
-            {{-- </div> --}}
-         </span>
+                  <!-- Only show if coming from the blog search page -->
+                  @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.search')
+                     <a href="{{ route('blog.index') }}" class="btn btn-xs btn-primary">
+                        <i class="fas fa-blog"></i> Blog
+                     </a>
+                     <a href="{{ URL::previous() }}" class="btn btn-xs btn-primary">
+                        <i class="fas fa-blog"></i> Search
+                     </a>
+                  @endif              
+
+                  <!-- Only show if coming from the blog archive page -->
+                  @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.archive')
+                     <a href="{{ route('blog.index') }}" class="btn btn-xs btn-primary">
+                        <i class="fas fa-blog"></i> Blog
+                     </a>
+                     <a href="{{ URL::previous() }}" class="btn btn-xs btn-primary">
+                        <i class="fas fa-blog"></i> Archive
+                     </a>
+                  @endif
+               {{-- </div> --}}
+            </div>
+         </div>
       </div>
 
       <div class="card-body section_body p-2">
@@ -140,9 +146,13 @@
                            @if ($post->image)
                               {{-- @if(checkPerm('post_show')) --}}
                               @auth
+                              <div class="text-center">
                                  <a href="" data-toggle="modal" data-target="#imageModal">
                                     {{ Html::image("_posts/" . $post->image, "", array('height'=>'100%','width'=>'100%')) }}
                                  </a>
+                                 <a href="" data-toggle="modal" data-target="#imageModal_XL" class="btn btn-xs btn-primary">View Larger</a>
+                                 {{-- <a href="" data-toggle="modal" data-target="#imageModal_XL" class="btn btn-xs btn-success">View Extra Large</a> --}}
+                              </div>
                               @else
                                  {{ Html::image("_posts/" . $post->image, "", array('height'=>'100%','width'=>'100%')) }}
                               @endauth
@@ -260,21 +270,36 @@
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            {{-- <h4 class="modal-title" id="printPostModalLabel">Post Image</h4> --}}
             <h4 class="modal-title" id="imageModalLabel">
-               {{-- {{ $title }} --}}
-               Image Name
+               {{ $post->title }}
             </h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                <span>&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <p>
-               {{-- {{ Html::image($img_path . "/". $model->$img_name, "", array('height'=>'100%','width'=>'100%')) }} --}}
-               {{ Html::image('_posts/'. $post->image, "", array('height'=>'100%','width'=>'100%')) }}
-               {{-- 1498587512.jpg --}}
-            </p>
+            <p>{{ Html::image('_posts/'. $post->image, "", array('height'=>'100%','width'=>'100%')) }}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+   </div>
+
+   <div class="modal fade" id="imageModal_XL" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel">
+      <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="imageModalLabel">
+               {{ $post->title }}
+            </h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span>&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>{{ Html::image('_posts/'. $post->image, "", array('height'=>'100%','width'=>'100%')) }}</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Close</button>
@@ -287,10 +312,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title" id="printModalLabel">
-               {{-- {{ $title }} {{ ucfirst(str_singular($name)) }} --}}
-               Print blog
-            </h4>
+            <h4 class="modal-title" id="printModalLabel">Print blog</h4>
                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                <span>&times;</span>
             </button>

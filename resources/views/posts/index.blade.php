@@ -27,8 +27,8 @@
                   Published Posts
                   <div class="float-right">
                      <div class="btn-group">
-                        @include('posts.buttons.trashAll', ['size'=>'xs'])
                         @include('posts.buttons.unpublishAll', ['size'=>'xs'])
+                        @include('posts.buttons.trashAll', ['size'=>'xs'])
                         @include('posts.buttons.add', ['size'=>'xs'])
                      </div>
                   </div>
@@ -40,7 +40,7 @@
                      <table id="datatable" class="table table-hover table-sm">
                         <thead>
                            <tr>
-                              <th><input type="checkbox" id="selectall" class="checked" /></th>
+                              <th data-orderable="false"><input type="checkbox" id="selectall" class="checked" /></th>
                               <th>ID</th>
                               <th>Title</th>
                               <th>Category</th>
@@ -59,8 +59,10 @@
                         <tbody>
                            @foreach ($posts as $post)
                               <tr>
-                                 <td>
-                                    <input type="checkbox" onClick="checkbox_is_checked()" name="checked[]" value="{{ $post->id }}" class="check-all">
+                                 <td data-orderable="false">
+                                    @if(checkPerm('post_delete', $post))
+                                       <input type="checkbox" onClick="checkbox_is_checked()" name="checked[]" value="{{ $post->id }}" class="check-all">
+                                    @endif
                                  </td>
                                  <td>{{ $post->id }}</td>
                                  <td>{{ $post->title }}</td>
@@ -75,12 +77,8 @@
                                     <div class="btn-group">
                                        @include('posts.buttons.publish', ['size'=>'xs'])
                                        @include('posts.buttons.show', ['size'=>'xs'])
-                                       @if(checkPerm('post_edit', $post))
-                                          @include('posts.buttons.edit', ['size'=>'xs'])
-                                       @endif
-                                       @if(checkPerm('post_delete', $post))
-                                          @include('posts.buttons.trash', ['size'=>'xs'])
-                                       @endif
+                                       @include('posts.buttons.edit', ['size'=>'xs'])
+                                       @include('posts.buttons.trash', ['size'=>'xs'])
                                     </div>
                                  </td>
                               </tr>
@@ -89,7 +87,7 @@
                      </table>
                   </div>
                @else
-                  <div class="card-body">
+                  <div class="card-body p-2">
                      {{ setting('no_records_found') }}
                   </div>
                @endif

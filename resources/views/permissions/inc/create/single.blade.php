@@ -1,5 +1,5 @@
 {!! Form::open(array('route' => 'permissions.store')) !!}
-
+   <input type="hidden" name="single" value="single">
    <div class="card mb-3">
       <!--CARD HEADER-->
       <div class="card-header card_header p-2">

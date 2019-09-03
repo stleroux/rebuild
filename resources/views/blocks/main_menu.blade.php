@@ -36,7 +36,7 @@
          Blog
       </a>
 
-      @if(checkPerm('category_index'))
+      @if(checkPerm('category_browse'))
          <a href="{{ route('categories.index') }}"
             class="list-group-item list-group-item-action p-1 {{ Request::is('categories*') ? 'menu_active' : '' }}">
             <i class="fa fa-sitemap fa-fw"></i>
@@ -44,7 +44,7 @@
          </a>
       @endif
 
-      @if(checkPerm('comment_index'))
+      @if(checkPerm('comment_browse'))
          <a href="{{ route('comments.index') }}"
             class="list-group-item list-group-item-action p-1 {{ Request::is('comments*') ? 'menu_active' : '' }}">
             <i class="fas fa-comments fa-fw"></i>
@@ -78,7 +78,7 @@
          </a>
       @endif
 
-      @if(checkPerm('post_index'))
+      @if(checkPerm('post_browse'))
          <a href="{{ route('posts.index') }}"
             class="list-group-item list-group-item-action p-1 {{ Request::is('posts*') ? 'menu_active' : '' }}">
             <i class="far fa-newspaper fa-fw"></i>

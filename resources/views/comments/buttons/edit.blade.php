@@ -1,4 +1,4 @@
-@if(checkPerm('comments_edit', $comment))
+@if(checkPerm('comment_edit', $comment))
    <a href="{{ route('comments.edit', $comment->id) }}"
       class="btn btn-{{ $size }} btn-info text-light"
       title="Edit Comment">

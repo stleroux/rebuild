@@ -1,4 +1,4 @@
-@if(checkPerm('category_show'))
+@if(checkPerm('category_read'))
    <a href="{{ route('categories.show', $category->id) }}"
       class="btn btn-{{ $size }} btn-primary text-light"
       title="Show Category">

@@ -16,33 +16,42 @@
 
 @section('content')
 
-<div class="card">
-	<div class="card-header section_header p-2">
-		{{-- <span class="h5 align-middle pt-2"> --}}
-         <i class="fab fa-pagelines"></i>
-         {{ ucwords($project->name) }} Project Information
-      {{-- </span> --}}
-		<span class="float-right">
-         <div class="btn-group">
-            @include('projects.buttons.edit', ['size'=>'xs'])
-            @include('projects.buttons.back', ['size'=>'xs'])
+   <div class="card mb-3">
+      <div class="card-header section_header p-2">
+         <div class="row d-flex justify-content-center">
+            <div class="col-sm-4 float-left">
+               <i class="fab fa-pagelines"></i>
+               {{ ucwords($project->name) }} Project Information
+            </div>
+            <div class="col-sm-4 text-center">
+               @include('projects.buttons.previous', ['size'=>'xs'])
+               @include('projects.buttons.next', ['size'=>'xs'])
+            </div>
+            <div class="col-sm-4 text text-right">
+               <div class="btn-group">
+                  {{-- @include('projects.buttons.previous', ['size'=>'xs'])
+                  @include('projects.buttons.next', ['size'=>'xs']) --}}
+                  @include('projects.buttons.edit', ['size'=>'xs'])
+                  @include('projects.buttons.back', ['size'=>'xs'])
+               </div>
+            </div>
          </div>
-      </span>
-	</div>
-	<div class="card-body section_body p-2">
-		@include('projects.partials.show.general')
-      @auth
-         @include('projects.partials.show.others')
-         @include('projects.partials.show.materials')
-         @include('projects.partials.show.finishes')
-      @endauth
-      @guest
-         @include('common.view_more')
-      @endguest
-		{{-- @include('projects.partials.show.comments') --}}
-      @include('common.comments', ['model'=>$project])
-	</div>
-</div>
+	  </div>
+   	<div class="card-body section_body p-2">
+   		@include('projects.partials.show.general')
+         @auth
+            @include('projects.partials.show.others')
+            @include('projects.partials.show.materials')
+            @include('projects.partials.show.finishes')
+         @endauth
+         @guest
+            @include('common.view_more')
+         @endguest
+   		{{-- @include('projects.partials.show.comments') --}}
+         @include('common.comments', ['model'=>$project])
+         {{-- {{ $projects->links() }} --}}
+   	</div>
+   </div>
 
 @endsection
 

@@ -50,6 +50,11 @@
                   </a>
                </li>
                <li class="nav-item">
+                  <a class="nav-link" id="permissions-tab" data-toggle="tab" href="#permissions" role="tab" aria-controls="permissions" aria-selected="true">
+                     Permissions
+                  </a>
+               </li>
+              {{--  <li class="nav-item">
                   <a class="nav-link" id="core-tab" data-toggle="tab" href="#core" role="tab" aria-controls="core" aria-selected="false">
                      Core Permissions
                   </a>
@@ -63,7 +68,7 @@
                   <a class="nav-link" id="modules-tab" data-toggle="tab" href="#modules" role="tab" aria-controls="modules" aria-selected="false">
                      Modules Permissions
                   </a>
-               </li>
+               </li> --}}
                <li class="nav-item">
                   <a class="nav-link" id="instructions-tab" data-toggle="tab" href="#instructions" role="tab" aria-controls="instructions" aria-selected="false">
                      Instructions
@@ -75,7 +80,10 @@
                <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                   @include('users.inc.edit.profile')
                </div>
-               <div class="tab-pane fade" id="core" role="tabpanel" aria-labelledby="core-tab">
+               <div class="tab-pane fade" id="permissions" role="tabpanel" aria-labelledby="permissions-tab">
+                  @include('users.inc.edit.permissions')
+               </div>
+               {{-- <div class="tab-pane fade" id="core" role="tabpanel" aria-labelledby="core-tab">
                   @include('users.inc.edit.core')
                </div>
                <div class="tab-pane fade" id="nonCore" role="tabpanel" aria-labelledby="nonCore-tab">
@@ -83,9 +91,9 @@
                </div>
                <div class="tab-pane fade" id="modules" role="tabpanel" aria-labelledby="modules-tab">
                   @include('users.inc.edit.modules')
-               </div>
+               </div> --}}
                <div class="tab-pane fade" id="instructions" role="tabpanel" aria-labelledby="instructions-tab">
-                  @include('users.inc.edit.instructions')
+                  @include('users.inc.instructions')
                </div>
             </div>
          </div>

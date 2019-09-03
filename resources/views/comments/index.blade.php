@@ -12,8 +12,8 @@
 @endsection
 
 @section('content')
+
    <form style="display:inline;">
-   {{-- <form method="POST" action="{{ route('backend.recipes.trashAll') }}"> --}}
       {!! csrf_field() !!}
          
       <div class="card mb-3">
@@ -80,7 +80,9 @@
                   </tbody>
                </table>
             @else
-               NO RECORDS FOUND
+               <div class="card-body card_body p-2">
+                  {{ setting('no_records_found') }}
+               </div>
             @endif
          </div>
       </div>

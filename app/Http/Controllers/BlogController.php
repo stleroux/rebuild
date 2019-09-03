@@ -26,9 +26,10 @@ class BlogController extends Controller
 # ╚██████╗╚██████╔╝██║ ╚████║███████║   ██║   ██║  ██║╚██████╔╝╚██████╗   ██║   
 #  ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝  ╚═════╝   ╚═╝   
 ##################################################################################################################
-	public function __construct() {
-		//Log::useFiles(storage_path().'/logs/audits.log');
-	}
+   public function __construct() {
+      $this->enablePermissions = false;
+      //Log::useFiles(storage_path().'/logs/audits.log');
+   }
 
 
 ##################################################################################################################
@@ -40,20 +41,20 @@ class BlogController extends Controller
 # ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝  ╚══════╝
 # Display the archived resources
 ##################################################################################################################
-	public function archive($year, $month)
-	{
+   public function archive($year, $month)
+   {
 
-		$archives = Post::published()->with('user')
-			->whereYear('created_at','=', $year)
-			->whereMonth('created_at','=', $month)
-			->orderBy('id','desc')
-			->get();
+      $archives = Post::published()->with('user')
+         ->whereYear('created_at','=', $year)
+         ->whereMonth('created_at','=', $month)
+         ->orderBy('id','desc')
+         ->get();
 
-		// Save the URL in a varibale so it can be used in the blog.single page to redirect the user to the archives list page
-		Session::flash('backUrl', \Request::fullUrl());
+      // Save the URL in a varibale so it can be used in the blog.single page to redirect the user to the archives list page
+      Session::flash('backUrl', \Request::fullUrl());
 
-		return view('blog.archive', compact('archives'))->withYear($year)->withMonth($month);
-	}
+      return view('blog.archive', compact('archives'))->withYear($year)->withMonth($month);
+   }
 
 
 ##################################################################################################################
@@ -65,15 +66,15 @@ class BlogController extends Controller
 # ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝
 // Display a list of resources
 ##################################################################################################################
-	public function getIndex()
-	{
-		// Check if user has required permission
+   public function getIndex()
+   {
+      // Check if user has required permission
       // if(!checkPerm('post_blog_index')) { abort(401, 'Unauthorized Access'); }
 
-		$posts = Post::published()->with('user')->orderBy('published_at','desc')->paginate(5);//->get();
+      $posts = Post::published()->with('user')->orderBy('published_at','desc')->paginate(5);//->get();
 
-		return view ('blog.index', compact('posts'));
-	}
+      return view ('blog.index', compact('posts'));
+   }
 
 
 ##################################################################################################################
@@ -84,15 +85,15 @@ class BlogController extends Controller
 # ██║     ██║  ██║██║██║ ╚████║   ██║   
 # ╚═╝     ╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝   ╚═╝   
 ##################################################################################################################
-	public function print($id)
-	{
-		// Check if user has required permission
+   public function print($id)
+   {
+      // Check if user has required permission
       // if(!checkPerm('post_blog_index')) { abort(401, 'Unauthorized Access'); }
 
-		$post = Post::find($id);
+      $post = Post::find($id);
 
-		return view('blog.print', compact('post'));
-	}
+      return view('blog.print', compact('post'));
+   }
 
 
 ##################################################################################################################
@@ -103,22 +104,22 @@ class BlogController extends Controller
 # ███████║███████╗██║  ██║██║  ██║╚██████╗██║  ██║
 # ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝
 ##################################################################################################################
-	public function search(Request $request)
-	{
-		$this->validate($request, [
-			'search' => 'required'
-		]);
+   public function search(Request $request)
+   {
+      $this->validate($request, [
+         'search' => 'required'
+      ]);
 
-		$search = $request->get('search');
+      $search = $request->get('search');
 
-		$posts = Post::where('title', 'like', "%$search%")
-			 ->orWhere('body', 'like', "%$search%")
-			 ->published()
-			 ->paginate(10)
-			 ->appends(['search' => $search]);
+      $posts = Post::where('title', 'like', "%$search%")
+          ->orWhere('body', 'like', "%$search%")
+          ->published()
+          ->paginate(10)
+          ->appends(['search' => $search]);
 
-		return view('blog.search', compact('posts','postlinks'));
-	 }
+      return view('blog.search', compact('posts','postlinks'));
+    }
 
 
 ##################################################################################################################
@@ -130,31 +131,31 @@ class BlogController extends Controller
 # ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝ 
 // Display the specified resource
 ##################################################################################################################
-	public function show($slug)
-	{
-		// fetch from database based on slug
-		$post = Post::where('slug', '=', $slug)->first();
+   public function show($slug)
+   {
+      // fetch from database based on slug
+      $post = Post::where('slug', '=', $slug)->first();
 
-		// get previous post id
-		$previous = Post::published()->where('id', '<', $post->id)->orderBy('published_at','asc')->max('id');
-		// get slug if record exists
-		if($previous = Post::published()->find($previous)) {
-			$previous = $previous->slug;
-		}
+      // get previous post id
+      $previous = Post::published()->where('id', '<', $post->id)->orderBy('published_at','asc')->max('id');
+      // get slug if record exists
+      if($previous = Post::published()->find($previous)) {
+         $previous = $previous->slug;
+      }
 
-		// get next post id
-		$next = Post::published()->where('id', '>', $post->id)->orderBy('published_at','desc')->min('id');
-		// get slug if record exists
-		if($next = Post::published()->find($next)) {
-			$next = $next->slug;
-		}
+      // get next post id
+      $next = Post::published()->where('id', '>', $post->id)->orderBy('published_at','desc')->min('id');
+      // get slug if record exists
+      if($next = Post::published()->find($next)) {
+         $next = $next->slug;
+      }
 
-		// Add 1 to views column
-		DB::table('posts')->where('slug', '=', $slug)->increment('views', 1);
+      // Add 1 to views column
+      DB::table('posts')->where('slug', '=', $slug)->increment('views', 1);
 
-		// return the view and pass in the post object
-		return view('blog.show', compact('post','next','previous'));
-	}
+      // return the view and pass in the post object
+      return view('blog.show', compact('post','next','previous'));
+   }
 
 
 ##################################################################################################################
@@ -165,21 +166,23 @@ class BlogController extends Controller
 # ███████║   ██║   ╚██████╔╝██║  ██║███████╗    ╚██████╗╚██████╔╝██║ ╚═╝ ██║██║ ╚═╝ ██║███████╗██║ ╚████║   ██║   
 # ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝     ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝   ╚═╝   
 ##################################################################################################################
-	public function storeComment(CreateCommentRequest $request, $id)
-	{
-		// Check if user has required permission
-      if(!checkPerm('comment_create')) { abort(401, 'Unauthorized Access'); }
+   public function storeComment(CreateCommentRequest $request, $id)
+   {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('comment_add')) { abort(401, 'Unauthorized Access'); }
+      }
 
-		$post = Post::find($id);
+      $post = Post::find($id);
 
-		$comment = new Comment();
-			$comment->user_id = Auth::user()->id;
-			$comment->comment = $request->comment;
-		$post->comments()->save($comment);
+      $comment = new Comment();
+         $comment->user_id = Auth::user()->id;
+         $comment->comment = $request->comment;
+      $post->comments()->save($comment);
 
-		Session::flash('success', 'Comment added succesfully.');
-		return redirect()->route('blog.show', [$post->slug]);
-		}
+      Session::flash('success', 'Comment added succesfully.');
+      return redirect()->route('blog.show', [$post->slug]);
+      }
 
 
 }

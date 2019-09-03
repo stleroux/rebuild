@@ -266,10 +266,24 @@ class ProjectsController extends Controller
             DB::table('projects__projects')->where('id','=',$project->id)->increment('views',1);
         }
 
+        // get previous project
+        $previous = Project::where('name', '<', $project->name)->orderBy('name','asc')->max('name');
+        if($previous){
+            $p = Project::where('name',$previous)->get();
+            $previous = $p[0]->id;
+        }
+
+        // get next project
+        $next = Project::where('name', '>', $project->name)->orderBy('name','desc')->min('name');
+        if($next){
+            $n = Project::where('name',$next)->get();
+            $next = $n[0]->id;
+        }
+
         // Get the first image associated to this project
         $image = Image::where('project_id', '=', $project->id)->first();
 
-        return view('projects.show', compact('project', 'image'));
+        return view('projects.show', compact('project','image','previous','next'));
     }
 
 

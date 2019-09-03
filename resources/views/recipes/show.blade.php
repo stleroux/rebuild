@@ -23,7 +23,37 @@
 
 	<div class="card mb-3">
 		<div class="card-header section_header p-2">
-			{{ $recipe->title }}
+			<div class="row d-flex justify-content-center">
+				<div class="col-sm-4 float-left">
+					{{ $recipe->title }}
+				</div>
+				<div class="col-sm-4 text-center">
+					@include('recipes.buttons.previous', ['size'=>'xs'])
+      			@include('recipes.buttons.next', ['size'=>'xs'])
+				</div>
+				<div class="col-sm-4 text text-right">
+					<div class="btn-group">
+						@include('recipes.buttons.back', ['size'=>'xs'])
+						@include('recipes.buttons.print', ['size'=>'xs'])
+						@include('recipes.buttons.printPDF', ['size'=>'xs'])
+						@include('recipes.buttons.favorite', ['size'=>'xs'])
+	  		         @include('recipes.buttons.privatize', ['size'=>'xs'])
+						@include('recipes.buttons.publish', ['size'=>'xs'])
+						@include('recipes.buttons.edit', ['size'=>'xs'])
+						@include('recipes.buttons.trash', ['size'=>'xs'])
+					</div>
+				</div>
+			</div>
+		</div>
+
+{{-- 		<div class="card-header section_header p-2">
+			<span class="float-left">
+				{{ $recipe->title }}
+			</span>
+			<span class="text text-center border">
+				@include('recipes.buttons.previous', ['size'=>'xs'])
+      		@include('recipes.buttons.next', ['size'=>'xs'])	
+			</span>
 			<span class="float-right">
 				<div class="btn-group">
 					@include('recipes.buttons.back', ['size'=>'xs'])
@@ -36,7 +66,7 @@
 					@include('recipes.buttons.trash', ['size'=>'xs'])
 				</div>
 			</span>
-		</div>
+		</div> --}}
 	
 		<div class="card-body section_body p-2">
 	

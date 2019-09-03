@@ -30,7 +30,7 @@
 							<div class="btn-group">
 								@include('comments.buttons.back', ['size'=>'xs'])
 								@include('comments.buttons.reset', ['size'=>'xs'])
-								@include('comments.buttons.save', ['size'=>'xs'])
+								@include('comments.buttons.update', ['size'=>'xs'])
 							</div>								
 						</span>
 					</div>

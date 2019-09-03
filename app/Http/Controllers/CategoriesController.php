@@ -57,7 +57,7 @@ class CategoriesController extends Controller
 	{
 		// Check if user has required permission
 		if($this->enablePermissions) {
-			if(!checkPerm('category_create')) { abort(401, 'Unauthorized Access'); }
+			if(!checkPerm('category_add')) { abort(401, 'Unauthorized Access'); }
 		}
 
 		$categories = Category::with('children')->where('parent_id','=',0)->orderBy('name')->get();
@@ -240,7 +240,7 @@ class CategoriesController extends Controller
 	{
 		// Check if user has required permission
 		if($this->enablePermissions) {
-			if(!checkPerm('category_index')) { abort(401, 'Unauthorized Access'); }
+			if(!checkPerm('category_browse')) { abort(401, 'Unauthorized Access'); }
 		}
 
 		$alphas = DB::table('categories')
@@ -280,7 +280,7 @@ class CategoriesController extends Controller
 	{
 		// Check if user has required permission
 		if($this->enablePermissions) {
-			if(!checkPerm('category_new')) { abort(401, 'Unauthorized Access'); }
+			if(!checkPerm('category_edit')) { abort(401, 'Unauthorized Access'); }
 		}
 
 		//$alphas = range('A', 'Z');
@@ -323,7 +323,7 @@ class CategoriesController extends Controller
 
 		// Check if user has required permission
 		if($this->enablePermissions) {
-			if(!checkPerm('category_show')) { abort(401, 'Unauthorized Access'); }
+			if(!checkPerm('category_read')) { abort(401, 'Unauthorized Access'); }
 		}
 
 		return view('categories.show', compact('category'));
@@ -343,7 +343,7 @@ class CategoriesController extends Controller
 	{
 		// Check if user has required module
 		if($this->enablePermissions) {
-			if(!checkPerm('category_create')) { abort(401, 'Unauthorized Access'); }
+			if(!checkPerm('category_add')) { abort(401, 'Unauthorized Access'); }
 		}
 
 		if($request->part === 'main')
@@ -367,7 +367,7 @@ class CategoriesController extends Controller
 				$category->description = $request->mDescription;
 			$category->save();
 
-			Session::flash('store','The new parent category has been created.');
+			Session::flash('success','The new parent category has been created.');
 			return redirect()->route('categories.create');
 		} 
 
@@ -394,7 +394,7 @@ class CategoriesController extends Controller
 				$category->description = $request->sDescription;
 			$category->save();
 
-			Session::flash('store','The new sub-category has been created.');
+			Session::flash('success','The new sub-category has been created.');
 			return redirect()->route('categories.create');
 		}
 
@@ -428,7 +428,7 @@ class CategoriesController extends Controller
 				$category->description = $request->cDescription;
 			$category->save();
 
-			Session::flash('store','The new category has been created.');
+			Session::flash('success','The new category has been created.');
 			return redirect()->route('categories.index');
 		}
 		
@@ -461,7 +461,7 @@ class CategoriesController extends Controller
 		$category->save();
 
 		// Set flash data with success message
-		Session::flash ('update', 'The category was successfully updated!');
+		Session::flash('success','The category was successfully updated!');
 		// Redirect
 		return redirect()->route('categories.index');
 	}

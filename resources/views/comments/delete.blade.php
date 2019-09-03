@@ -25,7 +25,7 @@
 
 				<a class="btn btn-secondary" href="{{ route('comments.index') }}">No - Return To Previous Page</a>
 						
-				@if(checkPerm('module_delete'))
+				@if(checkPerm('comment_delete'))
 					<button type="submit" class="btn btn-danger">
 						<i class="far fa-trash-alt" aria-hidden="true"></i>
 						Yes - Delete Permanently

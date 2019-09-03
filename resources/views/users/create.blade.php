@@ -43,11 +43,11 @@
                      Profile
                   </a>
                </li>
-{{--                <li class="nav-item">
-                  <a class="nav-link" id="details-tab" data-toggle="tab" href="#details" role="tab" aria-controls="details" aria-selected="true">
-                     User Details
+               <li class="nav-item">
+                  <a class="nav-link" id="permissions-tab" data-toggle="tab" href="#permissions" role="tab" aria-controls="permissions" aria-selected="true">
+                     Permissions
                   </a>
-               </li> --}}
+               </li>
                <li class="nav-item">
                   <a class="nav-link" id="core-tab" data-toggle="tab" href="#core" role="tab" aria-controls="core" aria-selected="true">
                      Core Permissions
@@ -74,9 +74,9 @@
                <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                   @include('users.inc.create.profile')
                </div>
-{{--                <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
-                  @include('users.inc.create.details')
-               </div> --}}
+               <div class="tab-pane fade" id="permissions" role="tabpanel" aria-labelledby="permissions-tab">
+                  @include('users.inc.create.permissions')
+               </div>
                <div class="tab-pane fade" id="core" role="tabpanel" aria-labelledby="core-tab">
                   @include('users.inc.create.core')
                </div>
@@ -87,7 +87,7 @@
                   @include('users.inc.create.modules')
                </div>
                <div class="tab-pane fade" id="instructions" role="tabpanel" aria-labelledby="instructions-tab">
-                  @include('users.inc.create.instructions')
+                  @include('users.inc.instructions')
                </div>               
             </div>
          </div>
