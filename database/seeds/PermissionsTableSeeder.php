@@ -130,22 +130,22 @@ class PermissionsTableSeeder extends Seeder
             10 => 
             array (
                 'id' => 11,
-                'name' => 'post_index',
-                'display_name' => 'index',
+                'name' => 'post_browse',
+                'display_name' => 'browse',
                 'model' => 'post',
                 'type' => 3,
-                'description' => 'List posts',
+                'description' => 'Browse all posts',
                 'created_at' => NULL,
                 'updated_at' => '2018-11-28 16:50:28',
             ),
             11 => 
             array (
                 'id' => 12,
-                'name' => 'post_create',
-                'display_name' => 'create',
+                'name' => 'post_add',
+                'display_name' => 'add',
                 'model' => 'post',
                 'type' => 3,
-                'description' => 'Save posts',
+                'description' => 'Add a post',
                 'created_at' => NULL,
                 'updated_at' => '2018-11-28 16:50:20',
             ),
@@ -156,7 +156,7 @@ class PermissionsTableSeeder extends Seeder
                 'display_name' => 'edit',
                 'model' => 'post',
                 'type' => 3,
-                'description' => 'Edit posts',
+                'description' => 'Edit all posts',
                 'created_at' => NULL,
                 'updated_at' => '2018-11-28 16:50:42',
             ),
@@ -167,77 +167,22 @@ class PermissionsTableSeeder extends Seeder
                 'display_name' => 'delete',
                 'model' => 'post',
                 'type' => 3,
-                'description' => 'Delete posts',
+                'description' => 'Delete all posts',
                 'created_at' => NULL,
                 'updated_at' => '2018-11-28 16:50:52',
             ),
             14 => 
             array (
                 'id' => 15,
-                'name' => 'post_show',
-                'display_name' => 'show',
+                'name' => 'post_read',
+                'display_name' => 'read',
                 'model' => 'post',
                 'type' => 3,
-                'description' => 'View posts',
+                'description' => 'View a post',
                 'created_at' => NULL,
                 'updated_at' => '2018-11-28 16:51:02',
             ),
             15 => 
-            array (
-                'id' => 16,
-                'name' => 'component_index',
-                'display_name' => 'Index',
-                'model' => 'component',
-                'type' => 2,
-                'description' => 'List components',
-                'created_at' => '2018-11-26 14:37:41',
-                'updated_at' => '2018-11-28 16:52:00',
-            ),
-            16 => 
-            array (
-                'id' => 17,
-                'name' => 'component_create',
-                'display_name' => 'create',
-                'model' => 'component',
-                'type' => 2,
-                'description' => 'Create components',
-                'created_at' => '2018-11-26 14:45:03',
-                'updated_at' => '2018-11-28 16:52:19',
-            ),
-            17 => 
-            array (
-                'id' => 18,
-                'name' => 'component_enable',
-                'display_name' => 'enable',
-                'model' => 'component',
-                'type' => 2,
-                'description' => 'Enable a component',
-                'created_at' => '2018-11-26 14:46:16',
-                'updated_at' => '2018-11-28 16:53:14',
-            ),
-            18 => 
-            array (
-                'id' => 19,
-                'name' => 'component_disable',
-                'display_name' => 'disable',
-                'model' => 'component',
-                'type' => 2,
-                'description' => 'Disable a component',
-                'created_at' => '2018-11-26 14:46:44',
-                'updated_at' => '2018-11-28 16:53:24',
-            ),
-            19 => 
-            array (
-                'id' => 20,
-                'name' => 'component_delete',
-                'display_name' => 'delete',
-                'model' => 'component',
-                'type' => 2,
-                'description' => 'Delete components',
-                'created_at' => '2018-11-26 14:47:24',
-                'updated_at' => '2018-11-28 16:53:37',
-            ),
-            20 => 
             array (
                 'id' => 21,
                 'name' => 'change_user_pwd',
@@ -248,7 +193,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2018-11-26 15:15:18',
                 'updated_at' => '2018-11-28 16:55:31',
             ),
-            21 => 
+            16 => 
             array (
                 'id' => 24,
                 'name' => 'invoicer_index',
@@ -259,7 +204,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2018-11-26 15:46:46',
                 'updated_at' => '2018-11-28 16:55:45',
             ),
-            22 => 
+            17 => 
             array (
                 'id' => 25,
                 'name' => 'invoicer_client_index',
@@ -270,7 +215,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2018-11-26 15:47:42',
                 'updated_at' => '2018-11-28 16:55:55',
             ),
-            23 => 
+            18 => 
             array (
                 'id' => 26,
                 'name' => 'invoicer_dashboard',
@@ -281,7 +226,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2018-11-27 13:57:35',
                 'updated_at' => '2018-11-28 17:00:58',
             ),
-            24 => 
+            19 => 
             array (
                 'id' => 27,
                 'name' => 'invoicer_ledger',
@@ -292,7 +237,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2018-11-27 14:15:39',
                 'updated_at' => '2018-11-27 14:15:39',
             ),
-            25 => 
+            20 => 
             array (
                 'id' => 28,
                 'name' => 'invoicer_client_create',
@@ -303,7 +248,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2018-11-27 17:19:07',
                 'updated_at' => '2018-11-28 17:01:20',
             ),
-            26 => 
+            21 => 
             array (
                 'id' => 29,
                 'name' => 'invoicer_client_show',
@@ -314,7 +259,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2018-11-27 17:20:11',
                 'updated_at' => '2018-11-28 17:02:03',
             ),
-            27 => 
+            22 => 
             array (
                 'id' => 30,
                 'name' => 'invoicer_client_edit',
@@ -325,7 +270,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2018-11-27 17:21:02',
                 'updated_at' => '2018-11-28 17:02:15',
             ),
-            28 => 
+            23 => 
             array (
                 'id' => 31,
                 'name' => 'invoicer_client_delete',
@@ -336,7 +281,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2018-11-27 17:21:45',
                 'updated_at' => '2018-11-28 17:04:16',
             ),
-            29 => 
+            24 => 
             array (
                 'id' => 32,
                 'name' => 'invoicer_invoice_index',
@@ -347,7 +292,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2018-11-27 20:13:26',
                 'updated_at' => '2018-11-28 17:04:28',
             ),
-            30 => 
+            25 => 
             array (
                 'id' => 33,
                 'name' => 'invoicer_invoice_create',
@@ -358,7 +303,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2018-11-27 20:18:50',
                 'updated_at' => '2018-11-28 17:06:47',
             ),
-            31 => 
+            26 => 
             array (
                 'id' => 34,
                 'name' => 'invoicer_invoice_edit',
@@ -369,7 +314,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2018-11-27 20:19:17',
                 'updated_at' => '2018-11-28 17:06:56',
             ),
-            32 => 
+            27 => 
             array (
                 'id' => 35,
                 'name' => 'invoicer_invoice_delete',
@@ -380,7 +325,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2018-11-27 20:19:44',
                 'updated_at' => '2018-11-28 17:07:03',
             ),
-            33 => 
+            28 => 
             array (
                 'id' => 36,
                 'name' => 'invoicer_invoice_show',
@@ -391,7 +336,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2018-11-28 14:34:09',
                 'updated_at' => '2018-11-28 17:07:13',
             ),
-            34 => 
+            29 => 
             array (
                 'id' => 37,
                 'name' => 'invoicer_product_index',
@@ -402,7 +347,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2018-11-28 14:42:22',
                 'updated_at' => '2018-11-28 14:42:22',
             ),
-            35 => 
+            30 => 
             array (
                 'id' => 38,
                 'name' => 'invoicer_product_create',
@@ -413,7 +358,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2018-11-28 14:43:05',
                 'updated_at' => '2018-11-28 17:07:23',
             ),
-            36 => 
+            31 => 
             array (
                 'id' => 39,
                 'name' => 'invoicer_product_edit',
@@ -424,7 +369,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2018-11-28 14:43:33',
                 'updated_at' => '2018-11-28 17:07:36',
             ),
-            37 => 
+            32 => 
             array (
                 'id' => 40,
                 'name' => 'invoicer_product_show',
@@ -435,7 +380,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2018-11-28 14:44:02',
                 'updated_at' => '2018-11-28 17:07:47',
             ),
-            38 => 
+            33 => 
             array (
                 'id' => 41,
                 'name' => 'invoicer_product_delete',
@@ -446,7 +391,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2018-11-28 14:44:23',
                 'updated_at' => '2018-11-28 17:08:00',
             ),
-            39 => 
+            34 => 
             array (
                 'id' => 47,
                 'name' => 'admin_menu',
@@ -457,106 +402,62 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            40 => 
-            array (
-                'id' => 48,
-                'name' => 'module_index',
-                'display_name' => 'index',
-                'model' => 'module',
-                'type' => 2,
-                'description' => 'list modules',
-                'created_at' => '2018-11-30 14:04:16',
-                'updated_at' => '2018-11-30 14:04:16',
-            ),
-            41 => 
-            array (
-                'id' => 49,
-                'name' => 'module_create',
-                'display_name' => 'create',
-                'model' => 'module',
-                'type' => 2,
-                'description' => 'create modules',
-                'created_at' => '2018-11-30 15:37:02',
-                'updated_at' => '2018-11-30 15:37:02',
-            ),
-            42 => 
-            array (
-                'id' => 50,
-                'name' => 'module_edit',
-                'display_name' => 'edit',
-                'model' => 'module',
-                'type' => 2,
-                'description' => 'edit modules',
-                'created_at' => '2018-11-30 16:06:29',
-                'updated_at' => '2018-11-30 16:06:29',
-            ),
-            43 => 
-            array (
-                'id' => 51,
-                'name' => 'module_delete',
-                'display_name' => 'delete',
-                'model' => 'module',
-                'type' => 2,
-                'description' => 'delete modules',
-                'created_at' => '2018-11-30 16:10:38',
-                'updated_at' => '2018-11-30 16:10:38',
-            ),
-            44 => 
+            35 => 
             array (
                 'id' => 52,
-                'name' => 'category_index',
-                'display_name' => 'index',
-                'model' => 'categories',
+                'name' => 'category_browse',
+                'display_name' => 'browse',
+                'model' => 'category',
                 'type' => 2,
                 'description' => 'list categories',
                 'created_at' => '2018-12-03 15:02:47',
                 'updated_at' => '2018-12-03 15:02:47',
             ),
-            45 => 
+            36 => 
             array (
                 'id' => 53,
-                'name' => 'category_create',
-                'display_name' => 'create',
-                'model' => 'categories',
+                'name' => 'category_add',
+                'display_name' => 'add',
+                'model' => 'category',
                 'type' => 2,
                 'description' => 'create categories',
                 'created_at' => '2018-12-03 15:04:11',
                 'updated_at' => '2018-12-03 15:04:11',
             ),
-            46 => 
+            37 => 
             array (
                 'id' => 54,
                 'name' => 'category_edit',
                 'display_name' => 'edit',
-                'model' => 'categories',
+                'model' => 'category',
                 'type' => 2,
                 'description' => 'edit categories',
                 'created_at' => '2018-12-03 16:53:16',
                 'updated_at' => '2018-12-03 16:53:16',
             ),
-            47 => 
+            38 => 
             array (
                 'id' => 55,
                 'name' => 'category_delete',
                 'display_name' => 'delete',
-                'model' => 'categories',
+                'model' => 'category',
                 'type' => 2,
                 'description' => 'delete categories',
                 'created_at' => '2018-12-03 16:53:48',
                 'updated_at' => '2018-12-03 16:53:48',
             ),
-            48 => 
+            39 => 
             array (
                 'id' => 56,
-                'name' => 'category_show',
+                'name' => 'category_read',
                 'display_name' => 'show',
-                'model' => 'categories',
+                'model' => 'category',
                 'type' => 2,
                 'description' => 'show category',
                 'created_at' => '2018-12-03 17:36:32',
                 'updated_at' => '2018-12-03 17:36:32',
             ),
-            49 => 
+            40 => 
             array (
                 'id' => 57,
                 'name' => 'article_index',
@@ -567,7 +468,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2019-04-08 08:46:02',
                 'updated_at' => '2019-04-08 08:46:02',
             ),
-            50 => 
+            41 => 
             array (
                 'id' => 58,
                 'name' => 'recipe_edit',
@@ -578,7 +479,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2019-05-15 10:28:03',
                 'updated_at' => '2019-05-15 10:28:03',
             ),
-            51 => 
+            42 => 
             array (
                 'id' => 59,
                 'name' => 'recipe_publish',
@@ -589,7 +490,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2019-05-28 11:44:34',
                 'updated_at' => '2019-05-28 11:44:34',
             ),
-            52 => 
+            43 => 
             array (
                 'id' => 60,
                 'name' => 'recipe_published',
@@ -600,7 +501,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2019-05-28 11:44:34',
                 'updated_at' => '2019-05-28 11:44:34',
             ),
-            53 => 
+            44 => 
             array (
                 'id' => 61,
                 'name' => 'recipe_private',
@@ -611,7 +512,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2019-05-28 11:44:34',
                 'updated_at' => '2019-05-28 11:44:34',
             ),
-            54 => 
+            45 => 
             array (
                 'id' => 62,
                 'name' => 'recipe_create',
@@ -622,7 +523,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2019-05-28 11:44:34',
                 'updated_at' => '2019-05-28 11:44:34',
             ),
-            55 => 
+            46 => 
             array (
                 'id' => 63,
                 'name' => 'recipe_new',
@@ -633,7 +534,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2019-05-28 11:44:34',
                 'updated_at' => '2019-05-28 11:44:34',
             ),
-            56 => 
+            47 => 
             array (
                 'id' => 64,
                 'name' => 'recipe_future',
@@ -644,71 +545,115 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2019-05-28 11:44:34',
                 'updated_at' => '2019-05-28 11:44:34',
             ),
-            57 => 
+            48 => 
             array (
                 'id' => 65,
-                'name' => 'comment_create',
-                'display_name' => 'Create',
+                'name' => 'comment_add',
+                'display_name' => 'add',
                 'model' => 'comment',
                 'type' => 3,
                 'description' => 'add comments to items on the site',
                 'created_at' => '2019-06-10 13:17:15',
                 'updated_at' => '2019-06-10 13:17:15',
             ),
-            58 => 
+            49 => 
             array (
                 'id' => 166,
                 'name' => 'projects_index',
                 'display_name' => 'index',
-                'model' => 'projects',
+                'model' => 'project',
                 'type' => 3,
                 'description' => 'list projects',
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            59 => 
+            50 => 
             array (
                 'id' => 167,
                 'name' => 'projects_create',
                 'display_name' => 'create',
-                'model' => 'projects',
+                'model' => 'project',
                 'type' => 3,
                 'description' => 'create projects',
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            60 => 
+            51 => 
             array (
                 'id' => 168,
                 'name' => 'projects_edit',
                 'display_name' => 'edit',
-                'model' => 'projects',
+                'model' => 'project',
                 'type' => 3,
                 'description' => 'edit projects',
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            61 => 
+            52 => 
             array (
                 'id' => 169,
                 'name' => 'projects_show',
                 'display_name' => 'show',
-                'model' => 'projects',
+                'model' => 'project',
                 'type' => 3,
                 'description' => 'view projects',
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            62 => 
+            53 => 
             array (
                 'id' => 170,
                 'name' => 'projects_delete',
                 'display_name' => 'delete',
-                'model' => 'projects',
+                'model' => 'project',
                 'type' => 3,
                 'description' => 'delete projects',
                 'created_at' => NULL,
                 'updated_at' => NULL,
+            ),
+            54 => 
+            array (
+                'id' => 191,
+                'name' => 'post_publish',
+                'display_name' => 'publish',
+                'model' => 'post',
+                'type' => 3,
+                'description' => 'publish all posts',
+                'created_at' => '2019-09-01 13:43:41',
+                'updated_at' => '2019-09-01 13:43:41',
+            ),
+            55 => 
+            array (
+                'id' => 192,
+                'name' => 'comment_browse',
+                'display_name' => 'browse',
+                'model' => 'comment',
+                'type' => 3,
+                'description' => 'list comments',
+                'created_at' => '2019-09-02 07:28:14',
+                'updated_at' => '2019-09-02 07:28:14',
+            ),
+            56 => 
+            array (
+                'id' => 193,
+                'name' => 'comment_edit',
+                'display_name' => 'edit',
+                'model' => 'comment',
+                'type' => 3,
+                'description' => 'edit comments',
+                'created_at' => '2019-09-02 07:33:29',
+                'updated_at' => '2019-09-02 07:33:29',
+            ),
+            57 => 
+            array (
+                'id' => 194,
+                'name' => 'comment_delete',
+                'display_name' => 'delete',
+                'model' => 'comment',
+                'type' => 3,
+                'description' => 'delete comments',
+                'created_at' => '2019-09-02 07:34:30',
+                'updated_at' => '2019-09-02 07:34:30',
             ),
         ));
         
