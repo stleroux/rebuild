@@ -19,6 +19,8 @@
 
 	<div class="card mb-3">
 
+@include('recipes.dropdown')
+
 		<div class="card-header section_header p-2">
 			<i class="fab fa-apple"></i>
 			Recipes
