@@ -11,30 +11,36 @@
 // });
 
 Route::prefix('posts')->name('posts.')->group(function() {
+   Route::get('newPosts/{key?}',                'Posts\ExtraViewsController@newPosts')            ->name('newPosts');
+   Route::get('unpublished/{key?}',             'Posts\ExtraViewsController@unpublished')         ->name('unpublished');
+   Route::get('trashed/{key?}',                 'Posts\ExtraViewsController@trashed')             ->name('trashed');
+   Route::get('showTrashed/{id}',               'Posts\ExtraViewsController@showTrashed')         ->name('showTrashed');
+});
 
-   Route::get('newPosts/{key?}',                'PostsController@newPosts')            ->name('newPosts');
-   Route::get('unpublished/{key?}',             'PostsController@unpublished')         ->name('unpublished');
-   Route::get('trashed/{key?}',                 'PostsController@trashed')             ->name('trashed');
-   Route::get('/{id}/show',                     'PostsController@show')                ->name('show');
-   Route::get('/{id}/publish',                  'PostsController@publish')             ->name('publish');
-   Route::post('/publishAll',                   'PostsController@publishAll')          ->name('publishAll');
-   Route::get('/{id}/unpublish',                'PostsController@unpublish')           ->name('unpublish');
-   Route::get('/create',                        'PostsController@create')              ->name('create');
-   Route::post('/store',                        'PostsController@store')               ->name('store');
-   Route::post('/unpublishAll',                 'PostsController@unpublishAll')        ->name('unpublishAll');
-   Route::get('/{key?}',                        'PostsController@index')               ->name('index');
-   Route::get('restore/{id}',                   'PostsController@restore')             ->name('restore');
-   Route::post('restoreAll',                    'PostsController@restoreAll')          ->name('restoreAll');
-   Route::get('showTrashed/{id}',               'PostsController@showTrashed')         ->name('showTrashed');
-   Route::get('/{id}/edit',                     'PostsController@edit')                ->name('edit');
-   Route::put('/{id}/update',                   'PostsController@update')              ->name('update');
-   Route::get('/{id}/deleteImage',              'PostsController@deleteImage')         ->name('deleteImage');
+Route::prefix('posts')->name('posts.')->group(function() {
+   Route::get('/{id}/publish',                  'Posts\FunctionsController@publish')             ->name('publish');
+   Route::post('/publishAll',                   'Posts\FunctionsController@publishAll')          ->name('publishAll');
+   Route::get('/{id}/unpublish',                'Posts\FunctionsController@unpublish')           ->name('unpublish');
+   Route::post('/unpublishAll',                 'Posts\FunctionsController@unpublishAll')        ->name('unpublishAll');
+   Route::get('restore/{id}',                   'Posts\FunctionsController@restore')             ->name('restore');
+   Route::post('restoreAll',                    'Posts\FunctionsController@restoreAll')          ->name('restoreAll');
+   Route::get('showTrashed/{id}',               'Posts\FunctionsController@showTrashed')         ->name('showTrashed');
+   Route::get('/{id}/deleteImage',              'Posts\FunctionsController@deleteImage')         ->name('deleteImage');
    
-   Route::get('/{id}/trash',                    'PostsController@trash')               ->name('trash');
-   Route::delete('/trashDestroy/{id}/{page?}',  'PostsController@trashDestroy')        ->name('trashDestroy');
-   Route::post('/trashAll',                     'PostsController@trashAll')            ->name('trashAll');
+   Route::get('/{id}/trash',                    'Posts\FunctionsController@trash')               ->name('trash');
+   Route::delete('/trashDestroy/{id}/{page?}',  'Posts\FunctionsController@trashDestroy')        ->name('trashDestroy');
+   Route::post('/trashAll',                     'Posts\FunctionsController@trashAll')            ->name('trashAll');
 
-   Route::get('/{id}/delete',                   'PostsController@delete')              ->name('delete');
-   Route::delete('/{id}/deleteDestroy',         'PostsController@deleteDestroy')       ->name('deleteDestroy');
-   Route::post('/deleteAll',                    'PostsController@deleteAll')           ->name('deleteAll');
+   Route::get('/{id}/delete',                   'Posts\FunctionsController@delete')              ->name('delete');
+   Route::delete('/{id}/deleteDestroy',         'Posts\FunctionsController@deleteDestroy')       ->name('deleteDestroy');
+   Route::post('/deleteAll',                    'Posts\FunctionsController@deleteAll')           ->name('deleteAll');
+});
+
+Route::prefix('posts')->name('posts.')->group(function() {
+   Route::get('/{id}/show',                     'Posts\PostsController@show')                ->name('show');
+   Route::get('/create',                        'Posts\PostsController@create')              ->name('create');
+   Route::post('/store',                        'Posts\PostsController@store')               ->name('store');
+   Route::get('/{key?}',                        'Posts\PostsController@index')               ->name('index');
+   Route::get('/{id}/edit',                     'Posts\PostsController@edit')                ->name('edit');
+   Route::put('/{id}/update',                   'Posts\PostsController@update')              ->name('update');
 });

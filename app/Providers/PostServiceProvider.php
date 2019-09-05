@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Models\Post;
+use App\Models\Posts\Post;
 use Carbon\Carbon;
 use DB;
 

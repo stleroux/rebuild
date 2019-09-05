@@ -611,17 +611,6 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            54 => 
-            array (
-                'id' => 191,
-                'name' => 'post_publish',
-                'display_name' => 'publish',
-                'model' => 'post',
-                'type' => 3,
-                'description' => 'publish all posts',
-                'created_at' => '2019-09-01 13:43:41',
-                'updated_at' => '2019-09-01 13:43:41',
-            ),
             55 => 
             array (
                 'id' => 192,

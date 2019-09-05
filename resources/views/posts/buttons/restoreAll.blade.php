@@ -1,4 +1,4 @@
-{{-- @if(checkPerm('post_restore')) --}}
+@if(checkPerm('post_delete'))
    <button
       class="btn btn-{{ $size }} btn-info text-light"
       type="submit"
@@ -10,4 +10,4 @@
       onclick="return confirm('Are you sure you want to restore these posts?')">
       <i class="{{ Config::get('buttons.restore') }}"></i>
    </button>
-{{-- @endif --}}
+@endif

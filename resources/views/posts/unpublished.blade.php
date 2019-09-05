@@ -23,7 +23,7 @@
          <div class="col">
             <div class="card mb-2">
                <div class="card-header section_header p-2">
-                  <i class="fa fa-download"></i>
+                  <i class="{{ Config::get('buttons.unpublished') }}"></i>
                   Unpublished Posts
                   <div class="float-right">
                      <div class="btn-group">
@@ -68,14 +68,10 @@
                               {{-- @if(checkACL('author')) --}}
                               <td class="text-right">
                                  <div class="btn-group">
-                                    @include('posts.buttons.show', ['size'=>'xs'])
                                     @include('posts.buttons.publish', ['size'=>'xs'])
-                                    @if(checkPerm('post_edit', $post))
-                                       @include('posts.buttons.edit', ['size'=>'xs'])
-                                    @endif
-                                    @if(checkPerm('post_delete', $post))
-                                       @include('posts.buttons.trash', ['size'=>'xs'])
-                                    @endif
+                                    @include('posts.buttons.show', ['size'=>'xs'])
+                                    @include('posts.buttons.edit', ['size'=>'xs'])
+                                    @include('posts.buttons.trash', ['size'=>'xs'])
                                  </div>
                               </td>
 

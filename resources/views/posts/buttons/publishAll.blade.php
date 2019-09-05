@@ -1,4 +1,4 @@
-{{-- @if(checkPerm('post_publish')) --}}
+@if(checkPerm('post_edit'))
    <button
       class="btn btn-{{ $size }} btn-primary text-light"
       type="submit"
@@ -10,4 +10,4 @@
       onclick="return confirm('Are you sure you want to publish these posts?')">
       <i class="{{ Config::get('buttons.publish') }} text-success"></i>
    </button>
-{{-- @endif --}}
+@endif

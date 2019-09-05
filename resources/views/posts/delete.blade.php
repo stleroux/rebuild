@@ -31,12 +31,10 @@
                 No - Return To Previous Page
             </a>
             
-            {{-- @if(checkPerm('post_delete')) --}}
-               <button type="submit" class="btn btn-danger">
-                  <i class="far fa-trash-alt"></i>
-                  Yes - Permanently Delete This Recipe
-               </button>
-            {{-- @endif --}}
+            <button type="submit" class="btn btn-danger">
+               <i class="far fa-trash-alt"></i>
+               Yes - Permanently Delete This Recipe
+            </button>
          {{ Form::close() }}
       </div>
       <div class="card-footer pt-1 pb-1 pl-2">

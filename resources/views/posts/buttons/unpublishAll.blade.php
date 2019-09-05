@@ -1,4 +1,4 @@
-@if(checkPerm('post_publish'))
+@if(checkPerm('post_edit'))
    <button
       class="btn btn-{{ $size }} btn-primary text-light"
       type="submit"

@@ -39,7 +39,7 @@
          <tbody>
            <tr class="d-flex">
                <td class="col-2">Browse</td>
-               <td class="col-5">BROWSE ALL records of the specified model</td>
+               <td class="col-5">BROWSE ALL records</td>
                <td class="col-1 text-center text-success"><i class="fas fa-fw fa-check-square"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
@@ -49,7 +49,7 @@
 
             <tr class="d-flex">
                <td class="col-2">Read</td>
-               <td class="col-5">READ ALL records of the specified model</td>
+               <td class="col-5">READ ALL records</td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-success"><i class="fas fa-fw fa-check-square"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
@@ -58,7 +58,7 @@
             </tr>
             <tr class="d-flex">
                <td class="col-2">Edit</td>
-               <td class="col-5">EDIT ALL records of the specified model</td>
+               <td class="col-5">EDIT ALL records</td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-success"><i class="fas fa-fw fa-check-square"></i></td>
@@ -67,7 +67,7 @@
             </tr>
             <tr class="d-flex">
                <td class="col-2">Add</td>
-               <td class="col-5">ADD new records of the specified model</td>
+               <td class="col-5">ADD new records</td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
@@ -76,16 +76,19 @@
             </tr>
             <tr class="d-flex">
                <td class="col-2">Delete</td>
-               <td class="col-5">DELETE ALL records of the specified model</td>
+               <td class="col-5">DELETE ALL records</td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-success"><i class="fas fa-fw fa-check-square"></i></td>
             </tr>
+            <tr class="d-flex bg-dark">
+               <td class="col-12"></td>
+            </tr>
             <tr class="d-flex">
                <td class="col-2">Read Own</td>
-               <td class="col-5">READ records of the specified model that they authored</td>
+               <td class="col-5">READ authored records</td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-info"><i class="fas fa-fw fa-check-square"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
@@ -94,7 +97,7 @@
             </tr>
             <tr class="d-flex">
                <td class="col-2">Edit Own</td>
-               <td class="col-5">EDIT records of the specified model that they authored</td>
+               <td class="col-5">EDIT authored records</td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-info"><i class="fas fa-fw fa-check-square"></i></td>
@@ -102,71 +105,68 @@
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
             </tr>
             <tr class="d-flex">
-               <td class="col-2">Delete Own</td>
-               <td class="col-5">DELETE records of the specified model that they authored</td>
+               <td class="col-2">Trash Own</td>
+               <td class="col-5">TRASH authored records</td>
+               <td class="col-1 text-center text-secondary"><i class="fas fa-fw fa-check-square"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
-               <td class="col-1 text-center text-info"><i class="fas fa-fw fa-check-square"></i></td>
+            </tr>
+            <tr class="d-flex text-danger">
+               <td class="col-2">Restore Own</td>
+               <td class="col-5">RESTORE authored records</td>
+               <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
+               <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
+               <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
+               <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
+               <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
             </tr>
             <tr class="d-flex">
                <td class="col-2">Private \ Public Own</td>
-               <td class="col-5">make a specified model that they authored, PRIVATE or PUBLIC accessible</td>
-               <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
-               <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
-               <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
+               <td class="col-5">PRIVATIZE or PUBLICIZE authored records</td>
                <td class="col-1 text-center text-secondary"><i class="fas fa-fw fa-check-square"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
+               <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
+               <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
+               <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
+            </tr>
+            <tr class="d-flex bg-dark">
+               <td class="col-12"></td>
             </tr>
             <tr class="d-flex">
                <td class="col-2">Publish \ Unpublish All</td>
-               <td class="col-5">PUBLISH or UNPUBLISH records of the specified model</td>
+               <td class="col-5">PUBLISH or UNPUBLISH records</td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-secondary"><i class="fas fa-fw fa-check-square"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
-               <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
-            </tr>
-            <tr class="d-flex">
-               <td class="col-2">Restore Own</td>
-               <td class="col-5">RESTORE records of the specified model that they authored</td>
-               <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
-               <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
-               <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
-               <td class="col-1 text-center text-secondary"><i class="fas fa-fw fa-check-square"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
             </tr>
             <tr class="d-flex">
                <td class="col-2">Restore All</td>
-               <td class="col-5">RESTORE ALL records of the specified model</td>
+               <td class="col-5">RESTORE ALL records</td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-secondary"><i class="fas fa-fw fa-check-square"></i></td>
-            </tr>
-            <tr class="d-flex">
-               <td class="col-2">Trash Own</td>
-               <td class="col-5">TRASH records of the specified model that they authored</td>
-               <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
-               <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
-               <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
-               <td class="col-1 text-center text-secondary"><i class="fas fa-fw fa-check-square"></i></td>
-               <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
             </tr>
             <tr class="d-flex">
                <td class="col-2">Trash All</td>
-               <td class="col-5">TRASH ALL records of the specified model</td>
+               <td class="col-5">TRASH ALL records</td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-secondary"><i class="fas fa-fw fa-check-square"></i></td>
             </tr>
+            <tr class="d-flex bg-dark">
+               <td class="col-12"></td>
+            </tr>
             <tr class="d-flex">
                <td class="col-2">Unpublished Listings Page</td>
-               <td class="col-5">view the UNPUBLISHED records of the specified model</td>
+               <td class="col-5">View the UNPUBLISHED records</td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-secondary"><i class="fas fa-fw fa-check-square"></i></td>
@@ -175,7 +175,7 @@
             </tr>
             <tr class="d-flex">
                <td class="col-2">Trashed Listings Page</td>
-               <td class="col-5">view the TRASHED records of the specified model</td>
+               <td class="col-5">View the TRASHED records</td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-secondary"><i class="fas fa-fw fa-check-square"></i></td>
@@ -184,7 +184,7 @@
             </tr>
             <tr class="d-flex">
                <td class="col-2">New Listings Page</td>
-               <td class="col-5">view the NEW records of the specified model</td>
+               <td class="col-5">View the NEW records</td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-secondary"><i class="fas fa-fw fa-check-square"></i></td>
@@ -193,10 +193,31 @@
             </tr>
             <tr class="d-flex">
                <td class="col-2">Future Listings Page</td>
-               <td class="col-5">view the FUTURE records of the specified model</td>
+               <td class="col-5">View the FUTURE records</td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-secondary"><i class="fas fa-fw fa-check-square"></i></td>
+               <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
+               <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
+            </tr>
+            <tr class="d-flex bg-dark">
+               <td class="col-12">Other (To be re-visited)</td>
+            </tr>
+            <tr class="d-flex">
+               <td class="col-2">Delete Image</td>
+               <td class="col-5"></td>
+               <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
+               <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
+               <td class="col-1 text-center text-secondary"><i class="fas fa-fw fa-check-square"></i></td>
+               <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
+               <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
+            </tr>
+            <tr class="d-flex">
+               <td class="col-2">View Image</td>
+               <td class="col-5"></td>
+               <td class="col-1 text-center text-secondary"><i class="fas fa-fw fa-check-square"></i></td>
+               <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
+               <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
             </tr>

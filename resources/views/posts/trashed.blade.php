@@ -22,8 +22,8 @@
 		<div class="row">
 			<div class="col">
 				<div class="card mb-3">
-					<div class="card-header card_header p-2">
-						<i class="far fa-trash-alt"></i>
+					<div class="card-header section_header p-2">
+						<i class="{{ Config::get('buttons.trashed') }}"></i>
 						Trashed Posts
 						<div class="float-right">
 							<div class="btn-group">
@@ -70,9 +70,7 @@
 												<div class="btn-group">
 													@include('posts.buttons.show', ['size'=>'xs'])
 											 		@include('posts.buttons.restore', ['size'=>'xs'])
-											 		@if(checkPerm('post_delete', $post))
-														@include('posts.buttons.delete', ['size'=>'xs'])
-												 	@endif
+													@include('posts.buttons.delete', ['size'=>'xs'])
 												</div>
 											</td>
 										</tr>
