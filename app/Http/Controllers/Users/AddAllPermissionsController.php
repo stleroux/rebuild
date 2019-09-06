@@ -11,28 +11,35 @@ use App\Http\Controllers\Controller;
 
 class AddAllPermissionsController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function __invoke(Request $request)
-    {
-        // Get user
-        $user = User::findOrFail($request->id);
+   /**
+    * Handle the incoming request.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
+   public function __invoke(Request $request)
+   {
+      // Check if user has required permission
+      if($this->enablePermissions)
+      {
+         if(!checkPerm('user_edit')) { abort(401, 'Unauthorized Access'); }
+      }
+      
+      // Get user
+      $user = User::findOrFail($request->id);
 
-        // Get all permissions
-        $permissions = Permission::all();
+      // Get all permissions
+      $permissions = Permission::all();
 
-        foreach ($permissions as $p) {
-            DB::table('permission_user')->updateOrInsert([
-                'user_id' => $user->id,
-                'permission_id' => $p->id
-            ]);
-        }
-        
-        Session::flash ('success', 'All permissions successfully added!');
-        return redirect()->route('users.edit', $user->id);
-    }
+      foreach ($permissions as $p) {
+         DB::table('permission_user')->updateOrInsert([
+            'user_id' => $user->id,
+            'permission_id' => $p->id
+         ]);
+      }
+      
+      Session::flash ('success', 'All permissions successfully added!');
+      return redirect()->route('users.edit', $user->id);
+   }
+
 }

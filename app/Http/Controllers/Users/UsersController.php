@@ -28,7 +28,7 @@ class UsersController extends Controller
 	public function __construct()
 	{
 		$this->middleware('auth');
-      $this->enablePermissions = false;
+      $this->enablePermissions = true;
 	}
 
 
@@ -43,15 +43,17 @@ class UsersController extends Controller
 ##################################################################################################################
 	public function index()
 	{
+		// Check if user has required permission
+      if($this->enablePermissions)
+      {
+         if(!checkPerm('user_browse')) { abort(401, 'Unauthorized Access'); }
+      }
+
 		// Set the session to the current page route
       Session::put('fromPage', url()->full());
 
-		if($this->enablePermissions)
-      {
-         if(!checkPerm('user_index')) { abort(401, 'Unauthorized Access'); }
-      }
-
 		$users = User::orderby('username', 'asc')->get();
+
 		return view('users.index', compact('users'));
 	}
 
@@ -67,9 +69,10 @@ class UsersController extends Controller
 ##################################################################################################################
 	public function create()
 	{
-		if($this->enablePermissions)
+		// Check if user has required permission
+      if($this->enablePermissions)
       {
-         if(!checkPerm('user_create')) { abort(401, 'Unauthorized Access'); }
+         if(!checkPerm('user_add')) { abort(401, 'Unauthorized Access'); }
       }
 
 		$user = new User();
@@ -149,12 +152,14 @@ class UsersController extends Controller
 ##################################################################################################################
 	public function delete(User $user)
 	{
-		if($this->enablePermissions)
+		// Check if user has required permission
+      if($this->enablePermissions)
       {
          if(!checkPerm('user_delete')) { abort(401, 'Unauthorized Access'); }
       }
 
 		$user = User::findOrFail($user->id);
+
 		return view('users.delete', compact('user'));
 	}
 
@@ -171,7 +176,8 @@ class UsersController extends Controller
 ##################################################################################################################
 	public function destroy(User $user)
 	{
-		if($this->enablePermissions)
+		// Check if user has required permission
+      if($this->enablePermissions)
       {
          if(!checkPerm('user_delete')) { abort(401, 'Unauthorized Access'); }
       }
@@ -200,6 +206,7 @@ class UsersController extends Controller
 	public function edit($id)
 	{
 
+      // Check if user has required permission
       if($this->enablePermissions)
       {
          if(!checkPerm('user_edit')) { abort(401, 'Unauthorized Access'); }
@@ -290,9 +297,10 @@ class UsersController extends Controller
 ##################################################################################################################
 	public function show($id)
 	{
-		if($this->enablePermissions)
+		// Check if user has required permission
+      if($this->enablePermissions)
       {
-         if(!checkPerm('user_show')) { abort(401, 'Unauthorized Access'); }
+         if(!checkPerm('user_read')) { abort(401, 'Unauthorized Access'); }
       }
 		
 		$user = User::find($id);
@@ -365,6 +373,12 @@ class UsersController extends Controller
 ##################################################################################################################
 	public function store(Request $request)
 	{
+      // Check if user has required permission
+      if($this->enablePermissions)
+      {
+         if(!checkPerm('user_add')) { abort(401, 'Unauthorized Access'); }
+      }
+
 		$this->validate($request, [
 			'username' => 'required',
 			'email' => 'required|email|unique:users,email',
@@ -442,6 +456,12 @@ class UsersController extends Controller
 ##################################################################################################################
 	public function update(Request $request, User $user)
 	{
+      // Check if user has required permission
+      if($this->enablePermissions)
+      {
+         if(!checkPerm('user_edit')) { abort(401, 'Unauthorized Access'); }
+      }
+
 		$this->validate($request, [
 			'username' => 'required',
 			'email' => 'required|email|unique:users,email,'.$user->id,

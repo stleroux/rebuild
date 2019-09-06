@@ -19,13 +19,11 @@
 				<div class="card-header section_header p-2">
 					<i class="fas fa-shield-alt"></i>
 					Permissions
-					@if(checkPerm('permission_create'))
-						<span class="float-sm-right">
-							<div class="btn-group">
-								@include('permissions.buttons.add', ['size'=>'xs'])
-							</div>
-						</span>
-					@endif
+					<span class="float-sm-right">
+						<div class="btn-group">
+							@include('permissions.buttons.add', ['size'=>'xs'])
+						</div>
+					</span>
 				</div>
 				<div class="card-body section_body p-2">
 					<table id="datatable" class="table table-hover table-sm">

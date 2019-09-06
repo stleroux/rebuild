@@ -24,7 +24,7 @@ class ProfileController extends Controller
    public function __construct()
    {
       $this->middleware('auth');
-      $this->enablePermissions = true;
+      $this->enablePermissions = false;
    }
 
 
@@ -65,18 +65,17 @@ class ProfileController extends Controller
 ##################################################################################################################
    public function edit(Request $request, $id)
    {
-      $user = User::findOrFail($id);
+      // $user = User::findOrFail($id);
+      $user = Auth::user();
       // dd($user);
 
-      if($this->enablePermissions)
-      {
-         if(!checkPerm('profile_edit', $user)) { abort(401, 'Unauthorized Access'); }
-      }
-
-      // $user = User::with('profile')->findOrFail($id);
-      
+      // if($this->enablePermissions)
+      // {
+      //    if(!checkPerm('auto', $user)) { abort(401, 'Unauthorized Access'); }
+      // }
 
       return view('users.profile.edit', compact('user'));
+      // return view('users.profile.edit')->with('user', Auth::user());
    }
 
 
@@ -103,11 +102,6 @@ class ProfileController extends Controller
          $user->layout = 1;
       $user->save();
       
-      // Save entry to log file using built-in Monolog
-      //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") UPDATED article (" . $article->id . ")\r\n",
-      //    [json_decode($article, true)]
-      //);
-
       Session::flash('success','Your preferences have been reset to their default values successfully.');
       return redirect()->back();
    }
@@ -130,7 +124,7 @@ class ProfileController extends Controller
 
       if($this->enablePermissions)
       {
-         if(!checkPerm('profile_show', $user)) { abort(401, 'Unauthorized Access'); }
+         if(!checkPerm('', $user)) { abort(401, 'Unauthorized Access'); }
       }
 
       // Set the session to the current page route
@@ -220,7 +214,6 @@ class ProfileController extends Controller
       $user->permissions()->sync($request->input('permission'));
 
       Session::flash('success','Your profile has been updated.');
-      // return redirect()->back();
       return view('users.profile.show', compact('user'));
    }
 

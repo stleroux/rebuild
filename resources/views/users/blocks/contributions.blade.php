@@ -21,7 +21,7 @@
 			<td>
 				Posts
 				<span class="badge badge-secondary badge-pill float-right">
-					{{ App\Models\Post::where('user_id','=', Auth::user()->id)->count() }}
+					{{ App\Models\Posts\Post::where('user_id','=', Auth::user()->id)->count() }}
 				</span>
 			</td>
 		</tr>

@@ -23,7 +23,7 @@ class PermissionsController extends Controller
 	public function __construct()
 	{
 		$this->middleware('auth');
-      $this->enablePermissions = false;
+      $this->enablePermissions = true;
 	}
 
 
@@ -40,7 +40,7 @@ class PermissionsController extends Controller
 	{
 		// Check if user has required permission
 		if($this->enablePermissions) {
-			if(!checkPerm('permission_create')) { abort(401, 'Unauthorized Access'); }
+			if(!checkPerm('permission_add')) { abort(401, 'Unauthorized Access'); }
 		}
 
 		$permission = New Permission();
@@ -61,7 +61,9 @@ class PermissionsController extends Controller
 	public function delete(Permission $permission)
 	{
 		// Check if user has required permission
-		if(!checkPerm('permission_delete')) { abort(401, 'Unauthorized Access'); }
+		if($this->enablePermissions) {
+			if(!checkPerm('permission_delete')) { abort(401, 'Unauthorized Access'); }
+		}
 
 		$permission = Permission::findOrFail($permission->id);
 		return view('permissions.delete', compact('permission'));
@@ -81,7 +83,9 @@ class PermissionsController extends Controller
 	public function destroy(Permission $permission)
 	{
 		// Check if user has required permission
-		if(!checkPerm('permission_delete')) { abort(401, 'Unauthorized Access'); }
+		if($this->enablePermissions) {
+			if(!checkPerm('permission_delete')) { abort(401, 'Unauthorized Access'); }
+		}
 
 		$permission = Permission::find($permission->id);
 		$permission->delete();
@@ -106,7 +110,9 @@ class PermissionsController extends Controller
 	public function edit(Permission $permission)
 	{
 		// Check if user has required permission
-		if(!checkPerm('permission_edit')) { abort(401, 'Unauthorized Access'); }
+		if($this->enablePermissions) {
+			if(!checkPerm('permission_edit')) { abort(401, 'Unauthorized Access'); }
+		}
 
 		$permission = Permission::findOrFail($permission->id);
 		return view('permissions.edit', compact('permission')); 
@@ -125,7 +131,9 @@ class PermissionsController extends Controller
 	public function index()
 	{
 		// Check if user has required permission
-		if(!checkPerm('permission_index')) { abort(401, 'Unauthorized Access'); }
+		if($this->enablePermissions) {
+			if(!checkPerm('permission_browse')) { abort(401, 'Unauthorized Access'); }
+		}
 
 		$permissions = Permission::orderBy('name')->get();
 		return view('permissions.index', compact('permissions'));
@@ -144,7 +152,9 @@ class PermissionsController extends Controller
 	public function show(Permission $permission)
 	{
 		// Check if user has required permission
-		if(!checkPerm('permission_show')) { abort(401, 'Unauthorized Access'); }
+		if($this->enablePermissions) {
+			if(!checkPerm('permission_read')) { abort(401, 'Unauthorized Access'); }
+		}
 
 		$permission = Permission::findOrFail($permission->id);
 		return view('permissions.show', compact('permission')); 
@@ -163,6 +173,11 @@ class PermissionsController extends Controller
 	// public function store(CreatePermissionRequest $request, Permission $permission)
 	public function store(Request $request, Permission $permission)
 	{
+		// Check if user has required permission
+		if($this->enablePermissions) {
+			if(!checkPerm('permission_add')) { abort(401, 'Unauthorized Access'); }
+		}
+
 		if($request->bread){
 			$rules = [
             'b_model' => 'required',
@@ -245,6 +260,11 @@ class PermissionsController extends Controller
 ##################################################################################################################
 	public function update(UpdatePermissionRequest $request, Permission $permission)
 	{
+		// Check if user has required permission
+		if($this->enablePermissions) {
+			if(!checkPerm('permission_edit')) { abort(401, 'Unauthorized Access'); }
+		}
+
 		// save the data in the database
 		$permission = Permission::findOrFail($permission->id);
 			// $permission->name = $request->name;

@@ -26,7 +26,7 @@ class ResetPasswordController extends Controller
    public function __construct()
    {
       $this->middleware('auth');
-      $this->enablePermissions = false;
+      $this->enablePermissions = true;
    }
 
 
@@ -40,6 +40,12 @@ class ResetPasswordController extends Controller
 ##################################################################################################################
    public function edit($id)
    {
+            // Check if user has required permission
+      if($this->enablePermissions)
+      {
+         if(!checkPerm('user_edit')) { abort(401, 'Unauthorized Access'); }
+      }
+
       $user = User::findOrFail($id);
       return view('users.profile.resetPassword', compact('user'));
    }
@@ -56,6 +62,12 @@ class ResetPasswordController extends Controller
 ##################################################################################################################
    public function update(Request $request)
    {
+      // Check if user has required permission
+      if($this->enablePermissions)
+      {
+         if(!checkPerm('user_edit')) { abort(401, 'Unauthorized Access'); }
+      }
+
       // The current password does not match the one provided
       if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
          Session::flash ('danger', 'Your current password does not match the password you provided. Please try again.');

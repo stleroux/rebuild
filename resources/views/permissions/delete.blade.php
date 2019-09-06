@@ -31,12 +31,10 @@
 
             <a class="btn btn-secondary" href="{{ route('permissions.index') }}">No - Return To Previous Page</a>
             
-            @if(checkPerm('permission_delete'))
-               <button type="submit" class="btn btn-danger">
-                  <i class="far fa-trash-alt" aria-hidden="true"></i>
-                  Yes - Delete Permanently
-               </button>
-            @endif
+            <button type="submit" class="btn btn-danger">
+               <i class="far fa-trash-alt" aria-hidden="true"></i>
+               Yes - Permanently Delete this Permission
+            </button>
          </form>
       </div>
       <div class="card-footer pt-1 pb-1 pl-2">

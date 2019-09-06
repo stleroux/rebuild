@@ -12,21 +12,17 @@
       
       @if(checkPerm('albums_index'))
          <a href="#"
-            class="list-group-item list-group-item-action p-1 {{ Request::is('albums*') ? 'menu_active' : '' }}">
-            <i class="text-danger">
-               <i class="fas fa-camera-retro fa-fw"></i>
-               Albums
-            </i>
+            class="list-group-item list-group-item-action p-1 {{ Request::is('albums*') ? 'menu_active' : '' }} text-danger">
+            <i class="fas fa-camera-retro fa-fw"></i>
+            Albums
          </a>
       @endif
 
       @if(checkPerm('article_index'))
          <a href="{{ route('articles.index') }}"
-            class="list-group-item list-group-item-action p-1 {{ Route::is('articles.*') ? 'menu_active' : '' }}">
-            <i class="text-danger">
-               <i class="far fa-newspaper fa-fw"></i>
-               Articles
-            </i>
+            class="list-group-item list-group-item-action p-1 {{ Route::is('articles.*') ? 'menu_active' : '' }} text-danger">
+            <i class="far fa-newspaper fa-fw"></i>
+            Articles
          </a>
       @endif
 
@@ -38,7 +34,7 @@
 
       @if(checkPerm('category_browse'))
          <a href="{{ route('categories.index') }}"
-            class="list-group-item list-group-item-action p-1 {{ Request::is('categories*') ? 'menu_active' : '' }}">
+            class="list-group-item list-group-item-action p-1 {{ Request::is('categories*') ? 'menu_active' : '' }} text-warning">
             <i class="fa fa-sitemap fa-fw"></i>
             Categories
          </a>
@@ -46,7 +42,7 @@
 
       @if(checkPerm('comment_browse'))
          <a href="{{ route('comments.index') }}"
-            class="list-group-item list-group-item-action p-1 {{ Request::is('comments*') ? 'menu_active' : '' }}">
+            class="list-group-item list-group-item-action p-1 {{ Request::is('comments*') ? 'menu_active' : '' }} text-warning">
             <i class="fas fa-comments fa-fw"></i>
             Comments
          </a>
@@ -54,11 +50,9 @@
 
       @if(checkPerm('dart_index'))
          <a href="#"
-            class="list-group-item list-group-item-action p-1 {{ Route::is('darts.*') ? 'menu_active' : '' }}">
-            <i class="text-danger">
-               <i class="fas fa-bullseye fa-fw"></i>
-               Darts
-            </i>
+            class="list-group-item list-group-item-action p-1 {{ Route::is('darts.*') ? 'menu_active' : '' }} text-danger">
+            <i class="fas fa-bullseye fa-fw"></i>
+            Darts
          </a>
       @endif
 
@@ -70,9 +64,9 @@
          </a>
       @endif
 
-      @if(checkPerm('permission_index'))
+      @if(checkPerm('permission_browse'))
          <a href="{{ route('permissions.index') }}"
-            class="list-group-item list-group-item-action p-1 {{ Route::is('permissions.*') ? 'menu_active' : '' }}">
+            class="list-group-item list-group-item-action p-1 {{ Route::is('permissions.*') ? 'menu_active' : '' }} text-warning">
             <i class="fas fa-shield-alt fa-fw"></i>
             Permissions
          </a>
@@ -80,7 +74,7 @@
 
       @if(checkPerm('post_browse'))
          <a href="{{ route('posts.index') }}"
-            class="list-group-item list-group-item-action p-1 {{ Request::is('posts*') ? 'menu_active' : '' }}">
+            class="list-group-item list-group-item-action p-1 {{ Request::is('posts*') ? 'menu_active' : '' }} text-warning">
             <i class="far fa-newspaper fa-fw"></i>
             Posts
          </a>
@@ -101,7 +95,7 @@
                Route::is('projects.create') ||
                Route::is('finishes*') ||
                Route::is('materials*')
-            ) ? 'menu_active' : '' }}">
+            ) ? 'menu_active' : '' }} text-warning">
             <i class="fas fa-list-ol fa-fw"></i>
             Projects List
          </a>
@@ -129,9 +123,9 @@
          </a>
       @endif
 
-      @if(checkPerm('user_index'))
+      @if(checkPerm('user_browse'))
          <a href="{{ route('users.index') }}"
-            class="list-group-item list-group-item-action p-1 {{ Route::is('users.*') ? 'menu_active' : '' }}">
+            class="list-group-item list-group-item-action p-1 {{ Route::is('users.*') ? 'menu_active' : '' }} text-warning">
             <i class="fas fa-users fa-fw"></i>
             Users
          </a>
