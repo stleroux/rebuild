@@ -31,9 +31,9 @@ Route::prefix('posts')->name('posts.')->group(function() {
    Route::delete('/trashDestroy/{id}/{page?}',  'Posts\FunctionsController@trashDestroy')        ->name('trashDestroy');
    Route::post('/trashAll',                     'Posts\FunctionsController@trashAll')            ->name('trashAll');
 
-   Route::get('/{id}/delete',                   'Posts\FunctionsController@delete')              ->name('delete');
-   Route::delete('/{id}/deleteDestroy',         'Posts\FunctionsController@deleteDestroy')       ->name('deleteDestroy');
-   Route::post('/deleteAll',                    'Posts\FunctionsController@deleteAll')           ->name('deleteAll');
+   Route::get('/{id}/delete',                   'Posts\PostsController@delete')              ->name('delete');
+   Route::delete('/{id}/deleteDestroy',         'Posts\PostsController@deleteDestroy')       ->name('deleteDestroy');
+   Route::post('/deleteAll',                    'Posts\PostsController@deleteAll')           ->name('deleteAll');
 });
 
 Route::prefix('posts')->name('posts.')->group(function() {

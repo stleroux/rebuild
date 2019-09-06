@@ -37,7 +37,7 @@ class PostsController extends Controller
 	public function __construct() {
 		// only allow authenticated users to access these pages
 		$this->middleware('auth');
-      // $this->enablePermissions = true;
+      $this->enablePermissions = true;
 	}
 	
 

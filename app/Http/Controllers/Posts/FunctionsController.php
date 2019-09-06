@@ -174,18 +174,23 @@ class FunctionsController extends Controller
 # ╚═╝  ╚═╝╚══════╝╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝
 // RESTORE TRASHED FILE
 ##################################################################################################################
-   // public function restore($id)
-   // {
-   //    $post = Post::withTrashed()->findOrFail($id);
+   public function restore($id)
+   {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      }
 
-   //    // Check if user has required permission
-   //    if(!checkPerm('post_edit', $post)) { abort(401, 'Unauthorized Access'); }
+      $post = Post::withTrashed()->findOrFail($id);
 
-   //    $post->restore();
+      // Check if user has required permission
+      if(!checkPerm('post_edit', $post)) { abort(401, 'Unauthorized Access'); }
 
-   //    Session::flash ('success','The post was successfully restored.');
-   //    return redirect(Session::get('fromPage'));
-   // }
+      $post->restore();
+
+      Session::flash ('success','The post was successfully restored.');
+      return redirect(Session::get('fromPage'));
+   }
 
 
 ##################################################################################################################

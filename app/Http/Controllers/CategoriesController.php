@@ -149,7 +149,7 @@ class CategoriesController extends Controller
 
 		// Check if user has required permission
 		if($this->enablePermissions) {
-			if(!checkPerm('category_edit', $category)) { abort(401, 'Unauthorized Access'); }
+			if(!checkPerm('category_edit')) { abort(401, 'Unauthorized Access'); }
 		}
 
 		return  view('categories.edit', compact('category'));
