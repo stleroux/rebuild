@@ -1,5 +1,5 @@
 <?php
 
-Route::resource('settings', 'SettingsController');
+Route::resource('settings', 'Admin\SettingsController');
 // ->except('update');
-Route::put('updateAll', 'SettingsController@updateAll')->name('settings.updateAll');
+Route::put('updateAll', 'Admin\SettingsController@updateAll')->name('settings.updateAll');

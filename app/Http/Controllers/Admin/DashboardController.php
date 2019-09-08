@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Permission;
 use App\Models\User;
-use App\Models\Post;
+use App\Models\Posts\Post;
 use App\Models\Recipes\Recipe;
 
 class DashboardController extends Controller

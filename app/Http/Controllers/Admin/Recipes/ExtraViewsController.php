@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Recipes;
+namespace App\Http\Controllers\Admin\Recipes;
 
 use App\Http\Controllers\Controller; // Required for validation
 use App\Http\Requests\CreateCommentRequest;

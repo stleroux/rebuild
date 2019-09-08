@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Posts;
+namespace App\Http\Controllers\Admin\Posts;
 
 use App\Http\Controllers\Controller; // Required for validation // use Illuminate\Routing\Controller;
 use App\Models\Posts\Post;

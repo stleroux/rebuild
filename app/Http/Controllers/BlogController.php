@@ -28,7 +28,6 @@ class BlogController extends Controller
 ##################################################################################################################
    public function __construct() {
       $this->enablePermissions = false;
-      //Log::useFiles(storage_path().'/logs/audits.log');
    }
 
 
@@ -68,10 +67,7 @@ class BlogController extends Controller
 ##################################################################################################################
    public function getIndex()
    {
-      // Check if user has required permission
-      // if(!checkPerm('post_blog_index')) { abort(401, 'Unauthorized Access'); }
-
-      $posts = Post::published()->with('user')->orderBy('published_at','desc')->paginate(5);//->get();
+      $posts = Post::published()->with('user')->orderBy('published_at','desc')->paginate(5);
 
       return view ('blog.index', compact('posts'));
    }
@@ -87,9 +83,6 @@ class BlogController extends Controller
 ##################################################################################################################
    public function print($id)
    {
-      // Check if user has required permission
-      // if(!checkPerm('post_blog_index')) { abort(401, 'Unauthorized Access'); }
-
       $post = Post::find($id);
 
       return view('blog.print', compact('post'));
