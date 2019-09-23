@@ -219,6 +219,13 @@ div.sticky {
 }
 /* Bootstrap multi-select Ends */
 
+
+/* Used on the categories ADD page to capitalize the SubCategory dropdown which is created by Javascript */
+ .capitalize {
+    text-transform: capitalize;   
+  }
+  
+
 /* Adjust the number of columns to display when using card-columns like in the permissions section of user management */
 /*@media (min-width: 34em) {
     .card-columns-permissions {

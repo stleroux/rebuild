@@ -10,7 +10,7 @@
                @foreach ($popularRecipes as $r)
                   <a class="list-group-item list-group-item-action p-1" href="{{ route('recipes.show', $r->id) }}" role="button" style="text-decoration: none">
                      <div class="text text-left">
-                        <i class="far fa-address-card"></i>
+                        <i class="far fa-address-card fa-fw"></i>
                         {{ $r->title }}
                         <span class="badge badge-info text-dark float-right">{{ $r->views }}</span>
                      </div>

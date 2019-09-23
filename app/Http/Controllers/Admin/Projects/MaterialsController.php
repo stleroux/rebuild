@@ -43,7 +43,7 @@ class MaterialsController extends Controller
 
         $material = New Material();
 
-        return view('projects.materials.create', compact('material'));
+        return view('admin.projects.materials.create', compact('material'));
     }
 
 
@@ -57,7 +57,7 @@ class MaterialsController extends Controller
 // Remove the specified resource from storage
 // Used in the index page and trashAll action to soft delete multiple records
 ##################################################################################################################
-    public function destroy(Material $material)
+    public function destroy(Material $material, $id)
     {
         // Check if user has required permission
         if($this->enablePermissions)
@@ -65,12 +65,14 @@ class MaterialsController extends Controller
             if(!checkPerm('projects_delete')) { abort(401, 'Unauthorized Access'); }
         }
 
+        $material = Material::find($id);
+
         $material->delete();
 
         // Set flash data with success message
-        Session::flash('delete','The material was deleted successfully.');
+        Session::flash('success','The material was deleted successfully.');
         // Redirect
-        return redirect()->route('materials.index');
+        return redirect()->route('admin.projects.materials.index');
     }
 
 
@@ -91,7 +93,7 @@ class MaterialsController extends Controller
             if(!checkPerm('projects_delete')) { abort(401, 'Unauthorized Access'); }
         }
 
-        return view('projects.materials.delete', compact('material'));
+        return view('admin.projects.materials.delete', compact('material'));
     }
 
 
@@ -104,7 +106,7 @@ class MaterialsController extends Controller
 # ╚══════╝╚═════╝ ╚═╝   ╚═╝   
 // Show the form for editing the specified resource
 ##################################################################################################################
-    public function edit(Material $material)
+    public function edit(Material $material, $id)
     {
         // Check if user has required permission
         if($this->enablePermissions)
@@ -112,7 +114,9 @@ class MaterialsController extends Controller
             if(!checkPerm('projects_edit')) { abort(401, 'Unauthorized Access'); }
         }
 
-        return view('projects.materials.edit', compact('material'));
+        $material = Material::find($id);
+
+        return view('admin.projects.materials.edit', compact('material'));
     }
 
 
@@ -135,7 +139,7 @@ class MaterialsController extends Controller
 
         $materials = Material::All();
 
-        return view('projects.materials.index', compact('materials'));
+        return view('admin.projects.materials.index', compact('materials'));
     }
 
 
@@ -153,7 +157,7 @@ class MaterialsController extends Controller
         Material::create($this->validateRequest());
 
         Session::flash('store','The material was added successfully.');
-        return redirect('materials');
+        return redirect()->route('admin.projects.materials.index');
     }
 
 
@@ -166,7 +170,7 @@ class MaterialsController extends Controller
 # ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝ 
 // Display the specified resource
 ##################################################################################################################
-    public function show(Material $material)
+    public function show(Material $material, $id)
     {
         // Check if user has required permission
         if($this->enablePermissions)
@@ -174,7 +178,9 @@ class MaterialsController extends Controller
             if(!checkPerm('projects_show')) { abort(401, 'Unauthorized Access'); }
         }
 
-        return view('projects.materials.show', compact('material'));
+        $material = Material::find($id);
+
+        return view('admin.projects.materials.show', compact('material'));
     }
 
 
@@ -187,12 +193,14 @@ class MaterialsController extends Controller
 #  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
 // UPDATE :: Update the specified resource in storage
 ##################################################################################################################
-    public function update(Material $material)
+    public function update(Material $material, $id)
     {
+        $material = Material::find($id);
+
         $material->update($this->validateRequest());
 
         Session::flash('update','The material was updated successfully.');
-        return redirect('materials');
+        return redirect()->route('admin.projects.materials.index');
     }
 
 

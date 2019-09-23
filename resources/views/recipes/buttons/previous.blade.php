@@ -1,8 +1,8 @@
 @if($previous)
-   <a href="{{ route('recipes.show', $previous) }}"
-      class="btn btn-{{$size}} btn-primary text-light col-sm-5"
+   <a href="{{ route('recipes.show', [$previous, $byCatName]) }}"
+      class="btn btn-{{$size}} btn-primary text-light"
       title="Previous Recipe">
       <i class="{{ Config::get('buttons.previous') }}"></i>
-      View Previous
+      View Previous      
    </a>
 @endif

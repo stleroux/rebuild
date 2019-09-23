@@ -1,8 +1,8 @@
 <?php
 use Illuminate\Support\Facades\Input;
 
-Route::prefix('categories')->name('categories.')->group(function() {
-   Route::get('{cat}/delete',             'Admin\CategoriesController@delete')               ->name('delete');
+Route::prefix('admin/categories')->name('admin.categories.')->group(function() {
+   Route::get('{id}/delete',              'Admin\CategoriesController@delete')               ->name('delete');
    Route::get('getSubs/{id}',             'Admin\CategoriesController@getSubs')              ->name('getSubs');
    Route::get('create',                   'Admin\CategoriesController@create')               ->name('create');
    Route::post('store',                   'Admin\CategoriesController@store')                ->name('store');

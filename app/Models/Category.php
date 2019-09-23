@@ -43,14 +43,14 @@ class Category extends Model //implements AuditableContract
 	// a related entry needs to be added to the post model
 	public function posts()
 	{
-		return $this->hasMany('App\Models\Post');
+		return $this->hasMany('App\Models\Posts\Post');
 	}
 
 	// 1 category belongsToMany recipes
 	// a related entry needs to be added to the post model
 	public function recipes()
 	{
-		return $this->hasMany('App\Models\Recipe');
+		return $this->hasMany('App\Models\Recipes\Recipe');
 	}
 
 	// public function module()
@@ -60,7 +60,7 @@ class Category extends Model //implements AuditableContract
 
 	public function projects()
 	{
-		return $this->hasMany('App\Models\Project');
+		return $this->hasMany('App\Models\Projects\Project');
 	}
 
 	// public function scopeNewCategories($query)

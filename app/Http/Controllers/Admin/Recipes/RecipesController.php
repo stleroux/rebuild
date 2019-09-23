@@ -16,6 +16,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Input;
 use Auth;
 use DB;
+use File;
 use Image;
 use Route;
 use Session;
@@ -35,7 +36,7 @@ class RecipesController extends Controller
    public function __construct()
    {
       // Only allow authenticated users access to these functions
-      $this->middleware('auth')->except('index','show','archives');
+      $this->middleware('auth');
       $this->enablePermissions = false;
    }
 
@@ -59,7 +60,7 @@ class RecipesController extends Controller
       // Get all categories related to Recipe Category (id=>1)
       $categories = Category::where('parent_id',1)->get();
 
-      return view('recipes.create', compact('categories'));
+      return view('admin.recipes.create', compact('categories'));
    }
 
 
@@ -81,7 +82,7 @@ class RecipesController extends Controller
 
       $recipe = Recipe::onlyTrashed()->findOrFail($id);
 
-      return view('recipes.delete', compact('recipe'));
+      return view('admin.recipes.delete', compact('recipe'));
    }
 
 
@@ -111,7 +112,7 @@ class RecipesController extends Controller
       $recipe->forceDelete();
 
       Session::flash('success', 'The recipe was successfully deleted!');
-      return redirect()->route('recipes.trashed');
+      return redirect()->route('admin.recipes.trashed');
    }
 
 
@@ -192,7 +193,7 @@ class RecipesController extends Controller
       // find all categories in the categories table and pass them to the view
       $categories = Category::with('children')->where('parent_id',1)->get();
 
-      return view('recipes.edit', compact('recipe','categories'));
+      return view('admin.recipes.edit', compact('recipe','categories'));
    }
 
 
@@ -205,107 +206,50 @@ class RecipesController extends Controller
 # ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝
 // Display a list of resources
 ##################################################################################################################
-   public function index(Request $request)
+   public function index(Request $request, $key=null) // PUBLISHED RECIPES
    {
-      // Set the session to the current page route
-      Session::put('fromLocation', 'recipes.index'); // Required for Alphabet listing
-      Session::put('fromPage', url()->full());
-      
-      if(!Route::current()->parameters['cat'] == '') {
-         Session::put('cat', Route::current()->parameters['cat']);
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_browse')) { abort(401, 'Unauthorized Access'); }
       }
+
+      // Set the session to the current page route
+      Session::put('fromLocation', 'admin.recipes.index'); // Required for Alphabet listing
+      Session::put('fromPage', url()->full());
 
       // Get all categories related to Recipe Category (id=>1)
       $categories = Category::where('parent_id',1)->get();
-      $byCatName = Category::where('name', $request->cat)->first();
 
-      if($request->cat == 'all'){
-         $alphas = DB::table('recipes')
-            ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
-            ->where('published_at', '<=', Carbon::now())
-            ->where('deleted_at', '=', null)
-            ->where('personal', '=', 0)
-            ->orderBy('letter')
-            ->get();
-
-         $recipes = Recipe::with('user','category')
-            ->published()
-            ->public()
-            ->orderBy('title', 'asc')
-            ->paginate(15);
-
-         if($request->key){
-            $recipes = Recipe::with('user','category')
-               ->published()
-               ->public()
-               ->where('title', 'like', $request->key . '%')
-               ->orderBy('title', 'asc')
-               ->paginate(15);
-         }
-      } else {
-         if($byCatName->parent_id != 1) {
-            $alphas = DB::table('recipes')
-               ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
-               ->where('published_at', '<=', Carbon::now())
-               ->where('deleted_at', '=', null)
-               ->where('personal', '=', 0)
-               ->where('category_id', '=', $byCatName->id)
-               ->orderBy('letter')
-               ->get();
-
-            $recipes = Recipe::with('user','category')
-               ->published()
-               ->public()
-               ->where('category_id', '=', $byCatName->id)
-               ->orderBy('title', 'asc')
-               ->paginate(15);
-
-            if($request->key){
-               $recipes = Recipe::with('user','category')
-                  ->published()
-                  ->public()
-                  ->where('category_id', '=', $byCatName->id)
-                  ->where('title', 'like', $request->key . '%')
-                  ->orderBy('title', 'asc')
-                  ->paginate(15);
-            }
-         } else {
-            $allc = Category::where('parent_id', $byCatName->id)->pluck('id');
-            
-            $alphas = DB::table('recipes')
-               ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
-               ->where('published_at', '<=', Carbon::now())
-               ->where('deleted_at', '=', null)
-               ->where('personal', '=', 0)
-               ->whereIn('category_id', $allc)
-               ->orderBy('letter')
-               ->get();
-
-            $recipes = Recipe::with('user','category')
-               ->published()
-               ->public()
-               ->whereIn('category_id', $allc)
-               ->orderBy('title', 'asc')
-               ->paginate(15);
-
-            if($request->key){
-               $recipes = Recipe::with('user','category')
-                  ->published()
-                  ->public()
-                  ->whereIn('category_id', $allc)
-                  ->where('title', 'like', $request->key . '%')
-                  ->orderBy('title', 'asc')
-                  ->paginate(15);
-            }
-         }
-      }
+     $alphas = DB::table('recipes')
+      ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
+      ->where('published_at','<', Carbon::Now())
+      ->where('deleted_at','=', Null)
+      ->where('personal', '!=', 1)
+      ->orderBy('letter')
+      ->get();
 
       $letters = [];
       foreach($alphas as $alpha) {
-         $letters[] = $alpha->letter;
+        $letters[] = $alpha->letter;
       }
-      
-      return view('recipes.index', compact('recipes','categories','letters','byCatName'));
+
+      // If $key value is passed
+      if ($key) {
+         $recipes = Recipe::with('user','category')
+            ->published()
+            ->public()
+            ->where('title', 'like', $key . '%')
+            ->orderBy('title', 'asc')
+            ->get();
+      } else {
+         // No $key value is passed
+         $recipes = Recipe::with('user','category')
+            ->published()
+            ->public()
+            ->get();
+      }
+
+      return view('admin.recipes.index', compact('recipes','letters','categories'));
    }
 
 
@@ -323,7 +267,7 @@ class RecipesController extends Controller
       $recipe = Recipe::withTrashed()->findOrFail($id);
 
       // Increase the view count since this is viewed from the frontend
-      DB::table('recipes')->where('id','=',$recipe->id)->increment('views',1);
+      // DB::table('recipes')->where('id','=',$recipe->id)->increment('views',1);
 
       $categories = Category::where('parent_id',1)->get();
 
@@ -341,7 +285,7 @@ class RecipesController extends Controller
          $next = $n[0]->id;
       }
 
-      return view('recipes.show', compact('recipe','categories','previous','next'));
+      return view('admin.recipes.show', compact('recipe','categories','previous','next'));
    }
 
 
@@ -462,7 +406,8 @@ class RecipesController extends Controller
       if(Session::get('fromPage') === 'recipes.index') {
          return redirect()->route('recipes.index', 'all');
       } else {
-         return redirect()->route(Session::get('fromPage'));
+         // return redirect()->route(Session::get('fromPage'));
+         return redirect(Session::get('fromPage'));
       }
   }
 

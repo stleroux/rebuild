@@ -2,7 +2,7 @@
 
 @section ('stylesheets')
    {{ Html::style('css/print.css') }}
-@stop
+@endsection
 
 @section ('content')
    <div class="card mt-5">

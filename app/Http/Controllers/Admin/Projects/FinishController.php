@@ -44,6 +44,7 @@ class FinishController extends Controller
             ->where('finish_id', '=', $id)
             ->delete();
 
+        Session::flash('success', 'Finish removed succesfully.');
         return redirect()->back();
     }
 
@@ -72,6 +73,7 @@ class FinishController extends Controller
         $project = Project::find($id);
         $project->finishes()->syncWithoutDetaching($request->finish);
 
+        Session::flash('success', 'Finish added succesfully.');
         return redirect()->back();
     }
 

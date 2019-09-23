@@ -57,7 +57,7 @@
 			
 			<div class="panel-body">
 				<div class="col-xs-12 text-center">
-					<img src="\images\dog.jpg">
+					<img src="images\dog.jpg">
 				</div>
 				
 				<div class="col-xs-12 text-center">

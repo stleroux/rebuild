@@ -45,7 +45,7 @@ class SettingsController extends Controller
         // Check if user has required permission
         // if(!checkPerm('module_create')) { abort(401, 'Unauthorized Access'); }
 
-        return view('settings.create');
+        return view('admin.settings.create');
     }
 
 
@@ -64,7 +64,7 @@ class SettingsController extends Controller
         $site = Setting::where('tab','=','site')->get();
         $settings = Setting::where('tab','=','general')->get();
 
-        return view('settings.index', compact('invoicer','site','settings'));
+        return view('admin.settings.index', compact('invoicer','site','settings'));
     }
 
 
@@ -108,10 +108,10 @@ class SettingsController extends Controller
 
         if($request->submit == "new")
         {
-            return redirect()->route('settings.create');
+            return redirect()->route('admin.settings.create');
         } else {
             // redirect to another page
-            return redirect()->route('settings.index');
+            return redirect()->route('admin.settings.index');
         }
     }
 
@@ -128,7 +128,7 @@ class SettingsController extends Controller
     public function edit($id)
     {
         $setting = Setting::findOrFail($id);
-        return view('settings.edit', compact('setting'));
+        return view('admin.settings.edit', compact('setting'));
     }
 
 
@@ -158,7 +158,7 @@ class SettingsController extends Controller
         $setting->save();
 
         Session::flash('update', 'The setting has been updated successfully.');
-        return redirect()->route('settings.index');
+        return redirect()->route('admin.settings.index');
     }
 
 
@@ -198,7 +198,7 @@ class SettingsController extends Controller
            }
 
         Session::flash('update', 'The site settings have been updated successfully.');
-        return redirect()->route('settings.index');
+        return redirect()->route('admin.settings.index');
 
     }
 

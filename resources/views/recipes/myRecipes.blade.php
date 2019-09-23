@@ -5,11 +5,11 @@
 @endsection
 
 @section('left_column')
-   @include('blocks.main_menu')
+   {{-- @include('blocks.main_menu') --}}
 @endsection
 
 @section('right_column')
-   @include('recipes.sidebar')
+   @include('recipes.blocks.sidebar')
    @include('recipes.blocks.popularRecipes')
    @include('recipes.blocks.archives')
 @endsection
@@ -25,10 +25,10 @@
             My Recipes
             <span class="float-right">
                <div class="btn-group">
-                  @include('recipes.buttons.help', ['size'=>'xs', 'bookmark'=>'recipes'])
-                  @include('recipes.buttons.unpublishAll', ['size'=>'xs'])
-                  @include('recipes.buttons.trashAll', ['size'=>'xs'])
-                  @include('recipes.buttons.add', ['size'=>'xs'])
+                  {{-- @include('recipes.buttons.help', ['size'=>'xs', 'bookmark'=>'recipes']) --}}
+                  {{-- @include('recipes.buttons.unpublishAll', ['size'=>'xs']) --}}
+                  {{-- @include('recipes.buttons.trashAll', ['size'=>'xs']) --}}
+                  {{-- @include('recipes.buttons.add', ['size'=>'xs']) --}}
                </div>
             </span>
          </div>
@@ -39,12 +39,12 @@
                <table id="datatable" class="table table-sm table-hover text-light">
                   <thead>
                      <tr>
-                        <th><input type="checkbox" id="selectall" class="checked" /></th>
+                        <th data-orderable="false"><input type="checkbox" id="selectall" class="checked" /></th>
                         <th>Name</th>
                         <th>Category</th>
                         <th>Views</th>
-                        {{-- <th>Author</th> --}}
                         <th>Created On</th>
+                        <th>Private</th>
                         <th>Publish(ed) On</th>
                         <th data-orderable="false"></th>
                      </tr>
@@ -58,19 +58,15 @@
                         <td>{{ ucwords($recipe->title) }}</td>
                         <td>{{ ucwords($recipe->category->name) }}</td>
                         <td>{{ $recipe->views }}</td>
-                        {{-- <td>@include('common.authorFormat', ['model'=>$recipe, 'field'=>'user'])</td> --}}
                         <td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'created_at'])</td>
+                        <td>{{ $recipe->personal ? 'Yes' : 'No'}}</td>
                         <td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'published_at'])</td>
                         <td class="text-right">
                            <div class="btn-group">
-                              @include('recipes.buttons.view', ['size'=>'xs'])
-                              @include('recipes.buttons.edit', ['size'=>'xs'])
-                              {{-- @if(!$recipe->personal) --}}
-                                 {{-- @include('recipes.buttons.privatize', ['size'=>'xs']) --}}
-                              {{-- @else
-                                 @include('recipes.buttons.makePublic', ['size'=>'xs'])
-                              @endif --}}
-                              @include('recipes.buttons.trash', ['size'=>'xs'])
+                              @include('recipes.buttons.privatize', ['size'=>'xs'])
+                              @include('recipes.buttons.show', ['size'=>'xs'])
+                              {{-- @include('recipes.buttons.edit', ['size'=>'xs']) --}}
+                              {{-- @include('recipes.buttons.trash', ['size'=>'xs']) --}}
                            </div>
                         </td>
                      </tr>

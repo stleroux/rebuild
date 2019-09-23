@@ -1,11 +1,10 @@
-@extends('layouts.master')
+@extends('layouts.login')
 
 @section ('stylesheets')
    {{ Html::style('css/woodbarn.css') }}
 @endsection
 
 @section('left_column')
-
 @endsection
 
 @section('right_column')

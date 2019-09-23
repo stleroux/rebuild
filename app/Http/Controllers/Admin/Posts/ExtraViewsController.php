@@ -83,7 +83,7 @@ class ExtraViewsController extends Controller
             ->get();
       }
 
-      return view('posts.newPosts', compact('posts','letters'));
+      return view('admin.posts.newPosts', compact('posts','letters'));
    }
 
 
@@ -163,7 +163,7 @@ class ExtraViewsController extends Controller
          $posts = Post::with('user','category')->onlyTrashed()->orderBy('id','desc')->get();
       }
       
-      return view('posts.trashed', compact('posts','letters'));
+      return view('admin.posts.trashed', compact('posts','letters'));
    }
 
 
@@ -214,7 +214,7 @@ class ExtraViewsController extends Controller
             ->get();
       }
 
-      return view('posts.unpublished', compact('posts','letters', 'postlinks'));
+      return view('admin.posts.unpublished', compact('posts','letters', 'postlinks'));
    }
 
 

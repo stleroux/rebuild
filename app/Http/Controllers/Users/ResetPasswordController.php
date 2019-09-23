@@ -38,16 +38,16 @@ class ResetPasswordController extends Controller
 # ╚██████╗██║  ██║██║  ██║██║ ╚████║╚██████╔╝███████╗    ██║     ╚███╔███╔╝██████╔╝
 #  ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚══════╝    ╚═╝      ╚══╝╚══╝ ╚═════╝ 
 ##################################################################################################################
-   public function edit($id)
+   public function edit()
    {
             // Check if user has required permission
       if($this->enablePermissions)
       {
-         if(!checkPerm('user_edit')) { abort(401, 'Unauthorized Access'); }
+         // if(!checkPerm('user_edit')) { abort(401, 'Unauthorized Access'); }
       }
 
-      $user = User::findOrFail($id);
-      return view('users.profile.resetPassword', compact('user'));
+      $user = User::findOrFail(Auth::user()->id);
+      return view('profile.resetPassword', compact('user'));
    }
 
 
@@ -65,7 +65,7 @@ class ResetPasswordController extends Controller
       // Check if user has required permission
       if($this->enablePermissions)
       {
-         if(!checkPerm('user_edit')) { abort(401, 'Unauthorized Access'); }
+         // if(!checkPerm('user_edit')) { abort(401, 'Unauthorized Access'); }
       }
 
       // The current password does not match the one provided

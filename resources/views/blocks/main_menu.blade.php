@@ -32,21 +32,21 @@
          Blog
       </a>
 
-      @if(checkPerm('category_browse'))
+{{--       @if(checkPerm('category_browse'))
          <a href="{{ route('categories.index') }}"
             class="list-group-item list-group-item-action p-1 {{ Request::is('categories*') ? 'menu_active' : '' }} text-warning">
             <i class="fa fa-sitemap fa-fw"></i>
             Categories
          </a>
-      @endif
+      @endif --}}
 
-      @if(checkPerm('comment_browse'))
+{{--       @if(checkPerm('comment_browse'))
          <a href="{{ route('comments.index') }}"
             class="list-group-item list-group-item-action p-1 {{ Request::is('comments*') ? 'menu_active' : '' }} text-warning">
             <i class="fas fa-comments fa-fw"></i>
             Comments
          </a>
-      @endif
+      @endif --}}
 
       @if(checkPerm('dart_index'))
          <a href="#"
@@ -64,21 +64,21 @@
          </a>
       @endif
 
-      @if(checkPerm('permission_browse'))
+{{--       @if(checkPerm('permission_browse'))
          <a href="{{ route('permissions.index') }}"
             class="list-group-item list-group-item-action p-1 {{ Route::is('permissions.*') ? 'menu_active' : '' }} text-warning">
             <i class="fas fa-shield-alt fa-fw"></i>
             Permissions
          </a>
-      @endif
+      @endif --}}
 
-      @if(checkPerm('post_browse'))
+{{--       @if(checkPerm('post_browse'))
          <a href="{{ route('posts.index') }}"
             class="list-group-item list-group-item-action p-1 {{ Request::is('posts*') ? 'menu_active' : '' }} text-warning">
             <i class="far fa-newspaper fa-fw"></i>
             Posts
          </a>
-      @endif
+      @endif --}}
 
       <a href="{{ route('projects.index') }}"
          class="list-group-item list-group-item-action p-1 {{ (Route::is('projects.index') || Route::is('projects.show')) ? 'menu_active' : '' }}">
@@ -86,7 +86,7 @@
          Projects
       </a>
 
-      @if(checkPerm('projects_index'))
+{{--       @if(checkPerm('projects_index'))
          <a href="{{ route('projects.list') }}"
             class="list-group-item list-group-item-action p-1 {{
             (
@@ -99,7 +99,7 @@
             <i class="fas fa-list-ol fa-fw"></i>
             Projects List
          </a>
-      @endif
+      @endif --}}
 
       <a href="{{ route('recipes.index', 'all') }}"
          class="list-group-item list-group-item-action p-1 {{ Route::is('recipes.*') ? 'menu_active' : '' }}">
@@ -107,29 +107,29 @@
          Recipes
       </a>
 
-      @if(checkPerm('site_settings'))
+{{--       @if(checkPerm('site_settings'))
          <a href="{{ route('settings.index') }}"
             class="list-group-item list-group-item-action p-1 {{ Route::is('settings.*') ? 'menu_active' : '' }} text-warning">
             <i class="fas fa-cog fa-fw"></i>
             Site Settings
          </a>
-      @endif
+      @endif --}}
 
-      @if(checkPerm('site_stats'))
+{{--       @if(checkPerm('site_stats'))
          <a href="{{ route('stats') }}"
             class="list-group-item list-group-item-action p-1 {{ Route::is('stats*') ? 'menu_active' : '' }} text-warning">
             <i class="fas fa-chart-pie fa-fw"></i>
             Site Statistics
          </a>
-      @endif
+      @endif --}}
 
-      @if(checkPerm('user_browse'))
+{{--       @if(checkPerm('user_browse'))
          <a href="{{ route('users.index') }}"
             class="list-group-item list-group-item-action p-1 {{ Route::is('users.*') ? 'menu_active' : '' }} text-warning">
             <i class="fas fa-users fa-fw"></i>
             Users
          </a>
-      @endif
+      @endif --}}
 
    </div>
 </div>

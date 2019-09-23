@@ -1,5 +1,12 @@
 <?php
 
+Route::prefix('users/')->name('users.changePassword.')->group(function() {
+   Route::get('{id}/edit',                 'Users\ResetPasswordController@edit')                 ->name('edit');
+   Route::put('{id}',                      'Users\ResetPasswordController@update')               ->name('update');
+});
+
+// Route::resource('resetPassword', 'Users\ResetPasswordController')->only(['edit','update']);
+
 Route::get('profile/{id}/edit',              ['uses'=>'Users\ProfileController@edit',              'as'=>'profile.edit']);
 Route::put('profile/{id}',                   ['uses'=>'Users\ProfileController@update',            'as'=>'profile.update']);
 // Route::get('profile/{id}/resetPwd',          ['uses'=>'ProfileController@resetPwd',          'as'=>'profile.resetPwd']);

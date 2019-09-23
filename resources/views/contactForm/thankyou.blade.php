@@ -2,10 +2,10 @@
 
 @section ('stylesheets')
    {{ Html::style('css/woodbarn.css') }}
-@stop
+@endsection
 
 @section('left_column')
-   @include('blocks.main_menu')
+   {{-- @include('blocks.main_menu') --}}
 @endsection
 
 @section ('content')

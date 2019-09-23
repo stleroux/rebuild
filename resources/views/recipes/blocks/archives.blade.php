@@ -10,7 +10,7 @@
    				@foreach($recipelinks as $rlink)
    					<a href="{{ route('recipes.archives', ['year'=>$rlink->year, 'month'=>$rlink->month]) }}"
    						class="list-group-item list-group-item-action py-1 px-1 {{ Request::is('recipes/archives/' . $rlink->year . '/' . $rlink->month) ? 'active' : '' }}">
-                     <i class="fas fa-archive pl-2"></i>
+                     <i class="fas fa-archive fa-fw"></i>
    						{{ $rlink->month_name }} - {{ $rlink->year }}
    						<span class="float-right badge badge-warning text-dark">{{ $rlink->recipe_count }}</span>
    					</a>

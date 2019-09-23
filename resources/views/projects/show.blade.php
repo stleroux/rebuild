@@ -5,7 +5,7 @@
 @endsection
 
 @section('left_column')
-	@include('blocks.main_menu')
+	{{-- @include('blocks.main_menu') --}}
 @endsection
 
 @section('right_column')
@@ -31,14 +31,14 @@
                <div class="btn-group">
                   {{-- @include('projects.buttons.previous', ['size'=>'xs'])
                   @include('projects.buttons.next', ['size'=>'xs']) --}}
-                  @include('projects.buttons.edit', ['size'=>'xs'])
+                  {{-- @include('admin.projects.buttons.edit', ['size'=>'xs']) --}}
                   @include('projects.buttons.back', ['size'=>'xs'])
                </div>
             </div>
          </div>
 	  </div>
    	<div class="card-body section_body p-2">
-   		@include('projects.partials.show.general')
+   		@include('admin.projects.partials.show.general')
          @auth
             @include('projects.partials.show.others')
             @include('projects.partials.show.materials')

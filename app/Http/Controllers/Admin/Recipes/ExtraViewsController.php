@@ -3,9 +3,6 @@
 namespace App\Http\Controllers\Admin\Recipes;
 
 use App\Http\Controllers\Controller; // Required for validation
-use App\Http\Requests\CreateCommentRequest;
-use App\Http\Requests\CreateRecipeRequest;
-use App\Http\Requests\UpdateRecipeRequest;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\User;
@@ -131,158 +128,133 @@ class ExtraViewsController extends RecipesController
             ->get();
       }
 
-      return view('recipes.future', compact('recipes','letters','categories'));
+      return view('admin.recipes.pages.future', compact('recipes','letters','categories'));
    }
 
 
-##################################################################################################################
-# ███╗   ███╗██╗   ██╗    ███████╗ █████╗ ██╗   ██╗ ██████╗ ██████╗ ██╗████████╗███████╗███████╗
-# ████╗ ████║╚██╗ ██╔╝    ██╔════╝██╔══██╗██║   ██║██╔═══██╗██╔══██╗██║╚══██╔══╝██╔════╝██╔════╝
-# ██╔████╔██║ ╚████╔╝     █████╗  ███████║██║   ██║██║   ██║██████╔╝██║   ██║   █████╗  ███████╗
-# ██║╚██╔╝██║  ╚██╔╝      ██╔══╝  ██╔══██║╚██╗ ██╔╝██║   ██║██╔══██╗██║   ██║   ██╔══╝  ╚════██║
-# ██║ ╚═╝ ██║   ██║       ██║     ██║  ██║ ╚████╔╝ ╚██████╔╝██║  ██║██║   ██║   ███████╗███████║
-# ╚═╝     ╚═╝   ╚═╝       ╚═╝     ╚═╝  ╚═╝  ╚═══╝   ╚═════╝ ╚═╝  ╚═╝╚═╝   ╚═╝   ╚══════╝╚══════╝
-// MY FAVORITES :: Display a listing of the resource that have been favorited by a specific user.
-##################################################################################################################
-   public function myFavorites(Request $request, $key=null)
-   {
-      // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
-      }
-
-      // Fake get categories needed for back button to work properly
-      $categories = [];
-
-      if(Auth::check()) {
-         $user = Auth::user();
-         $recipes = $user->favorite(Recipe::class)->sortBy('title');
-      }
-
-      return view('recipes.myFavorites', compact('recipes','categories'));
-   }
 
 
-##################################################################################################################
-# ███╗   ███╗██╗   ██╗    ██████╗ ██████╗ ██╗██╗   ██╗ █████╗ ████████╗███████╗    ██████╗ ███████╗ ██████╗██╗██████╗ ███████╗███████╗
-# ████╗ ████║╚██╗ ██╔╝    ██╔══██╗██╔══██╗██║██║   ██║██╔══██╗╚══██╔══╝██╔════╝    ██╔══██╗██╔════╝██╔════╝██║██╔══██╗██╔════╝██╔════╝
-# ██╔████╔██║ ╚████╔╝     ██████╔╝██████╔╝██║██║   ██║███████║   ██║   █████╗      ██████╔╝█████╗  ██║     ██║██████╔╝█████╗  ███████╗
-# ██║╚██╔╝██║  ╚██╔╝      ██╔═══╝ ██╔══██╗██║╚██╗ ██╔╝██╔══██║   ██║   ██╔══╝      ██╔══██╗██╔══╝  ██║     ██║██╔═══╝ ██╔══╝  ╚════██║
-# ██║ ╚═╝ ██║   ██║       ██║     ██║  ██║██║ ╚████╔╝ ██║  ██║   ██║   ███████╗    ██║  ██║███████╗╚██████╗██║██║     ███████╗███████║
-# ╚═╝     ╚═╝   ╚═╝       ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝  ╚═╝  ╚═╝   ╚═╝   ╚══════╝    ╚═╝  ╚═╝╚══════╝ ╚═════╝╚═╝╚═╝     ╚══════╝╚══════╝
-// Display a listing of the resource that belong to a specific user.
-##################################################################################################################
-   public function myPrivateRecipes($key=null)
-   {
-      // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
-      }
 
-      // Set the session to the current page route
-      Session::put('fromLocation', 'recipes.myPrivateRecipes'); // Required for Alphabet listing
-      Session::put('fromPage', url()->full());
+// ##################################################################################################################
+// # ███╗   ███╗██╗   ██╗    ██████╗ ██████╗ ██╗██╗   ██╗ █████╗ ████████╗███████╗    ██████╗ ███████╗ ██████╗██╗██████╗ ███████╗███████╗
+// # ████╗ ████║╚██╗ ██╔╝    ██╔══██╗██╔══██╗██║██║   ██║██╔══██╗╚══██╔══╝██╔════╝    ██╔══██╗██╔════╝██╔════╝██║██╔══██╗██╔════╝██╔════╝
+// # ██╔████╔██║ ╚████╔╝     ██████╔╝██████╔╝██║██║   ██║███████║   ██║   █████╗      ██████╔╝█████╗  ██║     ██║██████╔╝█████╗  ███████╗
+// # ██║╚██╔╝██║  ╚██╔╝      ██╔═══╝ ██╔══██╗██║╚██╗ ██╔╝██╔══██║   ██║   ██╔══╝      ██╔══██╗██╔══╝  ██║     ██║██╔═══╝ ██╔══╝  ╚════██║
+// # ██║ ╚═╝ ██║   ██║       ██║     ██║  ██║██║ ╚████╔╝ ██║  ██║   ██║   ███████╗    ██║  ██║███████╗╚██████╗██║██║     ███████╗███████║
+// # ╚═╝     ╚═╝   ╚═╝       ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝  ╚═╝  ╚═╝   ╚═╝   ╚══════╝    ╚═╝  ╚═╝╚══════╝ ╚═════╝╚═╝╚═╝     ╚══════╝╚══════╝
+// // Display a listing of the resource that belong to a specific user.
+// ##################################################################################################################
+//    public function myPrivateRecipes($key=null)
+//    {
+//       // Check if user has required permission
+//       if($this->enablePermissions) {
+//          if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+//       }
 
-      if (Auth::check()) {
-         // Get list of recips by year and month
-         $recipelinks = DB::table('recipes')
-            ->select(DB::raw('YEAR(published_at) year, MONTH(published_at) month, MONTHNAME(published_at) month_name, COUNT(*) recipe_count'))
-            ->where('published_at', '<=', Carbon::now())
-            ->where('personal', '=', 1)
-            ->groupBy('year')
-            ->groupBy('month')
-            ->orderBy('year', 'desc')
-            ->orderBy('month', 'desc')
-            ->get();
+//       // Set the session to the current page route
+//       Session::put('fromLocation', 'recipes.myPrivateRecipes'); // Required for Alphabet listing
+//       Session::put('fromPage', url()->full());
 
-         $alphas = DB::table('recipes')
-            ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
-            ->where('user_id','=', Auth::user()->id)
-            ->where('personal', '=', 1)
-            ->orderBy('letter')
-            ->get();
+//       if (Auth::check()) {
+//          // Get list of recips by year and month
+//          $recipelinks = DB::table('recipes')
+//             ->select(DB::raw('YEAR(published_at) year, MONTH(published_at) month, MONTHNAME(published_at) month_name, COUNT(*) recipe_count'))
+//             ->where('published_at', '<=', Carbon::now())
+//             ->where('personal', '=', 1)
+//             ->groupBy('year')
+//             ->groupBy('month')
+//             ->orderBy('year', 'desc')
+//             ->orderBy('month', 'desc')
+//             ->get();
 
-         $letters = [];
-         foreach($alphas as $alpha) {
-            $letters[] = $alpha->letter;
-         }
+//          $alphas = DB::table('recipes')
+//             ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
+//             ->where('user_id','=', Auth::user()->id)
+//             ->where('personal', '=', 1)
+//             ->orderBy('letter')
+//             ->get();
 
-         // If $key value is passed
-         if ($key) {
-            $recipes = Recipe::with('user','category')
-               ->myRecipes()
-               ->private()
-               ->where('title', 'like', $key . '%')
-               ->orderBy('title', 'asc')
-               ->paginate(18);
-         } else {
-            // No $key value is passed
-            $recipes = Recipe::with('user','category')
-               ->myRecipes()
-               ->private()
-               ->orderBy('title', 'asc')
-               ->paginate(18);
-         }
+//          $letters = [];
+//          foreach($alphas as $alpha) {
+//             $letters[] = $alpha->letter;
+//          }
 
-         return view('recipes.myPrivateRecipes', compact('recipes','letters', 'recipelinks'));
-      } else {
-         return ('You need to be logged in');
-      }
-   }
+//          // If $key value is passed
+//          if ($key) {
+//             $recipes = Recipe::with('user','category')
+//                ->myRecipes()
+//                ->private()
+//                ->where('title', 'like', $key . '%')
+//                ->orderBy('title', 'asc')
+//                ->paginate(18);
+//          } else {
+//             // No $key value is passed
+//             $recipes = Recipe::with('user','category')
+//                ->myRecipes()
+//                ->private()
+//                ->orderBy('title', 'asc')
+//                ->paginate(18);
+//          }
+
+//          return view('recipes.myPrivateRecipes', compact('recipes','letters', 'recipelinks'));
+//       } else {
+//          return ('You need to be logged in');
+//       }
+//    }
 
 
-##################################################################################################################
-# ███╗   ███╗██╗   ██╗    ██████╗ ███████╗ ██████╗██╗██████╗ ███████╗███████╗
-# ████╗ ████║╚██╗ ██╔╝    ██╔══██╗██╔════╝██╔════╝██║██╔══██╗██╔════╝██╔════╝
-# ██╔████╔██║ ╚████╔╝     ██████╔╝█████╗  ██║     ██║██████╔╝█████╗  ███████╗
-# ██║╚██╔╝██║  ╚██╔╝      ██╔══██╗██╔══╝  ██║     ██║██╔═══╝ ██╔══╝  ╚════██║
-# ██║ ╚═╝ ██║   ██║       ██║  ██║███████╗╚██████╗██║██║     ███████╗███████║
-# ╚═╝     ╚═╝   ╚═╝       ╚═╝  ╚═╝╚══════╝ ╚═════╝╚═╝╚═╝     ╚══════╝╚══════╝
-// Display a listing of the resource that belong to a specific user.
-##################################################################################################################
-   public function myRecipes($key=null)
-   {
-      // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
-      }
+// ##################################################################################################################
+// # ███╗   ███╗██╗   ██╗    ██████╗ ███████╗ ██████╗██╗██████╗ ███████╗███████╗
+// # ████╗ ████║╚██╗ ██╔╝    ██╔══██╗██╔════╝██╔════╝██║██╔══██╗██╔════╝██╔════╝
+// # ██╔████╔██║ ╚████╔╝     ██████╔╝█████╗  ██║     ██║██████╔╝█████╗  ███████╗
+// # ██║╚██╔╝██║  ╚██╔╝      ██╔══██╗██╔══╝  ██║     ██║██╔═══╝ ██╔══╝  ╚════██║
+// # ██║ ╚═╝ ██║   ██║       ██║  ██║███████╗╚██████╗██║██║     ███████╗███████║
+// # ╚═╝     ╚═╝   ╚═╝       ╚═╝  ╚═╝╚══════╝ ╚═════╝╚═╝╚═╝     ╚══════╝╚══════╝
+// // Display a listing of the resource that belong to a specific user.
+// ##################################################################################################################
+//    public function myRecipes($key=null)
+//    {
+//       // Check if user has required permission
+//       if($this->enablePermissions) {
+//          if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+//       }
 
-      // Set the session to the current page route
-      Session::put('fromLocation', 'recipes.myRecipes'); // Required for Alphabet listing
-      Session::put('fromPage', url()->full());
+//       // Set the session to the current page route
+//       Session::put('fromLocation', 'recipes.myRecipes'); // Required for Alphabet listing
+//       Session::put('fromPage', url()->full());
 
-      if (Auth::check()) {
-         $alphas = DB::table('recipes')
-            ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
-            ->where('user_id','=', Auth::user()->id)
-            ->orderBy('letter')
-            ->get();
+//       if (Auth::check()) {
+//          $alphas = DB::table('recipes')
+//             ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
+//             ->where('user_id','=', Auth::user()->id)
+//             ->orderBy('letter')
+//             ->get();
 
-         $letters = [];
-         foreach($alphas as $alpha) {
-            $letters[] = $alpha->letter;
-         }
+//          $letters = [];
+//          foreach($alphas as $alpha) {
+//             $letters[] = $alpha->letter;
+//          }
 
-         // If $key value is passed
-         if ($key) {
-            $recipes = Recipe::with('user','category')
-               ->myRecipes()
-               ->where('title', 'like', $key . '%')
-               ->orderBy('title', 'asc')
-               ->paginate(18);
-         } else {
-            // No $key value is passed
-            $recipes = Recipe::with('user','category')
-               ->myRecipes()
-               ->orderBy('title', 'asc')
-               ->paginate(18);
-         }
+//          // If $key value is passed
+//          if ($key) {
+//             $recipes = Recipe::with('user','category')
+//                ->myRecipes()
+//                ->where('title', 'like', $key . '%')
+//                ->orderBy('title', 'asc')
+//                ->paginate(18);
+//          } else {
+//             // No $key value is passed
+//             $recipes = Recipe::with('user','category')
+//                ->myRecipes()
+//                ->orderBy('title', 'asc')
+//                ->paginate(18);
+//          }
 
-         return view('recipes.myRecipes', compact('recipes','letters'));
-      } else {
-         return ('You need to be logged in');
-      }
-   }
+//          return view('recipes.myRecipes', compact('recipes','letters'));
+//       } else {
+//          return ('You need to be logged in');
+//       }
+//    }
 
 
 ##################################################################################################################
@@ -331,7 +303,7 @@ class ExtraViewsController extends RecipesController
             ->paginate(18);
       }
 
-      return view('recipes.newRecipes', compact('recipes','letters','categories'));
+      return view('admin.recipes.pages.newRecipes', compact('recipes','letters','categories'));
    }
 
 
@@ -343,51 +315,51 @@ class ExtraViewsController extends RecipesController
 # ██║     ╚██████╔╝██████╔╝███████╗██║███████║██║  ██║███████╗██████╔╝
 # ╚═╝      ╚═════╝ ╚═════╝ ╚══════╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚═════╝ 
 ##################################################################################################################
-   public function published(Request $request, $key=null)
-   {
-      // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_published')) { abort(401, 'Unauthorized Access'); }
-      }
+   // public function published(Request $request, $key=null)
+   // {
+   //    // Check if user has required permission
+   //    if($this->enablePermissions) {
+   //       if(!checkPerm('recipe_published')) { abort(401, 'Unauthorized Access'); }
+   //    }
 
-      // Set the session to the current page route
-      Session::put('fromLocation', 'recipes.published'); // Required for Alphabet listing
-      Session::put('fromPage', url()->full());
+   //    // Set the session to the current page route
+   //    Session::put('fromLocation', 'recipes.published'); // Required for Alphabet listing
+   //    Session::put('fromPage', url()->full());
 
-      // Get all categories related to Recipe Category (id=>1)
-      $categories = Category::where('parent_id',1)->get();
+   //    // Get all categories related to Recipe Category (id=>1)
+   //    $categories = Category::where('parent_id',1)->get();
 
-     $alphas = DB::table('recipes')
-      ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
-      ->where('published_at','<', Carbon::Now())
-      ->where('deleted_at','=', Null)
-      ->where('personal', '!=', 1)
-      ->orderBy('letter')
-      ->get();
+   //   $alphas = DB::table('recipes')
+   //    ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
+   //    ->where('published_at','<', Carbon::Now())
+   //    ->where('deleted_at','=', Null)
+   //    ->where('personal', '!=', 1)
+   //    ->orderBy('letter')
+   //    ->get();
 
-      $letters = [];
-      foreach($alphas as $alpha) {
-        $letters[] = $alpha->letter;
-      }
+   //    $letters = [];
+   //    foreach($alphas as $alpha) {
+   //      $letters[] = $alpha->letter;
+   //    }
 
-      // If $key value is passed
-      if ($key) {
-         $recipes = Recipe::with('user','category')
-            ->published()
-            ->public()
-            ->where('title', 'like', $key . '%')
-            ->orderBy('title', 'asc')
-            ->get();
-      } else {
-         // No $key value is passed
-         $recipes = Recipe::with('user','category')
-            ->published()
-            ->public()
-            ->get();
-      }
+   //    // If $key value is passed
+   //    if ($key) {
+   //       $recipes = Recipe::with('user','category')
+   //          ->published()
+   //          ->public()
+   //          ->where('title', 'like', $key . '%')
+   //          ->orderBy('title', 'asc')
+   //          ->get();
+   //    } else {
+   //       // No $key value is passed
+   //       $recipes = Recipe::with('user','category')
+   //          ->published()
+   //          ->public()
+   //          ->get();
+   //    }
 
-      return view('recipes.published', compact('recipes','letters','categories'));
-   }
+   //    return view('recipes.published', compact('recipes','letters','categories'));
+   // }
 
 
 ##################################################################################################################
@@ -407,7 +379,7 @@ class ExtraViewsController extends RecipesController
       }
 
       // Set the session to the current page route
-      Session::put('fromLocation', 'recipes.trashed'); // Required for Alphabet listing
+      Session::put('fromLocation', 'admin.recipes.trashed'); // Required for Alphabet listing
       Session::put('fromPage', url()->full());
 
       // Get all categories related to Recipe Category (id=>1)
@@ -438,7 +410,7 @@ class ExtraViewsController extends RecipesController
             ->get();
       }
       
-      return view('recipes.trashed', compact('recipes','letters','categories'));
+      return view('admin.recipes.pages.trashed', compact('recipes','letters','categories'));
    }
 
 
@@ -481,7 +453,7 @@ class ExtraViewsController extends RecipesController
       }
 
       // Set the session to the current page route
-      Session::put('fromLocation', 'recipes.unpublished'); // Required for Alphabet listing
+      Session::put('fromLocation', 'admin.recipes.unpublished'); // Required for Alphabet listing
       Session::put('fromPage', url()->full());
 
       // Get all categories related to Recipe Category (id=>1)
@@ -512,7 +484,7 @@ class ExtraViewsController extends RecipesController
             ->get();
       }
 
-      return view('recipes.unpublished', compact('recipes','letters','categories'));
+      return view('admin.recipes.pages.unpublished', compact('recipes','letters','categories'));
    }
 
 

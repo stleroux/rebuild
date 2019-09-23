@@ -1,5 +1,5 @@
 {{-- @auth --}}
-   @if(checkPerm('recipe_trash', $recipe))
+   @if(checkPerm('recipe_delete', $recipe))
       <a href="{{ route('recipes.trash', $recipe->id) }}"
          class="btn btn-{{ $size }} btn-danger text-light"
          title="Trash Recipe"><i class="{{ Config::get('buttons.trash') }}"></i></a>

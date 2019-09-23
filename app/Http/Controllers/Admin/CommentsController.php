@@ -50,7 +50,7 @@ class CommentsController extends Controller
 
 		$comment = Comment::find($id);
 
-		return view('comments.delete')->withComment($comment);
+		return view('admin.comments.delete')->withComment($comment);
 	}
 
 
@@ -76,7 +76,7 @@ class CommentsController extends Controller
 		$comment->delete();
 
 		Session::flash('delete', 'Comment Deleted');
-		return redirect()->route('comments.index');
+		return redirect()->route('admin.comments.index');
 	}
 
 
@@ -98,7 +98,7 @@ class CommentsController extends Controller
 
 		$comment = Comment::find($id);
 
-		return view('comments.edit')->withComment($comment);
+		return view('admin.comments.edit')->withComment($comment);
 	}
 
 ##################################################################################################################
@@ -122,7 +122,7 @@ class CommentsController extends Controller
 
 		$comments = Comment::orderBy('id','desc')->get();
 
-		return view ('comments.index', compact('comments'));
+		return view ('admin.comments.index', compact('comments'));
 	}
 
 
@@ -144,7 +144,7 @@ class CommentsController extends Controller
 
 		$comments = Comment::where('created_at', '>=' , Auth::user()->last_login_date)->get();
 
-		return view('comments.newComments', compact('comments'));
+		return view('admin.comments.newComments', compact('comments'));
 	}
 
 
@@ -166,7 +166,7 @@ class CommentsController extends Controller
 
 		$comment = Comment::find($id);
 
-		return view('comments.show')->withComment($comment);
+		return view('admin.comments.show')->withComment($comment);
 	}
 
 
@@ -196,7 +196,7 @@ class CommentsController extends Controller
 			return redirect()->route('posts.show', $comment->commentable_id);
 		}
 
-		return redirect()->route('comments.index');
+		return redirect()->route('admin.comments.index');
 	}
 
 

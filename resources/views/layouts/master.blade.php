@@ -30,16 +30,18 @@
 
    	<main class="container-fluid">
    		{{-- <div id="" class="py-0 px-0"> --}}
-   			<div class="row py-0 px-2">
-   				<div class="col-sm-3 col-md-2 py-0 px-0">
+   			<div class="row py-0 px-0">
+   				<div class="col-sm-12 col-md-2 px-sm-0 px-md-1">
                   @include('blocks.sessions')
+                  @include('blocks.main_menu')
+                  @include('admin.blocks.admin_menu')
    					@yield('left_column')
    				</div>
-   				<div class="col-sm-6 col-md-8 py-0 px-2">
+   				<div class="col-sm-12 col-md-8 py-0 px-sm-0 px-md-1">
                   {{-- <example-component></example-component> --}}
    					@yield('content')
    				</div>
-   				<div class="col-sm-3 col-md-2 py-0 px-0">
+   				<div class="col-sm-12 col-md-2 px-sm-0 px-md-1">
    					@yield('right_column')
    				</div>
    			</div>

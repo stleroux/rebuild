@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card mb-3">
    <div class="card-header card_header p-2">
       <i class="fa fa-comments-o"></i>
       Comments <small>({{ $model->comments()->count() }} total)</small>

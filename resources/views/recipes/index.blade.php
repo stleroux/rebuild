@@ -5,29 +5,33 @@
 @endsection
 
 @section('left_column')
-	@include('blocks.main_menu')
-	@include('recipes.menu')
+	{{-- @include('blocks.main_menu') --}}
 @endsection
 
 @section('right_column')
-	@include('recipes.sidebar')
+	@include('recipes.blocks.sidebar')
 	@include('recipes.blocks.popularRecipes')
 	@include('recipes.blocks.archives')
 @endsection
 
 @section('content')
 
-	<div class="card mb-3">
 
-@include('recipes.dropdown')
+
+	<div class="card mb-3">
 
 		<div class="card-header section_header p-2">
 			<i class="fab fa-apple"></i>
 			Recipes
+			@if($byCatName)
+				 :: {{  deliciousCamelcase(ucwords($byCatName->name)) }}
+			@endif
+
 			<span class="float-right">
 				<div class="btn-group">
-					@include('recipes.buttons.printAll', ['size'=>'xs'])
-					@include('recipes.buttons.add', ['size'=>'xs'])
+					@include('recipes.dropdown', ['size'=>'sm'])
+					@include('recipes.buttons.printAll', ['size'=>'sm'])
+					{{-- @include('admin.recipes.buttons.add', ['size'=>'sm']) --}}
 				</div>
 			</span>
 		</div>
@@ -45,11 +49,11 @@
 								onMouseOut="this.style.backgroundColor='', this.style.color=''" --}}>
 
 							@if($recipe->image)
-								<a href="{{ route('recipes.show', $recipe->id) }}" class="" style="text-decoration: none">
+								<a href="{{ route('recipes.show', [$recipe->id, $byCatName]) }}" class="" style="text-decoration: none">
 									<img class="card-img-top" src="\_recipes\{{ $recipe->image }}" height="120px" width="auto">
 								</a>
 							@else
-								<a href="{{ route('recipes.show', $recipe->id) }}" class="" style="text-decoration: none">
+								<a href="{{ route('recipes.show', [$recipe->id, $byCatName]) }}" class="" style="text-decoration: none">
 									<img class="card-img-top" src="\_recipes\image_not_available.jpg" height="120px" width="auto">
 								</a>
 							@endif

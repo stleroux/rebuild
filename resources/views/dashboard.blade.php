@@ -3,12 +3,10 @@
 @section ('stylesheets')
    {{-- {{ Html::style('css/woodbarn.css') }} --}}
    {{-- {{ Html::style('css/menu.css') }} --}}
-@stop
+@endsection
 
 @section('left_column')
-   {{-- @include('blocks.adminNav') --}}
    {{-- @include('blocks.main_menu') --}}
-   @include('blocks.main_menu')
 @endsection
 
 @section('right_column')
@@ -24,4 +22,4 @@
    </div>
 
 
-@stop
+@endsection

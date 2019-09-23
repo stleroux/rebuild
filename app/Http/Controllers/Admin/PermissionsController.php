@@ -46,7 +46,7 @@ class PermissionsController extends Controller
 
 		$permission = New Permission();
 
-		return view('permissions.create', compact('permission'));
+		return view('admin.permissions.create', compact('permission'));
 	}
 
 
@@ -59,15 +59,15 @@ class PermissionsController extends Controller
 # ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝
 // Mass Delete selected rows - all selected records
 ##################################################################################################################
-	public function delete(Permission $permission)
+	public function delete($id)
 	{
 		// Check if user has required permission
 		if($this->enablePermissions) {
 			if(!checkPerm('permission_delete')) { abort(401, 'Unauthorized Access'); }
 		}
 
-		$permission = Permission::findOrFail($permission->id);
-		return view('permissions.delete', compact('permission'));
+		$permission = Permission::findOrFail($id);
+		return view('admin.permissions.delete', compact('permission'));
 	}
 
 
@@ -81,21 +81,21 @@ class PermissionsController extends Controller
 // Remove the specified resource from storage
 // Used in the index page and trashAll action to soft delete multiple records
 ##################################################################################################################
-	public function destroy(Permission $permission)
+	public function destroy($id)
 	{
 		// Check if user has required permission
 		if($this->enablePermissions) {
 			if(!checkPerm('permission_delete')) { abort(401, 'Unauthorized Access'); }
 		}
 
-		$permission = Permission::find($permission->id);
+		$permission = Permission::find($id);
 		$permission->delete();
 
 		// Set flash data with success message
-		Session::flash('delete','The permission was deleted successfully.');
+		Session::flash('success','The permission was deleted successfully.');
 
 		// Redirect
-		return redirect()->route('permissions.index');
+		return redirect()->route('admin.permissions.index');
 	}
 
 
@@ -108,15 +108,15 @@ class PermissionsController extends Controller
 # ╚══════╝╚═════╝ ╚═╝   ╚═╝   
 // Show the form for editing the specified resource
 ##################################################################################################################
-	public function edit(Permission $permission)
+	public function edit($id)
 	{
 		// Check if user has required permission
 		if($this->enablePermissions) {
 			if(!checkPerm('permission_edit')) { abort(401, 'Unauthorized Access'); }
 		}
 
-		$permission = Permission::findOrFail($permission->id);
-		return view('permissions.edit', compact('permission')); 
+		$permission = Permission::findOrFail($id);
+		return view('admin.permissions.edit', compact('permission')); 
 	}
 
 
@@ -137,7 +137,7 @@ class PermissionsController extends Controller
 		}
 
 		$permissions = Permission::orderBy('name')->get();
-		return view('permissions.index', compact('permissions'));
+		return view('admin.permissions.index', compact('permissions'));
 	}
 
 
@@ -150,15 +150,15 @@ class PermissionsController extends Controller
 # ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝ 
 // Display the specified resource
 ##################################################################################################################
-	public function show(Permission $permission)
+	public function show($id)
 	{
 		// Check if user has required permission
 		if($this->enablePermissions) {
 			if(!checkPerm('permission_read')) { abort(401, 'Unauthorized Access'); }
 		}
 
-		$permission = Permission::findOrFail($permission->id);
-		return view('permissions.show', compact('permission')); 
+		$permission = Permission::findOrFail($id);
+		return view('admin.permissions.show', compact('permission'));
 	}
 
 
@@ -182,12 +182,12 @@ class PermissionsController extends Controller
 		if($request->bread){
 			$rules = [
             'b_model' => 'required',
-            'b_type' => 'required',
+            // 'b_type' => 'required',
       	];
 
         	$customMessages = [
             'b_model.required' => 'The model field can not be left blank.',
-            'b_type.required' => 'The type field is required.',
+            // 'b_type.required' => 'The type field is required.',
         	];
 
         	$this->validate($request, $rules, $customMessages);
@@ -201,7 +201,7 @@ class PermissionsController extends Controller
 					$permission->name = str::singular($request->b_model) . "_" . $b;
 					$permission->display_name = ucfirst($b);
 					$permission->model = str::singular($request->b_model);
-					$permission->type = $request->b_type;
+					// $permission->type = $request->b_type;
 					$permission->description = $b . " " . $request->b_model;
 				$permission->save();
 			}
@@ -212,7 +212,7 @@ class PermissionsController extends Controller
             'name' => 'required',
             'display_name' => 'required',
             'model' => 'required',
-            'type' => 'required',
+            // 'type' => 'required',
             'description' => 'required',
       	];
 
@@ -220,7 +220,7 @@ class PermissionsController extends Controller
             'name.required' => 'The :attribute field can not be left blank.',
             'display_name.required' => 'The :attribute field is required.',
             'model.required' => 'The :attribute field is required.',
-            'type.required' => 'The :attribute field is required.',
+            // 'type.required' => 'The :attribute field is required.',
             'description.required' => 'The :attribute field is required.',
         	];
 
@@ -231,7 +231,7 @@ class PermissionsController extends Controller
 				$permission->name = $request->name;
 				$permission->display_name = $request->display_name;
 				$permission->model = str::singular($request->model);
-				$permission->type = $request->type;
+				// $permission->type = $request->type;
 				$permission->description = $request->description;
 			$permission->save();
 		}
@@ -242,9 +242,9 @@ class PermissionsController extends Controller
 		// if($request->submit == "new")
 		if($request->single)
 		{
-			return redirect()->route('permissions.index');
+			return redirect()->route('admin.permissions.index');
 		} else {
-			return redirect()->route('permissions.create');
+			return redirect()->route('admin.permissions.create');
 		}
 		
 	}
@@ -259,19 +259,36 @@ class PermissionsController extends Controller
 #  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
 // UPDATE :: Update the specified resource in storage
 ##################################################################################################################
-	public function update(UpdatePermissionRequest $request, Permission $permission)
+	public function update(UpdatePermissionRequest $request, $id)
 	{
 		// Check if user has required permission
 		if($this->enablePermissions) {
 			if(!checkPerm('permission_edit')) { abort(401, 'Unauthorized Access'); }
 		}
+		$rules = [
+         'name' => 'required',
+         'display_name' => 'required',
+         'model' => 'required',
+         // 'type' => 'required',
+         'description' => 'required',
+   	];
+
+     	$customMessages = [
+         'name.required' => 'The :attribute field can not be left blank.',
+         'display_name.required' => 'The :attribute field is required.',
+         'model.required' => 'The :attribute field is required.',
+         // 'type.required' => 'The :attribute field is required.',
+         'description.required' => 'The :attribute field is required.',
+     	];
+
+     	$this->validate($request, $rules, $customMessages);
 
 		// save the data in the database
-		$permission = Permission::findOrFail($permission->id);
+		$permission = Permission::findOrFail($id);
 			// $permission->name = $request->name;
 			$permission->display_name = $request->display_name;
 			$permission->model = $request->model;
-			$permission->type = $request->type;
+			// $permission->type = $request->type;
 			$permission->description = $request->description;
 		$permission->save();
 
@@ -279,7 +296,7 @@ class PermissionsController extends Controller
 		Session::flash('update','The permission was updated successfully!');
 
 		// redirect to another page
-	   return redirect()->route('permissions.index');
+	   return redirect()->route('admin.permissions.index');
 	}
 
 

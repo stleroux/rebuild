@@ -1,17 +1,15 @@
 @extends ('layouts.master')
 
 @section ('stylesheets')
-	{{ Html::style('css/recipes.css') }}
-@stop
+	{{ Html::style('css/woodbarn.css') }}
+@endsection
 
 @section('left_column')
-	@include('blocks.main_menu')
-	@include('recipes.menu')
+	{{-- @include('blocks.main_menu') --}}
 @endsection
 
 @section('right_column')
-	@include('recipes.sidebar')
-	{{-- @include('recipes.blocks.information') --}}
+	@include('recipes.blocks.sidebar')
 	@include('recipes.blocks.popularRecipes')
 	@include('recipes.blocks.archives')
 	@include('recipes.show.leave_comment')
@@ -19,106 +17,80 @@
 
 @section ('content')
 
-<form style="display:inline;">
-
-	<div class="card mb-3">
-		<div class="card-header section_header p-2">
-			<div class="row d-flex justify-content-center">
-				<div class="col-sm-4 float-left">
-					{{ $recipe->title }}
-				</div>
-				<div class="col-sm-4 text-center">
-					@include('recipes.buttons.previous', ['size'=>'xs'])
-      			@include('recipes.buttons.next', ['size'=>'xs'])
-				</div>
-				<div class="col-sm-4 text text-right">
-					<div class="btn-group">
-						@include('recipes.buttons.back', ['size'=>'xs'])
-						@include('recipes.buttons.print', ['size'=>'xs'])
-						@include('recipes.buttons.printPDF', ['size'=>'xs'])
-						@include('recipes.buttons.favorite', ['size'=>'xs'])
-	  		         @include('recipes.buttons.privatize', ['size'=>'xs'])
-						@include('recipes.buttons.publish', ['size'=>'xs'])
-						@include('recipes.buttons.edit', ['size'=>'xs'])
-						@include('recipes.buttons.trash', ['size'=>'xs'])
+	<form style="display:inline;">
+		<div class="card mb-3">
+			<div class="card-header section_header p-2">
+				<div class="row p-0 m-0">
+					<div class="col-sm-12 col-md-12 col-lg-4 px-0">
+						&nbsp;{{ $recipe->title }}
+					</div>
+					<div class="col-sm-12 col-md-6 col-lg-4 px-0">
+						<div class="text-center">
+							<div class="btn-group">
+								@if($byCatName)
+									@include('recipes.buttons.previous', ['size'=>'xs', $previous, $byCatName])
+									@include('recipes.buttons.next', ['size'=>'xs', $next, $byCatName])
+								@else
+									@include('recipes.buttons.previousAll', ['size'=>'xs', $previous])
+									@include('recipes.buttons.nextAll', ['size'=>'xs', $next])
+								@endif
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12 col-md-6 col-lg-4 px-0">
+						<div class="text-right">
+							<div class="btn-group">
+								@include('recipes.buttons.back', ['size'=>'xs'])
+								@include('recipes.buttons.print', ['size'=>'xs'])
+								@include('recipes.buttons.printPDF', ['size'=>'xs'])
+								@include('recipes.buttons.favorite', ['size'=>'xs'])
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 
-{{-- 		<div class="card-header section_header p-2">
-			<span class="float-left">
-				{{ $recipe->title }}
-			</span>
-			<span class="text text-center border">
-				@include('recipes.buttons.previous', ['size'=>'xs'])
-      		@include('recipes.buttons.next', ['size'=>'xs'])	
-			</span>
-			<span class="float-right">
-				<div class="btn-group">
-					@include('recipes.buttons.back', ['size'=>'xs'])
-					@include('recipes.buttons.print', ['size'=>'xs'])
-					@include('recipes.buttons.printPDF', ['size'=>'xs'])
-					@include('recipes.buttons.favorite', ['size'=>'xs'])
-  		         @include('recipes.buttons.privatize', ['size'=>'xs'])
-					@include('recipes.buttons.publish', ['size'=>'xs'])
-					@include('recipes.buttons.edit', ['size'=>'xs'])
-					@include('recipes.buttons.trash', ['size'=>'xs'])
+			<div class="card-body section_body p-2">
+				<div class="row">
+					@include('recipes.show.ingredients')
+					@include('recipes.show.image')
 				</div>
-			</span>
-		</div> --}}
-	
-		<div class="card-body section_body p-2">
-	
-			<div class="row">
-				@include('recipes.show.ingredients')
-				@include('recipes.show.image')
-			</div>
 
-			{{-- <div class="row pb-2"> --}}
 				@include('common.view_more', ['message'=>'If you would like to see the full recipe'])
-			{{-- </div> --}}
 
-			@auth
+				@auth
+					<div class="row">
+						@include('recipes.show.methodology')
+					</div>
 
-				<div class="row">
-					@include('recipes.show.methodology')
+					<div class="row">
+						@include('recipes.show.category')
+						@include('recipes.show.servings')
+						@include('recipes.show.prep_time')
+						@include('recipes.show.cook_time')
+						@include('recipes.show.personal')
+						@include('recipes.show.views')
+						@include('recipes.show.source')
+						@include('recipes.show.publishDate')
+					</div>
+
+					<div class="row">
+						@include('recipes.show.public_notes')
+						@include('recipes.show.private_notes')
+					</div>
+
+					<div class="row">
+						@include('recipes.show.information')
+					</div>
+				@endauth
+
+				<div class="row m-0 p-0">
+					<div class="col m-0 p-0">
+						@include('common.comments', ['model'=>$recipe])
+					</div>
 				</div>
 
-				<div class="row">
-					@include('recipes.show.category')
-					@include('recipes.show.servings')
-					@include('recipes.show.prep_time')
-					@include('recipes.show.cook_time')
-					@include('recipes.show.personal')
-					@include('recipes.show.views')
-					@include('recipes.show.source')
-					{{-- @include('recipes.show.author') --}}
-					@include('recipes.show.publishDate')
-				</div>
-
-				<div class="row">
-					@include('recipes.show.public_notes')
-					@include('recipes.show.private_notes')
-				</div>
-
-				<div class="row">
-					@include('recipes.show.information')
-				</div>
-
-			@endauth
-
-			<div class="row m-0 p-0">
-				<div class="col m-0 p-0">
-					{{-- @include('recipes.show.comments') --}}
-					@include('common.comments', ['model'=>$recipe])
-				</div>
 			</div>
-
 		</div>
-	</div>
-
-	{{-- @include('modals.image', ['title'=>'Recipe Image', 'img_path'=>'_recipes', 'img_name'=>'image', 'model'=>$recipe]) --}}
-   {{-- @include('modals.print', ['title'=>'Print','name'=>'recipes','model'=>$recipe]) --}}
-</form>
-@stop
+	</form>
+@endsection

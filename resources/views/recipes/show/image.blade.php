@@ -1,4 +1,4 @@
-<div class="col-sm-4 pl-1">
+<div class="col-sm-4">
 	<div class="card mb-2">
 		
 		<div class="card-header card_header p-2">Image</div>

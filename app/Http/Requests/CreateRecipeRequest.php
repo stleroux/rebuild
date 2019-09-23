@@ -29,7 +29,7 @@ class CreateRecipeRequest extends FormRequest
             'ingredients'   => 'required',
             'methodology'   => 'required',
             'image'         => 'sometimes|image',
-            'category_id'   => 'required|integer',
+            'category_id'   => 'required|string',
             'servings'      => 'required|integer',
             'prep_time'     => 'required|integer',
             'cook_time'     => 'required|integer',

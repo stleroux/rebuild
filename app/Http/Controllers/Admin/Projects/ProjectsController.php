@@ -54,7 +54,7 @@ class ProjectsController extends Controller
 
       $project = New Project();
 
-      return view('projects.create', compact('project'));
+      return view('admin.projects.create', compact('project'));
    }
 
 
@@ -75,7 +75,7 @@ class ProjectsController extends Controller
             if(!checkPerm('projects_delete')) { abort(401, 'Unauthorized Access'); }
         }
 
-        return view('projects.delete', compact('project'));
+        return view('admin.projects.delete', compact('project'));
     }
 
 
@@ -133,7 +133,7 @@ class ProjectsController extends Controller
         // Set flash data with success message
         Session::flash('delete','The project, related files and DB entries were deleted successfully.');
         // Redirect
-        return redirect()->route('projects.list');
+        return redirect()->route('admin.projects.index');
     }
 
 
@@ -159,7 +159,7 @@ class ProjectsController extends Controller
         $materials = Material::all();
         $finishes = Finish::all();
 
-        return view('projects.edit', compact('project','finishes','materials'));
+        return view('admin.projects.edit', compact('project','finishes','materials'));
     }
 
 
@@ -172,33 +172,33 @@ class ProjectsController extends Controller
 # ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝
 // Display a list of resources
 ##################################################################################################################
-    public function index($filter = null)
-    {
-        // Check if user has required permission
-        if($this->enablePermissions)
-        {
-            if(!checkPerm('projects_index')) { abort(401, 'Unauthorized Access'); }
-        }
+    // public function index($filter = null)
+    // {
+    //     // Check if user has required permission
+    //     if($this->enablePermissions)
+    //     {
+    //         if(!checkPerm('projects_index')) { abort(401, 'Unauthorized Access'); }
+    //     }
 
-        // Set the session to the current page route
-        Session::put('fromPage', url()->full());
+    //     // Set the session to the current page route
+    //     Session::put('fromPage', url()->full());
 
-        $project = New Project();
+    //     $project = New Project();
 
-        if($filter) {
-            if($filter == 1000) {
-                $projects = Project::with('images')->orderBy('id','desc')->take(4)->get();
-                return view('projects.index', compact('projects','project'));
-            }
+    //     if($filter) {
+    //         if($filter == 1000) {
+    //             $projects = Project::with('images')->orderBy('id','desc')->take(4)->get();
+    //             return view('projects.index', compact('projects','project'));
+    //         }
 
-            $projects = Project::with('images')->where('category', '=', $filter)->paginate(8);
+    //         $projects = Project::with('images')->where('category', '=', $filter)->paginate(8);
 
-        } else {
-            $projects = Project::with('images')->orderBy('name','asc')->paginate(8);
-        }
+    //     } else {
+    //         $projects = Project::with('images')->orderBy('name','asc')->paginate(8);
+    //     }
         
-        return view('projects.index', compact('projects','project'));
-    }
+    //     return view('projects.index', compact('projects','project'));
+    // }
 
 
 ##################################################################################################################
@@ -210,7 +210,7 @@ class ProjectsController extends Controller
 # ╚══════╝╚═╝╚══════╝   ╚═╝  
 // Display a list of resources in Backend
 ##################################################################################################################
-    public function list()
+    public function index()
     {
         // Check if user has required permission
         if($this->enablePermissions)
@@ -223,7 +223,7 @@ class ProjectsController extends Controller
 
         $projects = Project::with('images')->orderBy('name','asc')->get();
 
-        return view('projects.list', compact('projects'));
+        return view('admin.projects.index', compact('projects'));
     }
 
 
@@ -240,7 +240,7 @@ class ProjectsController extends Controller
     {
         Project::create($this->validateRequest());
 
-        return redirect()->route('projects.list');
+        return redirect()->route('admin.projects.index');
     }
 
 
@@ -262,9 +262,9 @@ class ProjectsController extends Controller
         }
 
         // Increase the view count if viewed from the frontend
-        if (url()->previous() != url('/projects/list')) {
-            DB::table('projects__projects')->where('id','=',$project->id)->increment('views',1);
-        }
+        // if (url()->previous() != url('/projects/list')) {
+        //     DB::table('projects__projects')->where('id','=',$project->id)->increment('views',1);
+        // }
 
         // get previous project
         $previous = Project::where('name', '<', $project->name)->orderBy('name','asc')->max('name');
@@ -283,7 +283,7 @@ class ProjectsController extends Controller
         // Get the first image associated to this project
         $image = Image::where('project_id', '=', $project->id)->first();
 
-        return view('projects.show', compact('project','image','previous','next'));
+        return view('admin.projects.show', compact('project','image','previous','next'));
     }
 
 
@@ -300,7 +300,7 @@ class ProjectsController extends Controller
     {
         $project->update($this->validateRequest());
 
-        return redirect()->route('projects.list');
+        return redirect()->route('admin.projects.index');
     }
 
 

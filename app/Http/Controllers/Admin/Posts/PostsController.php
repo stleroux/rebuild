@@ -62,7 +62,7 @@ class PostsController extends Controller
 		$categories = Category::where('parent_id', $cats->id)->get();
 		$tags = Tag::all();
 
-		return view('posts.create', compact('categories','tags'));
+		return view('admin.posts.create', compact('categories','tags'));
 	}
 
 
@@ -86,7 +86,7 @@ class PostsController extends Controller
 
 		Session::put('pageName', 'trashed');
 
-		return view('posts.delete', compact('post'));
+		return view('admin.posts.delete', compact('post'));
 	}
 
 
@@ -118,7 +118,7 @@ class PostsController extends Controller
 		Post::whereIn('id', $checked)->forceDelete();
 
 		Session::flash('delete','The posts were deleted successfully.');
-		return redirect()->route('posts.trashed');
+		return redirect()->route('admin.posts.trashed');
 	}
 
 
@@ -150,7 +150,7 @@ class PostsController extends Controller
 		$post->forceDelete();
 
 		Session::flash('success', 'The post was successfully deleted!');
-		return redirect()->route('posts.trashed');
+		return redirect()->route('admin.posts.trashed');
 	}
 
 
@@ -178,7 +178,7 @@ class PostsController extends Controller
 		$categories = Category::where('parent_id', $cats->id)->get();
 		$tags = Tag::all();
 
-		return view('posts.edit', compact('post','categories','tags'));
+		return view('admin.posts.edit', compact('post','categories','tags'));
 	}
 
 
@@ -229,7 +229,7 @@ class PostsController extends Controller
 				->get();
 		}
 		
-		return view('posts.index', compact('posts','letters'));
+		return view('admin.posts.index', compact('posts','letters'));
 	}
 
 
@@ -262,7 +262,7 @@ class PostsController extends Controller
 
 		$tags = Tag::all();
 
-		return view ('posts.show')
+		return view('admin.posts.show')
 			->withPost($post)
 			->withTags($tags)
 			->withCategories($cats);
@@ -320,7 +320,7 @@ class PostsController extends Controller
 		// set a flash message to be displayed on screen
 		Session::flash('success','The post was successfully saved!');
 		// redirect to another page
-		return redirect()->route('posts.index');
+		return redirect()->route('admin.posts.index');
 	}
 
 
@@ -381,7 +381,7 @@ class PostsController extends Controller
 
 		// Set flash data with success message
 		Session::flash ('success', 'This post was successfully updated!');
-		return redirect()->route('posts.index');
+		return redirect()->route('admin.posts.index');
 	}
 
 

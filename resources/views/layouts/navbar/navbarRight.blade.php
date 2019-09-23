@@ -12,7 +12,7 @@
 
    @auth
       <li class="nav-item {{ Request::is('dashboard*') ? 'active' : '' }}">
-         <a class="nav-link p-2" href="{{ route('dashboard') }}">Dashboard</a>
+         <a class="nav-link p-2" href="{{ route('admin.dashboard') }}">Dashboard</a>
       </li>
    @endauth
 

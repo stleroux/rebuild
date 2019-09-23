@@ -43,7 +43,7 @@ class FinishesController extends Controller
 
         $finish = New Finish();
 
-        return view('projects.finishes.create', compact('finish'));
+        return view('admin.projects.finishes.create', compact('finish'));
     }
 
 
@@ -57,7 +57,7 @@ class FinishesController extends Controller
 // Remove the specified resource from storage
 // Used in the index page and trashAll action to soft delete multiple records
 ##################################################################################################################
-    public function destroy(Finish $finish)
+    public function destroy(Finish $finish, $id)
     {
         // Check if user has required permission
         if($this->enablePermissions)
@@ -65,12 +65,14 @@ class FinishesController extends Controller
             if(!checkPerm('projects_delete')) { abort(401, 'Unauthorized Access'); }
         }
 
+        $finish = Finish::find($id);
+
         $finish->delete();
 
         // Set flash data with success message
         Session::flash('delete','The finish was deleted successfully.');
         // Redirect
-        return redirect()->route('finishes.index');
+        return redirect()->route('admin.projects.finishes.index');
     }
 
 
@@ -91,7 +93,7 @@ class FinishesController extends Controller
             if(!checkPerm('projects_delete')) { abort(401, 'Unauthorized Access'); }
         }
 
-        return view('projects.finishes.delete', compact('finish'));
+        return view('admin.projects.finishes.delete', compact('finish'));
     }
 
 
@@ -104,7 +106,7 @@ class FinishesController extends Controller
 # ╚══════╝╚═════╝ ╚═╝   ╚═╝   
 // Show the form for editing the specified resource
 ##################################################################################################################
-    public function edit(Finish $finish)
+    public function edit(Finish $finish, $id)
     {
         // Check if user has required permission
         if($this->enablePermissions)
@@ -112,7 +114,9 @@ class FinishesController extends Controller
             if(!checkPerm('projects_edit')) { abort(401, 'Unauthorized Access'); }
         }
 
-        return view('projects.finishes.edit', compact('finish'));
+        $finish = Finish::find($id);
+
+        return view('admin.projects.finishes.edit', compact('finish'));
     }
 
 
@@ -135,7 +139,7 @@ class FinishesController extends Controller
 
         $finishes = Finish::All();
         // dd($materials);
-        return view('projects.finishes.index', compact('finishes'));
+        return view('admin.projects.finishes.index', compact('finishes'));
     }
 
 
@@ -152,7 +156,7 @@ class FinishesController extends Controller
     {
         Finish::create($this->validateRequest());
 
-        return redirect('finishes');
+        return redirect()->route('admin.projects.finishes.index');
     }
 
 
@@ -165,7 +169,7 @@ class FinishesController extends Controller
 # ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝ 
 // Display the specified resource
 ##################################################################################################################
-    public function show(Finish $finish)
+    public function show(Finish $finish, $id)
     {
         // Check if user has required permission
         if($this->enablePermissions)
@@ -173,7 +177,9 @@ class FinishesController extends Controller
             if(!checkPerm('projects_show')) { abort(401, 'Unauthorized Access'); }
         }
 
-        return view('projects.finishes.show', compact('finish'));
+        $finish = Finish::find($id);
+
+        return view('admin.projects.finishes.show', compact('finish'));
     }
 
 
@@ -186,11 +192,13 @@ class FinishesController extends Controller
 #  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
 // UPDATE :: Update the specified resource in storage
 ##################################################################################################################
-    public function update(Finish $finish)
+    public function update(Finish $finish, $id)
     {
+        $finish = Finish::find($id);
+
         $finish->update($this->validateRequest());
 
-        return redirect('finishes');
+        return redirect()->route('admin.projects.finishes.index');
     }
 
 

@@ -62,7 +62,7 @@ class CategoriesController extends Controller
 
 		$categories = Category::with('children')->where('parent_id','=',0)->orderBy('name')->get();
 		
-		return view('categories.create', compact('categories'));
+		return view('admin.categories.create', compact('categories'));
 	}
 
 
@@ -84,7 +84,7 @@ class CategoriesController extends Controller
 			if(!checkPerm('category_delete')) { abort(401, 'Unauthorized Access'); }
 		}
 
-		return view('categories.delete', compact('category'));
+		return view('admin.categories.delete', compact('category'));
 	}
 
 
@@ -110,7 +110,7 @@ class CategoriesController extends Controller
 		$category->forceDelete();
 
 		Session::flash('delete', 'The category was successfully deleted!');
-		return redirect()->route('categories.index');
+		return redirect()->route('admin.categories.index');
 	}
 
 
@@ -152,7 +152,7 @@ class CategoriesController extends Controller
 			if(!checkPerm('category_edit')) { abort(401, 'Unauthorized Access'); }
 		}
 
-		return  view('categories.edit', compact('category'));
+		return  view('admin.categories.edit', compact('category'));
 	}
 
 
@@ -187,7 +187,7 @@ class CategoriesController extends Controller
 ##################################################################################################################
 	public function import()
 	{
-		return view('categories.import');
+		return view('admin.categories.import');
 	}
 
 
@@ -264,7 +264,7 @@ class CategoriesController extends Controller
    		$categories = Category::with('parent','children')->orderBy('name', 'asc')->get();
       }
 
-		return view ('categories.index', compact('categories','letters'));
+		return view('admin.categories.index', compact('categories','letters'));
 	}
 
 
@@ -304,7 +304,7 @@ class CategoriesController extends Controller
 			$categories = Category::newCategories()->get();
 		}
 
-		return view('categories.newCategories', compact('categories','letters'));
+		return view('admin.categories.newCategories', compact('categories','letters'));
 	}
 
 
@@ -326,7 +326,7 @@ class CategoriesController extends Controller
 			if(!checkPerm('category_read')) { abort(401, 'Unauthorized Access'); }
 		}
 
-		return view('categories.show', compact('category'));
+		return view('admin.categories.show', compact('category'));
 	}
 
 
@@ -368,7 +368,7 @@ class CategoriesController extends Controller
 			$category->save();
 
 			Session::flash('success','The new parent category has been created.');
-			return redirect()->route('categories.create');
+			return redirect()->route('admin.categories.create');
 		} 
 
 		if($request->part === 'sub')
@@ -395,7 +395,7 @@ class CategoriesController extends Controller
 			$category->save();
 
 			Session::flash('success','The new sub-category has been created.');
-			return redirect()->route('categories.create');
+			return redirect()->route('admin.categories.create');
 		}
 
 		if($request->part === 'category')
@@ -429,7 +429,7 @@ class CategoriesController extends Controller
 			$category->save();
 
 			Session::flash('success','The new category has been created.');
-			return redirect()->route('categories.index');
+			return redirect()->route('admin.categories.index');
 		}
 		
 	}
@@ -446,14 +446,25 @@ class CategoriesController extends Controller
 ##################################################################################################################
 	public function update(Request $request, $id)
 	{
-		// Get the category value from the database
-		$category = Category::find($id);
-
 		// Check if user has required module
 		if($this->enablePermissions) {
 			if(!checkPerm('category_edit')) { abort(401, 'Unauthorized Access'); }
 		}
 
+		$rules = [
+			'name' => 'required|min:3|max:50',
+		];
+
+		$customMessages = [
+			'name.required' => 'Required',
+			'name.min' => 'Minimum 3 characters',
+			'name.max' => 'Maximum 50 characters',
+		];
+
+		$this->validate($request, $rules, $customMessages);
+		
+		// Get the category value from the database
+		$category = Category::find($id);
 			$category->name = $request->input('name');
 			$category->value = $request->input('value');
 			$category->description = $request->input('description');
@@ -463,7 +474,7 @@ class CategoriesController extends Controller
 		// Set flash data with success message
 		Session::flash('success','The category was successfully updated!');
 		// Redirect
-		return redirect()->route('categories.index');
+		return redirect()->route('admin.categories.index');
 	}
 
 

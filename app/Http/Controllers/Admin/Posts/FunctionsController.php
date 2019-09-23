@@ -67,7 +67,7 @@ class FunctionsController extends Controller
       Session::flash ('success', 'The post\'s image was successfully removed!');
 
       // Send the user back to the Show page
-      return redirect()->route('posts.edit', compact('post'));
+      return redirect()->route('admin.posts.edit', compact('post'));
    }
 
 
@@ -88,7 +88,7 @@ class FunctionsController extends Controller
          if(!checkPerm('post_browse', $post)) { abort(401, 'Unauthorized Access'); }
       }
 
-      return view('posts.viewImage')->withPost($post);
+      return view('admin.posts.viewImage')->withPost($post);
    }
 
 
@@ -104,7 +104,7 @@ class FunctionsController extends Controller
    {
       $post = Post::find($id);
 
-      return view('posts.print')->withPost($post);
+      return view('admin.posts.print')->withPost($post);
    }
 
 
@@ -235,7 +235,7 @@ class FunctionsController extends Controller
          if(!checkPerm('post_browse', $post)) { abort(401, 'Unauthorized Access'); }
       }
 
-      return view('posts.trash', compact('post'));
+      return view('admin.posts.trash', compact('post'));
    }
 
 

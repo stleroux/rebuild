@@ -112,19 +112,19 @@ class FunctionsController extends RecipesController
 # ██║     ██║  ██║ ╚████╔╝ ╚██████╔╝██║  ██║██║   ██║   ███████╗    ██║  ██║██████╔╝██████╔╝
 # ╚═╝     ╚═╝  ╚═╝  ╚═══╝   ╚═════╝ ╚═╝  ╚═╝╚═╝   ╚═╝   ╚══════╝    ╚═╝  ╚═╝╚═════╝ ╚═════╝ 
 ##################################################################################################################
-   public function favoriteAdd($id)
-   {
-      // Check if user has required permission
-      // if($this->enablePermissions) {
-      //    if(!checkPerm('recipe_favorite')) { abort(401, 'Unauthorized Access'); }
-      // }
+   // public function favoriteAdd($id)
+   // {
+   //    // Check if user has required permission
+   //    // if($this->enablePermissions) {
+   //    //    if(!checkPerm('recipe_favorite')) { abort(401, 'Unauthorized Access'); }
+   //    // }
 
-      $recipe = Recipe::find($id);
-      $recipe->addFavorite();
+   //    $recipe = Recipe::find($id);
+   //    $recipe->addFavorite();
 
-      Session::flash ('success','The recipe was successfully added to your Favorites list!');
-      return redirect()->back();
-   }
+   //    Session::flash ('success','The recipe was successfully added to your Favorites list!');
+   //    return redirect()->back();
+   // }
 
 
 ##################################################################################################################
@@ -135,19 +135,19 @@ class FunctionsController extends RecipesController
 # ██║     ██║  ██║ ╚████╔╝ ╚██████╔╝██║  ██║██║   ██║   ███████╗    ██║  ██║███████╗██║ ╚═╝ ██║╚██████╔╝ ╚████╔╝ ███████╗
 # ╚═╝     ╚═╝  ╚═╝  ╚═══╝   ╚═════╝ ╚═╝  ╚═╝╚═╝   ╚═╝   ╚══════╝    ╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝ ╚═════╝   ╚═══╝  ╚══════╝
 ##################################################################################################################
-   public function favoriteRemove($id)
-   {
-      // Check if user has required permission
-      // if($this->enablePermissions) {
-      //    if(!checkPerm('recipe_favorite')) { abort(401, 'Unauthorized Access'); }
-      // }
+   // public function favoriteRemove($id)
+   // {
+   //    // Check if user has required permission
+   //    // if($this->enablePermissions) {
+   //    //    if(!checkPerm('recipe_favorite')) { abort(401, 'Unauthorized Access'); }
+   //    // }
 
-      $recipe = Recipe::find($id);
-      $recipe->removeFavorite();
+   //    $recipe = Recipe::find($id);
+   //    $recipe->removeFavorite();
 
-      Session::flash ('success','The recipe was successfully removed to your Favorites list!');
-      return redirect()->back();
-   }
+   //    Session::flash ('success','The recipe was successfully removed to your Favorites list!');
+   //    return redirect()->back();
+   // }
 
 
 ##################################################################################################################
@@ -158,17 +158,17 @@ class FunctionsController extends RecipesController
 # ██║     ██║  ██║██║██║ ╚████║   ██║   
 # ╚═╝     ╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝   ╚═╝   
 ##################################################################################################################
-   public function print($id)
-   {
-      // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_print')) { abort(401, 'Unauthorized Access'); }
-      }
+   // public function print($id)
+   // {
+   //    // Check if user has required permission
+   //    if($this->enablePermissions) {
+   //       if(!checkPerm('recipe_print')) { abort(401, 'Unauthorized Access'); }
+   //    }
 
-      $recipe = Recipe::findorFail($id);
+   //    $recipe = Recipe::findorFail($id);
 
-      return view('recipes.print', compact('recipe'));
-   }
+   //    return view('recipes.print', compact('recipe'));
+   // }
 
 
 ##################################################################################################################
@@ -179,28 +179,28 @@ class FunctionsController extends RecipesController
 # ██║     ██║  ██║██║██║ ╚████║   ██║       ██║  ██║███████╗███████╗
 # ╚═╝     ╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝   ╚═╝       ╚═╝  ╚═╝╚══════╝╚══════╝
 ##################################################################################################################
-   public function printAll($category)
-   {
-      // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_print')) { abort(401, 'Unauthorized Access'); }
-      }
+   // public function printAll($category)
+   // {
+   //    // Check if user has required permission
+   //    if($this->enablePermissions) {
+   //       if(!checkPerm('recipe_print')) { abort(401, 'Unauthorized Access'); }
+   //    }
 
-      if($category == "all"){
-         $recipes = Recipe::orderBy('title', 'asc')->get();
-      } else {
-         $cCat = Category::where('name', $category)->pluck('id');
-         $sCats = Category::where('parent_id', $cCat)->pluck('id');
+   //    if($category == "all"){
+   //       $recipes = Recipe::orderBy('title', 'asc')->get();
+   //    } else {
+   //       $cCat = Category::where('name', $category)->pluck('id');
+   //       $sCats = Category::where('parent_id', $cCat)->pluck('id');
 
-         if($sCats->count() <= 0){
-            $recipes = Recipe::where('category_id', $cCat)->orderBy('title', 'asc')->get();
-         } else {
-            $recipes = Recipe::whereIn('category_id', $sCats)->orderBy('title', 'asc')->get();
-         }
-      }
+   //       if($sCats->count() <= 0){
+   //          $recipes = Recipe::where('category_id', $cCat)->orderBy('title', 'asc')->get();
+   //       } else {
+   //          $recipes = Recipe::whereIn('category_id', $sCats)->orderBy('title', 'asc')->get();
+   //       }
+   //    }
 
-      return view('recipes.printAll', compact('recipes'));
-   }
+   //    return view('recipes.printAll', compact('recipes'));
+   // }
 
 
 ##################################################################################################################
@@ -208,45 +208,45 @@ class FunctionsController extends RecipesController
 # PRINT PDF
 ##################################################################################################################
 ##################################################################################################################
-   public function printPDF($id)
-    {
-      // // This  $data array will be passed to our PDF blade
-      // // $data = [
-      // //    'title' => 'First PDF for Medium',
-      // //    'heading' => 'Hello from 99Points.info',
-      // //    'content' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'        
-      // // ];
-      // $recipe = Recipe::findOrFail($id);
-      // // dd($recipe);
+//    public function printPDF($id)
+//     {
+//       // // This  $data array will be passed to our PDF blade
+//       // // $data = [
+//       // //    'title' => 'First PDF for Medium',
+//       // //    'heading' => 'Hello from 99Points.info',
+//       // //    'content' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'        
+//       // // ];
+//       // $recipe = Recipe::findOrFail($id);
+//       // // dd($recipe);
 
-      // // Increase the view count since this is viewed from the frontend
-      // // DB::table('recipes')->where('id','=',$recipe->id)->increment('views',1);
+//       // // Increase the view count since this is viewed from the frontend
+//       // // DB::table('recipes')->where('id','=',$recipe->id)->increment('views',1);
 
-      // // $categories = Category::where('parent_id',1)->get();
+//       // // $categories = Category::where('parent_id',1)->get();
 
-      // // return view('recipes.show', compact('recipe','categories'));
+//       // // return view('recipes.show', compact('recipe','categories'));
         
-      // // $pdf = PDF::loadView('recipes.printPDF', $data);
-      // $pdf = PDF::loadView('recipes.printPDF', $recipe);
-      // // dd($pdf);
-      // return $pdf->download('medium.pdf');
+//       // // $pdf = PDF::loadView('recipes.printPDF', $data);
+//       // $pdf = PDF::loadView('recipes.printPDF', $recipe);
+//       // // dd($pdf);
+//       // return $pdf->download('medium.pdf');
 
 
 
-$recipe = Recipe::findOrFail($id);
-// dd($recipe);
-$recipedata = ['recipe'=>$recipe];
-$pdf = PDF::loadView('recipes.print', array('recipedata'=>$recipedata));
-$pdf->setOptions(['isPhpEnabled' => true,'isRemoteEnabled' => true]);
-$filename = "generatepdf.pdf";
-// Save file to the directory
-// $pdf->save('generatepdf/'.$filename);
-//Download Pdf
-return $pdf->download('generatepdf.pdf');
-// Or return to view pdf
-//return view('pdfview');
+// $recipe = Recipe::findOrFail($id);
+// // dd($recipe);
+// $recipedata = ['recipe'=>$recipe];
+// $pdf = PDF::loadView('recipes.print', array('recipedata'=>$recipedata));
+// $pdf->setOptions(['isPhpEnabled' => true,'isRemoteEnabled' => true]);
+// $filename = "generatepdf.pdf";
+// // Save file to the directory
+// // $pdf->save('generatepdf/'.$filename);
+// //Download Pdf
+// return $pdf->download('generatepdf.pdf');
+// // Or return to view pdf
+// //return view('pdfview');
 
-    }
+//     }
 
 
 
@@ -407,7 +407,7 @@ return $pdf->download('generatepdf.pdf');
       $recipe->restore();
 
       Session::flash ('success','The recipe was successfully restored.');
-      return redirect()->route('recipes.trashed');
+      return redirect()->route('admin.recipes.trashed');
    }
 
 
@@ -444,23 +444,23 @@ return $pdf->download('generatepdf.pdf');
 # ███████║   ██║   ╚██████╔╝██║  ██║███████╗    ╚██████╗╚██████╔╝██║ ╚═╝ ██║██║ ╚═╝ ██║███████╗██║ ╚████║   ██║   
 # ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝     ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝   ╚═╝   
 ##################################################################################################################
-   public function storeComment(CreateCommentRequest $request, $id)
-   {
-      // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('comment_add')) { abort(401, 'Unauthorized Access'); }
-      }
+   // public function storeComment(CreateCommentRequest $request, $id)
+   // {
+   //    // Check if user has required permission
+   //    if($this->enablePermissions) {
+   //       if(!checkPerm('comment_add')) { abort(401, 'Unauthorized Access'); }
+   //    }
 
-      $recipe = Recipe::find($id);
-         $comment = new Comment();
-         $comment->user_id = Auth::user()->id;
-         $comment->comment = $request->comment;
-      $recipe->comments()->save($comment);
+   //    $recipe = Recipe::find($id);
+   //       $comment = new Comment();
+   //       $comment->user_id = Auth::user()->id;
+   //       $comment->comment = $request->comment;
+   //    $recipe->comments()->save($comment);
 
-      Session::flash('success','Comment added succesfully.');
-      // return redirect()->route('recipes.show', $recipe->id);
-      return redirect()->back();
-   }
+   //    Session::flash('success','Comment added succesfully.');
+   //    // return redirect()->route('recipes.show', $recipe->id);
+   //    return redirect()->back();
+   // }
 
 
 ##################################################################################################################
@@ -480,7 +480,7 @@ return $pdf->download('generatepdf.pdf');
 
       $recipe = Recipe::findOrFail($id);
 
-      return view('recipes.trash', compact('recipe'));
+      return view('admin.recipes.trash', compact('recipe'));
    }
 
 
@@ -539,10 +539,8 @@ return $pdf->download('generatepdf.pdf');
       $recipe->delete();
 
       Session::flash('success', 'The recipe was successfully trashed!');
-      // return redirect()->back();
-      // return redirect()->route('recipes.'. Session::get('pageName'));
-      // return redirect()->route(Session::get('fromPage'));
-      return redirect(Session::get('fromPage'));
+      // return redirect(Session::get('fromPage'));
+      return redirect()->back();
    }
 
 

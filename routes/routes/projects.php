@@ -12,19 +12,40 @@ Route::delete('/projects/{project}/finish',           'Admin\Projects\FinishCont
 Route::post('projects/{project}/comment',             'Admin\Projects\CommentController@store')            ->name('projects.comment.store');
 
 
-Route::get('projects/{finish}/deleteFinish',          'Admin\Projects\FinishesController@delete')           ->name('finishes.delete');
-Route::resource('finishes', 'Admin\Projects\FinishesController');
+Route::prefix('admin/projects/materials')->name('admin.projects.materials.')->group(function() {
+   // Route::resource('materials', 'Admin\Projects\MaterialsController');
+   Route::get('create',                   'Admin\Projects\MaterialsController@create')           ->name('create');
+   Route::get('index',                    'Admin\Projects\MaterialsController@index')            ->name('index');
+   Route::post('store',                   'Admin\Projects\MaterialsController@store')            ->name('store');
+   Route::get('{project}/show',           'Admin\Projects\MaterialsController@show')             ->name('show');
+   Route::get('{project}/edit',           'Admin\Projects\MaterialsController@edit')             ->name('edit');
+   Route::put('{project}',                'Admin\Projects\MaterialsController@update')           ->name('update');
+   Route::delete('{project}',             'Admin\Projects\MaterialsController@destroy')          ->name('destroy');
+   Route::get('{material}/delete',        'Admin\Projects\MaterialsController@delete')           ->name('delete');
+});
 
-Route::get('projects/{material}/deleteMaterial',      'Admin\Projects\MaterialsController@delete')          ->name('materials.delete');
-Route::resource('materials', 'Admin\Projects\MaterialsController');
+Route::prefix('admin/projects/finishes')->name('admin.projects.finishes.')->group(function() {
+   // Route::resource('finishes', 'Admin\Projects\FinishesController');
+   Route::get('create',                   'Admin\Projects\FinishesController@create')           ->name('create');
+   Route::get('index',                    'Admin\Projects\FinishesController@index')            ->name('index');
+   Route::post('store',                   'Admin\Projects\FinishesController@store')            ->name('store');
+   Route::get('{project}/show',           'Admin\Projects\FinishesController@show')             ->name('show');
+   Route::get('{project}/edit',           'Admin\Projects\FinishesController@edit')             ->name('edit');
+   Route::put('{project}',                'Admin\Projects\FinishesController@update')           ->name('update');
+   Route::delete('{project}',             'Admin\Projects\FinishesController@destroy')          ->name('destroy');
+   Route::get('{finish}/delete',          'Admin\Projects\FinishesController@delete')           ->name('delete');
+});
 
+Route::prefix('admin/projects')->name('admin.projects.')->group(function() {
+   Route::get('create',                   'Admin\Projects\ProjectsController@create')           ->name('create');
+   Route::get('{filter?}',                'Admin\Projects\ProjectsController@index')            ->name('index');
+   Route::post('store',                   'Admin\Projects\ProjectsController@store')            ->name('store');
+   Route::get('{project}/show',           'Admin\Projects\ProjectsController@show')             ->name('show');
+   Route::get('{project}/edit',           'Admin\Projects\ProjectsController@edit')             ->name('edit');
+   Route::put('{project}',                'Admin\Projects\ProjectsController@update')           ->name('update');
+   Route::delete('{project}',             'Admin\Projects\ProjectsController@destroy')          ->name('destroy');
+   Route::get('{project}/delete',         'Admin\Projects\ProjectsController@delete')           ->name('delete');
+});
 
-Route::get('/projects/create',                        'Admin\Projects\ProjectsController@create')           ->name('projects.create');
-Route::get('/projects/list',                          'Admin\Projects\ProjectsController@list')             ->name('projects.list');
-Route::post('/projects',                              'Admin\Projects\ProjectsController@store')            ->name('projects.store');
-Route::get('/projects/{project}/show',                'Admin\Projects\ProjectsController@show')             ->name('projects.show');
-Route::get('/projects/{project}/edit',                'Admin\Projects\ProjectsController@edit')             ->name('projects.edit');
-Route::put('/projects/{project}',                     'Admin\Projects\ProjectsController@update')           ->name('projects.update');
-Route::delete('/projects/{project}',                  'Admin\Projects\ProjectsController@destroy')          ->name('projects.destroy');
-Route::get('/projects/{filter?}',                     'Admin\Projects\ProjectsController@index')            ->name('projects.index');
-Route::get('/projects/{project}/delete',              'Admin\Projects\ProjectsController@delete')           ->name('projects.delete');
+Route::get('/projects/{project}/show',    'Projects\ProjectsController@show')                   ->name('projects.show');
+Route::get('/projects/{filter?}',         'Projects\ProjectsController@index')                  ->name('projects.index');

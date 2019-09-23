@@ -1,7 +1,0 @@
-@if(checkPerm('category_delete'))
-   <a href="{{ route('categories.delete', $category->id) }}"
-      class="btn btn-{{ $size }} btn-danger text-light"
-      title="Delete Category">
-      <i class="{{ Config::get('buttons.delete') }}"></i>
-   </a>
-@endif

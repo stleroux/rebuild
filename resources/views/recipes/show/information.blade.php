@@ -22,7 +22,7 @@
    </tr>
 </table> --}}
 
-<div class="col-md-2 pr-1">
+<div class="col-md-2 pl-md-3 pr-md-1">
    <div class="card mb-2">
       <div class="card-header card_header p-2">Author</div>
       <div class="card-body p-1 text-center text-light">
@@ -31,7 +31,7 @@
    </div>
 </div>
 
-<div class="col-md-2 px-1">
+<div class="col-md-2 px-md-1">
    <div class="card mb-2">
       <div class="card-header card_header p-2">Created On</div>
       <div class="card-body p-1 text-center text-light">
@@ -40,7 +40,7 @@
    </div>
 </div>
 
-<div class="col-md-2 px-1">
+<div class="col-md-2 px-md-1">
    <div class="card mb-2">
       <div class="card-header card_header p-2">Updated By</div>
       <div class="card-body p-1 text-center text-light">
@@ -49,7 +49,7 @@
    </div>
 </div>
 
-<div class="col-md-2 px-1">
+<div class="col-md-2 px-md-1">
    <div class="card mb-2">
       <div class="card-header card_header p-2">Updated On</div>
       <div class="card-body p-1 text-center text-light">
@@ -58,7 +58,7 @@
    </div>
 </div>
 
-<div class="col-md-2 px-1">
+<div class="col-md-2 px-md-1">
    <div class="card mb-2">
       <div class="card-header card_header p-2">Last Viewed By</div>
       <div class="card-body p-1 text-center text-light">
@@ -67,7 +67,7 @@
    </div>
 </div>
 
-<div class="col-md-2 pl-1">
+<div class="col-md-2 pl-md-1 pr-md-3">
    <div class="card mb-2">
       <div class="card-header card_header p-2">Last Viewed On</div>
       <div class="card-body p-1 text-center text-light">

@@ -77,7 +77,7 @@ class DashboardController extends Controller
         $userCount = User::count();
         $comments = Comment::all();
 
-        return view('stats.index', compact(
+        return view('admin.stats.index', compact(
             'categoryCount','commentCount','permissionCount','postCount','recipeCount','userCount','comments'
         ));
     }

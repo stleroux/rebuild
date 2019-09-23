@@ -1,4 +1,4 @@
-@if(checkPerm('recipe_show'))
+@if(checkPerm('recipe_show', $recipe))
    <a href="{{ route('recipes.show', ($recipe->id ? $recipe->id : $archive->id)) }}"
       class="btn btn-{{ $size }} btn-primary text-light"
       title="Show Recipe">

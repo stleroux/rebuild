@@ -1,15 +1,15 @@
 @extends('layouts.master')
 
 @section ('stylesheets')
-   {{ Html::style('css/recipes.css') }}
+   {{ Html::style('css/woodbarn.css') }}
 @endsection
 
 @section('left_column')
-   @include('blocks.main_menu')
+   {{-- @include('blocks.main_menu') --}}
 @endsection
 
 @section('right_column')
-   @include('recipes.sidebar')
+   @include('recipes.block.sidebar')
    @include('recipes.blocks.popularRecipes')
    @include('recipes.blocks.archives')
 @endsection
@@ -20,15 +20,15 @@
       {!! csrf_field() !!}
       
       <div class="card">
-         <div class="card-header card_header p-2">
+         <div class="card-header section_header p-2">
             <i class="{{ Config::get('buttons.private') }}"></i>
             My Private Recipes
             <span class="float-right">
                <div class="btn-group">
-                  @include('recipes.buttons.help', ['size'=>'xs', 'bookmark'=>'recipes'])
-                  @include('recipes.buttons.unpublishAll', ['size'=>'xs'])
-                  @include('recipes.buttons.trashAll', ['size'=>'xs'])
-                  @include('recipes.buttons.add', ['size'=>'xs'])
+                  {{-- @include('recipes.buttons.help', ['size'=>'xs', 'bookmark'=>'recipes']) --}}
+                  {{-- @include('recipes.buttons.unpublishAll', ['size'=>'xs']) --}}
+                  {{-- @include('recipes.buttons.trashAll', ['size'=>'xs']) --}}
+                  {{-- @include('recipes.buttons.add', ['size'=>'xs']) --}}
                </div>
             </span>
          </div>
@@ -63,9 +63,10 @@
                         <td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'published_at'])</td>
                         <td class="text-right">
                            <div class="btn-group">
-                              @include('recipes.buttons.view', ['size'=>'xs'])
-                              @include('recipes.buttons.edit', ['size'=>'xs'])
-                              @include('recipes.buttons.trash', ['size'=>'xs'])
+                              @include('recipes.buttons.privatize', ['size'=>'xs'])
+                              @include('recipes.buttons.show', ['size'=>'xs'])
+                              {{-- @include('recipes.buttons.edit', ['size'=>'xs']) --}}
+                              {{-- @include('recipes.buttons.trash', ['size'=>'xs']) --}}
                            </div>
                         </td>
                      </tr>
@@ -76,7 +77,7 @@
          @else
             <div class="card-body card_body p-2">
                {{ setting('no_records_found') }}
-              </div>
+            </div>
          @endif
 
       </div>
