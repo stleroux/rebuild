@@ -1,9 +1,0 @@
-<snippet>
-   <content><![CDATA[
-@include('common.buttons.deleteAll', ['model'=>'${1:model}'])
-]]></content>
-   <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-   <tabTrigger>btn-deleteAll</tabTrigger>
-   <!-- Optional: Set a scope to limit where the snippet will trigger -->
-   <!-- <scope>source.python</scope> -->
-</snippet>

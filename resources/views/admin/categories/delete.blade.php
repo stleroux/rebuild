@@ -19,22 +19,25 @@
       </div>
       <div class="card-body bg-light p-2 text-center">
          <form
-            action="{{ route('admin.categories.destroy', [$category->id]) }}"
-            method="POST"
+            {{-- action="{{ route('admin.categories.destroy', [$category->id]) }}" --}}
+            {{-- method="POST" --}}
             {{-- onsubmit="return confirm('Do you really want to delete this permission?');" class="pull-right" --}}
             >
+            @csrf
+            @method('DELETE')
 
-            {{ csrf_field() }}
-            <input type="hidden" name="_method" value="DELETE" />
+            {{-- {{ csrf_field() }} --}}
+            {{-- <input type="hidden" name="_method" value="DELETE" /> --}}
 
-            <a class="btn btn-secondary" href="{{ route('admin.categories.index') }}">No - Return To Previous Page</a>
+            {{-- <a class="btn btn-secondary" href="{{ route('admin.categories.index') }}">No - Return To Previous Page</a> --}}
+            @include('admin.categories.buttons.back', ['size'=>'', 'btn_label'=>'No - Return To Previous Page'])
             
-            @if(checkPerm('category_delete'))
-               <button type="submit" class="btn btn-danger">
-                  <i class="far fa-trash-alt" aria-hidden="true"></i>
-                  Yes - Delete Permanently
-               </button>
-            @endif
+            {{-- <button type="submit" class="btn btn-danger">
+               <i class="far fa-trash-alt" aria-hidden="true"></i>
+               Yes - Delete Permanently
+            </button> --}}
+            @include('admin.categories.buttons.btn_delete', ['size'=>'', 'btn_label'=>'Yes - Delete Permanently'])
+
          </form>
       </div>
       <div class="card-footer pt-1 pb-1 pl-2">

@@ -1,10 +1,10 @@
 <snippet>
    <content><![CDATA[
 <div class="card">
-      <div class="card-header"></div>
-      <div class="card-body"></div>
-      <div class="card-footer"></div>
-   </div>
+   <div class="card-header"></div>
+   <div class="card-body"></div>
+   <div class="card-footer"></div>
+</div>
 ]]></content>
    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
    <tabTrigger>-card</tabTrigger>

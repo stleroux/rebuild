@@ -1,6 +1,6 @@
 <snippet>
    <content><![CDATA[
-<table class="table tbale-condensed table-striped table-hover">
+<table class="table table-condensed table-striped table-hover">
    <thead>
       <tr>
          <th>Header</th>

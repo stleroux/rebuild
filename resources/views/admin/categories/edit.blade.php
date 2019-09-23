@@ -13,8 +13,11 @@
 
 @section('content')
 	
-	{!! Form::model($category, ['route'=>['admin.categories.update', $category->id], 'method' => 'PUT']) !!}
-		{{ Form::token() }}
+	{{-- {!! Form::model($category, ['route'=>['admin.categories.update', $category->id], 'method' => 'PUT']) !!} --}}
+	<form>
+		@method('PUT')
+		{{-- {{ Form::token() }} --}}
+		@csrf
 
 		<div class="row">
 			<div class="col">
@@ -28,7 +31,7 @@
 								@include('admin.categories.buttons.help', ['size'=>'xs', 'bookmark'=>'categories_edit_category'])
 								@include('admin.categories.buttons.back', ['size'=>'xs'])
 								@include('admin.categories.buttons.reset', ['size'=>'xs'])
-								@include('admin.categories.buttons.update', ['size'=>'xs'])
+								@include('admin.categories.buttons.btn_update', ['size'=>'xs'])
 							</div>
 						</span>
 					</div>
@@ -37,22 +40,22 @@
 						<div class="row">
 							<div class="col-3">
 								<div class="form-group">
-									{{ Form::label('name', 'Name', ['class'=>'required']) }}
-									{{ Form::text('name', null, ['class' => 'form-control form-control-sm', 'autofocus', "onfocus"=>"this.focus();this.select()"]) }}
+									<label for="name" class="required">Name</label>
+									<input type="text" name="name" value="{{ $category->name }}" class="form-control form-control-sm" autofocus onfocus="this.focus();this.select()">
 									<div class="pl-1 bg-danger">{{ $errors->first('name') }}</div>
 								</div>
 							</div>
 							<div class="col-3">
 								<div class="form-group">
-									{{ Form::label('value', 'Value') }}
-									{{ Form::text('value', null, ['class' => 'form-control form-control-sm']) }}
+									<label for="value">Value</label>
+									<input type="text" name="value" value="{{ $category->value }}" class="form-control form-control-sm">
 								</div>
 							</div>
 							<div class="w-100"></div>
 							<div class="col">
 								<div class="form-group">
-									{{ Form::label('description', 'Description') }}
-									{{ Form::textarea('description', null, ['class' => 'form-control input-sm', 'rows'=>3]) }}
+									<label for="description">Description</label>
+									<textarea name="description" class="form-control form-control-sm" rows="3">{{ $category->description }}</textarea>
 								</div>
 							</div>
 						</div>
