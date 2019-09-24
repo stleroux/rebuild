@@ -14,6 +14,7 @@
 
 @section('content')
 
+<form style="display:inline;">
    <div class="row">
       <div class="col">
          <div class="card mb-3">
@@ -81,5 +82,6 @@
          </div>
       </div>
    </div>
+</form>
 
 @endsection

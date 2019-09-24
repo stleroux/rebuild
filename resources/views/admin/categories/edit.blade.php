@@ -13,10 +13,8 @@
 
 @section('content')
 	
-	{{-- {!! Form::model($category, ['route'=>['admin.categories.update', $category->id], 'method' => 'PUT']) !!} --}}
 	<form>
 		@method('PUT')
-		{{-- {{ Form::token() }} --}}
 		@csrf
 
 		<div class="row">
@@ -31,7 +29,7 @@
 								@include('admin.categories.buttons.help', ['size'=>'xs', 'bookmark'=>'categories_edit_category'])
 								@include('admin.categories.buttons.back', ['size'=>'xs'])
 								@include('admin.categories.buttons.reset', ['size'=>'xs'])
-								@include('admin.categories.buttons.btn_update', ['size'=>'xs'])
+								@include('admin.categories.buttons.update', ['size'=>'xs'])
 							</div>
 						</span>
 					</div>

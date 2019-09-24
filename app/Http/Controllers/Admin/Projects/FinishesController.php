@@ -48,6 +48,27 @@ class FinishesController extends Controller
 
 
 ##################################################################################################################
+# ██████╗ ███████╗██╗     ███████╗████████╗███████╗
+# ██╔══██╗██╔════╝██║     ██╔════╝╚══██╔══╝██╔════╝
+# ██║  ██║█████╗  ██║     █████╗     ██║   █████╗  
+# ██║  ██║██╔══╝  ██║     ██╔══╝     ██║   ██╔══╝  
+# ██████╔╝███████╗███████╗███████╗   ██║   ███████╗
+# ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝
+// Mass Delete selected rows - all selected records
+##################################################################################################################
+    public function delete(Finish $finish)
+    {
+        // Check if user has required permission
+        if($this->enablePermissions)
+        {
+            if(!checkPerm('projects_delete')) { abort(401, 'Unauthorized Access'); }
+        }
+
+        return view('admin.projects.finishes.delete', compact('finish'));
+    }
+
+
+##################################################################################################################
 # ██████╗ ███████╗███████╗████████╗██████╗  ██████╗ ██╗   ██╗
 # ██╔══██╗██╔════╝██╔════╝╚══██╔══╝██╔══██╗██╔═══██╗╚██╗ ██╔╝
 # ██║  ██║█████╗  ███████╗   ██║   ██████╔╝██║   ██║ ╚████╔╝ 
@@ -73,27 +94,6 @@ class FinishesController extends Controller
         Session::flash('delete','The finish was deleted successfully.');
         // Redirect
         return redirect()->route('admin.projects.finishes.index');
-    }
-
-
-##################################################################################################################
-# ██████╗ ███████╗██╗     ███████╗████████╗███████╗
-# ██╔══██╗██╔════╝██║     ██╔════╝╚══██╔══╝██╔════╝
-# ██║  ██║█████╗  ██║     █████╗     ██║   █████╗  
-# ██║  ██║██╔══╝  ██║     ██╔══╝     ██║   ██╔══╝  
-# ██████╔╝███████╗███████╗███████╗   ██║   ███████╗
-# ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝
-// Mass Delete selected rows - all selected records
-##################################################################################################################
-    public function delete(Finish $finish)
-    {
-        // Check if user has required permission
-        if($this->enablePermissions)
-        {
-            if(!checkPerm('projects_delete')) { abort(401, 'Unauthorized Access'); }
-        }
-
-        return view('admin.projects.finishes.delete', compact('finish'));
     }
 
 

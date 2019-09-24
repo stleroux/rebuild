@@ -1,3 +1,5 @@
+@csrf
+
 <div class="form-row">
    <div class="form-group col-md-3">
       <label for="name" class="required">Name</label>
@@ -54,4 +56,3 @@
    </div>
 </div>
 
-@csrf

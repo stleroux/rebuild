@@ -13,8 +13,8 @@
 
 @section('content')
 
-   {{-- <form style="display:inline;"> --}}
-      {{-- {!! csrf_field() !!} --}}
+   <form style="display:inline;">
+      {{-- @csrf --}}
       <div class="row">
          <div class="col">
             <div class="card mb-3">
@@ -30,8 +30,7 @@
                   </span>
                </div>
                
-               <!--CARD BODY-->
-               
+               <!--CARD BODY-->               
                @if($categories->count() > 0)
                   <div class="card-body section_body p-2">
                      {{-- @include('common.alphabet', ['model'=>'category', 'page'=>'index']) --}}
@@ -75,6 +74,6 @@
             </div>
          </div>
       </div>
-   {{-- </form> --}}
+   </form>
 
 @endsection

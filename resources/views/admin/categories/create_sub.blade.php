@@ -12,7 +12,7 @@
                @include('admin.categories.buttons.help', ['size'=>'xs', 'bookmark'=>'categories_add_subCategory'])
                @include('admin.categories.buttons.back', ['size'=>'xs'])
                @include('admin.categories.buttons.reset', ['size'=>'xs'])
-               @include('admin.categories.buttons.btn_save', ['size'=>'xs'])
+               @include('admin.categories.buttons.save', ['size'=>'xs'])
             </div>
          </span>
       </div>
