@@ -3,7 +3,7 @@
       class="btn {{ $size ? 'btn-'.$size : '' }} btn-info text-light"
       type="button"
       onclick="location.href='{{ route('admin.categories.edit', $category->id) }}'"
-      title="EditCategory">
+      title="Edit Category">
       <i class="{{ Config::get('buttons.edit') }}"></i>
       {{ $btn_label ?? '' }}
    </button>

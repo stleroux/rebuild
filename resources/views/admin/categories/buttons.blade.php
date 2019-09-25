@@ -67,7 +67,7 @@
    @auth
       <a href="/help#{{$bookmark}}"
          target="_blank"
-         class="btn btn-{{ $size }} btn-primary text-light"
+         class="btn {{ $size ? 'btn-'.$size : '' }} btn-primary text-light"
          title="Help">
          <i class="{{ Config::get('buttons.help') }}"></i>
       </a>
@@ -76,7 +76,7 @@
 
 @if($action === 'reset')
    <button
-      class="btn btn-{{ $size }} btn-primary text-light"
+      class="btn {{ $size ? 'btn-'.$size : '' }} btn-primary text-light"
       type="reset"
       formmethod="POST"
       title="Reset Form">
@@ -88,7 +88,7 @@
 @if($action === 'save')
    @if(checkPerm('category_add'))
       <button
-         class="btn btn-{{ $size }} btn-success text-light"
+         class="btn {{ $size ? 'btn-'.$size : '' }} btn-success text-light"
          type="submit"
          formaction="{{ route('admin.categories.store') }}"
          formmethod="POST"
@@ -102,7 +102,7 @@
 @if($action === 'show')
    @if(checkPerm('category_read'))
       <button
-         class="btn btn-{{ $size }} btn-primary text-light"
+         class="btn {{ $size ? 'btn-'.$size : '' }} btn-primary text-light"
          type="button"
          onclick="location.href='{{ route('admin.categories.show', $category->id) }}'"
          title="Show Category">
@@ -115,7 +115,7 @@
 @if($action === 'update')
    @if(checkPerm('category_edit'))
       <button
-         class="btn btn-{{ $size }} btn-info text-light"
+         class="btn {{ $size ? 'btn-'.$size : '' }} btn-info text-light"
          type="submit"
          formaction="{{ route('admin.categories.update', $category->id) }}"
          formmethod="POST"

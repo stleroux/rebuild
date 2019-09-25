@@ -1,6 +1,6 @@
 @if(checkPerm('category_read'))
    <button
-      class="btn btn-{{ $size }} btn-primary text-light"
+      class="btn {{ $size ? 'btn-'.$size : '' }} btn-primary text-light"
       type="button"
       onclick="location.href='{{ route('admin.categories.show', $category->id) }}'"
       title="Show Category">

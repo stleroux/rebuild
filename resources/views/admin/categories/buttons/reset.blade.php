@@ -1,5 +1,5 @@
 <button
-   class="btn btn-{{ $size }} btn-primary text-light"
+   class="btn {{ $size ? 'btn-'.$size : '' }} btn-primary text-light"
    type="reset"
    formmethod="POST"
    title="Reset Form">

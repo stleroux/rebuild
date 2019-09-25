@@ -1,6 +1,6 @@
 @if(checkPerm('category_add'))
    <button
-      class="btn btn-{{ $size }} btn-success text-light"
+      class="btn {{ $size ? 'btn-'.$size : '' }} btn-success text-light"
       type="submit"
       formaction="{{ route('admin.categories.store') }}"
       formmethod="POST"
