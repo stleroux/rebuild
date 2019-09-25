@@ -1,0 +1,10 @@
+<snippet>
+   <content><![CDATA[
+@include('admin.buttons', ['name'=>'${1:name}', 'model'=>\$${2:model}, 'action'=>'${3:action}', 'size'=>'${4:size}'])
+]]></content>
+<!-- Hello, ${1:this} is a ${2:snippet}. -->
+   <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+   <tabTrigger>_btn</tabTrigger>
+   <!-- Optional: Set a scope to limit where the snippet will trigger -->
+   <!-- <scope>source.python</scope> -->
+</snippet>

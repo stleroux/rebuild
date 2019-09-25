@@ -13,7 +13,10 @@
 
 @section('content')
 
+{{-- @website('site-name') --}}
+
    <form>
+{{-- {{ buttons('','button') }} --}}
       @csrf
       <div class="row">
          <div class="col">
@@ -24,9 +27,10 @@
                   Categories
                   <span class="float-right">
                      <div class="btn-group">
-                        @include('admin.categories.buttons.help', ['size'=>'xs', 'bookmark'=>'categories'])
-                        @include('admin.categories.buttons.add', ['size'=>'xs'])
-                        {{-- @include('admin.categories.buttons', ['action'=>'add', 'size'=>'xs']) --}}
+                        {{-- @include('admin.categories.buttons.help', ['size'=>'xs', 'bookmark'=>'categories']) --}}
+                        @include('admin.buttons', ['name'=>'', 'model'=>'', 'action'=>'help', 'size'=>'xs', 'bookmark'=>'categories'])
+                        {{-- @include('admin.categories.buttons.add', ['size'=>'xs']) --}}
+                        @include('admin.buttons', ['name'=>'category', 'model'=>'', 'action'=>'add', 'size'=>'xs'])
                      </div>
                   </span>
                </div>
@@ -56,12 +60,12 @@
                                  <td data-order="{{ $category->created_at}}">{{ $category->created_at ? $category->created_at->format('M d, Y') : 'no data found' }}</td>
                                  <td class="text-right">
                                     <div class="btn-group">
-                                       @include('admin.categories.buttons.show', ['size'=>'xs'])
-                                       {{-- @include('admin.categories.buttons', ['action'=>'show', 'size'=>'xs']) --}}
-                                       @include('admin.categories.buttons.edit', ['size'=>'xs'])
-                                       {{-- @include('admin.categories.buttons', ['action'=>'edit', 'size'=>'xs']) --}}
-                                       @include('admin.categories.buttons.delete', ['size'=>'xs'])
-                                       {{-- @include('admin.categories.buttons', ['action'=>'delete', 'size'=>'xs']) --}}
+                                       {{-- @include('admin.categories.buttons.show', ['size'=>'xs']) --}}
+                                       @include('admin.buttons', ['name'=>'category', 'model'=>$category, 'action'=>'show', 'size'=>'xs'])
+                                       {{-- @include('admin.categories.buttons.edit', ['size'=>'xs']) --}}
+                                       @include('admin.buttons', ['name'=>'category', 'model'=>$category, 'action'=>'edit', 'size'=>'xs'])
+                                       {{-- @include('admin.categories.buttons.delete', ['size'=>'xs']) --}}
+                                       @include('admin.buttons', ['name'=>'category', 'model'=>$category, 'action'=>'delete', 'size'=>'xs'])
                                     </div>
                                  </td>
                               </tr>
