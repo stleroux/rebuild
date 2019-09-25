@@ -13,8 +13,8 @@
 
 @section('content')
 
-   <form style="display:inline;">
-      {{-- @csrf --}}
+   <form>
+      @csrf
       <div class="row">
          <div class="col">
             <div class="card mb-3">
@@ -26,6 +26,7 @@
                      <div class="btn-group">
                         @include('admin.categories.buttons.help', ['size'=>'xs', 'bookmark'=>'categories'])
                         @include('admin.categories.buttons.add', ['size'=>'xs'])
+                        {{-- @include('admin.categories.buttons', ['action'=>'add', 'size'=>'xs']) --}}
                      </div>
                   </span>
                </div>
@@ -56,8 +57,11 @@
                                  <td class="text-right">
                                     <div class="btn-group">
                                        @include('admin.categories.buttons.show', ['size'=>'xs'])
+                                       {{-- @include('admin.categories.buttons', ['action'=>'show', 'size'=>'xs']) --}}
                                        @include('admin.categories.buttons.edit', ['size'=>'xs'])
+                                       {{-- @include('admin.categories.buttons', ['action'=>'edit', 'size'=>'xs']) --}}
                                        @include('admin.categories.buttons.delete', ['size'=>'xs'])
+                                       {{-- @include('admin.categories.buttons', ['action'=>'delete', 'size'=>'xs']) --}}
                                     </div>
                                  </td>
                               </tr>

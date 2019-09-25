@@ -1,5 +1,9 @@
 @extends('layouts.help')
 
+@section('stylesheets')
+   {{ Html::style('css/woodbarn.css') }}
+@endsection
+
 @section('left_column')
 	@include('help.toc')
 @endsection

@@ -18,7 +18,7 @@ Route::get('/about', 'SiteController@about')->name('about');
 Route::get('/terms', 'SiteController@terms')->name('terms');
 Route::get('/privacy', 'SiteController@privacy')->name('privacy');
 
-// Route::view('/help', 'help.index');
+Route::view('/help', 'help.index');
 
 foreach (File::allFiles(__DIR__ . '/routes') as $route_file) {
   require $route_file->getPathname();

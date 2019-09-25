@@ -18,6 +18,7 @@
    {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/dt-1.10.18/datatables.min.css"/> --}}
    {{-- <link rel="stylesheet" href="{{ asset('css/bootstrap_4/slate.css') }}"> --}}
    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+   <link rel="stylesheet" href="{{ asset('css/bootstrap_4/slate_b431.css') }}">
    <link rel="stylesheet" href="{{ asset('css/bootstrap-colors.css') }}" />
    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
    @yield('stylesheets')
