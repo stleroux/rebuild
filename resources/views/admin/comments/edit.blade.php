@@ -5,7 +5,6 @@
 @endsection
 
 @section('left_column')
-   {{-- @include('blocks.main_menu') --}}
 @endsection
 
 @section('right_column')
@@ -36,15 +35,15 @@
 						<div class="row">
 							<div class="col">
 								<div class="form-group">
-									{{ Form::label('name', 'Name:') }}
-									{{ Form::text('name', $comment->user->username, ['class' => 'form-control form-control-sm', 'readonly']) }}
+									{{ Form::label('name', 'Name') }}
+									{{ Form::text ('name', $comment->user->username, ['class' => 'form-control form-control-sm', 'readonly']) }}
 								</div>
 							</div>
 
 							<div class="col">
 								<div class="form-group">
-									{{ Form::label('email', 'Email:') }}
-									{{ Form::text('email', $comment->user->email, ['class' => 'form-control form-control-sm', 'readonly']) }}
+									{{ Form::label('email', 'Email') }}
+									{{ Form::text ('email', $comment->user->email, ['class' => 'form-control form-control-sm', 'readonly']) }}
 								</div>
 							</div>
 						</div>
@@ -52,8 +51,8 @@
 						<div class="row">
 							<div class="col">
 								<div class="form-group">
-									{{ Form::label('comment', 'Comment:') }}
-									{{ Form::textarea('comment', null, ['class' => 'form-control form-control-sm', 'autofocus', "onfocus"=>"this.focus();this.select()"]) }}
+									{{ Form::label('comment', 'Comment') }}
+									{{ Form::textarea('comment', $comment->comment, ['class'=>'form-control form-control-sm', 'autofocus', 'onfocus'=>'this.focus();this.select()']) }}
 									<div class="pl-1 bg-danger">{{ $errors->first('comment') }}</div>
 								</div>
 							</div>
@@ -64,6 +63,7 @@
 		</div>
 
 	{{ Form::close() }}
+
 @endsection
 
 @section ('scripts')

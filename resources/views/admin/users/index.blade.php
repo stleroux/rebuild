@@ -60,7 +60,7 @@
 									</td>
 									<td>{{ $user->email }}</td>
 									<td>{{ $user->permissions->count() }}</td>
-									<td>{{ $user->created_at->format('M d, Y') }}</td>
+									<td>{{ $user->created_at }}</td>
 									<td class="text-right">
 										<div class="btn-group">
 											@if(checkPerm('user_show'))

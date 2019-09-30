@@ -43,4 +43,5 @@ Route::prefix('admin/posts')->name('admin.posts.')->group(function() {
    Route::get('/{key?}',                        'Admin\Posts\PostsController@index')               ->name('index');
    Route::get('/{id}/edit',                     'Admin\Posts\PostsController@edit')                ->name('edit');
    Route::put('/{id}/update',                   'Admin\Posts\PostsController@update')              ->name('update');
+   Route::delete('{id}/destroy',                'Admin\PostsController@destroy')                   ->name('destroy');
 });

@@ -14,7 +14,6 @@
 @section('content')
 
    {!! Form::model($setting, ['route'=>['admin.settings.update', $setting->id], 'method'=>'PUT']) !!}
-      {{ Form::token() }}
       
       <div class="card">
          
@@ -77,6 +76,7 @@
          </div>
 
       </div>
+      
    {!! Form::close() !!}
 
 @endsection

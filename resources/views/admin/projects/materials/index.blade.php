@@ -20,7 +20,7 @@
             <!--CARD HEADER-->
             <div class="card-header section_header p-2">
                <i class="fa fa-hammer"></i>
-               Materials
+               Project Materials
                <span class="float-right">
                   <div class="btn-group">
                      @include('admin.projects.buttons.help', ['size'=>'xs', 'bookmark'=>'projects'])
@@ -43,7 +43,7 @@
                            <th>Name</th>
                            <th>Type</th>
                            <th>Created On</th>
-                           <th>Updated On</th>
+                           {{-- <th>Updated On</th> --}}
                            <th class="no-sort"></th>
                         </tr>
                      </thead>
@@ -54,8 +54,7 @@
                               <td>{{ $material->name }}</td>
                               <td>{{ $material->type }}</td>
                               {{-- Add more columns here --}}
-                              <td data-order="{{ $material->created_at}}">{{ $material->created_at ? $material->created_at->format('M d, Y') : 'no data found' }}</td>
-                              <td data-order="{{ $material->updated_at}}">{{ $material->updated_at ? $material->updated_at->format('M d, Y') : 'no data found' }}</td>
+                              <td data-order="{{ $material->created_at}}">{{ $material->created_at }}</td>
                               <td class="text-right">
                                  <div class="btn-group">
                                     @include('admin.projects.materials.buttons.show', ['size'=>'xs'])

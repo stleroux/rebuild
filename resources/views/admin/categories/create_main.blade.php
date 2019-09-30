@@ -1,8 +1,6 @@
-{{-- {!! Form::open(['route' => 'admin.categories.store']) !!} --}}
-{{-- <form action="{{ route('admin.categories.store') }}"> --}}
-<form>
-   @csrf
+{!! Form::open(['route' => 'admin.categories.store']) !!}
    <input type="hidden" name="part" value="main">
+   
    <div class="card mb-3">
       <div class="card-header section_header p-2">
          <i class="fa fa-plus" aria-hidden="true"></i>
@@ -20,22 +18,22 @@
          <div class="row">
             <div class="col-3">
                <div class="form-group">
-                  <label for="mName" class="required">Main Category</label>
-                  <input type="text" name="mName" class="form-control form-control-sm">
+                  {{ Form::label('mName', 'Main Category', ['class'=>'required']) }}
+                  {{ Form::text ('mName', null, ['class' => 'form-control form-control-sm']) }}
                   <div class="pl-1 bg-danger">{{ $errors->first('mName') }}</div>
                </div>
             </div>
             <div class="col-3">
                <div class="form-group">
-                  <label for="mValue">Value</label>
-                  <input type="text" name="mValue" class="form-control form-control-sm" placeholder="See Category Help for details." />
+                  {{ Form::label('mValue', 'Value', ['class'=>'']) }}
+                  {{ Form::text ('mValue', null, ['class' => 'form-control form-control-sm', 'placeholder'=>'See Category Help for details.']) }}
                </div>
             </div>
             <div class="w-100"></div>
             <div class="col">
                <div class="form-group">
-                  <label for="mDescription">Description</label>
-                  <input type="text" name="mDescription" class="form-control form-control-sm">
+                  {{ Form::label('mDescription', 'Description', ['class'=>'']) }}
+                  {{ Form::text ('mDescription', null, ['class' => 'form-control form-control-sm']) }}
                </div>
             </div>
          </div>
@@ -45,4 +43,5 @@
          <div>Fields with <i class="fa fa-star" style="color:#ff0000" aria-hidden="true"></i> are required</div>
       </div>
    </div>
+
 {!! Form::close() !!}

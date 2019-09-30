@@ -5,7 +5,6 @@
 @endsection
 
 @section('left_column')
-   {{-- @include('blocks.main_menu') --}}
 @endsection
 
 @section('right_column')
@@ -32,7 +31,7 @@
 								<th>Name</th>
 								<th>Display Name</th>
 								<th>Model</th>
-								<th>Core</th>
+								{{-- <th>Core</th> --}}
 								<th>Allow member to</th>
 								<th class="no-sort"></th>
 							</tr>
@@ -43,7 +42,7 @@
 									<td>{{ $permission->name }}</td>
 									<td>{{ ucwords($permission->display_name) }}</td>
 									<td>{{ ucfirst($permission->model) }}</td>
-									<td>{{ $permission->type }}</td>
+									{{-- <td>{{ $permission->type }}</td> --}}
 									<td>{{ ucwords($permission->description) }}</td>
 									<td class="text-right">
 										<div class="btn-group">

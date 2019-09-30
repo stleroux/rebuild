@@ -14,7 +14,8 @@
 
 @section('content')
 
-<form style="display:inline;">
+{{-- <form style="display:inline;"> --}}
+{{ Form::open() }}   
    <div class="row">
       <div class="col">
          <div class="card mb-3">
@@ -59,7 +60,7 @@
                               <td>{{ $finish->color_name }}</td>
                               <td>{{ $finish->sheen }}</td>
                               {{-- Add more columns here --}}
-                              <td data-order="{{ $finish->created_at}}">{{ $finish->created_at ? $finish->created_at->format('M d, Y') : 'no data found' }}</td>
+                              <td data-order="{{ $finish->created_at}}">{{ $finish->created_at }}</td>
                               {{-- <td data-order="{{ $finish->updated_at}}">{{ $finish->updated_at ? $finish->updated_at->format('M d, Y') : 'no data found' }}</td> --}}
                               <td class="text-right">
                                  <div class="btn-group">

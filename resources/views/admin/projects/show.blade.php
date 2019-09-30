@@ -31,8 +31,8 @@
                <div class="btn-group">
                   {{-- @include('projects.buttons.previous', ['size'=>'xs'])
                   @include('projects.buttons.next', ['size'=>'xs']) --}}
-                  @include('admin.projects.buttons.edit', ['size'=>'xs'])
                   @include('admin.projects.buttons.back', ['size'=>'xs'])
+                  @include('admin.projects.buttons.edit', ['size'=>'xs'])
                </div>
             </div>
          </div>

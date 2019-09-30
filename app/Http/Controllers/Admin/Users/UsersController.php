@@ -468,7 +468,7 @@ class UsersController extends Controller
 #  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
 // UPDATE :: Update the specified resource in storage
 ##################################################################################################################
-	public function update(Request $request, User $user)
+	public function update(Request $request, $id)
 	{
       // Check if user has required permission
       if($this->enablePermissions)
@@ -476,8 +476,8 @@ class UsersController extends Controller
          if(!checkPerm('user_edit')) { abort(401, 'Unauthorized Access'); }
       }
 
-		$user = User::findOrFail($user->id);
-      dd($user);
+		$user = User::findOrFail($id);
+      // dd($user);
 
 		$this->validate($request, [
 			'username' => 'required',

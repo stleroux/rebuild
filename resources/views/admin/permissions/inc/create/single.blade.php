@@ -1,5 +1,6 @@
-{!! Form::open(array('route' => 'admin.permissions.store')) !!}
+{!! Form::open(['route' => 'admin.categories.store']) !!}
    <input type="hidden" name="single" value="single">
+   
    <div class="card mb-3">
       <!--CARD HEADER-->
       <div class="card-header card_header p-2">
@@ -19,7 +20,7 @@
             <div class="col-sm-4">
                <div class="form-group">
                   {{ Form::label('name', 'Name', ['class'=>'required']) }}
-                  {!! Form::text('name', null, array('class'=>'form-control form-control-sm', 'autofocus'=>'autofocus')) !!}
+                  {{ Form::text ('name', null, array('class' => 'form-control form-control-sm', 'autofocus')) }}
                   <div class="pl-1 bg-danger">{{ $errors->first('name') }}</div>
                   <small class="form-text">Will be used in code</small>
                </div>
@@ -27,7 +28,7 @@
             <div class="col-sm-4">
                <div class="form-group">
                   {{ Form::label('display_name', 'Display Name', ['class'=>'required']) }}
-                  {!! Form::text('display_name', null, array('class'=>'form-control form-control-sm')) !!}
+                  {{ Form::text ('display_name', null, array('class' => 'form-control form-control-sm')) }}
                   <div class="pl-1 bg-danger">{{ $errors->first('display_name') }}</div>
                   <small class="form-text">As displayed in user interface</small>
                </div>
@@ -35,30 +36,20 @@
             <div class="col-sm-4">
                <div class="form-group">
                   {{ Form::label('model', 'Model', ['class'=>'required']) }}
-                  {!! Form::text('model', null, array('class'=>'form-control form-control-sm')) !!}
+                  {{ Form::text ('model', null, array('class' => 'form-control form-control-sm')) }}
                   <div class="pl-1 bg-danger">{{ $errors->first('model') }}</div>
                   <small class="form-text">Used for sorting and grouping permissions</small>
                </div>
             </div>
-{{--             <div class="col-sm-4">
-               <div class="form-group">
-                  <label for="type" class="required">Core Module?</label>
-                     <select name="type" value="{{ old('type') ?? $permission->type }}" id="type" class="form-control form-control-sm">
-                        @foreach($permission->typesOptions() as $typeOptionKey => $typeOptionValue)
-                           <option value="{{ $typeOptionKey }}" {{ $permission->type == $typeOptionValue ? 'selected' : '' }}>{{ $typeOptionValue }}</option>
-                        @endforeach
-                     </select>
-                  <div class="pl-1 bg-danger">{{ $errors->first('type') }}</div>
-               </div>
-            </div> --}}
             <div class="col-sm-12">
                <div class="form-group">
                   {{ Form::label('description', 'Allow member to', ['class'=>'required']) }}
-                  {!! Form::text('description', null, array('class'=>'form-control form-control-sm')) !!}
+                  {{ Form::text ('description', null, array('class' => 'form-control form-control-sm')) }}
                   <div class="pl-1 bg-danger">{{ $errors->first('description') }}</div>
                </div>
             </div>
          </div>
       </div>
    </div>
+
 {{ Form::close() }}

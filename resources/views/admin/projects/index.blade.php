@@ -60,7 +60,7 @@
                               <td>{{ $project->finishes()->count() }}</td>
                               <td>{{ $project->materials()->count() }}</td>
                               {{-- Add more columns here --}}
-                              <td data-order="{{ $project->created_at}}">{{ $project->created_at ? $project->created_at->format('M d, Y') : 'no data found' }}</td>
+                              <td data-order="{{ $project->created_at}}">{{ $project->created_at }}</td>
                               <td class="text-right">
                                  <div class="btn-group">
                                     @include('admin.projects.buttons.show', ['size'=>'xs'])

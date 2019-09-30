@@ -6,7 +6,6 @@
 @endsection
 
 @section('left_column')
-   {{-- @include('blocks.main_menu') --}}
 @endsection
 
 @section('right_column')
@@ -15,6 +14,7 @@
 @section('content')
 
 	{!! Form::open(['route' => 'admin.posts.store', 'files'=>'true']) !!}
+
 		<div class="card mb-3">
 			<div class="card-header section_header p-2">
 				New Post
@@ -40,7 +40,7 @@
                <div class="col-xs-12 col-sm-6 col-md-3">
                   <div class="form-group">
                      {!! Form::label('category_id', 'Category', ['class'=>'required']) !!}
-                     <select class="form-control form-control-sm">
+                     <select name="category_id" id="category_id" class="form-control form-control-sm">
                         <option value="" selected>Select One</option>
                         @foreach ($categories as $category)
                            <option disabled>{{ ucfirst($category->name) }}</option>

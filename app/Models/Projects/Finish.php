@@ -38,4 +38,21 @@ class Finish extends Model
    {
       return $this->belongsToMany('App\Models\Projects\Project::class', 'projects__finish_project');
    }
+
+
+//////////////////////////////////////////////////////////////////////////////////////
+// ACCESSORS
+//////////////////////////////////////////////////////////////////////////////////////
+   public function getCreatedAtAttribute($date)
+   {
+      if($date){
+         $date = new \Carbon\Carbon($date);
+         // Now modify and return the date
+         $date = $date->format(setting('dateFormat'));
+         return $date;
+      }
+      
+      return 'N/A';
+   }
+
 }

@@ -5,7 +5,6 @@
 @endsection
 
 @section('left_column')
-   {{-- @include('blocks.main_menu') --}}
 @endsection
 
 @section('right_column')
@@ -14,7 +13,6 @@
 @section('content')
 
    {!! Form::model($permission, ['route'=>['admin.permissions.update', $permission->id], 'method'=>'PUT']) !!}
-      {{ Form::token() }}
       
       <div class="card">
          
@@ -33,40 +31,29 @@
             <div class="row">
                <div class="col-sm-4">
                   <div class="form-group">
-                     {{ Form::label('name', 'Name') }}
-                     {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control form-control-sm', 'readonly')) !!}
+                     <label for="name">Name</label>
+                     <input type="text" name="name" value="{{ $permission->name }}" class="form-control form-control-sm" readonly placeholder="Name" />
                      <div class="pl-1 bg-danger">{{ $errors->first('name') }}</div>
                   </div>
                </div>
                <div class="col-sm-4">
                   <div class="form-group">
-                     {{ Form::label('display_name', 'Display Name', ['class'=>'required']) }}
-                     {!! Form::text('display_name', null, array('placeholder' => 'Display Name','class' => 'form-control form-control-sm', 'autofocus')) !!}
+                     <label for="display_name" class="required">Display Name</label>
+                     <input type="text" name="display_name" value="{{ $permission->display_name}}" class="form-control form-control-sm" placeholder="Display Name" autofocus />
                      <div class="pl-1 bg-danger">{{ $errors->first('display_name') }}</div>
                   </div>
                </div>
                <div class="col-sm-4">
                   <div class="form-group {{ $errors->has('model') ? 'has-error' : '' }}">
-                     {{ Form::label('model', 'Model', ['class'=>'required']) }}
-                     {!! Form::text('model', null, array('placeholder' => 'Model','class' => 'form-control form-control-sm')) !!}
+                     <label for="model">Model</label>
+                     <input type="text" name="model" value="{{ $permission->model }}" placeholder="Model" class="form-control form-control-sm" />
                      <div class="pl-1 bg-danger">{{ $errors->first('model') }}</div>
                   </div>
                </div>
-{{--                <div class="col-sm-4">
-                  <div class="form-group {{ $errors->has('type') ? 'has-error' : '' }}">
-                     <label for="type">Core Module?</label>
-                        <select name="type" value="{{ old('type') ?? $permission->type }}" id="type" class="form-control form-control-sm">
-                           @foreach($permission->typesOptions() as $typeOptionKey => $typeOptionValue)
-                              <option value="{{ $typeOptionKey }}" {{ $permission->type == $typeOptionValue ? 'selected' : '' }}>{{ $typeOptionValue }}</option>
-                           @endforeach
-                        </select>
-                     <div class="pl-1 bg-danger">{{ $errors->first('type') }}</div>
-                  </div>
-               </div> --}}
                <div class="col-sm-12">
                   <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
-                     {{ Form::label('description', 'Allow member to', ['class'=>'required']) }}
-                     {!! Form::text('description', null, array('placeholder' => 'Description','class' => 'form-control form-control-sm')) !!}
+                     <label for="description">Allow member to</label>
+                     <input type="text" name="description" value="{{ $permission->description }}" placeholder="Description" class="form-control form-control-sm" />
                      <div class="pl-1 bg-danger">{{ $errors->first('description') }}</div>
                   </div>
                </div>
@@ -81,6 +68,7 @@
          </div>
 
       </div>
-   {!! Form::close() !!}
+
+   {{ Form::close() }}
 
 @endsection

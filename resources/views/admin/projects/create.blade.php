@@ -14,7 +14,6 @@
 @section('content')
    
    {!! Form::open(['route' => 'admin.projects.store', 'files'=>'true']) !!}
-      {{-- @csrf --}}
 
       <div class="card mb-3">
 

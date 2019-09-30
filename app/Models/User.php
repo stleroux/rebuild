@@ -63,4 +63,33 @@ class User extends Authenticatable
    //     return $this->hasMany('App\Comment');
    // }
 
+//////////////////////////////////////////////////////////////////////////////////////
+// ACCESSORS
+//////////////////////////////////////////////////////////////////////////////////////
+   public function getCreatedAtAttribute($date)
+   {
+      if($date){
+         $date = new \Carbon\Carbon($date);
+         // Now modify and return the date
+         // $date = $date->format('M d, Y');
+         $date = $date->format(setting('dateFormat'));
+         return $date;
+      }
+      
+      return 'N/A';
+   }
+
+   public function getLastLoginDateAttribute($date)
+   {
+      if($date){
+         $date = new \Carbon\Carbon($date);
+         // Now modify and return the date
+         // $date = $date->format('M d, Y');
+         $date = $date->format(setting('dateFormat'));
+         return $date;
+      }
+      
+      return 'N/A';
+   }
+
 }

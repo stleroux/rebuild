@@ -13,8 +13,8 @@
 
 @section('content')
 
-   <form style="display:inline;">
-      {!! csrf_field() !!}
+   <form>
+      @csrf
          
       <div class="card mb-3">
          <div class="card-header section_header p-2">
@@ -86,6 +86,7 @@
             @endif
          </div>
       </div>
+      
    </form>
 
 @endsection

@@ -12,6 +12,7 @@
 
 	<h1 id="mainTOC">Main system help</h1>
 	@include('help.categories.index')
+   @include('help.posts.index')
 	@include('help.recipes.index')
 
 @endsection

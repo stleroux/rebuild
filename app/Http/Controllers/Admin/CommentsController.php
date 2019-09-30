@@ -43,12 +43,12 @@ class CommentsController extends Controller
 ##################################################################################################################
 	public function delete($id)
 	{
+		$comment = Comment::findOrFail($id);
+
 		// Check if user has required permission
       if($this->enablePermissions) {
          if(!checkPerm('comment_delete')) { abort(401, 'Unauthorized Access'); }
       }
-
-		$comment = Comment::find($id);
 
 		return view('admin.comments.delete')->withComment($comment);
 	}
@@ -66,16 +66,16 @@ class CommentsController extends Controller
 ##################################################################################################################
 	public function destroy($id)
 	{
+		$comment = Comment::find($id);
+
 		// Check if user has required permission
       if($this->enablePermissions) {
          if(!checkPerm('comment_delete')) { abort(401, 'Unauthorized Access'); }
       }
 
-		$comment = Comment::find($id);
+		$comment->forceDelete();
 
-		$comment->delete();
-
-		Session::flash('delete', 'Comment Deleted');
+		Session::flash('delete', 'The comment was successfully deleted!');
 		return redirect()->route('admin.comments.index');
 	}
 

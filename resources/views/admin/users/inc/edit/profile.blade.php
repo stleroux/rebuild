@@ -20,7 +20,7 @@
                            <div class="form-group">
                               <label for="created_at">Member Since</label>
                               @if($user->created_at)
-                                 <input type="text" class="form-control form-control-sm" value="{{ $user->created_at->format('M d, Y') }}" disabled>
+                                 <input type="text" class="form-control form-control-sm" value="{{ $user->created_at }}" disabled>
                               @else
                                  <input type="text" class="form-control form-control-sm" value="Unknown" disabled>
                               @endif
@@ -29,7 +29,7 @@
                         <div class="col-md-3 col-lg-2">
                            <div class="form-group">
                               <label for="last_login_date">Last Login Date</label>
-                              <input type="text" class="form-control form-control-sm" value="{{ $user->last_login_date->format('M d, Y') }}" disabled>
+                              <input type="text" class="form-control form-control-sm" value="{{ $user->last_login_date }}" disabled>
                            </div>
                         </div>
                         <div class="col-md-2">

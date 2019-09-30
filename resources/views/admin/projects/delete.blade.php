@@ -13,35 +13,33 @@
 @endsection
 
 @section('content')
+   
+   {!! Form::open(['route'=>['admin.projects.destroy', $project->id], 'method'=>'DELETE']) !!}
+      
+      <div class="card">
+         <div class="card-header section_header text-center text-danger font-weight-bold p-2">
+            ARE YOU SURE YOU WANT TO PERMANENTLY DELETE THIS PROJECT?
+         </div>
+         <div class="card-body bg-light text-center">
 
-   <div class="card">
-      <div class="card-header section_header text-center p-2">
-         <b class="text-danger">
-            ARE YOU SURE YOU WANT TO PERMANENTLY DELETE THIS PROJECT?<br />
-            {{-- Title : {{ $woodproject->title }}? --}}
-         </b>
-      </div>
-      <div class="card-body bg-light text-center">
-         {!! Form::open(['method'=>'POST', 'route'=>['admin.projects.destroy', $project->id]]) !!}
-            {{ csrf_field() }}
-            <input type="hidden" name="_method" value="DELETE" />
+               <a href="{{ URL::previous() }}" class="btn btn-secondary">
+                  <i class="fas fa-angle-double-left"></i>
+                   No - Return To Previous Page
+               </a>
+               
+               {{-- @if(checkPerm('post_delete')) --}}
+                  <button type="submit" class="btn btn-danger">
+                     <i class="far fa-trash-alt"></i>
+                     Yes - Permanently Delete This Recipe
+                  </button>
+               {{-- @endif --}}
 
-            <a href="{{ URL::previous() }}" class="btn btn-secondary">
-               <i class="fas fa-angle-double-left"></i>
-                No - Return To Previous Page
-            </a>
-            
-            {{-- @if(checkPerm('post_delete')) --}}
-               <button type="submit" class="btn btn-danger">
-                  <i class="far fa-trash-alt"></i>
-                  Yes - Permanently Delete This Recipe
-               </button>
-            {{-- @endif --}}
-         {{ Form::close() }}
+         </div>
+         <div class="card-footer pt-1 pb-1 pl-2">
+            <b>Note: </b>This record will not be recoverable if deleted.
+         </div>
       </div>
-      <div class="card-footer pt-1 pb-1 pl-2">
-         <b>Note: </b>This record will not be recoverable if deleted.
-      </div>
-   </div>
+
+   {{ Form::close() }}
 
 @endsection

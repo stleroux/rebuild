@@ -140,19 +140,19 @@
                         <td class="text-left">
                             @if($field == 'user')
                               @if($model->user->created_at)
-                                 {{ $model->user->created_at->format(setting('dateFormat')) }}
+                                 {{ $model->user->created_at }}
                               @else
                                  Unknown
                               @endif
                            @elseif($field == 'modifiedBy')
                               @if($model->modifiedBy->created_at)
-                                 {{ $model->modifiedBy->created_at->format(setting('dateFormat')) }}
+                                 {{ $model->modifiedBy->created_at }}
                               @else
                                  Unknown
                               @endif
                            @elseif($field == 'lastViewedBy')
                               @if($model->lastViewedBy->created_at)
-                                 {{ $model->lastViewedBy->created_at->format(setting('dateFormat')) }}
+                                 {{ $model->lastViewedBy->created_at }}
                               @else
                                  Unknown
                               @endif

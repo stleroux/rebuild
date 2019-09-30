@@ -1,10 +1,11 @@
 @if(checkPerm('permission_add'))
    <button
-      class="btn btn-{{ $size }} btn-success text-light"
+      class="btn {{ $size ? 'btn-'.$size : '' }} btn-success text-light"
       type="submit"
-      {{-- formaction="{{ route($model.'s'.'.store') }}" --}}
+      formaction="{{ route('admin.permissions.store') }}"
       formmethod="POST"
-      title="Save">
+      title="Save Permission">
       <i class="{{ Config::get('buttons.save') }}"></i>
+      {{ $btn_label ?? '' }}
    </button>
 @endif

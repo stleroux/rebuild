@@ -182,12 +182,10 @@ class PermissionsController extends Controller
 		if($request->bread){
 			$rules = [
             'b_model' => 'required',
-            // 'b_type' => 'required',
       	];
 
         	$customMessages = [
             'b_model.required' => 'The model field can not be left blank.',
-            // 'b_type.required' => 'The type field is required.',
         	];
 
         	$this->validate($request, $rules, $customMessages);
@@ -201,7 +199,6 @@ class PermissionsController extends Controller
 					$permission->name = str::singular($request->b_model) . "_" . $b;
 					$permission->display_name = ucfirst($b);
 					$permission->model = str::singular($request->b_model);
-					// $permission->type = $request->b_type;
 					$permission->description = $b . " " . $request->b_model;
 				$permission->save();
 			}
@@ -212,7 +209,6 @@ class PermissionsController extends Controller
             'name' => 'required',
             'display_name' => 'required',
             'model' => 'required',
-            // 'type' => 'required',
             'description' => 'required',
       	];
 
@@ -220,7 +216,6 @@ class PermissionsController extends Controller
             'name.required' => 'The :attribute field can not be left blank.',
             'display_name.required' => 'The :attribute field is required.',
             'model.required' => 'The :attribute field is required.',
-            // 'type.required' => 'The :attribute field is required.',
             'description.required' => 'The :attribute field is required.',
         	];
 
@@ -231,7 +226,6 @@ class PermissionsController extends Controller
 				$permission->name = $request->name;
 				$permission->display_name = $request->display_name;
 				$permission->model = str::singular($request->model);
-				// $permission->type = $request->type;
 				$permission->description = $request->description;
 			$permission->save();
 		}
@@ -239,12 +233,11 @@ class PermissionsController extends Controller
 		// set a flash message to be displayed on screen
 		Session::flash('store','The permission was successfully saved!');
 
-		// if($request->submit == "new")
-		if($request->single)
+		if($request->submit == 'new')
 		{
-			return redirect()->route('admin.permissions.index');
-		} else {
 			return redirect()->route('admin.permissions.create');
+		} else {
+			return redirect()->route('admin.permissions.index');
 		}
 		
 	}
@@ -259,7 +252,7 @@ class PermissionsController extends Controller
 #  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
 // UPDATE :: Update the specified resource in storage
 ##################################################################################################################
-	public function update(UpdatePermissionRequest $request, $id)
+	public function update(Request $request, $id)
 	{
 		// Check if user has required permission
 		if($this->enablePermissions) {
@@ -269,7 +262,6 @@ class PermissionsController extends Controller
          'name' => 'required',
          'display_name' => 'required',
          'model' => 'required',
-         // 'type' => 'required',
          'description' => 'required',
    	];
 
@@ -277,7 +269,6 @@ class PermissionsController extends Controller
          'name.required' => 'The :attribute field can not be left blank.',
          'display_name.required' => 'The :attribute field is required.',
          'model.required' => 'The :attribute field is required.',
-         // 'type.required' => 'The :attribute field is required.',
          'description.required' => 'The :attribute field is required.',
      	];
 
@@ -288,7 +279,6 @@ class PermissionsController extends Controller
 			// $permission->name = $request->name;
 			$permission->display_name = $request->display_name;
 			$permission->model = $request->model;
-			// $permission->type = $request->type;
 			$permission->description = $request->description;
 		$permission->save();
 

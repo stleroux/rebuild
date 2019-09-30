@@ -17,9 +17,7 @@
 
 @section('content')
 
-   {{-- {!! Form::model($user, ['method' => 'PATCH', 'files'=>true, 'route' => ['users.update', $user->id]]) !!} --}}
    {!! Form::model($user, ['route'=>['admin.users.update', $user->id], 'method'=>'PUT', 'files'=>true]) !!}
-      {{ Form::token() }}
       
       <div class="card mb-3">
          <!--CARD HEADER-->

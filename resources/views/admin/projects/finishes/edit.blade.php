@@ -14,8 +14,7 @@
 
 @section ('content')
    
-   {!! Form::model($finish, ['route'=>['admin.projects.finishes.update', $finish->id], 'method' => 'POST', 'files' => true]) !!}
-      @method("PUT")
+   {!! Form::model($finish, ['route'=>['admin.projects.finishes.update', $finish->id], 'method' => 'PUT', 'files' => true]) !!}
       
       <div class="card mb-3">
          

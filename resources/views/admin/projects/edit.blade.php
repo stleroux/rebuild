@@ -14,6 +14,8 @@
 
 @section ('content')
 
+   {!! Form::model($project, ['route'=>['admin.projects.update', $project->id], 'method' => 'PUT', 'files' => true]) !!}
+
       <div class="form-row">
          <div class="col-12">
             <!-- MAIN CARD -->
@@ -23,9 +25,6 @@
                   <i class="fa fa-edit"></i>
                   Edit {{ $project->name }} Project
                   <span class="float-right">
-                     {!! Form::model($project, ['route'=>['admin.projects.update', $project->id], 'method' => 'POST', 'files' => true]) !!}
-                     @csrf
-                     @method("PUT")
                      <div class="btn-group">
                         @include('admin.projects.buttons.help', ['size'=>'xs', 'bookmark'=>'projects'])
                         @include('admin.projects.buttons.back', ['size'=>'xs'])
@@ -36,16 +35,14 @@
                <!-- MAIN CARD BODY -->
                <div class="card-body section_body p-2">
                   
-                     <div class="form-row">
-
-                        <div class="col-md-6">
-                           @include('admin.projects.partials.edit.general')
-                        </div>
-                        <div class="col-md-6">
-                           @include('admin.projects.partials.edit.others')
-                        </div>
+                  <div class="form-row">
+                     <div class="col-md-6">
+                        @include('admin.projects.partials.edit.general')
                      </div>
-                  {!! Form::Close() !!}
+                     <div class="col-md-6">
+                        @include('admin.projects.partials.edit.others')
+                     </div>
+                  </div>
                   
                   <div class="form-row">
                      <div class="col-md-4">
@@ -69,11 +66,6 @@
          </div>
       </div>
    
-
-
-
-
-      {{-- @include('projects.form') --}}
-   
+   {!! Form::Close() !!}
 
 @endsection

@@ -18,16 +18,24 @@ class Profile extends Model
 //////////////////////////////////////////////////////////////////////////////////////
 // RELATIONSHIPS
 //////////////////////////////////////////////////////////////////////////////////////
-	public function user() { 
-		return $this->belongsTo('App\Models\User');
-	}
+	// public function user() { 
+	// 	return $this->belongsTo('App\Models\User');
+	// }
 
-   public function landingPage () {
-      return $this->belongsTo(Category::class);
-   }
+ //   public function landingPage () {
+ //      return $this->belongsTo(Category::class);
+ //   }
 
    // public function scopeTrashed($query)
    // {
    //    return $query->where('deleted_at', '!=', NULL)->withTrashed();
    // }
+
+   public function getCreatedAtAttribute($date)
+   {
+      $date = new \Carbon\Carbon($date);
+      // Now modify and return the date
+      $date = $date->format('M d, Y');
+      return $date;
+   }
 }

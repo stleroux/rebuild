@@ -18,7 +18,7 @@ class CreatePermissionsTable extends Migration {
 			$table->string('name');
 			$table->string('display_name');
 			$table->string('model');
-			$table->integer('type')->unsigned()->default(0);
+			// $table->integer('type')->unsigned()->default(0);
 			$table->string('description');
 			$table->timestamps();
 		});

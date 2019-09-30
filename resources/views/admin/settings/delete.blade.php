@@ -14,16 +14,11 @@
 
 @section('content')
 
-   <div class="card">
-      <div class="card-header bg-danger text-white text-center"><b>ARE YOU SURE YOU WANT TO DELETE THIS SETTING?</b></div>
-      <div class="card-body card_body text-center">
-         <form
-            action="{{ route('settings.destroy', [$settings->id]) }}"
-            method="POST"
-            {{-- onsubmit="return confirm('Do you really want to delete this permission?');" class="pull-right" --}}
-            >
+   {!! Form::open(['route'=>['admin.settings.destroy', $setting->id], 'method'=>'DELETE']) !!}
 
-            {{ csrf_field() }}
+      <div class="card">
+         <div class="card-header bg-danger text-white text-center"><b>ARE YOU SURE YOU WANT TO DELETE THIS SETTING?</b></div>
+         <div class="card-body card_body text-center">
             <input type="hidden" name="_method" value="DELETE" />
 
             <a class="btn btn-outline-secondary" href="{{ route('settings.index') }}">No - Return To Previous Page</a>
@@ -34,11 +29,13 @@
                   Yes - Delete Permanently
                </button>
             @endif
-         </form>
+
+         </div>
+         <div class="card-footer pt-1 pb-1 pl-2 text-danger">
+            <b>Note: </b>This record will not be recoverable if deleted.
+         </div>
       </div>
-      <div class="card-footer pt-1 pb-1 pl-2 text-danger">
-         <b>Note: </b>This record will not be recoverable if deleted.
-      </div>
-   </div>
+
+   {{ Form:: close() }}
 
 @endsection

@@ -1,4 +1,4 @@
-@if(checkPerm('category_delete'))
+@if(checkPerm('post_delete'))
    <button
       class="btn {{ $size ? 'btn-.$size' : '' }} btn-danger text-light"
       type="submit"

@@ -15,10 +15,8 @@
 @section('content')
 
    <div class="card">
-      <div class="card-header section_header text-center p-2">
-         <b class="text-danger">
-            ARE YOU SURE YOU WANT TO PERMANENTLY DELETE THIS MATERIAL?<br />
-         </b>
+      <div class="card-header section_header text-center text-danger font-weight-bold p-2">
+         ARE YOU SURE YOU WANT TO PERMANENTLY DELETE THIS MATERIAL?
       </div>
       <div class="card-body bg-light p-2 text-center">
          {!! Form::open(['method'=>'POST', 'route'=>['admin.projects.materials.destroy', $material->id]]) !!}

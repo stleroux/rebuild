@@ -29,6 +29,7 @@
                      <div class="btn-group">
                         @include('admin.posts.buttons.unpublishAll', ['size'=>'xs'])
                         @include('admin.posts.buttons.trashAll', ['size'=>'xs'])
+                        @include('admin.posts.buttons.help', ['size'=>'xs', 'bookmark'=>'posts'])
                         @include('admin.posts.buttons.add', ['size'=>'xs'])
                      </div>
                   </div>

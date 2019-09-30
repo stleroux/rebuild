@@ -15,6 +15,7 @@
 
 @section('content')
 
+{!! Form::model($user, ['route'=>['profile.show', $user->id], 'method'=>'GET']) !!}
    <div class="card mb-3">
 
       <div class="card-header section_header p-2">
@@ -34,13 +35,7 @@
       </div>
 
       <div class="card-body section_body p-2">
-{{-- 
 
-@foreach($user->permissions as $p)
-   <li>{{ $p->name }}</li>
-@endforeach
-
- --}}         
          <div class="form-row">
             <div class="col-9">
 
@@ -51,30 +46,26 @@
                      <div class="form-row">
                         <div class="col-md-2">
                            <div class="form-group">
-                              <label for="username">Username</label>
-                              <input name="username" type="text" class="form-control form-control-sm" value="{{ $user->username }}" disabled>
+                              {{ Form::label('username', 'Username') }}
+                              {{ Form::text('username', null, ['class'=>'form-control form-control-sm', 'readonly'=>'readonly']) }}
                            </div>
                         </div>
                         <div class="col-md-2">
                            <div class="form-group">
-                              <label for="created_at">Member Since</label>
-                              @if($user->created_at)
-                                 <input type="text" class="form-control form-control-sm" value="{{ $user->created_at->format('M d, Y') }}" disabled>
-                              @else
-                                 <input type="text" class="form-control form-control-sm" value="Unknown" disabled>
-                              @endif
+                              {{ Form::label('created_at', 'Member Since', ['class'=>'control-label']) }}
+                              {{ Form::text('created_at', null, ['class'=>'form-control form-control-sm', 'readonly'=>'readonly']) }}
                            </div>
                         </div>
                         <div class="col-md-3 col-lg-2">
                            <div class="form-group">
-                              <label for="last_login_date">Last Login Date</label>
-                              <input type="text" class="form-control form-control-sm" value="{{ $user->last_login_date->format('M d, Y') }}" disabled>
+                              {{ Form::label('last_login_date', 'Last Login Date', ['class'=>'control-label']) }}
+                              {{ Form::text('last_login_date', null, ['class'=>'form-control form-control-sm', 'readonly'=>'readonly']) }}
                            </div>
                         </div>
                         <div class="col-md-2">
                            <div class="form-group">
-                              <label for="login_count">Login Count</label>
-                              <input type="text" class="form-control form-control-sm" value="{{ $user->login_count }}" disabled>
+                              {{ Form::label('login_count', 'Login Count', ['class'=>'control-label']) }}
+                              {{ Form::text('login_count', null, ['class'=>'form-control form-control-sm', 'readonly'=>'readonly']) }}
                            </div>
                         </div>
                         {{-- <div class="col-md-2">
@@ -111,53 +102,53 @@
                      <div class="form-row">
                         <div class="col-md-3">
                            <div class="form-group">
-                              <label for="first_name">First Name</label>
-                              <input name="first_name" type="input-text" class="form-control form-control-sm" value="{{ $user->first_name }}" disabled>
+                              {{ Form::label('first_name', 'First Name', ['class'=>'']) }}
+                              {{ Form::text('first_name', null, ['class'=>'form-control form-control-sm', 'readonly'=>'readonly'] )}}
                            </div>
                         </div>
                         <div class="col-md-3">
                            <div class="form-group">
-                              <label for="last_name">Last Name</label>
-                              <input name="last_name" type="text" class="form-control form-control-sm" value="{{ $user->last_name }}" disabled>
+                              {{ Form::label('last_name', 'Last Name', ['class'=>'']) }}
+                              {{ Form::text('last_name', null, ['class'=>'form-control form-control-sm', 'readonly'=>'readonly'])}}
                            </div>
                         </div>
                         <div class="col-md-4">
                            <div class="form-group">
-                              <label for="email">Email Address</label>
-                              <input name="email" type="text" class="form-control form-control-sm" value="{{ $user->email }}" disabled>
+                              {{ Form::label('email', 'Email Address', ['class'=>'']) }}
+                              {{ Form::text('email', null, ['class'=>'form-control form-control-sm', 'readonly'=>'readonly']) }}
                            </div>
                         </div>
                         <div class="col-md-2">
                            <div class="form-group">
-                              <label for="public_email">Public Email</label>
+                              {{ Form::label('public_email', 'Public Email') }}
                               <i class="far fa-question-circle float-right" data-toggle="tooltip" data-placement="top" title="Do you want to show your email address to all users?"></i>
-                              {{ Form::select('public_email', ['No','Yes'], $user->public_email, ['class'=>'form-control form-control-sm', 'disabled'] ) }}
+                              {{ Form::select('public_email', ['No','Yes'], null, ['class'=>'form-control form-control-sm', 'readonly'=>'readonly']) }}
                            </div>
                         </div>
                      </div>
                      <div class="form-row">
                         <div class="col-md-2">
                            <div class="form-group">
-                              <label for="telephone">Telephone</label>
-                              <input name="telephone" type="text" class="form-control form-control-sm" value="{{ $user->telephone }}" disabled>
+                              {{ Form::label('telephone', 'Telephone') }}
+                              {{ Form::text('telephone', null, ['class'=>'form-control form-control-sm', 'readonly'=>'readonly']) }}
                            </div>
                         </div>
                         <div class="col-md-2">
                            <div class="form-group">
-                              <label for="cell">Cell Phone</label>
-                              <input name="cell" type="text" class="form-control form-control-sm" value="{{ $user->cell }}" disabled>
+                              {{ Form::label('cell', 'Cell Phone') }}
+                              {{ Form::text('cell', null, ['class'=>'form-control form-control-sm', 'readonly'=>'readonly']) }}
                            </div>
                         </div>
                         <div class="col-md-2">
                            <div class="form-group">
-                              <label for="fax">Fax</label>
-                              <input name="fax" type="text" class="form-control form-control-sm" value="{{ $user->fax }}" disabled>
+                              {{ Form::label('fax', 'Fax') }}
+                              {{ Form::text('fax', null, ['class'=>'form-control form-control-sm', 'readonly'=>'readonly']) }}
                            </div>
                         </div>
                         <div class="col-md-3">
                            <div class="form-group">
-                              <label for="website">Website</label>
-                              <input name="website" type="text" class="form-control form-control-sm" value="{{ $user->website }}" disabled>
+                              {{ Form::label('website', 'Website Address') }}
+                              {{ Form::text('website', null, ['class'=>'form-control form-control-sm', 'readonly'=>'readonly']) }}
                            </div>
                         </div>
                      </div>
@@ -179,20 +170,20 @@
                      <div class="form-row">
                         <div class="col-md-1">
                            <div class="form-group">
-                              <label for="civic_number" class="control-label">Unit N<sup>o</sup></label>
-                              <input name="civic_number" type="text" class="form-control form-control-sm" value="{{ $user->civic_number }}" disabled>
+                              {{ Form::label('civic_number', 'Unit N<sup>o</sup>', ['class'=>'control-label'], false) }}
+                              {{ Form::text('civic_number', null, ['class'=>'form-control form-control-sm', 'readonly'=>'readonly']) }}
                            </div>
                         </div>
                         <div class="col-md-4">
                            <div class="form-group">
-                              <label for="address_1" class="control-label">Address 1</label>
-                              <input name="address_1" type="text" class="form-control form-control-sm" value="{{ $user->address_1 }}" disabled>
+                              {{ Form::label('address_1', 'Address', ['class'=>'control-label']) }}
+                              {{ Form::text('address_1', null, ['class'=>'form-control form-control-sm', 'readonly'=>'readonly']) }}
                            </div>
                         </div>
                         <div class="col-md-4">
                            <div class="form-group">
-                              <label for="address_2" class="control-label">Address 2</label>
-                              <input name="address_2" type="text" class="form-control form-control-sm" value="{{ $user->address_2 }}" disabled>
+                              {{ Form::label('address_2', 'Address 2', ['class'=>'control-label']) }}
+                              {{ Form::text('address_2', null, ['class'=>'form-control form-control-sm', 'readonly'=>'readonly']) }}
                            </div>
                         </div>
                      </div>
@@ -200,20 +191,20 @@
                      <div class="form-row">
                         <div class="col-md-2">
                            <div class="form-group">
-                              <label for="city" class="control-label">City</label>
-                              <input name="city" type="text" class="form-control form-control-sm" value="{{ $user->city }}" disabled>
+                              {{ Form::label('city', 'City', ['class'=>'control-label']) }}
+                              {{ Form::text('city', null, ['class'=>'form-control form-control-sm', 'readonly'=>'readonly']) }}
                            </div>
                         </div>
                         <div class="col-md-2">
                            <div class="form-group">
-                              <label for="province" class="control-label">Province/State</label>
-                              <input name="province" type="text" class="form-control form-control-sm" value="{{ $user->province }}" disabled>
+                              {{ Form::label('province', 'Province / State', ['class'=>'control-label']) }}
+                              {{ Form::text('province', null, ['class'=>'form-control form-control-sm', 'readonly'=>'readonly']) }}
                            </div>                                    
                         </div>
                         <div class="col-md-2">
                            <div class="form-group">
-                              <label for="postal_code" class="control-label">Postal/Zip Code</label>
-                              <input name="postal_code" type="text" class="form-control form-control-sm" value="{{ $user->postal_code }}" disabled>
+                              {{ Form::label('postal_code', 'Postal / Zip Code', ['class'=>'control-label']) }}
+                              {{ Form::text('postal_code', null, ['class'=>'form-control form-control-sm', 'readonly'=>'readonly']) }}
                            </div>
                         </div>
                      </div>
@@ -231,8 +222,8 @@
                      <div class="form-row">
                         <div class="col-sm-12">
                            <div class="form-group">
-                              <label for="notes" class="control-label">Notes</label>
-                              <textarea name="notes" class="form-control form-control-sm" rows="2" disabled>{{ $user->notes }}</textarea>
+                              {{ Form::label('notes', 'Notes', ['class'=>'control-label']) }}
+                                    {{ Form::textarea('notes', null, ['class'=>'form-control form-control-sm', 'rows'=>2, 'readonly'=>'readonly']) }}
                            </div>
                         </div>
                      </div>
