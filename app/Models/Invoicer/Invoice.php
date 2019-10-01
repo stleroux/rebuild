@@ -58,10 +58,14 @@ class Invoice extends Model
 // RELATIONSHIPS
 //////////////////////////////////////////////////////////////////////////////////////
 	// An invoice belongs to a client
-	public function client()
-	{
-		return $this->belongsTo('App\Models\Invoicer\Client');
-	}
+	// public function client()
+	// {
+	// 	return $this->belongsTo('App\Models\Invoicer\Client');
+	// }
+   public function user()
+   {
+      return $this->belongsTo('App\Models\User');
+   }
 
 	// An invoice has many items
 	public function invoiceItems() {

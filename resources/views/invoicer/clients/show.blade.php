@@ -9,10 +9,10 @@
 		<div class="card-header">
 			<span class="h3">Client Information</span>
 			<span class="float-right">
-				<a href="{{ route('invoicer.clients') }}" class="btn btn-sm btn-primary">
+{{-- 				<a href="{{ route('invoicer.clients') }}" class="btn btn-sm btn-primary">
 					<i class="fas fa-list"></i>
 					Clients List
-				</a>
+				</a> --}}
 			</span>
 		</div>
 		
@@ -25,7 +25,10 @@
 					</div>
 					<div class="form-group">
 						{{ Form::label ('address', 'Address:')}}
-						{{ Form::text ('address', $client->address, array('class'=>'form-control', 'readonly')) }}
+						{{ Form::text ('address_1', $client->address_1, array('class'=>'form-control', 'readonly')) }}
+						@if($client->address_2)
+							{{ Form::text ('address_2', $client->address_2, array('class'=>'form-control', 'readonly')) }}
+						@endif
 					</div>
 
 					<div class="row">
@@ -37,14 +40,14 @@
 						</div>
 						<div class="col-sm-12 col-md-3">
 							<div class="form-group">
-								{{ Form::label ('state', 'Province:')}}
-								{{ Form::text ('state', $client->state, array('class'=>'form-control', 'readonly')) }}
+								{{ Form::label ('province', 'Province:')}}
+								{{ Form::text ('province', $client->province, array('class'=>'form-control', 'readonly')) }}
 							</div>
 						</div>
 						<div class="col-sm-12 col-md-3">
 							<div class="form-group">
-								{{ Form::label ('zip', 'Postal Code:')}}
-								{{ Form::text ('zip', $client->zip, array('class'=>'form-control', 'readonly')) }}
+								{{ Form::label ('postal_code', 'Postal Code:')}}
+								{{ Form::text ('postal_code', $client->postal_code, array('class'=>'form-control', 'readonly')) }}
 							</div>
 						</div>
 						<div class="col-sm-12">
@@ -91,6 +94,7 @@
 		<div class="card-header">Related Invoices</div>
 		
 		@if($client->invoices->count() > 0)
+		{{-- @if($user->invoices->count() > 0) --}}
 			<table class="table table-sm table-striped">
 				<thead>
 					<tr>
@@ -103,6 +107,7 @@
 				</thead>
 				<tbody>
 					@foreach($client->invoices as $invoice)
+					{{-- @foreach($user->invoices as $invoice) --}}
 						<tr>
 							<td>{{ $invoice->id }}</td>
 							<td>{{ $invoice->created_at }}</td>

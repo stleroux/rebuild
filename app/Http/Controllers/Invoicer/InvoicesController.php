@@ -10,6 +10,7 @@ use App\Models\Invoicer\Client;
 use App\Models\Invoicer\Invoice;
 use App\Models\Invoicer\InvoiceItem;
 use App\Models\Invoicer\Product;
+use App\Models\User;
 use App\Mail\Invoicer\InvoicedPDFMail;
 use carbon\Carbon;
 use Config;
@@ -17,7 +18,6 @@ use DB;
 use PDF;
 use Session;
 use Storage;
-
 
 class InvoicesController extends Controller
 {
@@ -51,7 +51,9 @@ class InvoicesController extends Controller
 		if(!checkPerm('invoicer_invoice_create')) { abort(401, 'Unauthorized Access'); }
 
 		$products = Product::all();
-		$clients = Client::orderBy('company_name','asc')->pluck('company_name','id');
+		// $clients = Client::orderBy('company_name','asc')->pluck('company_name','id');
+		$clients = User::where('invoicer_client', 1)->orderBy('company_name','asc')->pluck('company_name','id');
+		// dd($clients);
 
 		if($id){
 			// $client = Client::where('id',$id)->pluck('company_name','id');
@@ -96,12 +98,24 @@ class InvoicesController extends Controller
 
 	public function downloadInvoice($id)
 	{
+		// dd($id);
 		// $invoice = Invoice::findOrfail($id);
 		// return Storage::download(public_path('invoices/'.$invoice->id . '.pdf'), $invoice->id);
-		$file = public_path('invoices') . '/' . $id . '.pdf'; // or wherever you have stored your PDF files
+		$file = public_path('invoices') . '\\' . $id . '.pdf'; // or wherever you have stored your PDF files
+		// dd($file);
    	return response()->download($file);
 	}
 
+
+// public function downloadInvoice($id)
+// {
+// 	$invoice = Invoice::with('InvoiceItems')->where('id', $id)->get();
+// 	// dd($invoice);
+
+// 	$pdf = PDF::loadview('invoicer.invoices.show', compact('invoice'));
+
+// 	return $pdf->download('invoice.pdf');
+// }
 
 
 
@@ -123,7 +137,8 @@ class InvoicesController extends Controller
 
 		$invoice = Invoice::with('InvoiceItems')->find($id);
 		// dd($invoice);
-		$clients = Client::orderBy('company_name','asc')->pluck('company_name','id');
+		// $clients = Client::orderBy('company_name','asc')->pluck('company_name','id');
+		$clients = User::where('invoicer_client', 1)->orderBy('company_name','asc')->pluck('company_name','id');
 		//$invoiceitems = InvoiceItem::where('invoice_id', $invoice->id);
 		//dd($invoiceitems);
 
@@ -263,7 +278,7 @@ class InvoicesController extends Controller
       // Mail::to('stephaneandstacie@gmail.com')->send(new InvoicedPDFMail($invoice));
 
       // Email PDF to client's email
-      Mail::to($invoice->client->email)->send(new InvoicedPDFMail($invoice));
+      Mail::to($invoice->user->email)->send(new InvoicedPDFMail($invoice));
 
 		// Set flash data with success message
 		Session::flash ('success', 'This invoice was successfully updated and emailed to the client!');
@@ -300,7 +315,7 @@ class InvoicesController extends Controller
 		      // Mail::to('stephaneandstacie@gmail.com')->send(new InvoicedPDFMail($invoice));
 
 		      // Email PDF to client's email
-		      Mail::to($invoice->client->email)->send(new InvoicedPDFMail($invoice));
+		      Mail::to($invoice->user->email)->send(new InvoicedPDFMail($invoice));
 			}
 
 		// Set flash data with success message
@@ -387,7 +402,8 @@ class InvoicesController extends Controller
 		// save the data in the database
 		$invoice = new Invoice;
 			// $invoice->work_date = $request->work_date;
-			$invoice->client_id = $request->client_id;
+			// $invoice->client_id = $request->client_id;
+			$invoice->user_id = $request->client_id;
 			$invoice->notes = $request->notes;
 			$invoice->status = $request->status;
 			if($request->status == 'invoiced')
@@ -428,7 +444,7 @@ class InvoicesController extends Controller
 		// validate the data
 		$this->validate($request,
 			[
-				'client_id'		=> 'required',
+				'user_id'		=> 'required',
 				'status'			=> 'required',
 				'paid_at'		=> 'required_if:status,==,paid',
 				'invoiced_at'	=> 'required_if:status,==,invoiced',
@@ -467,7 +483,8 @@ class InvoicesController extends Controller
 			}
 
 			// Update the rest of the fields
-			$invoice->client_id = $request->client_id;
+			// $invoice->client_id = $request->client_id;
+			$invoice->user_id = $request->user_id;
 			$invoice->notes = $request->notes;
 			$invoice->status = $request->status;
 

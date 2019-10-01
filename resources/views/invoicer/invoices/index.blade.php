@@ -120,7 +120,8 @@
 							<td>{{ $invoice->created_at }}</td>
 							<td>{{ $invoice->invoiced_at }}</td>
 							<td>{{ $invoice->paid_at }}</td>
-							<td><a href="{{ route('invoicer.clients.show', $invoice->client->id) }}">{{ $invoice->client->company_name }}</a></td>
+							{{-- <td><a href="{{ route('invoicer.clients.show', $invoice->user->id) }}">{{ $invoice->user->company_name }}</a></td> --}}
+							<td><a href="{{ route('invoicer.clients.show', $invoice->user->id) }}">{{ $invoice->user->company_name }}</a></td>
 							<td class="text-right">{{ number_format($invoice->sub_total, 2, '.', ', ') }}$</td>
 							<td class="text-right">{{ number_format($invoice->total, 2, '.', ', ') }}$</td>
 							<td>

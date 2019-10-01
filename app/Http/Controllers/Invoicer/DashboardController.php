@@ -9,6 +9,7 @@ use App\Models\Invoicer\Client;
 use App\Models\Invoicer\Invoice;
 use App\Models\Invoicer\InvoiceItem;
 use App\Models\Invoicer\Product;
+use App\models\User;
 //use Auth;
 //use Charts;
 
@@ -45,7 +46,8 @@ class DashboardController extends Controller
 	  // Check if user has required permission
 	  if(!checkPerm('invoicer_dashboard')) { abort(401, 'Unauthorized Access'); }
 
-	  $clients = Client::orderBy('company_name','asc')->get();
+	  // $clients = Client::orderBy('company_name','asc')->get();
+	  $clients = User::where('invoicer_client', 1)->orderBy('company_name','asc')->get();
 	  $invoicesTotal = Invoice::all();
 	  $invoicesLogged = Invoice::where('status','logged')->get();
 	  $invoicesInvoiced = Invoice::where('status','invoiced')->get();

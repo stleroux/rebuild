@@ -99,10 +99,10 @@
 							<div class="row">
 								<div class="col-sm-4">
 									<div><strong>Billed To</strong></div>
-										<div>{{ $invoice->client->company_name }}</div>
-										<div>{{ $invoice->client->address }}</div>
-										<div>{{ $invoice->client->city }}, {{ $invoice->client->state }}</div>
-										<div>{{ $invoice->client->zip }}</div>
+										<div>{{ $invoice->user->company_name }}</div>
+										<div>{{ $invoice->user->address }}</div>
+										<div>{{ $invoice->user->city }}, {{ $invoice->user->province }}</div>
+										<div>{{ $invoice->user->postal_code }}</div>
 								</div>
 								<div class="col-sm-3">
 									<div><strong>Invoice N<sup>o</sup></strong></div>

@@ -82,10 +82,10 @@
             </tr>
             <tr>
                <td>
-                  {{ $invoice->client->company_name }}<br />
-                  {{ $invoice->client->address }}<br />
-                  {{ $invoice->client->city }}, {{ $invoice->client->state }}<br />
-                  {{ $invoice->client->zip }}
+                  {{ $invoice->user->company_name }}<br />
+                  {{ $invoice->user->address }}<br />
+                  {{ $invoice->user->city }}, {{ $invoice->user->province }}<br />
+                  {{ $invoice->user->postal_code }}
                </td>
             </tr>
          </table>
@@ -98,7 +98,7 @@
             </tr>
             <tr>
                <th width="50%" align="right">Invoice Date</th>
-               <td width="50%" align="right">{{ $invoice->invoiced_at->format('M d, Y') }}</td>
+               <td width="50%" align="right">{{ $invoice->invoiced_at }}</td>
             </tr>
          </table>
       </td>
@@ -136,7 +136,7 @@
                   @foreach($invoice->invoiceItems->sortByDesc('work_date') as $item)
                      <tr>
                         <td>{{ $item->product->details }}</td>
-                        <td nowrap="nowrap">{{ $item->work_date->format('M d, Y') }}</td>
+                        <td nowrap="nowrap">{{ $item->work_date }}</td>
                         <td>{!! nl2br(e($item->notes)) !!}</td>
                         <td align="center" nowrap="nowrap">{{ $item->quantity }}</td>
                         <td align="right" nowrap="nowrap">{{ number_format($item->price, 2, '.', ' ') }}$</td>

@@ -10,14 +10,14 @@
 						@if(strpos($_SERVER['REQUEST_URI'], 'search?') !== false)
 							[Filtered]
 						@endif
-						@if(checkPerm('invoicer_client_create'))
+{{-- 						@if(checkPerm('invoicer_client_create'))
 							<span class="float-right">
 								<a href="{{ route('invoicer.clients.create') }}" class="btn btn-sm btn-secondary">
 									<i class="far fa-plus-square"></i>
 									Add New Client
 								</a>
 							</span>
-						@endif
+						@endif --}}
 					</div>
 					{{-- <div class="card-body"> --}}
 						@if($clients->count() > 0)
@@ -26,7 +26,7 @@
 									<tr>
 										<th>@sortablelink('id','Client ID')</th>
 										<th>@sortablelink('company_name','Company Name')</th>
-										<th>@sortablelink('contact_name','Contact Name')</th>
+										<th>@sortablelink('last_name','Contact Name')</th>
 										<th>@sortablelink('email','Contact Email')</th>
 										<th></th>
 									</tr>
@@ -36,7 +36,7 @@
 									<tr>
 										<td>{{ $client->id }}</td>
 										<td>{{ $client->company_name }}</td>
-										<td>{{ $client->contact_name }}</td>
+										<td>{{ $client->first_name }} {{ $client->last_name }}</td>
 										<td>{{ $client->email }}</td>
 										<td>
 											<form action="{{ route('invoicer.clients.destroy',[$client->id]) }}" method="POST" 
@@ -52,26 +52,26 @@
 													</a>
 												@endif
 
-												@if(checkPerm('invoicer_client_show'))
+												{{-- @if(checkPerm('invoicer_client_show'))
 													<a href="{{ route('invoicer.clients.show', $client->id) }}" class="btn btn-sm btn-outline-primary">
 														<i class="fa fa-eye" aria-hidden="true"></i>
 														View
 													</a>
-												@endif
+												@endif --}}
 												
-												@if(checkPerm('invoicer_client_edit'))
+												{{-- @if(checkPerm('invoicer_client_edit'))
 													<a href="{{ route('invoicer.clients.edit', $client->id) }}" class="btn btn-sm btn-primary">
 														<i class="fa fa-edit"></i>
 														Edit
 													</a>
-												@endif
+												@endif --}}
 
-												@if(checkPerm('invoicer_client_delete'))
+												{{-- @if(checkPerm('invoicer_client_delete'))
 													<button type="submit" class="btn btn-sm btn-danger">
 														<i class="fa fa-trash-alt"></i>
 														Delete
 													</button>
-												@endif
+												@endif --}}
 											</form>
 										</td>
 									</tr>

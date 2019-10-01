@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use App\Models\Invoicer\Client;
+use App\Models\User;
 use Config;
 use Session;
 
@@ -106,9 +107,11 @@ class ClientsController extends Controller
 		// Check if user has required permission
 	  if(!checkPerm('invoicer_client_index')) { abort(401, 'Unauthorized Access'); }
 
-		$clients = Client::sortable()
-			->orderBy('company_name','asc')
-			->paginate(Config::get('settings.rowsPerPage'));
+		// $clients = Client::sortable()
+		// 	->orderBy('company_name','asc')
+		// 	->paginate(Config::get('settings.rowsPerPage'));
+	  $clients = User::where('invoicer_client', 1)->paginate(Config::get('settings.rowsPerPage'));
+	  // dd($clients);
 
 		return view('invoicer.clients.index', compact('clients'));
 	}
@@ -150,7 +153,9 @@ class ClientsController extends Controller
 		// Check if user has required permission
 	  if(!checkPerm('invoicer_client_show')) { abort(401, 'Unauthorized Access'); }
 
-		$client = Client::findOrFail($id);
+		// $client = Client::findOrFail($id);
+		$client = User::findOrFail($id);
+		// dd($client);
 
 		return view('invoicer.clients.show', compact('client'));
 	}

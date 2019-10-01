@@ -21,27 +21,27 @@
 				<td><a href="{{ route('invoicer.clients.show', $client->id) }}">{{ $client->company_name }}</a></td>
 				<td>
 					<div class="float-right">
-						{{ number_format($amount = DB::table('invoicer__invoices')->where('client_id', '=', $client->id)->where('status','logged')->sum('sub_total'), 2, '.', ', ') }}$
+						{{ number_format($amount = DB::table('invoicer__invoices')->where('user_id', '=', $client->id)->where('status','logged')->sum('sub_total'), 2, '.', ', ') }}$
 					</div>
 				</td>
 				<td>
 					<div class="float-right">
-						{{ number_format($amount = DB::table('invoicer__invoices')->where('client_id', '=', $client->id)->where('status','invoiced')->sum('sub_total'), 2, '.', ', ') }}$
+						{{ number_format($amount = DB::table('invoicer__invoices')->where('user_id', '=', $client->id)->where('status','invoiced')->sum('sub_total'), 2, '.', ', ') }}$
 					</div>
 				</td>
 				<td>
 					<div class="float-right">
-						{{ number_format($amount = DB::table('invoicer__invoices')->where('client_id', '=', $client->id)->where('status','paid')->sum('sub_total'), 2, '.', ', ') }}$
+						{{ number_format($amount = DB::table('invoicer__invoices')->where('user_id', '=', $client->id)->where('status','paid')->sum('sub_total'), 2, '.', ', ') }}$
 					</div>
 				</td>
 				<td>
 					<div class="float-right">
-						{{ number_format($amount = DB::table('invoicer__invoices')->where('client_id', '=', $client->id)->sum('sub_total'), 2, '.', ', ') }}$
+						{{ number_format($amount = DB::table('invoicer__invoices')->where('user_id', '=', $client->id)->sum('sub_total'), 2, '.', ', ') }}$
 					</div>
 				</td>
 				<td>
 					<div class="float-right">
-						{{ number_format($amount = DB::table('invoicer__invoices')->where('client_id', '=', $client->id)->sum('total'), 2, '.', ', ') }}$
+						{{ number_format($amount = DB::table('invoicer__invoices')->where('user_id', '=', $client->id)->sum('total'), 2, '.', ', ') }}$
 					</div>
 				</td>
 			</tr>

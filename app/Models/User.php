@@ -63,6 +63,11 @@ class User extends Authenticatable
    //     return $this->hasMany('App\Comment');
    // }
 
+   // A client has many invoices
+   public function invoices() {
+      return $this->hasMany('App\Models\Invoicer\Invoice')->orderBy('id','desc');
+   }
+
 //////////////////////////////////////////////////////////////////////////////////////
 // ACCESSORS
 //////////////////////////////////////////////////////////////////////////////////////
@@ -99,4 +104,11 @@ class User extends Authenticatable
       return 'N/A';
    }
 
+
+
+
+   public function getContactNameAttribute()
+   {
+       return "{$this->first_name} {$this->last_name}";
+   }
 }

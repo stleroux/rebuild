@@ -17,7 +17,7 @@
 </p>
 
 <p>
-   Here is your invoice dated {{ $invoice->invoiced_at->format('M d, Y') }}
+   Here is your invoice dated {{ $invoice->invoiced_at }}
 </p>
 
 <p>

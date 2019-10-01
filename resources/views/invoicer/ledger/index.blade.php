@@ -107,7 +107,9 @@
 					<tbody>
 						@foreach($invoices as $invoice)
 						<tr>
-							<td><a href="{{ route('invoicer.invoices.show', $invoice->id) }}">{{ $invoice->id }}</td>
+							<td>
+								{{-- <a href="{{ route('invoicer.invoices.show', $invoice->id) }}"> --}}{{ $invoice->id }}
+							</td>
 							
 							@if(Request::is('invoicer/ledger/logged'))
 								<td>{{ $invoice->created_at->format('M d Y') }}</td>
@@ -129,7 +131,9 @@
 									@endif
 								</td>
 							@endif
-							<td><a href="{{ route('invoicer.clients.show', $invoice->client_id) }}">{{ $invoice->client->company_name }}</a></td>
+							<td>
+								<a href="{{ route('invoicer.clients.show', $invoice->user_id) }}">{{ $invoice->user->company_name }}</a>
+							</td>
 							<td class="text-right">{{ number_format($invoice->amount_charged, 2, '.' , ', ') }}$</td>
 							<td class="text-right">{{ number_format($invoice->hst, 2, '.' , ', ') }}$</td>
 							<td class="text-right">{{ number_format($invoice->sub_total, 2, '.', ', ') }}$</td>

@@ -20,10 +20,10 @@
 			<div class="card-body">
 				<div class="row">
 					<div class="col-sm-9">
-						<div class="form-group {{ $errors->has('client_id') ? 'has-error' : '' }}">
-							{{ Form::label('client_id', 'Client', ['class'=>'required']) }}
-							{{ Form::select('client_id', $clients, $invoice->client_id, ['class'=>'form-control', 'placeholder'=>'Select']) }}
-							<span class="text-danger">{{ $errors->first('client_id') }}</span>
+						<div class="form-group {{ $errors->has('user_id') ? 'has-error' : '' }}">
+							{{ Form::label('user_id', 'Client', ['class'=>'required']) }}
+							{{ Form::select('user_id', $clients, $invoice->user_id, ['class'=>'form-control', 'placeholder'=>'Select']) }}
+							<span class="text-danger">{{ $errors->first('user_id') }}</span>
 						</div>
 						<div class="form-group {{ $errors->has('notes') ? 'has-error' : '' }}">
 							{{ Form::label ('notes', 'Notes:') }}
@@ -143,7 +143,7 @@
 			<div class="card-header">
 				<span class="h3">Billable Items</span>
 				@if(checkPerm('invoicer_invoice_edit'))
-					@if($invoice->status != 'paid')
+					@if($invoice->status == 'logged')
 						<span class="float-right">
 							<a href="{{ route('invoicer.invoiceItems.create', $invoice->id) }}" class="btn btn-sm btn-primary">
 								<i class="far fa-plus-square"></i>
@@ -165,7 +165,9 @@
 								<th class="text-center">Quantity</th>
 								<th class="text-right">Price</th>
 								<th class="text-right">Total</th>
-								<th></th>
+								@if($invoice->status == 'logged')
+									<th></th>
+								@endif
 							</tr>
 						</thead>
 						<tbody>
@@ -177,27 +179,29 @@
 									<td class="text-center">{{ $item->quantity }}</td>
 									<td class="text-right" nowrap="nowrap">{{ number_format($item->price, 2, '.', ' ') }}$</td>
 									<td class="text-right" nowrap="nowrap">{{ number_format($item->total, 2, '.', ' ') }}$</td>
-									<td class="text-right" nowrap="nowrap">
-										<form action="{{ route('invoiceItems.destroy',[$item->id]) }}" method="POST" onsubmit="return confirm('Do you really want to delete this billable item?');"
-											class="pull-right">
-											{{ csrf_field() }}
-											<input type="hidden" name="_method" value="DELETE" />
+									@if($invoice->status == 'logged')
+										<td class="text-right" nowrap="nowrap">
+											<form action="{{ route('invoiceItems.destroy',[$item->id]) }}" method="POST" onsubmit="return confirm('Do you really want to delete this billable item?');"
+												class="pull-right">
+												{{ csrf_field() }}
+												<input type="hidden" name="_method" value="DELETE" />
 
-											@if(checkPerm('invoicer_invoice_edit'))
-												<a href="{{ route('invoiceItems.edit', $item->id) }}" class="btn btn-sm btn-primary">
-													<i class="fa fa-edit"></i>
-													Edit
-												</a>
-											@endif
-											
-											@if(checkPerm('invoicer_invoice_edit'))
-												<button type="submit" class="btn btn-sm btn-danger">
-													<i class="fa fa-trash-alt"></i>
-													Delete
-												</button>
-											@endif
-										</form>
-									</td>
+												@if(checkPerm('invoicer_invoice_edit'))
+													<a href="{{ route('invoiceItems.edit', $item->id) }}" class="btn btn-sm btn-primary">
+														<i class="fa fa-edit"></i>
+														Edit
+													</a>
+												@endif
+												
+												@if(checkPerm('invoicer_invoice_edit'))
+													<button type="submit" class="btn btn-sm btn-danger">
+														<i class="fa fa-trash-alt"></i>
+														Delete
+													</button>
+												@endif
+											</form>
+										</td>
+									@endif
 								</tr>
 							@endforeach
 						</tbody>
