@@ -67,12 +67,23 @@ class Project extends Model
    {
       if($date){
          $date = new \Carbon\Carbon($date);
-         // Now modify and return the date
          $date = $date->format(setting('dateFormat'));
          return $date;
       }
       
       return 'N/A';
    }
+
+   public function getUpdatedAtAttribute($date)
+   {
+      if($date){
+         $date = new \Carbon\Carbon($date);
+         $date = $date->format(setting('dateFormat'));
+         return $date;
+      }
+      
+      return 'N/A';
+   }
+
 
 }

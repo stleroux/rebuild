@@ -105,7 +105,7 @@
 					@foreach($client->invoices as $invoice)
 						<tr>
 							<td>{{ $invoice->id }}</td>
-							<td>{{ $invoice->created_at->format('M d, Y') }}</td>
+							<td>{{ $invoice->created_at }}</td>
 							<td>{{ number_format($invoice->sub_total, 2, '.', ', ') }}$</td>
 							<td>{{ ucfirst($invoice->status) }}</td>							
 							<form action="{{ route('invoicer.invoices.destroy',[$invoice->id]) }}" method="POST" onsubmit="return confirm('Do you really want to delete this invoice?');">

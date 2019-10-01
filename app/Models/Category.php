@@ -32,13 +32,6 @@ class Category extends Model //implements AuditableContract
 		return $this->hasMany(self::class, 'parent_id')->orderBy('name');
 	}
 
-	/**
-	* Always capitalize the name when we retrieve it
-	*/
-	// public function getNameAttribute($value) {
-	// 	return ucfirst($value);
-	// }
-
 	// 1 category has many posts
 	// a related entry needs to be added to the post model
 	public function posts()
@@ -53,11 +46,6 @@ class Category extends Model //implements AuditableContract
 		return $this->hasMany('App\Models\Recipes\Recipe');
 	}
 
-	// public function module()
-	// {
-	// 	return $this->belongsTo('App\Module')->orderBy('name','desc');
-	// }
-
 	public function projects()
 	{
 		return $this->hasMany('App\Models\Projects\Project');
@@ -70,5 +58,38 @@ class Category extends Model //implements AuditableContract
  //         //->where('user_id', '=', Auth::user()->id)
  //         ->orderBy('name','DESC');
  //   }
+
+//////////////////////////////////////////////////////////////////////////////////////
+// ACCESSORS
+//////////////////////////////////////////////////////////////////////////////////////
+   public function getCreatedAtAttribute($date)
+   {
+      if($date){
+         $date = new \Carbon\Carbon($date);
+         $date = $date->format(setting('dateFormat'));
+         return $date;
+      }
+      
+      return 'N/A';
+   }
+
+   public function getUpdatedAtAttribute($date)
+   {
+      if($date){
+         $date = new \Carbon\Carbon($date);
+         $date = $date->format(setting('dateFormat'));
+         return $date;
+      }
+      
+      return 'N/A';
+   }
+
+	/**
+	* Always capitalize the name when we retrieve it
+	*/
+	// public function getNameAttribute($value) {
+	// 	return ucfirst($value);
+	// }
+
 
 }

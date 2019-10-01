@@ -4,12 +4,24 @@ namespace App\Models\Invoicer;
 
 use Illuminate\Database\Eloquent\Model;
 use Kyslik\ColumnSortable\Sortable;
+use Carbon\Carbon;
+use Collective\Html\Eloquent\FormAccessible;
 
 class Invoice extends Model
 {
 	use Sortable;
+   use FormAccessible;
 
 	protected $table = 'invoicer__invoices';
+
+	protected $dates = [
+		'created_at',
+		'updated_at',
+		'deleted_at',
+		'invoiced_at',
+		'paid_at',
+      'work_date'
+	];
 
 	protected $fillable = [
 		'client_id',
@@ -41,13 +53,6 @@ class Invoice extends Model
 		'paid_at'
 	];
 
-	protected $dates = [
-		'created_at',
-		'updated_at',
-		'deleted_at',
-		'invoiced_at',
-		'paid_at'
-	];
 
 //////////////////////////////////////////////////////////////////////////////////////
 // RELATIONSHIPS
@@ -62,6 +67,64 @@ class Invoice extends Model
 	public function invoiceItems() {
 		return $this->hasMany('App\Models\Invoicer\InvoiceItem');
 	}
+
+
+//////////////////////////////////////////////////////////////////////////////////////
+// ACCESSORS
+//////////////////////////////////////////////////////////////////////////////////////
+   public function getCreatedAtAttribute($date)
+   {
+      if($date){
+         $date = new \Carbon\Carbon($date);
+         $date = $date->format(setting('dateFormat'));
+         return $date;
+      }
+      
+      return 'N/A';
+   }
+
+
+   public function getUpdatedAtAttribute($date)
+   {
+      if($date){
+         $date = new \Carbon\Carbon($date);
+         $date = $date->format(setting('dateFormat'));
+         return $date;
+      }
+      
+      return 'N/A';
+   }
+
+   public function formInvoicedAtAttribute($date)
+   {
+       // return Carbon::parse($date)->format(setting('dateFormat'));
+       return Carbon::parse($date)->format('m/d/y');
+   }
+
+   public function getInvoicedAtAttribute($date)
+   {
+      if($date){
+         $date = new \Carbon\Carbon($date);
+         $date = $date->format(setting('dateFormat'));
+         return $date;
+      }
+      
+      // return 'N/A';
+   }
+
+   public function getPaidAtAttribute($date)
+   {
+      if($date){
+         $date = new \Carbon\Carbon($date);
+         $date = $date->format(setting('dateFormat'));
+         return $date;
+      }
+      
+      // return 'N/A';
+   }
+
+
+
 
 }
 

@@ -79,11 +79,14 @@
 								<th>@sortablelink('invoiced_at','Invoiced Date')</th>
 							@endif
 							@if(Request::is('invoicer/invoices/paid'))
-								<th>@sortablelink('paidd_at','Paid Date')</th>
+								<th>@sortablelink('paid_at','Paid Date')</th>
 							@endif
 							@if(Request::is('invoicer/invoices'))
 								<th>@sortablelink('status','Status')</th>
 							@endif
+							<th>Created</th>
+							<th>Invoiced</th>
+							<th>Paid</th>
 							<th>@sortablelink('client.company_name','Company Name')</th>
 							<th class="text-right">@sortablelink('amount_charged','Charged')</th>
 							<th class="text-right">@sortablelink('total','Net Total')</th>
@@ -95,13 +98,13 @@
 						<tr>
 							<td>{{ $invoice->id }}</td>
 							@if(Request::is('invoicer/invoices/logged'))
-								<td>{{ $invoice->created_at->format('M d Y') }}</td>
+								<td>{{ $invoice->created_at }}</td>
 							@endif
 							@if(Request::is('invoicer/invoices/invoiced'))
-								<td>{{ $invoice->invoiced_at->format('M d Y') }}</td>
+								<td>{{ $invoice->invoiced_at }}</td>
 							@endif
 							@if(Request::is('invoicer/invoices/paid'))
-								<td>{{ $invoice->paid_at->format('M d Y') }}</td>
+								<td>{{ $invoice->paid_at }}</td>
 							@endif
 							@if(Request::is('invoicer/invoices'))
 								<td>
@@ -114,6 +117,9 @@
 									@endif
 								</td>
 							@endif
+							<td>{{ $invoice->created_at }}</td>
+							<td>{{ $invoice->invoiced_at }}</td>
+							<td>{{ $invoice->paid_at }}</td>
 							<td><a href="{{ route('invoicer.clients.show', $invoice->client->id) }}">{{ $invoice->client->company_name }}</a></td>
 							<td class="text-right">{{ number_format($invoice->sub_total, 2, '.', ', ') }}$</td>
 							<td class="text-right">{{ number_format($invoice->total, 2, '.', ', ') }}$</td>

@@ -70,8 +70,17 @@ class User extends Authenticatable
    {
       if($date){
          $date = new \Carbon\Carbon($date);
-         // Now modify and return the date
-         // $date = $date->format('M d, Y');
+         $date = $date->format(setting('dateFormat'));
+         return $date;
+      }
+      
+      return 'N/A';
+   }
+
+   public function getUpdatedAtAttribute($date)
+   {
+      if($date){
+         $date = new \Carbon\Carbon($date);
          $date = $date->format(setting('dateFormat'));
          return $date;
       }
@@ -83,8 +92,6 @@ class User extends Authenticatable
    {
       if($date){
          $date = new \Carbon\Carbon($date);
-         // Now modify and return the date
-         // $date = $date->format('M d, Y');
          $date = $date->format(setting('dateFormat'));
          return $date;
       }

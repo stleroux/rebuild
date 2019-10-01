@@ -40,7 +40,7 @@
 								<div class="form-group">
 									{{ Form::label ('created_at', 'Logged Date') }}
 									<div class="input-group">
-										{{ Form::date ('created_at', $invoice->created_at, ['class'=>'form-control', 'readonly'=>'readonly']) }}
+										{{ Form::text ('created_at', $invoice->created_at, ['class'=>'form-control', 'readonly'=>'readonly']) }}
 										<div class="input-group-append">
 											<span class="input-group-text">
 												<i class="far fa-calendar-alt"></i>
@@ -54,7 +54,11 @@
 								<div class="form-group {{ $errors->has('invoiced_at') ? 'has-error' : '' }}">
 									{{ Form::label ('invoiced_at', 'Invoiced Date') }}
 									<div class="input-group">
-										{{ Form::date ('invoiced_at', $invoice->invoiced_at, ['class'=>'form-control']) }}
+										@if($invoice->invoiced_at)
+											{{ Form::text ('created_at', $invoice->invoiced_at, ['class'=>'form-control', 'readonly'=>'readonly']) }}
+										@else
+											{{ Form::date ('invoiced_at', $invoice->invoiced_at, ['class'=>'form-control']) }}
+										@endif
 										<div class="input-group-append">
 											<span class="input-group-text">
 												<i class="far fa-calendar-alt"></i>
@@ -62,6 +66,7 @@
 										</div>
 										<span class="text-danger">{{ $errors->first('invoiced_at') }}</span>
 									</div>
+<span><small class="form-text">Ensure you select Invoiced from the Status dropdown</small></span>
 								</div>
 							</div>
 							{{-- Paid Date --}}
@@ -69,7 +74,11 @@
 								<div class="form-group {{ $errors->has('paid_at') ? 'has-error' : '' }}">
 									{{ Form::label ('paid_at', 'Paid Date') }}
 									<div class="input-group">
-										{{ Form::date ('paid_at', $invoice->paid_at, ['class'=>'form-control']) }}
+										@if($invoice->paid_at)
+											{{ Form::text ('created_at', $invoice->paid_at, ['class'=>'form-control', 'readonly'=>'readonly']) }}
+										@else
+											{{ Form::date ('paid_at', $invoice->paid_at, ['class'=>'form-control']) }}
+										@endif
 										<div class="input-group-append">
 											<span class="input-group-text">
 												<i class="far fa-calendar-alt"></i>
@@ -77,6 +86,7 @@
 										</div>
 										<span class="text-danger">{{ $errors->first('paid_at') }}</span>
 									</div>
+<span><small class="form-text">Ensure you select Paid from the Status dropdown</small></span>
 								</div>
 							</div>
 						</div>
@@ -162,7 +172,7 @@
 							@foreach($invoice->invoiceItems->sortByDesc('work_date') as $item)
 								<tr>
 									<td>{{ $item->product->details }}</td>
-									<td nowrap="nowrap">{{ $item->work_date->format('M d, Y') }}</td>
+									<td nowrap="nowrap">{{ $item->work_date }}</td>
 									<td>{!! nl2br(e($item->notes)) !!}</td>
 									<td class="text-center">{{ $item->quantity }}</td>
 									<td class="text-right" nowrap="nowrap">{{ number_format($item->price, 2, '.', ' ') }}$</td>

@@ -112,15 +112,15 @@
 									{{-- <div>&nbsp;</div> --}}
 									@if($invoice->invoiced_at)
 										<div><strong>Invoiced</strong></div>
-										<div>{{ $invoice->invoiced_at->format('M d, Y') }}</div>
+										<div>{{ $invoice->invoiced_at }}</div>
 									@else
 										<div><strong>Logged</strong></div>
-										<div>{{ $invoice->created_at->format('M d, Y') }}</div>
+										<div>{{ $invoice->created_at }}</div>
 									@endif
 								</div>
 								<div class="col-sm-2">
 									<div><strong>Paid</strong></div>
-										<div>{{ ($invoice->paid_at ? $invoice->paid_at->format('M d, Y') : 'N/A') }}</div>
+										<div>{{ $invoice->paid_at }}</div>
 								</div>
 							</div>
 							@if($invoice->work_description)
@@ -160,7 +160,7 @@
 									@foreach($invoice->invoiceItems->sortByDesc('work_date') as $item)
 										<tr>
 											<td>{{ $item->product->details }}</td>
-											<td nowrap="nowrap">{{ $item->work_date->format('M d, Y') }}</td>
+											<td nowrap="nowrap">{{ $item->work_date }}</td>
 											<td>{!! nl2br(e($item->notes)) !!}</td>
 											<td class="text-center" nowrap="nowrap">{{ $item->quantity }}</td>
 											<td class="text-right" nowrap="nowrap">{{ number_format($item->price, 2, '.', ' ') }}$</td>

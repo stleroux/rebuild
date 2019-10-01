@@ -3,7 +3,7 @@
 @section('content')
 
 	{!! Form::model($item, ['route'=>['invoiceItems.update', $item->id], 'method' => 'PUT']) !!}
-	{{ Form::token() }}
+	{{-- {{ Form::token() }} --}}
 	{{ Form::hidden ('invoice_id', $item->invoice->id) }}
 
 		<div class="card">
@@ -59,11 +59,12 @@
 							</small>
 						</div>
 					</div>
-					<div class="col-sm-4">
+					<div class="col-sm-2">
 						<div class="form-group {{ $errors->has('work_date') ? 'has-error' : '' }}">
 							{{ Form::label ('work_date', 'Work Date:', ['class'=>'required'])}}
 							<div class="input-group">
-								{{ Form::date ('work_date', $item->work_date, array('class'=>'form-control')) }}
+								{{-- {{ Form::date ('work_date', $item->work_date, array('class'=>'form-control')) }} --}}
+								{{ Form::input('date' , 'work_date' , null , ['class'=>'form-control']) }}
 								<div class="input-group-append">
 									<span class="input-group-text">
 										<i class="far fa-calendar-alt"></i>
