@@ -34,7 +34,7 @@ class CreateUsersTable extends Migration {
 			$table->string('province', 60)->nullable();
 			$table->string('postal_code', 20)->nullable();
 			$table->text('notes', 65535)->nullable();
-			$table->boolean('invoicer_client')->default(0);
+			// $table->boolean('invoicer_client')->default(0);
 			$table->string('frontendStyle')->default('slate');
 			$table->string('backendStyle')->default('bootstrap');
 			$table->integer('date_format')->default(1);

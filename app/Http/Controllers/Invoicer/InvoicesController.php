@@ -52,7 +52,7 @@ class InvoicesController extends Controller
 
 		$products = Product::all();
 		// $clients = Client::orderBy('company_name','asc')->pluck('company_name','id');
-		$clients = User::where('invoicer_client', 1)->orderBy('company_name','asc')->pluck('company_name','id');
+		$clients = User::orderBy('company_name','asc')->pluck('company_name','id');
 		// dd($clients);
 
 		if($id){
@@ -92,33 +92,21 @@ class InvoicesController extends Controller
 	}
 
 
-
-
-
+##################################################################################################################
+# ██████╗  ██████╗ ██╗    ██╗███╗   ██╗██╗      ██████╗  █████╗ ██████╗     ██████╗ ██████╗ ███████╗
+# ██╔══██╗██╔═══██╗██║    ██║████╗  ██║██║     ██╔═══██╗██╔══██╗██╔══██╗    ██╔══██╗██╔══██╗██╔════╝
+# ██║  ██║██║   ██║██║ █╗ ██║██╔██╗ ██║██║     ██║   ██║███████║██║  ██║    ██████╔╝██║  ██║█████╗  
+# ██║  ██║██║   ██║██║███╗██║██║╚██╗██║██║     ██║   ██║██╔══██║██║  ██║    ██╔═══╝ ██║  ██║██╔══╝  
+# ██████╔╝╚██████╔╝╚███╔███╔╝██║ ╚████║███████╗╚██████╔╝██║  ██║██████╔╝    ██║     ██████╔╝██║     
+# ╚═════╝  ╚═════╝  ╚══╝╚══╝ ╚═╝  ╚═══╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═════╝     ╚═╝     ╚═════╝ ╚═╝     
+##################################################################################################################
 
 	public function downloadInvoice($id)
 	{
-		// dd($id);
-		// $invoice = Invoice::findOrfail($id);
-		// return Storage::download(public_path('invoices/'.$invoice->id . '.pdf'), $invoice->id);
+		// 
 		$file = public_path('invoices') . '\\' . $id . '.pdf'; // or wherever you have stored your PDF files
-		// dd($file);
    	return response()->download($file);
 	}
-
-
-// public function downloadInvoice($id)
-// {
-// 	$invoice = Invoice::with('InvoiceItems')->where('id', $id)->get();
-// 	// dd($invoice);
-
-// 	$pdf = PDF::loadview('invoicer.invoices.show', compact('invoice'));
-
-// 	return $pdf->download('invoice.pdf');
-// }
-
-
-
 
 
 ##################################################################################################################
@@ -138,7 +126,7 @@ class InvoicesController extends Controller
 		$invoice = Invoice::with('InvoiceItems')->find($id);
 		// dd($invoice);
 		// $clients = Client::orderBy('company_name','asc')->pluck('company_name','id');
-		$clients = User::where('invoicer_client', 1)->orderBy('company_name','asc')->pluck('company_name','id');
+		$clients = User::orderBy('company_name','asc')->pluck('company_name','id');
 		//$invoiceitems = InvoiceItem::where('invoice_id', $invoice->id);
 		//dd($invoiceitems);
 
