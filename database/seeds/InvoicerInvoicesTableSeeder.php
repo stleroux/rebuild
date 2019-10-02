@@ -20,7 +20,7 @@ class InvoicerInvoicesTableSeeder extends Seeder
             0 => 
             array (
                 'id' => 2,
-                'client_id' => 2,
+                'user_id' => 2,
                 'notes' => NULL,
                 'status' => 'paid',
                 'amount_charged' => '70.00',
@@ -38,7 +38,7 @@ class InvoicerInvoicesTableSeeder extends Seeder
             1 => 
             array (
                 'id' => 3,
-                'client_id' => 3,
+                'user_id' => 3,
                 'notes' => NULL,
                 'status' => 'logged',
                 'amount_charged' => '540.00',
@@ -56,7 +56,7 @@ class InvoicerInvoicesTableSeeder extends Seeder
             2 => 
             array (
                 'id' => 4,
-                'client_id' => 1,
+                'user_id' => 1,
                 'notes' => NULL,
                 'status' => 'invoiced',
                 'amount_charged' => '450.00',
@@ -74,7 +74,7 @@ class InvoicerInvoicesTableSeeder extends Seeder
             3 => 
             array (
                 'id' => 5,
-                'client_id' => 4,
+                'user_id' => 4,
                 'notes' => NULL,
                 'status' => 'paid',
                 'amount_charged' => '123.00',

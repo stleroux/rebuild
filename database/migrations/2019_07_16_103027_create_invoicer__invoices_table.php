@@ -15,7 +15,7 @@ class CreateInvoicerInvoicesTable extends Migration {
 		Schema::create('invoicer__invoices', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('client_id')->unsigned()->index('invoicer_invoices_client_id_foreign');
+			$table->integer('user_id')->unsigned()->index('invoicer_invoices_user_id_foreign');
 			$table->text('notes', 65535)->nullable();
 			$table->string('status');
 			$table->decimal('amount_charged')->unsigned()->nullable();
