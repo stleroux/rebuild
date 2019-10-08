@@ -74,11 +74,11 @@
 							@endif
 							<th>@sortablelink('client.company_name','Company Name')</th>
 							<th class="text-right">@sortablelink('amount_charged','Charge')</th>
-							<th class="d-none d-md-block text-right">@sortablelink('hst','HST')</th>
-							<th class="d-none d-md-block text-right" title="SubTotal">@sortablelink('sub_total','SUB')</th>
-							<th class="d-none d-md-block text-right">@sortablelink('wsib','WSIB')</th>
-							<th class="d-none d-md-block text-right" title="Income Taxes">@sortablelink('income_taxes','IT')</th>
-							<th class="text-right" title="Total Deductions">@sortablelink('total_deductions','DED')</th>
+							<th class="d-none d-md-table-cell text-right">@sortablelink('hst','HST')</th>
+							<th class="d-none d-lg-table-cell text-right" title="SubTotal">@sortablelink('sub_total','SUB')</th>
+							<th class="d-none d-lg-table-cell text-right">@sortablelink('wsib','WSIB')</th>
+							<th class="d-none d-lg-table-cell text-right" title="Income Taxes">@sortablelink('income_taxes','IT')</th>
+							<th class="d-none d-sm-table-cell text-right" title="Total Deductions">@sortablelink('total_deductions','DED')</th>
 							<th class="text-right">@sortablelink('total','NET')</th>
 						</tr>
 					</thead>
@@ -86,21 +86,21 @@
 						<tr class="bg-info">
 							<td colspan="3" class="text-right"><b>Totals This Page :&nbsp;</b></td>
 							<td class="text-right">{{ number_format($invoices->sum('amount_charged'), 2, '.', ', ') }}$</td>
-							<td class="d-none d-md-block text-right">{{ number_format($invoices->sum('hst'), 2, '.', ', ') }}$</td>
-							<td class="d-none d-md-block text-right">{{ number_format($invoices->sum('sub_total'), 2, '.', ', ') }}$</td>
-							<td class="d-none d-md-block text-right">{{ number_format($invoices->sum('wsib'), 2, '.', ', ') }}$</td>
-							<td class="d-none d-md-block text-right">{{ number_format($invoices->sum('income_taxes'), 2, '.', ', ') }}$</td>
-							<td class="text-right">{{ number_format($invoices->sum('total_deductions'), 2, '.', ', ') }}$</td>
+							<td class="d-none d-md-table-cell text-right">{{ number_format($invoices->sum('hst'), 2, '.', ', ') }}$</td>
+							<td class="d-none d-lg-table-cell text-right">{{ number_format($invoices->sum('sub_total'), 2, '.', ', ') }}$</td>
+							<td class="d-none d-lg-table-cell text-right">{{ number_format($invoices->sum('wsib'), 2, '.', ', ') }}$</td>
+							<td class="d-none d-lg-table-cell text-right">{{ number_format($invoices->sum('income_taxes'), 2, '.', ', ') }}$</td>
+							<td class="d-none d-sm-table-cell text-right">{{ number_format($invoices->sum('total_deductions'), 2, '.', ', ') }}$</td>
 							<td class="text-right">{{ number_format($invoices->sum('total'), 2, '.', ', ') }}$</td>
 						</tr>
 						<tr class="bg-info">
 							<td colspan="3" class="text-right"><b>Overall Totals :&nbsp;</b></td>
 							<td class="text-right">{{ number_format($totalAmountCharged, 2, '.', ', ') }}$</td>
-							<td class="d-none d-md-block text-right">{{ number_format($totalHST, 2, '.', ', ') }}$</td>
-							<td class="d-none d-md-block text-right">{{ number_format($totalSubTotal, 2, '.', ', ') }}$</td>
-							<td class="d-none d-md-block text-right">{{ number_format($totalWSIB, 2, '.', ', ') }}$</td>
-							<td class="d-none d-md-block text-right">{{ number_format($totalIncomeTaxes, 2, '.', ', ') }}$</td>
-							<td class="text-right">{{ number_format($totalTotalDeductions, 2, '.', ', ') }}$</td>
+							<td class="d-none d-md-table-cell text-right">{{ number_format($totalHST, 2, '.', ', ') }}$</td>
+							<td class="d-none d-lg-table-cell text-right">{{ number_format($totalSubTotal, 2, '.', ', ') }}$</td>
+							<td class="d-none d-lg-table-cell text-right">{{ number_format($totalWSIB, 2, '.', ', ') }}$</td>
+							<td class="d-none d-lg-table-cell text-right">{{ number_format($totalIncomeTaxes, 2, '.', ', ') }}$</td>
+							<td class="d-none d-sm-table-cell text-right">{{ number_format($totalTotalDeductions, 2, '.', ', ') }}$</td>
 							<td class="text-right">{{ number_format($totalTotal, 2, '.', ', ') }}$</td>
 						</tr>
 					</tfoot>
@@ -135,11 +135,11 @@
 								<a href="{{ route('invoicer.clients.show', $invoice->user_id) }}">{{ $invoice->user->company_name }}</a>
 							</td>
 							<td class="text-right">{{ number_format($invoice->amount_charged, 2, '.' , ', ') }}$</td>
-							<td class="d-none d-md-block text-right">{{ number_format($invoice->hst, 2, '.' , ', ') }}$</td>
-							<td class="d-none d-md-block text-right">{{ number_format($invoice->sub_total, 2, '.', ', ') }}$</td>
-							<td class="d-none d-md-block text-right">{{ number_format($invoice->wsib, 2, '.' , ', ') }}$</td>
-							<td class="d-none d-md-block text-right">{{ number_format($invoice->income_taxes, 2, '.' , ', ') }}$</td>
-							<td class="text-right">{{ number_format($invoice->total_deductions, 2, '.' , ', ') }}$</td>
+							<td class="d-none d-md-table-cell text-right">{{ number_format($invoice->hst, 2, '.' , ', ') }}$</td>
+							<td class="d-none d-lg-table-cell text-right">{{ number_format($invoice->sub_total, 2, '.', ', ') }}$</td>
+							<td class="d-none d-lg-table-cell text-right">{{ number_format($invoice->wsib, 2, '.' , ', ') }}$</td>
+							<td class="d-none d-lg-table-cell text-right">{{ number_format($invoice->income_taxes, 2, '.' , ', ') }}$</td>
+							<td class="d-none d-sm-table-cell text-right">{{ number_format($invoice->total_deductions, 2, '.' , ', ') }}$</td>
 							<td class="text-right">{{ number_format($invoice->total, 2, '.' , ', ') }}$</td>
 						</tr>
 						@endforeach
