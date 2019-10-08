@@ -38,12 +38,15 @@
 										<td>{{ $client->company_name }}</td>
 										<td>{{ $client->first_name }} {{ $client->last_name }}</td>
 										<td>{{ $client->email }}</td>
-										<td>
-											<form action="{{ route('invoicer.clients.destroy',[$client->id]) }}" method="POST" 
+										<td class="float-right">
+											{{-- @include('invoicer.invoices.buttons.add', ['size'=>'sm', 'btn_label'=>'Add Invoice']) --}}
+											{{-- <form action="{{ route('invoicer.clients.destroy',[$client->id]) }}" method="POST" 
 												onsubmit="return confirm('Do you really want to delete this client?');"
-												class="float-right">
-												<input type="hidden" name="_method" value="DELETE" />
-												{{ csrf_field() }}
+												class="float-right"> --}}
+												{{-- <input type="hidden" name="_method" value="DELETE" /> --}}
+												{{-- @method('DELETE') --}}
+												{{-- {{ csrf_field() }} --}}
+												{{-- @csrf --}}
 												
 												@if(checkPerm('invoicer_client_show'))
 													<a href="{{ route('invoicer.invoices.create', $client->id) }}" class="btn btn-sm btn-outline-primary">
@@ -52,12 +55,12 @@
 													</a>
 												@endif
 
-												{{-- @if(checkPerm('invoicer_client_show'))
+												@if(checkPerm('invoicer_client_show'))
 													<a href="{{ route('invoicer.clients.show', $client->id) }}" class="btn btn-sm btn-outline-primary">
 														<i class="fa fa-eye" aria-hidden="true"></i>
 														View
 													</a>
-												@endif --}}
+												@endif
 												
 												{{-- @if(checkPerm('invoicer_client_edit'))
 													<a href="{{ route('invoicer.clients.edit', $client->id) }}" class="btn btn-sm btn-primary">
@@ -72,7 +75,7 @@
 														Delete
 													</button>
 												@endif --}}
-											</form>
+											{{-- </form> --}}
 										</td>
 									</tr>
 									@endforeach

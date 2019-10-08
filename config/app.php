@@ -179,6 +179,7 @@ return [
         App\Providers\RecipeServiceProvider::class,
         App\Providers\PostServiceProvider::class,
         App\Providers\ProjectServiceProvider::class,
+        App\Providers\BladeServiceProvider::class,
 
     ],
 

@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration {
 			$table->string('fax')->nullable();
 			$table->string('website')->nullable();
 			$table->string('company_name')->nullable();
+			$table->boolean('invoicer_client')->default(0);
 			$table->string('image')->nullable();
 			$table->string('civic_number', 10)->nullable();
 			$table->string('address_1', 150)->nullable();
@@ -34,7 +35,6 @@ class CreateUsersTable extends Migration {
 			$table->string('province', 60)->nullable();
 			$table->string('postal_code', 20)->nullable();
 			$table->text('notes', 65535)->nullable();
-			// $table->boolean('invoicer_client')->default(0);
 			$table->string('frontendStyle')->default('slate');
 			$table->string('backendStyle')->default('bootstrap');
 			$table->integer('date_format')->default(1);

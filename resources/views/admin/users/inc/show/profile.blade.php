@@ -38,7 +38,7 @@
                      </div>
                      <div class="col-md-2">
                         <div class="form-group">
-                           <label>Total permissions</label>
+                           <label>Total Perms</label>
                            <input type="text" class="form-control form-control-sm" value="{{ $user->permissions->count() }}" disabled>
                         </div>
                      </div>
@@ -97,13 +97,24 @@
                            <input id="fax" type="text" class="form-control form-control-sm" name="fax" value="{{ $user->fax }}" disabled />
                         </div>
                      </div>
-                     <div class="col-md-2">
+                     <div class="col-md-4">
                         <div class="form-group">
                            <label for="website">Website</label>
                            <input id="website" type="text" class="form-control form-control-sm" name="website" value="{{ $user->website }}" disabled />
                         </div>
                      </div>
                   </div>
+
+                  <div class="form-row">
+                     <div class="col-md-6">
+                        <div class="form-group">
+                           <label for="company_name">Company Name</label>
+                           <input name="company_name" type="text" class="form-control form-control-sm" value="{{ $user->company_name }}" disabled />
+                           <span><small>Required for user to show up in the Invoicer</small></span>
+                        </div>
+                     </div>
+                  </div>
+
                </div>
             </div>
          </div>
@@ -122,7 +133,7 @@
                   <div class="form-row">
                      <div class="col-sm-2">
                         <div class="form-group">
-                           <label for="civic_number" class=" control-label">Civic/Unit N<sup>o</sup></label>
+                           <label for="civic_number" class=" control-label">Unit N<sup>o</sup></label>
                            <input id="civic_number" type="text" class="form-control form-control-sm" name="civic_number" value="{{ $user->civic_number }}" disabled />
                         </div>
                      </div>

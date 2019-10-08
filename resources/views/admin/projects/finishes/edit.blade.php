@@ -12,9 +12,9 @@
    @include('projects.blocks.popularProjects')
 @endsection
 
-@section ('content')
+@section('content')
    
-   {!! Form::model($finish, ['route'=>['admin.projects.finishes.update', $finish->id], 'method' => 'PUT', 'files' => true]) !!}
+   {!! Form::model($finish, ['route'=>['admin.projects.finishes.update', $finish->id], 'method'=>'PUT', 'files'=>true]) !!}
       
       <div class="card mb-3">
          

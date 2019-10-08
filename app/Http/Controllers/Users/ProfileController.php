@@ -175,6 +175,7 @@ class ProfileController extends Controller
          $user->cell = $request->input('cell');
          $user->fax = $request->input('fax');
          $user->website = $request->input('website');
+         $user->company_name = $request->input('company_name');
 
          $user->civic_number = $request->input('civic_number');
          $user->address_1 = $request->input('address_1');

@@ -80,7 +80,7 @@
                               <input type="text" class="form-control form-control-sm" value="{{ $user->invoicer_client }}" disabled>
                            </div>
                         </div> --}}
-                        <div class="col-md-2">
+                        {{-- <div class="col-md-2">
                            <div class="form-group">
                               <label for="status">Invoicer Client</label>
                               <select name="invoicer_client" id="invoicer_client" class="form-control form-control-sm" disabled>
@@ -90,7 +90,7 @@
                               </select>
                               <div class="bg-danger">{{ $errors->first('invoicer_client') }}</div>
                            </div>
-                        </div>
+                        </div> --}}
                      </div>
                   </div>
                </div>
@@ -149,6 +149,16 @@
                            <div class="form-group">
                               {{ Form::label('website', 'Website Address') }}
                               {{ Form::text('website', null, ['class'=>'form-control form-control-sm', 'readonly'=>'readonly']) }}
+                           </div>
+                        </div>
+                     </div>
+
+                     <div class="form-row">
+                        <div class="col-md-6">
+                           <div class="form-group">
+                              <label for="company_name">Company Name</label>
+                              <input name="company_name" type="text" class="form-control form-control-sm" value="{{ $user->company_name }}" disabled />
+                              {{-- <span><small>Required for user to show up in the Invoicer</small></span> --}}
                            </div>
                         </div>
                      </div>

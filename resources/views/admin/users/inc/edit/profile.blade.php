@@ -40,11 +40,11 @@
                         </div>
                         <div class="col-md-2">
                            <div class="form-group">
-                              <label>Total permissions</label>
+                              <label>Total Perms</label>
                               <input type="text" class="form-control form-control-sm" value="{{ $user->permissions->count() }}" disabled>
                            </div>
                         </div>
-                        <div class="col-md-2">
+                        {{-- <div class="col-md-2">
                            <div class="form-group">
                               <label for="status">Invoicer Client</label>
                               <select name="invoicer_client" id="invoicer_client" class="form-control form-control-sm">
@@ -54,7 +54,7 @@
                               </select>
                               <div class="text-danger">{{ $errors->first('invoicer_client') }}</div>
                            </div>
-                        </div>
+                        </div> --}}
                      {{-- </div> --}}
                   </div>
                </div>
@@ -110,10 +110,19 @@
                            <input name="fax" type="text" class="form-control form-control-sm" value="{{ $user->fax }}">
                         </div>
                      </div>
-                     <div class="col-md-3">
+                     <div class="col-md-4">
                         <div class="form-group">
                            <label for="website">Website</label>
                            <input name="website" type="text" class="form-control form-control-sm" value="{{ $user->website }}">
+                        </div>
+                     </div>
+                  </div>
+                  <div class="form-row">
+                     <div class="col-md-6">
+                        <div class="form-group">
+                           <label for="company_name">Company Name</label>
+                           <input name="company_name" type="text" class="form-control form-control-sm" value="{{ $user->company_name }}">
+                           <span><small>Required for user to show up in the Invoicer</small></span>
                         </div>
                      </div>
                   </div>
@@ -135,7 +144,7 @@
                   <div class="form-row">
                      <div class="col-md-1">
                         <div class="form-group">
-                           <label for="civic_number" class="control-label">Civic/Unit N<sup>o</sup></label>
+                           <label for="civic_number" class="control-label">Unit N<sup>o</sup></label>
                            <input name="civic_number" type="text" class="form-control form-control-sm" value="{{ $user->civic_number }}">
                         </div>
                      </div>

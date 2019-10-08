@@ -410,6 +410,7 @@ class UsersController extends Controller
          $user->cell             = $request->cell;
          $user->fax              = $request->fax;
          $user->website          = $request->website;
+         $user->company_name     = $request->company_name;
          $user->civic_number     = $request->civic_number;
          $user->address_1        = $request->address_1;
          $user->address_2        = $request->address_2;
@@ -417,7 +418,7 @@ class UsersController extends Controller
          $user->province         = $request->province;
          $user->postal_code      = $request->postal_code;
          $user->notes            = $request->notes;
-         $user->invoicer_client  = $request->invoicer_client;
+         // $user->invoicer_client  = $request->invoicer_client;
          $user->action_buttons   = $request->action_buttons;
          $user->alert_fade_time	= $request->alert_fade_time;
          $user->author_format    = $request->author_format;
@@ -488,13 +489,14 @@ class UsersController extends Controller
 			$user->username = $request->input('username');
 			$user->email = $request->input('email');
          $user->public_email = $request->input('public_email');
-         $user->invoicer_client = $request->input('invoicer_client');
+         // $user->invoicer_client = $request->input('invoicer_client');
          $user->first_name = $request->input('first_name');
          $user->last_name = $request->input('last_name');
          $user->telephone = $request->input('telephone');
          $user->cell = $request->input('cell');
          $user->fax = $request->input('fax');
          $user->website = $request->input('website');
+         $user->company_name = $request->input('company_name');
          $user->civic_number = $request->input('civic_number');
          $user->address_1 = $request->input('address_1');
          $user->address_2 = $request->input('address_2');
@@ -502,12 +504,12 @@ class UsersController extends Controller
          $user->province = $request->input('province');
          $user->postal_code = $request->input('postal_code');
          $user->notes = $request->input('notes');
-         $user->action_buttons = $request->input('action_buttons');
-         $user->alert_fade_time = $request->input('alert_fade_time');
-         $user->author_format = $request->input('author_format');
-         $user->date_format = $request->input('date_format');
-         $user->landing_page_id = $request->input('landing_page_id');
-         $user->rows_per_page = $request->input('rows_per_page');
+         // $user->action_buttons = $request->input('action_buttons');
+         // $user->alert_fade_time = $request->input('alert_fade_time');
+         // $user->author_format = $request->input('author_format');
+         // $user->date_format = $request->input('date_format');
+         // $user->landing_page_id = $request->input('landing_page_id');
+         // $user->rows_per_page = $request->input('rows_per_page');
 
          // Check if a new image was submitted
          if ($request->hasFile('image')) {
