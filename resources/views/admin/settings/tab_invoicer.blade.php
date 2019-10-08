@@ -9,9 +9,8 @@
                      <input type="hidden" name="id[]" value="{{ $setting->id }}" />
                      <input type="text" class="form-control form-control-sm" id="{{ $setting->key }}" name="value[]" value="{{ $setting->value }}">
                      <div class="input-group-append">
-                        <a href="{{ route('admin.settings.edit', $setting->id) }}" class="btn btn-sm btn-primary">
-                           <i class="far fa-edit"></i>
-                        </a>
+                        @include('admin.settings.buttons.edit', ['size'=>'xs'])
+                        @include('admin.settings.buttons.delete', ['size'=>'xs'])
                      </div>
                   </div>
                </div>

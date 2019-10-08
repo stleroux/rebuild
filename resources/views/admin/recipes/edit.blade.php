@@ -12,7 +12,7 @@
 @endsection
 
 @section ('content')
-   {!! Form::model($recipe, ['route'=>['admin.recipes.update', $recipe->id], 'method' => 'PUT', 'files' => true]) !!}
+   {!! Form::model($recipe, ['route'=>['admin.recipes.update', $recipe->id], 'method'=>'PUT', 'files'=>true]) !!}
       <div class="card mb-3">
          <div class="card-header section_header p-2">
             <i class="fa fa-edit"></i>

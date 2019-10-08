@@ -22,14 +22,9 @@
             Edit Site Setting
             <div class="float-right">
                <div class="btn-group">
-                  <a class="btn btn-sm btn-secondary" href="{{ route('admin.settings.index') }}">
-                     <i class="fas fa-angle-double-left"></i>
-                     {{-- Cancel --}}
-                  </a>
-                   <button type="submit" class="btn btn-sm btn-info">
-                     <i class="fa fa-save"></i>
-                     {{-- Update --}}
-                  </button>
+                  @include('admin.settings.buttons.back', ['size'=>'xs'])
+                  @include('admin.settings.buttons.reset', ['size'=>'xs'])
+                  @include('admin.settings.buttons.update', ['size'=>'xs'])
                </div>
             </div>
          </div>

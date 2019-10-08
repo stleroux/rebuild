@@ -1,4 +1,4 @@
-@if(checkPerm('projects_create'))
+@if(checkPerm('project_add'))
    <a href="{{ route('admin.projects.create') }}"
       class="btn btn-{{ $size }} btn-success text-light"
       title="Add Project">

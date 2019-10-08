@@ -1,6 +1,6 @@
 @if(checkPerm('comment_add'))
 
-   {!! Form::model($project, ['route'=>['projects.comment.store', $project->id], 'method'=>'POST']) !!}
+   {!! Form::model($project, ['route'=>['projects.comment.store', $project->id]]) !!}
 
       <div class="card mb-2">
          <div class="card-header block_header p-2">

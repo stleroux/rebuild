@@ -1,4 +1,4 @@
-@if(checkPerm('projects_edit', $material))
+@if(checkPerm('project_edit', $material))
    <a href="{{ route('admin.projects.materials.edit', $material->id) }}"
       class="btn btn-{{ $size }} btn-info text-light"
       title="Edit Material">

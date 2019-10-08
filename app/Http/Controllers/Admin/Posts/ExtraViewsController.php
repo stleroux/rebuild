@@ -83,7 +83,7 @@ class ExtraViewsController extends Controller
             ->get();
       }
 
-      return view('admin.posts.newPosts', compact('posts','letters'));
+      return view('admin.posts.pages.newPosts', compact('posts','letters'));
    }
 
 
@@ -119,7 +119,7 @@ class ExtraViewsController extends Controller
 
       $tags = Tag::all();
 
-      return view ('showTrashed')
+      return view ('admin.posts.pages.showTrashed')
          ->withPost($post)
          ->withTags($tags)
          ->withCategories($cats);
@@ -163,7 +163,7 @@ class ExtraViewsController extends Controller
          $posts = Post::with('user','category')->onlyTrashed()->orderBy('id','desc')->get();
       }
       
-      return view('admin.posts.trashed', compact('posts','letters'));
+      return view('admin.posts.pages.trashed', compact('posts','letters'));
    }
 
 
@@ -214,7 +214,7 @@ class ExtraViewsController extends Controller
             ->get();
       }
 
-      return view('admin.posts.unpublished', compact('posts','letters', 'postlinks'));
+      return view('admin.posts.pages.unpublished', compact('posts','letters', 'postlinks'));
    }
 
 

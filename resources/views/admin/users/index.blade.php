@@ -75,13 +75,8 @@
 												</a>
 											@endif
 											
-											@if(checkPerm('user_edit'))
-												@include('admin.users.buttons.edit', ['size'=>'xs'])
-											@endif
-
-											@if(checkPerm('user_delete'))
-												@include('admin.users.buttons.delete', ['size'=>'xs'])
-											@endif
+											@include('admin.users.buttons.edit', ['size'=>'xs'])
+											@include('admin.users.buttons.delete', ['size'=>'xs'])
 										</div>
 									</td>
 								</tr>

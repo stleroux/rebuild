@@ -1,9 +1,9 @@
-@if(checkPerm('permission_add'))
+@if(checkPerm('setting_add'))
    <button
       class="btn btn-{{ $size }} btn-info text-light"
       type="submit"
-      {{-- name="submit" --}}
-      {{-- value="new" --}}
+      name="new"
+      value="new"
       {{-- formaction="{{ route('admin.permissions.store') }}" --}}
       {{-- formmethod="POST" --}}
       title="Save & New">

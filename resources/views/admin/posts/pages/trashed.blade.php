@@ -63,9 +63,9 @@
 											<td>{{ $post->category->name }}</td>
 											<td>{{ $post->views }}</td>
 											<td>{{ ucfirst($post->user->username) }}</td>
-											<td>{{ $post->created_at->format('M d, Y') }}</td>
-											<td>{{ ($post->published) ? $post->published_at->format('M d, Y') : 'no data found' }}</td>
-											<td>{{ $post->deleted_at->format('M d, Y') }}</td>
+											<td>{{ $post->created_at }}</td>
+											<td>{{ $post->published_at }}</td>
+											<td>{{ $post->deleted_at }}</td>
 											<td class="text-right">
 												<div class="btn-group">
 													@include('admin.posts.buttons.show', ['size'=>'xs'])

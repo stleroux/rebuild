@@ -12,7 +12,7 @@
 
 @section('content')
 
-	{!! Form::model($comment, ['route'=>['admin.comments.update', $comment->id], 'method' => 'PUT']) !!}
+	{!! Form::model($comment, ['route'=>['admin.comments.update', $comment->id], 'method'=>'PUT']) !!}
 
 		<div class="row">
 			<div class="col">

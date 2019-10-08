@@ -23,8 +23,8 @@
          <div class="col">
             <div class="card mb-2">
                <div class="card-header section_header p-2">
-                  <i class="{{ Config::get('buttons.new') }}"></i>
-                  New Posts
+                  <i class="{{ Config::get('buttons.unpublished') }}"></i>
+                  Unpublished Posts
                   <div class="float-right">
                      <div class="btn-group">
                         @include('admin.posts.buttons.trashAll', ['size'=>'xs'])
@@ -34,9 +34,10 @@
                   </div>
                </div>
 
-               <div class="card-body section_body p-2">
-                  @if($posts->count() > 0)
-                     @include('admin.posts.alphabet', ['model'=>'post', 'page'=>'newPosts'])
+               
+               @if($posts->count() > 0)
+                  <div class="card-body section_body p-2">
+                     @include('admin.posts.alphabet', ['model'=>'post', 'page'=>'unpublished'])
                      <table id="datatable" class="table table-hover table-sm">
                         <thead>
                            <tr>
@@ -44,9 +45,9 @@
                               <th>ID</th>
                               <th>Title</th>
                               <th>Category</th>
-                              {{-- <th>Views</th> --}}
+                              <th>Views</th>
                               <th>Created By</th>
-                              <th>Created On</th>
+                              <th>Created On</th>                              
                               {{-- @if(checkACL('author')) --}}
                               <th data-orderable="false"></th>
                               {{-- @endif --}}
@@ -61,9 +62,9 @@
                               <td>{{ $post->id }}</td>
                               <td>{{ $post->title }}</td>
                               <td>{{ $post->category->name }}</td>
-                              {{-- <td>{{ $post->views }}</td> --}}
+                              <td>{{ $post->views }}</td>
                               <td>{{ ucfirst($post->user->username) }}</td>
-                              <td>{{ $post->created_at->format('M d, Y') }}</td>                            
+                              <td>{{ $post->created_at }}</td>                              
                               {{-- @if(checkACL('author')) --}}
                               <td class="text-right">
                                  <div class="btn-group">
@@ -73,15 +74,17 @@
                                     @include('admin.posts.buttons.trash', ['size'=>'xs'])
                                  </div>
                               </td>
-                              {{-- @endif --}}
+
                            </tr>
                            @endforeach
                         </tbody>
                      </table>
-                  @else
+                  </div>
+               @else
+                  <div class="card-body p-2">
                      {{ setting('no_records_found') }}
-                  @endif
-               </div>
+                  </div>
+               @endif
             </div>
          </div>
       </div>
@@ -90,40 +93,5 @@
 @endsection
 
 @section('scripts')
-
-   <script>
-      $(function () {
-         $("#selectall").click(function () {
-            if ($("#selectall").is(':checked')) {
-               $("input[type=checkbox]").each(function () {
-                  $(this).attr("checked", true);
-               });
-               $("#bulk-trash").show();
-               $("#bulk-publish").show();
-               $(".selectmenu").hide();
-            } else {
-               $("input[type=checkbox]").each(function () {
-                  $(this).attr("checked", false);
-               });
-               $("#bulk-trash").hide();
-               $("#bulk-publish").hide();
-               $(".selectmenu").show();
-            }
-         });
-      });
-
-      function checkbox_is_checked() {
-         if ($(".check-all:checked").length > 0) {
-            $("#bulk-trash").show();
-            $("#bulk-publish").show();
-            $(".selectmenu").hide();
-         } else {
-            $("#bulk-trash").hide();
-            $("#bulk-publish").hide();
-            $(".selectmenu").show();
-         }
-      };
-
-   </script>
-
+   @include('scripts.bulkButtons')
 @endsection

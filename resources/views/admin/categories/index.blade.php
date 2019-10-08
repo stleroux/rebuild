@@ -49,7 +49,7 @@
                               <td>{{ ucfirst($category->name) }}</td>
                               <td>{{ $category->parent_id ? ucfirst($category->parent->name) : '' }} <small>(Parent:{{ $category->parent_id }})</small></td>
                               <td>{{ $category->value }}</td>
-                              <td data-order="{{ $category->created_at}}">{{ $category->created_at ? $category->created_at->format('M d, Y') : 'no data found' }}</td>
+                              <td data-order="{{ $category->created_at}}">{{ $category->created_at }}</td>
                               <td class="text-right">
                                  <div class="btn-group">
                                     @include('admin.categories.buttons.show', ['size'=>'xs'])

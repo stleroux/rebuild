@@ -64,7 +64,7 @@ class CommentController extends Controller
     public function store(CreateCommentRequest $request, $id)
     {
       // Check if user has required module
-      if(!checkPerm('comment_create')) { abort(401, 'Unauthorized Access'); }
+      if(!checkPerm('comment_add')) { abort(401, 'Unauthorized Access'); }
 
       $project = project::find($id);
 

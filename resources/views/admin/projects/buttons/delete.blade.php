@@ -1,4 +1,4 @@
-@if(checkPerm('projects_delete'))
+@if(checkPerm('project_delete'))
    <a href="{{ route('admin.projects.delete', $project->id) }}"
       class="btn btn-{{ $size }} btn-danger text-light"
       title="Delete Project">

@@ -29,7 +29,7 @@
 
    {{-- {!! Form::open(['method'=>'post', 'route'=>['users.changeUserPWDPost', $user->id]]) !!} --}}
    {!! Form::open(array('route'=>['admin.users.changePassword.update', $user->id], 'method'=>'PUT')) !!}
-      {{ Form::token() }}
+      {{-- {{ Form::token() }} --}}
       {{-- <input type="text" name="id" value="{{ $user->id }}" /> --}}
       <div class="card mb-2">
          <!--CARD HEADER-->

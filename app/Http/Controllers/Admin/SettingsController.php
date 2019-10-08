@@ -106,7 +106,7 @@ class SettingsController extends Controller
         // set a flash message to be displayed on screen
         Session::flash('store','The setting was successfully saved!');
 
-        if($request->submit == "new")
+        if($request->new == "new")
         {
             return redirect()->route('admin.settings.create');
         } else {
@@ -212,14 +212,14 @@ class SettingsController extends Controller
 # ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝
 // Mass Delete selected rows - all selected records
 ##################################################################################################################
-    // public function delete(Setting $setting)
-    // {
-    //     // Check if user has required permission
-    //     // if(!checkPerm('setting_delete')) { abort(401, 'Unauthorized Access'); }
+    public function delete($id)
+    {
+        // Check if user has required permission
+        if(!checkPerm('setting_delete')) { abort(401, 'Unauthorized Access'); }
 
-    //     $setting = Setting::findOrFail($setting->id);
-    //     return view('settings.delete', compact('setting'));
-    // }
+        $setting = Setting::findOrFail($id);
+        return view('admin.settings.delete', compact('setting'));
+    }
 
 
 ##################################################################################################################
@@ -232,33 +232,19 @@ class SettingsController extends Controller
 // Remove the specified resource from storage
 // Used in the index page and trashAll action to soft delete multiple records
 ##################################################################################################################
-    // public function destroy($id)
-    // {
-    //     // Check if user has required permission
-    //     //if(!checkPerm('permission_delete')) { abort(401, 'Unauthorized Access'); }
+    public function destroy($id)
+    {
+        // Check if user has required permission
+        //if(!checkPerm('permission_delete')) { abort(401, 'Unauthorized Access'); }
 
-    //     $setting = Setting::findOrFail($id);
-    //     $setting->delete();
+        $setting = Setting::findOrFail($id);
+        $setting->delete();
 
-    //     // Set flash data with success message
-    //     Session::flash('delete','The site setting was deleted successfully.');
-    //     // Redirect
-    //     return redirect()->route('settings.index');
-    // }
-
-
-    // public function updatePlus(Request $request)
-    // {
-    //     $rows = $request->input('id');
-    //     $values = $request->input('value');
-
-    //     for($i=0; $i<count($rows); $i++) {
-    //           Setting::where('id', $rows[$i])->update(['value'=>$values[$i]]);
-    //        }
-
-    //     Session::flash('update', 'The site settings have been updated successfully.');
-    //     return redirect()->route('settings.index');
-    // }
+        // Set flash data with success message
+        Session::flash('delete','The site setting was deleted successfully.');
+        // Redirect
+        return redirect()->route('admin.settings.index');
+    }
 
 
 }

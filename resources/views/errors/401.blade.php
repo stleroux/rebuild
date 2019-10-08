@@ -1,47 +1,45 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Be right back.</title>
+@extends('layouts.master')
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+@section('title','Unauthorized Access')
 
-        <style>
-            html, body {
-                height: 100%;
-            }
+@section ('stylesheets')
+	{{ Html::style('css/woodbarn.css') }}
+@endsection
 
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                color: #B0BEC5;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato', sans-serif;
-            }
+@section('sectionSidebar')
+  {{-- @include('backend.projects.sidebar') --}}
+@endsection
 
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
+{{-- @section('breadcrumb') --}}
+	{{-- <li><a href="/">Home</a></li> --}}
+{{-- @endsection --}}
 
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
+@section('content')
+	
+		<div class="card bg-danger">
+			
+			<div class="card-header">
+				<h3 class="text-center text-danger">Unauthorized access.</h3>
+			</div>
+			
+			<div class="card-body">
+				<div class="col-xs-12 text-center">
+					<img src="images\dog.jpg">
+				</div>
+				
+				<div class="col-xs-12 text-center">
+					<br />
+					<p>It seems like you do not have sufficient permissions to view this page or your session has timed out due to inactiviy.</p>
+				</div>
+				
+				<div class="col-xs-12 text-center">
+					<p>If you think this is an error, please contact the system administrator by using the <a href="/contact">Contact Us</a> page</p>
+				</div>
+			</div>
 
-            .title {
-                font-size: 72px;
-                margin-bottom: 40px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Unauthorized access.........................</div>
-            </div>
-        </div>
-    </body>
-</html>
+			<div class="panel-footer mb-3 text-center">
+				<a href="{{ URL::previous() }}" class="btn btn-sm btn-primary">Return to previous page</a>
+			</div>
+		</div>
+	
+@endsection

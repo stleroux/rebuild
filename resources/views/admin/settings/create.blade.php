@@ -21,7 +21,7 @@
             New Site Setting
             <div class="float-right">
                <div class="btn-group">
-                  <a class="btn btn-sm btn-secondary px-1 py-0" href="{{ route('admin.settings.index') }}">
+                  {{-- <a class="btn btn-sm btn-secondary px-1 py-0" href="{{ route('admin.settings.index') }}">
                      <i class="fas fa-angle-double-left"></i>
                      Cancel
                   </a>
@@ -30,7 +30,13 @@
                   </button>
                   <button type="submit" class="btn btn-sm btn-success px-1 py-0" name="submit" value="save">
                      <i class="far fa-save"></i> Save & Close
-                  </button>
+                  </button> --}}
+
+                  @include('admin.settings.buttons.help', ['size'=>'xs', 'bookmark'=>'Settings'])
+                  @include('admin.settings.buttons.back', ['size'=>'xs'])
+                  @include('admin.settings.buttons.reset', ['size'=>'xs'])
+                  @include('admin.settings.buttons.save&new', ['size'=>'xs'])
+                  @include('admin.settings.buttons.save', ['size'=>'xs'])
                </div>
             </div>
          </div>

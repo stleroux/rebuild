@@ -36,6 +36,7 @@ class Post extends Model
       $this->attributes['slug'] = $slug;
    }
 
+
 //////////////////////////////////////////////////////////////////////////////////////
 // RELATIONSHIPS
 //////////////////////////////////////////////////////////////////////////////////////
@@ -74,6 +75,7 @@ class Post extends Model
    {
       return $this->belongsTo('App\Models\User');
    }
+
 
 //////////////////////////////////////////////////////////////////////////////////////
 // SCOPES
@@ -126,6 +128,7 @@ class Post extends Model
       return $query->where('deleted_at', '!=', NULL)->withTrashed();
    }
 
+
 //////////////////////////////////////////////////////////////////////////////////////
 // ACCESSORS
 //////////////////////////////////////////////////////////////////////////////////////
@@ -151,5 +154,26 @@ class Post extends Model
       return 'N/A';
    }
 
+   public function getPublishedAtAttribute($date)
+   {
+      if($date){
+         $date = new \Carbon\Carbon($date);
+         $date = $date->format(setting('dateFormat'));
+         return $date;
+      }
+      
+      return 'N/A';
+   }
+
+   public function getDeletedAtAttribute($date)
+   {
+      if($date){
+         $date = new \Carbon\Carbon($date);
+         $date = $date->format(setting('dateFormat'));
+         return $date;
+      }
+      
+      return 'N/A';
+   }
 
 }
