@@ -10,6 +10,8 @@ blah blah blah
 @endhidden --}}
 
 {{ collect(request()->segments())->last() }}
+<br />
+{{ last(request()->segments()) }}
 
 @php
    //Check if route name is show, if it is, make fields disbaled
