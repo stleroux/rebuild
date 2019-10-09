@@ -12,7 +12,7 @@
 @endsection
 
 @section('content')
-   
+
    <div class="card mb-3">
 
       <div class="card-header section_header p-2">
@@ -28,7 +28,7 @@
 
       <div class="card-body section_body p-2">
 
-         <table class="table table-sm table-striped table-hover text-dark">
+         {{-- <table class="table table-sm table-striped table-hover text-dark">
             <tbody>
                <tr>
                   <th class="col-sm-2">ID</th>
@@ -52,14 +52,17 @@
                </tr>
                <tr>
                   <th>Created On</th>
-                  <td>{{ $material->created_at ? $material->created_at->format('M d, Y') : 'no data found' }}</td>
+                  <td>{{ $material->created_at }}</td>
                </tr>
                <tr>
                   <th>Updated On</th>
-                  <td>{{ $material->updated_at ? $material->updated_at->format('M d, Y') : 'no data found' }}</td>
+                  <td>{{ $material->updated_at }}</td>
                </tr>
             </tbody>
-         </table>
+         </table> --}}
+
+         @include('admin.projects.materials.form')
+
       </div>
 
    </div>

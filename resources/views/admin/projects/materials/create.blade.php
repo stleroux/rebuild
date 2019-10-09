@@ -13,7 +13,7 @@
 
 @section('content')
    
-   {!! Form::open(['route' => 'admin.projects.materials.store', 'files'=>'true']) !!}
+   {!! Form::open(['route'=>'admin.projects.materials.store', 'files'=>'true']) !!}
    
       <div class="card mb-3">
          

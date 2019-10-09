@@ -14,7 +14,7 @@ blah blah blah
 {{ last(request()->segments()) }}
 
 @php
-   //Check if route name is show, if it is, make fields disbaled
+   //Check if route name is show, if it is, make fields disabled
    $rName = (\Route::current()->getName() == 'admin.projects.finishes.show');
    if ($rName) {
       // echo "Value : " . $rName;

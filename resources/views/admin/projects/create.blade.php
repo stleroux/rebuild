@@ -43,7 +43,7 @@
                </div>
                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
                   <div class="form-group">
-                     <label for="category" class="required">Category</label>
+                     {{ Form::label('category', 'Category', ['class'=>'required']) }}
                      <select name="category" value="{{ old('category') ?? $project->category }}" id="category" class="form-control form-control-sm">
                         @foreach($project->categoriesOptions() as $categoryOptionKey => $categoryOptionValue)
                            <option value="{{ $categoryOptionKey }}" {{ $project->category == $categoryOptionValue ? 'selected' : '' }}>{{ $categoryOptionValue }}</option>

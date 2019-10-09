@@ -13,8 +13,7 @@
 
 @section ('content')
    
-   {!! Form::model($material, ['route'=>['admin.projects.materials.update', $material->id], 'method' => 'POST', 'files' => true]) !!}
-      @method("PUT")
+   {!! Form::model($material, ['route'=>['admin.projects.materials.update', $material->id], 'method'=>'PUT', 'files'=>'true']) !!}
       
       <div class="card mb-3">
          

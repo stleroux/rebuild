@@ -14,7 +14,7 @@
 
 @section ('content')
 
-   {!! Form::model($project, ['route'=>['admin.projects.update', $project->id], 'method' => 'PUT', 'files' => true]) !!}
+   {!! Form::model($project, ['route'=>['admin.projects.update', $project->id], 'method'=>'PUT', 'files'=>'true']) !!}
 
       <div class="form-row">
          <div class="col-12">
@@ -43,6 +43,7 @@
                         @include('admin.projects.partials.edit.others')
                      </div>
                   </div>
+   {!! Form::Close() !!}
                   
                   <div class="form-row">
                      <div class="col-md-4">
@@ -66,6 +67,7 @@
          </div>
       </div>
    
-   {!! Form::Close() !!}
 
 @endsection
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
