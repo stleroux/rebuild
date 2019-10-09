@@ -104,7 +104,7 @@
                      <div class="card mb-2">
                         <div class="card-header card_header p-1">Published On</div>
                         <div class="card-body p-1">
-                           {{ $post->published_at->format('M d, Y') }}
+                           {{ $post->published_at }}
                         </div>
                      </div>
                   </div>
@@ -175,7 +175,8 @@
                               <div class="card">
                                  <div class="card-header card_header p-1">By</div>
                                  <div class="card-body p-1">
-                                    {{ ucfirst($post->user->username) }}
+                                    {{-- {{ ucfirst($post->user->username) }} --}}
+                                    @include('common.authorFormat', ['model'=>$post, 'field'=>'user'])
                                  </div>
                               </div>
                            </div>
@@ -183,7 +184,7 @@
                               <div class="card">
                                  <div class="card-header card_header p-1">Date</div>
                                  <div class="card-body p-1">
-                                    {{ $post->created_at->format('M d, Y') }}
+                                    {{ $post->created_at }}
                                  </div>
                               </div>
                            </div>
@@ -203,11 +204,12 @@
                               <div class="card">
                                  <div class="card-header card_header p-1">By</div>
                                  <div class="card-body p-1">
-                                    @if($post->updated_by_id)
-                                       {{ ucfirst($post->updated_by->username) }}
+                                    @include('common.authorFormat', ['model'=>$post, 'field'=>'modifiedBy'])
+                                    {{-- @if($post->modified_by_id)
+                                       {{ ucfirst($post->modifiedBy->username) }}
                                     @else
                                        N/A
-                                    @endif
+                                    @endif --}}
                                  </div>
                               </div>
                            </div>
@@ -215,11 +217,11 @@
                               <div class="card">
                                  <div class="card-header card_header p-1">Date</div>
                                  <div class="card-body p-1">
-                                    @if($post->updated_by_id)
-                                       {{ $post->updated_at->format('M d, Y') }}
+                                       {{ $post->updated_at }}
+                                    {{-- @if($post->modified_by_id)
                                     @else
                                        N/A
-                                    @endif
+                                    @endif --}}
                                  </div>
                               </div>
                            </div>

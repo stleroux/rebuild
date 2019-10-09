@@ -41,9 +41,9 @@
                         <div class="card-body p-1">
                            @if($post->published_at)
                               @if($post->published_at > Carbon\Carbon::Now())
-                                 <div class="text-danger"><b>{{ $post->published_at->format('M d, Y') }}</b></div>
+                                 <div class="text-danger"><b>{{ $post->published_at }}</b></div>
                               @else
-                                 {{ $post->published_at->format('M d, Y') }}
+                                 {{ $post->published_at }}
                               @endif
                            @else
                               N/A
@@ -129,7 +129,7 @@
                   <div class="card-header card_header p-1">Created On</div>
                   <div class="card-body p-1">
                      @include('common.dateFormat', ['model'=>$post, 'field'=>'user'])
-                     {{-- {{ $post->created_at->format('M d, Y') }} --}}
+                     {{-- {{ $post->created_at }} --}}
                   </div>
                </div>
             </div>
@@ -151,7 +151,7 @@
                   <div class="card-header card_header p-1">Updated On</div>
                   <div class="card-body p-1">
                      @include('common.dateFormat', ['model'=>$post, 'field'=>'updated_at'])
-                     {{-- {{ $post->updated_at->format('M d, Y') }} --}}
+                     {{-- {{ $post->updated_at }} --}}
                   </div>
                </div>
             </div>

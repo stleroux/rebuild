@@ -31,7 +31,7 @@
                      <div class="card mb-2 bg-transparent">
                         <div class="card-header card_header_2 py-0 pl-1 pr-0">Published On</div>
                         <div class="card-body px-1 py-0">
-                           {{ $post->published_at->format('M d, Y') }}
+                           {{ $post->published_at }}
                         </div>
                      </div>
                   </div>
@@ -99,7 +99,7 @@
                               <div class="card bg-transparent">
                                  <div class="card-header card_header_2 py-0 pl-1 pr-0">Date</div>
                                  <div class="card-body px-1 py-0">
-                                    {{ $post->created_at->format('M d, Y') }}
+                                    {{ $post->created_at }}
                                  </div>
                               </div>
                            </div>
@@ -130,7 +130,7 @@
                                  <div class="card-header card_header_2 py-0 pl-1 pr-0">Date</div>
                                  <div class="card-body px-1 py-0">
                                     @if($post->updated_by_id)
-                                       {{ $post->updated_at->format('M d, Y') }}
+                                       {{ $post->updated_at }}
                                     @endif
                                  </div>
                               </div>

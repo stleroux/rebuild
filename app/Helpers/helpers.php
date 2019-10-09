@@ -78,3 +78,4 @@ function deliciousCamelcase($str)
 	$formattedStr = implode(' ', $a);
 	return $formattedStr;
 }
+

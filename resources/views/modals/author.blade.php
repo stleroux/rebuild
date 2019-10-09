@@ -57,11 +57,11 @@
                         <th class="text-right text-light">Username</th>
                         <td class="text-left">
                            @if($field == 'user')
-                              {{ $model->user->username }}
+                              {{ ($model->user->username ?? 'N/A') }}
                            @elseif($field == 'modifiedBy')
-                              {{ $model->modifiedBy->username }}
+                              {{ ($model->modifiedBy->username ?? 'N/A') }}
                            @elseif($field == 'lastViewedBy')
-                              {{ $model->lastViewedBy->username }}
+                              {{ ($model->lastViewedBy->username?? 'N/A') }}
                            @endif
                         </td>
                      </tr>
@@ -115,30 +115,30 @@
                      </tr>
                      <tr>
                         <th class="text-right text-light">Email Address</th>
-                           @if($field == 'user')
-                              @if($model->user->public_email === 1)
-                                 <td class="text-left">{{ $model->user->email }}</td>
-                              @else
-                                 <td class="text-left">*************************</td>
-                              @endif
-                           @elseif($field == 'modifiedBy')
-                              @if($model->modifiedBy->public_email === 1)
-                                 <td class="text-left">{{ $model->modifiedBy->email }}</td>
-                              @else
-                                 <td class="text-left">*************************</td>
-                              @endif
-                           @elseif($field == 'lastViewedBy')
-                              @if($model->lastViewedBy->public_email === 1)
-                                 <td class="text-left">{{ $model->lastViewedBy->email }}</td>
-                              @else
-                                 <td class="text-left">*************************</td>
-                              @endif
+                        @if($field == 'user')
+                           @if($model->user->public_email === 1)
+                              <td class="text-left">{{ $model->user->email }}</td>
+                           @else
+                              <td class="text-left">*************************</td>
                            @endif
+                        @elseif($field == 'modifiedBy')
+                           @if($model->modifiedBy->public_email === 1)
+                              <td class="text-left">{{ $model->modifiedBy->email }}</td>
+                           @else
+                              <td class="text-left">*************************</td>
+                           @endif
+                        @elseif($field == 'lastViewedBy')
+                           @if($model->lastViewedBy->public_email === 1)
+                              <td class="text-left">{{ $model->lastViewedBy->email }}</td>
+                           @else
+                              <td class="text-left">*************************</td>
+                           @endif
+                        @endif
                      </tr>
                      <tr>
                         <th class="text-right text-light">Member Since</th>
                         <td class="text-left">
-                            @if($field == 'user')
+                           @if($field == 'user')
                               @if($model->user->created_at)
                                  {{ $model->user->created_at }}
                               @else

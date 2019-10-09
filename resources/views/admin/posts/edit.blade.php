@@ -1,4 +1,4 @@
-@extends ('layouts.master')
+@extends('layouts.master')
 
 @section ('stylesheets')
    {{ Html::style('css/woodbarn.css') }}
@@ -6,14 +6,13 @@
 @endsection
 
 @section('left_column')
-   {{-- @include('blocks.main_menu') --}}
 @endsection
 
 @section('right_column')
    @include('admin.posts.sidebar')
 @endsection
 
-@section ('content')
+@section('content')
 
 {!! Form::model($post, ['route'=>['admin.posts.update', $post->id], 'method' => 'PUT', 'files' => true]) !!}
    
