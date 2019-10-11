@@ -14,25 +14,57 @@
 
 @section('content')
 
-{!! Form::model($post, ['route'=>['admin.posts.update', $post->id], 'method' => 'PUT', 'files' => true]) !!}
+   {!! Form::model($post, ['route'=>['admin.posts.update', $post->id], 'method'=>'PUT', 'files'=>'true']) !!}
    
-   <div class="row">
-      <div class="col">
-         <div class="card mb-3">
-            <div class="card-header section_header p-2">
-               Edit Post
-               <div class="float-right">
-                  <div class="btn-group">
-                     @if($post->image)
-                        {{-- @include('admin.posts.buttons.deleteImage', ['size'=>'xs']) --}}
-                     @endif
-                     @include('admin.posts.buttons.back', ['size'=>'xs'])
-                     @include('admin.posts.buttons.update', ['size'=>'xs'])
-                  </div>
+      <div class="card mb-3">
+         <div class="card-header section_header p-2">
+            Edit Post
+            <div class="float-right">
+               <div class="btn-group">
+                  @if($post->image)
+                     @include('admin.posts.buttons.deleteImage', ['size'=>'xs'])
+                  @endif
+                  @include('admin.posts.buttons.back', ['size'=>'xs'])
+                  @include('admin.posts.buttons.reset', ['size'=>'xs'])
+                  @include('admin.posts.buttons.update', ['size'=>'xs'])
                </div>
             </div>
-            <div class="card-body section_body p-2">
-               <div class="row">
+         </div>
+
+         <div class="card-body section_body p-2">
+            @include('admin.posts.form')
+            </div>
+         </div>
+
+   {!! Form::close() !!}
+
+@endsection
+
+@section ('scripts')
+   <script type="text/javascript" src="/js/bootstrap-select.js"></script>
+   
+   {{-- <script type="text/javascript">
+      $(document).ready( function () {
+         $(function () {
+            $('.selectpicker').selectpicker({
+               // style: "btn-default btn-sm"
+            });
+         });
+      });
+   </script> --}}
+@endsection
+
+
+
+
+
+
+
+
+
+
+
+{{--                <div class="row">
                   <div class="col-md-4">
                      <div class="form-group">
                         {{ Form::label ('title', 'Title', ['class'=>'required']) }}
@@ -55,9 +87,9 @@
                         </select>
                      </div>
                   </div>
-               </div>
+               </div> --}}
 
-               <div class="row">
+               {{-- <div class="row">
                   <div class="col">
                      <div class="form-group">
                         {{ Form::label('tags', 'Tags') }}<br />
@@ -69,9 +101,9 @@
                         <div class="pl-1 bg-danger">{{ $errors->first('tag') }}</div>
                      </div>
                   </div>
-               </div>
+               </div> --}}
             
-               <div class="row">
+               {{-- <div class="row">
                   <div class="col-md-12">
                      <div class="form-group">
                         {{ Form::label ('body', 'Body', ['class' => 'required']) }}
@@ -79,10 +111,10 @@
                         <div class="pl-1 bg-danger">{{ $errors->first('body') }}</div>
                      </div>
                   </div>
-               </div>
+               </div> --}}
 
                <!-- Image -->
-               <div class="row">
+               {{-- <div class="row">
                   <div class="col-xs-6 col-sm-2">
                      <table width="100%">
                         <tr>
@@ -104,7 +136,7 @@
                      {!! Form::label("image", "Replace Image") !!}
                      {{ Form::file('image', ['class'=>'form-control form-control-sm p-0']) }}
                      <div class="help-block">Only choose new image to replace the existing one.</div>
-                  </div>
+                  </div> --}}
 {{--                      <div class="col-md-3">
                         <div class="form-group">
                            {{ Form::label ('image', 'Update image') }}
@@ -112,25 +144,3 @@
                         <div class="pl-1 bg-danger">{{ $errors->first('image') }}</div>
                         </div>
                      </div> --}}
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-{!! Form::close() !!}
-
-@endsection
-
-@section ('scripts')
-   <script type="text/javascript" src="/js/bootstrap-select.js"></script>
-   
-   <script type="text/javascript">
-      $(document).ready( function () {
-         $(function () {
-            $('.selectpicker').selectpicker({
-               // style: "btn-default btn-sm"
-            });
-         });
-      });
-   </script>
-@endsection

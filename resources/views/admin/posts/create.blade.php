@@ -9,6 +9,7 @@
 @endsection
 
 @section('right_column')
+   @include('admin.posts.sidebar')
 @endsection
 
 @section('content')
@@ -28,7 +29,40 @@
 			</div>
 
 			<div class="card-body section_body p-2">
-   	  		<div class="row">
+            @include('admin.posts.form')
+         </div>
+      </div>
+
+  	{!! Form::close() !!}
+
+@endsection
+
+@section ('scripts')
+	<script type="text/javascript" src="/js/bootstrap-select.js"></script>
+	
+	{{-- <script type="text/javascript">
+      $(function () {
+         $('.selectpicker').selectpicker({
+            style: "btn-light btn-sm"
+         });
+      });
+	</script> --}}
+@endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   	  		{{-- <div class="row">
 			 		<div class="col-6">
 						<div class="form-group">
 				  			{{ Form::label ('title', 'Title', ['class'=>'required'])}}
@@ -36,6 +70,7 @@
 				  			<div class="pl-1 bg-danger">{{ $errors->first('title') }}</div>
 						</div>
 			 		</div>
+
                <!-- Category -->
                <div class="col-xs-12 col-sm-6 col-md-3">
                   <div class="form-group">
@@ -59,9 +94,9 @@
 					  		<div class="pl-1 bg-danger">{{ $errors->first('image') }}</div>
 						</div>
 			 		</div>
-   		 	</div>
+   		 	</div> --}}
 			 	
-			 	<div class="row">
+			 	{{-- <div class="row">
 			 		<div class="col">
 						<div class="form-group">
 							{{ Form::label('tag_id', 'Tags') }}
@@ -73,9 +108,9 @@
 							<div class="pl-1 bg-danger">{{ $errors->first('tag') }}</div>
 						</div>
 					</div>
-				</div>
+				</div> --}}
 
-			 	<div class="row">
+			 	{{-- <div class="row">
 		 			<div class="col-md-12">
 						<div class="form-group">
 				  			{{ Form::label ('body', 'Body', ['class'=>'required']) }}
@@ -83,22 +118,4 @@
 				  			<div class="pl-1 bg-danger">{{ $errors->first('body') }}</div>
 						</div>
 			 		</div>
-			 	</div>
-		  	
-         </div>
-      </div>
-  	{!! Form::close() !!}
-
-@endsection
-
-@section ('scripts')
-	<script type="text/javascript" src="/js/bootstrap-select.js"></script>
-	
-	<script type="text/javascript">
-      $(function () {
-         $('.selectpicker').selectpicker({
-            style: "btn-light btn-sm"
-         });
-      });
-	</script>
-@endsection
+			 	</div> --}}
