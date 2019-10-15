@@ -132,7 +132,7 @@ class ArticlesController extends Controller
 
       $categories = Category::where('parent_id',11)->get();
 
-      return view('articles.create', compact('categories'));
+      return view('admin.articles.create', compact('categories'));
    }
 
 
@@ -449,7 +449,7 @@ class ArticlesController extends Controller
 
       // No $key value is passed
       $articles = Article::with('user','category')->published()->get();
-      return view('articles.index', compact('articles','letters', 'articlelinks'));
+      return view('admin.articles.index', compact('articles','letters', 'articlelinks'));
    }
 
 

@@ -1,80 +1,79 @@
 {{-- @if(checkACL('user')) --}}
-	<div class="panel-group" id="accordion">
-		<div class="panel panel-primary">
+		<div class="card mb-3 p-0 m-0">
 		
-			<div class="panel-heading">
-				<h4 class="panel-title">
+			<div class="card-header block_header p-2 m-0">
+				
 					Module Menu
-				</h4>
+				
 			</div>
 
 			<div class="list-group">
 
 				{{-- @if(checkACL('user')) --}}
-					<a href="{{ route('articles.index') }}" class="list-group-item {{-- {{ Nav::isRoute('articles.index') }} --}}">
+					<a href="{{ route('admin.articles.index') }}" class="list-group-item list-group-item-action p-1 {{-- {{ Nav::isRoute('admin.articles.index') }} --}}">
 						<i class="fa fa-file-text-o" aria-hidden="true"></i>
 						Articles
-						<div class="badge pull-right">
+						<div class="badge badge-secondary float-right">
 							{{ App\Models\Articles\Article::published()->count() }}
 						</div>
 					</a>
 				{{-- @endif --}}
 
 				{{-- @if(checkACL('author')) --}}
-					<a href="{{ route('articles.newArticles') }}" class="list-group-item {{-- {{ Nav::isRoute('articles.newArticles') }} --}}">
+					<a href="{{ route('admin.articles.newArticles') }}" class="list-group-item list-group-item-action p-1 {{-- {{ Nav::isRoute('admin.articles.newArticles') }} --}}">
 						<i class="fa fa-file-text-o" aria-hidden="true"></i>
 						New Articles
-						<div class="badge pull-right">
+						<div class="badge badge-secondary float-right">
 							{{ App\Models\Articles\Article::newArticles()->count() }}
 						</div>
 					</a>
 				{{-- @endif --}}
 
 				{{-- @if(checkACL('author')) --}}
-					<a href="{{ route('articles.myArticles') }}" class="list-group-item {{-- {{ Nav::isRoute('articles.myArticles') }} --}}">
+					<a href="{{ route('admin.articles.myArticles') }}" class="list-group-item list-group-item-action p-1 {{-- {{ Nav::isRoute('admin.articles.myArticles') }} --}}">
 						<i class="fa fa-file-text-o" aria-hidden="true"></i>
 						Created By Me
-						<div class="badge pull-right">
+						<div class="badge badge-secondary float-right">
 							{{ App\Models\Articles\Article::myArticles()->count() }}
 						</div>
 					</a>
 				{{-- @endif --}}
 
 				{{-- @if(checkACL('user')) --}}
-					<a href="{{ route('articles.myFavorites') }}" class="list-group-item {{-- {{ Nav::isRoute('articles.myFavorites') }} --}}">
+					<a href="{{ route('admin.articles.myFavorites') }}" class="list-group-item list-group-item-action p-1 {{-- {{ Nav::isRoute('admin.articles.myFavorites') }} --}}">
 						<i class="fa fa-file-text-o" aria-hidden="true"></i>
 						My Favorites
-						<div class="badge pull-right">
-							{{ DB::table('article_user')->where('user_id','=',Auth::user()->id)->count() }}
+						<div class="badge badge-secondary float-right">
+							{{-- {{ DB::table('article_user')->where('user_id','=',Auth::user()->id)->count() }} --}}
 						</div>
 					</a>
 				{{-- @endif --}}
 
 				{{-- @if(checkACL('publisher')) --}}
-					<a href="{{ route('articles.unpublished') }}" class="list-group-item {{-- {{ Nav::isRoute('articles.unpublished') }} --}}">
+					<a href="{{ route('admin.articles.unpublished') }}" class="list-group-item list-group-item-action p-1 {{-- {{ Nav::isRoute('admin.articles.unpublished') }} --}}">
 						<i class="fa fa-file-text-o" aria-hidden="true"></i>
 						Unpublished
-						<div class="badge pull-right">
+						<div class="badge badge-secondary float-right">
 							{{ App\Models\Articles\Article::unpublished()->count() }}
 						</div>
 					</a>
 				{{-- @endif --}}
 				
 				{{-- @if(checkACL('publisher')) --}}
-					<a href="{{ route('articles.future') }}" class="list-group-item {{-- {{ Nav::isRoute('articles.future') }} --}}">
+					<a href="{{ route('admin.articles.future') }}" class="list-group-item list-group-item-action p-1 {{-- {{ Nav::isRoute('admin.articles.future') }} --}}">
 						<i class="fa fa-file-text-o" aria-hidden="true"></i>
 						Future
-						<div class="badge pull-right">
+						<div class="badge badge-secondary float-right">
 							{{ App\Models\Articles\Article::future()->count() }}
 						</div>
 					</a>
 				{{-- @endif --}}
 
 				{{-- @if(checkACL('manager')) --}}
-					<a href="{{ route('articles.trashed') }}" class="list-group-item {{-- {{ Nav::isRoute('articles.trashed') }} --}}">
+					<a href="{{ route('admin.articles.trashed') }}" class="list-group-item list-group-item-action p-1 {{-- {{ Nav::isRoute('admin.articles.trashed') }} --}}">
 						<i class="fa fa-trash-o" aria-hidden="true"></i>
 						Trashed
-						<div class="badge pull-right">
+						<div class="badge badge-secondary float-right">
 							{{ App\Models\Articles\Article::trashedCount()->count() }}
 						</div>
 					</a>
@@ -102,7 +101,7 @@
 				         <a data-toggle="collapse" data-parent="#accordion" href="#collapseOptions" style="display: block; text-decoration: none;">
 				            <i class="fa fa-file-text" aria-hidden="true"></i>
 				            Options
-				            <span class="badge pull-right">
+				            <span class="badge badge-secondary float-right">
 				               <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
 				               <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
 				            </span>
@@ -111,27 +110,27 @@
 				   </div>
 
 				   <div id="collapseOptions" class="panel-collapse collapse"> --}}
-					   {{-- <a href="{{ URL::to('backend/articles/downloadExcel/xls') }}" class="list-group-item">
+					   {{-- <a href="{{ URL::to('backend/articles/downloadExcel/xls') }}" class="list-group-item list-group-item-action p-1">
 							<i class="fa fa-file-excel-o" aria-hidden="true"></i>
 							Download All as XLS
 						</a>
 
-						<a href="{{ URL::to('backend/articles/downloadExcel/xlsx') }}" class="list-group-item">
+						<a href="{{ URL::to('backend/articles/downloadExcel/xlsx') }}" class="list-group-item list-group-item-action p-1">
 							<i class="fa fa-file-excel-o" aria-hidden="true"></i>
 							Download All as XLSX
 						</a>
 
-						<a href="{{ URL::to('backend/articles/downloadExcel/csv') }}" class="list-group-item">
+						<a href="{{ URL::to('backend/articles/downloadExcel/csv') }}" class="list-group-item list-group-item-action p-1">
 							<i class="fa fa-file-text-o" aria-hidden="true"></i>
 							Download All as CSV
 						</a>
 
-						<a href="{{ route('articles.pdfview') }}" class="list-group-item {{ Nav::isRoute('articles.pdfview') }}">
+						<a href="{{ route('admin.articles.pdfview') }}" class="list-group-item list-group-item-action p-1 {{ Nav::isRoute('admin.articles.pdfview') }}">
 							<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 							Preview All as PDF
 						</a>
 
-						<a href="{{ route('articles.pdfview',['download'=>'pdf']) }}" class="list-group-item">
+						<a href="{{ route('admin.articles.pdfview',['download'=>'pdf']) }}" class="list-group-item list-group-item-action p-1">
 							<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 							Download All to PDF
 						</a> --}}
@@ -141,5 +140,4 @@
 			<br /><br />
 		@endif --}}
 
-	</div>
 {{-- @endif --}}

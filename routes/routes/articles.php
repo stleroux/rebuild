@@ -2,6 +2,10 @@
 
 // Route::group(['prefix'=>'articles'], function () {
 Route::prefix('articles')->name('articles.')->group(function() {
+   Route::get('/{key?}',                  'Articles\ArticlesController@index')            ->name('index');
+});
+
+Route::prefix('admin/articles')->name('admin.articles.')->group(function() {
 
    Route::get('newArticles/{key?}',       'Admin\Articles\ArticlesController@newArticles')      ->name('newArticles');
    // Route::get('published/{key?}',         'Admin\Articles\ArticlesController@published')        ->name('published');

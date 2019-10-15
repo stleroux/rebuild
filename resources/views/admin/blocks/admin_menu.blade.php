@@ -14,8 +14,8 @@
          @endif
 
          @if(checkPerm('article_index'))
-            <a href="{{ route('articles.index') }}"
-               class="list-group-item list-group-item-action p-1 {{ Route::is('articles.*') ? 'menu_active' : '' }} text-danger">
+            <a href="{{ route('admin.articles.index') }}"
+               class="list-group-item list-group-item-action p-1 {{ Route::is('admin.articles.*') ? 'menu_active' : '' }} text-danger">
                <i class="far fa-newspaper fa-fw"></i>
                Articles
             </a>
