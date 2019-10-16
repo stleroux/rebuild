@@ -1,50 +1,50 @@
-@extends('layouts.app')
-
-@section('title','Articles')
+@extends('layouts.master')
 
 @section('stylesheets')
-	{{ Html::style('css/articles.css') }}
-@stop
+   {{ Html::style('css/woodbarn.css') }}
+@endsection
 
-@section('sectionSidebar')
-	@include('articles.sidebar')
-@stop
+@section('left_column')
+@endsection
 
-@section('breadcrumb')
-	<li><a href="/">Home</a></li>
-	<li><a href="{{ route('articles.index') }}">Articles</a></li>
-	<li class="active"><span>Trashed Articles</span></li>
-@stop
+@section('right_column')
+	@include('admin.articles.trashed.controls')
+	@include('admin.articles.sidebar')
+	@include('admin.articles.blocks.archives')
+@endsection
 
 @section('content')
 	<form style="display:inline;">
 		{!! csrf_field() !!}
 
-		<div class="panel panel-danger">
-			@include('articles.trashed.panelHeader')
-			@include('articles.trashed.alphabet')
-			@include('articles.trashed.help')
-			<div class="panel-body">
-				@if($articles->count())
-					@include('articles.trashed.datagrid')
-				@else
-					@include('common.noRecordsFound')
-				@endif
+		<div class="card mb-3">
+
+			<div class="card-header section_header p-2">
+				Trashed Articles
 			</div>
-			<div class="panel-footer">
+
+			<div class="card-body section_body p-2">
+				{{-- @include('articles.trashed.panelHeader') --}}
+				@include('admin.articles.trashed.alphabet')
+				@include('admin.articles.trashed.help')
+				<div class="panel-body">
+					@if($articles->count())
+						@include('admin.articles.trashed.datagrid')
+					@else
+						{{ setting('no_records_found') }}
+					@endif
+				</div>
+			</div>
+			<div class="card-footer">
 				<p><strong>Note:</strong></p>
 				<p><strong>Publish Selected</strong> will set the deleted_at field to Null and the published_at field to the current date and time for all selected records.</p>
 				<p><strong>Restore Selected</strong> will set the deleted_at field to Null for all selected records. (Will not change anything else.)</p>
 				<p><strong>Delete Selected</strong> will <span class="text-danger">permanently delete</span> all selected records from the database.</p>
 			</div>
 		</div>
-@stop
-
-@section('blocks')
-		@include('articles.trashed.controls')
 	</form>
 @endsection
 
 @section('scripts')
-	@include('articles.common.btnScript')
-@stop
+	@include('admin.articles.common.btnScript')
+@endsection

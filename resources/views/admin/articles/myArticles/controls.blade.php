@@ -1,4 +1,4 @@
-@include('common.controlCenterHeader')
+{{-- @include('common.controlCenterHeader') --}}
 
 	@guest
 		<a href="{{ route('homepage') }}" class="btn btn-default btn-block">
@@ -7,16 +7,16 @@
 		</a>
 	@endguest
 
-	@if(checkACL('author'))
-		<a href="{{ route('articles.create') }}" class="btn btn-default btn-block">
+	{{-- @if(checkACL('author')) --}}
+		<a href="{{ route('admin.articles.create') }}" class="btn btn-default btn-block">
 			<i class="fa fa-plus-square" aria-hidden="true"></i>
 			Add Article
 		</a>
-	@endif
+	{{-- @endif --}}
 
-	@if(checkACL('manager'))
+	{{-- @if(checkACL('manager')) --}}
 	
-		<a href="{{ route('articles.import') }}" class="btn btn-warning btn-block">
+		{{-- <a href="{{ route('articles.import') }}" class="btn btn-warning btn-block">
 			<i class="fa fa-upload" aria-hidden="true"></i>
 			Import
 		</a>
@@ -46,8 +46,8 @@
 		<a href="{{ route('articles.pdfview',['download'=>'pdf']) }}" class="btn btn-warning btn-block">
 			<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 			Download All to PDF
-		</a>
+		</a> --}}
 
-	@endif
+	{{-- @endif --}}
 
-@include('common.controlCenterFooter')
+{{-- @include('common.controlCenterFooter') --}}

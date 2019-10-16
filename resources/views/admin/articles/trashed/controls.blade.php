@@ -1,4 +1,4 @@
-@include('common.controlCenterHeader')
+{{-- @include('common.controlCenterHeader') --}}
 
    <a href="{{ Route( Session::get('backURL') ) }}" class="btn btn-default btn-block">
       <i class="fa fa-file-text-o" aria-hidden="true"></i>
@@ -6,14 +6,14 @@
    </a>
 
 
-   @if(checkACL('manager'))
+   {{-- @if(checkACL('manager')) --}}
 
       <br id="bulk-space" style="display:none;" />
 
       <button
          class="btn btn-default btn-block"
          type="submit"
-         formaction="{{ route('articles.restoreAll') }}"
+         formaction="{{ route('admin.articles.restoreAll') }}"
          formmethod="POST"
          id="bulk-restore"
          style="display:none; margin-left:2px"
@@ -24,7 +24,7 @@
       <button
          class="btn btn-block btn-default"
          type="submit"
-         formaction="{{ route('articles.publishAll') }}"
+         formaction="{{ route('admin.articles.publishAll') }}"
          formmethod="POST"
          id="bulk-publish"
          style="display:none; margin-left:2px"
@@ -36,7 +36,7 @@
       <button
          class="btn btn-block btn-danger"
          type="submit"
-         formaction="{{ route('articles.deleteAll') }}"
+         formaction="{{ route('admin.articles.deleteAll') }}"
          formmethod="POST"
          id="bulk-trash"
          style="display:none; margin-left:2px"
@@ -45,6 +45,6 @@
             Delete Selected
       </button>
 
-   @endif
+   {{-- @endif --}}
 
-@include('common.controlCenterFooter')
+{{-- @include('common.controlCenterFooter') --}}

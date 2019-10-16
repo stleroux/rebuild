@@ -24,44 +24,7 @@ use Session;
 class ExtraViewsController extends Controller
 {
 
-##################################################################################################################
-# ███╗   ███╗██╗   ██╗     █████╗ ██████╗ ████████╗██╗ ██████╗██╗     ███████╗███████╗
-# ████╗ ████║╚██╗ ██╔╝    ██╔══██╗██╔══██╗╚══██╔══╝██║██╔════╝██║     ██╔════╝██╔════╝
-# ██╔████╔██║ ╚████╔╝     ███████║██████╔╝   ██║   ██║██║     ██║     █████╗  ███████╗
-# ██║╚██╔╝██║  ╚██╔╝      ██╔══██║██╔══██╗   ██║   ██║██║     ██║     ██╔══╝  ╚════██║
-# ██║ ╚═╝ ██║   ██║       ██║  ██║██║  ██║   ██║   ██║╚██████╗███████╗███████╗███████║
-# ╚═╝     ╚═╝   ╚═╝       ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝╚══════╝╚══════╝╚══════╝
-// Display a listing of the resource that belong to a specific user.
-##################################################################################################################
-   public function myArticles(Request $request, $key=null)
-   {
-      // Set the variable so we can use a button in other pages to come back to this page
-      Session::put('backURL', Route::currentRouteName());
 
-      //$alphas = range('A', 'Z');
-      $alphas = DB::table('articles')
-         ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
-         ->where('user_id', '=', Auth::user()->id)
-         ->where('deleted_at', '=', NULL)
-         ->orderBy('letter')
-         ->get();
-
-      $letters = [];
-      foreach($alphas as $alpha) {
-        $letters[] = $alpha->letter;
-      }
-
-      // If $key value is passed
-      if ($key) {
-         $articles = Article::with('user','category')->myArticles()
-            ->where('title', 'like', $key . '%')
-            ->get();
-         return view('articles.myArticles', compact('articles','letters'));
-      }
-
-      $articles = Article::with('user','category')->myArticles()->get();
-      return view('articles.myArticles', compact('articles','letters'));
-   }
 
 
 ##################################################################################################################

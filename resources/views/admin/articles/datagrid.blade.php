@@ -7,16 +7,20 @@
          <th class="d-none">French</th>
          {{-- Add columns for search purposes only --}}
 
-         <th>Title</th>
+         <th><div>Title</div></th>
          <th class="">Category</th>
-         <th class="">Views</th>
+         @if(last(request()->segments()) === 'articles')
+            <th class="">Views</th>
+         @endif
          <th class="">Author</th>
          <th class="">Created On</th>
-         <th class="">Publish(ed) On</th>
+         @if(last(request()->segments()) === 'trashed')
+            <th class="">Deleted On</th>
+         @endif
       </tr>
    </thead>
    <tbody>
-      @foreach ($articles as $key => $article)
+      @foreach ($articles as $article)
          <tr>
             <td>
                <input type="checkbox" onClick="checkbox_is_checked()" name="checked[]" value="{{$article->id}}" class="check-all">
@@ -26,18 +30,16 @@
             <td class="d-none">{{ $article->description_fre }}</td>
             {{-- Hide columns at all levels. Only needed because Datatables only searches for columns in the table --}}
             
-            <td><a href="{{ route('admin.articles.show', $article->id) }}" class="">{{ $article->title }}</a></td>
+            <td><a href="{{ route('admin.articles.showTrashed', $article->id) }}" class="">{{ $article->title }}</a></td>
             <td class="">{{ $article->category->name }}</td>
-            <td class="">{{ $article->views }}</td>
+            @if(last(request()->segments()) === 'articles')
+               <td class="">{{ $article->views }}</td>
+            @endif
             <td class="">@include('common.authorFormat', ['model'=>$article, 'field'=>'user'])</td>
             <td class="">@include('common.dateFormat', ['model'=>$article, 'field'=>'created_at'])</td>
-            <td class=" 
-               {{ $article->published_at >= Carbon\Carbon::now() ? 'text text-warning' : '' }}
-               {{ $article->published_at == null ? 'text text-info' : '' }}
-            ">
-               @include('common.dateFormat', ['model'=>$article, 'field'=>'published_at'])
-            </td>
-            {{-- @endif --}}
+            @if(last(request()->segments()) === 'trashed')
+               <td class="">@include('common.dateFormat', ['model'=>$article, 'field'=>'deleted_at'])</td>
+            @endif
          </tr>
       @endforeach
    </tbody>

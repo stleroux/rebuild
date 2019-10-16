@@ -1,44 +1,42 @@
-@extends('layouts.app')
-
-@section('title','Articles')
+@extends('layouts.master')
 
 @section('stylesheets')
-	{{ Html::style('css/articles.css') }}
-@stop
+   {{ Html::style('css/woodbarn.css') }}
+@endsection
 
-@section('sectionSidebar')
-	@include('articles.sidebar')
-@stop
+@section('left_column')
+@endsection
 
-@section('breadcrumb')
-	<li><a href="/">Home</a></li>
-	<li><a href="{{ route('articles.index') }}">Articles</a></li>
-	<li class="active"><span>Unpublished Articles</span></li>
-@stop
+@section('right_column')
+	@include('admin.articles.unpublished.controls')
+	@include('admin.articles.sidebar')
+	@include('admin.articles.blocks.archives')
+@endsection
 
 @section('content')
 	<form style="display:inline;">
 		{!! csrf_field() !!}
 
-		<div class="panel panel-primary">
-			@include('articles.unpublished.panelHeader')
-			@include('articles.unpublished.alphabet')
-			@include('articles.unpublished.help')
-			<div class="panel-body">
+		<div class="card">
+
+			<div class="card-header section_header p-2">
+				Unpublished Articles
+			</div>
+			{{-- @include('admin.articles.unpublished.panelHeader') --}}
+			@include('admin.articles.unpublished.alphabet')
+			@include('admin.articles.unpublished.help')
+			<div class="card-body section_body p-2">
 				@if($articles->count())
-					@include('articles.unpublished.datagrid')
+					{{-- @include('admin.articles.unpublished.datagrid') --}}
+					@include('admin.articles.datagrid')
 				@else
-					@include('common.noRecordsFound')
+					{{ setting('no_records_found') }}
 				@endif
 			</div>
 		</div>
-@stop
-
-@section('blocks')
-		@include('articles.unpublished.controls')
 	</form>
 @endsection
 
 @section('scripts')
-	@include('articles.common.btnScript')
-@stop
+	@include('admin.articles.common.btnScript')
+@endsection

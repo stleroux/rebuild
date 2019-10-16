@@ -32,7 +32,7 @@
 								<a href="{{ route('admin.articles.index', $value) }}" class="{{ Request::is('admin/articles/'.$value) ? "btn-secondary": "btn-primary" }} btn btn-sm">{{ strtoupper($value) }}</a>
 							@endforeach
 						</div>
-
+						
 						<table id="datatable" class="table table-hover table-sm searchHighlight">
 							<thead>
 								<tr>
@@ -77,6 +77,7 @@
 								@endforeach
 							</tbody>
 						</table>
+
 					@else
 						{{ setting('no_records_found') }}
 					@endif

@@ -8,17 +8,17 @@ Route::prefix('articles')->name('articles.')->group(function() {
 
 
 Route::prefix('admin/articles')->name('admin.articles.')->group(function() {
-   Route::get('myArticles/{key?}',        'Articles\ExtraViewsController@myArticles')             ->name('myArticles');
+   Route::get('myArticles/{key?}',        'Admin\Articles\ExtraViewsController@myArticles')       ->name('myArticles');
    Route::get('newArticles/{key?}',       'Admin\Articles\ExtraViewsController@newArticles')      ->name('newArticles');
    // Route::get('published/{key?}',         'Admin\Articles\ArticlesController@published')        ->name('published');
    Route::get('unpublished/{key?}',       'Admin\Articles\ExtraViewsController@unpublished')      ->name('unpublished');
    Route::get('future/{key?}',            'Admin\Articles\ExtraViewsController@future')           ->name('future');
    Route::get('showTrashed/{id}',         'Admin\Articles\ExtraViewsController@showTrashed')      ->name('showTrashed');
+   Route::get('trashed',                  'Admin\Articles\ExtraViewsController@trashed')          ->name('trashed');
 });
 
 
 Route::prefix('admin/articles')->name('admin.articles.')->group(function() {
-   Route::get('trashed',                  'Admin\Articles\ArticlesController@trashed')          ->name('trashed');
    Route::get('create',                   'Admin\Articles\ArticlesController@create')           ->name('create');
 
    Route::get('{id}/addFavorite',         'Admin\Articles\ArticlesController@addFavorite')      ->name('addFavorite');

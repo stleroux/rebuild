@@ -1,4 +1,4 @@
-<table id="datatable" class="table table-hover table-condensed table-responsive searchHighlight">
+<table id="datatable" class="table table-hover table-sm searchHighlight">
    <thead>
       <tr>
          <th><input type="checkbox" id="selectall" class="checked" /></th>

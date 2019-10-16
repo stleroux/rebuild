@@ -40,13 +40,13 @@
 				{{-- @endif --}}
 
 				{{-- @if(checkACL('user')) --}}
-					<a href="{{ route('articles.myFavorites') }}" class="list-group-item list-group-item-action p-1 {{-- {{ Nav::isRoute('admin.articles.myFavorites') }} --}}">
-						<i class="fa fa-file-text-o" aria-hidden="true"></i>
+					{{-- <a href="{{ route('articles.myFavorites') }}" class="list-group-item list-group-item-action p-1 --}} {{-- {{ Nav::isRoute('admin.articles.myFavorites') }} ">--}}
+{{-- 						<i class="fa fa-file-text-o" aria-hidden="true"></i>
 						My Favorites
-						<div class="badge badge-secondary float-right">
+						<div class="badge badge-secondary float-right"> --}}
 							{{-- {{ DB::table('article_user')->where('user_id','=',Auth::user()->id)->count() }} --}}
-						</div>
-					</a>
+{{-- 						</div>
+					</a> --}}
 				{{-- @endif --}}
 
 				{{-- @if(checkACL('publisher')) --}}
