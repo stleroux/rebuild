@@ -300,45 +300,7 @@ class ArticlesController extends Controller
    }
 
 
-##################################################################################################################
-# ███████╗██╗   ██╗████████╗██╗   ██╗██████╗ ███████╗
-# ██╔════╝██║   ██║╚══██╔══╝██║   ██║██╔══██╗██╔════╝
-# █████╗  ██║   ██║   ██║   ██║   ██║██████╔╝█████╗  
-# ██╔══╝  ██║   ██║   ██║   ██║   ██║██╔══██╗██╔══╝  
-# ██║     ╚██████╔╝   ██║   ╚██████╔╝██║  ██║███████╗
-# ╚═╝      ╚═════╝    ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝
-// Display a list of resources that will be published at a later date
-##################################################################################################################
-   public function future(Request $request, $key=null)
-   {
-      // Set the variable so we can use a button in other pages to come back to this page
-      Session::put('backURL', Route::currentRouteName());
 
-      //$alphas = range('A', 'Z');
-      $alphas = DB::table('articles')
-         ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
-         ->where('published_at','>', Carbon::Now())
-         ->orderBy('letter')
-         ->get();
-
-      $letters = [];
-      foreach($alphas as $alpha) {
-         $letters[] = $alpha->letter;
-      }
-
-      // If $key value is passed
-      if ($key) {
-         $articles = Article::with('user','category')->future()
-            ->where('title', 'like', $key . '%')
-            ->orderBy('title', 'asc')
-            ->get();
-         return view('articles.future', compact('articles','letters'));
-      }
-
-      // No $key value is passed
-      $articles = Article::with('user','category')->future()->get();
-      return view('articles.future', compact('articles','letters'));
-   }
 
 
 ##################################################################################################################
@@ -421,10 +383,10 @@ class ArticlesController extends Controller
       
 
       // Get list of articles by year and month
-      $articlelinks = DB::table('articles')
-         ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) article_count'))
-         ->where('published_at', '<=', Carbon::now())
-         ->groupBy('year')->groupBy('month')->orderBy('year', 'desc')->orderBy('month', 'desc')->get();
+      // $articlelinks = DB::table('articles')
+      //    ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) article_count'))
+      //    ->where('published_at', '<=', Carbon::now())
+      //    ->groupBy('year')->groupBy('month')->orderBy('year', 'desc')->orderBy('month', 'desc')->get();
 
       //$alphas = range('A', 'Z');
       $alphas = DB::table('articles')
@@ -444,7 +406,8 @@ class ArticlesController extends Controller
             ->where('title', 'like', $key . '%')
             ->orderBy('title', 'asc')
             ->get();
-         return view('articles.index', compact('articles','letters', 'articlelinks'));
+         return view('admin.articles.index', compact('articles','letters', 'articlelinks'));
+         // return view('admin.articles.index', compact('articles','letters'));
       }
 
       // No $key value is passed
@@ -472,118 +435,10 @@ class ArticlesController extends Controller
    }
 
 
-##################################################################################################################
-# ███╗   ███╗██╗   ██╗     █████╗ ██████╗ ████████╗██╗ ██████╗██╗     ███████╗███████╗
-# ████╗ ████║╚██╗ ██╔╝    ██╔══██╗██╔══██╗╚══██╔══╝██║██╔════╝██║     ██╔════╝██╔════╝
-# ██╔████╔██║ ╚████╔╝     ███████║██████╔╝   ██║   ██║██║     ██║     █████╗  ███████╗
-# ██║╚██╔╝██║  ╚██╔╝      ██╔══██║██╔══██╗   ██║   ██║██║     ██║     ██╔══╝  ╚════██║
-# ██║ ╚═╝ ██║   ██║       ██║  ██║██║  ██║   ██║   ██║╚██████╗███████╗███████╗███████║
-# ╚═╝     ╚═╝   ╚═╝       ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝╚══════╝╚══════╝╚══════╝
-// Display a listing of the resource that belong to a specific user.
-##################################################################################################################
-   public function myArticles(Request $request, $key=null)
-   {
-      // Set the variable so we can use a button in other pages to come back to this page
-      Session::put('backURL', Route::currentRouteName());
-
-      //$alphas = range('A', 'Z');
-      $alphas = DB::table('articles')
-         ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
-         ->where('user_id', '=', Auth::user()->id)
-         ->where('deleted_at', '=', NULL)
-         ->orderBy('letter')
-         ->get();
-
-      $letters = [];
-      foreach($alphas as $alpha) {
-        $letters[] = $alpha->letter;
-      }
-
-      // If $key value is passed
-      if ($key) {
-         $articles = Article::with('user','category')->myArticles()
-            ->where('title', 'like', $key . '%')
-            ->get();
-         return view('articles.myArticles', compact('articles','letters'));
-      }
-
-      $articles = Article::with('user','category')->myArticles()->get();
-      return view('articles.myArticles', compact('articles','letters'));
-   }
 
 
-##################################################################################################################
-# ███╗   ███╗██╗   ██╗    ███████╗ █████╗ ██╗   ██╗ ██████╗ ██████╗ ██╗████████╗███████╗███████╗
-# ████╗ ████║╚██╗ ██╔╝    ██╔════╝██╔══██╗██║   ██║██╔═══██╗██╔══██╗██║╚══██╔══╝██╔════╝██╔════╝
-# ██╔████╔██║ ╚████╔╝     █████╗  ███████║██║   ██║██║   ██║██████╔╝██║   ██║   █████╗  ███████╗
-# ██║╚██╔╝██║  ╚██╔╝      ██╔══╝  ██╔══██║╚██╗ ██╔╝██║   ██║██╔══██╗██║   ██║   ██╔══╝  ╚════██║
-# ██║ ╚═╝ ██║   ██║       ██║     ██║  ██║ ╚████╔╝ ╚██████╔╝██║  ██║██║   ██║   ███████╗███████║
-# ╚═╝     ╚═╝   ╚═╝       ╚═╝     ╚═╝  ╚═╝  ╚═══╝   ╚═════╝ ╚═╝  ╚═╝╚═╝   ╚═╝   ╚══════╝╚══════╝
-// MY FAVORITES :: Display a listing of the resource that have been favorited by a specific user.
-##################################################################################################################
-   public function myFavorites()
-   {
-      // Set the variable so we can use a button in other pages to come back to this page
-      Session::put('backURL', Route::currentRouteName());
-
-      // find the favorites
-      $favs = DB::table('article_user')->where('user_id','=',Auth::user()->id)->get();
-
-      // Create an empty array to store the recipes        
-      $articles = [];
-
-      // Store the recipe values into the $recipes array
-      foreach ($favs as $fav)
-      {
-        $articles[$fav->id] = Article::with('user','category')->find($fav->article_id);
-      }
-      
-      // Sort the recipes array by title
-      $articles = array_values(array_sort($articles, function ($value) {
-         return $value['title'];
-      }));
-      
-      return view('articles.myFavorites', compact('articles'));
-   }
 
 
-##################################################################################################################
-# ███╗   ██╗███████╗██╗    ██╗     █████╗ ██████╗ ████████╗██╗ ██████╗██╗     ███████╗███████╗
-# ████╗  ██║██╔════╝██║    ██║    ██╔══██╗██╔══██╗╚══██╔══╝██║██╔════╝██║     ██╔════╝██╔════╝
-# ██╔██╗ ██║█████╗  ██║ █╗ ██║    ███████║██████╔╝   ██║   ██║██║     ██║     █████╗  ███████╗
-# ██║╚██╗██║██╔══╝  ██║███╗██║    ██╔══██║██╔══██╗   ██║   ██║██║     ██║     ██╔══╝  ╚════██║
-# ██║ ╚████║███████╗╚███╔███╔╝    ██║  ██║██║  ██║   ██║   ██║╚██████╗███████╗███████╗███████║
-# ╚═╝  ╚═══╝╚══════╝ ╚══╝╚══╝     ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝╚══════╝╚══════╝╚══════╝
-// Display a listing of the resource that were created since the user's last login.
-##################################################################################################################
-   public function newArticles(Request $request, $key=null)
-   {
-      // Set the variable so we can use a button in other pages to come back to this page
-      Session::put('backURL', Route::currentRouteName());
-
-      //$alphas = range('A', 'Z');
-      $alphas = DB::table('articles')
-         ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
-         ->where('created_at', '>=' , Auth::user()->last_login_date)
-         ->orderBy('letter')
-         ->get();
-
-      $letters = [];
-      foreach($alphas as $alpha) {
-        $letters[] = $alpha->letter;
-      }
-
-      // If $key value is passed
-      if ($key) {
-         $articles = Article::with('user','category')->newArticles()
-            ->where('title', 'like', $key . '%')
-            ->get();
-         return view('articles.newArticles', compact('articles','letters'));
-      }
-
-      $articles = Article::with('user','category')->newarticles()->get();
-      return view('articles.newArticles', compact('articles','letters'));
-   }
 
 
 ##################################################################################################################

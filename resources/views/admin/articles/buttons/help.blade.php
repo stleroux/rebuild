@@ -1,4 +1,8 @@
-<button type="button" class="btn btn-xs btn-primary float-right" data-toggle="modal" data-target="#help">
-   <i class="fa fa-question-circle" aria-hidden="true"></i>
-   Help
-</button>
+@auth
+   <a href="/help#{{$bookmark}}"
+      target="_blank"
+      class="btn {{ $size ? 'btn-'.$size : '' }} btn-primary text-light"
+      title="Help">
+      <i class="{{ Config::get('buttons.help') }}"></i>
+   </a>
+@endauth

@@ -2,19 +2,22 @@
 
 // Route::group(['prefix'=>'articles'], function () {
 Route::prefix('articles')->name('articles.')->group(function() {
+   Route::get('myFavorites',              'Articles\ArticlesController@myFavorites')      ->name('myFavorites');
    Route::get('/{key?}',                  'Articles\ArticlesController@index')            ->name('index');
 });
 
+
 Route::prefix('admin/articles')->name('admin.articles.')->group(function() {
-
-   Route::get('newArticles/{key?}',       'Admin\Articles\ArticlesController@newArticles')      ->name('newArticles');
+   Route::get('myArticles/{key?}',        'Articles\ExtraViewsController@myArticles')             ->name('myArticles');
+   Route::get('newArticles/{key?}',       'Admin\Articles\ExtraViewsController@newArticles')      ->name('newArticles');
    // Route::get('published/{key?}',         'Admin\Articles\ArticlesController@published')        ->name('published');
-   Route::get('unpublished/{key?}',       'Admin\Articles\ArticlesController@unpublished')      ->name('unpublished');
-   Route::get('future/{key?}',            'Admin\Articles\ArticlesController@future')           ->name('future');
-   Route::get('myArticles/{key?}',        'Admin\Articles\ArticlesController@myArticles')       ->name('myArticles');
-   Route::get('showTrashed/{id}',         'Admin\Articles\ArticlesController@showTrashed')      ->name('showTrashed');
+   Route::get('unpublished/{key?}',       'Admin\Articles\ExtraViewsController@unpublished')      ->name('unpublished');
+   Route::get('future/{key?}',            'Admin\Articles\ExtraViewsController@future')           ->name('future');
+   Route::get('showTrashed/{id}',         'Admin\Articles\ExtraViewsController@showTrashed')      ->name('showTrashed');
+});
 
-   Route::get('myFavorites',              'Admin\Articles\ArticlesController@myFavorites')      ->name('myFavorites');
+
+Route::prefix('admin/articles')->name('admin.articles.')->group(function() {
    Route::get('trashed',                  'Admin\Articles\ArticlesController@trashed')          ->name('trashed');
    Route::get('create',                   'Admin\Articles\ArticlesController@create')           ->name('create');
 

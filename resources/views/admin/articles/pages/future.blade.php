@@ -1,30 +1,28 @@
-@extends('layouts.app')
-
-@section('title','Articles')
+@extends('layouts.master')
 
 @section('stylesheets')
-	{{ Html::style('css/articles.css') }}
-@stop
+   {{ Html::style('css/woodbarn.css') }}
+@endsection
 
-@section('sectionSidebar')
-	@include('articles.sidebar')
-@stop
+@section('left_column')
+@endsection
 
-@section('breadcrumb')
-	<li><a href="dashboard">Dashboard</a></li>
-	<li><a href="{{ route('articles.index') }}">Articles</a></li>
-	<li class="active"><span>Future Articles</span></li>
-@stop
+@section('right_column')
+	@include('admin.articles.sidebar')
+	@include('admin.articles.blocks.archives')
+@endsection
+
+@section('content')
 
 @section('content')
 	<form style="display:inline;">
 		{!! csrf_field() !!}
 
-		<div class="panel panel-primary">
+		<div class="card">
 			@include('articles.future.panelHeader')
 			@include('articles.future.alphabet')
 			@include('articles.future.help')
-			<div class="panel-body">
+			<div class="card-body">
 				@if($articles->count())
 					@include('articles.future.datagrid')
 				@else
@@ -32,7 +30,7 @@
 				@endif
 			</div>
 		</div>
-@stop
+@endsection
 
 @section('blocks')
 		@include('articles.future.controls')
@@ -42,4 +40,4 @@
 
 @section('scripts')
 	@include('articles.common.btnScript')
-@stop
+@endsection

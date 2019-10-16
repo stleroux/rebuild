@@ -180,6 +180,7 @@ return [
         App\Providers\PostServiceProvider::class,
         App\Providers\ProjectServiceProvider::class,
         App\Providers\BladeServiceProvider::class,
+        App\Providers\ArticleServiceProvider::class,
 
     ],
 

@@ -3,7 +3,7 @@
 		
 			<div class="card-header block_header p-2 m-0">
 				
-					Module Menu
+					Articles Menu
 				
 			</div>
 
@@ -40,7 +40,7 @@
 				{{-- @endif --}}
 
 				{{-- @if(checkACL('user')) --}}
-					<a href="{{ route('admin.articles.myFavorites') }}" class="list-group-item list-group-item-action p-1 {{-- {{ Nav::isRoute('admin.articles.myFavorites') }} --}}">
+					<a href="{{ route('articles.myFavorites') }}" class="list-group-item list-group-item-action p-1 {{-- {{ Nav::isRoute('admin.articles.myFavorites') }} --}}">
 						<i class="fa fa-file-text-o" aria-hidden="true"></i>
 						My Favorites
 						<div class="badge badge-secondary float-right">
