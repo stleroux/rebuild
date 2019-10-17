@@ -25,6 +25,37 @@ class ExtraViewsController extends Controller
 {
 
 ##################################################################################################################
+#  █████╗ ██████╗  ██████╗██╗  ██╗██╗██╗   ██╗███████╗
+# ██╔══██╗██╔══██╗██╔════╝██║  ██║██║██║   ██║██╔════╝
+# ███████║██████╔╝██║     ███████║██║██║   ██║█████╗  
+# ██╔══██║██╔══██╗██║     ██╔══██║██║╚██╗ ██╔╝██╔══╝  
+# ██║  ██║██║  ██║╚██████╗██║  ██║██║ ╚████╔╝ ███████╗
+# ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝  ╚══════╝
+# Display the archived resources
+##################################################################################################################
+   public function archive($year, $month)
+   {
+
+      // Get list of articles by year and month
+      $articlelinks = DB::table('articles')
+         ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) article_count'))
+         ->where('published_at', '<=', Carbon::now())
+         ->groupBy('year')
+         ->groupBy('month')
+         ->orderBy('year', 'desc')
+         ->orderBy('month', 'desc')
+         ->get();
+
+      $archives = Article::with('user')->whereYear('created_at','=', $year)
+         ->whereMonth('created_at','=', $month)
+         ->where('published_at', '<=', Carbon::now())
+         ->get();
+
+      return view('articles.archive', compact('archives','articlelinks'))->withYear($year)->withMonth($month);
+   }
+
+
+##################################################################################################################
 # ███████╗██╗   ██╗████████╗██╗   ██╗██████╗ ███████╗
 # ██╔════╝██║   ██║╚══██╔══╝██║   ██║██╔══██╗██╔════╝
 # █████╗  ██║   ██║   ██║   ██║   ██║██████╔╝█████╗  
@@ -145,12 +176,133 @@ class ExtraViewsController extends Controller
 
 
 ##################################################################################################################
-# ███████╗██╗  ██╗ ██████╗ ██╗    ██╗ TRASHED
-# ██╔════╝██║  ██║██╔═══██╗██║    ██║
-# ███████╗███████║██║   ██║██║ █╗ ██║
-# ╚════██║██╔══██║██║   ██║██║███╗██║
-# ███████║██║  ██║╚██████╔╝╚███╔███╔╝
-# ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝ 
+# ██████╗ ██████╗ ███████╗    ██╗   ██╗██╗███████╗██╗    ██╗
+# ██╔══██╗██╔══██╗██╔════╝    ██║   ██║██║██╔════╝██║    ██║
+# ██████╔╝██║  ██║█████╗      ██║   ██║██║█████╗  ██║ █╗ ██║
+# ██╔═══╝ ██║  ██║██╔══╝      ╚██╗ ██╔╝██║██╔══╝  ██║███╗██║
+# ██║     ██████╔╝██║          ╚████╔╝ ██║███████╗╚███╔███╔╝
+# ╚═╝     ╚═════╝ ╚═╝           ╚═══╝  ╚═╝╚══════╝ ╚══╝╚══╝ 
+// 
+##################################################################################################################
+   // public function exportPDF()
+   // {
+   //   // if(!checkACL('manager')) {
+   //   //   return view('errors.403');
+   //   // }
+
+   //   $data = Article::get()->toArray();
+   //   return Excel::create('Articles_List', function($excel) use ($data) {
+   //     $excel->sheet('mySheet', function($sheet) use ($data)
+   //     {
+   //       $sheet->fromArray($data);
+   //     });
+   //   })->download("pdf");
+   // }
+
+   // public function downloadPDF()
+   // {
+   //   $pdf = PDF::loadView('backend.articles.pdfView');
+   //   return $pdf->download('articles.pdf');
+   // }
+
+   public function pdfview(Request $request)
+   {
+      if(!checkACL('manager')) {
+         return view('errors.403');
+      }
+
+      if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'articles.newArticles') {
+            $data = Article::newArticles()->get();
+      }
+      if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'articles.published') {
+            $data = Article::published()->get();
+      }
+      if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'articles.myArticles') {
+            $data = Article::myArticles()->get();
+      }
+      if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'articles.unpublished') {
+            $data = Article::unpublished()->get();
+      }
+      if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'articles.future') {
+            $data = Article::future()->get();
+      }
+      if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'articles.trashed') {
+            $data = Article::trashedCount()->get();
+      }
+
+      view()->share('articles',$data);
+
+      if($request->has('download')){
+         $pdf = PDF::loadView('articles.pdfDownload');
+         //$pdf->setPaper('A4', 'landscape');
+         return $pdf->download('articles.pdf');
+      }
+
+      return view('articles.pdfPreview');
+   }
+
+
+##################################################################################################################
+# ██████╗ ██████╗ ██╗███╗   ██╗████████╗
+# ██╔══██╗██╔══██╗██║████╗  ██║╚══██╔══╝
+# ██████╔╝██████╔╝██║██╔██╗ ██║   ██║   
+# ██╔═══╝ ██╔══██╗██║██║╚██╗██║   ██║   
+# ██║     ██║  ██║██║██║ ╚████║   ██║   
+# ╚═╝     ╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝   ╚═╝   
+##################################################################################################################
+   public function print($id)
+   {
+      $article = Article::find($id);
+
+      return view('articles.print')->withArticle($article);
+   }
+
+
+##################################################################################################################
+# ██████╗ ██╗   ██╗██████╗ ██╗     ██╗███████╗██╗  ██╗███████╗██████╗ 
+# ██╔══██╗██║   ██║██╔══██╗██║     ██║██╔════╝██║  ██║██╔════╝██╔══██╗
+# ██████╔╝██║   ██║██████╔╝██║     ██║███████╗███████║█████╗  ██║  ██║
+# ██╔═══╝ ██║   ██║██╔══██╗██║     ██║╚════██║██╔══██║██╔══╝  ██║  ██║
+# ██║     ╚██████╔╝██████╔╝███████╗██║███████║██║  ██║███████╗██████╔╝
+# ╚═╝      ╚═════╝ ╚═════╝ ╚══════╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚═════╝ 
+##################################################################################################################
+   public function published(Request $request, $key=null)
+   {
+      //$alphas = range('A', 'Z');
+        $alphas = DB::table('articles')
+         ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
+         ->where('published_at','<', Carbon::Now())
+         ->where('deleted_at','=', Null)
+         ->orderBy('letter')
+         ->get();
+
+      $letters = [];
+      foreach($alphas as $alpha) {
+        $letters[] = $alpha->letter;
+      }
+
+      // If $key value is passed
+      if ($key) {
+         $articles = Article::with('user','category')->published()
+            ->where('title', 'like', $key . '%')
+            ->orderBy('title', 'asc')
+            ->get();
+         return view('articles.published', compact('articles','letters'));
+      }
+
+      // No $key value is passed
+      $articles = Article::with('user','category')->published()->get();
+      return view('articles.published', compact('articles','letters'));
+   }
+
+
+##################################################################################################################
+# ███████╗██╗  ██╗ ██████╗ ██╗    ██╗ ████████╗██████╗  █████╗ ███████╗██╗  ██╗███████╗██████╗
+# ██╔════╝██║  ██║██╔═══██╗██║    ██║ ╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██║  ██║██╔════╝██╔══██╗
+# ███████╗███████║██║   ██║██║ █╗ ██║    ██║   ██████╔╝███████║███████╗███████║█████╗  ██║  ██║
+# ╚════██║██╔══██║██║   ██║██║███╗██║    ██║   ██╔══██╗██╔══██║╚════██║██╔══██║██╔══╝  ██║  ██║
+# ███████║██║  ██║╚██████╔╝╚███╔███╔╝    ██║   ██║  ██║██║  ██║███████║██║  ██║███████╗██████╔╝
+# ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝     ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚═════╝ 
 // Display the specified resource
 ##################################################################################################################
    public function showTrashed($id)

@@ -14,6 +14,8 @@
 
 @section('content')
 
+@lang('articles.first')
+
 	<div class="row">
       <div class="col">
          <div class="card mb-3">
