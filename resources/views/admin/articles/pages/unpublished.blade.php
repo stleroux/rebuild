@@ -28,7 +28,7 @@
 			<div class="card-body section_body p-2">
 				@if($articles->count())
 					{{-- @include('admin.articles.unpublished.datagrid') --}}
-					@include('admin.articles.datagrid')
+					@include('admin.articles.unpublished.datagrid')
 				@else
 					{{ setting('no_records_found') }}
 				@endif

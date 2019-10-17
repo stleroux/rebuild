@@ -89,7 +89,7 @@ class Article extends Model
    public function scopeNewArticles($query)
    {
       return $query
-         ->where('created_at', '>=' , Auth::user()->last_login_date)
+         ->where('created_at', '>=' , Auth::user()->previous_login_date)
          ->orderBy('title','DESC');
    }
 

@@ -120,7 +120,7 @@ class Recipe extends Model
    public function scopeNewRecipes($query)
    {
       return $query
-         ->where('created_at', '>=' , Auth::user()->last_login_date);
+         ->where('created_at', '>=' , Auth::user()->previous_login_date);
    }
 
    public function scopeFuture($query)

@@ -33,8 +33,8 @@
             </div>
 
             <!--CARD BODY-->
-            @if($projects->count() > 0)
-               <div class="card-body section_body p-2">
+            <div class="card-body section_body p-2">
+               @if($projects->count() > 0)
                   <table id="datatable" class="table table-hover table-sm">
                      <thead>
                         <tr>
@@ -72,12 +72,10 @@
                         @endforeach
                      </tbody>
                   </table>
-               </div>
-            @else
-               <div class="card-body card_body py-2">
+               @else
                   {{ setting('no_records_found') }}
-               </div>
-            @endif
+               @endif
+            </div>
             
          </div>
       </div>

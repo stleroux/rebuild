@@ -20,11 +20,16 @@
 	<form style="display:inline;">
 		{!! csrf_field() !!}
 
-		<div class="card">
-			@include('admin.articles.future.panelHeader')
-			@include('admin.articles.future.alphabet')
-			@include('admin.articles.future.help')
-			<div class="card-body">
+		<div class="card mb-3">
+
+			<div class="card-header section_header p-2">
+				Future Articles
+			</div>
+			
+			<div class="card-body section_body p-2">
+				@include('admin.articles.future.alphabet')
+				@include('admin.articles.future.help')
+			
 				@if($articles->count())
 					@include('admin.articles.future.datagrid')
 				@else
@@ -32,9 +37,6 @@
 				@endif
 			</div>
 		</div>
-@endsection
-
-@section('blocks')
 	</form>
 @endsection
 

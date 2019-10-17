@@ -732,34 +732,20 @@ class ArticlesController extends Controller
       DB::table('articles')->where('id','=',$article->id)->increment('views',1);
 
       // Get list of articles by year and month
-      $articlelinks = DB::table('articles')
-         ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) article_count'))
-         ->where('published_at', '<=', Carbon::now())
-         ->groupBy('year')
-         ->groupBy('month')
-         ->orderBy('year', 'desc')
-         ->orderBy('month', 'desc')
-         ->get();
+      // $articlelinks = DB::table('articles')
+      //    ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) article_count'))
+      //    ->where('published_at', '<=', Carbon::now())
+      //    ->groupBy('year')
+      //    ->groupBy('month')
+      //    ->orderBy('year', 'desc')
+      //    ->orderBy('month', 'desc')
+      //    ->get();
 
-      return view('articles.show', compact('article','articlelinks','next','previous'));
+      return view('admin.articles.show', compact('article','articlelinks','next','previous'));
    }
 
 
-##################################################################################################################
-# ███████╗██╗  ██╗ ██████╗ ██╗    ██╗ TRASHED
-# ██╔════╝██║  ██║██╔═══██╗██║    ██║
-# ███████╗███████║██║   ██║██║ █╗ ██║
-# ╚════██║██╔══██║██║   ██║██║███╗██║
-# ███████║██║  ██║╚██████╔╝╚███╔███╔╝
-# ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝ 
-// Display the specified resource
-##################################################################################################################
-   public function showTrashed($id)
-   {
-      $article = Article::withTrashed()->findOrFail($id);
 
-      return view('articles.showTrashed', compact('article'));
-   }
 
 
 ##################################################################################################################

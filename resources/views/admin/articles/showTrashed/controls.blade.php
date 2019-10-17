@@ -1,4 +1,4 @@
-@include('common.controlCenterHeader')
+{{-- @include('common.controlCenterHeader') --}}
 
    <a href="{{ Route( Session::get('backURL') ) }}" class="btn btn-default btn-block">
       <i class="fa fa-file-text-o" aria-hidden="true"></i>
@@ -6,9 +6,9 @@
    </a>
 
 
-   @if(checkACL('manager'))
+   {{-- @if(checkACL('manager')) --}}
 
-      <form method="GET" action="{{ route('articles.restore', $article->id) }}" accept-charset="UTF-8" style="display:inline">
+      <form method="GET" action="{{ route('admin.articles.restore', $article->id) }}" accept-charset="UTF-8" style="display:inline">
          {!! csrf_field() !!}
          <button
             class="btn btn-block btn-default"
@@ -20,7 +20,7 @@
          </button>
       </form>
 
-      <form method="GET" action="{{ route('articles.publish', $article->id) }}" accept-charset="UTF-8" style="display:inline">
+      <form method="GET" action="{{ route('admin.articles.publish', $article->id) }}" accept-charset="UTF-8" style="display:inline">
          {!! csrf_field() !!}
          <button
             class="btn btn-block btn-default"
@@ -32,7 +32,7 @@
          </button>
       </form>
 
-      <form method="POST" action="{{ route('articles.deleteTrashed', $article->id) }}" accept-charset="UTF-8" style="display:inline">
+      <form method="POST" action="{{ route('admin.articles.deleteTrashed', $article->id) }}" accept-charset="UTF-8" style="display:inline">
          <input type="hidden" name="_method" value="delete" />
          {!! csrf_field() !!}
          <button
@@ -45,9 +45,9 @@
          </button>
       </form>
 
-   @endif
+   {{-- @endif --}}
 
-@include('common.controlCenterFooter')
+{{-- @include('common.controlCenterFooter') --}}
 
 
 

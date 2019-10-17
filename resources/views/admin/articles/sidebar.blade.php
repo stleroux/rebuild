@@ -10,7 +10,8 @@
 			<div class="list-group">
 
 				{{-- @if(checkACL('user')) --}}
-					<a href="{{ route('admin.articles.index') }}" class="list-group-item list-group-item-action p-1 {{-- {{ Nav::isRoute('admin.articles.index') }} --}}">
+					<a href="{{ route('admin.articles.index') }}" class="list-group-item list-group-item-action p-1
+						{{ Route::is('admin.articles.index') ? 'active' : '' }}">
 						<i class="fa fa-file-text-o" aria-hidden="true"></i>
 						Articles
 						<div class="badge badge-secondary float-right">
@@ -20,7 +21,8 @@
 				{{-- @endif --}}
 
 				{{-- @if(checkACL('author')) --}}
-					<a href="{{ route('admin.articles.newArticles') }}" class="list-group-item list-group-item-action p-1 {{-- {{ Nav::isRoute('admin.articles.newArticles') }} --}}">
+					<a href="{{ route('admin.articles.newArticles') }}" class="list-group-item list-group-item-action p-1 
+						{{ Route::is('admin.articles.newArticles') ? 'active' : '' }}">
 						<i class="fa fa-file-text-o" aria-hidden="true"></i>
 						New Articles
 						<div class="badge badge-secondary float-right">
@@ -30,7 +32,8 @@
 				{{-- @endif --}}
 
 				{{-- @if(checkACL('author')) --}}
-					<a href="{{ route('admin.articles.myArticles') }}" class="list-group-item list-group-item-action p-1 {{-- {{ Nav::isRoute('admin.articles.myArticles') }} --}}">
+					<a href="{{ route('admin.articles.myArticles') }}" class="list-group-item list-group-item-action p-1
+						{{ Route::is('admin.articles.myArticles') ? 'active' : '' }}">
 						<i class="fa fa-file-text-o" aria-hidden="true"></i>
 						Created By Me
 						<div class="badge badge-secondary float-right">
@@ -50,7 +53,8 @@
 				{{-- @endif --}}
 
 				{{-- @if(checkACL('publisher')) --}}
-					<a href="{{ route('admin.articles.unpublished') }}" class="list-group-item list-group-item-action p-1 {{-- {{ Nav::isRoute('admin.articles.unpublished') }} --}}">
+					<a href="{{ route('admin.articles.unpublished') }}" class="list-group-item list-group-item-action p-1
+						{{ Route::is('admin.articles.unpublished') ? 'active' : '' }}">
 						<i class="fa fa-file-text-o" aria-hidden="true"></i>
 						Unpublished
 						<div class="badge badge-secondary float-right">
@@ -60,7 +64,8 @@
 				{{-- @endif --}}
 				
 				{{-- @if(checkACL('publisher')) --}}
-					<a href="{{ route('admin.articles.future') }}" class="list-group-item list-group-item-action p-1 {{-- {{ Nav::isRoute('admin.articles.future') }} --}}">
+					<a href="{{ route('admin.articles.future') }}" class="list-group-item list-group-item-action p-1
+						{{ Route::is('admin.articles.future') ? 'active' : '' }}">
 						<i class="fa fa-file-text-o" aria-hidden="true"></i>
 						Future
 						<div class="badge badge-secondary float-right">
@@ -70,7 +75,8 @@
 				{{-- @endif --}}
 
 				{{-- @if(checkACL('manager')) --}}
-					<a href="{{ route('admin.articles.trashed') }}" class="list-group-item list-group-item-action p-1 {{-- {{ Nav::isRoute('admin.articles.trashed') }} --}}">
+					<a href="{{ route('admin.articles.trashed') }}" class="list-group-item list-group-item-action p-1
+						{{ Route::is('admin.articles.trashed') ? 'active' : '' }}">
 						<i class="fa fa-trash-o" aria-hidden="true"></i>
 						Trashed
 						<div class="badge badge-secondary float-right">

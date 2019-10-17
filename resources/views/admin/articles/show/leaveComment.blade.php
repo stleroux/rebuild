@@ -7,7 +7,7 @@
 			</h3>
 		</div>
 		<div class="panel-body">
-			{{ Form::open(['route' => ['articles.storeComment', $article->id], 'method' => 'POST']) }}
+			{{ Form::open(['route' => ['admin.articles.storeComment', $article->id], 'method' => 'POST']) }}
 {{-- 			<div class="row">
 				<div class="col-xs-12">
 					<div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">

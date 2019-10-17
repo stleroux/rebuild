@@ -40,7 +40,7 @@
 						
 						<div class="panel-body">
 							@if($articles->count())
-								@include('articles.newArticles.datagrid')
+								@include('admin.articles.newArticles.datagrid')
 							@else
 								{{ setting('no_records_found') }}
 							@endif

@@ -62,7 +62,7 @@
 	{{-- @endif --}}
 
 	{{-- @if(checkACL('author')) --}}
-		<a href="{{ route('articles.duplicate', $article->id) }}" class="btn btn-block btn-default">
+		<a href="{{ route('admin.articles.duplicate', $article->id) }}" class="btn btn-block btn-default">
 			<i class="fa fa-clone" aria-hidden="true"></i>
 			Duplicate
 		</a>
@@ -70,18 +70,18 @@
 
 	{{-- @if(checkACL('publisher')) --}}
 		@if($article->published_at >= Carbon\Carbon::Now())
-			<a href="{{ route('articles.publish', $article->id) }}" class="btn btn-block btn-default">
+			<a href="{{ route('admin.articles.publish', $article->id) }}" class="btn btn-block btn-default">
 				<i class="fa fa-book" aria-hidden="true"></i>
 				Publish Now
 			</a>
 		@else
 			@if($article->published_at)
-				<a href="{{ route('articles.unpublish', $article->id) }}" class="btn btn-block btn-default">
+				<a href="{{ route('admin.articles.unpublish', $article->id) }}" class="btn btn-block btn-default">
 					<i class="fa fa-window-close-o" aria-hidden="true"></i>
 					Unpublish                     
 				</a>
 			@else
-				<a href="{{ route('articles.publish', $article->id) }}" class="btn btn-block btn-default">
+				<a href="{{ route('admin.articles.publish', $article->id) }}" class="btn btn-block btn-default">
 					<i class="fa fa-book" aria-hidden="true"></i>
 					Publish
 				</a>
@@ -90,21 +90,21 @@
 	{{-- @endif --}}
 
 	{{-- @if(checkACL('manager')) --}}
-		<a href="{{ route('articles.resetViews', $article->id) }}" class="btn btn-block btn-default">
+		<a href="{{ route('admin.articles.resetViews', $article->id) }}" class="btn btn-block btn-default">
 			<i class="fa fa-eye-slash" aria-hidden="true"></i>
 			Reset Views
 		</a>
 	{{-- @endif --}}
 
 	{{-- @if(checkACL('editor') || checkOwner($article)) --}}
-		<a href="{{ route('articles.edit', $article->id) }}" class="btn btn-block btn-primary" title="Edit">
+		<a href="{{ route('admin.articles.edit', $article->id) }}" class="btn btn-block btn-primary" title="Edit">
 			<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 			Edit
 		</a>
 	{{-- @endif --}}
 
 	{{-- @if(checkACL('manager') || checkOwner($article)) --}}
-		<form method="POST" action="{{ route('articles.destroy', $article->id) }}" accept-charset="UTF-8" style="display:inline">
+		<form method="POST" action="{{ route('admin.articles.destroy', $article->id) }}" accept-charset="UTF-8" style="display:inline">
 			<input type="hidden" name="_method" value="delete" />
 			{!! csrf_field() !!}
 			<button

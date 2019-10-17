@@ -10,7 +10,7 @@
          <th>Title</th>
          <th class="">Category</th>
          <th class="">Views</th>
-         <th class="">Author</th>
+         {{-- <th class="">Author</th> --}}
          <th class="">Created On</th>
          <th class="">Publish(ed) On</th>
       </tr>
@@ -29,7 +29,7 @@
             <td><a href="{{ route('admin.articles.show', $article->id) }}" class="">{{ $article->title }}</a></td>
             <td class="">{{ $article->category->name }}</td>
             <td class="">{{ $article->views }}</td>
-            <td class="">@include('common.authorFormat', ['model'=>$article, 'field'=>'user'])</td>
+            {{-- <td class="">@include('common.authorFormat', ['model'=>$article, 'field'=>'user'])</td> --}}
             <td class="">@include('common.dateFormat', ['model'=>$article, 'field'=>'created_at'])</td>
             <td class=" 
                {{ $article->published_at >= Carbon\Carbon::now() ? 'text text-warning' : '' }}
