@@ -127,9 +127,11 @@ class ArticlesController extends Controller
       $article = Article::findOrFail($id);
 
       // find all categories in the categories table and pass them to the view
-      $categories = Category::whereHas('module', function ($query) {
-         $query->where('name', '=', 'articles');
-      })->get();
+      // $categories = Category::whereHas('module', function ($query) {
+      //    $query->where('name', '=', 'articles');
+      // })->get();
+      $categories = Category::where('parent_id',11)->get();
+      // dd($categories);
 
       // Create an empty array to store the categories
       $cats = [];
@@ -138,7 +140,7 @@ class ArticlesController extends Controller
          $cats[$category->id] = $category->name;
       }
 
-      return view('articles.edit', compact('article'))->withCategories($cats);
+      return view('admin.articles.edit', compact('article'))->withCategories($cats);
    }
 
 

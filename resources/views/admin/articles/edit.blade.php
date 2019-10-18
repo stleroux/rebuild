@@ -1,23 +1,18 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
-@section ('title','Edit Article')
+@section('stylesheets')
+   {{ Html::style('css/woodbarn.css') }}
+@endsection
 
-@section ('stylesheets')
-	{{ Html::style('css/articles.css') }}
-@stop
+@section('left_column')
+@endsection
 
-@section('sectionSidebar')
-	@include('articles.sidebar')
-@stop
+@section('right_column')
+@endsection
 
-@section('breadcrumb')
-	<li><a href="dashboard">Dashboard</a></li>
-	<li><a href="{{ route('articles.index') }}">Articles</a></li>
-	<li class="active"><span>Edit Article</span></li>
-@stop
 
 @section('content')
-	{!! Form::model($article, ['route'=>['articles.update', $article->id], 'method' => 'PUT']) !!}
+	{!! Form::model($article, ['route'=>['admin.articles.update', $article->id], 'method' => 'PUT']) !!}
 		{{-- <input type="hidden" value="{{ $ref }}" name="ref" size="50"/> --}}
 
 {{-- 		<div class="panel text-right">
@@ -27,11 +22,11 @@
 
 <div class="row">
 	<div class="col-xs-12 col-sm-12 col-md-9">
-		@include('articles.edit.form')
+		@include('admin.articles.edit.form')
 	</div>
 
 	<div class="col-xs-12 col-sm-12 col-md-3">
-		@include('articles.edit.controls')
+		@include('admin.articles.edit.controls')
 	</div>
 </div>
 

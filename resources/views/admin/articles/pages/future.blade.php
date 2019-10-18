@@ -26,8 +26,9 @@
 				Future Articles
 			</div>
 			
+			@include('admin.articles.future.alphabet')
+			
 			<div class="card-body section_body p-2">
-				@include('admin.articles.future.alphabet')
 				@include('admin.articles.future.help')
 			
 				@if($articles->count())

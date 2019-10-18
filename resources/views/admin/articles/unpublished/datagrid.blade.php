@@ -12,6 +12,7 @@
          <th class="hidden-xs hidden-sm">Views</th>
          <th class="hidden-xs">Author</th>
          <th class="hidden-sm hidden-xs">Created On</th>
+         <th></th>
       </tr>
    </thead>
    <tbody>
@@ -30,6 +31,9 @@
             <td class="hidden-xs hidden-sm">{{ $article->views }}</td>
             <td class="hidden-xs">@include('common.authorFormat', ['model'=>$article, 'field'=>'user'])</td>
             <td class="hidden-sm hidden-xs">@include('common.dateFormat', ['model'=>$article, 'field'=>'created_at'])</td>
+            <td>
+               @include('admin.articles.buttons.edit', ['size'=>'xs'])
+            </td>
          </tr>
       @endforeach
    </tbody>

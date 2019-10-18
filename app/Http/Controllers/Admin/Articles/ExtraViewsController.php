@@ -153,7 +153,7 @@ class ExtraViewsController extends Controller
       //$alphas = range('A', 'Z');
       $alphas = DB::table('articles')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
-         ->where('created_at', '>=' , Auth::user()->last_login_date)
+         ->where('created_at', '>=' , Auth::user()->previous_login_date)
          ->orderBy('letter')
          ->get();
 
@@ -269,7 +269,7 @@ class ExtraViewsController extends Controller
    public function published(Request $request, $key=null)
    {
       //$alphas = range('A', 'Z');
-        $alphas = DB::table('articles')
+      $alphas = DB::table('articles')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
          ->where('published_at','<', Carbon::Now())
          ->where('deleted_at','=', Null)
@@ -327,9 +327,22 @@ class ExtraViewsController extends Controller
       // Set the variable so we can use a button in other pages to come back to this page
       Session::put('backURL', Route::currentRouteName());
 
+      //$alphas = range('A', 'Z');
+      $alphas = DB::table('articles')
+         ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
+         // ->where('published_at','<', Carbon::Now())
+         ->where('deleted_at','!=', Null)
+         ->orderBy('letter')
+         ->get();
+
+      $letters = [];
+      foreach($alphas as $alpha) {
+        $letters[] = $alpha->letter;
+      }
+
       $articles = Article::with('user','category')->onlyTrashed()->get();
 
-      return view('admin.articles.pages.trashed', compact('articles'));
+      return view('admin.articles.pages.trashed', compact('articles','letters'));
    }
 
 

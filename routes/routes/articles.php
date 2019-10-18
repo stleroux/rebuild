@@ -14,7 +14,7 @@ Route::prefix('admin/articles')->name('admin.articles.')->group(function() {
    Route::get('unpublished/{key?}',       'Admin\Articles\ExtraViewsController@unpublished')      ->name('unpublished');
    Route::get('future/{key?}',            'Admin\Articles\ExtraViewsController@future')           ->name('future');
    Route::get('showTrashed/{id}',         'Admin\Articles\ExtraViewsController@showTrashed')      ->name('showTrashed');
-   Route::get('trashed',                  'Admin\Articles\ExtraViewsController@trashed')          ->name('trashed');
+   Route::get('trashed/{id?}',            'Admin\Articles\ExtraViewsController@trashed')          ->name('trashed');
 });
 
 

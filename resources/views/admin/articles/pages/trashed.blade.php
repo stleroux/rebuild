@@ -22,10 +22,11 @@
 			<div class="card-header section_header p-2">
 				Trashed Articles
 			</div>
+			
+			@include('admin.articles.trashed.alphabet')
 
 			<div class="card-body section_body p-2">
 				{{-- @include('articles.trashed.panelHeader') --}}
-				@include('admin.articles.trashed.alphabet')
 				@include('admin.articles.trashed.help')
 				<div class="panel-body">
 					@if($articles->count())

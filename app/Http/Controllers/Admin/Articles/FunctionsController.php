@@ -20,7 +20,7 @@ use Route;
 use Session;
 use URL;
 
-class ArticlesController extends Controller
+class FunctionsController extends Controller
 {
 
 ##################################################################################################################
