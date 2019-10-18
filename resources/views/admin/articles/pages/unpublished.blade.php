@@ -22,12 +22,15 @@
 			<div class="card-header section_header p-2">
 				Unpublished Articles
 			</div>
-			{{-- @include('admin.articles.unpublished.panelHeader') --}}
-			@include('admin.articles.unpublished.alphabet')
+
 			@include('admin.articles.unpublished.help')
+			
+			@if($articles->count())
+				@include('admin.articles.unpublished.alphabet')
+			@endif
+
 			<div class="card-body section_body p-2">
 				@if($articles->count())
-					{{-- @include('admin.articles.unpublished.datagrid') --}}
 					@include('admin.articles.unpublished.datagrid')
 				@else
 					{{ setting('no_records_found') }}

@@ -1,22 +1,17 @@
 <table id="datatable" class="table table-hover table-sm searchHighlight">
 	<thead>
 		<tr>
-			{{-- @if(checkACL('editor')) --}}
-				<th><input type="checkbox" id="selectall" class="checked" /></th>
-			{{-- @endif --}}
+			<th data-orderable="false"><input type="checkbox" id="selectall" class="checked" /></th>
 			{{-- Add columns for search purposes only --}}
 			<th class="d-none">English</th>
 			<th class="d-none">French</th>
 			{{-- Add columns for search purposes only --}}
-
 			<th>Title</th>
 			<th class="">Category</th>
 			<th class="">Views</th>
 			<th class="">Author</th>
-			{{-- @if(checkACL('manager')) --}}
-				<th class="">Created On</th>
-				<th class="">Publish(ed) On</th>
-			{{-- @endif --}}
+			<th class="">Created On</th>
+			<th class="">Publish(ed) On</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -32,19 +27,17 @@
 				<td class="d-none">{{ $article->description_fre }}</td>
 				{{-- Hide columns at all levels. Only needed because Datatables only searches for columns in the table --}}
 				
-				<td><a href="{{ route('articles.show', $article->id) }}" class="">{{ $article->title }}</a></td>
+				<td><a href="{{ route('admin.articles.show', $article->id) }}" class="">{{ $article->title }}</a></td>
 				<td class="">{{ $article->category->name }}</td>
 				<td class="">{{ $article->views }}</td>
 				<td class="">@include('common.authorFormat', ['model'=>$article, 'field'=>'user'])</td>
-				{{-- @if(checkACL('manager')) --}}
-					<td class="">@include('common.dateFormat', ['model'=>$article, 'field'=>'created_at'])</td>
-					<td class=" 
-						{{ $article->published_at >= Carbon\Carbon::now() ? 'text text-warning' : '' }}
-						{{ $article->published_at == null ? 'text text-info' : '' }}
-					">
-						@include('common.dateFormat', ['model'=>$article, 'field'=>'published_at'])
-					</td>
-				{{-- @endif --}}
+				<td class="">@include('common.dateFormat', ['model'=>$article, 'field'=>'created_at'])</td>
+				<td class=" 
+					{{ $article->published_at >= Carbon\Carbon::now() ? 'text text-warning' : '' }}
+					{{ $article->published_at == null ? 'text text-info' : '' }}
+				">
+					@include('common.dateFormat', ['model'=>$article, 'field'=>'published_at'])
+				</td>
 			</tr>
 		@endforeach
 	</tbody>

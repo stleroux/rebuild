@@ -24,7 +24,9 @@
 				@include('admin.articles.myArticles.help')
 			</div>
 
-			@include('admin.articles.myArticles.alphabet')
+			@if($articles->count())
+				@include('admin.articles.myArticles.alphabet')
+			@endif
 
 			<div class="card-body section_body p-2">
 				

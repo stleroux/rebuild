@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'first' => 'FIRST',
-    'last' => 'LAST',
+    '' => '',
+    '' => '',
 
 ];

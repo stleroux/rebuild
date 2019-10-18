@@ -28,7 +28,9 @@
 					@include('admin.articles.buttons.add', ['size'=>'xs'])
 				</div>
 
-				@include('admin.articles.newArticles.alphabet')
+				@if($articles->count())
+					@include('admin.articles.newArticles.alphabet')
+				@endif
 
 
 				<div class="card-body section_body p-2">
