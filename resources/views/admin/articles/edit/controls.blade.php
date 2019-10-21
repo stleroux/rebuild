@@ -1,6 +1,6 @@
 {{-- @include('common.controlCenterHeader') --}}
 
-	<a href="{{ Route( Session::get('backURL') ) }}" class="btn btn-default btn-block">
+	<a href="{{ Route('admin.articles.index') }}" class="btn btn-default btn-block">
 		<i class="fa fa-file-text-o" aria-hidden="true"></i>
 		Articles
 	</a>

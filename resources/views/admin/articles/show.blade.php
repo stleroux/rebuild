@@ -8,6 +8,7 @@
 @endsection
 
 @section('right_column')
+	@include('admin.articles.show.controls')
 	@include('admin.articles.sidebar')
 	@include('admin.articles.blocks.archives')
 @endsection
@@ -66,7 +67,6 @@
 @endsection
 
 @section('blocks')
-	@include('admin.articles.show.controls')
 	{{-- @include('admin.articles.trashed.help') --}}
 @endsection
 

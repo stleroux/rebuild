@@ -9,6 +9,7 @@
 	{{-- @endif --}}
 
 	{{ Form::button('<i class="fa fa-save"></i> Save Article', ['type'=>'submit', 'class'=>'btn btn-success btn-block']) }}
+	<input type="submit" name="save">
 	{{-- {{ Form::button('<i class="fa fa-refresh"></i> Reset Form', ['type'=>'reset', 'class'=>'btn btn-default btn-block']) }} --}}
 		
 {{-- @include('common.controlCenterFooter') --}}

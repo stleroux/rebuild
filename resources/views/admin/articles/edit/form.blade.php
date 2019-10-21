@@ -29,10 +29,10 @@
       <select name="category_id" id="catSelect" class="form-control form-control-sm">
          <option selected>Select One</option>
          @foreach ($categories as $category)
-            <option disabled>{{ ucfirst($category->name) }}</option>
+            {{-- <option disabled>{{ ucfirst($category->name) }}</option>
             @foreach ($category->children as $children)
                <option value="{{ $children->id}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- {{ ucfirst($children->name) }}</option>
-            @endforeach
+            @endforeach --}}
          @endforeach
       </select>
 		<div class="pl-1 bg-danger">{{ $errors->first('category_id') }}</div>

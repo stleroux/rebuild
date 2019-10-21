@@ -46,7 +46,7 @@
 	{{-- @endif --}}
 
 	{{-- @if(checkACL('user')) --}}
-		@if(($article->published_at != NULL) && ($article->published_at <= Carbon\Carbon::now()))
+		{{-- @if(($article->published_at != NULL) && ($article->published_at <= Carbon\Carbon::now()))
 			@if(count($article->favorites))
 				<a href="{{ route('articles.removeFavorite', $article->id) }}" class="btn btn-block btn-default">
 					<i class="fa fa-times-circle-o" aria-hidden="true"></i>
@@ -58,7 +58,7 @@
 					Add Favorite
 				</a>
 			@endif
-		@endif
+		@endif --}}
 	{{-- @endif --}}
 
 	{{-- @if(checkACL('author')) --}}

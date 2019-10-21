@@ -32,13 +32,13 @@ class Article extends Model
 //////////////////////////////////////////////////////////////////////////////////////
 // RELATIONSHIPS
 //////////////////////////////////////////////////////////////////////////////////////
-   public function parent() {
-      return $this->belongsTo(self::class, 'parent_id')->orderBy('name');
-   }
+   // public function parent() {
+   //    return $this->belongsTo(self::class, 'parent_id')->orderBy('name');
+   // }
 
-   public function children() {
-      return $this->hasMany(self::class, 'parent_id')->orderBy('name');
-   }
+   // public function children() {
+   //    return $this->hasMany(self::class, 'parent_id')->orderBy('name');
+   // }
 
 	public function comments()
 	{

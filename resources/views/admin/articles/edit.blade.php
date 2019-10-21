@@ -8,6 +8,7 @@
 @endsection
 
 @section('right_column')
+	@include('admin.articles.edit.controls')
 @endsection
 
 
@@ -15,25 +16,30 @@
 	{!! Form::model($article, ['route'=>['admin.articles.update', $article->id], 'method' => 'PUT']) !!}
 		{{-- <input type="hidden" value="{{ $ref }}" name="ref" size="50"/> --}}
 
-{{-- 		<div class="panel text-right">
-			<a href="{{ route($ref) }}" class="btn btn-default">Cancel</a>
-			{{ Form::button('<i class="fa fa-save"></i> Update ', array('type' => 'submit', 'class' => 'btn btn-primary')) }}
-		</div> --}}
 
-<div class="row">
-	<div class="col-xs-12 col-sm-12 col-md-9">
-		@include('admin.articles.edit.form')
+	<div class="card mb-3">
+		
+		<div class="card-header section_header p-2">
+			Article Details
+			<div class="float-right">
+				<a href="{{ route('admin.articles.index') }}" class="btn btn-xs btn-primary">Cancel</a>
+				{{ Form::button('<i class="fa fa-cancel"></i> Cancel ', array('type' => 'submit', 'class' => 'btn btn-xs btn-info')) }}
+				{{ Form::button('<i class="fa fa-save"></i> Update ', array('type' => 'submit', 'class' => 'btn btn-xs btn-info')) }}
+			</div>
+		</div>
+
+		<div class="card-body section_body p-2">
+			{{-- <div class="row"> --}}
+				@include('admin.articles.edit.form')
+			{{-- </div> --}}
+		</div>
 	</div>
 
-	<div class="col-xs-12 col-sm-12 col-md-3">
-		@include('admin.articles.edit.controls')
-	</div>
-</div>
 
 
 
 	{!! Form::close() !!}
-@stop
+@endsection
 
 @section ('scripts')
 {{--   <script type="text/javascript" src="/js/jquery.datetimepicker.full.min.js"></script>
@@ -47,6 +53,6 @@
 			lang:'ru'
 		});
 	</script> --}}
-@stop
+@endsection
 
 	

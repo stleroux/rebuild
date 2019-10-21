@@ -18,15 +18,15 @@
 				</div>
 			</div>
 			
-{{-- 			<div class="col-xs-12 col-sm-3 col-md-3">
+			<div class="col-xs-12 col-sm-3 col-md-3">
 				<div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}">
 					{{ Form::label('category_id', 'Category', ['class'=>'required']) }}
 					{{ Form::select('category_id', array('' => '-- Category --') + $categories, null , ['class' => 'form-control form-control-sm']) }}
 					<div class="pl-1 bg-danger">{{ $errors->first('category_id') }}</div>
 				</div>
-			</div> --}}
+			</div>
 
-<div class="col-xs-12 col-sm-6 col-md-3">
+{{-- <div class="col-xs-12 col-sm-6 col-md-3">
    <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}" >
       {!! Form::label("category_id", "Category", ['class'=>'required']) !!}
       <select name="category_id" id="catSelect" class="form-control form-control-sm">
@@ -40,7 +40,7 @@
       </select>
 		<div class="pl-1 bg-danger">{{ $errors->first('category_id') }}</div>
    </div>
-</div>
+</div> --}}
 
 			{{-- @if(checkACL('publisher')) --}}
 				<div class="col-xs-12 col-sm-3 col-md-3">

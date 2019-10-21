@@ -80,6 +80,7 @@ class ArticlesController extends Controller
       }
 
       $categories = Category::where('parent_id',11)->get();
+      // dd($categories);
 
       return view('admin.articles.create', compact('categories'));
    }
@@ -130,7 +131,7 @@ class ArticlesController extends Controller
       // $categories = Category::whereHas('module', function ($query) {
       //    $query->where('name', '=', 'articles');
       // })->get();
-      $categories = Category::where('parent_id',11)->get();
+      $categories = Category::where('parent_id',0)->get();
       // dd($categories);
 
       // Create an empty array to store the categories
