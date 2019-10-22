@@ -32,8 +32,8 @@
 				</div>
 				<div class="col-xs-4 col-sm-4 col-md-4">
 					<div class="form-group">
-						{{ Form::label('category_id', 'Category', ['class'=>'required']) }}
-						{{ Form::text('category_id', $article->category->name, ['class'=>'form-control form-control-sm', 'readonly']) }}
+						{{ Form::label('category', 'Category', ['class'=>'required']) }}
+						{{ Form::text('category', $article->category, ['class'=>'form-control form-control-sm', 'readonly']) }}
 						{{-- <div class="well well-sm">{{ $article->category->name}}</div> --}}
 					</div>
 				</div>

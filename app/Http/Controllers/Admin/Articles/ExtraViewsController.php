@@ -83,7 +83,7 @@ class ExtraViewsController extends Controller
 
       // If $key value is passed
       if ($key) {
-         $articles = Article::with('user','category')->future()
+         $articles = Article::with('user')->future()
             ->where('title', 'like', $key . '%')
             ->orderBy('title', 'asc')
             ->get();
@@ -91,7 +91,7 @@ class ExtraViewsController extends Controller
       }
 
       // No $key value is passed
-      $articles = Article::with('user','category')->future()->get();
+      $articles = Article::with('user')->future()->get();
       return view('admin.articles.pages.future', compact('articles','letters'));
    }
 
@@ -125,13 +125,13 @@ class ExtraViewsController extends Controller
 
       // If $key value is passed
       if ($key) {
-         $articles = Article::with('user','category')->myArticles()
+         $articles = Article::with('user')->myArticles()
             ->where('title', 'like', $key . '%')
             ->get();
          return view('admin.articles.pages.myArticles', compact('articles','letters'));
       }
 
-      $articles = Article::with('user','category')->myArticles()->get();
+      $articles = Article::with('user')->myArticles()->get();
       return view('admin.articles.pages.myArticles', compact('articles','letters'));
    }
 
@@ -164,13 +164,13 @@ class ExtraViewsController extends Controller
 
       // If $key value is passed
       if ($key) {
-         $articles = Article::with('user','category')->newArticles()
+         $articles = Article::with('user')->newArticles()
             ->where('title', 'like', $key . '%')
             ->get();
          return view('admin.articles.pages.newArticles', compact('articles','letters'));
       }
 
-      $articles = Article::with('user','category')->newarticles()->get();
+      $articles = Article::with('user')->newarticles()->get();
       return view('admin.articles.pages.newArticles', compact('articles','letters'));
    }
 
@@ -283,7 +283,7 @@ class ExtraViewsController extends Controller
 
       // If $key value is passed
       if ($key) {
-         $articles = Article::with('user','category')->published()
+         $articles = Article::with('user')->published()
             ->where('title', 'like', $key . '%')
             ->orderBy('title', 'asc')
             ->get();
@@ -291,7 +291,7 @@ class ExtraViewsController extends Controller
       }
 
       // No $key value is passed
-      $articles = Article::with('user','category')->published()->get();
+      $articles = Article::with('user')->published()->get();
       return view('articles.published', compact('articles','letters'));
    }
 
@@ -340,7 +340,7 @@ class ExtraViewsController extends Controller
         $letters[] = $alpha->letter;
       }
 
-      $articles = Article::with('user','category')->onlyTrashed()->get();
+      $articles = Article::with('user')->onlyTrashed()->get();
 
       return view('admin.articles.pages.trashed', compact('articles','letters'));
    }
@@ -376,7 +376,7 @@ class ExtraViewsController extends Controller
 
       // If $key value is passed
       if ($key) {
-         $articles = Article::with('user','category')->unpublished()
+         $articles = Article::with('user')->unpublished()
             ->where('title', 'like', $key . '%')
             ->orderBy('title', 'asc')
             ->get();
@@ -384,7 +384,7 @@ class ExtraViewsController extends Controller
       }
 
       // No $key value is passed
-      $articles = Article::with('user','category')->unpublished()->get();
+      $articles = Article::with('user')->unpublished()->get();
       return view('admin.articles.pages.unpublished', compact('articles','letters', 'backURL'));
    }
 

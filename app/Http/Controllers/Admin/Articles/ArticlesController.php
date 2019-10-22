@@ -20,8 +20,8 @@ use Route;
 use Session;
 use URL;
 
-use App\Http\Requests\CreateArticleRequest;
-use App\Http\Requests\UpdateArticleRequest;
+// use App\Http\Requests\CreateArticleRequest;
+// use App\Http\Requests\UpdateArticleRequest;
 use App\Http\Requests\CreateCommentRequest;
 
 class ArticlesController extends Controller
@@ -79,10 +79,12 @@ class ArticlesController extends Controller
          Session::put('backURL', 'articles.trashed');
       }
 
-      $categories = Category::where('parent_id',11)->get();
+      // $categories = Category::where('parent_id',11)->get();
       // dd($categories);
+      $article = New Article();
 
-      return view('admin.articles.create', compact('categories'));
+      // return view('admin.articles.create', compact('categories','article'));
+      return view('admin.articles.create', compact('article'));
    }
 
 
@@ -122,26 +124,29 @@ class ArticlesController extends Controller
 # ╚══════╝╚═════╝ ╚═╝   ╚═╝   
 // Show the form for editing the specified resource
 ##################################################################################################################
-   public function edit($id)
+   public function edit(Article $article, $id)
    {
       // Find the article to edit
-      $article = Article::findOrFail($id);
+      $article = Article::find($id);
+      // dd($article);
 
-      // find all categories in the categories table and pass them to the view
-      // $categories = Category::whereHas('module', function ($query) {
-      //    $query->where('name', '=', 'articles');
-      // })->get();
-      $categories = Category::where('parent_id',0)->get();
-      // dd($categories);
+      // // find all categories in the categories table and pass them to the view
+      // // $categories = Category::whereHas('module', function ($query) {
+      // //    $query->where('name', '=', 'articles');
+      // // })->get();
+      // $categories = Category::where('parent_id',0)->get();
+      // // dd($categories);
 
-      // Create an empty array to store the categories
-      $cats = [];
-      // Store the category values into the $cats array
-      foreach ($categories as $category) {
-         $cats[$category->id] = $category->name;
-      }
+      // // Create an empty array to store the categories
+      // $cats = [];
+      // // Store the category values into the $cats array
+      // foreach ($categories as $category) {
+      //    $cats[$category->id] = $category->name;
+      // }
 
-      return view('admin.articles.edit', compact('article'))->withCategories($cats);
+      // return view('admin.articles.edit', compact('article'))->withCategories($cats);
+      return view('admin.articles.edit', compact('article'));
+      // return 'TEST';
    }
 
 
@@ -180,7 +185,8 @@ class ArticlesController extends Controller
 
       // If $key value is passed
       if ($key) {
-         $articles = Article::with('user','category')->published()
+         // $articles = Article::with('user','category')->published()
+         $articles = Article::with('user')->published()
             ->where('title', 'like', $key . '%')
             ->orderBy('title', 'asc')
             ->get();
@@ -189,7 +195,8 @@ class ArticlesController extends Controller
       }
 
       // No $key value is passed
-      $articles = Article::with('user','category')->published()->get();
+      // $articles = Article::with('user','category')->published()->get();
+      $articles = Article::with('user')->published()->get();
       return view('admin.articles.index', compact('articles','letters', 'articlelinks'));
    }
 
@@ -239,19 +246,21 @@ class ArticlesController extends Controller
 # ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝
 // Store a newly created resource in storage
 ##################################################################################################################
-   public function store(CreateArticleRequest $request)
+   // public function store(CreateArticleRequest $request)
+   public function store()
    {
-      $article = new Article;
-         $article->title             = $request->title;
-         $article->category_id       = $request->category_id;
-         $article->published_at      = $request->published_at;
-         $article->description_eng   = $request->description_eng;
-         $article->description_fre   = $request->description_fre;
-         $article->user_id           = Auth::user()->id;
-      $article->save();
+      Article::create($this->validateRequest());
+      // $article = new Article;
+      //    $article->title             = $request->title;
+      //    $article->category_id       = $request->category_id;
+      //    $article->published_at      = $request->published_at;
+      //    $article->description_eng   = $request->description_eng;
+      //    $article->description_fre   = $request->description_fre;
+      //    $article->user_id           = Auth::user()->id;
+      // $article->save();
 
       Session::flash('success','The article has been created successfully!');
-      return redirect()->route('articles.index');
+      return redirect()->route('admin.articles.index');
    }
 
 
@@ -264,20 +273,46 @@ class ArticlesController extends Controller
 #  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
 // UPDATE :: Update the specified resource in storage
 ##################################################################################################################
-   public function update(UpdateArticleRequest $request, $id)
+   // public function update(UpdateArticleRequest $request, $id)
+   // public function update(Request $request)
+   public function update(Article $article, $id)
    {
-      
       $article = Article::findOrFail($id);
-         $article->title             = $request->title;
-         $article->category_id       = $request->category_id;
-         $article->published_at      = $request->published_at;
-         $article->description_eng   = $request->description_eng;
-         $article->description_fre   = $request->description_fre;
-      $article->save();
+      $article->update($this->validateRequest());
+      // dd($article);
+      
+      // $article = Article::findOrFail($id);
+      //    $article->title             = $request->title;
+      //    $article->category_id       = $request->category_id;
+      //    $article->published_at      = $request->published_at;
+      //    $article->description_eng   = $request->description_eng;
+      //    $article->description_fre   = $request->description_fre;
+      // $article->save();
       
       Session::flash('success','The article has been updated successfully.');
-      return redirect()->route('articles.show', $article);
+      return redirect()->route('admin.articles.index');
    }
+
+
+##################################################################################################################
+#██╗   ██╗ █████╗ ██╗     ██╗██████╗  █████╗ ████████╗███████╗    ██████╗ ███████╗ ██████╗ ██╗   ██╗███████╗███████╗████████╗
+#██║   ██║██╔══██╗██║     ██║██╔══██╗██╔══██╗╚══██╔══╝██╔════╝    ██╔══██╗██╔════╝██╔═══██╗██║   ██║██╔════╝██╔════╝╚══██╔══╝
+#██║   ██║███████║██║     ██║██║  ██║███████║   ██║   █████╗      ██████╔╝█████╗  ██║   ██║██║   ██║█████╗  ███████╗   ██║   
+#╚██╗ ██╔╝██╔══██║██║     ██║██║  ██║██╔══██║   ██║   ██╔══╝      ██╔══██╗██╔══╝  ██║▄▄ ██║██║   ██║██╔══╝  ╚════██║   ██║   
+# ╚████╔╝ ██║  ██║███████╗██║██████╔╝██║  ██║   ██║   ███████╗    ██║  ██║███████╗╚██████╔╝╚██████╔╝███████╗███████║   ██║   
+#  ╚═══╝  ╚═╝  ╚═╝╚══════╝╚═╝╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝    ╚═╝  ╚═╝╚══════╝ ╚══▀▀═╝  ╚═════╝ ╚══════╝╚══════╝   ╚═╝   
+##################################################################################################################
+
+    private function validateRequest()
+    {
+        return request()->validate([
+            'title' => 'required',
+            'category' => 'required|min:0|not_in:0',
+            'published_at' => '',
+            'description_eng' => 'required',
+            'description_fre' => '',
+        ]);
+    }
 
 
 }

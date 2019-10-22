@@ -23,22 +23,33 @@
 					<span class="text-danger">{{ $errors->first('category_id') }}</span>
 				</div>
 			</div> --}}
-<div class="col-xs-12 col-sm-6 col-md-3">
+{{-- <div class="col-xs-12 col-sm-6 col-md-3">
    <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}" >
       {!! Form::label("category_id", "Category", ['class'=>'required']) !!}
       <select name="category_id" id="catSelect" class="form-control form-control-sm">
          <option selected>Select One</option>
          @foreach ($categories as $category)
-            {{-- <option disabled>{{ ucfirst($category->name) }}</option>
+            <option disabled>{{ ucfirst($category->name) }}</option>
             @foreach ($category->children as $children)
                <option value="{{ $children->id}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- {{ ucfirst($children->name) }}</option>
-            @endforeach --}}
+            @endforeach
          @endforeach
       </select>
 		<div class="pl-1 bg-danger">{{ $errors->first('category_id') }}</div>
    </div>
-</div>
+</div> --}}
 
+<div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
+   <div class="form-group">
+      {{ Form::label('category', 'Category', ['class'=>'required']) }}
+      <select name="category" value="{{ old('category') ?? $article->category }}" id="category" class="form-control form-control-sm">
+         @foreach($article->categoriesOptions() as $categoryOptionKey => $categoryOptionValue)
+            <option value="{{ $categoryOptionKey }}" {{ $article->category == $categoryOptionValue ? 'selected' : '' }}>{{ $categoryOptionValue }}</option>
+         @endforeach
+      </select>
+      <div class="pl-1 bg-danger">{{ $errors->first('category') }}</div>
+   </div>
+</div>
 			{{-- @if(checkACL('publisher')) --}}
 				<div class="col-xs-12 col-sm-3 col-md-3">
 					<div class="form-group {{ $errors->has('published_at') ? 'has-error' : '' }}">

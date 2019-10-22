@@ -12,6 +12,7 @@
 			<th class="">Author</th>
 			<th class="">Created On</th>
 			<th class="">Publish(ed) On</th>
+			<th></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -28,7 +29,7 @@
 				{{-- Hide columns at all levels. Only needed because Datatables only searches for columns in the table --}}
 				
 				<td><a href="{{ route('admin.articles.show', $article->id) }}" class="">{{ $article->title }}</a></td>
-				<td class="">{{ $article->category->name }}</td>
+				<td class="">{{ $article->category }}</td>
 				<td class="">{{ $article->views }}</td>
 				<td class="">@include('common.authorFormat', ['model'=>$article, 'field'=>'user'])</td>
 				<td class="">@include('common.dateFormat', ['model'=>$article, 'field'=>'created_at'])</td>
@@ -37,6 +38,9 @@
 					{{ $article->published_at == null ? 'text text-info' : '' }}
 				">
 					@include('common.dateFormat', ['model'=>$article, 'field'=>'published_at'])
+				</td>
+				<td>
+					@include('admin.articles.buttons.edit', ['size'=>'xs'])
 				</td>
 			</tr>
 		@endforeach

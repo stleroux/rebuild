@@ -14,8 +14,6 @@
 
 @section('content')
 	{!! Form::model($article, ['route'=>['admin.articles.update', $article->id], 'method' => 'PUT']) !!}
-		{{-- <input type="hidden" value="{{ $ref }}" name="ref" size="50"/> --}}
-
 
 	<div class="card mb-3">
 		

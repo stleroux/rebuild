@@ -4,8 +4,6 @@ namespace App\Models\Articles;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-//use OwenIt\Auditing\Auditable;
-//use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use Auth;
 use App\Models\Category;
 use Carbon\Carbon;
@@ -17,16 +15,45 @@ class Article extends Model
 	use SoftDeletes;
 	//use Auditable;
 
+   protected $guarded = [];
+   
 	protected $dates = ['deleted_at', 'published_at'];
 
-	protected $fillable = [
-		'title',
-		'category_id',
-		'published_at',
-		'description_eng',
-		'description_fre',
-		'user_id'
-	];
+	// protected $fillable = [
+	// 	'title',
+	// 	'category_id',
+	// 	'published_at',
+	// 	'description_eng',
+	// 	'description_fre',
+	// 	'user_id'
+	// ];
+
+
+
+
+   // Set the default value for the status field to 0
+   protected $attributes = [
+      'category' => 0,
+   ];
+
+   public function getCategoryAttribute($attribute)
+   {
+      return $this->categoriesOptions()[$attribute];
+   }
+
+   public function categoriesOptions()
+   {
+      return [
+         0 => 'Select One',
+         1 => 'Sites',
+         2 => 'General',
+         3 => 'Blog',
+         4 => 'Recipe',
+         5 => 'Project',
+      ];
+   }
+
+
 
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -50,10 +77,10 @@ class Article extends Model
 		return $this->belongsTo('App\Models\User');
 	}
 
-	public function category()
-	{
-		return $this->belongsTo('App\Models\Category');
-	}
+	// public function category()
+	// {
+	// 	return $this->belongsTo('App\Models\Category');
+	// }
 
 	// Used to display the Add/Remove links if item is in favorite list
 	public function favorites()

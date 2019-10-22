@@ -28,6 +28,7 @@ Route::prefix('admin/articles')->name('admin.articles.')->group(function() {
    Route::get('{id}/unpublish',           'Admin\Articles\ArticlesController@unpublish')        ->name('unpublish');
    Route::get('{id}/resetViews',          'Admin\Articles\ArticlesController@resetViews')       ->name('resetViews');
    Route::get('{id}/edit',                'Admin\Articles\ArticlesController@edit')             ->name('edit');
+   Route::put('update/{id}',              'Admin\Articles\ArticlesController@update')           ->name('update');
    Route::get('{id}/show',                'Admin\Articles\ArticlesController@show')             ->name('show');
    Route::get('/{key?}',                  'Admin\Articles\ArticlesController@index')            ->name('index');
 
@@ -38,7 +39,6 @@ Route::prefix('admin/articles')->name('admin.articles.')->group(function() {
    Route::get('pdfview',                  'Admin\Articles\ArticlesController@pdfview')          ->name('pdfview');
    Route::get('archives/{year}/{month}',  'Admin\Articles\ArticlesController@archive')          ->name('archive');
 
-   Route::put('update/{id}',              'Admin\Articles\ArticlesController@update')           ->name('update');
 
    Route::post('',                        'Admin\Articles\ArticlesController@store')            ->name('store');
    Route::post('{id}/storeComment',       'Admin\Articles\ArticlesController@storeComment')     ->name('storeComment');

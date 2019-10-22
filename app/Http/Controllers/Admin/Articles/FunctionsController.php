@@ -83,7 +83,7 @@ class FunctionsController extends Controller
       $article->forceDelete();
 
       Session::flash ('success','The article was deleted successfully.');
-      return redirect()->route('articles.trashed');
+      return redirect()->route('admin.articles.trashed');
    }
 
 
@@ -164,7 +164,7 @@ class FunctionsController extends Controller
       // Pass along the ROUTE value of the previous page
       $ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
 
-      return view('articles.import')->withRef($ref);
+      return view('admin.articles.import')->withRef($ref);
    }
 
 
@@ -206,7 +206,7 @@ class FunctionsController extends Controller
                //Log::warning(Auth::user()->username . " (" . Auth::user()->id . ") imported :: articles");
 
                Session::flash('success', $data->count() . ' articles imported successfully!');
-               return redirect()->route('articles.index');
+               return redirect()->route('admin.articles.index');
             }
          }
       }
@@ -356,7 +356,7 @@ class FunctionsController extends Controller
       $article->restore();
 
       Session::flash ('success','The article was successfully restored.');
-      return redirect()->route('articles.trashed');
+      return redirect()->route('admin.articles.trashed');
    }
 
 
@@ -376,7 +376,7 @@ class FunctionsController extends Controller
       Article::whereIn('id', $checked)->restore();
 
       Session::flash('success','The selected articles were restored successfully.');
-      return redirect()->route('articles.trashed');
+      return redirect()->route('admin.articles.trashed');
    }
 
 
@@ -398,7 +398,7 @@ class FunctionsController extends Controller
       $article->comments()->save($comment);
 
       Session::flash('success', 'Comment added succesfully.');
-      return redirect()->route('articles.show', $article->id);
+      return redirect()->route('admin.articles.show', $article->id);
    }
 
 
