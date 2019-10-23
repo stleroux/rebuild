@@ -27,7 +27,7 @@
 				{{-- Hide columns at all levels. Only needed because Datatables only searches for columns in the table --}}
 				
 				<td><a href="{{ route('admin.articles.show', $article->id) }}" class="">{{ $article->title }}</a></td>
-				<td class="hidden-xs">{{ $article->category->name }}</td>
+				<td class="hidden-xs">{{ $article->category }}</td>
 				<td class="hidden-xs hidden-sm">{{ $article->views }}</td>
 				<td class="hidden-xs">@include('common.authorFormat', ['model'=>$article, 'field'=>'user'])</td>
 				<td class="hidden-sm hidden-xs">@include('common.dateFormat', ['model'=>$article, 'field'=>'created_at'])</td>

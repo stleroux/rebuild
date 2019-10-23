@@ -7,12 +7,12 @@
          <th class="d-none">French</th>
          {{-- Add columns for search purposes only --}}
 
-         <th><div>Title</div></th>
-         <th class="hidden-xs">Category</th>
-         <th class="hidden-xs hidden-sm">Views</th>
-         <th class="hidden-xs">Author</th>
-         <th class="hidden-sm hidden-xs">Created On</th>
-         <th class="hidden-sm hidden-xs">Publish(ed) On</th>
+         <th>Title</th>
+         <th class="">Category</th>
+         <th class="">Views</th>
+         {{-- <th class="">Author</th> --}}
+         <th class="">Created On</th>
+         <th class="">Publish(ed) On</th>
       </tr>
    </thead>
    <tbody>
@@ -27,16 +27,17 @@
             {{-- Hide columns at all levels. Only needed because Datatables only searches for columns in the table --}}
             
             <td><a href="{{ route('admin.articles.show', $article->id) }}" class="">{{ $article->title }}</a></td>
-            <td class="hidden-xs">{{ $article->category->name }}</td>
-            <td class="hidden-xs hidden-sm">{{ $article->views }}</td>
-            <td class="hidden-xs">@include('common.authorFormat', ['model'=>$article, 'field'=>'user'])</td>
-            <td class="hidden-sm hidden-xs">@include('common.dateFormat', ['model'=>$article, 'field'=>'created_at'])</td>
-            <td class="hidden-sm hidden-xs 
+            <td class="">{{ $article->category }}</td>
+            <td class="">{{ $article->views }}</td>
+            {{-- <td class="">@include('common.authorFormat', ['model'=>$article, 'field'=>'user'])</td> --}}
+            <td class="">@include('common.dateFormat', ['model'=>$article, 'field'=>'created_at'])</td>
+            <td class=" 
                {{ $article->published_at >= Carbon\Carbon::now() ? 'text text-warning' : '' }}
                {{ $article->published_at == null ? 'text text-info' : '' }}
             ">
                @include('common.dateFormat', ['model'=>$article, 'field'=>'published_at'])
             </td>
+            {{-- @endif --}}
          </tr>
       @endforeach
    </tbody>

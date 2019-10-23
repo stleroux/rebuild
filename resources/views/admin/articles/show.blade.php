@@ -8,7 +8,7 @@
 @endsection
 
 @section('right_column')
-	@include('admin.articles.show.controls')
+	{{-- @include('admin.articles.show.controls') --}}
 	@include('admin.articles.sidebar')
 	@include('admin.articles.blocks.archives')
 @endsection
@@ -19,6 +19,7 @@
 		
 		<div class="card-header section_header p-2">
 			Article Details
+			@include('admin.articles.buttons.back', ['size'=>'xs'])
 		</div>
 
 		<div class="card-body section_body p-2">

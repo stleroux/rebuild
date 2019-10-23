@@ -8,8 +8,8 @@
 @endsection
 
 @section('right_column')
-	@include('admin.articles.sidebar')
-	@include('admin.articles.blocks.archives')
+	{{-- @include('articles.sidebar') --}}
+	{{-- @include('articles.blocks.archives') --}}
 @endsection
 
 @section('content')
@@ -20,16 +20,16 @@
 				<div class="card-header section_header p-2">
 					<i class="fa fa-file-text-o"></i>
 					Articles
-					@include('admin.posts.buttons.help', ['size'=>'xs', 'bookmark'=>'articles'])
-					@include('admin.articles.buttons.add', ['size'=>'xs'])
+					{{-- @include('posts.buttons.help', ['size'=>'xs', 'bookmark'=>'articles']) --}}
+					{{-- @include('articles.buttons.add', ['size'=>'xs']) --}}
 				</div>
 				<div class="card-body section_body p-2">
 					@if($articles->count())
 					
 						<div class="well well-sm text-center" style="padding-top:4px; padding-bottom:4px; margin-top:0px; margin-bottom:0px;">
-							<a href="{{ route('admin.articles.index') }}" class="{{ Request::is('admin/articles') ? "btn-secondary": "btn-primary" }} btn btn-sm">All</a>
+							<a href="{{ route('articles.index') }}" class="{{ Request::is('admin/articles') ? "btn-secondary": "btn-primary" }} btn btn-sm">All</a>
 							@foreach($letters as $value)
-								<a href="{{ route('admin.articles.index', $value) }}" class="{{ Request::is('admin/articles/'.$value) ? "btn-secondary": "btn-primary" }} btn btn-sm">{{ strtoupper($value) }}</a>
+								<a href="{{ route('articles.index', $value) }}" class="{{ Request::is('admin/articles/'.$value) ? "btn-secondary": "btn-primary" }} btn btn-sm">{{ strtoupper($value) }}</a>
 							@endforeach
 						</div>
 
@@ -62,8 +62,8 @@
 										<td class="d-none">{{ $article->description_fre }}</td>
 										{{-- Hide columns at all levels. Only needed because Datatables only searches for columns in the table --}}
 										
-										<td><a href="{{ route('admin.articles.show', $article->id) }}" class="">{{ $article->title }}</a></td>
-										<td class="">{{ $article->category->name }}</td>
+										<td><a href="{{ route('articles.show', $article->id) }}" class="">{{ $article->title }}</a></td>
+										<td class="">{{ $article->category }}</td>
 										<td class="">{{ $article->views }}</td>
 										<td class="">@include('common.authorFormat', ['model'=>$article, 'field'=>'user'])</td>
 										<td class="">@include('common.dateFormat', ['model'=>$article, 'field'=>'created_at'])</td>

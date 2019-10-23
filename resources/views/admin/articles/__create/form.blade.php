@@ -1,15 +1,13 @@
 <div class="card mb-3">
-	<div class="card-header section_header p-2">
-		
-			<i class="fa fa-plus-square" aria-hidden="true"></i>
-			{{-- <i class="fa fa-file-text-o" aria-hidden="true"></i> --}}
-			Create Article
-			@include('admin.articles.buttons.save', ['size'=>'xs'])
-		
+	
+   <div class="card-header section_header p-2">
+		<i class="fa fa-plus-square"></i>
+		Create Article
+		@include('admin.articles.buttons.save', ['size'=>'xs'])
 	</div>
+
 	<div class="card-body section_body p-2">
 		<div class="row">
-			
 			<div class="col-xs-12 col-sm-6 col-md-6">
 				<div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
 					{!! Form::label('title', 'Title', ['class'=>'required']) !!}

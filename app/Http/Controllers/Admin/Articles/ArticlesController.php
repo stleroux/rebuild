@@ -161,9 +161,8 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function index(Request $request, $key=null)
    {
-      // Set the variable so we can use a button in other pages to come back to this page
-      Session::put('backURL', Route::currentRouteName());
-      
+      // Set the session to the current page route
+      Session::put('fromPage', url()->full());
 
       // Get list of articles by year and month
       // $articlelinks = DB::table('articles')
@@ -290,7 +289,9 @@ class ArticlesController extends Controller
       // $article->save();
       
       Session::flash('success','The article has been updated successfully.');
-      return redirect()->route('admin.articles.index');
+      // return redirect()->route('admin.articles.index');
+      return redirect(Session::get('fromPage'));
+
    }
 
 

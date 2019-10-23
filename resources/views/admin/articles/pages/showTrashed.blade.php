@@ -17,6 +17,7 @@
 	<div class="card mb-3">
 		<div class="card-header section_header p-2">
 			Article Details
+			@include('admin.articles.buttons.back', ['size'=>'xs'])
 		</div>
 		<div class="card-body section_body p-2">
 			<div class="row">
@@ -30,7 +31,7 @@
 				<div class="col-xs-4 col-sm-4 col-md-4">
 					<div class="form-group">
 						{{ Form::label('category_id', 'Category', ['class'=>'required']) }}
-						{{ Form::text('category_id', $article->category->name, ['class'=>'form-control form-control-sm', 'readonly']) }}
+						{{ Form::text('category_id', $article->category, ['class'=>'form-control form-control-sm', 'readonly']) }}
 						{{-- <div class="well well-sm">{{ $article->category->name}}</div> --}}
 					</div>
 				</div>
@@ -64,7 +65,7 @@
 @endsection
 
 @section('blocks')
-	@include('admin.articles.showTrashed.controls')
+	{{-- @include('admin.articles.showTrashed.controls') --}}
 	@include('admin.articles.trashed.help')
 @endsection
 

@@ -8,7 +8,7 @@
 @endsection
 
 @section('right_column')
-	@include('admin.articles.edit.controls')
+	{{-- @include('admin.articles.edit.controls') --}}
 @endsection
 
 
@@ -18,18 +18,18 @@
 	<div class="card mb-3">
 		
 		<div class="card-header section_header p-2">
-			Article Details
+			Edit Article
 			<div class="float-right">
-				<a href="{{ route('admin.articles.index') }}" class="btn btn-xs btn-primary">Cancel</a>
-				{{ Form::button('<i class="fa fa-cancel"></i> Cancel ', array('type' => 'submit', 'class' => 'btn btn-xs btn-info')) }}
-				{{ Form::button('<i class="fa fa-save"></i> Update ', array('type' => 'submit', 'class' => 'btn btn-xs btn-info')) }}
+				{{-- <a href="{{ route('admin.articles.index') }}" class="btn btn-xs btn-primary">Cancel</a> --}}
+				{{-- {{ Form::button('<i class="fa fa-cancel"></i> Cancel ', array('type' => 'submit', 'class' => 'btn btn-xs btn-info')) }} --}}
+				{{-- {{ Form::button('<i class="fa fa-save"></i> Update ', array('type' => 'submit', 'class' => 'btn btn-xs btn-info')) }} --}}
+				@include('admin.articles.buttons.back', ['size'=>'xs'])
+            @include('admin.articles.buttons.update', ['size'=>'xs'])
 			</div>
 		</div>
 
 		<div class="card-body section_body p-2">
-			{{-- <div class="row"> --}}
-				@include('admin.articles.edit.form')
-			{{-- </div> --}}
+			@include('admin.articles.form')
 		</div>
 	</div>
 

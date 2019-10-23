@@ -1,13 +1,11 @@
-<div class="panel panel-primary">
+<div class="card nb-3">
 
-	<div class="panel-heading">
-		<h3 class="panel-title">
-			<i class="fa fa-file-text-o" aria-hidden="true"></i>
-			Article Details
-		</h3>
+	<div class="card-header card_header p-2">
+      <i class="fa fa-file-text-o"></i>
+		Article Details
 	</div>
 
-	<div class="panel-body">
+	<div class="card-body card_body p-2">
 		<div class="row">
 			<div class="col-xs-12 col-sm-6 col-md-6">
 				<div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">

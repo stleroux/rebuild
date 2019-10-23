@@ -66,8 +66,8 @@ class ExtraViewsController extends Controller
 ##################################################################################################################
    public function future(Request $request, $key=null)
    {
-      // Set the variable so we can use a button in other pages to come back to this page
-      Session::put('backURL', Route::currentRouteName());
+      // Set the session to the current page route
+      Session::put('fromPage', url()->full());
 
       //$alphas = range('A', 'Z');
       $alphas = DB::table('articles')
@@ -107,8 +107,8 @@ class ExtraViewsController extends Controller
 ##################################################################################################################
    public function myArticles(Request $request, $key=null)
    {
-      // Set the variable so we can use a button in other pages to come back to this page
-      Session::put('backURL', Route::currentRouteName());
+      // Set the session to the current page route
+      Session::put('fromPage', url()->full());
 
       //$alphas = range('A', 'Z');
       $alphas = DB::table('articles')
@@ -147,8 +147,8 @@ class ExtraViewsController extends Controller
 ##################################################################################################################
    public function newArticles(Request $request, $key=null)
    {
-      // Set the variable so we can use a button in other pages to come back to this page
-      Session::put('backURL', Route::currentRouteName());
+      // Set the session to the current page route
+      Session::put('fromPage', url()->full());
 
       //$alphas = range('A', 'Z');
       $alphas = DB::table('articles')
@@ -324,8 +324,8 @@ class ExtraViewsController extends Controller
 ##################################################################################################################
    public function trashed(Request $request)
    {
-      // Set the variable so we can use a button in other pages to come back to this page
-      Session::put('backURL', Route::currentRouteName());
+      // Set the session to the current page route
+      Session::put('fromPage', url()->full());
 
       //$alphas = range('A', 'Z');
       $alphas = DB::table('articles')
@@ -357,9 +357,8 @@ class ExtraViewsController extends Controller
 ##################################################################################################################
    public function unpublished(Request $request, $key=null)
    {
-
-      // Set the variable so we can use a button in other pages to come back to this page
-      Session::put('backURL', Route::currentRouteName());
+      // Set the session to the current page route
+      Session::put('fromPage', url()->full());
 
       //$alphas = range('A', 'Z');
         $alphas = DB::table('articles')

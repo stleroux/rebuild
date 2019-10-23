@@ -3,6 +3,7 @@
 // Route::group(['prefix'=>'articles'], function () {
 Route::prefix('articles')->name('articles.')->group(function() {
    Route::get('myFavorites',              'Articles\ArticlesController@myFavorites')      ->name('myFavorites');
+   Route::get('{id}/show',                'Admin\Articles\ArticlesController@show')       ->name('show');
    Route::get('/{key?}',                  'Articles\ArticlesController@index')            ->name('index');
 });
 
