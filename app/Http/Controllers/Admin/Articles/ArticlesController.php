@@ -220,7 +220,7 @@ class ArticlesController extends Controller
       $next = Article::published()->where('id', '>', $article->id)->min('id');
 
       // Add 1 to views column
-      DB::table('articles')->where('id','=',$article->id)->increment('views',1);
+      // DB::table('articles')->where('id','=',$article->id)->increment('views',1);
 
       // Get list of articles by year and month
       // $articlelinks = DB::table('articles')

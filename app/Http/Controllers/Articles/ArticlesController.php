@@ -78,4 +78,40 @@ class ArticlesController extends Controller
    }
 
 
+##################################################################################################################
+# ███████╗██╗  ██╗ ██████╗ ██╗    ██╗
+# ██╔════╝██║  ██║██╔═══██╗██║    ██║
+# ███████╗███████║██║   ██║██║ █╗ ██║
+# ╚════██║██╔══██║██║   ██║██║███╗██║
+# ███████║██║  ██║╚██████╔╝╚███╔███╔╝
+# ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝ 
+// Display the specified resource
+##################################################################################################################
+   public function show($id)
+   {
+      $article = Article::findOrFail($id);
+
+      // get previous article id
+      $previous = Article::published()->where('id', '<', $article->id)->max('id');
+
+      // get next article id
+      $next = Article::published()->where('id', '>', $article->id)->min('id');
+
+      // Add 1 to views column
+      DB::table('articles')->where('id','=',$article->id)->increment('views',1);
+
+      // Get list of articles by year and month
+      // $articlelinks = DB::table('articles')
+      //    ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) article_count'))
+      //    ->where('published_at', '<=', Carbon::now())
+      //    ->groupBy('year')
+      //    ->groupBy('month')
+      //    ->orderBy('year', 'desc')
+      //    ->orderBy('month', 'desc')
+      //    ->get();
+
+      return view('articles.show', compact('article','articlelinks','next','previous'));
+   }
+
+
 }

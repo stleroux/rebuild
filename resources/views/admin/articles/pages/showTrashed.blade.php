@@ -17,7 +17,14 @@
 	<div class="card mb-3">
 		<div class="card-header section_header p-2">
 			Article Details
-			@include('admin.articles.buttons.back', ['size'=>'xs'])
+			<span class="float-right">
+            <div class="btn-group">
+					@include('admin.articles.buttons.back', ['size'=>'xs'])
+					@include('admin.articles.buttons.help', ['size'=>'xs', 'bookmark'=>''])
+               @include('admin.articles.buttons.unpublishAll', ['size'=>'xs'])
+               @include('admin.articles.buttons.add', ['size'=>'xs'])
+				</div>
+			</span>
 		</div>
 		<div class="card-body section_body p-2">
 			<div class="row">

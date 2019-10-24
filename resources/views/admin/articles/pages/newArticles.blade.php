@@ -24,8 +24,13 @@
 				<div class="card-header section_header p-2">
 					<i class="fa fa-file-text-o"></i>
 					New Articles
-					@include('admin.articles.buttons.help', ['size'=>'xs', 'bookmark'=>'articles'])
-					@include('admin.articles.buttons.add', ['size'=>'xs'])
+					<span class="float-right">
+            		<div class="btn-group">
+							@include('admin.articles.buttons.help', ['size'=>'xs', 'bookmark'=>'articles'])
+							@include('admin.articles.buttons.unpublishAll', ['size'=>'xs'])
+							@include('admin.articles.buttons.add', ['size'=>'xs'])
+						</div>
+					</span>
 				</div>
 
 				@if($articles->count())

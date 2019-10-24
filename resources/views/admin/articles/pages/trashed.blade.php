@@ -21,15 +21,24 @@
 
          <div class="card-header section_header p-2">
             Trashed Articles
+            <span class="float-right">
+               <div class="btn-group">
+                  @include('admin.articles.buttons.help', ['size'=>'xs', 'bookmark'=>''])
+                  @include('admin.articles.buttons.unpublishAll', ['size'=>'xs'])
+                  @include('admin.articles.buttons.add', ['size'=>'xs'])
+               </div>
+            </span>
          </div>
          
          {{-- @include('admin.articles.trashed.alphabet') --}}
-         <div class="well well-sm text text-center" style="padding-top:4px; padding-bottom:4px; margin-top:0px; margin-bottom:0px;">
-            <a href="{{ route('admin.articles.trashed') }}" class="{{ Request::is('admin/articles/trashed') ? "btn-secondary": "btn-primary" }} btn btn-sm">All</a>
-            @foreach($letters as $value)
-               <a href="{{ route('admin.articles.trashed', $value) }}" class="{{ Request::is('admin/articles/trashed/'.$value) ? "btn-secondary": "btn-primary" }} btn btn-sm">{{ strtoupper($value) }}</a>
-            @endforeach
-         </div>
+         @if($articles->count())
+            <div class="well well-sm text text-center" style="padding-top:4px; padding-bottom:4px; margin-top:0px; margin-bottom:0px;">
+               <a href="{{ route('admin.articles.trashed') }}" class="{{ Request::is('admin/articles/trashed') ? "btn-secondary": "btn-primary" }} btn btn-sm">All</a>
+               @foreach($letters as $value)
+                  <a href="{{ route('admin.articles.trashed', $value) }}" class="{{ Request::is('admin/articles/trashed/'.$value) ? "btn-secondary": "btn-primary" }} btn btn-sm">{{ strtoupper($value) }}</a>
+               @endforeach
+            </div>
+         @endif
 
          <div class="card-body section_body p-2">
             {{-- @include('admin.articles.trashed.help') --}}
@@ -89,6 +98,6 @@
    </form>
 @endsection
 
-@section('scripts')
+{{-- @section('scripts')
    @include('admin.articles.common.btnScript')
-@endsection
+@endsection --}}

@@ -20,11 +20,10 @@
 		<div class="card-header section_header p-2">
 			Edit Article
 			<div class="float-right">
-				{{-- <a href="{{ route('admin.articles.index') }}" class="btn btn-xs btn-primary">Cancel</a> --}}
-				{{-- {{ Form::button('<i class="fa fa-cancel"></i> Cancel ', array('type' => 'submit', 'class' => 'btn btn-xs btn-info')) }} --}}
-				{{-- {{ Form::button('<i class="fa fa-save"></i> Update ', array('type' => 'submit', 'class' => 'btn btn-xs btn-info')) }} --}}
-				@include('admin.articles.buttons.back', ['size'=>'xs'])
-            @include('admin.articles.buttons.update', ['size'=>'xs'])
+            <div class="btn-group">
+					@include('admin.articles.buttons.back', ['size'=>'xs'])
+   	         @include('admin.articles.buttons.update', ['size'=>'xs'])
+				</div>
 			</div>
 		</div>
 

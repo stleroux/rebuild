@@ -14,13 +14,22 @@
 
 @section('content')
 
+<form style="display:inline;">
+   {!! csrf_field() !!}
+
    <div class="card mb-3">
 
 		<div class="card-header section_header p-2">
 			<i class="fa fa-file-text-o"></i>
 			Articles
-			@include('admin.posts.buttons.help', ['size'=>'xs', 'bookmark'=>'articles'])
-			@include('admin.articles.buttons.add', ['size'=>'xs'])
+			<span class="float-right">
+            <div class="btn-group">
+					@include('admin.articles.buttons.help', ['size'=>'xs', 'bookmark'=>'articles'])
+					@include('admin.articles.buttons.unpublishAll', ['size'=>'xs'])
+					@include('admin.articles.buttons.trashAll', ['size'=>'xs'])
+					@include('admin.articles.buttons.add', ['size'=>'xs'])
+            </div>
+         </span>
 		</div>
 
 		@if($articles->count())
@@ -56,11 +65,10 @@
 					<tbody>
 						@foreach ($articles as $key => $article)
 							<tr>
-								{{-- @if(checkACL('editor')) --}}
-									<td>
-										<input type="checkbox" onClick="checkbox_is_checked()" name="checked[]" value="{{$article->id}}" class="check-all">
-									</td>
-								{{-- @endif --}}
+								<td>
+									<input type="checkbox" onClick="checkbox_is_checked()" name="checked[]" value="{{$article->id}}" class="check-all">
+								</td>
+
 								{{-- Hide columns at all levels. Only needed because Datatables only searches for columns in the table --}}
 								<td class="d-none">{{ $article->description_eng }}</td>
 								<td class="d-none">{{ $article->description_fre }}</td>
@@ -72,8 +80,8 @@
 								<td class="">@include('common.authorFormat', ['model'=>$article, 'field'=>'user'])</td>
 								<td class="">@include('common.dateFormat', ['model'=>$article, 'field'=>'created_at'])</td>
 								<td class=" 
-									{{ $article->published_at >= Carbon\Carbon::now() ? 'text text-warning' : '' }}
-									{{ $article->published_at == null ? 'text text-info' : '' }}
+									{{ $article->published_at >= Carbon\Carbon::now() ? 'font-italic text text-info' : '' }}
+									{{-- {{ $article->published_at == null ? 'bg-info' : '' }} --}}
 								">
 									@include('common.dateFormat', ['model'=>$article, 'field'=>'published_at'])
 								</td>
@@ -90,8 +98,6 @@
 		</div>
 	</div>
 
-@endsection
+</form>
 
-@section('scripts')
-	@include('admin.articles.common.btnScript')
-@stop
+@endsection

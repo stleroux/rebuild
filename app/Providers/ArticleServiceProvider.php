@@ -48,6 +48,19 @@ class ArticleServiceProvider extends ServiceProvider
             ->get();
          $view->with('articlelinks', $articlelinks);
       });
+
+      view()->composer('articles.blocks.archives', function ($view) {
+         $articlelinks = DB::table('articles')
+            ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) article_count'))
+            ->where('published_at', '<=', Carbon::now())
+            //->where('created_at', '<=', Carbon::now()->subMonth(3))
+            ->groupBy('year')
+            ->groupBy('month')
+            ->orderBy('year', 'desc')
+            ->orderBy('month', 'desc')
+            ->get();
+         $view->with('articlelinks', $articlelinks);
+      });
    }
 
 }

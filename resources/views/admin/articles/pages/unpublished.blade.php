@@ -21,6 +21,13 @@
 
          <div class="card-header section_header p-2">
             Unpublished Articles
+            <span class="float-right">
+               <div class="btn-group">
+                  @include('admin.articles.buttons.help', ['size'=>'xs', 'bookmark'=>''])
+                  @include('admin.articles.buttons.publishAll', ['size'=>'xs'])
+                  @include('admin.articles.buttons.add', ['size'=>'xs'])
+               </div>
+            </span>
          </div>
 
          {{-- @include('admin.articles.unpublished.help') --}}
@@ -86,6 +93,6 @@
    </form>
 @endsection
 
-@section('scripts')
+{{-- @section('scripts')
    @include('admin.articles.common.btnScript')
-@endsection
+@endsection --}}

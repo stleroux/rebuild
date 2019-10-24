@@ -21,7 +21,13 @@
 
          <div class="card-header section_header p-2">
             My Articles
-            {{-- @include('admin.articles.myArticles.help') --}}
+            <span class="float-right">
+               <div class="btn-group">
+                  @include('admin.articles.buttons.help', ['size'=>'xs', 'bookmark'=>''])
+                  @include('admin.articles.buttons.unpublishAll', ['size'=>'xs'])
+                  @include('admin.articles.buttons.add', ['size'=>'xs'])
+               </div>
+            </span>
          </div>
 
          @if($articles->count())
@@ -91,6 +97,6 @@
    </form>
 @endsection
 
-@section('scripts')
+{{-- @section('scripts')
    @include('admin.articles.common.btnScript')
-@endsection
+@endsection --}}

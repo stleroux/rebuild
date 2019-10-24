@@ -61,7 +61,7 @@
                      <div class="form-group">
                         {{ Form::label('published_at', 'Publish(ed) On') }}
                         <div class="input-group input-group-sm">
-                           <input type="text" name="published_at" class="form-control" id="datePicker" />
+                           <input type="text" name="published_at" class="form-control form-control-sm" id="datePicker" />
                            <div class="input-group-append">
                               <span class="input-group-text input-group-text-sm"><i class="far fa-calendar-alt"></i></span>
                            </div>

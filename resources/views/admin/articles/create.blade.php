@@ -42,10 +42,12 @@
          <div class="card-header section_header p-2">
             Create Article
             <div class="float-right">
-               {{-- <a href="{{ route('admin.articles.index') }}" class="btn btn-xs btn-primary">Cancel</a> --}}
-               {{-- {{ Form::button('<i class="fa fa-save"></i> Save ', array('type' => 'submit', 'class' => 'btn btn-xs btn-success')) }} --}}
-               @include('admin.articles.buttons.back', ['size'=>'xs'])
-               @include('admin.articles.buttons.save', ['size'=>'xs'])
+               <span class="float-right">
+                  <div class="btn-group">
+                     @include('admin.articles.buttons.back', ['size'=>'xs'])
+                     @include('admin.articles.buttons.save', ['size'=>'xs'])
+                  </div>
+               </span>
             </div>
          </div>
 

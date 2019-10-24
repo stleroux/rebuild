@@ -24,7 +24,35 @@ use Session;
 class ExtraViewsController extends Controller
 {
 
+##################################################################################################################
+#  █████╗ ██████╗  ██████╗██╗  ██╗██╗██╗   ██╗███████╗
+# ██╔══██╗██╔══██╗██╔════╝██║  ██║██║██║   ██║██╔════╝
+# ███████║██████╔╝██║     ███████║██║██║   ██║█████╗  
+# ██╔══██║██╔══██╗██║     ██╔══██║██║╚██╗ ██╔╝██╔══╝  
+# ██║  ██║██║  ██║╚██████╗██║  ██║██║ ╚████╔╝ ███████╗
+# ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝  ╚══════╝
+# Display the archived resources
+##################################################################################################################
+   public function archive($year, $month)
+   {
 
+      // // Get list of articles by year and month
+      // $articlelinks = DB::table('articles')
+      //    ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) article_count'))
+      //    ->where('published_at', '<=', Carbon::now())
+      //    ->groupBy('year')
+      //    ->groupBy('month')
+      //    ->orderBy('year', 'desc')
+      //    ->orderBy('month', 'desc')
+      //    ->get();
+
+      $archives = Article::with('user')->whereYear('created_at','=', $year)
+         ->whereMonth('created_at','=', $month)
+         ->where('published_at', '<=', Carbon::now())
+         ->get();
+
+      return view('articles.archive', compact('archives','articlelinks'))->withYear($year)->withMonth($month);
+   }
 
 
 ##################################################################################################################
