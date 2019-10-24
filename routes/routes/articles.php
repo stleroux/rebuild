@@ -16,6 +16,7 @@ Route::prefix('admin/articles')->name('admin.articles.')->group(function() {
    Route::get('future/{key?}',            'Admin\Articles\ExtraViewsController@future')           ->name('future');
    Route::get('showTrashed/{id}',         'Admin\Articles\ExtraViewsController@showTrashed')      ->name('showTrashed');
    Route::get('trashed/{id?}',            'Admin\Articles\ExtraViewsController@trashed')          ->name('trashed');
+   Route::get('archives/{year}/{month}',  'Admin\Articles\ExtraViewsController@archive')          ->name('archive');
 });
 
 
@@ -38,7 +39,6 @@ Route::prefix('admin/articles')->name('admin.articles.')->group(function() {
    Route::get('downloadExcel/{type}',     'Admin\Articles\ArticlesController@downloadExcel')    ->name('downloadExcel');
    Route::get('restore/{id}',             'Admin\Articles\ArticlesController@restore')          ->name('restore');
    Route::get('pdfview',                  'Admin\Articles\ArticlesController@pdfview')          ->name('pdfview');
-   Route::get('archives/{year}/{month}',  'Admin\Articles\ArticlesController@archive')          ->name('archive');
 
 
    Route::post('',                        'Admin\Articles\ArticlesController@store')            ->name('store');

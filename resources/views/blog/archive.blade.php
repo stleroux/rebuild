@@ -15,7 +15,7 @@
 @endsection
 
 @section ('content')
-	
+	FRONT END
 	<div class="card mb-2">
 		<div class="card-header section_header p-2">
 			Blog Archives For  

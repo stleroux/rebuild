@@ -10,7 +10,9 @@
                <a href="{{ route('admin.articles.archive', ['year'=>$alink->year, 'month'=>$alink->month]) }}"
                   class="list-group-item list-group-item-action p-1">
                   {{ $alink->month_name }} - {{ $alink->year }}
-                  <span class="badge badge-secondary float-right">{{-- {{ $alink->article_count }} --}}BLAH</span>
+                  <span class="badge badge-secondary float-right">
+                     {{ $alink->article_count }}
+                  </span>
                </a>
             @endforeach
          </ul>

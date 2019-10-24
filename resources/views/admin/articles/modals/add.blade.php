@@ -11,7 +11,7 @@
                <p>Are you sure you want to add an article?</p>
             </div>
             <div class="modal-footer">
-               <button type="button" class="btn btn-success" id="confirm">YES</button>
+               <a href="{{ route('admin.articles.create') }}" class="btn btn-success">Yes</a>
                <button type="button" class="btn btn-warning" data-dismiss="modal">NO</button>
             </div>
          </div>
