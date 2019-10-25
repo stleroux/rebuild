@@ -15,30 +15,30 @@
 @section('content')
 
 	<div class="card">
+		
 		<div class="card-header section_header p-2">
-			
-				<i class="fa fa-file-text-o" aria-hidden="true"></i>
-				Article Archives for 
-				@if ($month == 1) January @endif
-				@if ($month == 2) February @endif
-				@if ($month == 3) March @endif
-				@if ($month == 4) April @endif
-				@if ($month == 5) May @endif
-				@if ($month == 6) June @endif
-				@if ($month == 7) July @endif
-				@if ($month == 8) August @endif
-				@if ($month == 9) September @endif
-				@if ($month == 10) October @endif
-				@if ($month == 11) November @endif
-				@if ($month == 12) December @endif
-				{{ $year }}
-			
+			<i class="fa fa-file-text-o" aria-hidden="true"></i>
+			Article Archives for 
+			@if ($month == 1) January @endif
+			@if ($month == 2) February @endif
+			@if ($month == 3) March @endif
+			@if ($month == 4) April @endif
+			@if ($month == 5) May @endif
+			@if ($month == 6) June @endif
+			@if ($month == 7) July @endif
+			@if ($month == 8) August @endif
+			@if ($month == 9) September @endif
+			@if ($month == 10) October @endif
+			@if ($month == 11) November @endif
+			@if ($month == 12) December @endif
+			{{ $year }}
 			<span class="float-right">
             <div class="btn-group">
                @include('articles.buttons.back', ['size'=>'xs'])
             </div>
          </span>
 		</div>
+
 		<div class="card-body section_body p-2">
 			<table id="datatable" class="table table-hover table-sm">
 				<thead>
