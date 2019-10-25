@@ -38,16 +38,9 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function index(Request $request, $key=null)
    {
-      // Set the variable so we can use a button in other pages to come back to this page
-      Session::put('backURL', Route::currentRouteName());
+      // Set the session to the current page route
+      Session::put('fromPage', url()->full());
       
-
-      // Get list of articles by year and month
-      // $articlelinks = DB::table('articles')
-      //    ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) article_count'))
-      //    ->where('published_at', '<=', Carbon::now())
-      //    ->groupBy('year')->groupBy('month')->orderBy('year', 'desc')->orderBy('month', 'desc')->get();
-
       //$alphas = range('A', 'Z');
       $alphas = DB::table('articles')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
@@ -62,17 +55,14 @@ class ArticlesController extends Controller
 
       // If $key value is passed
       if ($key) {
-         // $articles = Article::with('user','category')->published()
          $articles = Article::with('user')->published()
             ->where('title', 'like', $key . '%')
             ->orderBy('title', 'asc')
             ->get();
          return view('articles.index', compact('articles','letters', 'articlelinks'));
-         // return view('articles.index', compact('articles','letters'));
       }
 
       // No $key value is passed
-      // $articles = Article::with('user','category')->published()->get();
       $articles = Article::with('user')->published()->get();
       return view('articles.index', compact('articles','letters', 'articlelinks'));
    }

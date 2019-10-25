@@ -19,7 +19,14 @@
 		
 		<div class="card-header section_header p-2">
 			Article Details
-			@include('admin.articles.buttons.back', ['size'=>'xs'])
+			<span class="float-right">
+            <div class="btn-group">
+					@include('admin.articles.buttons.back', ['size'=>'xs'])
+					{{-- @include('admin.articles.buttons.publish', ['size'=>'xs'])
+					@include('admin.articles.buttons.edit', ['size'=>'xs'])
+               @include('admin.articles.buttons.trash', ['size'=>'xs']) --}}
+				</div>
+			</span>
 		</div>
 
 		<div class="card-body section_body p-2">

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin\Articles;
 
 use App\Http\Controllers\Controller; // Required for validation // use Illuminate\Routing\Controller;
 use App\Models\Articles\Article;
-// use App\Models\Tag;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -12,14 +11,8 @@ use Illuminate\Http\Response;
 use Auth;
 use Carbon\Carbon;
 use DB;
-// use File;
-// use Image;
-// use Log;
-// use Purifier;
 use Route;
 use Session;
-// use Storage;
-// use URL;
 
 class ExtraViewsController extends Controller
 {
@@ -35,17 +28,6 @@ class ExtraViewsController extends Controller
 ##################################################################################################################
    public function archive($year, $month)
    {
-
-      // // Get list of articles by year and month
-      // $articlelinks = DB::table('articles')
-      //    ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) article_count'))
-      //    ->where('published_at', '<=', Carbon::now())
-      //    ->groupBy('year')
-      //    ->groupBy('month')
-      //    ->orderBy('year', 'desc')
-      //    ->orderBy('month', 'desc')
-      //    ->get();
-
       $archives = Article::with('user')->whereYear('created_at','=', $year)
          ->whereMonth('created_at','=', $month)
          ->where('published_at', '<=', Carbon::now())
@@ -330,7 +312,6 @@ class ExtraViewsController extends Controller
       //$alphas = range('A', 'Z');
       $alphas = DB::table('articles')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
-         // ->where('published_at','<', Carbon::Now())
          ->where('deleted_at','!=', Null)
          ->orderBy('letter')
          ->get();

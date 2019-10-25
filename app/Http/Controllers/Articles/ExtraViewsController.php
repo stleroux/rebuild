@@ -35,16 +35,8 @@ class ExtraViewsController extends Controller
 ##################################################################################################################
    public function archive($year, $month)
    {
-
-      // // Get list of articles by year and month
-      // $articlelinks = DB::table('articles')
-      //    ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) article_count'))
-      //    ->where('published_at', '<=', Carbon::now())
-      //    ->groupBy('year')
-      //    ->groupBy('month')
-      //    ->orderBy('year', 'desc')
-      //    ->orderBy('month', 'desc')
-      //    ->get();
+      // Set the session to the current page route
+      Session::put('fromPage', url()->full());
 
       $archives = Article::with('user')->whereYear('created_at','=', $year)
          ->whereMonth('created_at','=', $month)

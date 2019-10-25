@@ -29,6 +29,7 @@ Route::prefix('admin/articles')->name('admin.articles.')->group(function() {
    Route::get('pdfview',                  'Admin\Articles\FunctionsController@pdfview')          ->name('pdfview');
    Route::post('{id}/storeComment',       'Admin\Articles\FunctionsController@storeComment')     ->name('storeComment');
    Route::post('trashAll',                'Admin\Articles\FunctionsController@trashAll')         ->name('trashAll');
+   Route::get('{id}/trash',               'Admin\Articles\FunctionsController@trash')            ->name('trash');
    Route::post('deleteAll',               'Admin\Articles\FunctionsController@deleteAll')        ->name('deleteAll');
    Route::post('restoreAll',              'Admin\Articles\FunctionsController@restoreAll')       ->name('restoreAll');
    Route::post('importExcel',             'Admin\Articles\FunctionsController@importExcel')      ->name('importExport');

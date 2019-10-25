@@ -21,7 +21,8 @@
          Article Details
          <span class="float-right">
             <div class="btn-group">
-               @include('articles.buttons.back', ['size'=>'xs'])
+               @include('articles.buttons.back', ['size'=>'xs', 'btn_label'=>'Back'])
+               Add\Remove Favorite
             </div>
          </span>
       </div>

@@ -20,8 +20,6 @@ use Route;
 use Session;
 use URL;
 
-// use App\Http\Requests\CreateArticleRequest;
-// use App\Http\Requests\UpdateArticleRequest;
 use App\Http\Requests\CreateCommentRequest;
 
 class ArticlesController extends Controller
@@ -39,8 +37,6 @@ class ArticlesController extends Controller
       // only allow authenticated users to access these pages
       $this->middleware('auth');
       $this->enablePermissions = false;
-      //Log::useFiles(storage_path().'/logs/articles.log');
-      //Log::useFiles(storage_path().'/logs/audits.log');
    }
 
 
@@ -55,35 +51,7 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function create()
    {
-
-      // Set the variable so we can use a button in other pages to come back to this page
-      if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'articles.index') {
-         Session::put('backURL', 'articles.index');
-      }
-      if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'articles.newArticles') {
-         Session::put('backURL', 'articles.newArticles');
-      }
-      if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'articles.myArticles') {
-         Session::put('backURL', 'articles.myArticles');
-      }
-      if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'articles.myFavorites') {
-         Session::put('backURL', 'articles.myFavorites');
-      }
-      if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'articles.unpublished') {
-         Session::put('backURL', 'articles.unpublished');
-      }
-      if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'articles.future') {
-         Session::put('backURL', 'articles.future');
-      }
-      if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'articles.trashed') {
-         Session::put('backURL', 'articles.trashed');
-      }
-
-      // $categories = Category::where('parent_id',11)->get();
-      // dd($categories);
       $article = New Article();
-
-      // return view('admin.articles.create', compact('categories','article'));
       return view('admin.articles.create', compact('article'));
    }
 
@@ -128,25 +96,7 @@ class ArticlesController extends Controller
    {
       // Find the article to edit
       $article = Article::find($id);
-      // dd($article);
-
-      // // find all categories in the categories table and pass them to the view
-      // // $categories = Category::whereHas('module', function ($query) {
-      // //    $query->where('name', '=', 'articles');
-      // // })->get();
-      // $categories = Category::where('parent_id',0)->get();
-      // // dd($categories);
-
-      // // Create an empty array to store the categories
-      // $cats = [];
-      // // Store the category values into the $cats array
-      // foreach ($categories as $category) {
-      //    $cats[$category->id] = $category->name;
-      // }
-
-      // return view('admin.articles.edit', compact('article'))->withCategories($cats);
       return view('admin.articles.edit', compact('article'));
-      // return 'TEST';
    }
 
 
@@ -164,12 +114,6 @@ class ArticlesController extends Controller
       // Set the session to the current page route
       Session::put('fromPage', url()->full());
 
-      // Get list of articles by year and month
-      // $articlelinks = DB::table('articles')
-      //    ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) article_count'))
-      //    ->where('published_at', '<=', Carbon::now())
-      //    ->groupBy('year')->groupBy('month')->orderBy('year', 'desc')->orderBy('month', 'desc')->get();
-
       //$alphas = range('A', 'Z');
       $alphas = DB::table('articles')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
@@ -184,17 +128,14 @@ class ArticlesController extends Controller
 
       // If $key value is passed
       if ($key) {
-         // $articles = Article::with('user','category')->published()
          $articles = Article::with('user')->published()
             ->where('title', 'like', $key . '%')
             ->orderBy('title', 'asc')
             ->get();
          return view('admin.articles.index', compact('articles','letters', 'articlelinks'));
-         // return view('admin.articles.index', compact('articles','letters'));
       }
 
       // No $key value is passed
-      // $articles = Article::with('user','category')->published()->get();
       $articles = Article::with('user')->published()->get();
       return view('admin.articles.index', compact('articles','letters', 'articlelinks'));
    }
@@ -219,19 +160,6 @@ class ArticlesController extends Controller
       // get next article id
       $next = Article::published()->where('id', '>', $article->id)->min('id');
 
-      // Add 1 to views column
-      // DB::table('articles')->where('id','=',$article->id)->increment('views',1);
-
-      // Get list of articles by year and month
-      // $articlelinks = DB::table('articles')
-      //    ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) article_count'))
-      //    ->where('published_at', '<=', Carbon::now())
-      //    ->groupBy('year')
-      //    ->groupBy('month')
-      //    ->orderBy('year', 'desc')
-      //    ->orderBy('month', 'desc')
-      //    ->get();
-
       return view('admin.articles.show', compact('article','articlelinks','next','previous'));
    }
 
@@ -245,18 +173,9 @@ class ArticlesController extends Controller
 # ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝
 // Store a newly created resource in storage
 ##################################################################################################################
-   // public function store(CreateArticleRequest $request)
    public function store()
    {
       Article::create($this->validateRequest());
-      // $article = new Article;
-      //    $article->title             = $request->title;
-      //    $article->category_id       = $request->category_id;
-      //    $article->published_at      = $request->published_at;
-      //    $article->description_eng   = $request->description_eng;
-      //    $article->description_fre   = $request->description_fre;
-      //    $article->user_id           = Auth::user()->id;
-      // $article->save();
 
       Session::flash('success','The article has been created successfully!');
       return redirect()->route('admin.articles.index');
@@ -272,26 +191,13 @@ class ArticlesController extends Controller
 #  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
 // UPDATE :: Update the specified resource in storage
 ##################################################################################################################
-   // public function update(UpdateArticleRequest $request, $id)
-   // public function update(Request $request)
    public function update(Article $article, $id)
    {
       $article = Article::findOrFail($id);
       $article->update($this->validateRequest());
-      // dd($article);
-      
-      // $article = Article::findOrFail($id);
-      //    $article->title             = $request->title;
-      //    $article->category_id       = $request->category_id;
-      //    $article->published_at      = $request->published_at;
-      //    $article->description_eng   = $request->description_eng;
-      //    $article->description_fre   = $request->description_fre;
-      // $article->save();
       
       Session::flash('success','The article has been updated successfully.');
-      // return redirect()->route('admin.articles.index');
       return redirect(Session::get('fromPage'));
-
    }
 
 

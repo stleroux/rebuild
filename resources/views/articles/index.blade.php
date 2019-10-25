@@ -20,19 +20,27 @@
 				<div class="card-header section_header p-2">
 					<i class="fa fa-file-text-o"></i>
 					Articles
-					{{-- @include('posts.buttons.help', ['size'=>'xs', 'bookmark'=>'articles']) --}}
-					{{-- @include('articles.buttons.add', ['size'=>'xs']) --}}
+					<span class="float-right">
+		            <div class="btn-group">
+		               @include('articles.buttons.back', ['size'=>'xs', 'btn_label'=>'Back'])
+		               My Favorite Articles
+		            </div>
+		         </span>
 				</div>
-				<div class="card-body section_body p-2">
-					@if($articles->count())
-					
-						<div class="well well-sm text-center" style="padding-top:4px; padding-bottom:4px; margin-top:0px; margin-bottom:0px;">
+				
+				@if($articles->count())
+					<div class="text-center">
+						<div class="btn-group p-1">
 							<a href="{{ route('articles.index') }}" class="{{ Request::is('articles') ? "btn-secondary": "btn-primary" }} btn btn-sm">All</a>
 							@foreach($letters as $value)
 								<a href="{{ route('articles.index', $value) }}" class="{{ Request::is('articles/'.$value) ? "btn-secondary": "btn-primary" }} btn btn-sm">{{ strtoupper($value) }}</a>
 							@endforeach
 						</div>
+					</div>
+				@endif
 
+				<div class="card-body section_body p-2">
+					@if($articles->count())
 						<table id="datatable" class="table table-hover table-sm searchHighlight">
 							<thead>
 								<tr>
