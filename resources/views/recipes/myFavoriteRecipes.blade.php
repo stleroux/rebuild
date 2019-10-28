@@ -33,8 +33,8 @@
             </span>
          </div>
 
-         @if($recipes->count() > 0)
-            <div class="card-body section_body p-2">
+         <div class="card-body section_body p-2">
+            @if($recipes->count() > 0)
                @foreach($recipes->chunk(6) as $chunk)
                   <div class="card-deck mb-0 px-2 bg-transparent">
                      @foreach($chunk as $recipe)
@@ -89,12 +89,11 @@
                      @endforeach
                   </div>
                @endforeach
-            </div>
-         @else
-            <div class="card-body card_body p-2">
+            @else
+            {{-- <div class="card-body card_body p-2"> --}}
                {{ setting('no_records_found') }}
-            </div>
-         @endif
+            @endif
+         </div>
       </div>
       
    </form>

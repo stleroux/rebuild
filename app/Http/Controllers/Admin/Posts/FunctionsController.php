@@ -119,6 +119,7 @@ class FunctionsController extends Controller
    public function publish($id)
    {
       $post = Post::find($id);
+      
       // Check if user has required permission
       if($this->enablePermissions) {
          if(!checkPerm('post_edit')) { abort(401, 'Unauthorized Access'); }

@@ -16,6 +16,20 @@ use Session;
 
 class ExtraViewsController extends Controller
 {
+##################################################################################################################
+#  ██████╗ ██████╗ ███╗   ██╗███████╗████████╗██████╗ ██╗   ██╗ ██████╗████████╗
+# ██╔════╝██╔═══██╗████╗  ██║██╔════╝╚══██╔══╝██╔══██╗██║   ██║██╔════╝╚══██╔══╝
+# ██║     ██║   ██║██╔██╗ ██║███████╗   ██║   ██████╔╝██║   ██║██║        ██║   
+# ██║     ██║   ██║██║╚██╗██║╚════██║   ██║   ██╔══██╗██║   ██║██║        ██║   
+# ╚██████╗╚██████╔╝██║ ╚████║███████║   ██║   ██║  ██║╚██████╔╝╚██████╗   ██║   
+#  ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝  ╚═════╝   ╚═╝   
+##################################################################################################################
+   public function __construct() {
+      // only allow authenticated users to access these pages
+      $this->middleware('auth');
+      $this->enablePermissions = true;
+   }
+
 
 ##################################################################################################################
 #  █████╗ ██████╗  ██████╗██╗  ██╗██╗██╗   ██╗███████╗
@@ -28,6 +42,11 @@ class ExtraViewsController extends Controller
 ##################################################################################################################
    public function archive($year, $month)
    {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_read')) { abort(401, 'Unauthorized Access'); }
+      }
+
       $archives = Article::with('user')->whereYear('created_at','=', $year)
          ->whereMonth('created_at','=', $month)
          ->where('published_at', '<=', Carbon::now())
@@ -48,6 +67,11 @@ class ExtraViewsController extends Controller
 ##################################################################################################################
    public function future(Request $request, $key=null)
    {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_edit')) { abort(401, 'Unauthorized Access'); }
+      }
+
       // Set the session to the current page route
       Session::put('fromPage', url()->full());
 
@@ -89,6 +113,11 @@ class ExtraViewsController extends Controller
 ##################################################################################################################
    public function myArticles(Request $request, $key=null)
    {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_browse')) { abort(401, 'Unauthorized Access'); }
+      }
+
       // Set the session to the current page route
       Session::put('fromPage', url()->full());
 
@@ -129,6 +158,11 @@ class ExtraViewsController extends Controller
 ##################################################################################################################
    public function newArticles(Request $request, $key=null)
    {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_edit')) { abort(401, 'Unauthorized Access'); }
+      }
+
       // Set the session to the current page route
       Session::put('fromPage', url()->full());
 
@@ -250,6 +284,11 @@ class ExtraViewsController extends Controller
 ##################################################################################################################
    public function published(Request $request, $key=null)
    {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_edit')) { abort(401, 'Unauthorized Access'); }
+      }
+
       //$alphas = range('A', 'Z');
       $alphas = DB::table('articles')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
@@ -289,6 +328,11 @@ class ExtraViewsController extends Controller
 ##################################################################################################################
    public function showTrashed($id)
    {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_delete')) { abort(401, 'Unauthorized Access'); }
+      }
+
       $article = Article::withTrashed()->findOrFail($id);
 
       return view('admin.articles.pages.showTrashed', compact('article'));
@@ -306,6 +350,11 @@ class ExtraViewsController extends Controller
 ##################################################################################################################
    public function trashed(Request $request)
    {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_delete')) { abort(401, 'Unauthorized Access'); }
+      }
+
       // Set the session to the current page route
       Session::put('fromPage', url()->full());
 
@@ -338,6 +387,11 @@ class ExtraViewsController extends Controller
 ##################################################################################################################
    public function unpublished(Request $request, $key=null)
    {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_edit')) { abort(401, 'Unauthorized Access'); }
+      }
+
       // Set the session to the current page route
       Session::put('fromPage', url()->full());
 

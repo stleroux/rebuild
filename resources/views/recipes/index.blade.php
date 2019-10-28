@@ -5,7 +5,6 @@
 @endsection
 
 @section('left_column')
-	{{-- @include('blocks.main_menu') --}}
 @endsection
 
 @section('right_column')
@@ -27,6 +26,7 @@
 
 			<span class="float-right">
 				<div class="btn-group">
+					@include('recipes.buttons.recipes', ['size'=>'sm', 'btn_label'=>'All Recipes'])
 					@include('recipes.dropdown', ['size'=>'sm'])
 					@include('recipes.buttons.printAll', ['size'=>'sm'])
 					{{-- @include('admin.recipes.buttons.add', ['size'=>'sm']) --}}

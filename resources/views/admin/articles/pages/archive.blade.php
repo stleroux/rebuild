@@ -8,7 +8,7 @@
 @endsection
 
 @section('right_column')
-   @include('admin.articles.sidebar')
+   @include('admin.articles.blocks.sidebar')
    @include('admin.articles.blocks.archives')
 @endsection
 

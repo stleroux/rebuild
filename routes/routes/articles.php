@@ -44,8 +44,8 @@ Route::prefix('admin/articles')->name('admin.articles.')->group(function() {
    Route::post('',                        'Admin\Articles\ArticlesController@store')             ->name('store');
    Route::get('{id}/edit',                'Admin\Articles\ArticlesController@edit')              ->name('edit');
    Route::put('{id}',                     'Admin\Articles\ArticlesController@update')            ->name('update');
-   Route::get('{id}',                     'Admin\Articles\ArticlesController@show')              ->name('show');
    Route::delete('{id}',                  'Admin\Articles\ArticlesController@destroy')           ->name('destroy');
+   Route::get('{id}/show',                'Admin\Articles\ArticlesController@show')              ->name('show');
    Route::get('{key?}',                   'Admin\Articles\ArticlesController@index')             ->name('index');
 });
 
@@ -53,8 +53,10 @@ Route::prefix('admin/articles')->name('admin.articles.')->group(function() {
 // FRONTEND ROUTES
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Route::prefix('articles')->name('articles.')->group(function() {
-   Route::get('myFavorites',              'Articles\ArticlesController@myFavorites')             ->name('myFavorites');
+   Route::get('{id}/favoriteAdd',         'Articles\FunctionsController@favoriteAdd')            ->name('favoriteAdd');
+   Route::get('{id}/favoriteRemove',      'Articles\FunctionsController@favoriteRemove')         ->name('favoriteRemove');
    Route::get('{id}/show',                'Articles\ArticlesController@show')                    ->name('show');
-   Route::get('/{key?}',                  'Articles\ArticlesController@index')                   ->name('index');
+   Route::get('myFavorites',              'Articles\ExtraViewsController@myFavorites')           ->name('myFavorites');
+   Route::get('{key?}',                   'Articles\ArticlesController@index')                   ->name('index');
    Route::get('archives/{year}/{month}',  'Articles\ExtraViewsController@archive')               ->name('archive');
 });

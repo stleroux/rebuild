@@ -1,44 +1,82 @@
-@extends('layouts.app')
-
-@section('title','Articles')
+@extends('layouts.master')
 
 @section('stylesheets')
-	{{ Html::style('css/articles.css') }}
-@stop
-
-@section('sectionSidebar')
-	@include('articles.sidebar')
-@stop
-
-@section('breadcrumb')
-	<li><a href="/">Home</a></li>
-	<li><a href="{{ route('articles.index') }}">Articles</a></li>
-	<li class="active"><span>My Favorite Articles</span></li>
-@stop
-
-@section('content')
-	<form style="display:inline;">
-		{!! csrf_field() !!}
-
-		<div class="panel panel-primary">
-			@include('articles.myFavorites.panelHeader')
-			@include('articles.myFavorites.alphabet')
-			@include('articles.myFavorites.help')
-			<div class="panel-body">
-				@if($articles)
-					@include('articles.myFavorites.datagrid')
-				@else
-					@include('common.noRecordsFound')
-				@endif
-			</div>
-		</div>
-@stop
-
-@section('blocks')
-		@include('articles.myFavorites.controls')
-	</form>
+   {{ Html::style('css/woodbarn.css') }}
 @endsection
 
-@section('scripts')
-	@include('articles.common.btnScript')
-@stop
+@section('left_column')
+@endsection
+
+@section('right_column')
+   {{-- @include('articles.sidebar') --}}
+   @include('articles.blocks.archives')
+@endsection
+
+@section('content')
+
+   <form style="display:inline;">
+      {!! csrf_field() !!}
+
+         <div class="card mb-3">
+            <div class="card-header section_header p-2">
+               <i class="fa fa-file-text-o"></i>
+               My Favorite Articles
+               <span class="float-right">
+                  <div class="btn-group">
+                     @include('articles.buttons.back', ['size'=>'xs', 'btn_label'=>'Back'])
+                  </div>
+               </span>
+            </div>
+         
+            <div class="card-body section_body p-2">
+               @if($articles->count())
+                  <table id="datatable" class="table table-hover table-sm searchHighlight">
+                     <thead>
+                        <tr>
+                           {{-- <th><input type="checkbox" id="selectall" class="checked" /></th> --}}
+                           {{-- Add columns for search purposes only --}}
+                           <th class="d-none">English</th>
+                           <th class="d-none">French</th>
+                           {{-- Add columns for search purposes only --}}
+
+                           <th class="">Title</th>
+                           <th class="">Category</th>
+                           <th class="">Views</th>
+                           <th class="">Author</th>
+                           <th class="">Created On</th>
+                           <th class="">Publish(ed) On</th>
+                           <th class="" data-orderable="false"></th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        @foreach ($articles as $key => $article)
+                           <tr>
+                              {{-- <td><input type="checkbox" onClick="checkbox_is_checked()" name="checked[]" value="{{$article->id}}" class="check-all"></td> --}}
+                              {{-- Hide columns at all levels. Only needed because Datatables only searches for columns in the table --}}
+                              <td class="d-none">{{ $article->description_eng }}</td>
+                              <td class="d-none">{{ $article->description_fre }}</td>
+                              {{-- Hide columns at all levels. Only needed because Datatables only searches for columns in the table --}}
+                              
+                              <td><a href="{{ route('articles.show', $article->id) }}" class="">{{ $article->title }}</a></td>
+                              <td class="">{{ $article->category }}</td>
+                              <td class="">{{ $article->views }}</td>
+                              <td class="">@include('common.authorFormat', ['model'=>$article, 'field'=>'user'])</td>
+                              <td class="">@include('common.dateFormat', ['model'=>$article, 'field'=>'created_at'])</td>
+                              <td class=" 
+                                 {{ $article->published_at >= Carbon\Carbon::now() ? 'text text-warning' : '' }}
+                                 {{ $article->published_at == null ? 'text text-info' : '' }}">
+                                 @include('common.dateFormat', ['model'=>$article, 'field'=>'published_at'])
+                              </td>
+                              <td>@include('articles.buttons.favorite', ['size'=>'xs'])</td>
+                           </tr>
+                        @endforeach
+                     </tbody>
+                  </table>
+               @else
+                  {{ setting('no_records_found') }}
+               @endif
+            </div>
+         </div>
+   </form>
+      
+@endsection

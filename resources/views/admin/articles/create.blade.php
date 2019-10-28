@@ -1,25 +1,3 @@
-{{-- @extends('layouts.master')
-
-@section('stylesheets')
-   {{ Html::style('css/woodbarn.css') }}
-@endsection
-
-@section('left_column')
-@endsection
-
-@section('right_column')
-@endsection
-
-
-@section('content')
-	{!! Form::open(['route'=>'admin.articles.store']) !!}
-		@include('admin.articles.form')
-	{!! Form::close() !!}
-@endsection
-
-@section ('scripts')
-@endsection
- --}}
 @extends('layouts.master')
 
 @section('stylesheets')
@@ -30,7 +8,7 @@
 @endsection
 
 @section('right_column')
-   @include('admin.articles.sidebar')
+   @include('admin.articles.blocks.sidebar')
 @endsection
 
 @section('content')
@@ -42,12 +20,10 @@
          <div class="card-header section_header p-2">
             Create Article
             <div class="float-right">
-               <span class="float-right">
-                  <div class="btn-group">
-                     @include('admin.articles.buttons.back', ['size'=>'xs'])
-                     @include('admin.articles.buttons.save', ['size'=>'xs'])
-                  </div>
-               </span>
+               <div class="btn-group">
+                  @include('admin.articles.buttons.back', ['size'=>'xs'])
+                  @include('admin.articles.buttons.save', ['size'=>'xs'])
+               </div>
             </div>
          </div>
 

@@ -23,6 +23,20 @@ use Session;
 
 class ExtraViewsController extends Controller
 {
+##################################################################################################################
+#  ██████╗ ██████╗ ███╗   ██╗███████╗████████╗██████╗ ██╗   ██╗ ██████╗████████╗
+# ██╔════╝██╔═══██╗████╗  ██║██╔════╝╚══██╔══╝██╔══██╗██║   ██║██╔════╝╚══██╔══╝
+# ██║     ██║   ██║██╔██╗ ██║███████╗   ██║   ██████╔╝██║   ██║██║        ██║   
+# ██║     ██║   ██║██║╚██╗██║╚════██║   ██║   ██╔══██╗██║   ██║██║        ██║   
+# ╚██████╗╚██████╔╝██║ ╚████║███████║   ██║   ██║  ██║╚██████╔╝╚██████╗   ██║   
+#  ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝  ╚═════╝   ╚═╝   
+##################################################################################################################
+   public function __construct() {
+      // only allow authenticated users to access these pages
+      $this->middleware('auth');
+      $this->enablePermissions = true;
+   }
+
 
 ##################################################################################################################
 #  █████╗ ██████╗  ██████╗██╗  ██╗██╗██╗   ██╗███████╗
@@ -35,6 +49,11 @@ class ExtraViewsController extends Controller
 ##################################################################################################################
    public function archive($year, $month)
    {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_browse')) { abort(401, 'Unauthorized Access'); }
+      }
+
       // Set the session to the current page route
       Session::put('fromPage', url()->full());
 
@@ -56,28 +75,18 @@ class ExtraViewsController extends Controller
 # ╚═╝     ╚═╝   ╚═╝       ╚═╝     ╚═╝  ╚═╝  ╚═══╝   ╚═════╝ ╚═╝  ╚═╝╚═╝   ╚═╝   ╚══════╝╚══════╝
 // MY FAVORITES :: Display a listing of the resource that have been favorited by a specific user.
 ##################################################################################################################
-   public function myFavorites()
+   public function myFavorites(Request $request, $key=null)
    {
-      // Set the variable so we can use a button in other pages to come back to this page
-      Session::put('backURL', Route::currentRouteName());
-
-      // find the favorites
-      $favs = DB::table('article_user')->where('user_id','=',Auth::user()->id)->get();
-
-      // Create an empty array to store the recipes        
-      $articles = [];
-
-      // Store the recipe values into the $recipes array
-      foreach ($favs as $fav)
-      {
-        $articles[$fav->id] = Article::with('user','category')->find($fav->article_id);
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_browse')) { abort(401, 'Unauthorized Access'); }
       }
-      
-      // Sort the recipes array by title
-      $articles = array_values(array_sort($articles, function ($value) {
-         return $value['title'];
-      }));
-      
+
+      if(Auth::check()) {
+         $user = Auth::user();
+         $articles = $user->favorite(Article::class)->sortBy('title');
+      }
+
       return view('articles.myFavorites', compact('articles'));
    }
 

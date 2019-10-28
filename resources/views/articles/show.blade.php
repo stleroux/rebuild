@@ -18,13 +18,29 @@
    <div class="card mb-3">
       
       <div class="card-header section_header p-2">
-         Article Details
-         <span class="float-right">
-            <div class="btn-group">
-               @include('articles.buttons.back', ['size'=>'xs', 'btn_label'=>'Back'])
-               Add\Remove Favorite
+         <div class="row p-0 m-0">
+            <div class="col-sm-12 col-md-12 col-lg-4 px-0">
+               Article Details
             </div>
-         </span>
+         
+            <div class="col-sm-12 col-md-6 col-lg-4 px-0">
+               <div class="text-center">
+                  <div class="btn-group">
+                     @include('articles.buttons.previous', ['size'=>'xs', $previous])
+                     @include('articles.buttons.next', ['size'=>'xs', $next])
+                  </div>
+               </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-4 px-0">
+               <span class="float-right">
+                  <div class="btn-group">
+                     @include('articles.buttons.back', ['size'=>'xs', 'btn_label'=>'Back'])
+                     @include('articles.buttons.btnFavorite', ['size'=>'xs'])
+                  </div>
+               </span>
+            </div>
+         </div>
       </div>
 
       <div class="card-body section_body p-2">

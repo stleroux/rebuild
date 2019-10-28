@@ -8,9 +8,7 @@
 @endsection
 
 @section('right_column')
-	{{-- @include('admin.articles.edit.controls') --}}
 @endsection
-
 
 @section('content')
 	{!! Form::model($article, ['route'=>['admin.articles.update', $article->id], 'method' => 'PUT']) !!}
@@ -32,24 +30,6 @@
 		</div>
 	</div>
 
-
-
-
 	{!! Form::close() !!}
-@endsection
 
-@section ('scripts')
-{{--   <script type="text/javascript" src="/js/jquery.datetimepicker.full.min.js"></script>
-	<script>
-		$("#datetime").datetimepicker({
-			step: 30,
-			showOn: 'button',
-			buttonImage: '',
-			buttonImageOnly: true,
-			format:'Y-m-d H:i',
-			lang:'ru'
-		});
-	</script> --}}
 @endsection
-
-	

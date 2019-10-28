@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Auth;
 use App\Models\Category;
 use Carbon\Carbon;
+use ChristianKuri\LaravelFavorite\Traits\Favoriteable;
 
 
 class Article extends Model
 	// implements AuditableContract
 {
 	use SoftDeletes;
-	//use Auditable;
+   use Favoriteable;
 
    protected $guarded = [];
    
@@ -83,10 +84,10 @@ class Article extends Model
 	// }
 
 	// Used to display the Add/Remove links if item is in favorite list
-	public function favorites()
-	{
-		return $this->belongsToMany('App\Models\User')->where('user_id','=',Auth::user()->id);
-	}
+	// public function favorites()
+	// {
+	// 	return $this->belongsToMany('App\Models\User')->where('user_id','=',Auth::user()->id);
+	// }
 
 //////////////////////////////////////////////////////////////////////////////////////
 // SCOPES

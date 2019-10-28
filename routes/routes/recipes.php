@@ -35,8 +35,7 @@ Route::prefix('admin/recipes')->name('admin.recipes.')->group(function() {
    Route::get('{key?}',                   'Admin\Recipes\RecipesController@index')             ->name('index');
 });
 
-Route::prefix('recipes')->name('recipes.')->group(function() {
-   
+Route::prefix('recipes')->name('recipes.')->group(function() {   
    Route::get('{id}/show/{byCatName?}',   'Recipes\RecipesController@show')                    ->name('show');
    Route::get('{id}/printPDF',            'Recipes\FunctionsController@printPDF')              ->name('printPDF');
    Route::get('{id}/print',               'Recipes\FunctionsController@print')                 ->name('print');

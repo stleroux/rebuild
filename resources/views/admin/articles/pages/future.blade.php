@@ -8,9 +8,7 @@
 @endsection
 
 @section('right_column')
-   {{-- @include('admin.articles.future.controls') --}}
-   {{-- @include('admin.articles.future.help') --}}
-   @include('admin.articles.sidebar')
+   @include('admin.articles.blocks.sidebar')
    @include('admin.articles.blocks.archives')
 @endsection
 
@@ -39,10 +37,8 @@
          @endif
          
          <div class="card-body section_body p-2">
-            {{-- @include('admin.articles.future.help') --}}
          
             @if($articles->count())
-               {{-- @include('admin.articles.future.datagrid') --}}
                <table id="datatable" class="table table-hover table-sm searchHighlight">
                   <thead>
                      <tr>
@@ -95,7 +91,3 @@
    </form>
 
 @endsection
-
-{{-- @section('scripts')
-   @include('admin.articles.common.btnScript')
-@endsection --}}

@@ -24,11 +24,3 @@ Route::view('/template', 'template');
 foreach (File::allFiles(__DIR__ . '/routes') as $route_file) {
   require $route_file->getPathname();
 }
-
-// Route::get('modules/{module}/disableModule', 'ModulesController@disableModule')->name('modules.disableModule');
-// Route::get('modules/{module}/enableModule', 'ModulesController@enableModule')->name('modules.enableModule');
-// Route::get('modules/{module}/deleteModule', 'ModulesController@deleteModule')->name('modules.deleteModule');
-// Route::post('modules/{module}/deleteModulePost', 'ModulesController@deleteModulePost')->name('modules.deleteModulePost');
-// Route::get('modules/{module}/delete', 'ModulesController@delete')->name('modules.delete');
-// Route::resource('modules', 'ModulesController');
-

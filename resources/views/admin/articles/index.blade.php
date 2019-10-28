@@ -8,7 +8,7 @@
 @endsection
 
 @section('right_column')
-	@include('admin.articles.sidebar')
+	@include('admin.articles.blocks.sidebar')
 	@include('admin.articles.blocks.archives')
 @endsection
 
@@ -44,8 +44,8 @@
 		@endif
 		
 		<div class="card-body section_body p-2">
+
 			@if($articles->count())
-				{{-- @include('admin.articles.index.datagrid') --}}
 				<table id="datatable" class="table table-hover table-sm searchHighlight">
 					<thead>
 						<tr>
@@ -88,8 +88,7 @@
 								</td>
 								<td>
 									<div class="text-center">
-               					<div class="btn-group p-1">
-		                           <!-- @include('admin.articles.buttons.show', ['size'=>'xs']) -->
+               					<div class="btn-group">
 											@include('admin.articles.buttons.publish', ['size'=>'xs'])
 											@include('admin.articles.buttons.edit', ['size'=>'xs'])
 		                           @include('admin.articles.buttons.trash', ['size'=>'xs'])

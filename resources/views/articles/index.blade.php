@@ -23,7 +23,7 @@
 					<span class="float-right">
 		            <div class="btn-group">
 		               @include('articles.buttons.back', ['size'=>'xs', 'btn_label'=>'Back'])
-		               My Favorite Articles
+		               @include('articles.buttons.myFavorites', ['size'=>'xs', 'btn_label'=>'Favorites'])
 		            </div>
 		         </span>
 				</div>
@@ -44,7 +44,7 @@
 						<table id="datatable" class="table table-hover table-sm searchHighlight">
 							<thead>
 								<tr>
-									<th data-orderable="false"><input type="checkbox" id="selectall" class="checked" /></th>
+									{{-- <th data-orderable="false"><input type="checkbox" id="selectall" class="checked" /></th> --}}
 									{{-- Add columns for search purposes only --}}
 									<th class="d-none">English</th>
 									<th class="d-none">French</th>
@@ -55,15 +55,16 @@
 									<th class="">Author</th>
 									<th class="">Created On</th>
 									<th class="">Publish(ed) On</th>
+									<th data-orderable="false"></th>
 								</tr>
 							</thead>
 							<tbody>
 								@foreach ($articles as $key => $article)
 									<tr>
 										{{-- @if(checkACL('editor')) --}}
-											<td>
+											{{-- <td>
 												<input type="checkbox" onClick="checkbox_is_checked()" name="checked[]" value="{{$article->id}}" class="check-all">
-											</td>
+											</td> --}}
 										{{-- @endif --}}
 										{{-- Hide columns at all levels. Only needed because Datatables only searches for columns in the table --}}
 										<td class="d-none">{{ $article->description_eng }}</td>
@@ -81,6 +82,7 @@
 										">
 											@include('common.dateFormat', ['model'=>$article, 'field'=>'published_at'])
 										</td>
+										<td>@include('articles.buttons.favorite', ['size'=>'xs'])</td>
 									</tr>
 								@endforeach
 							</tbody>

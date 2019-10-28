@@ -26,6 +26,20 @@ use Session;
 
 class ArticlesController extends Controller
 {
+##################################################################################################################
+#  ██████╗ ██████╗ ███╗   ██╗███████╗████████╗██████╗ ██╗   ██╗ ██████╗████████╗
+# ██╔════╝██╔═══██╗████╗  ██║██╔════╝╚══██╔══╝██╔══██╗██║   ██║██╔════╝╚══██╔══╝
+# ██║     ██║   ██║██╔██╗ ██║███████╗   ██║   ██████╔╝██║   ██║██║        ██║   
+# ██║     ██║   ██║██║╚██╗██║╚════██║   ██║   ██╔══██╗██║   ██║██║        ██║   
+# ╚██████╗╚██████╔╝██║ ╚████║███████║   ██║   ██║  ██║╚██████╔╝╚██████╗   ██║   
+#  ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝  ╚═════╝   ╚═╝   
+##################################################################################################################
+   public function __construct() {
+      // only allow authenticated users to access these pages
+      $this->middleware('auth');
+      $this->enablePermissions = true;
+   }
+
 
 ##################################################################################################################
 # ██╗███╗   ██╗██████╗ ███████╗██╗  ██╗
@@ -38,6 +52,11 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function index(Request $request, $key=null)
    {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_browse')) { abort(401, 'Unauthorized Access'); }
+      }
+
       // Set the session to the current page route
       Session::put('fromPage', url()->full());
       
@@ -77,8 +96,13 @@ class ArticlesController extends Controller
 # ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝ 
 // Display the specified resource
 ##################################################################################################################
-   public function show($id)
+   public function show(Request $request, $id, $previous=null, $next=null)
    {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_read')) { abort(401, 'Unauthorized Access'); }
+      }
+
       $article = Article::findOrFail($id);
 
       // get previous article id
@@ -89,16 +113,6 @@ class ArticlesController extends Controller
 
       // Add 1 to views column
       DB::table('articles')->where('id','=',$article->id)->increment('views',1);
-
-      // Get list of articles by year and month
-      // $articlelinks = DB::table('articles')
-      //    ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) article_count'))
-      //    ->where('published_at', '<=', Carbon::now())
-      //    ->groupBy('year')
-      //    ->groupBy('month')
-      //    ->orderBy('year', 'desc')
-      //    ->orderBy('month', 'desc')
-      //    ->get();
 
       return view('articles.show', compact('article','articlelinks','next','previous'));
    }

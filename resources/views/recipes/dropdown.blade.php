@@ -1,6 +1,6 @@
 <div class="btn-group">
-	<a type="button" href="{{ route('recipes.index', 'all') }}" class="btn btn-sm btn-primary">All Recipes</a>
-	<a type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select A Category
+	<a class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+		Select A Category
 		<span class="sr-only">Toggle Dropdown</span>
 	</a>
 	<div class="dropdown-menu dropdown-menu-right">

@@ -8,12 +8,12 @@
 @endsection
 
 @section('right_column')
-   {{-- @include('admin.articles.myArticles.controls') --}}
-   @include('admin.articles.sidebar')
+   @include('admin.articles.blocks.sidebar')
    @include('admin.articles.blocks.archives')
 @endsection
 
 @section('content')
+
    <form style="display:inline;">
       {!! csrf_field() !!}
       
@@ -44,7 +44,6 @@
          <div class="card-body section_body p-2">
             
             @if($articles->count())
-               {{-- @include('admin.articles.myArticles.datagrid') --}}
                <table id="datatable" class="table table-hover table-sm searchHighlight">
                   <thead>
                      <tr>
@@ -97,7 +96,3 @@
       </div>
    </form>
 @endsection
-
-{{-- @section('scripts')
-   @include('admin.articles.common.btnScript')
-@endsection --}}

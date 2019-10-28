@@ -11,10 +11,10 @@
          <th class="hidden-xs">Category</th>
          <th class="hidden-xs hidden-sm">Views</th>
          <th class="hidden-xs">Author</th>
-         @if(checkACL('manager'))
+         
             <th class="hidden-sm hidden-xs">Created On</th>
             <th class="hidden-sm hidden-xs">Publish(ed) On</th>
-         @endif
+         
       </tr>
    </thead>
    <tbody>
@@ -32,7 +32,6 @@
             <td class="hidden-xs">{{ $article->category }}</td>
             <td class="hidden-xs hidden-sm">{{ $article->views }}</td>
             <td class="hidden-xs">@include('common.authorFormat', ['model'=>$article, 'field'=>'user'])</td>
-            @if(checkACL('manager'))
                <td class="hidden-sm hidden-xs">@include('common.dateFormat', ['model'=>$article, 'field'=>'created_at'])</td>
                <td class="hidden-sm hidden-xs 
                   {{ $article->published_at >= Carbon\Carbon::now() ? 'text text-warning' : '' }}
@@ -40,7 +39,6 @@
                ">
                   @include('common.dateFormat', ['model'=>$article, 'field'=>'published_at'])
                </td>
-            @endif
          </tr>
       @endforeach
    </tbody>

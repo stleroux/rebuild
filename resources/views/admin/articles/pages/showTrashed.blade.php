@@ -8,7 +8,7 @@
 @endsection
 
 @section('right_column')
-	@include('admin.articles.sidebar')
+	@include('admin.articles.blocks.sidebar')
 	@include('admin.articles.blocks.archives')
 @endsection
 
@@ -16,13 +16,13 @@
 
 	<div class="card mb-3">
 		<div class="card-header section_header p-2">
-			Article Details
+			<span class="text-danger font-weight-bold">
+				Article Details
+			</span>
 			<span class="float-right">
             <div class="btn-group">
-					@include('admin.articles.buttons.back', ['size'=>'xs'])
 					@include('admin.articles.buttons.help', ['size'=>'xs', 'bookmark'=>''])
-               @include('admin.articles.buttons.unpublishAll', ['size'=>'xs'])
-               @include('admin.articles.buttons.add', ['size'=>'xs'])
+					@include('admin.articles.buttons.back', ['size'=>'xs'])
 				</div>
 			</span>
 		</div>
@@ -32,14 +32,12 @@
 					<div class="form-group">
 						{!! Form::label('title', 'Title') !!}
 						{!! Form::text('title', $article->title, ['class'=>'form-control form-control-sm', 'readonly']) !!}
-						{{-- <div class="well well-sm">{!! $article->title !!}</div> --}}
 					</div>
 				</div>
 				<div class="col-xs-4 col-sm-4 col-md-4">
 					<div class="form-group">
 						{{ Form::label('category_id', 'Category', ['class'=>'required']) }}
 						{{ Form::text('category_id', $article->category, ['class'=>'form-control form-control-sm', 'readonly']) }}
-						{{-- <div class="well well-sm">{{ $article->category->name}}</div> --}}
 					</div>
 				</div>
 			</div>
@@ -48,7 +46,6 @@
 				<div class="col-xs-12 col-sm-12 col-md-12">
 					<div class="form-group">
 						{!! Form::label('description_eng', 'Description (En)', ['class'=>'required']) !!}
-						{{-- <div class="well">{!! $article->description_eng !!}</div> --}}
 						{{ Form::textarea('decription_eng', strip_tags($article->description_eng), ['class'=>'form-control form-control-sm', 'readonly']) }}
 					</div>
 				</div>
@@ -59,25 +56,10 @@
 					<div class="form-group">
 						{!! Form::label('description_fre', 'Description (Fr)', ['class'=>'required']) !!}
 						{{ Form::textarea('decription_fre', strip_tags($article->description_fre), ['class'=>'form-control form-control-sm', 'readonly']) }}
-						{{-- <div class="well">{!! $article->description_fre !!}</div> --}}
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	{{-- @include('admin.articles.modals.delete') --}}
-	{{-- @include('admin.articles.modals.publish') --}}
-	{{-- @include('admin.articles.modals.restore') --}}
-@endsection
-
-@section('blocks')
-	{{-- @include('admin.articles.showTrashed.controls') --}}
-	@include('admin.articles.trashed.help')
-@endsection
-
-@section ('scripts')
-	{{-- @include('scripts.modals.delete') --}}
-	{{-- @include('scripts.modals.publish') --}}
-	{{-- @include('scripts.modals.restore') --}}
 @endsection

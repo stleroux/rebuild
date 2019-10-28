@@ -22,6 +22,20 @@ use URL;
 
 class FunctionsController extends Controller
 {
+##################################################################################################################
+#  ██████╗ ██████╗ ███╗   ██╗███████╗████████╗██████╗ ██╗   ██╗ ██████╗████████╗
+# ██╔════╝██╔═══██╗████╗  ██║██╔════╝╚══██╔══╝██╔══██╗██║   ██║██╔════╝╚══██╔══╝
+# ██║     ██║   ██║██╔██╗ ██║███████╗   ██║   ██████╔╝██║   ██║██║        ██║   
+# ██║     ██║   ██║██║╚██╗██║╚════██║   ██║   ██╔══██╗██║   ██║██║        ██║   
+# ╚██████╗╚██████╔╝██║ ╚████║███████║   ██║   ██║  ██║╚██████╔╝╚██████╗   ██║   
+#  ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝  ╚═════╝   ╚═╝   
+##################################################################################################################
+   public function __construct() {
+      // only allow authenticated users to access these pages
+      $this->middleware('auth');
+      $this->enablePermissions = true;
+   }
+
 
 ##################################################################################################################
 #  █████╗ ██████╗ ██████╗     ███████╗ █████╗ ██╗   ██╗ ██████╗ ██████╗ ██╗████████╗███████╗
@@ -33,6 +47,11 @@ class FunctionsController extends Controller
 ##################################################################################################################
    public function addfavorite($id)
    {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_browse')) { abort(401, 'Unauthorized Access'); }
+      }
+
       $user = Auth::user()->id;
       $article = Article::find($id);
 
@@ -54,6 +73,11 @@ class FunctionsController extends Controller
 ##################################################################################################################
    public function deleteAll(Request $request)
    {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_delete')) { abort(401, 'Unauthorized Access'); }
+      }
+
       $this->validate($request, [
          'checked' => 'required',
       ]);
@@ -78,6 +102,11 @@ class FunctionsController extends Controller
 ##################################################################################################################
    public static function deleteTrashed($id)
    {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_delete')) { abort(401, 'Unauthorized Access'); }
+      }
+
       $article = Article::withTrashed()->findorFail($id);
 
       $article->forceDelete();
@@ -137,6 +166,11 @@ class FunctionsController extends Controller
 ##################################################################################################################
    public function duplicate($id)
    {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_edit')) { abort(401, 'Unauthorized Access'); }
+      }
+
       // Pass along the ROUTE value of the previous page
       $ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
 
@@ -224,6 +258,11 @@ class FunctionsController extends Controller
 ##################################################################################################################
    public function makeprivate($id)
    {
+      // Check if user has required permission
+      // if($this->enablePermissions) {
+      //    if(!checkPerm('article_browse')) { abort(401, 'Unauthorized Access'); }
+      // }
+
       $article = Article::find($id);
          $article->personal = 1;
       $article->save();
@@ -243,6 +282,11 @@ class FunctionsController extends Controller
 ##################################################################################################################
    public function publish($id)
    {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_edit')) { abort(401, 'Unauthorized Access'); }
+      }
+
       $article = Article::withTrashed()->find($id);
         $article->published_at = Carbon::now();
         $article->deleted_at = Null;
@@ -263,6 +307,11 @@ class FunctionsController extends Controller
 ##################################################################################################################
    public function publishAll(Request $request)
    {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_edit')) { abort(401, 'Unauthorized Access'); }
+      }
+
       $this->validate($request, [
          'checked' => 'required',
       ]);
@@ -291,6 +340,11 @@ class FunctionsController extends Controller
 ##################################################################################################################
    public function removefavorite($id)
    {
+      // Check if user has required permission
+      // if($this->enablePermissions) {
+      //    if(!checkPerm('')) { abort(401, 'Unauthorized Access'); }
+      // }
+
       $user = Auth::user()->id;
       $article = Article::find($id);
 
@@ -311,6 +365,11 @@ class FunctionsController extends Controller
 ##################################################################################################################
    public function removeprivate($id)
    {
+      // Check if user has required permission
+      // if($this->enablePermissions) {
+      //    if(!checkPerm('')) { abort(401, 'Unauthorized Access'); }
+      // }
+
       $article = Article::find($id);
          $article->personal = 0;
       $article->save();
@@ -331,6 +390,11 @@ class FunctionsController extends Controller
 ##################################################################################################################
    public function resetViews($id)
    {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_edit')) { abort(401, 'Unauthorized Access'); }
+      }
+
       $article = Article::find($id);
          $article->views = 0;
       $article->save();
@@ -351,6 +415,11 @@ class FunctionsController extends Controller
 ##################################################################################################################
    public function restore($id)
    {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_delete')) { abort(401, 'Unauthorized Access'); }
+      }
+
       $article = Article::withTrashed()->findOrFail($id);
 
       $article->restore();
@@ -371,6 +440,11 @@ class FunctionsController extends Controller
 ##################################################################################################################
    public function restoreAll(Request $request)
    {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_delete')) { abort(401, 'Unauthorized Access'); }
+      }
+
       $checked = $request->input('checked');
 
       Article::whereIn('id', $checked)->restore();
@@ -390,6 +464,11 @@ class FunctionsController extends Controller
 ##################################################################################################################
    public function storeComment(CreateCommentRequest $request, $id)
    {
+      // Check if user has required permission
+      // if($this->enablePermissions) {
+      //    if(!checkPerm('')) { abort(401, 'Unauthorized Access'); }
+      // }
+
       $article = Article::find($id);
 
       $comment = new Comment();
@@ -414,6 +493,11 @@ class FunctionsController extends Controller
 ##################################################################################################################
    public function trashAll(Request $request)
    {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_delete')) { abort(401, 'Unauthorized Access'); }
+      }
+
       $this->validate($request, [
          'checked' => 'required',
       ]);
@@ -443,6 +527,11 @@ class FunctionsController extends Controller
 ##################################################################################################################
    public function unpublish($id)
    {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_edit')) { abort(401, 'Unauthorized Access'); }
+      }
+
       $article = Article::find($id);
          $article->published_at = NULL;
          $favorites = DB::select('select * from article_user where article_id = '. $id, [1]);
@@ -468,6 +557,11 @@ class FunctionsController extends Controller
 ##################################################################################################################
    public function unpublishAll(Request $request)
    {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_edit')) { abort(401, 'Unauthorized Access'); }
+      }
+
       $this->validate($request, [
          'checked' => 'required',
       ]);

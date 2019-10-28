@@ -9,7 +9,7 @@
 @endsection
 
 @section('right_column')
-   @include('recipes.block.sidebar')
+   @include('recipes.blocks.sidebar')
    @include('recipes.blocks.popularRecipes')
    @include('recipes.blocks.archives')
 @endsection

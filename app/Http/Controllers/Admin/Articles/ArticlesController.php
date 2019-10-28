@@ -36,7 +36,7 @@ class ArticlesController extends Controller
    public function __construct() {
       // only allow authenticated users to access these pages
       $this->middleware('auth');
-      $this->enablePermissions = false;
+      $this->enablePermissions = true;
    }
 
 
@@ -51,6 +51,11 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function create()
    {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_add')) { abort(401, 'Unauthorized Access'); }
+      }
+
       $article = New Article();
       return view('admin.articles.create', compact('article'));
    }
@@ -68,6 +73,11 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function destroy($id)
    {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_delete')) { abort(401, 'Unauthorized Access'); }
+      }
+
       $article = Article::findOrFail($id);
          $article->published_at = Null;
             // Delete related favorites
@@ -94,6 +104,11 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function edit(Article $article, $id)
    {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_edit')) { abort(401, 'Unauthorized Access'); }
+      }
+
       // Find the article to edit
       $article = Article::find($id);
       return view('admin.articles.edit', compact('article'));
@@ -111,6 +126,11 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function index(Request $request, $key=null)
    {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_browse')) { abort(401, 'Unauthorized Access'); }
+      }
+
       // Set the session to the current page route
       Session::put('fromPage', url()->full());
 
@@ -152,6 +172,11 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function show($id)
    {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_read')) { abort(401, 'Unauthorized Access'); }
+      }
+
       $article = Article::findOrFail($id);
 
       // get previous article id
@@ -175,6 +200,11 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function store()
    {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_add')) { abort(401, 'Unauthorized Access'); }
+      }
+
       Article::create($this->validateRequest());
 
       Session::flash('success','The article has been created successfully!');
@@ -193,6 +223,11 @@ class ArticlesController extends Controller
 ##################################################################################################################
    public function update(Article $article, $id)
    {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_edit')) { abort(401, 'Unauthorized Access'); }
+      }
+
       $article = Article::findOrFail($id);
       $article->update($this->validateRequest());
       
