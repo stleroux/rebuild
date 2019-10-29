@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin\Tests;
 
-use App\Http\Requests\{{modelName}}Request;
-use App\Models\{{modelName}};
+// use App\Http\Requests\TestRequest;
+use App\Models\Test;
 use Session;
 
-class {{modelNamePlural}}Controller extends Controller
+class TestsController extends Controller
 {
 ##################################################################################################################
 #  ██████╗ ██████╗ ███╗   ██╗███████╗████████╗██████╗ ██╗   ██╗ ██████╗████████╗
@@ -37,12 +37,12 @@ class {{modelNamePlural}}Controller extends Controller
         // Check if user has required permission
         if($this->enablePermissions)
         {
-            if(!checkPerm('{{modelNameSingularLowerCase}}_create')) { abort(401, 'Unauthorized Access'); }
+            if(!checkPerm('test_create')) { abort(401, 'Unauthorized Access'); }
         }
 
-        ${{modelNameSingularLowerCase}} = New {{modelName}}();
+        $test = New Test();
 
-        return view('{{modelNamePluralLowerCase}}.create', compact('{{modelNameSingularLowerCase}}'));
+        return view('admin.tests.create', compact('test'));
     }
 
 
@@ -56,20 +56,20 @@ class {{modelNamePlural}}Controller extends Controller
 // Remove the specified resource from storage
 // Used in the index page and trashAll action to soft delete multiple records
 ##################################################################################################################
-    public function destroy({{modelName}} ${{modelNameSingularLowerCase}})
+    public function destroy(Test $test)
     {
         // Check if user has required permission
         if($this->enablePermissions)
         {
-            if(!checkPerm('{{modelNameSingularLowerCase}}_delete')) { abort(401, 'Unauthorized Access'); }
+            if(!checkPerm('test_delete')) { abort(401, 'Unauthorized Access'); }
         }
 
-        ${{modelNameSingularLowerCase}}->delete();
+        $test->delete();
 
         // Set flash data with success message
-        Session::flash('delete','The {{modelNameSingularLowerCase}} was deleted successfully.');
+        Session::flash('delete','The test was deleted successfully.');
         // Redirect
-        return redirect()->route('{{modelNamePluralLowerCase}}.index');
+        return redirect()->route('admin.tests.index');
     }
 
 
@@ -82,15 +82,15 @@ class {{modelNamePlural}}Controller extends Controller
 # ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝
 // Mass Delete selected rows - all selected records
 ##################################################################################################################
-    public function delete({{modelName}} ${{modelNameSingularLowerCase}})
+    public function delete(Test $test)
     {
         // Check if user has required permission
         if($this->enablePermissions)
         {
-            if(!checkPerm('{{modelNameSingularLowerCase}}_delete')) { abort(401, 'Unauthorized Access'); }
+            if(!checkPerm('test_delete')) { abort(401, 'Unauthorized Access'); }
         }
 
-        return view('{{modelNamePluralLowerCase}}.delete', compact('{{modelNameSingularLowerCase}}'));
+        return view('admin.tests.delete', compact('test'));
     }
 
 
@@ -103,15 +103,15 @@ class {{modelNamePlural}}Controller extends Controller
 # ╚══════╝╚═════╝ ╚═╝   ╚═╝   
 // Show the form for editing the specified resource
 ##################################################################################################################
-    public function edit({{modelName}} ${{modelNameSingularLowerCase}})
+    public function edit(Test $test)
     {
         // Check if user has required permission
         if($this->enablePermissions)
         {
-            if(!checkPerm('{{modelNameSingularLowerCase}}_edit')) { abort(401, 'Unauthorized Access'); }
+            if(!checkPerm('test_edit')) { abort(401, 'Unauthorized Access'); }
         }
 
-        return view('{{modelNamePluralLowerCase}}.edit', compact('{{modelNameSingularLowerCase}}'));
+        return view('admin.tests.edit', compact('test'));
     }
 
 
@@ -129,11 +129,11 @@ class {{modelNamePlural}}Controller extends Controller
         // Check if user has required permission
         if($this->enablePermissions)
         {
-            if(!checkPerm('{{modelNameSingularLowerCase}}_index')) { abort(401, 'Unauthorized Access'); }
+            if(!checkPerm('test_index')) { abort(401, 'Unauthorized Access'); }
         }
 
-        ${{modelNamePluralLowerCase}} = {{modelName}}::All();
-        return view('{{modelNamePluralLowerCase}}.index', compact('{{modelNamePluralLowerCase}}'));
+        $tests = Test::All();
+        return view('admin.tests.index', compact('tests'));
     }
 
 
@@ -148,9 +148,9 @@ class {{modelNamePlural}}Controller extends Controller
 ##################################################################################################################
     public function store()
     {
-        {{modelName}}::create($this->validateRequest());
+        Test::create($this->validateRequest());
 
-        return redirect('{{modelNamePluralLowerCase}}');
+        return redirect('admin.tests');
     }
 
 
@@ -163,15 +163,15 @@ class {{modelNamePlural}}Controller extends Controller
 # ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝ 
 // Display the specified resource
 ##################################################################################################################
-    public function show({{modelName}} ${{modelNameSingularLowerCase}})
+    public function show(Test $test)
     {
         // Check if user has required permission
         if($this->enablePermissions)
         {
-            if(!checkPerm('{{modelNameSingularLowerCase}}_show')) { abort(401, 'Unauthorized Access'); }
+            if(!checkPerm('test_show')) { abort(401, 'Unauthorized Access'); }
         }
 
-        return view('{{modelNamePluralLowerCase}}.show', compact('{{modelNameSingularLowerCase}}'));
+        return view('admin.tests.show', compact('test'));
     }
 
 
@@ -184,11 +184,11 @@ class {{modelNamePlural}}Controller extends Controller
 #  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
 // UPDATE :: Update the specified resource in storage
 ##################################################################################################################
-    public function update({{modelName}} ${{modelNameSingularLowerCase}})
+    public function update(Test $test)
     {
-        ${{modelNameSingularLowerCase}}->update($this->validateRequest());
+        $test->update($this->validateRequest());
 
-        return redirect('{{modelNamePluralLowerCase}}');
+        return redirect('admin.tests');
     }
 
 

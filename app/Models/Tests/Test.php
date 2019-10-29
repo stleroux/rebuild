@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models\{{modelNamePlural}};
+namespace App\Models\Tests;
 
 use Illuminate\Database\Eloquent\Model;
 
-class {{modelName}} extends Model
+class Test extends Model
 {
    protected $guarded = [];
 

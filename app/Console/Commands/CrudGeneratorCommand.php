@@ -28,7 +28,7 @@ class CrudGeneratorCommand extends Command
       $name = $this->ask('What is the name of the model? (Must be Capitalized singular form: i.e.: User)');
 
       $this->createFolders($name);
-      $this->info('Folders created');
+      $this->info('Frontend folders created');
       $this->createAdminFolders($name);
       $this->info('Admin folders created');
 
@@ -38,8 +38,9 @@ class CrudGeneratorCommand extends Command
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       if ($this->confirm('Do you wish to create the CONTROLLERS?')) {
          $this->controllers($name);
+         $this->info('Frontend controllers created');
          $this->adminControllers($name);
-         $this->info('Controller created');
+         $this->info('Admin controllers created');
       }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -53,11 +54,19 @@ class CrudGeneratorCommand extends Command
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       if ($this->confirm('Do you wish to create the VIEWS and ASSOCIATED FILES?')) {
-         $this->addViews($name);
-            $this->info('Views created');
-         $this->addButtons($name);
-            $this->info('Buttons added');
+         $this->addFrontendViews($name);
+            $this->info('Frontend views created');
+         $this->addFrontendButtons($name);
+            $this->info('Frontend buttons added');
+        $this->addAdminViews($name);
+            $this->info('Admin views created');
+         $this->addAdminButtons($name);
+            $this->info('Admn buttons added');
       }
+
+
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -113,22 +122,30 @@ class CrudGeneratorCommand extends Command
    {
       file_put_contents(
          app_path("/Http/Controllers/" . Str::plural($name) . "/" . Str::plural($name) . "Controller.php"),
-         $this->getTemplate('Controller', $name));
+         $this->getTemplate('frontend/controllers/Controller', $name));
+
+      file_put_contents(
+         app_path("/Http/Controllers/" . Str::plural($name) . "/" . "ExtraViewsController.php"),
+         $this->getTemplate('frontend/controllers/ExtraViewsController', $name));
+
+      file_put_contents(
+         app_path("/Http/Controllers/" . Str::plural($name) . "/" . "FunctionsController.php"),
+         $this->getTemplate('frontend/controllers/FunctionsController', $name));
    }
 
    protected function adminControllers($name)
    {
       file_put_contents(
          app_path("/Http/Controllers/Admin/" . Str::plural($name) . "/" . Str::plural($name) . "Controller.php"),
-         $this->getTemplate('controllers/admin/Controller', $name));
+         $this->getTemplate('admin/controllers/Controller', $name));
 
       file_put_contents(
          app_path("/Http/Controllers/Admin/" . Str::plural($name) . "/" . "ExtraViewsController.php"),
-         $this->getTemplate('controllers/admin/ExtraViewsController', $name));
+         $this->getTemplate('admin/controllers/ExtraViewsController', $name));
 
       file_put_contents(
          app_path("/Http/Controllers/Admin/" . Str::plural($name) . "/" . "FunctionsController.php"),
-         $this->getTemplate('controllers/admin/FunctionsController', $name));
+         $this->getTemplate('admin/controllers/FunctionsController', $name));
    }
 
 
@@ -158,8 +175,18 @@ class CrudGeneratorCommand extends Command
 
 
 
+    protected function addViews($name)
+   {
+      file_put_contents(
+         resource_path("/views/".strtolower(Str::plural($name))."/index.blade.php"),
+         $this->getTemplate('views/index', $name));
 
-   protected function addViews($name)
+      file_put_contents(
+         resource_path("/views/".strtolower(Str::plural($name))."/show.blade.php"),
+         $this->getTemplate('views/show', $name));
+   }
+
+   protected function addAdminViews($name)
    {
       file_put_contents(
          resource_path("/views/".strtolower(Str::plural($name))."/create.blade.php"),

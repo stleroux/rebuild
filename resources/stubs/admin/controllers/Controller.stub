@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin\{{modelNamePlural}};
 
-use App\Http\Requests\{{modelName}}Request;
+// use App\Http\Requests\{{modelName}}Request;
 use App\Models\{{modelName}};
 use Session;
 
@@ -42,7 +42,7 @@ class {{modelNamePlural}}Controller extends Controller
 
         ${{modelNameSingularLowerCase}} = New {{modelName}}();
 
-        return view('{{modelNamePluralLowerCase}}.create', compact('{{modelNameSingularLowerCase}}'));
+        return view('admin.{{modelNamePluralLowerCase}}.create', compact('{{modelNameSingularLowerCase}}'));
     }
 
 
@@ -69,7 +69,7 @@ class {{modelNamePlural}}Controller extends Controller
         // Set flash data with success message
         Session::flash('delete','The {{modelNameSingularLowerCase}} was deleted successfully.');
         // Redirect
-        return redirect()->route('{{modelNamePluralLowerCase}}.index');
+        return redirect()->route('admin.{{modelNamePluralLowerCase}}.index');
     }
 
 
@@ -90,7 +90,7 @@ class {{modelNamePlural}}Controller extends Controller
             if(!checkPerm('{{modelNameSingularLowerCase}}_delete')) { abort(401, 'Unauthorized Access'); }
         }
 
-        return view('{{modelNamePluralLowerCase}}.delete', compact('{{modelNameSingularLowerCase}}'));
+        return view('admin.{{modelNamePluralLowerCase}}.delete', compact('{{modelNameSingularLowerCase}}'));
     }
 
 
@@ -111,7 +111,7 @@ class {{modelNamePlural}}Controller extends Controller
             if(!checkPerm('{{modelNameSingularLowerCase}}_edit')) { abort(401, 'Unauthorized Access'); }
         }
 
-        return view('{{modelNamePluralLowerCase}}.edit', compact('{{modelNameSingularLowerCase}}'));
+        return view('admin.{{modelNamePluralLowerCase}}.edit', compact('{{modelNameSingularLowerCase}}'));
     }
 
 
@@ -133,7 +133,7 @@ class {{modelNamePlural}}Controller extends Controller
         }
 
         ${{modelNamePluralLowerCase}} = {{modelName}}::All();
-        return view('{{modelNamePluralLowerCase}}.index', compact('{{modelNamePluralLowerCase}}'));
+        return view('admin.{{modelNamePluralLowerCase}}.index', compact('{{modelNamePluralLowerCase}}'));
     }
 
 
@@ -150,7 +150,7 @@ class {{modelNamePlural}}Controller extends Controller
     {
         {{modelName}}::create($this->validateRequest());
 
-        return redirect('{{modelNamePluralLowerCase}}');
+        return redirect('admin.{{modelNamePluralLowerCase}}');
     }
 
 
@@ -171,7 +171,7 @@ class {{modelNamePlural}}Controller extends Controller
             if(!checkPerm('{{modelNameSingularLowerCase}}_show')) { abort(401, 'Unauthorized Access'); }
         }
 
-        return view('{{modelNamePluralLowerCase}}.show', compact('{{modelNameSingularLowerCase}}'));
+        return view('admin.{{modelNamePluralLowerCase}}.show', compact('{{modelNameSingularLowerCase}}'));
     }
 
 
@@ -188,7 +188,7 @@ class {{modelNamePlural}}Controller extends Controller
     {
         ${{modelNameSingularLowerCase}}->update($this->validateRequest());
 
-        return redirect('{{modelNamePluralLowerCase}}');
+        return redirect('admin.{{modelNamePluralLowerCase}}');
     }
 
 

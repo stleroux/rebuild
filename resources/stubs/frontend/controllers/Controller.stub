@@ -1,0 +1,69 @@
+<?php
+
+namespace App\Http\Controllers\{{modelNamePlural}};
+
+// use App\Http\Requests\{{modelName}}Request;
+use App\Models\{{modelName}};
+use Session;
+
+class {{modelNamePlural}}Controller extends Controller
+{
+##################################################################################################################
+#  ██████╗ ██████╗ ███╗   ██╗███████╗████████╗██████╗ ██╗   ██╗ ██████╗████████╗
+# ██╔════╝██╔═══██╗████╗  ██║██╔════╝╚══██╔══╝██╔══██╗██║   ██║██╔════╝╚══██╔══╝
+# ██║     ██║   ██║██╔██╗ ██║███████╗   ██║   ██████╔╝██║   ██║██║        ██║   
+# ██║     ██║   ██║██║╚██╗██║╚════██║   ██║   ██╔══██╗██║   ██║██║        ██║   
+# ╚██████╗╚██████╔╝██║ ╚████║███████║   ██║   ██║  ██║╚██████╔╝╚██████╗   ██║   
+#  ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝  ╚═════╝   ╚═╝   
+##################################################################################################################
+   public function __construct()
+   {
+      $this->middleware('auth');
+      $this->enablePermissions = false;
+   }
+
+
+##################################################################################################################
+# ██╗███╗   ██╗██████╗ ███████╗██╗  ██╗
+# ██║████╗  ██║██╔══██╗██╔════╝╚██╗██╔╝
+# ██║██╔██╗ ██║██║  ██║█████╗   ╚███╔╝ 
+# ██║██║╚██╗██║██║  ██║██╔══╝   ██╔██╗ 
+# ██║██║ ╚████║██████╔╝███████╗██╔╝ ██╗
+# ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝
+// Display a list of resources
+##################################################################################################################
+    public function index()
+    {
+        // Check if user has required permission
+        if($this->enablePermissions)
+        {
+            if(!checkPerm('{{modelNameSingularLowerCase}}_index')) { abort(401, 'Unauthorized Access'); }
+        }
+
+        ${{modelNamePluralLowerCase}} = {{modelName}}::All();
+        return view('{{modelNamePluralLowerCase}}.index', compact('{{modelNamePluralLowerCase}}'));
+    }
+
+
+##################################################################################################################
+# ███████╗██╗  ██╗ ██████╗ ██╗    ██╗
+# ██╔════╝██║  ██║██╔═══██╗██║    ██║
+# ███████╗███████║██║   ██║██║ █╗ ██║
+# ╚════██║██╔══██║██║   ██║██║███╗██║
+# ███████║██║  ██║╚██████╔╝╚███╔███╔╝
+# ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝ 
+// Display the specified resource
+##################################################################################################################
+    public function show({{modelName}} ${{modelNameSingularLowerCase}})
+    {
+        // Check if user has required permission
+        if($this->enablePermissions)
+        {
+            if(!checkPerm('{{modelNameSingularLowerCase}}_show')) { abort(401, 'Unauthorized Access'); }
+        }
+
+        return view('{{modelNamePluralLowerCase}}.show', compact('{{modelNameSingularLowerCase}}'));
+    }
+
+
+}
