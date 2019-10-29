@@ -1,0 +1,12 @@
+<?php
+
+namespace App\Http\Controllers;
+
+// use App\Http\Requests\{{modelName}}Request;
+use App\Models\{{modelName}};
+use Session;
+
+class FunctionsController extends Controller
+{
+
+}

@@ -1,0 +1,33 @@
+@extends('layouts.backend')
+
+@section('stylesheets')
+   {{-- {{ Html::style('css/.css') }} --}}
+@endsection
+
+@section('left_column')
+   @include('blocks.main_menu')
+@endsection
+
+@section('right_column')
+@endsection
+
+@section('content')
+   
+   <div class="card mb-3">
+
+      <div class="card-header">
+         <i class="fa fa-plus-square"></i>
+         Show {{modelName}}
+         <span class="float-right">
+            @include('{{modelNamePluralLowerCase}}.addins.links.help', ['model'=>'{{modelNameSingularLowerCase}}', 'bookmark'=>'{{modelNamePluralLowerCase}}'])
+            @include('{{modelNamePluralLowerCase}}.addins.links.back', ['model'=>'category'])
+         </span>
+      </div>
+
+      <div class="card-body">
+         <p>{{ ${{modelNameSingularLowerCase}}->name }}</p>
+      </div>
+
+   </div>
+   
+@endsection
