@@ -1,0 +1,98 @@
+@extends('layouts.master')
+
+@section('stylesheets')
+   {{ Html::style('css/woodbarn.css') }}
+@endsection
+
+@section('left_column')
+@endsection
+
+@section('right_column')
+	@include('admin.{{modelNamePluralLowerCase}}.blocks.sidebar')
+	@include('admin.{{modelNamePluralLowerCase}}.blocks.archives')
+@endsection
+
+@section('content')
+
+	<form style="display:inline;">
+		{!! csrf_field() !!}
+		
+         <div class="card mb-3">
+
+				<div class="card-header section_header p-2">
+					<i class="fa fa-file-text-o"></i>
+					New {{modelNamePlural}}
+					<span class="float-right">
+            		<div class="btn-group">
+							@include('admin.{{modelNamePluralLowerCase}}.buttons.help', ['size'=>'xs', 'bookmark'=>'{{modelNamePluralLowerCase}}'])
+							@include('admin.{{modelNamePluralLowerCase}}.buttons.unpublishAll', ['size'=>'xs'])
+							@include('admin.{{modelNamePluralLowerCase}}.buttons.add', ['size'=>'xs'])
+						</div>
+					</span>
+				</div>
+
+				@if(${{modelNamePluralLowerCase}}->count())
+					<div class="text-center">
+						<div class="btn-group p-1">
+							<a href="{{ route('admin.{{modelNamePluralLowerCase}}.new{{modelNamePlural}}') }}" class="{{ Request::is('admin/{{modelNamePluralLowerCase}}/new{{modelNamePlural}}') ? "btn-secondary": "btn-primary" }} btn btn-sm">All</a>
+							@foreach($letters as $value)
+								<a href="{{ route('admin.{{modelNamePluralLowerCase}}.new{{modelNamePlural}}', $value) }}" class="{{ Request::is('admin/{{modelNamePluralLowerCase}}/new{{modelNamePlural}}/'.$value) ? "btn-secondary": "btn-primary" }} btn btn-sm">{{ strtoupper($value) }}</a>
+							@endforeach
+						</div>
+					</div>
+				@endif
+
+				<div class="card-body section_body p-2">
+					@if(${{modelNamePluralLowerCase}}->count())
+						<table id="datatable" class="table table-hover table-sm searchHighlight">
+							<thead>
+								<tr>
+									<th><input type="checkbox" id="selectall" class="checked" /></th>
+									{{-- Add columns for search purposes only --}}
+									<th class="d-none">English</th>
+									<th class="d-none">French</th>
+									{{-- Add columns for search purposes only --}}
+
+									<th><div>Title</div></th>
+									<th class="hidden-xs">Category</th>
+									<th class="hidden-xs hidden-sm">Views</th>
+									<th class="hidden-xs">Author</th>
+									<th class="hidden-sm hidden-xs">Created On</th>
+									<th class="hidden-sm hidden-xs">Publish(ed) On</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach (${{modelNameSingularLowerCase}}s as $key => ${{modelNameSingularLowerCase}})
+									<tr>
+										<td>
+											<input type="checkbox" onClick="checkbox_is_checked()" name="checked[]" value="{{${{modelNameSingularLowerCase}}->id}}" class="check-all">
+										</td>
+										{{-- Hide columns at all levels. Only needed because Datatables only searches for columns in the table --}}
+										<td class="d-none">{{ ${{modelNameSingularLowerCase}}->description_eng }}</td>
+										<td class="d-none">{{ ${{modelNameSingularLowerCase}}->description_fre }}</td>
+										{{-- Hide columns at all levels. Only needed because Datatables only searches for columns in the table --}}
+										
+										<td><a href="{{ route('admin.{{modelNamePluralLowerCase}}s.show', ${{modelNameSingularLowerCase}}->id) }}" class="">{{ ${{modelNameSingularLowerCase}}->title }}</a></td>
+										<td class="hidden-xs">{{ ${{modelNameSingularLowerCase}}->category }}</td>
+										<td class="hidden-xs hidden-sm">{{ ${{modelNameSingularLowerCase}}->views }}</td>
+										<td class="hidden-xs">@include('common.authorFormat', ['model'=>${{modelNameSingularLowerCase}}, 'field'=>'user'])</td>
+										<td class="hidden-sm hidden-xs">@include('common.dateFormat', ['model'=>${{modelNameSingularLowerCase}}, 'field'=>'created_at'])</td>
+										<td class="hidden-sm hidden-xs 
+												{{ ${{modelNameSingularLowerCase}}->published_at >= Carbon\Carbon::now() ? 'text text-warning' : '' }}
+												{{ ${{modelNameSingularLowerCase}}->published_at == null ? 'text text-info' : '' }}
+										">
+											@include('common.dateFormat', ['model'=>${{modelNameSingularLowerCase}}, 'field'=>'published_at'])
+										</td>
+									</tr>
+								@endforeach
+							</tbody>
+						</table>
+					@else
+						{{ setting('no_records_found') }}
+					@endif
+				</div>
+			</div>
+	
+	</form>
+
+@endsection

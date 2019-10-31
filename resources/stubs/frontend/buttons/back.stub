@@ -1,0 +1,19 @@
+<a href="{{ route('{{modelNamePluralLowerCase}}.index') }}"
+   class="btn btn-sm btn-primary"
+   title="{{modelName}}">
+   <i class="{{ Config::get('buttons.back') }}"></i>
+</a>
+
+@if(Session::get('fromPage')==='{{modelNameSingularLowerCase}}.index')
+   <a href="{{ route('{{modelNameSingularLowerCase}}.index') }}"
+      class="btn btn-sm btn-primary"
+      title="{{modelName}}">
+      <i class="{{ Config::get('buttons.back') }}"></i>
+   </a>
+@elseif(Session::get('fromPage'))
+   <a href="{{ route(Session::get('fromPage')) }}"
+      class="btn btn-sm btn-primary"
+      title="Back">
+      <i class="{{ Config::get('buttons.back') }}"></i>
+   </a>
+@endif

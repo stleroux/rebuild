@@ -1,0 +1,54 @@
+<?php
+
+namespace App\Providers;
+
+use Illuminate\Support\ServiceProvider;
+use App\Models\{{modelNamePlural}}\{{modelName}};
+use Carbon\Carbon;
+use DB;
+
+class {{modelName}}ServiceProvider extends ServiceProvider
+{
+   /**
+   * Register services.
+   *
+   * @return void
+   */
+   public function register()
+   {
+     //
+   }
+
+   /**
+   * Bootstrap services.
+   *
+   * @return void
+   */
+   public function boot()
+   {
+      view()->composer('admin.{{modelNamePluralLowerCase}}.blocks.archives', function ($view) {
+         ${{modelNameSingularLowerCase}}links = DB::table({{modelNamePluralLowerCase}})
+            ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) {{modelNameSingularLowerCase}}_count'))
+            ->where('published_at', '<=', Carbon::now())
+            ->groupBy('year')
+            ->groupBy('month')
+            ->orderBy('year', 'desc')
+            ->orderBy('month', 'desc')
+            ->get();
+         $view->with('{{modelNameSingularLowerCase}}links', ${{modelNameSingularLowerCase}}links);
+      });
+
+      view()->composer('{{modelNamePluralLowerCase}}.blocks.archives', function ($view) {
+         ${{modelNameSingularLowerCase}}links = DB::table('{{modelNamePluralLowerCase}}')
+            ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) {{modelNameSingularLowerCase}}_count'))
+            ->where('published_at', '<=', Carbon::now())
+            ->groupBy('year')
+            ->groupBy('month')
+            ->orderBy('year', 'desc')
+            ->orderBy('month', 'desc')
+            ->get();
+         $view->with('{{modelNameSingularLowerCase}}links', ${{modelNameSingularLowerCase}}links);
+      });
+   }
+
+}
