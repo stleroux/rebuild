@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Articles;
+namespace App\Http\Controllers\Admin\tests;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller; // Required for validation
 use Illuminate\Support\Facades\Input;
 
-use App\Models\Articles\Article;
-use App\Models\Category;
+use App\Models\tests\Test;
+// use App\Models\Category;
 use App\Models\Comment;
 use App\Models\User;
 use Carbon\Carbon;
@@ -49,15 +49,15 @@ class FunctionsController extends Controller
    {
       // Check if user has required permission
       if($this->enablePermissions) {
-         if(!checkPerm('article_browse')) { abort(401, 'Unauthorized Access'); }
+         if(!checkPerm('test_browse')) { abort(401, 'Unauthorized Access'); }
       }
 
       $user = Auth::user()->id;
-      $article = Article::find($id);
+      $test = Test::find($id);
 
-      $article->favorites()->sync([$user], false);
+      $test->favorites()->sync([$user], false);
 
-      Session::flash ('success','The article was successfully added to your Favorites list');
+      Session::flash ('success','The test was successfully added to your Favorites list!');
       return redirect()->back();
    }
 
@@ -75,7 +75,7 @@ class FunctionsController extends Controller
    {
       // Check if user has required permission
       if($this->enablePermissions) {
-         if(!checkPerm('article_delete')) { abort(401, 'Unauthorized Access'); }
+         if(!checkPerm('test_delete')) { abort(401, 'Unauthorized Access'); }
       }
 
       $this->validate($request, [
@@ -84,9 +84,9 @@ class FunctionsController extends Controller
 
       $checked = $request->input('checked');
 
-      Article::whereIn('id', $checked)->forceDelete();
+      Test::whereIn('id', $checked)->forceDelete();
 
-      Session::flash('success','The selected articles were deleted successfully');
+      Session::flash('success','The selected tests were deleted successfully.');
       return redirect()->back();
    }
 
@@ -104,15 +104,15 @@ class FunctionsController extends Controller
    {
       // Check if user has required permission
       if($this->enablePermissions) {
-         if(!checkPerm('article_delete')) { abort(401, 'Unauthorized Access'); }
+         if(!checkPerm('test_delete')) { abort(401, 'Unauthorized Access'); }
       }
 
-      $article = Article::withTrashed()->findorFail($id);
+      $test = Test::withTrashed()->findorFail($id);
 
-      $article->forceDelete();
+      $test->forceDelete();
 
-      Session::flash ('success','The article was deleted successfully');
-      return redirect()->route('admin.articles.trashed');
+      Session::flash ('success','The test was deleted successfully.');
+      return redirect()->route('admin.tests.trashed');
    }
 
 
@@ -129,18 +129,18 @@ class FunctionsController extends Controller
    {
       // Check if user has required permission
       if($this->enablePermissions) {
-         if(!checkPerm('article_edit')) { abort(401, 'Unauthorized Access'); }
+         if(!checkPerm('test_edit')) { abort(401, 'Unauthorized Access'); }
       }
 
       // Pass along the ROUTE value of the previous page
       $ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
 
-      $article = Article::find($id);
-        $newArticle = $article->replicate();
-        $newArticle->user_id = Auth::user()->id;
-      $newArticle->save();
+      $test = Test::find($id);
+        $newTest = $test->replicate();
+        $newTest->user_id = Auth::user()->id;
+      $newTestArticle->save();
 
-      Session::flash ('success','The article was duplicated successfully');
+      Session::flash ('success','The test was duplicated successfully!');
       return redirect()->back();
    }
 
@@ -155,16 +155,11 @@ class FunctionsController extends Controller
 ##################################################################################################################
    public function makeprivate($id)
    {
-      // Check if user has required permission
-      // if($this->enablePermissions) {
-      //    if(!checkPerm('article_browse')) { abort(401, 'Unauthorized Access'); }
-      // }
+      $test = Test::find($id);
+         $test->personal = 1;
+      $test->save();
 
-      $article = Article::find($id);
-         $article->personal = 1;
-      $article->save();
-
-      Session::flash('success','The article was made private successfully');
+      Session::flash('success','The test was made private successfully');
       return redirect()->back();
    }
 
@@ -181,15 +176,15 @@ class FunctionsController extends Controller
    {
       // Check if user has required permission
       if($this->enablePermissions) {
-         if(!checkPerm('article_edit')) { abort(401, 'Unauthorized Access'); }
+         if(!checkPerm('test_edit')) { abort(401, 'Unauthorized Access'); }
       }
 
-      $article = Article::withTrashed()->find($id);
-        $article->published_at = Carbon::now();
-        $article->deleted_at = Null;
-      $article->save();
+      $test = Test::withTrashed()->find($id);
+        $test->published_at = Carbon::now();
+        $test->deleted_at = Null;
+      $test->save();
 
-      Session::flash ('success','The article was published successfully');
+      Session::flash ('success','The test was published successfully!');
       return redirect()->back();
    }
 
@@ -206,7 +201,7 @@ class FunctionsController extends Controller
    {
       // Check if user has required permission
       if($this->enablePermissions) {
-         if(!checkPerm('article_edit')) { abort(401, 'Unauthorized Access'); }
+         if(!checkPerm('test_edit')) { abort(401, 'Unauthorized Access'); }
       }
 
       $this->validate($request, [
@@ -216,13 +211,13 @@ class FunctionsController extends Controller
       $checked = $request->input('checked');
 
       foreach ($checked as $item) {
-         $article = Article::withTrashed()->find($item);
-            $article->published_at = Carbon::now();
-            $article->deleted_at = Null;
-         $article->save();
+         $test = Test::withTrashed()->find($item);
+            $test->published_at = Carbon::now();
+            $test->deleted_at = Null;
+         $test->save();
       }
 
-      Session::flash('success','The selected articles were published successfully');
+      Session::flash('success','The selected test were published successfully.');
       return redirect()->back();
    }
 
@@ -243,11 +238,11 @@ class FunctionsController extends Controller
       // }
 
       $user = Auth::user()->id;
-      $article = Article::find($id);
+      $test = Article::find($id);
 
-      $article->favorites()->detach($user);
+      $test->favorites()->detach($user);
 
-      Session::flash ('success','The article was successfully removed to your Favorites list');
+      Session::flash ('success','The test was successfully removed to your Favorites list!');
       return redirect()->back();
    }
 
@@ -267,11 +262,11 @@ class FunctionsController extends Controller
       //    if(!checkPerm('')) { abort(401, 'Unauthorized Access'); }
       // }
 
-      $article = Article::find($id);
-         $article->personal = 0;
-      $article->save();
+      $test = Test::find($id);
+         $test->personal = 0;
+      $test->save();
 
-      Session::flash('success','The article was removed from private successfully');
+      Session::flash('success','The test was removed from private successfully');
       return redirect()->back();
    }
 
@@ -289,14 +284,14 @@ class FunctionsController extends Controller
    {
       // Check if user has required permission
       if($this->enablePermissions) {
-         if(!checkPerm('article_edit')) { abort(401, 'Unauthorized Access'); }
+         if(!checkPerm('test_edit')) { abort(401, 'Unauthorized Access'); }
       }
 
-      $article = Article::find($id);
-         $article->views = 0;
-      $article->save();
+      $test = Test::find($id);
+         $test->views = 0;
+      $test->save();
 
-      Session::flash('success','The article\'s views count was reset to 0');
+      Session::flash('success','The test\'s views count was reset to 0.');
       return redirect()->back();
    }
 
@@ -314,15 +309,15 @@ class FunctionsController extends Controller
    {
       // Check if user has required permission
       if($this->enablePermissions) {
-         if(!checkPerm('article_delete')) { abort(401, 'Unauthorized Access'); }
+         if(!checkPerm('test_delete')) { abort(401, 'Unauthorized Access'); }
       }
 
-      $article = Article::withTrashed()->findOrFail($id);
+      $test = Test::withTrashed()->findOrFail($id);
 
-      $article->restore();
+      $test->restore();
 
-      Session::flash ('success','The article was successfully restored');
-      return redirect()->route('admin.articles.trashed');
+      Session::flash ('success','The test was successfully restored.');
+      return redirect()->route('admin.tests.trashed');
    }
 
 
@@ -339,15 +334,15 @@ class FunctionsController extends Controller
    {
       // Check if user has required permission
       if($this->enablePermissions) {
-         if(!checkPerm('article_delete')) { abort(401, 'Unauthorized Access'); }
+         if(!checkPerm('test_delete')) { abort(401, 'Unauthorized Access'); }
       }
 
       $checked = $request->input('checked');
 
-      Article::whereIn('id', $checked)->restore();
+      Test::whereIn('id', $checked)->restore();
 
-      Session::flash('success','The selected articles were restored successfully');
-      return redirect()->route('admin.articles.trashed');
+      Session::flash('success','The selected tests were restored successfully.');
+      return redirect()->route('admin.tests.trashed');
    }
 
 
@@ -366,15 +361,15 @@ class FunctionsController extends Controller
       //    if(!checkPerm('')) { abort(401, 'Unauthorized Access'); }
       // }
 
-      $article = Article::find($id);
+      $test = Test::find($id);
 
       $comment = new Comment();
          $comment->user_id = Auth::user()->id;
          $comment->comment = $request->comment;
-      $article->comments()->save($comment);
+      $test->comments()->save($comment);
 
-      Session::flash('success', 'Comment added succesfully');
-      return redirect()->route('admin.articles.show', $article->id);
+      Session::flash('success', 'Comment added succesfully.');
+      return redirect()->route('admin.tests.show', $test->id);
    }
 
 
@@ -392,7 +387,7 @@ class FunctionsController extends Controller
    {
       // Check if user has required permission
       if($this->enablePermissions) {
-         if(!checkPerm('article_delete')) { abort(401, 'Unauthorized Access'); }
+         if(!checkPerm('test_delete')) { abort(401, 'Unauthorized Access'); }
       }
 
       $this->validate($request, [
@@ -401,15 +396,15 @@ class FunctionsController extends Controller
 
       $checked = $request->input('checked');
 
-      foreach($checked as $article) {
-         $article = Article::findOrFail($article);
-         $article->published_at = Null;
-         $article->save();
+      foreach($checked as $test) {
+         $test = Test::findOrFail($test);
+         $test->published_at = Null;
+         $test->save();
       }
 
-      Article::destroy($checked);
+      Test::destroy($checked);
 
-      Session::flash('success','The selected articles were trashed successfully');
+      Session::flash('success','The selected tests were trashed successfully.');
       return redirect()->back();
    }
 
@@ -424,22 +419,18 @@ class FunctionsController extends Controller
 ##################################################################################################################
    public function unpublish($id)
    {
+      $test = Test::find($id);
+
       // Check if user has required permission
       if($this->enablePermissions) {
-         if(!checkPerm('article_edit')) { abort(401, 'Unauthorized Access'); }
+         if(!checkPerm('test_edit')) { abort(401, 'Unauthorized Access'); }
       }
 
-      $article = Article::find($id);
-         $article->published_at = NULL;
-         // $favorites = DB::select('select * from article_user where article_id = '. $id, [1]);
+         $test->published_at = NULL;
+         DB::table('favorites')->where('favoriteable_id', '=', $test->id)->delete();
+      $test->save();
 
-         // foreach($favorites as $favorite) {
-         //    $article->favorites()->detach($favorite);
-         // }
-         DB::table('favorites')->where('favoriteable_id', '=', $article->id)->delete();
-      $article->save();
-
-      Session::flash ('success','The article was successfully unpublished and related favorites have been removed');
+      Session::flash ('success','The test was successfully unpublished and related favorites have been removed');
       return redirect()->back();
    }
 
@@ -456,7 +447,7 @@ class FunctionsController extends Controller
    {
       // Check if user has required permission
       if($this->enablePermissions) {
-         if(!checkPerm('article_edit')) { abort(401, 'Unauthorized Access'); }
+         if(!checkPerm('test_edit')) { abort(401, 'Unauthorized Access'); }
       }
 
       $this->validate($request, [
@@ -466,21 +457,14 @@ class FunctionsController extends Controller
       $checked = $request->input('checked');
 
       foreach ($checked as $item) {
-         $article = Article::withTrashed()->find($item);
-            $article->published_at = Null;
-            DB::table('favorites')->where('favoriteable_id', '=', $article->id)->delete();
-
-            // Delete related favorites
-            // $favorites = DB::select('select * from article_user where article_id = '. $article->id, [1]);
-            //    foreach($favorites as $favorite) {
-            //       $article->favorites()->detach($favorite);
-            //    }
-
-         $article->save();
+         $test = Test::withTrashed()->find($item);
+            $test->published_at = Null;
+            DB::table('favorites')->where('favoriteable_id', '=', $test->id)->delete();
+         $test->save();
       }
       
 
-      Session::flash('success','The selected articles were unpublished successfully and all related favorites have been removed');
+      Session::flash('success','The selected tests were unpublished successfully and all related favorites have been removed.');
       return redirect()->back();
    }
 

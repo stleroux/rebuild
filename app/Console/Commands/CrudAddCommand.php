@@ -29,11 +29,13 @@ class CrudAddCommand extends Command
       // $name = $this->argument('name');
       $name = $this->ask('What is the name of the model? (Must be Capitalized singular form: i.e.: User)');
 
+      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      // Folder structure
+      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       $this->createFrontendFolders($name);
       $this->info('Frontend folders created');
       $this->createAdminFolders($name);
       $this->info('Admin folders created');
-
 
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       // Controllers
@@ -63,8 +65,8 @@ class CrudAddCommand extends Command
             $this->info('Frontend buttons added');
          $this->addFrontendBlocks($name);
             $this->info('Frontend blocks added');
-         // $this->addExtraPages($name);
-            // $this->info('Extra Pages added');
+// $this->addFrontendExtraPages($name);
+// $this->info('Extra Pages added');
 
         $this->addAdminViews($name);
             $this->info('Admin views created');
@@ -124,11 +126,30 @@ class CrudAddCommand extends Command
          //     ]
          // );
          $this->makeMigration($name);
-         $this->info('Migration created');
-         $this->info('Don\'t forget to update the migration file and then run "php artisan migrate"');
+         $this->info('Migration file created');
       }
 
-      $this->info('Done! Happy coding.');
+
+// Modify frontend and backend menu
+// Check into modifying the file structure to allow the favorites block to be added to the Popular Items block on the homepage
+// Add extra pages to frontend (favorites and archive)
+// Check into modifying the file structure to allow the main menu and admin menu to be updated with new entries
+
+
+
+
+      $this->info('╔════════════════════════════════════════════════════════════════════════════════╗');
+      $this->info('║ Done! Happy coding.                                                            ║');
+      $this->info('╠════════════════════════════════════════════════════════════════════════════════╣');
+      $this->info('║ NEXT STEPS:                                                                    ║');
+      $this->info('║  - Update the migration file                                                   ║');
+      $this->info('║  - Do not forget to run "php artisan migrate"                                  ║');
+      $this->info('║ ║');
+      $this->info('║ Update the form for the Edit and Create page                                   ║');
+      $this->info('║ ║');
+      $this->info('║ ║');
+      $this->info('║ ║');
+      $this->info('╚════════════════════════════════════════════════════════════════════════════════╝');
    }
 
 
@@ -249,12 +270,12 @@ class CrudAddCommand extends Command
    protected function addAdminBlocks($name)
    {
       file_put_contents(
-         resource_path("views/admin/".strtolower(Str::plural($name))."/blocks/" . "archives.php"),
+         resource_path("views/admin/".strtolower(Str::plural($name))."/blocks/" . "archives.blade.php"),
          $this->getTemplate('admin/blocks/archives', $name)
       );
 
       file_put_contents(
-         resource_path("views/admin/".strtolower(Str::plural($name))."/blocks/" . "sidebar.php"),
+         resource_path("views/admin/".strtolower(Str::plural($name))."/blocks/" . "sidebar.blade.php"),
          $this->getTemplate('admin/blocks/sidebar', $name)
       );
    }
@@ -263,7 +284,7 @@ class CrudAddCommand extends Command
    protected function addFrontendBlocks($name)
    {
       file_put_contents(
-         resource_path("views/".strtolower(Str::plural($name))."/blocks/" . "archives.php"),
+         resource_path("views/".strtolower(Str::plural($name))."/blocks/" . "archives.blade.php"),
          $this->getTemplate('frontend/blocks/archives', $name)
       );
    }

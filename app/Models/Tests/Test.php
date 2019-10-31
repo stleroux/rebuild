@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\{{modelNamePlural}};
+namespace App\Models\Tests;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -8,7 +8,7 @@ use Auth;
 use Carbon\Carbon;
 use ChristianKuri\LaravelFavorite\Traits\Favoriteable;
 
-class {{modelName}} extends Model
+class Test extends Model
 {
    use SoftDeletes;
    use Favoriteable;
@@ -58,7 +58,7 @@ public function scopePublished($query)
       return $query->where('published_at', '<', Carbon::now());
    }
 
-   public function scopeMy{{modelNamePluralLowerCase}}($query)
+   public function scopeMytests($query)
    {
       return $query->where('user_id', '=', Auth::user()->id)->orderBy('title','DESC');
    }
@@ -83,7 +83,7 @@ public function scopePublished($query)
       return $query->whereNotNull('deleted_at')->withTrashed();
    }
 
-   public function scopeNew{{modelNamePluralLowerCase}}($query)
+   public function scopeNewtests($query)
    {
       return $query
          ->where('created_at', '>=' , Auth::user()->previous_login_date)

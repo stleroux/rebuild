@@ -1,13 +1,13 @@
-<a href="{{ route('{{modelNamePluralLowerCase}}.index') }}"
+<a href="{{ route('tests.index') }}"
    class="btn btn-sm btn-primary"
-   title="{{modelName}}">
+   title="Test">
    <i class="{{ Config::get('buttons.back') }}"></i>
 </a>
 
-@if(Session::get('fromPage')==='{{modelNameSingularLowerCase}}.index')
-   <a href="{{ route('admin.{{modelNameSingularLowerCase}}.index') }}"
+@if(Session::get('fromPage')==='test.index')
+   <a href="{{ route('admin.test.index') }}"
       class="btn btn-sm btn-primary"
-      title="{{modelName}}">
+      title="Test">
       <i class="{{ Config::get('buttons.back') }}"></i>
    </a>
 @elseif(Session::get('fromPage'))

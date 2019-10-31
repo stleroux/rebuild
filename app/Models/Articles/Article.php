@@ -5,7 +5,7 @@ namespace App\Models\Articles;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Auth;
-use App\Models\Category;
+// use App\Models\Category;
 use Carbon\Carbon;
 use ChristianKuri\LaravelFavorite\Traits\Favoriteable;
 

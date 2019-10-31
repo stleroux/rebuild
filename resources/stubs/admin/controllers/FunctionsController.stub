@@ -1,13 +1,472 @@
 <?php
 
-namespace App\Http\Controllers\Admin\{{modelNamePlural}};
+namespace App\Http\Controllers\Admin\{{modelNamePluralLowerCase}};
 
-// use App\Http\Requests\{{modelName}}Request;
-use App\Http\Controllers\Controller; // Required for validation // use Illuminate\Routing\Controller;
-use App\Models\{{modelName}};
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use App\Http\Controllers\Controller; // Required for validation
+use Illuminate\Support\Facades\Input;
+
+use App\Models\{{modelNamePluralLowerCase}}\{{modelName}};
+// use App\Models\Category;
+use App\Models\Comment;
+use App\Models\User;
+use Carbon\Carbon;
+use Auth;
+use DB;
+use Excel;
+use Log;
+use Route;
 use Session;
+use URL;
 
 class FunctionsController extends Controller
 {
+##################################################################################################################
+#  ██████╗ ██████╗ ███╗   ██╗███████╗████████╗██████╗ ██╗   ██╗ ██████╗████████╗
+# ██╔════╝██╔═══██╗████╗  ██║██╔════╝╚══██╔══╝██╔══██╗██║   ██║██╔════╝╚══██╔══╝
+# ██║     ██║   ██║██╔██╗ ██║███████╗   ██║   ██████╔╝██║   ██║██║        ██║   
+# ██║     ██║   ██║██║╚██╗██║╚════██║   ██║   ██╔══██╗██║   ██║██║        ██║   
+# ╚██████╗╚██████╔╝██║ ╚████║███████║   ██║   ██║  ██║╚██████╔╝╚██████╗   ██║   
+#  ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝  ╚═════╝   ╚═╝   
+##################################################################################################################
+   public function __construct() {
+      // only allow authenticated users to access these pages
+      $this->middleware('auth');
+      $this->enablePermissions = true;
+   }
+
+
+##################################################################################################################
+#  █████╗ ██████╗ ██████╗     ███████╗ █████╗ ██╗   ██╗ ██████╗ ██████╗ ██╗████████╗███████╗
+# ██╔══██╗██╔══██╗██╔══██╗    ██╔════╝██╔══██╗██║   ██║██╔═══██╗██╔══██╗██║╚══██╔══╝██╔════╝
+# ███████║██║  ██║██║  ██║    █████╗  ███████║██║   ██║██║   ██║██████╔╝██║   ██║   █████╗  
+# ██╔══██║██║  ██║██║  ██║    ██╔══╝  ██╔══██║╚██╗ ██╔╝██║   ██║██╔══██╗██║   ██║   ██╔══╝  
+# ██║  ██║██████╔╝██████╔╝    ██║     ██║  ██║ ╚████╔╝ ╚██████╔╝██║  ██║██║   ██║   ███████╗
+# ╚═╝  ╚═╝╚═════╝ ╚═════╝     ╚═╝     ╚═╝  ╚═╝  ╚═══╝   ╚═════╝ ╚═╝  ╚═╝╚═╝   ╚═╝   ╚══════╝
+##################################################################################################################
+   public function addfavorite($id)
+   {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('{{modelNameSingularLowerCase}}_browse')) { abort(401, 'Unauthorized Access'); }
+      }
+
+      $user = Auth::user()->id;
+      ${{modelNameSingularLowerCase}} = {{modelName}}::find($id);
+
+      ${{modelNameSingularLowerCase}}->favorites()->sync([$user], false);
+
+      Session::flash ('success','The {{modelNameSingularLowerCase}} was successfully added to your Favorites list!');
+      return redirect()->back();
+   }
+
+
+##################################################################################################################
+# ██████╗ ███████╗██╗     ███████╗████████╗███████╗     █████╗ ██╗     ██╗     
+# ██╔══██╗██╔════╝██║     ██╔════╝╚══██╔══╝██╔════╝    ██╔══██╗██║     ██║     
+# ██║  ██║█████╗  ██║     █████╗     ██║   █████╗      ███████║██║     ██║     
+# ██║  ██║██╔══╝  ██║     ██╔══╝     ██║   ██╔══╝      ██╔══██║██║     ██║     
+# ██████╔╝███████╗███████╗███████╗   ██║   ███████╗    ██║  ██║███████╗███████╗
+# ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝    ╚═╝  ╚═╝╚══════╝╚══════╝
+// Mass Delete selected rows - all selected records
+##################################################################################################################
+   public function deleteAll(Request $request)
+   {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('{{modelNameSingularLowerCase}}_delete')) { abort(401, 'Unauthorized Access'); }
+      }
+
+      $this->validate($request, [
+         'checked' => 'required',
+      ]);
+
+      $checked = $request->input('checked');
+
+      {{modelName}}::whereIn('id', $checked)->forceDelete();
+
+      Session::flash('success','The selected {{modelNamePluralLowerCase}} were deleted successfully.');
+      return redirect()->back();
+   }
+
+
+##################################################################################################################
+# ██████╗ ███████╗██╗     ███████╗████████╗███████╗    ████████╗██████╗  █████╗ ███████╗██╗  ██╗███████╗██████╗ 
+# ██╔══██╗██╔════╝██║     ██╔════╝╚══██╔══╝██╔════╝    ╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██║  ██║██╔════╝██╔══██╗
+# ██║  ██║█████╗  ██║     █████╗     ██║   █████╗         ██║   ██████╔╝███████║███████╗███████║█████╗  ██║  ██║
+# ██║  ██║██╔══╝  ██║     ██╔══╝     ██║   ██╔══╝         ██║   ██╔══██╗██╔══██║╚════██║██╔══██║██╔══╝  ██║  ██║
+# ██████╔╝███████╗███████╗███████╗   ██║   ███████╗       ██║   ██║  ██║██║  ██║███████║██║  ██║███████╗██████╔╝
+# ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝       ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚═════╝ 
+// Remove the specified resource from storage - individual record
+##################################################################################################################
+   public static function deleteTrashed($id)
+   {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('{{modelNameSingularLowerCase}}_delete')) { abort(401, 'Unauthorized Access'); }
+      }
+
+      ${{modelNameSingularLowerCase}} = {{modelName}}::withTrashed()->findorFail($id);
+
+      ${{modelNameSingularLowerCase}}->forceDelete();
+
+      Session::flash ('success','The {{modelNameSingularLowerCase}} was deleted successfully.');
+      return redirect()->route('admin.{{modelNamePluralLowerCase}}.trashed');
+   }
+
+
+##################################################################################################################
+# ██████╗ ██╗   ██╗██████╗ ██╗     ██╗ ██████╗ █████╗ ████████╗███████╗
+# ██╔══██╗██║   ██║██╔══██╗██║     ██║██╔════╝██╔══██╗╚══██╔══╝██╔════╝
+# ██║  ██║██║   ██║██████╔╝██║     ██║██║     ███████║   ██║   █████╗  
+# ██║  ██║██║   ██║██╔═══╝ ██║     ██║██║     ██╔══██║   ██║   ██╔══╝  
+# ██████╔╝╚██████╔╝██║     ███████╗██║╚██████╗██║  ██║   ██║   ███████╗
+# ╚═════╝  ╚═════╝ ╚═╝     ╚══════╝╚═╝ ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝
+// DUPLICATE :: Duplicate the specified resource in storage.
+##################################################################################################################
+   public function duplicate($id)
+   {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('{{modelNameSingularLowerCase}}_edit')) { abort(401, 'Unauthorized Access'); }
+      }
+
+      // Pass along the ROUTE value of the previous page
+      $ref = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName();
+
+      ${{modelNameSingularLowerCase}} = {{modelName}}::find($id);
+        $new{{modelName}} = ${{modelNameSingularLowerCase}}->replicate();
+        $new{{modelName}}->user_id = Auth::user()->id;
+      $new{{modelName}}Article->save();
+
+      Session::flash ('success','The {{modelNameSingularLowerCase}} was duplicated successfully!');
+      return redirect()->back();
+   }
+
+
+##################################################################################################################
+# ███╗   ███╗ █████╗ ██╗  ██╗███████╗    ██████╗ ██████╗ ██╗██╗   ██╗ █████╗ ████████╗███████╗
+# ████╗ ████║██╔══██╗██║ ██╔╝██╔════╝    ██╔══██╗██╔══██╗██║██║   ██║██╔══██╗╚══██╔══╝██╔════╝
+# ██╔████╔██║███████║█████╔╝ █████╗      ██████╔╝██████╔╝██║██║   ██║███████║   ██║   █████╗  
+# ██║╚██╔╝██║██╔══██║██╔═██╗ ██╔══╝      ██╔═══╝ ██╔══██╗██║╚██╗ ██╔╝██╔══██║   ██║   ██╔══╝  
+# ██║ ╚═╝ ██║██║  ██║██║  ██╗███████╗    ██║     ██║  ██║██║ ╚████╔╝ ██║  ██║   ██║   ███████╗
+# ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝    ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝  ╚═╝  ╚═╝   ╚═╝   ╚══════╝
+##################################################################################################################
+   public function makeprivate($id)
+   {
+      ${{modelNameSingularLowerCase}} = {{modelName}}::find($id);
+         ${{modelNameSingularLowerCase}}->personal = 1;
+      ${{modelNameSingularLowerCase}}->save();
+
+      Session::flash('success','The {{modelNameSingularLowerCase}} was made private successfully');
+      return redirect()->back();
+   }
+
+
+##################################################################################################################
+# ██████╗ ██╗   ██╗██████╗ ██╗     ██╗███████╗██╗  ██╗
+# ██╔══██╗██║   ██║██╔══██╗██║     ██║██╔════╝██║  ██║
+# ██████╔╝██║   ██║██████╔╝██║     ██║███████╗███████║
+# ██╔═══╝ ██║   ██║██╔══██╗██║     ██║╚════██║██╔══██║
+# ██║     ╚██████╔╝██████╔╝███████╗██║███████║██║  ██║
+# ╚═╝      ╚═════╝ ╚═════╝ ╚══════╝╚═╝╚══════╝╚═╝  ╚═╝
+##################################################################################################################
+   public function publish($id)
+   {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('{{modelNameSingularLowerCase}}_edit')) { abort(401, 'Unauthorized Access'); }
+      }
+
+      ${{modelNameSingularLowerCase}} = {{modelName}}::withTrashed()->find($id);
+        ${{modelNameSingularLowerCase}}->published_at = Carbon::now();
+        ${{modelNameSingularLowerCase}}->deleted_at = Null;
+      ${{modelNameSingularLowerCase}}->save();
+
+      Session::flash ('success','The {{modelNameSingularLowerCase}} was published successfully!');
+      return redirect()->back();
+   }
+
+
+##################################################################################################################
+# ██████╗ ██╗   ██╗██████╗ ██╗     ██╗███████╗██╗  ██╗     █████╗ ██╗     ██╗     
+# ██╔══██╗██║   ██║██╔══██╗██║     ██║██╔════╝██║  ██║    ██╔══██╗██║     ██║     
+# ██████╔╝██║   ██║██████╔╝██║     ██║███████╗███████║    ███████║██║     ██║     
+# ██╔═══╝ ██║   ██║██╔══██╗██║     ██║╚════██║██╔══██║    ██╔══██║██║     ██║     
+# ██║     ╚██████╔╝██████╔╝███████╗██║███████║██║  ██║    ██║  ██║███████╗███████╗
+# ╚═╝      ╚═════╝ ╚═════╝ ╚══════╝╚═╝╚══════╝╚═╝  ╚═╝    ╚═╝  ╚═╝╚══════╝╚══════╝
+##################################################################################################################
+   public function publishAll(Request $request)
+   {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('{{modelNameSingularLowerCase}}_edit')) { abort(401, 'Unauthorized Access'); }
+      }
+
+      $this->validate($request, [
+         'checked' => 'required',
+      ]);
+
+      $checked = $request->input('checked');
+
+      foreach ($checked as $item) {
+         ${{modelNameSingularLowerCase}} = {{modelName}}::withTrashed()->find($item);
+            ${{modelNameSingularLowerCase}}->published_at = Carbon::now();
+            ${{modelNameSingularLowerCase}}->deleted_at = Null;
+         ${{modelNameSingularLowerCase}}->save();
+      }
+
+      Session::flash('success','The selected {{modelNameSingularLowerCase}} were published successfully.');
+      return redirect()->back();
+   }
+
+
+##################################################################################################################
+# ██████╗ ███████╗███╗   ███╗ ██████╗ ██╗   ██╗███████╗    ███████╗ █████╗ ██╗   ██╗ ██████╗ ██████╗ ██╗████████╗███████╗
+# ██╔══██╗██╔════╝████╗ ████║██╔═══██╗██║   ██║██╔════╝    ██╔════╝██╔══██╗██║   ██║██╔═══██╗██╔══██╗██║╚══██╔══╝██╔════╝
+# ██████╔╝█████╗  ██╔████╔██║██║   ██║██║   ██║█████╗      █████╗  ███████║██║   ██║██║   ██║██████╔╝██║   ██║   █████╗  
+# ██╔══██╗██╔══╝  ██║╚██╔╝██║██║   ██║╚██╗ ██╔╝██╔══╝      ██╔══╝  ██╔══██║╚██╗ ██╔╝██║   ██║██╔══██╗██║   ██║   ██╔══╝  
+# ██║  ██║███████╗██║ ╚═╝ ██║╚██████╔╝ ╚████╔╝ ███████╗    ██║     ██║  ██║ ╚████╔╝ ╚██████╔╝██║  ██║██║   ██║   ███████╗
+# ╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝ ╚═════╝   ╚═══╝  ╚══════╝    ╚═╝     ╚═╝  ╚═╝  ╚═══╝   ╚═════╝ ╚═╝  ╚═╝╚═╝   ╚═╝   ╚══════╝
+##################################################################################################################
+   public function removefavorite($id)
+   {
+      // Check if user has required permission
+      // if($this->enablePermissions) {
+      //    if(!checkPerm('')) { abort(401, 'Unauthorized Access'); }
+      // }
+
+      $user = Auth::user()->id;
+      ${{modelNameSingularLowerCase}} = Article::find($id);
+
+      ${{modelNameSingularLowerCase}}->favorites()->detach($user);
+
+      Session::flash ('success','The {{modelNameSingularLowerCase}} was successfully removed to your Favorites list!');
+      return redirect()->back();
+   }
+
+
+##################################################################################################################
+# ██████╗ ███████╗███╗   ███╗ ██████╗ ██╗   ██╗███████╗    ██████╗ ██████╗ ██╗██╗   ██╗ █████╗ ████████╗███████╗
+# ██╔══██╗██╔════╝████╗ ████║██╔═══██╗██║   ██║██╔════╝    ██╔══██╗██╔══██╗██║██║   ██║██╔══██╗╚══██╔══╝██╔════╝
+# ██████╔╝█████╗  ██╔████╔██║██║   ██║██║   ██║█████╗      ██████╔╝██████╔╝██║██║   ██║███████║   ██║   █████╗  
+# ██╔══██╗██╔══╝  ██║╚██╔╝██║██║   ██║╚██╗ ██╔╝██╔══╝      ██╔═══╝ ██╔══██╗██║╚██╗ ██╔╝██╔══██║   ██║   ██╔══╝  
+# ██║  ██║███████╗██║ ╚═╝ ██║╚██████╔╝ ╚████╔╝ ███████╗    ██║     ██║  ██║██║ ╚████╔╝ ██║  ██║   ██║   ███████╗
+# ╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝ ╚═════╝   ╚═══╝  ╚══════╝    ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝  ╚═╝  ╚═╝   ╚═╝   ╚══════╝
+##################################################################################################################
+   public function removeprivate($id)
+   {
+      // Check if user has required permission
+      // if($this->enablePermissions) {
+      //    if(!checkPerm('')) { abort(401, 'Unauthorized Access'); }
+      // }
+
+      ${{modelNameSingularLowerCase}} = {{modelName}}::find($id);
+         ${{modelNameSingularLowerCase}}->personal = 0;
+      ${{modelNameSingularLowerCase}}->save();
+
+      Session::flash('success','The {{modelNameSingularLowerCase}} was removed from private successfully');
+      return redirect()->back();
+   }
+
+
+##################################################################################################################
+# ██████╗ ███████╗███████╗███████╗████████╗    ██╗   ██╗██╗███████╗██╗    ██╗███████╗
+# ██╔══██╗██╔════╝██╔════╝██╔════╝╚══██╔══╝    ██║   ██║██║██╔════╝██║    ██║██╔════╝
+# ██████╔╝█████╗  ███████╗█████╗     ██║       ██║   ██║██║█████╗  ██║ █╗ ██║███████╗
+# ██╔══██╗██╔══╝  ╚════██║██╔══╝     ██║       ╚██╗ ██╔╝██║██╔══╝  ██║███╗██║╚════██║
+# ██║  ██║███████╗███████║███████╗   ██║        ╚████╔╝ ██║███████╗╚███╔███╔╝███████║
+# ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝   ╚═╝         ╚═══╝  ╚═╝╚══════╝ ╚══╝╚══╝ ╚══════╝
+// RESET VIEWS COUNT
+##################################################################################################################
+   public function resetViews($id)
+   {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('{{modelNameSingularLowerCase}}_edit')) { abort(401, 'Unauthorized Access'); }
+      }
+
+      ${{modelNameSingularLowerCase}} = {{modelName}}::find($id);
+         ${{modelNameSingularLowerCase}}->views = 0;
+      ${{modelNameSingularLowerCase}}->save();
+
+      Session::flash('success','The {{modelNameSingularLowerCase}}\'s views count was reset to 0.');
+      return redirect()->back();
+   }
+
+
+##################################################################################################################
+# ██████╗ ███████╗███████╗████████╗ ██████╗ ██████╗ ███████╗
+# ██╔══██╗██╔════╝██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗██╔════╝
+# ██████╔╝█████╗  ███████╗   ██║   ██║   ██║██████╔╝█████╗  
+# ██╔══██╗██╔══╝  ╚════██║   ██║   ██║   ██║██╔══██╗██╔══╝  
+# ██║  ██║███████╗███████║   ██║   ╚██████╔╝██║  ██║███████╗
+# ╚═╝  ╚═╝╚══════╝╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝
+// RESTORE TRASHED FILE
+##################################################################################################################
+   public function restore($id)
+   {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('{{modelNameSingularLowerCase}}_delete')) { abort(401, 'Unauthorized Access'); }
+      }
+
+      ${{modelNameSingularLowerCase}} = {{modelName}}::withTrashed()->findOrFail($id);
+
+      ${{modelNameSingularLowerCase}}->restore();
+
+      Session::flash ('success','The {{modelNameSingularLowerCase}} was successfully restored.');
+      return redirect()->route('admin.{{modelNamePluralLowerCase}}.trashed');
+   }
+
+
+##################################################################################################################
+# ██████╗ ███████╗███████╗████████╗ ██████╗ ██████╗ ███████╗     █████╗ ██╗     ██╗     
+# ██╔══██╗██╔════╝██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗██╔════╝    ██╔══██╗██║     ██║     
+# ██████╔╝█████╗  ███████╗   ██║   ██║   ██║██████╔╝█████╗      ███████║██║     ██║     
+# ██╔══██╗██╔══╝  ╚════██║   ██║   ██║   ██║██╔══██╗██╔══╝      ██╔══██║██║     ██║     
+# ██║  ██║███████╗███████║   ██║   ╚██████╔╝██║  ██║███████╗    ██║  ██║███████╗███████╗
+# ╚═╝  ╚═╝╚══════╝╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝    ╚═╝  ╚═╝╚══════╝╚══════╝
+// RESTORE ALL TRASHED FILE
+##################################################################################################################
+   public function restoreAll(Request $request)
+   {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('{{modelNameSingularLowerCase}}_delete')) { abort(401, 'Unauthorized Access'); }
+      }
+
+      $checked = $request->input('checked');
+
+      {{modelName}}::whereIn('id', $checked)->restore();
+
+      Session::flash('success','The selected {{modelNamePluralLowerCase}} were restored successfully.');
+      return redirect()->route('admin.{{modelNamePluralLowerCase}}.trashed');
+   }
+
+
+##################################################################################################################
+# ███████╗████████╗ ██████╗ ██████╗ ███████╗     ██████╗ ██████╗ ███╗   ███╗███╗   ███╗███████╗███╗   ██╗████████╗
+# ██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗██╔════╝    ██╔════╝██╔═══██╗████╗ ████║████╗ ████║██╔════╝████╗  ██║╚══██╔══╝
+# ███████╗   ██║   ██║   ██║██████╔╝█████╗      ██║     ██║   ██║██╔████╔██║██╔████╔██║█████╗  ██╔██╗ ██║   ██║   
+# ╚════██║   ██║   ██║   ██║██╔══██╗██╔══╝      ██║     ██║   ██║██║╚██╔╝██║██║╚██╔╝██║██╔══╝  ██║╚██╗██║   ██║   
+# ███████║   ██║   ╚██████╔╝██║  ██║███████╗    ╚██████╗╚██████╔╝██║ ╚═╝ ██║██║ ╚═╝ ██║███████╗██║ ╚████║   ██║   
+# ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝     ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝   ╚═╝   
+##################################################################################################################
+   public function storeComment(CreateCommentRequest $request, $id)
+   {
+      // Check if user has required permission
+      // if($this->enablePermissions) {
+      //    if(!checkPerm('')) { abort(401, 'Unauthorized Access'); }
+      // }
+
+      ${{modelNameSingularLowerCase}} = {{modelName}}::find($id);
+
+      $comment = new Comment();
+         $comment->user_id = Auth::user()->id;
+         $comment->comment = $request->comment;
+      ${{modelNameSingularLowerCase}}->comments()->save($comment);
+
+      Session::flash('success', 'Comment added succesfully.');
+      return redirect()->route('admin.{{modelNamePluralLowerCase}}.show', ${{modelNameSingularLowerCase}}->id);
+   }
+
+
+##################################################################################################################
+# ████████╗██████╗  █████╗ ███████╗██╗  ██╗     █████╗ ██╗     ██╗     
+# ╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██║  ██║    ██╔══██╗██║     ██║     
+#    ██║   ██████╔╝███████║███████╗███████║    ███████║██║     ██║     
+#    ██║   ██╔══██╗██╔══██║╚════██║██╔══██║    ██╔══██║██║     ██║     
+#    ██║   ██║  ██║██║  ██║███████║██║  ██║    ██║  ██║███████╗███████╗
+#    ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝    ╚═╝  ╚═╝╚══════╝╚══════╝
+// Remove the specified resource from storage
+// Used in the index page to soft delete multiple records
+##################################################################################################################
+   public function trashAll(Request $request)
+   {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('{{modelNameSingularLowerCase}}_delete')) { abort(401, 'Unauthorized Access'); }
+      }
+
+      $this->validate($request, [
+         'checked' => 'required',
+      ]);
+
+      $checked = $request->input('checked');
+
+      foreach($checked as ${{modelNameSingularLowerCase}}) {
+         ${{modelNameSingularLowerCase}} = {{modelName}}::findOrFail(${{modelNameSingularLowerCase}});
+         ${{modelNameSingularLowerCase}}->published_at = Null;
+         ${{modelNameSingularLowerCase}}->save();
+      }
+
+      {{modelName}}::destroy($checked);
+
+      Session::flash('success','The selected {{modelNamePluralLowerCase}} were trashed successfully.');
+      return redirect()->back();
+   }
+
+
+##################################################################################################################
+# ██╗   ██╗███╗   ██╗██████╗ ██╗   ██╗██████╗ ██╗     ██╗███████╗██╗  ██╗
+# ██║   ██║████╗  ██║██╔══██╗██║   ██║██╔══██╗██║     ██║██╔════╝██║  ██║
+# ██║   ██║██╔██╗ ██║██████╔╝██║   ██║██████╔╝██║     ██║███████╗███████║
+# ██║   ██║██║╚██╗██║██╔═══╝ ██║   ██║██╔══██╗██║     ██║╚════██║██╔══██║
+# ╚██████╔╝██║ ╚████║██║     ╚██████╔╝██████╔╝███████╗██║███████║██║  ██║
+#  ╚═════╝ ╚═╝  ╚═══╝╚═╝      ╚═════╝ ╚═════╝ ╚══════╝╚═╝╚══════╝╚═╝  ╚═╝
+##################################################################################################################
+   public function unpublish($id)
+   {
+      ${{modelNameSingularLowerCase}} = {{modelName}}::find($id);
+
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('{{modelNameSingularLowerCase}}_edit')) { abort(401, 'Unauthorized Access'); }
+      }
+
+         ${{modelNameSingularLowerCase}}->published_at = NULL;
+         DB::table('favorites')->where('favoriteable_id', '=', ${{modelNameSingularLowerCase}}->id)->delete();
+      ${{modelNameSingularLowerCase}}->save();
+
+      Session::flash ('success','The {{modelNameSingularLowerCase}} was successfully unpublished and related favorites have been removed');
+      return redirect()->back();
+   }
+
+
+##################################################################################################################
+# ██╗   ██╗███╗   ██╗██████╗ ██╗   ██╗██████╗ ██╗     ██╗███████╗██╗  ██╗     █████╗ ██╗     ██╗     
+# ██║   ██║████╗  ██║██╔══██╗██║   ██║██╔══██╗██║     ██║██╔════╝██║  ██║    ██╔══██╗██║     ██║     
+# ██║   ██║██╔██╗ ██║██████╔╝██║   ██║██████╔╝██║     ██║███████╗███████║    ███████║██║     ██║     
+# ██║   ██║██║╚██╗██║██╔═══╝ ██║   ██║██╔══██╗██║     ██║╚════██║██╔══██║    ██╔══██║██║     ██║     
+# ╚██████╔╝██║ ╚████║██║     ╚██████╔╝██████╔╝███████╗██║███████║██║  ██║    ██║  ██║███████╗███████╗
+#  ╚═════╝ ╚═╝  ╚═══╝╚═╝      ╚═════╝ ╚═════╝ ╚══════╝╚═╝╚══════╝╚═╝  ╚═╝    ╚═╝  ╚═╝╚══════╝╚══════╝
+##################################################################################################################
+   public function unpublishAll(Request $request)
+   {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('{{modelNameSingularLowerCase}}_edit')) { abort(401, 'Unauthorized Access'); }
+      }
+
+      $this->validate($request, [
+         'checked' => 'required',
+      ]);
+
+      $checked = $request->input('checked');
+
+      foreach ($checked as $item) {
+         ${{modelNameSingularLowerCase}} = {{modelName}}::withTrashed()->find($item);
+            ${{modelNameSingularLowerCase}}->published_at = Null;
+            DB::table('favorites')->where('favoriteable_id', '=', ${{modelNameSingularLowerCase}}->id)->delete();
+         ${{modelNameSingularLowerCase}}->save();
+      }
+      
+
+      Session::flash('success','The selected {{modelNamePluralLowerCase}} were unpublished successfully and all related favorites have been removed.');
+      return redirect()->back();
+   }
+
 
 }

@@ -1,5 +1,5 @@
-@if(checkPerm('{{modelNamePluralLowerCase}}_delete'))
-   <a href="{{ route('{{modelNamePluralLowerCase}}.delete', ${{modelNameSingularLowerCase}}->id) }}"
+@if(checkPerm('{{modelNameSingularLowerCase}}_delete'))
+   <a href="{{ route('admin.{{modelNamePluralLowerCase}}.delete', ${{modelNameSingularLowerCase}}->id) }}"
       class="btn btn-{{ $size }} btn-danger"
       title="Delete {{modelName}}">
       <i class="{{ Config::get('buttons.delete') }}"></i>

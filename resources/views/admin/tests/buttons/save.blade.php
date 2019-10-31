@@ -1,4 +1,4 @@
-@if(checkPerm('{{modelNameSingularLowerCase}}_add'))
+@if(checkPerm('test_add'))
    <button
       class="btn {{ $size ? 'btn-'.$size : '' }} btn-success text-light"
       type="submit"

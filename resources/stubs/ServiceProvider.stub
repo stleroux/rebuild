@@ -27,7 +27,7 @@ class {{modelName}}ServiceProvider extends ServiceProvider
    public function boot()
    {
       view()->composer('admin.{{modelNamePluralLowerCase}}.blocks.archives', function ($view) {
-         ${{modelNameSingularLowerCase}}links = DB::table({{modelNamePluralLowerCase}})
+         ${{modelNameSingularLowerCase}}links = DB::table('{{modelNamePluralLowerCase}}')
             ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) {{modelNameSingularLowerCase}}_count'))
             ->where('published_at', '<=', Carbon::now())
             ->groupBy('year')

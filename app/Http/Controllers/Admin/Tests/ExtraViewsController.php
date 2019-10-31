@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin\{{modelNamePlural}};
+namespace App\Http\Controllers\Admin\Tests;
 
 use App\Http\Controllers\Controller; // Required for validation // use Illuminate\Routing\Controller;
-use App\Models\{{modelNamePlural}}\{{modelName}};
+use App\Models\Tests\Test;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -44,15 +44,15 @@ class ExtraViewsController extends Controller
    {
       // Check if user has required permission
       if($this->enablePermissions) {
-         if(!checkPerm('{{modelNameSingularLowerCase}}_read')) { abort(401, 'Unauthorized Access'); }
+         if(!checkPerm('test_read')) { abort(401, 'Unauthorized Access'); }
       }
 
-      $archives = {{modelName}}::with('user')->whereYear('created_at','=', $year)
+      $archives = Test::with('user')->whereYear('created_at','=', $year)
          ->whereMonth('created_at','=', $month)
          ->where('published_at', '<=', Carbon::now())
          ->get();
 
-      return view('admin.{{modelNamePluralLowerCase}}.pages.archive', compact('archives','{{modelNameSingularLowerCase}}links'))->withYear($year)->withMonth($month);
+      return view('admin.tests.pages.archive', compact('archives','testlinks'))->withYear($year)->withMonth($month);
    }
 
 
@@ -69,14 +69,14 @@ class ExtraViewsController extends Controller
    {
       // Check if user has required permission
       if($this->enablePermissions) {
-         if(!checkPerm('{{modelNameSingularLowerCase}}_edit')) { abort(401, 'Unauthorized Access'); }
+         if(!checkPerm('test_edit')) { abort(401, 'Unauthorized Access'); }
       }
 
       // Set the session to the current page route
       Session::put('fromPage', url()->full());
 
       //$alphas = range('A', 'Z');
-      $alphas = DB::table('{{modelNamePluralLowerCase}}')
+      $alphas = DB::table('tests')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
          ->where('published_at','>', Carbon::Now())
          ->orderBy('letter')
@@ -89,16 +89,16 @@ class ExtraViewsController extends Controller
 
       // If $key value is passed
       if ($key) {
-         ${{modelNamePluralLowerCase}} = {{modelName}}::with('user')->future()
+         $tests = Test::with('user')->future()
             ->where('title', 'like', $key . '%')
             ->orderBy('title', 'asc')
             ->get();
-         return view('admin.{{modelNamePluralLowerCase}}.pages.future', compact('{{modelNamePluralLowerCase}}','letters'));
+         return view('admin.tests.pages.future', compact('tests','letters'));
       }
 
       // No $key value is passed
-      ${{modelNamePluralLowerCase}} = {{modelName}}::with('user')->future()->get();
-      return view('admin.{{modelNamePluralLowerCase}}.pages.future', compact('{{modelNamePluralLowerCase}}','letters'));
+      $tests = Test::with('user')->future()->get();
+      return view('admin.tests.pages.future', compact('tests','letters'));
    }
 
 
@@ -111,18 +111,18 @@ class ExtraViewsController extends Controller
 # ╚═╝     ╚═╝   ╚═╝   
 // Display a listing of the resource that belong to a specific user.
 ##################################################################################################################
-   public function my{{modelNamePlural}}(Request $request, $key=null)
+   public function myTests(Request $request, $key=null)
    {
       // Check if user has required permission
       if($this->enablePermissions) {
-         if(!checkPerm('{{modelNameSingularLowerCase}}_browse')) { abort(401, 'Unauthorized Access'); }
+         if(!checkPerm('test_browse')) { abort(401, 'Unauthorized Access'); }
       }
 
       // Set the session to the current page route
       Session::put('fromPage', url()->full());
 
       //$alphas = range('A', 'Z');
-      $alphas = DB::table('{{modelNamePluralLowerCase}}')
+      $alphas = DB::table('tests')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
          ->where('user_id', '=', Auth::user()->id)
          ->where('deleted_at', '=', NULL)
@@ -136,14 +136,14 @@ class ExtraViewsController extends Controller
 
       // If $key value is passed
       if ($key) {
-         ${{modelNamePluralLowerCase}} = {{modelName}}::with('user')->my{{modelNamePlural}}()
+         $tests = Test::with('user')->myTests()
             ->where('title', 'like', $key . '%')
             ->get();
-         return view('admin.{{modelNamePluralLowerCase}}.pages.my{{modelNamePlural}}', compact('{{modelNamePluralLowerCase}}','letters'));
+         return view('admin.tests.pages.myTests', compact('tests','letters'));
       }
 
-      ${{modelNamePluralLowerCase}} = {{modelName}}::with('user')->my{{modelNamePlural}}()->get();
-      return view('admin.{{modelNamePluralLowerCase}}.pages.my{{modelNamePlural}}', compact('{{modelNamePluralLowerCase}}','letters'));
+      $tests = Test::with('user')->myTests()->get();
+      return view('admin.tests.pages.myTests', compact('tests','letters'));
    }
 
 
@@ -156,18 +156,18 @@ class ExtraViewsController extends Controller
 # ╚═╝  ╚═══╝╚══════╝ ╚══╝╚══╝ 
 // Display a listing of the resource that were created since the user's last login.
 ##################################################################################################################
-   public function new{{modelNamePlural}}(Request $request, $key=null)
+   public function newTests(Request $request, $key=null)
    {
       // Check if user has required permission
       if($this->enablePermissions) {
-         if(!checkPerm('{{modelNameSingularLowerCase}}_edit')) { abort(401, 'Unauthorized Access'); }
+         if(!checkPerm('test_edit')) { abort(401, 'Unauthorized Access'); }
       }
 
       // Set the session to the current page route
       Session::put('fromPage', url()->full());
 
       //$alphas = range('A', 'Z');
-      $alphas = DB::table('{{modelNamePluralLowerCase}}')
+      $alphas = DB::table('tests')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
          ->where('created_at', '>=' , Auth::user()->previous_login_date)
          ->orderBy('letter')
@@ -180,14 +180,14 @@ class ExtraViewsController extends Controller
 
       // If $key value is passed
       if ($key) {
-         ${{modelNamePluralLowerCase}} = {{modelName}}::with('user')->new{{modelNamePlural}}()
+         $tests = Test::with('user')->newTests()
             ->where('title', 'like', $key . '%')
             ->get();
-         return view('admin.{{modelNamePluralLowerCase}}.pages.new{{modelNamePlural}}', compact('{{modelNamePluralLowerCase}}','letters'));
+         return view('admin.tests.pages.newTests', compact('tests','letters'));
       }
 
-      ${{modelNamePluralLowerCase}} = {{modelName}}::with('user')->new{{modelNamePlural}}()->get();
-      return view('admin.{{modelNamePluralLowerCase}}.pages.new{{modelNamePlural}}', compact('{{modelNamePluralLowerCase}}','letters'));
+      $tests = Test::with('user')->newTests()->get();
+      return view('admin.tests.pages.newTests', compact('tests','letters'));
    }
 
 
@@ -201,9 +201,9 @@ class ExtraViewsController extends Controller
 ##################################################################################################################
    public function print($id)
    {
-      ${{modelNameSingularLowerCase}} = {{modelName}}::find($id);
+      $test = Test::find($id);
 
-      return view('admin.{{modelNamePluralLowerCase}}.print', compact('{{modelNameSingularLowerCase}}');
+      return view('admin.tests.print', compact('test');
    }
 
 
@@ -219,11 +219,11 @@ class ExtraViewsController extends Controller
    {
       // Check if user has required permission
       if($this->enablePermissions) {
-         if(!checkPerm('{{modelNameSingularLowerCase}}_edit')) { abort(401, 'Unauthorized Access'); }
+         if(!checkPerm('test_edit')) { abort(401, 'Unauthorized Access'); }
       }
 
       //$alphas = range('A', 'Z');
-      $alphas = DB::table('{{modelNamePluralLowerCase}}')
+      $alphas = DB::table('tests')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
          ->where('published_at','<', Carbon::Now())
          ->where('deleted_at','=', Null)
@@ -237,16 +237,16 @@ class ExtraViewsController extends Controller
 
       // If $key value is passed
       if ($key) {
-         ${{modelNamePluralLowerCase}} = {{modelName}}::with('user')->published()
+         $tests = Test::with('user')->published()
             ->where('title', 'like', $key . '%')
             ->orderBy('title', 'asc')
             ->get();
-         return view('admin.{{modelNamePluralLowerCase}}.published', compact('{{modelNamePluralLowerCase}}','letters'));
+         return view('admin.tests.published', compact('tests','letters'));
       }
 
       // No $key value is passed
-      ${{modelNamePluralLowerCase}} = {{modelName}}::with('user')->published()->get();
-      return view('admin.{{modelNamePluralLowerCase}}.published', compact('{{modelNamePluralLowerCase}}','letters'));
+      $tests = Test::with('user')->published()->get();
+      return view('admin.tests.published', compact('tests','letters'));
    }
 
 
@@ -263,12 +263,12 @@ class ExtraViewsController extends Controller
    {
       // Check if user has required permission
       if($this->enablePermissions) {
-         if(!checkPerm('{{modelNameSingularLowerCase}}_delete')) { abort(401, 'Unauthorized Access'); }
+         if(!checkPerm('test_delete')) { abort(401, 'Unauthorized Access'); }
       }
 
-      ${{modelNameSingularLowerCase}} = {{modelName}}::withTrashed()->findOrFail($id);
+      $test = Test::withTrashed()->findOrFail($id);
 
-      return view('admin.{{modelNamePluralLowerCase}}.pages.showTrashed', compact('{{modelNameSingularLowerCase}}'));
+      return view('admin.tests.pages.showTrashed', compact('test'));
    }
 
 
@@ -285,14 +285,14 @@ class ExtraViewsController extends Controller
    {
       // Check if user has required permission
       if($this->enablePermissions) {
-         if(!checkPerm('{{modelNameSingularLowerCase}}_delete')) { abort(401, 'Unauthorized Access'); }
+         if(!checkPerm('test_delete')) { abort(401, 'Unauthorized Access'); }
       }
 
       // Set the session to the current page route
       Session::put('fromPage', url()->full());
 
       //$alphas = range('A', 'Z');
-      $alphas = DB::table('{{modelNamePluralLowerCase}}')
+      $alphas = DB::table('tests')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
          ->where('deleted_at','!=', Null)
          ->orderBy('letter')
@@ -303,9 +303,9 @@ class ExtraViewsController extends Controller
         $letters[] = $alpha->letter;
       }
 
-      ${{modelNamePluralLowerCase}} = {{modelName}}::with('user')->onlyTrashed()->get();
+      $tests = Test::with('user')->onlyTrashed()->get();
 
-      return view('admin.{{modelNamePluralLowerCase}}.pages.trashed', compact('{{modelNamePluralLowerCase}}','letters'));
+      return view('admin.tests.pages.trashed', compact('tests','letters'));
    }
 
 
@@ -322,14 +322,14 @@ class ExtraViewsController extends Controller
    {
       // Check if user has required permission
       if($this->enablePermissions) {
-         if(!checkPerm('{{modelNameSingularLowerCase}}_edit')) { abort(401, 'Unauthorized Access'); }
+         if(!checkPerm('test_edit')) { abort(401, 'Unauthorized Access'); }
       }
 
       // Set the session to the current page route
       Session::put('fromPage', url()->full());
 
       //$alphas = range('A', 'Z');
-        $alphas = DB::table('{{modelNamePluralLowerCase}}')
+        $alphas = DB::table('tests')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
          ->where('published_at','=', null)
          ->where('deleted_at','=', null)
@@ -343,16 +343,16 @@ class ExtraViewsController extends Controller
 
       // If $key value is passed
       if ($key) {
-         ${{modelNamePluralLowerCase}} = {{modelName}}::with('user')->unpublished()
+         $tests = Test::with('user')->unpublished()
             ->where('title', 'like', $key . '%')
             ->orderBy('title', 'asc')
             ->get();
-         return view('admin.{{modelNamePluralLowerCase}}.pages.unpublished', compact('{{modelNamePluralLowerCase}}','letters'));
+         return view('admin.tests.pages.unpublished', compact('tests','letters'));
       }
 
       // No $key value is passed
-      ${{modelNamePluralLowerCase}} = {{modelName}}::with('user')->unpublished()->get();
-      return view('admin.{{modelNamePluralLowerCase}}.pages.unpublished', compact('{{modelNamePluralLowerCase}}','letters'));
+      $tests = Test::with('user')->unpublished()->get();
+      return view('admin.tests.pages.unpublished', compact('tests','letters'));
    }
 
 

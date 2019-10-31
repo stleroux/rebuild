@@ -1,12 +1,12 @@
-@if(checkPerm('{{modelNameSingularLowerCase}}_edit', ${{modelNameSingularLowerCase}}))
-   @if(!${{modelNameSingularLowerCase}}->published_at)
-      <a href="{{ route('admin.{{modelNamePluralLowerCase}}.publish', ${{modelNameSingularLowerCase}}->id) }}"
+@if(checkPerm('test_edit', $test))
+   @if(!$test->published_at)
+      <a href="{{ route('admin.tests.publish', $test->id) }}"
          class="btn btn-{{ $size }} btn-primary text-light"
          title="Publish {$name}">
          <i class="{{ Config::get('buttons.publish') }} text-success"></i>
       </a>
    @else
-      <a href="{{ route('admin.{{modelNamePluralLowerCase}}.unpublish', ${{modelNameSingularLowerCase}}->id) }}"
+      <a href="{{ route('admin.tests.unpublish', $test->id) }}"
          class="btn btn-{{ $size }} btn-primary text-light"
          title="Unpublish {$name}">
          <i class="{{ Config::get('buttons.publish') }} text-danger"></i>
