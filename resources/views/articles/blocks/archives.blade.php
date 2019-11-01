@@ -4,14 +4,14 @@
       Article Archives
    </div>
    <div class="card-body card_body p-0">
-      @if(count($articlelinks) > 0)
+      @if(count($links) > 0)
          <ul class="list-group">
-            @foreach($articlelinks as $alink)
-               <a href="{{ route('articles.archive', ['year'=>$alink->year, 'month'=>$alink->month]) }}"
+            @foreach($links as $link)
+               <a href="{{ route('articles.archive', ['year'=>$link->year, 'month'=>$link->month]) }}"
                   class="list-group-item list-group-item-action p-1">
-                  {{ $alink->month_name }} - {{ $alink->year }}
+                  {{ $link->month_name }} - {{ $link->year }}
                   <span class="badge badge-secondary float-right">
-                     {{ $alink->article_count }}
+                     {{ $link->article_count }}
                   </span>
                </a>
             @endforeach

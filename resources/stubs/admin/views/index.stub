@@ -1,11 +1,10 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
-   {{-- {{ Html::style('css/.css') }} --}}
+   {{ Html::style('css/woodbarn.css') }}
 @endsection
 
 @section('left_column')
-   @include('blocks.main_menu')
 @endsection
 
 @section('right_column')
@@ -17,18 +16,18 @@
       <div class="col">
          <div class="card mb-2">
             <!--CARD HEADER-->
-            <div class="card-header card_header">
-               {{-- <i class="fa fa-sitemap"></i> --}}
+            <div class="card-header section_header p-2">
+               <i class="{{ Config::get('buttons.{{modelNamePluralLowerCase}}') }}"></i>
                {{modelNamePlural}}
                <span class="float-right">
-                  @include('{{modelNamePluralLowerCase}}.addins.links.help', ['bookmark'=>'{{modelNamePluralLowerCase}}'])
-                  @include('{{modelNamePluralLowerCase}}.addins.links.add', ['model'=>'{{modelNameSingularLowerCase}}'])
+                  @include('admin.{{modelNamePluralLowerCase}}.buttons.help', ['size'=>'xs', 'bookmark'=>'{{modelNamePluralLowerCase}}'])
+                  @include('admin.{{modelNamePluralLowerCase}}.buttons.add', ['size'=>'xs', 'model'=>'{{modelNameSingularLowerCase}}'])
                </span>
             </div>
 
             <!--CARD BODY-->
-            @if(${{modelNamePluralLowerCase}}->count() > 0)
-               <div class="card-body card_body pb-0">
+            <div class="card-body section_body p-2">
+               @if(${{modelNamePluralLowerCase}}->count() > 0)
                   {{-- @include('common.alphabet', ['model'=>'{{modelNameSingularLowerCase}}', 'page'=>'index']) --}}
                   <table id="datatable" class="table table-hover table-sm">
                      <thead>
@@ -46,30 +45,23 @@
                         @foreach (${{modelNamePluralLowerCase}} as ${{modelNameSingularLowerCase}})
                            <tr>
                               <td>{{ ${{modelNameSingularLowerCase}}->id }}</td>
-                              <td><a href="{{ route('{{modelNamePluralLowerCase}}.show', ${{modelNameSingularLowerCase}}->id) }}">{{ ${{modelNameSingularLowerCase}}->name }}</a></td>
+                              <td><a href="{{ route('admin.{{modelNamePluralLowerCase}}.show', ${{modelNameSingularLowerCase}}->id) }}">{{ ${{modelNameSingularLowerCase}}->name }}</a></td>
                               <td>{{ ${{modelNameSingularLowerCase}}->email }}</td>
                               <td>{{ ${{modelNameSingularLowerCase}}->status }}</td>
                               {{-- Add more columns here --}}
-                              <td data-order="{{ ${{modelNameSingularLowerCase}}->created_at}}">{{ ${{modelNameSingularLowerCase}}->created_at ? ${{modelNameSingularLowerCase}}->created_at->format('M d, Y') : 'no data found' }}</td>
+                              <td data-order="{{${{modelNameSingularLowerCase}}->created_at}}">{{${{modelNameSingularLowerCase}}->created_at}}</td>
                               <td class="text-right">
-                                 {{-- @if(checkPerm('{{modelNameSingularLowerCase}}_edit')) --}}
-                                    @include('{{modelNamePluralLowerCase}}.addins.links.edit', ['size'=>'xs'])
-                                 {{-- @endif --}}
-
-                                 {{-- @if(checkPerm('{{modelNameSingularLowerCase}}_delete')) --}}
-                                    @include('{{modelNamePluralLowerCase}}.addins.links.delete', ['size'=>'xs'])
-                                 {{-- @endif --}}
+                                 @include('admin.{{modelNamePluralLowerCase}}.buttons.edit', ['size'=>'xs'])
+                                 @include('admin.{{modelNamePluralLowerCase}}.buttons.delete', ['size'=>'xs'])
                               </td>
                            </tr>
                         @endforeach
                      </tbody>
                   </table>
-               </div>
-            @else
-               <div class="card-body card_body">
+               @else
                   {{ setting('no_records_found') }}
-               </div>
-            @endif
+               @endif
+            </div>
             
          </div>
       </div>

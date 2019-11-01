@@ -1,6 +1,6 @@
 @if(checkPerm('{{modelNameSingularLowerCase}}_edit'))
    <button
-      class="btn btn-{{ $size }} btn-primary text-light"
+      class="btn {{ $size ? 'btn-'.$size : '' }} btn-primary text-light"
       type="submit"
       formaction="{{ route('admin.{{modelNamePluralLowerCase}}.unpublishAll') }}"
       formmethod="POST"

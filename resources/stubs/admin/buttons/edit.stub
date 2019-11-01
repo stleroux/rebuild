@@ -1,6 +1,6 @@
 @if(checkPerm('{{modelNameSingularLowerCase}}_edit', ${{modelNameSingularLowerCase}}))
    <a href="{{ route('admin.{{modelNamePluralLowerCase}}.edit', ${{modelNameSingularLowerCase}}->id) }}"
-      class="btn btn-{{ $size }} btn-info"
+      class="btn {{ $size ? 'btn-'.$size : '' }} btn-info"
       title="Edit {{modelName}}">
       <i class="{{ Config::get('buttons.edit') }}"></i>
    </a>

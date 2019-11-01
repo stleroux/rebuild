@@ -1,7 +1,5 @@
 @extends('layouts.master')
 
-@section('title','Woodshop Projects')
-
 @section('stylesheets')
    {{ Html::style('css/woodbarn.css') }}
 @stop

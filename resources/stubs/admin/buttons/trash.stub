@@ -1,6 +1,6 @@
 @if(checkPerm('{{modelNameSingularLowerCase}}_delete', ${{modelNameSingularLowerCase}}))
    <a href="{{ route('admin.{{modelNamePluralLowerCase}}.trash', ${{modelNameSingularLowerCase}}->id) }}"
-      class="btn btn-{{ $size }} btn-danger text-light"
+      class="btn {{ $size ? 'btn-'.$size : '' }} btn-danger text-light"
       title="Trash {$name}">
       <i class="{{ Config::get('buttons.trash') }}"></i>
    </a>

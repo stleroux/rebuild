@@ -13,7 +13,7 @@ class CrudAddCommand extends Command
 
    // protected $signature = 'crud:generator {name : Class (singular), e.g.: User}';
    // protected $signature = 'crud:generator';
-   protected $signature = 'crud:add';
+   protected $signature = 'crud:add {name}';
 
    protected $description = 'Create CRUD operations';
 
@@ -27,11 +27,13 @@ class CrudAddCommand extends Command
    {
       // Get the name of the argument
       // $name = $this->argument('name');
-      $name = $this->ask('What is the name of the model? (Must be Capitalized singular form: i.e.: User)');
+      // $name = $this->ask('What is the name of the model? (Must be Capitalized singular form: i.e.: User)');
 
+      $name = $this->argument('name');
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       // Folder structure
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      // $this->createFrontendFolders($name);
       $this->createFrontendFolders($name);
       $this->info('Frontend folders created');
       $this->createAdminFolders($name);
@@ -40,25 +42,25 @@ class CrudAddCommand extends Command
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       // Controllers
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      if ($this->confirm('Do you wish to create the CONTROLLERS?')) {
+      // if ($this->confirm('Do you wish to create the CONTROLLERS?')) {
          $this->frontendControllers($name);
          $this->info('Frontend controllers created');
          $this->adminControllers($name);
          $this->info('Admin controllers created');
-      }
+      // }
 
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       // Model
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      if ($this->confirm('Do you wish to create the MODEL?')) {
+      // if ($this->confirm('Do you wish to create the MODEL?')) {
          $this->model($name);
          $this->info('Model created');
-      }
+      // }
 
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       // Views and buttons
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      if ($this->confirm('Do you wish to create the VIEWS and ASSOCIATED FILES?')) {
+      // if ($this->confirm('Do you wish to create the VIEWS and ASSOCIATED FILES?')) {
          $this->addFrontendViews($name);
             $this->info('Frontend views created');
          $this->addFrontendButtons($name);
@@ -67,6 +69,8 @@ class CrudAddCommand extends Command
             $this->info('Frontend blocks added');
 // $this->addFrontendExtraPages($name);
 // $this->info('Extra Pages added');
+         $this->addFrontendMenuItem($name);
+            $this->info('Frontend menu item added');
 
         $this->addAdminViews($name);
             $this->info('Admin views created');
@@ -76,43 +80,45 @@ class CrudAddCommand extends Command
             $this->info('Admn blocks added');
          $this->addAdminExtraPages($name);
             $this->info('Admin extra Pages added');
-      }
+         $this->addAdminMenuItem($name);
+            $this->info('Admin menu item added');
+      // }
 
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       // Request
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      if ($this->confirm('Do you wish to create the REQUEST?')) {
+      // if ($this->confirm('Do you wish to create the REQUEST?')) {
          $this->request($name);
          $this->info('Request created');
-      }
+      // }
 
 
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       // Service Provider
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      if ($this->confirm('Do you wish to create the SERVICE PROVIDER?')) {
+      // if ($this->confirm('Do you wish to create the SERVICE PROVIDER?')) {
          $this->serviceProvider($name);
          $this->info('Request created');
-      }
+      // }
 
 
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       // Permissions
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      if ($this->confirm('Do you wish to add base PERMISSIONS to the database?')) {
-         $this->addPermissions($name);
-         $this->info('Base permissions added to database');
-      }
+      // if ($this->confirm('Do you wish to add base PERMISSIONS to the database?')) {
+      //    $this->addPermissions($name);
+      //    $this->info('Base permissions added to database');
+      // }
 
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       // Routes
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      if ($this->confirm('Do you wish to add related ROUTES?')) {
+      // if ($this->confirm('Do you wish to add related ROUTES?')) {
          // File::append(base_path('routes/web.php'),'Route::get(\'' . strtolower(Str::plural($name)) . "/{test}/delete', '" . (Str::plural($name)) . "Controller@delete')->name('" . strtolower(Str::plural($name)) . ".delete');\n");
          // File::append(base_path('routes/web.php'), 'Route::resource(\'' . strtolower(Str::plural($name)) . "', '" . (Str::plural($name)) . "Controller');\n");
          $this->addRoutes($name);
          $this->info('Route resource added to web.php routes file');
-      }
+      // }
 
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       // Migration
@@ -138,24 +144,23 @@ class CrudAddCommand extends Command
       $this->info('║ Done! Happy coding.                                                            ║');
       $this->info('╠════════════════════════════════════════════════════════════════════════════════╣');
       $this->info('║ NEXT STEPS:                                                                    ║');
-      $this->info('║  - Update the migration file                                                   ║');
-      $this->info('║  - Do not forget to run "php artisan migrate"                                  ║');
+      $this->info('║   - Update the migration file                                                  ║');
+      $this->info('║   - Update the form for the Edit and Create page                               ║');
       $this->info('║                                                                                ║');
-      $this->info('║ Update the form for the Edit and Create page                                   ║');
+      $this->info('║ - Add the ServiceProvider class to config\app.php                              ║');
       $this->info('║                                                                                ║');
       $this->info('║                                                                                ║');
-      $this->info('║                                                                                ║');
+      $this->info('║   - Do not forget to run "php artisan migrate"                                 ║');
       $this->info('╚════════════════════════════════════════════════════════════════════════════════╝');
    }
 
 
 
-// Modify frontend and backend menu
 // Check into modifying the file structure to allow the favorites block to be added to the Popular Items block on the homepage
 // Add extra pages to frontend (favorites and archive)
-// Check into modifying the file structure to allow the main menu and admin menu to be updated with new entries
-
-
+// Add line to config/buttons for new icon
+// Seed DB with data
+// Popular block
 
 
 
@@ -287,6 +292,10 @@ class CrudAddCommand extends Command
          resource_path("views/".strtolower(Str::plural($name))."/blocks/" . "archives.blade.php"),
          $this->getTemplate('frontend/blocks/archives', $name)
       );
+      file_put_contents(
+         resource_path("views/".strtolower(Str::plural($name))."/blocks/" . "popular.blade.php"),
+         $this->getTemplate('frontend/blocks/popular', $name)
+      );
    }
 
 
@@ -393,6 +402,9 @@ class CrudAddCommand extends Command
    }
 
 
+// AddFrontendExtraPages
+
+
    protected function addAdminExtraPages($name)
    {
       file_put_contents(
@@ -426,6 +438,22 @@ class CrudAddCommand extends Command
    }
 
 
+   protected function addFrontendMenuItem($name)
+   {
+      file_put_contents(
+         resource_path("/views/blocks/menu/menuItems/".strtolower(Str::plural($name)).".blade.php"),
+         $this->getTemplate('frontend/menu/item', $name)
+      );
+   }
+
+
+   protected function addAdminMenuItem($name)
+   {
+      file_put_contents(
+         resource_path("/views/admin/blocks/menu/menuItems/".strtolower(Str::plural($name)).".blade.php"),
+         $this->getTemplate('admin/menu/item', $name)
+      );
+   }
 
    protected function makeMigration($name)
    {

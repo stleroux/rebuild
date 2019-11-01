@@ -26,6 +26,15 @@ class {{modelName}}ServiceProvider extends ServiceProvider
    */
    public function boot()
    {
+      view()->composer('{{modelNamePluralLowerCase}}.blocks.popular', function ($view) {
+         $popular = {{modelName}}::published()
+             ->where('views', '>=', 10)
+             ->orderBy('views', 'desc')
+             ->take(setting('homepage_favorite_post_count'))
+             ->get();
+         $view->with('popular', $popular);
+      });
+
       view()->composer('admin.{{modelNamePluralLowerCase}}.blocks.archives', function ($view) {
          ${{modelNameSingularLowerCase}}links = DB::table('{{modelNamePluralLowerCase}}')
             ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) {{modelNameSingularLowerCase}}_count'))

@@ -5,14 +5,15 @@
 @endsection
 
 @section('left_column')
-   {{-- @include('blocks.main_menu') --}}
 @endsection
 
 @section('right_column')
    @include('blocks.popularItems')
-   @include('projects.blocks.popularProjects')
-   @include('blog.blocks.popularPosts')
-   @include('recipes.blocks.popularRecipes')
+   @include('projects.blocks.popular')
+   @include('blog.blocks.popular')
+   @include('recipes.blocks.popular')
+   @include('articles.blocks.popular')
+   @include('tests.blocks.popular')
 @endsection
 
 @section('content')

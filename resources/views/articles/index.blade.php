@@ -22,7 +22,7 @@
 					Articles
 					<span class="float-right">
 		            <div class="btn-group">
-		               @include('articles.buttons.back', ['size'=>'xs', 'btn_label'=>'Back'])
+		               {{-- @include('articles.buttons.back', ['size'=>'xs', 'btn_label'=>'Back']) --}}
 		               @include('articles.buttons.myFavorites', ['size'=>'xs', 'btn_label'=>'Favorites'])
 		            </div>
 		         </span>

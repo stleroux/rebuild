@@ -1,11 +1,10 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
-   {{-- {{ Html::style('css/.css') }} --}}
+   {{ Html::style('css/woodbarn.css') }}
 @endsection
 
 @section('left_column')
-   @include('blocks.main_menu')
 @endsection
 
 @section('right_column')
@@ -13,22 +12,24 @@
 
 @section('content')
    
-   {!! Form::open(['route' => '{{modelNamePluralLowerCase}}.store', 'files'=>'true']) !!}
+   {!! Form::open(['route' => 'admin.{{modelNamePluralLowerCase}}.store', 'files'=>'true']) !!}
    
       <div class="card mb-3">
 
-         <div class="card-header">
+         <div class="card-header section_header p-2">
             <i class="fa fa-plus-square"></i>
             Create {{modelName}}
-            <span class="float-right">
-               @include('{{modelNamePluralLowerCase}}.addins.links.help', ['model'=>'{{modelNameSingularLowerCase}}', 'bookmark'=>'{{modelNamePluralLowerCase}}'])
-               @include('{{modelNamePluralLowerCase}}.addins.links.back', ['model'=>'{{modelNameSingularLowerCase}}'])
-               @include('{{modelNamePluralLowerCase}}.addins.buttons.save', ['model'=>'{{modelNameSingularLowerCase}}'])
-            </span>
+            <div class="float-right">
+               <div class="btn-group">
+                  @include('admin.{{modelNamePluralLowerCase}}.buttons.help', ['size'=>'xs', 'model'=>'{{modelNameSingularLowerCase}}', 'bookmark'=>'{{modelNamePluralLowerCase}}'])
+                  @include('admin.{{modelNamePluralLowerCase}}.buttons.back', ['size'=>'xs', 'model'=>'{{modelNameSingularLowerCase}}'])
+                  @include('admin.{{modelNamePluralLowerCase}}.buttons.save', ['size'=>'xs', 'model'=>'{{modelNameSingularLowerCase}}'])
+               </div>
+            </div>
          </div>
 
-         <div class="card-body">
-            @include('{{modelNamePluralLowerCase}}.form')            
+         <div class="card-body section_body p-2">
+            @include('admin.{{modelNamePluralLowerCase}}.form')            
          </div>
 
       </div>

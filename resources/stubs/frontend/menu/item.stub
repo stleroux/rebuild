@@ -1,0 +1,7 @@
+@if(checkPerm('{{modelNameSingularLowerCase}}_browse'))
+   <a href="{{ route('{{modelNamePluralLowerCase}}.index') }}"
+      class="list-group-item list-group-item-action p-1 {{ Route::is('{{modelNamePluralLowerCase}}.*') ? 'menu_active' : '' }} text-warning">
+      <i class="far fa-newspaper fa-fw"></i>
+      {{modelNamePlural}}
+   </a>
+@endif

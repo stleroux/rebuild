@@ -1,11 +1,10 @@
 @extends('layouts.backend')
 
 @section('stylesheets')
-   {{-- {{ Html::style('css/.css') }} --}}
+   {{ Html::style('css/woodbarn.css') }}
 @endsection
 
 @section('left_column')
-   @include('blocks.main_menu')
 @endsection
 
 @section('right_column')
@@ -21,7 +20,7 @@
          </b>
       </div>
       <div class="card-body card_body text-center">
-         {!! Form::open(['method'=>'POST', 'route'=>['{{modelNamePluralLowerCase}}.destroy', ${{modelNameSingularLowerCase}}->id]]) !!}
+         {!! Form::open(['method'=>'POST', 'route'=>['admin.{{modelNamePluralLowerCase}}.destroy', ${{modelNameSingularLowerCase}}->id]]) !!}
             {{ csrf_field() }}
             <input type="hidden" name="_method" value="DELETE" />
 

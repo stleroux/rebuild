@@ -21,9 +21,9 @@ class CreateArticlesTable extends Migration {
 			$table->text('description_eng', 65535);
 			$table->text('description_fre', 65535)->nullable();
 			$table->integer('views')->unsigned()->default(0);
-			$table->timestamps();
 			$table->dateTime('published_at')->nullable();
 			$table->softDeletes();
+			$table->timestamps();
 		});
 	}
 

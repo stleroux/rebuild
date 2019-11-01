@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\{{modelNamePlural}};
 
 // use App\Http\Requests\{{modelName}}Request;
 use App\Http\Controllers\Controller; // Required for validation // use Illuminate\Routing\Controller;
-use App\Models\{{modelName}};
+use App\Models\{{modelNamePlural}}\{{modelName}};
 use Session;
 
 class {{modelNamePlural}}Controller extends Controller
@@ -151,7 +151,7 @@ class {{modelNamePlural}}Controller extends Controller
     {
         {{modelName}}::create($this->validateRequest());
 
-        return redirect('admin.{{modelNamePluralLowerCase}}');
+        return redirect()->route('admin.{{modelNamePluralLowerCase}}.index');
     }
 
 
@@ -164,7 +164,7 @@ class {{modelNamePlural}}Controller extends Controller
 # ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝ 
 // Display the specified resource
 ##################################################################################################################
-    public function show({{modelName}} ${{modelNameSingularLowerCase}})
+    public function show($id)
     {
         // Check if user has required permission
         if($this->enablePermissions)
@@ -172,7 +172,15 @@ class {{modelNamePlural}}Controller extends Controller
             if(!checkPerm('{{modelNameSingularLowerCase}}_show')) { abort(401, 'Unauthorized Access'); }
         }
 
-        return view('admin.{{modelNamePluralLowerCase}}.show', compact('{{modelNameSingularLowerCase}}'));
+        ${{modelNameSingularLowerCase}} = {{modelName}}::findOrFail($id);
+
+        // get previous article id
+        $previous = {{modelName}}::published()->where('id', '<', ${{modelNameSingularLowerCase}}->id)->max('id');
+
+        // get next article id
+        $next = {{modelName}}::published()->where('id', '>', ${{modelNameSingularLowerCase}}->id)->min('id');
+
+        return view('admin.{{modelNamePluralLowerCase}}.show', compact('{{modelNameSingularLowerCase}}','{{modelNameSingularLowerCase}}links','next','previous'));
     }
 
 
@@ -189,7 +197,7 @@ class {{modelNamePlural}}Controller extends Controller
     {
         ${{modelNameSingularLowerCase}}->update($this->validateRequest());
 
-        return redirect('admin.{{modelNamePluralLowerCase}}');
+        return redirect()->route('admin.{{modelNamePluralLowerCase}}');
     }
 
 

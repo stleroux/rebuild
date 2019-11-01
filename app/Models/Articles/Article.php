@@ -5,13 +5,10 @@ namespace App\Models\Articles;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Auth;
-// use App\Models\Category;
 use Carbon\Carbon;
 use ChristianKuri\LaravelFavorite\Traits\Favoriteable;
 
-
 class Article extends Model
-	// implements AuditableContract
 {
 	use SoftDeletes;
    use Favoriteable;
@@ -19,18 +16,6 @@ class Article extends Model
    protected $guarded = [];
    
 	protected $dates = ['deleted_at', 'published_at'];
-
-	// protected $fillable = [
-	// 	'title',
-	// 	'category_id',
-	// 	'published_at',
-	// 	'description_eng',
-	// 	'description_fre',
-	// 	'user_id'
-	// ];
-
-
-
 
    // Set the default value for the status field to 0
    protected $attributes = [

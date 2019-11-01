@@ -1,13 +1,13 @@
 <div class="form-group">
    <label for="name">Name</label>
    <input type="text" name="name" value="{{ old('name') ?? ${{modelNameSingularLowerCase}}->name }}" class="form-control form-control-sm">
-   <div class="text-danger">{{ $errors->first('name') }}</div>
+   <div class="pl-1 bg-danger">{{ $errors->first('name') }}</div>
 </div>
 
 <div class="form-group">
    <label for="email">Email</label>
    <input type="text" name="email" value="{{ old('email') ?? ${{modelNameSingularLowerCase}}->email }}" class="form-control form-control-sm">
-   <div class="text-danger">{{ $errors->first('email') }}</div>
+   <div class="pl-1 bg-danger">{{ $errors->first('email') }}</div>
 </div>
 
 <div class="form-group">
@@ -17,7 +17,7 @@
          <option value="{{$statusOptionKey}}" {{ ${{modelNameSingularLowerCase}}->status == $statusOptionValue ? 'selected' : '' }}>{{ $statusOptionValue }}</option>
       @endforeach
    </select>
-   <div class="text-danger">{{ $errors->first('status') }}</div>
+   <div class="pl-1 bg-danger">{{ $errors->first('status') }}</div>
 </div>
    
 @csrf

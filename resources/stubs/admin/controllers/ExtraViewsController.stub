@@ -203,7 +203,7 @@ class ExtraViewsController extends Controller
    {
       ${{modelNameSingularLowerCase}} = {{modelName}}::find($id);
 
-      return view('admin.{{modelNamePluralLowerCase}}.print', compact('{{modelNameSingularLowerCase}}');
+      return view('admin.{{modelNamePluralLowerCase}}.print', compact('{{modelNameSingularLowerCase}}'));
    }
 
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\{{modelNamePlural}};
 
 // use App\Http\Requests\{{modelName}}Request;
 use App\Http\Controllers\Controller; // Required for validation // use Illuminate\Routing\Controller;
-use App\Models\{{modelName}};
+use App\Models\{{modelNamePlural}}\{{modelName}};
 use Session;
 
 class {{modelNamePlural}}Controller extends Controller

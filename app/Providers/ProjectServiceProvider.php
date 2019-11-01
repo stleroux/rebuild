@@ -25,12 +25,12 @@ class ProjectServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-        view()->composer('projects.blocks.popularProjects', function ($view) {
-            $popularProjects = Project::where('views', '>=', 10)
+        view()->composer('projects.blocks.popular', function ($view) {
+            $popular = Project::where('views', '>=', 10)
                 ->orderBy('views', 'desc')
                 ->take(10)
                 ->get();
-            $view->with('popularProjects', $popularProjects);
+            $view->with('popular', $popular);
         });
     }
 }

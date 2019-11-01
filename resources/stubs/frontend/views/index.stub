@@ -1,6 +1,7 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
+   {{ Html::style('css/woodbarn.css') }}
 @endsection
 
 @section('left_column')
@@ -11,66 +12,57 @@
 
 @section('content')
 
-   <div class="row">
-      <div class="col">
-         <div class="card mb-2">
-            <!--CARD HEADER-->
-            <div class="card-header card_header">
-               {{-- <i class="fa fa-sitemap"></i> --}}
-               {{modelNamePlural}}
-               <span class="float-right">
-                  @include('{{modelNamePluralLowerCase}}.addins.links.help', ['bookmark'=>'{{modelNamePluralLowerCase}}'])
-                  @include('{{modelNamePluralLowerCase}}.addins.links.add', ['model'=>'{{modelNameSingularLowerCase}}'])
-               </span>
-            </div>
-
-            <!--CARD BODY-->
-            @if(${{modelNamePluralLowerCase}}->count() > 0)
-               <div class="card-body card_body pb-0">
-                  {{-- @include('common.alphabet', ['model'=>'{{modelNameSingularLowerCase}}', 'page'=>'index']) --}}
-                  <table id="datatable" class="table table-hover table-sm">
-                     <thead>
-                        <tr>
-                           <th>ID</th>
-                           <th>Name</th>
-                           <th>Email</th>
-                           <th>Status</th>
-                           {{-- Add more columns here --}}
-                           <th>Created</th>
-                           <th class="no-sort"></th>
-                        </tr>
-                     </thead>
-                     <tbody>
-                        @foreach (${{modelNamePluralLowerCase}} as ${{modelNameSingularLowerCase}})
-                           <tr>
-                              <td>{{ ${{modelNameSingularLowerCase}}->id }}</td>
-                              <td><a href="{{ route('{{modelNamePluralLowerCase}}.show', ${{modelNameSingularLowerCase}}->id) }}">{{ ${{modelNameSingularLowerCase}}->name }}</a></td>
-                              <td>{{ ${{modelNameSingularLowerCase}}->email }}</td>
-                              <td>{{ ${{modelNameSingularLowerCase}}->status }}</td>
-                              {{-- Add more columns here --}}
-                              <td data-order="{{ ${{modelNameSingularLowerCase}}->created_at}}">{{ ${{modelNameSingularLowerCase}}->created_at ? ${{modelNameSingularLowerCase}}->created_at->format('M d, Y') : 'no data found' }}</td>
-                              <td class="text-right">
-                                 {{-- @if(checkPerm('{{modelNameSingularLowerCase}}_edit')) --}}
-                                    @include('{{modelNamePluralLowerCase}}.addins.links.edit', ['size'=>'xs'])
-                                 {{-- @endif --}}
-
-                                 {{-- @if(checkPerm('{{modelNameSingularLowerCase}}_delete')) --}}
-                                    @include('{{modelNamePluralLowerCase}}.addins.links.delete', ['size'=>'xs'])
-                                 {{-- @endif --}}
-                              </td>
-                           </tr>
-                        @endforeach
-                     </tbody>
-                  </table>
-               </div>
-            @else
-               <div class="card-body card_body">
-                  {{ setting('no_records_found') }}
-               </div>
-            @endif
-            
-         </div>
+   <div class="card mb-3">
+      <!--CARD HEADER-->
+      <div class="card-header section_header p-2">
+         <i class="{{ Config::get('buttons.{{modelNamePluralLowerCase}}') }}"></i>
+         {{modelNamePlural}}
+         <span class="float-right">
+            {{-- 
+            @include('{{modelNamePluralLowerCase}}.buttons.add', ['model'=>'{{modelNameSingularLowerCase}}'])
+            --}}
+            FAVORITES BUTTON
+         </span>
       </div>
+
+      <!--CARD BODY-->
+      <div class="card-body section_body p-2">
+         @if(${{modelNamePluralLowerCase}}->count() > 0)
+            {{-- @include('common.alphabet', ['model'=>'{{modelNameSingularLowerCase}}', 'page'=>'index']) --}}
+            <table id="datatable" class="table table-hover table-sm">
+               <thead>
+                  <tr>
+                     <th>ID</th>
+                     <th>Name</th>
+                     <th>Email</th>
+                     <th>Status</th>
+                     {{-- Add more columns here --}}
+                     <th>Created</th>
+                     <th class="no-sort"></th>
+                  </tr>
+               </thead>
+               <tbody>
+                  @foreach (${{modelNamePluralLowerCase}} as ${{modelNameSingularLowerCase}})
+                     <tr>
+                        <td>{{ ${{modelNameSingularLowerCase}}->id }}</td>
+                        <td><a href="{{ route('{{modelNamePluralLowerCase}}.show', ${{modelNameSingularLowerCase}}->id) }}">{{ ${{modelNameSingularLowerCase}}->name }}</a></td>
+                        <td>{{ ${{modelNameSingularLowerCase}}->email }}</td>
+                        <td>{{ ${{modelNameSingularLowerCase}}->status }}</td>
+                        {{-- Add more columns here --}}
+                        <td data-order="{{ ${{modelNameSingularLowerCase}}->created_at}}">{{ ${{modelNameSingularLowerCase}}->created_at ? ${{modelNameSingularLowerCase}}->created_at->format('M d, Y') : 'no data found' }}</td>
+                        <td class="text-right">
+                           @include('{{modelNamePluralLowerCase}}.buttons.edit', ['size'=>'xs'])
+                           @include('{{modelNamePluralLowerCase}}.buttons.delete', ['size'=>'xs'])
+                        </td>
+                     </tr>
+                  @endforeach
+               </tbody>
+            </table>
+         @else
+            {{ setting('no_records_found') }}
+         @endif
+      </div>
+      
    </div>
 
 @endsection

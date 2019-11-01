@@ -1,6 +1,6 @@
 @if(checkPerm('{{modelNameSingularLowerCase}}_delete'))
    <button
-      class="btn btn-{{ $size }} btn-danger text-light"
+      class="btn {{ $size ? 'btn-'.$size : '' }} btn-danger text-light"
       type="submit"
       formaction="{{ route('admin.{{modelNamePluralLowerCase}}.trashAll') }}"
       formmethod="POST"

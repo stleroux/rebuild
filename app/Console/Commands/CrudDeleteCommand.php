@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use File;
 use DB;
+use Schema;
 
 // class CrudGeneratorCommand extends Command
 class CrudDeleteCommand extends Command
@@ -14,7 +15,7 @@ class CrudDeleteCommand extends Command
 
    // protected $signature = 'crud:generator {name : Class (singular), e.g.: User}';
    // protected $signature = 'crud:generator';
-   protected $signature = 'crud:delete';
+   protected $signature = 'crud:delete {name}';
 
    protected $description = 'Delete CRUD operations';
 
@@ -27,7 +28,8 @@ class CrudDeleteCommand extends Command
    public function handle()
    {
       // Get the name of the argument
-      $name = $this->ask('What is the name of the model to DELETE? (Must be Capitalized singular form: i.e.: User)');
+      // $name = $this->ask('What is the name of the model to DELETE? (Must be Capitalized singular form: i.e.: User)');
+      $name = $this->argument('name');
 
       if ($this->confirm('Are you sure you wish to delete ALL related files?')) {
  
@@ -60,8 +62,24 @@ class CrudDeleteCommand extends Command
          File::deleteDirectory(resource_path('views/'. strtolower(str_plural($name))));
          $this->info('║ - Frontend views and folder deleted                                            ║');
 
+         File::delete(resource_path('views/blocks/menu/menuItems/' . strtolower(str_plural($name)) . '.blade.php'));
+         $this->info('║ - Frontend menu item deleted                                                   ║');
+         File::delete(resource_path('views/admin/blocks/menu/menuItems/' . strtolower(str_plural($name)) . '.blade.php'));
+         $this->info('║ - Admin menu item deleted                                                      ║');
+
+         File::delete(glob(database_path("migrations\*".strtolower(str_plural($name))."_table.php")));
+         $this->info('║ - Migration deleted                                                            ║');
+
          File::delete(base_path('/routes/routes/' . strtolower(str_plural($name) . '.php')));
          $this->info('║ - Routes file deleted                                                          ║');
+
+         if($this->confirm('Do you wish to delete the database table also?')) {
+            if($db = DB::getSchemaBuilder()->hasTable(strtolower(str_plural($name)))) {
+               Schema::drop(strtolower(str_plural($name)));
+               $this->info('║ - Database table deleted                                                       ║');
+            }
+         }
+
          $this->info('╠════════════════════════════════════════════════════════════════════════════════╣');
          $this->info('║ All files removed successfully                                                 ║');
          $this->info('╚════════════════════════════════════════════════════════════════════════════════╝');

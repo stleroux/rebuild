@@ -31,8 +31,8 @@
    			<div class="row py-0 px-0">
    				<div class="col-sm-12 col-md-2 px-sm-0 px-md-1">
                   @include('blocks.sessions')
-                  @include('blocks.main_menu')
-                  @include('admin.blocks.admin_menu')
+                  @include('blocks.menu.main')
+                  @include('admin.blocks.menu.admin')
    					@yield('left_column')
    				</div>
    				<div class="col-sm-12 col-md-8 py-0 px-sm-0 px-md-1">

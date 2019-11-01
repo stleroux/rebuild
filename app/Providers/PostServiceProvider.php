@@ -27,13 +27,13 @@ class PostServiceProvider extends ServiceProvider
    public function boot()
    {
       //
-      view()->composer('blog.blocks.popularPosts', function ($view) {
-         $popularPosts = Post::published()
+      view()->composer('blog.blocks.popular', function ($view) {
+         $popular = Post::published()
              ->where('views', '>=', 10)
              ->orderBy('views', 'desc')
              ->take(setting('homepage_favorite_post_count'))
              ->get();
-         $view->with('popularPosts', $popularPosts);
+         $view->with('popular', $popular);
       });
 
       view()->composer('blog.blocks.archives', function ($view) {

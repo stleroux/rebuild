@@ -27,14 +27,14 @@ class RecipeServiceProvider extends ServiceProvider
 	public function boot()
 	{
 		//
-		view()->composer('recipes.blocks.popularRecipes', function ($view) {
-			 $popularRecipes = Recipe::published()
+		view()->composer('recipes.blocks.popular', function ($view) {
+			 $popular = Recipe::published()
 					->public()
 					->orderBy('views', 'desc')
 					->orderBy('title')            
 					->take(setting('homepage_favorite_recipe_count'))
 					->get();
-			 $view->with('popularRecipes', $popularRecipes);
+			 $view->with('popular', $popular);
 		});
 
 		view()->composer('recipes.blocks.archives', function ($view) {

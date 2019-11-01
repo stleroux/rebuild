@@ -137,6 +137,12 @@ Route::prefix('admin/{{modelNamePluralLowerCase}}')->name('admin.{{modelNamePlur
          'as' => 'trash'
       ]);
 
+   Route::get('delete',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\FunctionsController@delete',
+         'as' => 'delete'
+      ]);
+
    Route::post('deleteAll',
       [
          'uses' => 'Admin\{{modelNamePlural}}\FunctionsController@deleteAll',
