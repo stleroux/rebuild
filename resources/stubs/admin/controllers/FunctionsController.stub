@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin\{{modelNamePluralLowerCase}};
+namespace App\Http\Controllers\Admin\{{modelNamePlural}};
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller; // Required for validation
 use Illuminate\Support\Facades\Input;
 
-use App\Models\{{modelNamePluralLowerCase}}\{{modelName}};
-// use App\Models\Category;
+use App\Models\{{modelNamePlural}}\{{modelName}};
 use App\Models\Comment;
 use App\Models\User;
 use Carbon\Carbon;
@@ -57,7 +56,7 @@ class FunctionsController extends Controller
 
       ${{modelNameSingularLowerCase}}->favorites()->sync([$user], false);
 
-      Session::flash ('success','The {{modelNameSingularLowerCase}} was successfully added to your Favorites list!');
+      Session::flash ('success','The {{modelNameSingularLowerCase}} was successfully added to your favorites list');
       return redirect()->back();
    }
 
@@ -86,7 +85,7 @@ class FunctionsController extends Controller
 
       {{modelName}}::whereIn('id', $checked)->forceDelete();
 
-      Session::flash('success','The selected {{modelNamePluralLowerCase}} were deleted successfully.');
+      Session::flash('success','The selected {{modelNamePluralLowerCase}} were deleted successfully');
       return redirect()->back();
    }
 
@@ -111,7 +110,7 @@ class FunctionsController extends Controller
 
       ${{modelNameSingularLowerCase}}->forceDelete();
 
-      Session::flash ('success','The {{modelNameSingularLowerCase}} was deleted successfully.');
+      Session::flash ('success','The {{modelNameSingularLowerCase}} was deleted successfully');
       return redirect()->route('admin.{{modelNamePluralLowerCase}}.trashed');
    }
 
@@ -138,9 +137,9 @@ class FunctionsController extends Controller
       ${{modelNameSingularLowerCase}} = {{modelName}}::find($id);
         $new{{modelName}} = ${{modelNameSingularLowerCase}}->replicate();
         $new{{modelName}}->user_id = Auth::user()->id;
-      $new{{modelName}}Article->save();
+      $new{{modelName}}->save();
 
-      Session::flash ('success','The {{modelNameSingularLowerCase}} was duplicated successfully!');
+      Session::flash ('success','The {{modelNameSingularLowerCase}} was duplicated successfully');
       return redirect()->back();
    }
 
@@ -184,7 +183,7 @@ class FunctionsController extends Controller
         ${{modelNameSingularLowerCase}}->deleted_at = Null;
       ${{modelNameSingularLowerCase}}->save();
 
-      Session::flash ('success','The {{modelNameSingularLowerCase}} was published successfully!');
+      Session::flash ('success','The {{modelNameSingularLowerCase}} was published successfully');
       return redirect()->back();
    }
 
@@ -217,7 +216,7 @@ class FunctionsController extends Controller
          ${{modelNameSingularLowerCase}}->save();
       }
 
-      Session::flash('success','The selected {{modelNameSingularLowerCase}} were published successfully.');
+      Session::flash('success','The selected {{modelNamePluralLowerCase}} were published successfully');
       return redirect()->back();
    }
 
@@ -238,11 +237,11 @@ class FunctionsController extends Controller
       // }
 
       $user = Auth::user()->id;
-      ${{modelNameSingularLowerCase}} = Article::find($id);
+      ${{modelNameSingularLowerCase}} = {{modelName}}::find($id);
 
       ${{modelNameSingularLowerCase}}->favorites()->detach($user);
 
-      Session::flash ('success','The {{modelNameSingularLowerCase}} was successfully removed to your Favorites list!');
+      Session::flash ('success','The {{modelNameSingularLowerCase}} was successfully removed to your favorites list');
       return redirect()->back();
    }
 
@@ -291,7 +290,7 @@ class FunctionsController extends Controller
          ${{modelNameSingularLowerCase}}->views = 0;
       ${{modelNameSingularLowerCase}}->save();
 
-      Session::flash('success','The {{modelNameSingularLowerCase}}\'s views count was reset to 0.');
+      Session::flash('success','The {{modelNameSingularLowerCase}}\'s views count was reset to 0');
       return redirect()->back();
    }
 
@@ -316,7 +315,7 @@ class FunctionsController extends Controller
 
       ${{modelNameSingularLowerCase}}->restore();
 
-      Session::flash ('success','The {{modelNameSingularLowerCase}} was successfully restored.');
+      Session::flash ('success','The {{modelNameSingularLowerCase}} was successfully restored');
       return redirect()->route('admin.{{modelNamePluralLowerCase}}.trashed');
    }
 
@@ -341,7 +340,7 @@ class FunctionsController extends Controller
 
       {{modelName}}::whereIn('id', $checked)->restore();
 
-      Session::flash('success','The selected {{modelNamePluralLowerCase}} were restored successfully.');
+      Session::flash('success','The selected {{modelNamePluralLowerCase}} were restored successfully');
       return redirect()->route('admin.{{modelNamePluralLowerCase}}.trashed');
    }
 
@@ -368,7 +367,7 @@ class FunctionsController extends Controller
          $comment->comment = $request->comment;
       ${{modelNameSingularLowerCase}}->comments()->save($comment);
 
-      Session::flash('success', 'Comment added succesfully.');
+      Session::flash('success', 'Comment added succesfully');
       return redirect()->route('admin.{{modelNamePluralLowerCase}}.show', ${{modelNameSingularLowerCase}}->id);
    }
 
@@ -396,15 +395,15 @@ class FunctionsController extends Controller
 
       $checked = $request->input('checked');
 
-      foreach($checked as ${{modelNameSingularLowerCase}}) {
-         ${{modelNameSingularLowerCase}} = {{modelName}}::findOrFail(${{modelNameSingularLowerCase}});
+      foreach($checked as $item) {
+         ${{modelNameSingularLowerCase}} = {{modelName}}::findOrFail($item);
          ${{modelNameSingularLowerCase}}->published_at = Null;
          ${{modelNameSingularLowerCase}}->save();
       }
 
       {{modelName}}::destroy($checked);
 
-      Session::flash('success','The selected {{modelNamePluralLowerCase}} were trashed successfully.');
+      Session::flash('success','The selected {{modelNamePluralLowerCase}} were trashed successfully');
       return redirect()->back();
    }
 
@@ -462,9 +461,8 @@ class FunctionsController extends Controller
             DB::table('favorites')->where('favoriteable_id', '=', ${{modelNameSingularLowerCase}}->id)->delete();
          ${{modelNameSingularLowerCase}}->save();
       }
-      
 
-      Session::flash('success','The selected {{modelNamePluralLowerCase}} were unpublished successfully and all related favorites have been removed.');
+      Session::flash('success','The selected {{modelNamePluralLowerCase}} were unpublished successfully and all related favorites have been removed');
       return redirect()->back();
    }
 

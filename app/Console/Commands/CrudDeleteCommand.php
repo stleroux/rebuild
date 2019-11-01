@@ -33,32 +33,38 @@ class CrudDeleteCommand extends Command
  
          File::cleanDirectory(app_path('/Http/Controllers/Admin/'. str_plural($name)));
          File::deleteDirectory(app_path('/Http/Controllers/Admin/'. str_plural($name)));
-         $this->info('Admin controllers and folder deleted');
+         $this->info('╔════════════════════════════════════════════════════════════════════════════════╗');
+         $this->info('║ Removing all files                                                             ║');
+         $this->info('╠════════════════════════════════════════════════════════════════════════════════╣');
+         $this->info('║ - Admin controllers and folder deleted                                         ║');
 
          File::cleanDirectory(app_path('/Http/Controllers/'. str_plural($name)));
          File::deleteDirectory(app_path('/Http/Controllers/'. str_plural($name)));
-         $this->info('Frontend controllers and folder deleted');
+         $this->info('║ - Frontend controllers and folder deleted                                      ║');
 
          File::delete(app_path('/Models/' . str_plural($name) . '/' . $name . '.php'));
          File::deleteDirectory(app_path('/Models/'. ucfirst(str_plural($name))));
-         $this->info('Model and folder deleted');
+         $this->info('║ - Model and folder deleted                                                     ║');
 
          File::delete(app_path('/Http/Requests/' . $name . 'Request.php'));
-         $this->info('Request file deleted');
+         $this->info('║ - Request file deleted                                                         ║');
 
          File::delete(app_path('/Providers/' . $name . 'ServiceProvider.php'));
-         $this->info('Service Provider file deleted');
+         $this->info('║ - Service Provider file deleted                                                ║');
 
          File::cleanDirectory(resource_path('views/admin/'. strtolower(str_plural($name))));
          File::deleteDirectory(resource_path('views/admin/'. strtolower(str_plural($name))));
-         $this->info('Admin views and folder deleted');
+         $this->info('║ - Admin views and folder deleted                                               ║');
 
          File::cleanDirectory(resource_path('views/'. strtolower(str_plural($name))));
          File::deleteDirectory(resource_path('views/'. strtolower(str_plural($name))));
-         $this->info('Frontend views and folder deleted');
+         $this->info('║ - Frontend views and folder deleted                                            ║');
 
          File::delete(base_path('/routes/routes/' . strtolower(str_plural($name) . '.php')));
-         $this->info('Routes file deleted');
+         $this->info('║ - Routes file deleted                                                          ║');
+         $this->info('╠════════════════════════════════════════════════════════════════════════════════╣');
+         $this->info('║ All files removed successfully                                                 ║');
+         $this->info('╚════════════════════════════════════════════════════════════════════════════════╝');
       }
    }
 

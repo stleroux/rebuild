@@ -130,10 +130,6 @@ class CrudAddCommand extends Command
       }
 
 
-// Modify frontend and backend menu
-// Check into modifying the file structure to allow the favorites block to be added to the Popular Items block on the homepage
-// Add extra pages to frontend (favorites and archive)
-// Check into modifying the file structure to allow the main menu and admin menu to be updated with new entries
 
 
 
@@ -144,16 +140,20 @@ class CrudAddCommand extends Command
       $this->info('║ NEXT STEPS:                                                                    ║');
       $this->info('║  - Update the migration file                                                   ║');
       $this->info('║  - Do not forget to run "php artisan migrate"                                  ║');
-      $this->info('║ ║');
+      $this->info('║                                                                                ║');
       $this->info('║ Update the form for the Edit and Create page                                   ║');
-      $this->info('║ ║');
-      $this->info('║ ║');
-      $this->info('║ ║');
+      $this->info('║                                                                                ║');
+      $this->info('║                                                                                ║');
+      $this->info('║                                                                                ║');
       $this->info('╚════════════════════════════════════════════════════════════════════════════════╝');
    }
 
 
 
+// Modify frontend and backend menu
+// Check into modifying the file structure to allow the favorites block to be added to the Popular Items block on the homepage
+// Add extra pages to frontend (favorites and archive)
+// Check into modifying the file structure to allow the main menu and admin menu to be updated with new entries
 
 
 
