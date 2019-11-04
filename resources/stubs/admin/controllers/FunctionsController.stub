@@ -19,7 +19,7 @@ use Route;
 use Session;
 use URL;
 
-class FunctionsController extends Controller
+class FunctionsController extends {{modelNamePlural}}Controller
 {
 ##################################################################################################################
 #  ██████╗ ██████╗ ███╗   ██╗███████╗████████╗██████╗ ██╗   ██╗ ██████╗████████╗

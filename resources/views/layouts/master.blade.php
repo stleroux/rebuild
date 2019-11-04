@@ -29,17 +29,17 @@
    	<main class="container-fluid">
    		{{-- <div id="" class="py-0 px-0"> --}}
    			<div class="row py-0 px-0">
-   				<div class="col-sm-12 col-md-2 px-sm-0 px-md-1">
+   				<div class="col-sm-12 col-md-2 px-sm-0 px-md-1 mb-2">
                   @include('blocks.sessions')
                   @include('blocks.menu.main')
                   @include('admin.blocks.menu.admin')
    					@yield('left_column')
    				</div>
-   				<div class="col-sm-12 col-md-8 py-0 px-sm-0 px-md-1">
+   				<div class="col-sm-12 col-md-8 py-0 px-sm-0 px-md-1 mb-2">
                   {{-- <example-component></example-component> --}}
    					@yield('content')
    				</div>
-   				<div class="col-sm-12 col-md-2 px-sm-0 px-md-1">
+   				<div class="col-sm-12 col-md-2 px-sm-1 mb-2">
    					@yield('right_column')
    				</div>
    			</div>

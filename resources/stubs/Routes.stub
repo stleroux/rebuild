@@ -39,8 +39,8 @@ Route::prefix('admin/{{modelNamePluralLowerCase}}')->name('admin.{{modelNamePlur
 
    Route::get('archives/{year}/{month}',
       [
-         'uses' => 'Admin\{{modelNamePlural}}\ExtraViewsController@archive',
-         'as' => 'archive'
+         'uses' => 'Admin\{{modelNamePlural}}\ExtraViewsController@archives',
+         'as' => 'archives'
       ]);
 
    Route::get('my{{modelNamePlural}}/{key?}',
@@ -263,8 +263,8 @@ Route::prefix('{{modelNamePluralLowerCase}}')->name('{{modelNamePluralLowerCase}
 
    Route::get('archives/{year}/{month}',
       [
-         'uses' => '{{modelNamePlural}}\ExtraViewsController@archive',
-         'as' => 'archive'
+         'uses' => '{{modelNamePlural}}\ExtraViewsController@archives',
+         'as' => 'archives'
       ]);
 
 });

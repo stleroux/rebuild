@@ -14,7 +14,7 @@ use DB;
 use Route;
 use Session;
 
-class ExtraViewsController extends Controller
+class ExtraViewsController extends {{modelNamePlural}}Controller
 {
 ##################################################################################################################
 #  ██████╗ ██████╗ ███╗   ██╗███████╗████████╗██████╗ ██╗   ██╗ ██████╗████████╗
@@ -40,19 +40,22 @@ class ExtraViewsController extends Controller
 # ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝  ╚══════╝
 # Display the archived resources
 ##################################################################################################################
-   public function archive($year, $month)
+   public function archives($year, $month)
    {
       // Check if user has required permission
       if($this->enablePermissions) {
          if(!checkPerm('{{modelNameSingularLowerCase}}_read')) { abort(401, 'Unauthorized Access'); }
       }
 
+      // Set the session to the current page route
+      Session::put('fromPage', url()->full());
+
       $archives = {{modelName}}::with('user')->whereYear('created_at','=', $year)
          ->whereMonth('created_at','=', $month)
          ->where('published_at', '<=', Carbon::now())
          ->get();
 
-      return view('admin.{{modelNamePluralLowerCase}}.pages.archive', compact('archives','{{modelNameSingularLowerCase}}links'))->withYear($year)->withMonth($month);
+      return view('admin.{{modelNamePluralLowerCase}}.pages.archives', compact('archives','archivesLinks'))->withYear($year)->withMonth($month);
    }
 
 
@@ -77,7 +80,7 @@ class ExtraViewsController extends Controller
 
       //$alphas = range('A', 'Z');
       $alphas = DB::table('{{modelNamePluralLowerCase}}')
-         ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
+         ->select(DB::raw('DISTINCT LEFT(name, 1) as letter'))
          ->where('published_at','>', Carbon::Now())
          ->orderBy('letter')
          ->get();
@@ -90,8 +93,8 @@ class ExtraViewsController extends Controller
       // If $key value is passed
       if ($key) {
          ${{modelNamePluralLowerCase}} = {{modelName}}::with('user')->future()
-            ->where('title', 'like', $key . '%')
-            ->orderBy('title', 'asc')
+            ->where('name', 'like', $key . '%')
+            ->orderBy('name', 'asc')
             ->get();
          return view('admin.{{modelNamePluralLowerCase}}.pages.future', compact('{{modelNamePluralLowerCase}}','letters'));
       }
@@ -123,7 +126,7 @@ class ExtraViewsController extends Controller
 
       //$alphas = range('A', 'Z');
       $alphas = DB::table('{{modelNamePluralLowerCase}}')
-         ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
+         ->select(DB::raw('DISTINCT LEFT(name, 1) as letter'))
          ->where('user_id', '=', Auth::user()->id)
          ->where('deleted_at', '=', NULL)
          ->orderBy('letter')
@@ -137,7 +140,7 @@ class ExtraViewsController extends Controller
       // If $key value is passed
       if ($key) {
          ${{modelNamePluralLowerCase}} = {{modelName}}::with('user')->my{{modelNamePlural}}()
-            ->where('title', 'like', $key . '%')
+            ->where('name', 'like', $key . '%')
             ->get();
          return view('admin.{{modelNamePluralLowerCase}}.pages.my{{modelNamePlural}}', compact('{{modelNamePluralLowerCase}}','letters'));
       }
@@ -168,7 +171,7 @@ class ExtraViewsController extends Controller
 
       //$alphas = range('A', 'Z');
       $alphas = DB::table('{{modelNamePluralLowerCase}}')
-         ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
+         ->select(DB::raw('DISTINCT LEFT(name, 1) as letter'))
          ->where('created_at', '>=' , Auth::user()->previous_login_date)
          ->orderBy('letter')
          ->get();
@@ -181,7 +184,7 @@ class ExtraViewsController extends Controller
       // If $key value is passed
       if ($key) {
          ${{modelNamePluralLowerCase}} = {{modelName}}::with('user')->new{{modelNamePlural}}()
-            ->where('title', 'like', $key . '%')
+            ->where('name', 'like', $key . '%')
             ->get();
          return view('admin.{{modelNamePluralLowerCase}}.pages.new{{modelNamePlural}}', compact('{{modelNamePluralLowerCase}}','letters'));
       }
@@ -224,7 +227,7 @@ class ExtraViewsController extends Controller
 
       //$alphas = range('A', 'Z');
       $alphas = DB::table('{{modelNamePluralLowerCase}}')
-         ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
+         ->select(DB::raw('DISTINCT LEFT(name, 1) as letter'))
          ->where('published_at','<', Carbon::Now())
          ->where('deleted_at','=', Null)
          ->orderBy('letter')
@@ -238,8 +241,8 @@ class ExtraViewsController extends Controller
       // If $key value is passed
       if ($key) {
          ${{modelNamePluralLowerCase}} = {{modelName}}::with('user')->published()
-            ->where('title', 'like', $key . '%')
-            ->orderBy('title', 'asc')
+            ->where('name', 'like', $key . '%')
+            ->orderBy('name', 'asc')
             ->get();
          return view('admin.{{modelNamePluralLowerCase}}.published', compact('{{modelNamePluralLowerCase}}','letters'));
       }
@@ -293,7 +296,7 @@ class ExtraViewsController extends Controller
 
       //$alphas = range('A', 'Z');
       $alphas = DB::table('{{modelNamePluralLowerCase}}')
-         ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
+         ->select(DB::raw('DISTINCT LEFT(name, 1) as letter'))
          ->where('deleted_at','!=', Null)
          ->orderBy('letter')
          ->get();
@@ -330,7 +333,7 @@ class ExtraViewsController extends Controller
 
       //$alphas = range('A', 'Z');
         $alphas = DB::table('{{modelNamePluralLowerCase}}')
-         ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
+         ->select(DB::raw('DISTINCT LEFT(name, 1) as letter'))
          ->where('published_at','=', null)
          ->where('deleted_at','=', null)
          ->orderBy('letter')
@@ -344,8 +347,8 @@ class ExtraViewsController extends Controller
       // If $key value is passed
       if ($key) {
          ${{modelNamePluralLowerCase}} = {{modelName}}::with('user')->unpublished()
-            ->where('title', 'like', $key . '%')
-            ->orderBy('title', 'asc')
+            ->where('name', 'like', $key . '%')
+            ->orderBy('name', 'asc')
             ->get();
          return view('admin.{{modelNamePluralLowerCase}}.pages.unpublished', compact('{{modelNamePluralLowerCase}}','letters'));
       }

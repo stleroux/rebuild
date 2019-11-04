@@ -8,6 +8,7 @@
 @endsection
 
 @section('right_column')
+   @include('{{modelNamePluralLowerCase}}.blocks.archives')
 @endsection
 
 @section('content')
@@ -17,12 +18,9 @@
       <div class="card-header section_header p-2">
          <i class="{{ Config::get('buttons.{{modelNamePluralLowerCase}}') }}"></i>
          {{modelNamePlural}}
-         <span class="float-right">
-            {{-- 
-            @include('{{modelNamePluralLowerCase}}.buttons.add', ['model'=>'{{modelNameSingularLowerCase}}'])
-            --}}
-            FAVORITES BUTTON
-         </span>
+         <div class="float-right">
+            @include('{{modelNamePluralLowerCase}}.buttons.myFavorites', ['size'=>'xs', 'btn_label'=>'My Favorites'])
+         </div>
       </div>
 
       <!--CARD BODY-->
@@ -38,7 +36,7 @@
                      <th>Status</th>
                      {{-- Add more columns here --}}
                      <th>Created</th>
-                     <th class="no-sort"></th>
+                     <th></th>
                   </tr>
                </thead>
                <tbody>
@@ -49,10 +47,9 @@
                         <td>{{ ${{modelNameSingularLowerCase}}->email }}</td>
                         <td>{{ ${{modelNameSingularLowerCase}}->status }}</td>
                         {{-- Add more columns here --}}
-                        <td data-order="{{ ${{modelNameSingularLowerCase}}->created_at}}">{{ ${{modelNameSingularLowerCase}}->created_at ? ${{modelNameSingularLowerCase}}->created_at->format('M d, Y') : 'no data found' }}</td>
-                        <td class="text-right">
-                           @include('{{modelNamePluralLowerCase}}.buttons.edit', ['size'=>'xs'])
-                           @include('{{modelNamePluralLowerCase}}.buttons.delete', ['size'=>'xs'])
+                        <td data-order="{{ ${{modelNameSingularLowerCase}}->created_at}}">{{ ${{modelNameSingularLowerCase}}->created_at }}</td>
+                        <td>
+                           @include('{{modelNamePluralLowerCase}}.buttons.favorite', ['size'=>'xs'])
                         </td>
                      </tr>
                   @endforeach

@@ -9,19 +9,18 @@
 
 @section('right_column')
    @include('blocks.popularItems')
-   @include('projects.blocks.popular')
+{{--    @include('projects.blocks.popular')
    @include('blog.blocks.popular')
    @include('recipes.blocks.popular')
    @include('articles.blocks.popular')
-   @include('tests.blocks.popular')
+   @include('tests.blocks.popular') --}}
+   @include('homepage.blocks')
 @endsection
 
 @section('content')
-
    @include('homepage.greeting')
    @include('homepage.warning')
    @include('homepage.newUser')
    @include('homepage.interests')
    @include('homepage.blog')
-
 @endsection

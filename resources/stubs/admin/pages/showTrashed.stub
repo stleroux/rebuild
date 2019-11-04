@@ -30,8 +30,8 @@
 			<div class="row">
 				<div class="col-xs-8 col-sm-8 col-md-8">
 					<div class="form-group">
-						{!! Form::label('title', 'Title') !!}
-						{!! Form::text('title', ${{modelNameSingularLowerCase}}->title, ['class'=>'form-control form-control-sm', 'readonly']) !!}
+						{!! Form::label('name', 'Name') !!}
+						{!! Form::text('name', ${{modelNameSingularLowerCase}}->name, ['class'=>'form-control form-control-sm', 'readonly']) !!}
 					</div>
 				</div>
 				<div class="col-xs-4 col-sm-4 col-md-4">

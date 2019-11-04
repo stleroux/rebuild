@@ -1,0 +1,79 @@
+@extends('layouts.master')
+
+@section('stylesheets')
+   {{ Html::style('css/woodbarn.css') }}
+@endsection
+
+@section('left_column')
+@endsection
+
+@section('right_column')
+   @include('{{modelNamePluralLowerCase}}.blocks.archives')
+@endsection
+
+@section('content')
+
+   <form style="display:inline;">
+      {!! csrf_field() !!}
+
+         <div class="card mb-3">
+            <div class="card-header section_header p-2">
+               <i class="fa fa-file-text-o"></i>
+               My Favorite {{modelNamePlural}}
+               <span class="float-right">
+                  <div class="btn-group">
+                     @include('{{modelNamePluralLowerCase}}.buttons.back', ['size'=>'xs', 'btn_label'=>'Back'])
+                  </div>
+               </span>
+            </div>
+         
+            <div class="card-body section_body p-2">
+               @if(${{modelNamePluralLowerCase}}->count())
+                  <table id="datatable" class="table table-hover table-sm searchHighlight">
+                     <thead>
+                        <tr>
+                           {{-- Add columns for search purposes only --}}
+                           <th class="d-none">English</th>
+                           <th class="d-none">French</th>
+                           {{-- Add columns for search purposes only --}}
+
+                           <th class="">Name</th>
+                           <th class="">Category</th>
+                           <th class="">Views</th>
+                           <th class="">Author</th>
+                           <th class="">Created On</th>
+                           <th class="">Publish(ed) On</th>
+                           <th class="" data-orderable="false"></th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        @foreach (${{modelNamePluralLowerCase}} as $key => ${{modelNameSingularLowerCase}})
+                           <tr>
+                              {{-- Hide columns at all levels. Only needed because Datatables only searches for columns in the table --}}
+                              <td class="d-none">{{ ${{modelNameSingularLowerCase}}->description_eng }}</td>
+                              <td class="d-none">{{ ${{modelNameSingularLowerCase}}->description_fre }}</td>
+                              {{-- Hide columns at all levels. Only needed because Datatables only searches for columns in the table --}}
+                              
+                              <td><a href="{{ route('{{modelNamePluralLowerCase}}.show', ${{modelNameSingularLowerCase}}->id) }}" class="">{{ ${{modelNameSingularLowerCase}}->name }}</a></td>
+                              <td class="">{{ ${{modelNameSingularLowerCase}}->category }}</td>
+                              <td class="">{{ ${{modelNameSingularLowerCase}}->views }}</td>
+                              <td class="">@include('common.authorFormat', ['model'=>${{modelNameSingularLowerCase}}, 'field'=>'user'])</td>
+                              <td class="">@include('common.dateFormat', ['model'=>${{modelNameSingularLowerCase}}, 'field'=>'created_at'])</td>
+                              <td class=" 
+                                 {{ ${{modelNameSingularLowerCase}}->published_at >= Carbon\Carbon::now() ? 'text text-warning' : '' }}
+                                 {{ ${{modelNameSingularLowerCase}}->published_at == null ? 'text text-info' : '' }}">
+                                 @include('common.dateFormat', ['model'=>${{modelNameSingularLowerCase}}, 'field'=>'published_at'])
+                              </td>
+                              <td>@include('{{modelNamePluralLowerCase}}.buttons.favorite', ['size'=>'xs'])</td>
+                           </tr>
+                        @endforeach
+                     </tbody>
+                  </table>
+               @else
+                  {{ setting('no_records_found') }}
+               @endif
+            </div>
+         </div>
+   </form>
+      
+@endsection

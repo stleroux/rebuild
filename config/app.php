@@ -181,8 +181,9 @@ return [
         App\Providers\ProjectServiceProvider::class,
         App\Providers\BladeServiceProvider::class,
         App\Providers\ArticleServiceProvider::class,
-        App\Providers\TestServiceProvider::class,
-
+        
+        /* * Customer Service Providers */
+																																																																																																																																																												
     ],
 
     /*

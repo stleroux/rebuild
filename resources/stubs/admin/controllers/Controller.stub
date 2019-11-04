@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin\{{modelNamePlural}};
 
-// use App\Http\Requests\{{modelName}}Request;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller; // Required for validation // use Illuminate\Routing\Controller;
 use App\Models\{{modelNamePlural}}\{{modelName}};
+use Carbon\Carbon;
+use DB;
 use Session;
 
 class {{modelNamePlural}}Controller extends Controller
@@ -104,7 +106,7 @@ class {{modelNamePlural}}Controller extends Controller
 # ╚══════╝╚═════╝ ╚═╝   ╚═╝   
 // Show the form for editing the specified resource
 ##################################################################################################################
-    public function edit({{modelName}} ${{modelNameSingularLowerCase}})
+    public function edit({{modelName}} ${{modelNameSingularLowerCase}}, $id)
     {
         // Check if user has required permission
         if($this->enablePermissions)
@@ -112,6 +114,8 @@ class {{modelNamePlural}}Controller extends Controller
             if(!checkPerm('{{modelNameSingularLowerCase}}_edit')) { abort(401, 'Unauthorized Access'); }
         }
 
+        // Find the model to edit
+        ${{modelNameSingularLowerCase}} = {{modelName}}::find($id);
         return view('admin.{{modelNamePluralLowerCase}}.edit', compact('{{modelNameSingularLowerCase}}'));
     }
 
@@ -125,34 +129,41 @@ class {{modelNamePlural}}Controller extends Controller
 # ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝
 // Display a list of resources
 ##################################################################################################################
-    public function index()
-    {
-        // Check if user has required permission
-        if($this->enablePermissions)
-        {
-            if(!checkPerm('{{modelNameSingularLowerCase}}_index')) { abort(401, 'Unauthorized Access'); }
-        }
+   public function index(Request $request, $key=null)
+   {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('{{modelNameSingularLowerCase}}_browse')) { abort(401, 'Unauthorized Access'); }
+      }
 
-        ${{modelNamePluralLowerCase}} = {{modelName}}::All();
-        return view('admin.{{modelNamePluralLowerCase}}.index', compact('{{modelNamePluralLowerCase}}'));
-    }
+      // Set the session to the current page route
+      Session::put('fromPage', url()->full());
 
+      //$alphas = range('A', 'Z');
+      $alphas = DB::table('{{modelNamePluralLowerCase}}')
+         ->select(DB::raw('DISTINCT LEFT(name, 1) as letter'))
+         ->where('published_at','<', Carbon::Now())
+         ->orderBy('letter')
+         ->get();
 
-##################################################################################################################
-# ███████╗████████╗ ██████╗ ██████╗ ███████╗
-# ██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗██╔════╝
-# ███████╗   ██║   ██║   ██║██████╔╝█████╗  
-# ╚════██║   ██║   ██║   ██║██╔══██╗██╔══╝  
-# ███████║   ██║   ╚██████╔╝██║  ██║███████╗
-# ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝
-// Store a newly created resource in storage
-##################################################################################################################
-    public function store()
-    {
-        {{modelName}}::create($this->validateRequest());
+      $letters = [];
+      foreach($alphas as $alpha) {
+         $letters[] = $alpha->letter;
+      }
 
-        return redirect()->route('admin.{{modelNamePluralLowerCase}}.index');
-    }
+      // If $key value is passed
+      if ($key) {
+         ${{modelNamePluralLowerCase}} = {{modelName}}::with('user')->published()
+            ->where('name', 'like', $key . '%')
+            ->orderBy('name', 'asc')
+            ->get();
+         return view('admin.{{modelNamePluralLowerCase}}.index', compact('{{modelNamePluralLowerCase}}','letters', 'archivesLinks'));
+      }
+
+      // No $key value is passed
+      ${{modelNamePluralLowerCase}} = {{modelName}}::with('user')->published()->get();
+      return view('admin.{{modelNamePluralLowerCase}}.index', compact('{{modelNamePluralLowerCase}}','letters', 'archivesLinks'));
+   }
 
 
 ##################################################################################################################
@@ -185,6 +196,29 @@ class {{modelNamePlural}}Controller extends Controller
 
 
 ##################################################################################################################
+# ███████╗████████╗ ██████╗ ██████╗ ███████╗
+# ██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗██╔════╝
+# ███████╗   ██║   ██║   ██║██████╔╝█████╗  
+# ╚════██║   ██║   ██║   ██║██╔══██╗██╔══╝  
+# ███████║   ██║   ╚██████╔╝██║  ██║███████╗
+# ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝
+// Store a newly created resource in storage
+##################################################################################################################
+   public function store()
+   {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('{{modelNameSingularLowerCase}}_add')) { abort(401, 'Unauthorized Access'); }
+      }
+
+      {{modelName}}::create($this->validateRequest());
+
+      Session::flash('success','The {{modelNameSingularLowerCase}} has been created successfully!');
+      return redirect()->route('admin.{{modelNamePluralLowerCase}}.index');
+   }
+
+
+##################################################################################################################
 # ██╗   ██╗██████╗ ██████╗  █████╗ ████████╗███████╗
 # ██║   ██║██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██╔════╝
 # ██║   ██║██████╔╝██║  ██║███████║   ██║   █████╗  
@@ -193,12 +227,19 @@ class {{modelNamePlural}}Controller extends Controller
 #  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
 // UPDATE :: Update the specified resource in storage
 ##################################################################################################################
-    public function update({{modelName}} ${{modelNameSingularLowerCase}})
-    {
-        ${{modelNameSingularLowerCase}}->update($this->validateRequest());
+   public function update({{modelName}} ${{modelNameSingularLowerCase}}, $id)
+   {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('{{modelNameSingularLowerCase}}_edit')) { abort(401, 'Unauthorized Access'); }
+      }
 
-        return redirect()->route('admin.{{modelNamePluralLowerCase}}');
-    }
+      ${{modelNameSingularLowerCase}} = {{modelName}}::findOrFail($id);
+      ${{modelNameSingularLowerCase}}->update($this->validateRequest());
+      
+      Session::flash('success','The {{modelNameSingularLowerCase}} has been updated successfully.');
+      return redirect(Session::get('fromPage'));
+   }
 
 
 ##################################################################################################################

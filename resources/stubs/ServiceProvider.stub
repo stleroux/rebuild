@@ -36,27 +36,27 @@ class {{modelName}}ServiceProvider extends ServiceProvider
       });
 
       view()->composer('admin.{{modelNamePluralLowerCase}}.blocks.archives', function ($view) {
-         ${{modelNameSingularLowerCase}}links = DB::table('{{modelNamePluralLowerCase}}')
-            ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) {{modelNameSingularLowerCase}}_count'))
+         $archivesLinks = DB::table('{{modelNamePluralLowerCase}}')
+            ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) archivesLinks_count'))
             ->where('published_at', '<=', Carbon::now())
             ->groupBy('year')
             ->groupBy('month')
             ->orderBy('year', 'desc')
             ->orderBy('month', 'desc')
             ->get();
-         $view->with('{{modelNameSingularLowerCase}}links', ${{modelNameSingularLowerCase}}links);
+         $view->with('archivesLinks', $archivesLinks);
       });
 
       view()->composer('{{modelNamePluralLowerCase}}.blocks.archives', function ($view) {
-         ${{modelNameSingularLowerCase}}links = DB::table('{{modelNamePluralLowerCase}}')
-            ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) {{modelNameSingularLowerCase}}_count'))
+         $archivesLinks = DB::table('{{modelNamePluralLowerCase}}')
+            ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) archivesLinks_count'))
             ->where('published_at', '<=', Carbon::now())
             ->groupBy('year')
             ->groupBy('month')
             ->orderBy('year', 'desc')
             ->orderBy('month', 'desc')
             ->get();
-         $view->with('{{modelNameSingularLowerCase}}links', ${{modelNameSingularLowerCase}}links);
+         $view->with('archivesLinks', $archivesLinks);
       });
    }
 

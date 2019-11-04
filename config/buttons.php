@@ -33,7 +33,10 @@ return [
    'unpublish'    => 'far fa-fw fa-lightbulb',
    'unpublished'  => 'fas fa-fw fa-ban',
    'update'       => 'fa  fa-fw fa-save',
-   'permissions'  => 'fas fa-fw fa-user-shield'
+   'permissions'  => 'fas fa-fw fa-user-shield',
+
+   /** CRUD Added **/
+	
 ];
 
 // <i class="{{ Config::get('buttons.') }}"></i>

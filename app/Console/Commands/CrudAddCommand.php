@@ -23,17 +23,21 @@ class CrudAddCommand extends Command
    }
 
 
+
+// Add line to config/buttons for new icon
+// Seed DB with data
+
+
+
    public function handle()
    {
       // Get the name of the argument
-      // $name = $this->argument('name');
       // $name = $this->ask('What is the name of the model? (Must be Capitalized singular form: i.e.: User)');
-
       $name = $this->argument('name');
+
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       // Folder structure
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      // $this->createFrontendFolders($name);
       $this->createFrontendFolders($name);
       $this->info('Frontend folders created');
       $this->createAdminFolders($name);
@@ -67,8 +71,8 @@ class CrudAddCommand extends Command
             $this->info('Frontend buttons added');
          $this->addFrontendBlocks($name);
             $this->info('Frontend blocks added');
-// $this->addFrontendExtraPages($name);
-// $this->info('Extra Pages added');
+         $this->addFrontendExtraPages($name);
+            $this->info('Frontend extra pages added');
          $this->addFrontendMenuItem($name);
             $this->info('Frontend menu item added');
 
@@ -79,10 +83,51 @@ class CrudAddCommand extends Command
          $this->addAdminBlocks($name);
             $this->info('Admn blocks added');
          $this->addAdminExtraPages($name);
-            $this->info('Admin extra Pages added');
+            $this->info('Admin extra pages added');
          $this->addAdminMenuItem($name);
             $this->info('Admin menu item added');
-      // }
+
+
+      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      // Write settings to files
+      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      // Add include line to homepage blocks
+      File::append(
+         resource_path('views/homepage/blocks.blade.php'),
+         '@include(\'' . strtolower(Str::plural($name)) . ".blocks.popular')\n");
+         
+      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      // Add a new icon to config/buttons.php
+      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      $val = "'" . strtolower(str::plural($name)) . "' => 'fas fa-fw fa-random',\n";
+      $configFile = base_path().'/config/buttons.php';
+      $file = file_get_contents($configFile);
+      $searchFor = '/** CRUD Added **/'.PHP_EOL;
+      $customIcon = strpos($file, $searchFor);
+      if($customIcon) {
+         // \t represents a tab
+         $newFile = substr_replace($file, $searchFor."\t".$val.PHP_EOL, $customIcon, strlen($searchFor));
+         // Save file
+         file_put_contents($configFile, $newFile);
+      }
+
+
+      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      // Register service provider in config/app.php
+      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      $configFile = base_path().'/config/app.php';
+      $file = file_get_contents($configFile);
+      $searchFor = '/* * Customer Service Providers */'.PHP_EOL;
+      $customProviders = strpos($file, $searchFor);
+      if($customProviders) {
+         $namespace = "App";
+         $moduleName = "Providers";
+         // $name = Str::plural($name);
+         $newFile = substr_replace($file, $searchFor."\t\t".$namespace.'\\'.$moduleName.'\\'.$name.'ServiceProvider::class,'.PHP_EOL, $customProviders, strlen($searchFor));
+         // Save file
+         file_put_contents($configFile, $newFile);
+      }
+
 
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       // Request
@@ -105,10 +150,10 @@ class CrudAddCommand extends Command
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       // Permissions
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      // if ($this->confirm('Do you wish to add base PERMISSIONS to the database?')) {
-      //    $this->addPermissions($name);
-      //    $this->info('Base permissions added to database');
-      // }
+      if ($this->confirm('Do you wish to add base PERMISSIONS to the database?')) {
+         $this->addPermissions($name);
+         $this->info('Base permissions added to database');
+      }
 
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       // Routes
@@ -136,10 +181,6 @@ class CrudAddCommand extends Command
       }
 
 
-
-
-
-
       $this->info('╔════════════════════════════════════════════════════════════════════════════════╗');
       $this->info('║ Done! Happy coding.                                                            ║');
       $this->info('╠════════════════════════════════════════════════════════════════════════════════╣');
@@ -153,17 +194,6 @@ class CrudAddCommand extends Command
       $this->info('║   - Do not forget to run "php artisan migrate"                                 ║');
       $this->info('╚════════════════════════════════════════════════════════════════════════════════╝');
    }
-
-
-
-// Check into modifying the file structure to allow the favorites block to be added to the Popular Items block on the homepage
-// Add extra pages to frontend (favorites and archive)
-// Add line to config/buttons for new icon
-// Seed DB with data
-// Popular block
-
-
-
 
 
    protected function frontendControllers($name)
@@ -214,7 +244,7 @@ class CrudAddCommand extends Command
    protected function request($name)
    {
       file_put_contents(
-         app_path("/Http/Requests/{$name}Request.php"),
+         app_path("/Http/Requests/".$name."Request.php"),
          $this->getTemplate('Request', $name));
    }
 
@@ -222,7 +252,7 @@ class CrudAddCommand extends Command
    protected function serviceProvider($name)
    {
       file_put_contents(
-         app_path("/Providers/{$name}ServiceProvider.php"),
+         app_path("/Providers/".$name."ServiceProvider.php"),
          $this->getTemplate('ServiceProvider', $name));
    }  
 
@@ -302,38 +332,48 @@ class CrudAddCommand extends Command
    protected function addFrontendButtons($name)
    {
       file_put_contents(
-         resource_path("/views/".strtolower(Str::plural($name))."/buttons/add.blade.php"),
-         $this->getTemplate('frontend/buttons/add', $name)
-      );
-
-      file_put_contents(
-         resource_path("/views/".strtolower(Str::plural($name))."/buttons/save.blade.php"),
-         $this->getTemplate('frontend/buttons/save', $name)
-      );
-
-      file_put_contents(
-         resource_path("/views/".strtolower(Str::plural($name))."/buttons/edit.blade.php"),
-         $this->getTemplate('frontend/buttons/edit', $name)
-      );
-
-      file_put_contents(
-         resource_path("/views/".strtolower(Str::plural($name))."/buttons/update.blade.php"),
-         $this->getTemplate('frontend/buttons/update', $name)
-      );
-
-      file_put_contents(
-         resource_path("/views/".strtolower(Str::plural($name))."/buttons/delete.blade.php"),
-         $this->getTemplate('frontend/buttons/delete', $name)
-      );
-
-      file_put_contents(
          resource_path("/views/".strtolower(Str::plural($name))."/buttons/back.blade.php"),
          $this->getTemplate('frontend/buttons/back', $name)
       );
 
       file_put_contents(
+         resource_path("/views/".strtolower(Str::plural($name))."/buttons/btnFavorite.blade.php"),
+         $this->getTemplate('frontend/buttons/btnFavorite', $name)
+      );
+
+      file_put_contents(
+         resource_path("/views/".strtolower(Str::plural($name))."/buttons/favorite.blade.php"),
+         $this->getTemplate('frontend/buttons/favorite', $name)
+      );
+
+      file_put_contents(
          resource_path("/views/".strtolower(Str::plural($name))."/buttons/help.blade.php"),
          $this->getTemplate('frontend/buttons/help', $name)
+      );
+
+      file_put_contents(
+         resource_path("/views/".strtolower(Str::plural($name))."/buttons/myFavorites.blade.php"),
+         $this->getTemplate('frontend/buttons/myFavorites', $name)
+      );
+
+      file_put_contents(
+         resource_path("/views/".strtolower(Str::plural($name))."/buttons/next.blade.php"),
+         $this->getTemplate('frontend/buttons/next', $name)
+      );
+
+      file_put_contents(
+         resource_path("/views/".strtolower(Str::plural($name))."/buttons/nextAll.blade.php"),
+         $this->getTemplate('frontend/buttons/nextAll', $name)
+      );
+
+      file_put_contents(
+         resource_path("/views/".strtolower(Str::plural($name))."/buttons/previous.blade.php"),
+         $this->getTemplate('frontend/buttons/previous', $name)
+      );
+
+      file_put_contents(
+         resource_path("/views/".strtolower(Str::plural($name))."/buttons/previousAll.blade.php"),
+         $this->getTemplate('frontend/buttons/previousAll', $name)
       );
    }
 
@@ -402,14 +442,23 @@ class CrudAddCommand extends Command
    }
 
 
-// AddFrontendExtraPages
+   protected function addFrontendExtraPages($name)
+   {
+      file_put_contents(
+         resource_path("views/".strtolower(Str::plural($name))."/archives.blade.php"),
+         $this->getTemplate('frontend/pages/archives', $name));
+
+      file_put_contents(
+         resource_path("views/".strtolower(Str::plural($name))."/myFavorites.blade.php"),
+         $this->getTemplate('frontend/pages/myFavorites', $name));
+   }
 
 
    protected function addAdminExtraPages($name)
    {
       file_put_contents(
-         resource_path("/views/admin/".strtolower(Str::plural($name))."/pages/archive.blade.php"),
-         $this->getTemplate('admin/pages/archive', $name));
+         resource_path("/views/admin/".strtolower(Str::plural($name))."/pages/archives.blade.php"),
+         $this->getTemplate('admin/pages/archives', $name));
 
       file_put_contents(
          resource_path("/views/admin/".strtolower(Str::plural($name))."/pages/future.blade.php"),
@@ -551,62 +600,43 @@ class CrudAddCommand extends Command
 
    protected function addPermissions($name)
    {
-      // $type = $this->choice('What section do the permissions need to be added to?',
-         // [0=>'Non-Core', 1=>'Core', 2=>'Module', ''=>'Select from above choices'], 2);
-
       DB::table('permissions')->insert([
          [
-            // index permission
+            // Browse permission (Index)
             'name' => strtolower(Str::plural($name)).'_browse',
             'display_name' => 'browse',
             'model' => strtolower($name),
-            // 'type' => $type,
             'description' => 'List '.strtolower($name)
          ],
          [
-            // show permission
+            // Read permission (Show)
             'name' => strtolower(Str::plural($name)).'_read',
             'display_name' => 'read',
             'model' => strtolower($name),
-            // 'type' => $type,
             'description' => 'View '.strtolower($name)
          ],
          [
-            // edit permission
+            // Edit permission
             'name' => strtolower(Str::plural($name)).'_edit',
             'display_name' => 'edit',
             'model' => strtolower($name),
-            // 'type' => $type,
             'description' => 'Edit '.strtolower($name)
          ],
          [
-            // create permission
+            // Add permission (Create)
             'name' => strtolower(Str::plural($name)).'_add',
             'display_name' => 'add',
             'model' => strtolower($name),
-            // 'type' => $type,
             'description' => 'Add '.strtolower($name)
          ],
          [
-            // delete permission
+            // Delete permission
             'name' => strtolower(Str::plural($name)).'_delete',
             'display_name' => 'delete',
             'model' => strtolower($name),
-            // 'type' => $type,
             'description' => 'Delete '.strtolower($name)
          ]
       ]);
-
-      // Find newly added permissions (ids)
-      // $results = DB::select('select id from permissions where model = "' . strtolower($name) . '"');
-      // Add permissions to admin account
-      // foreach($results as $r) {
-      //    DB::table('permission_user')->insert(
-      //       [
-      //          'permission_id' => $r->id,
-      //          'user_id' => 2
-      //       ]);
-      // }
    }
 
 

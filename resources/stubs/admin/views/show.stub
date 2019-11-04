@@ -8,6 +8,8 @@
 @endsection
 
 @section('right_column')
+   @include('admin.{{modelNamePluralLowerCase}}.blocks.sidebar')
+   @include('admin.{{modelNamePluralLowerCase}}.blocks.archives')
 @endsection
 
 @section('content')

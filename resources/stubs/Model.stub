@@ -60,7 +60,7 @@ public function scopePublished($query)
 
    public function scopeMy{{modelNamePluralLowerCase}}($query)
    {
-      return $query->where('user_id', '=', Auth::user()->id)->orderBy('title','DESC');
+      return $query->where('user_id', '=', Auth::user()->id)->orderBy('name','DESC');
    }
 
    public function scopeUnpublished($query)
@@ -87,7 +87,7 @@ public function scopePublished($query)
    {
       return $query
          ->where('created_at', '>=' , Auth::user()->previous_login_date)
-         ->orderBy('title','DESC');
+         ->orderBy('name','DESC');
    }
 
 //////////////////////////////////////////////////////////////////////////////////////

@@ -21,7 +21,7 @@ use Session;
 // use Storage;
 // use URL;
 
-class ExtraViewsController extends Controller
+class ExtraViewsController extends ArticlesController
 {
 ##################################################################################################################
 #  ██████╗ ██████╗ ███╗   ██╗███████╗████████╗██████╗ ██╗   ██╗ ██████╗████████╗

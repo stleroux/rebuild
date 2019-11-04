@@ -19,19 +19,21 @@
 
    <div class="card mb-3">
 
+		<!-- CARD HEADER -->
 		<div class="card-header section_header p-2">
 			<i class="fa fa-file-text-o"></i>
 			Articles
-			<span class="float-right">
+			<div class="float-right">
             <div class="btn-group">
 					@include('admin.articles.buttons.help', ['size'=>'xs', 'bookmark'=>'articles'])
 					@include('admin.articles.buttons.unpublishAll', ['size'=>'xs'])
 					@include('admin.articles.buttons.trashAll', ['size'=>'xs'])
 					@include('admin.articles.buttons.add', ['size'=>'xs'])
             </div>
-         </span>
+         </div>
 		</div>
 
+		<!-- ALPHABET -->
 		@if($articles->count())
 			<div class="text-center">
 				<div class="btn-group p-1">
@@ -43,6 +45,7 @@
 			</div>
 		@endif
 		
+		<!-- CARD BODY -->
 		<div class="card-body section_body p-2">
 
 			@if($articles->count())
@@ -80,10 +83,7 @@
 								<td class="">{{ $article->views }}</td>
 								<td class="">@include('common.authorFormat', ['model'=>$article, 'field'=>'user'])</td>
 								<td class="">@include('common.dateFormat', ['model'=>$article, 'field'=>'created_at'])</td>
-								<td class=" 
-									{{ $article->published_at >= Carbon\Carbon::now() ? 'font-italic text text-info' : '' }}
-									{{-- {{ $article->published_at == null ? 'bg-info' : '' }} --}}
-								">
+								<td class="{{ $article->published_at >= Carbon\Carbon::now() ? 'font-italic text text-info' : '' }}">
 									@include('common.dateFormat', ['model'=>$article, 'field'=>'published_at'])
 								</td>
 								<td>

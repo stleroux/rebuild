@@ -4,14 +4,14 @@
       {{modelName}} Archives
    </div>
    <div class="card-body card_body p-0">
-      @if(count(${{modelNameSingularLowerCase}}links) > 0)
+      @if(count($archivesLinks) > 0)
          <ul class="list-group">
-            @foreach(${{modelNameSingularLowerCase}}links as $alink)
-               <a href="{{ route('admin.{{modelNamePluralLowerCase}}.archive', ['year'=>$alink->year, 'month'=>$alink->month]) }}"
+            @foreach($archivesLinks as $alink)
+               <a href="{{ route('{{modelNamePluralLowerCase}}.archives', ['year'=>$alink->year, 'month'=>$alink->month]) }}"
                   class="list-group-item list-group-item-action p-1">
                   {{ $alink->month_name }} - {{ $alink->year }}
                   <span class="badge badge-secondary float-right">
-                     {{ $alink->{{modelNameSingularLowerCase}}_count }}
+                     {{ $alink->archivesLinks_count }}
                   </span>
                </a>
             @endforeach

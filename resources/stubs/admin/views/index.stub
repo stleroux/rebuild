@@ -8,63 +8,86 @@
 @endsection
 
 @section('right_column')
+   @include('admin.{{modelNamePluralLowerCase}}.blocks.sidebar')
+   @include('admin.{{modelNamePluralLowerCase}}.blocks.archives')
 @endsection
 
 @section('content')
 
-   <div class="row">
-      <div class="col">
-         <div class="card mb-2">
-            <!--CARD HEADER-->
-            <div class="card-header section_header p-2">
-               <i class="{{ Config::get('buttons.{{modelNamePluralLowerCase}}') }}"></i>
-               {{modelNamePlural}}
-               <span class="float-right">
-                  @include('admin.{{modelNamePluralLowerCase}}.buttons.help', ['size'=>'xs', 'bookmark'=>'{{modelNamePluralLowerCase}}'])
-                  @include('admin.{{modelNamePluralLowerCase}}.buttons.add', ['size'=>'xs', 'model'=>'{{modelNameSingularLowerCase}}'])
-               </span>
-            </div>
+<form style="display:inline;">
+   {!! csrf_field() !!}
 
-            <!--CARD BODY-->
-            <div class="card-body section_body p-2">
-               @if(${{modelNamePluralLowerCase}}->count() > 0)
-                  {{-- @include('common.alphabet', ['model'=>'{{modelNameSingularLowerCase}}', 'page'=>'index']) --}}
-                  <table id="datatable" class="table table-hover table-sm">
-                     <thead>
-                        <tr>
-                           <th>ID</th>
-                           <th>Name</th>
-                           <th>Email</th>
-                           <th>Status</th>
-                           {{-- Add more columns here --}}
-                           <th>Created</th>
-                           <th class="no-sort"></th>
-                        </tr>
-                     </thead>
-                     <tbody>
-                        @foreach (${{modelNamePluralLowerCase}} as ${{modelNameSingularLowerCase}})
-                           <tr>
-                              <td>{{ ${{modelNameSingularLowerCase}}->id }}</td>
-                              <td><a href="{{ route('admin.{{modelNamePluralLowerCase}}.show', ${{modelNameSingularLowerCase}}->id) }}">{{ ${{modelNameSingularLowerCase}}->name }}</a></td>
-                              <td>{{ ${{modelNameSingularLowerCase}}->email }}</td>
-                              <td>{{ ${{modelNameSingularLowerCase}}->status }}</td>
-                              {{-- Add more columns here --}}
-                              <td data-order="{{${{modelNameSingularLowerCase}}->created_at}}">{{${{modelNameSingularLowerCase}}->created_at}}</td>
-                              <td class="text-right">
-                                 @include('admin.{{modelNamePluralLowerCase}}.buttons.edit', ['size'=>'xs'])
-                                 @include('admin.{{modelNamePluralLowerCase}}.buttons.delete', ['size'=>'xs'])
-                              </td>
-                           </tr>
-                        @endforeach
-                     </tbody>
-                  </table>
-               @else
-                  {{ setting('no_records_found') }}
-               @endif
+   <div class="card mb-3">
+      
+      <!--CARD HEADER-->
+      <div class="card-header section_header p-2">
+         <i class="{{ Config::get('buttons.{{modelNamePluralLowerCase}}') }}"></i>
+         {{modelNamePlural}}
+         <div class="float-right">
+            <div class="btn-group">
+               @include('admin.{{modelNamePluralLowerCase}}.buttons.help', ['size'=>'xs', 'bookmark'=>'{{modelNamePluralLowerCase}}'])
+               @include('admin.{{modelNamePluralLowerCase}}.buttons.add', ['size'=>'xs', 'model'=>'{{modelNameSingularLowerCase}}'])
             </div>
-            
          </div>
       </div>
+
+<!-- ALPHABET -->
+{{--
+<div class="text-center">
+   <div class="btn-group p-1">
+      <a href="{{ route('admin.{{modelNamePluralLowerCase}}.index') }}" class="{{ Request::is('admin/{{modelNamePluralLowerCase}}') ? "btn-secondary": "btn-primary" }} btn btn-sm">All</a>
+      @foreach($letters as $value)
+         <a href="{{ route('admin.{{modelNamePluralLowerCase}}.index', $value) }}" class="{{ Request::is('admin/{{modelNamePluralLowerCase}}/'.$value) ? "btn-secondary": "btn-primary" }} btn btn-sm">{{ strtoupper($value) }}</a>
+      @endforeach
    </div>
+</div>
+--}}
+
+      <!--CARD BODY-->
+      <div class="card-body section_body p-2">
+
+         @if(${{modelNamePluralLowerCase}}->count() > 0)
+            <table id="datatable" class="table table-hover table-sm">
+               <thead>
+                  <tr>
+                     <th>Name</th>
+                     <th>Email</th>
+                     <th>Status</th>
+                     {{-- Add more columns here --}}
+                     <th>Created</th>
+                     <th class="">Publish(ed) On</th>
+                     <th data-orderable="false"></th>
+                  </tr>
+               </thead>
+               <tbody>
+                  @foreach (${{modelNamePluralLowerCase}} as ${{modelNameSingularLowerCase}})
+                     <tr>
+                        <td><a href="{{ route('admin.{{modelNamePluralLowerCase}}.show', ${{modelNameSingularLowerCase}}->id) }}">{{ ${{modelNameSingularLowerCase}}->name }}</a></td>
+                        <td>{{ ${{modelNameSingularLowerCase}}->email }}</td>
+                        <td>{{ ${{modelNameSingularLowerCase}}->status }}</td>
+                        {{-- Add more columns here --}}
+                        <td data-order="{{${{modelNameSingularLowerCase}}->created_at}}">{{${{modelNameSingularLowerCase}}->created_at}}</td>
+                        <td class="{{ ${{modelNameSingularLowerCase}}->published_at >= Carbon\Carbon::now() ? 'font-italic text text-info' : '' }}">
+                           @include('common.dateFormat', ['model'=>${{modelNameSingularLowerCase}}, 'field'=>'published_at'])
+                        </td>
+                        <td>
+                           <div class="text-center">
+                              <div class="btn-group">
+                                 @include('admin.{{modelNamePluralLowerCase}}.buttons.edit', ['size'=>'xs'])
+                                 @include('admin.{{modelNamePluralLowerCase}}.buttons.delete', ['size'=>'xs'])
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                  @endforeach
+               </tbody>
+            </table>
+         @else
+            {{ setting('no_records_found') }}
+         @endif
+      </div>
+
+   </div>
+</form>
 
 @endsection

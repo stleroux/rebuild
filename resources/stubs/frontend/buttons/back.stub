@@ -1,10 +1,11 @@
 <a href="{{ route('{{modelNamePluralLowerCase}}.index') }}"
-   class="btn btn-sm btn-primary"
+   class="btn {{ $size ? 'btn-'.$size : '' }} btn-primary"
    title="{{modelName}}">
    <i class="{{ Config::get('buttons.back') }}"></i>
+   {{ $btn_label ?? '' }}
 </a>
 
-@if(Session::get('fromPage')==='{{modelNameSingularLowerCase}}.index')
+{{-- @if(Session::get('fromPage')==='{{modelNameSingularLowerCase}}.index')
    <a href="{{ route('{{modelNameSingularLowerCase}}.index') }}"
       class="btn btn-sm btn-primary"
       title="{{modelName}}">
@@ -16,4 +17,4 @@
       title="Back">
       <i class="{{ Config::get('buttons.back') }}"></i>
    </a>
-@endif
+@endif --}}

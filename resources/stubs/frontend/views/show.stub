@@ -1,30 +1,31 @@
-@extends('layouts.backend')
+@extends('layouts.master')
 
 @section('stylesheets')
    {{ Html::style('css/woodbarn.css') }}
 @endsection
 
 @section('left_column')
-   @include('blocks.main_menu')
 @endsection
 
 @section('right_column')
+   @include('{{modelNamePluralLowerCase}}.blocks.archives')
 @endsection
 
 @section('content')
    
    <div class="card mb-3">
 
-      <div class="card-header">
+      <div class="card-header section_header p-2">
          <i class="fa fa-plus-square"></i>
          Show {{modelName}}
-         <span class="float-right">
-            @include('{{modelNamePluralLowerCase}}.addins.links.help', ['model'=>'{{modelNameSingularLowerCase}}', 'bookmark'=>'{{modelNamePluralLowerCase}}'])
-            @include('{{modelNamePluralLowerCase}}.addins.links.back', ['model'=>'category'])
-         </span>
+         <div class="float-right">
+            <div class="btn-group">
+               @include('{{modelNamePluralLowerCase}}.buttons.back', ['size'=>'xs', 'btn_label'=>'Back'])
+            </div>
+         </div>
       </div>
 
-      <div class="card-body">
+      <div class="card-body section_body p-2">
          <p>{{ ${{modelNameSingularLowerCase}}->name }}</p>
       </div>
 

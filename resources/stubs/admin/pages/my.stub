@@ -53,7 +53,7 @@
                         <th class="d-none">French</th>
                         {{-- Add columns for search purposes only --}}
 
-                        <th>Title</th>
+                        <th>Name</th>
                         <th class="">Category</th>
                         <th class="">Views</th>
                         {{-- <th class="">Author</th> --}}
@@ -72,7 +72,7 @@
                            <td class="d-none">{{ ${{modelNameSingularLowerCase}}->description_fre }}</td>
                            {{-- Hide columns at all levels. Only needed because Datatables only searches for columns in the table --}}
                            
-                           <td><a href="{{ route('admin.{{modelNamePluralLowerCase}}.show', ${{modelNameSingularLowerCase}}->id) }}" class="">{{ ${{modelNameSingularLowerCase}}->title }}</a></td>
+                           <td><a href="{{ route('admin.{{modelNamePluralLowerCase}}.show', ${{modelNameSingularLowerCase}}->id) }}" class="">{{ ${{modelNameSingularLowerCase}}->name }}</a></td>
                            <td class="">{{ ${{modelNameSingularLowerCase}}->category }}</td>
                            <td class="">{{ ${{modelNameSingularLowerCase}}->views }}</td>
                            {{-- <td class="">@include('common.authorFormat', ['model'=>${{modelNameSingularLowerCase}}, 'field'=>'user'])</td> --}}

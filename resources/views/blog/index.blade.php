@@ -10,7 +10,7 @@
 
 @section('right_column')
    @include('blog.blocks.search')
-   @include('blog.blocks.popularPosts')
+   @include('blog.blocks.popular')
    @include('blog.blocks.archives')
 @endsection
 
