@@ -75,6 +75,9 @@ class ExtraViewsController extends {{modelNamePlural}}Controller
          if(!checkPerm('{{modelNameSingularLowerCase}}_browse')) { abort(401, 'Unauthorized Access'); }
       }
 
+      // Set the session to the current page route
+      Session::put('fromPage', url()->full());
+
       if(Auth::check()) {
          $user = Auth::user();
          ${{modelNamePluralLowerCase}} = $user->favorite({{modelName}}::class)->sortBy('title');

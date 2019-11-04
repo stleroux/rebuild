@@ -9,7 +9,7 @@
 @endsection
 
 @section('right_column')
-   @include('projects.blocks.popularProjects')
+   @include('projects.blocks.popular')
 @endsection
 
 @section('content')

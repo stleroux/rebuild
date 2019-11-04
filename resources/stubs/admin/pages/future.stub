@@ -74,7 +74,7 @@
                            <td class="d-none">{{ ${{modelNameSingularLowerCase}}->description_fre }}</td>
                            {{-- Hide columns at all levels. Only needed because Datatables only searches for columns in the table --}}
                            
-                           <td><a href="{{ route('admin.{{modelNamePluralLowerCase}}s.show', ${{modelNameSingularLowerCase}}->id) }}" class="">{{ ${{modelNameSingularLowerCase}}->name }}</a></td>
+                           <td><a href="{{ route('admin.{{modelNamePluralLowerCase}}.show', ${{modelNameSingularLowerCase}}->id) }}" class="">{{ ${{modelNameSingularLowerCase}}->name }}</a></td>
                            <td class="hidden-xs">{{ ${{modelNameSingularLowerCase}}->category }}</td>
                            <td class="hidden-xs hidden-sm">{{ ${{modelNameSingularLowerCase}}->views }}</td>
                            <td class="hidden-xs">@include('common.authorFormat', ['model'=>${{modelNameSingularLowerCase}}, 'field'=>'user'])</td>

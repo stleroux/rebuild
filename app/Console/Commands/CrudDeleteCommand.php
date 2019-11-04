@@ -13,9 +13,9 @@ use Schema;
 class CrudDeleteCommand extends Command
 {
 
-   // protected $signature = 'crud:generator {name : Class (singular), e.g.: User}';
+   protected $signature = 'crud:delete {name : Class (Capitalized singular), e.g.: User}';
    // protected $signature = 'crud:generator';
-   protected $signature = 'crud:delete {name}';
+   // protected $signature = 'crud:delete {name}';
 
    protected $description = 'Delete CRUD operations';
 
@@ -25,14 +25,16 @@ class CrudDeleteCommand extends Command
    }
 
 
-// Delete entries from migration table
+
+// homepage/blocks.blade.php - entry not being removed
+
 
 
    public function handle()
    {
       // Get the name of the argument
       // $name = $this->ask('What is the name of the model to DELETE? (Must be Capitalized singular form: i.e.: User)');
-      $name = $this->argument('name');
+      $name = ucfirst($this->argument('name'));
 
       if ($this->confirm('Are you sure you wish to delete ALL related files?')) {
  
@@ -108,6 +110,12 @@ class CrudDeleteCommand extends Command
          $this->info('║ - Routes file deleted                                                          ║');
 
          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         // Delete seeder file
+         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         File::delete(database_path('/seeds/' . str_plural($name) . 'TableSeeder.php'));
+         $this->info('║ - Seeder file deleted                                                          ║');
+
+         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
          // Remove include line to homepage blocks
          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
          if(strpos(file_get_contents(resource_path("/views/homepage/blocks.blade.php")), '@include(\'' . strtolower(Str::plural($name)) . ".blocks.popular'") !== false) {
@@ -115,17 +123,6 @@ class CrudDeleteCommand extends Command
             $content = str_replace("@include('tests.blocks.popular')\n", "", $content);
             file_put_contents(resource_path("/views/homepage/blocks.blade.php"), $content);
             $this->info('║ - Removed include line from block.blade.php                                    ║');
-         }
-
-         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-         // Un-register service provider in config/app.php
-         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-         // dd(strtolower(str::plural($name)));
-         if(strpos(file_get_contents(base_path("config/app.php")), 'App\Providers' . '\\' . $name . 'ServiceProvider::class,') !== false) {
-            $content = file_get_contents(base_path("config/app.php"));
-            $content = str_replace("App\Providers". "\\" . $name . "ServiceProvider::class,\n", "", $content);
-            file_put_contents(base_path("config/app.php"), $content);
-            $this->info('║ - Removed Service Provider line from config/app.php                            ║');
          }
 
          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -137,6 +134,19 @@ class CrudDeleteCommand extends Command
             $content = str_replace($val, "", $content);
             file_put_contents(base_path("config/buttons.php"), $content);
             $this->info('║ - Removed Icon line form config/buttons.php                                    ║');
+         }
+
+         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         // Un-register service provider in config/app.php
+         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         // dd(strtolower(str::plural($name)));
+         $val = "\t\t" . "App\Providers" . "\\" . $name . "ServiceProvider::class,".PHP_EOL."";
+         // dd($val);
+         if(strpos(file_get_contents(base_path("config/app.php")), $val) !== false) {
+            $content = file_get_contents(base_path("config/app.php"));
+            $content = str_replace($val, "", $content);
+            file_put_contents(base_path("config/app.php"), $content);
+            $this->info('║ - Removed Service Provider line from config/app.php                            ║');
          }
 
          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -162,13 +172,14 @@ class CrudDeleteCommand extends Command
             }
          }
 
+
          $this->info('╠════════════════════════════════════════════════════════════════════════════════╣');
          $this->info('║ All files removed successfully                                                 ║');
          $this->info('╠════════════════════════════════════════════════════════════════════════════════╣');
          $this->info('║ NEXT STEPS:                                                                    ║');
-         $this->info('║   - Remove entries from Migrations table                                       ║');
+         $this->info('║   - Remove entry from Migrations table                                         ║');
+         $this->info('║   - Remove Seeder file (if needed)                                             ║');
          $this->info('║   -                                                                            ║');
-         $this->info('║                                                                                ║');
          $this->info('║   -                                                                            ║');
          $this->info('║                                                                                ║');
          $this->info('║                                                                                ║');

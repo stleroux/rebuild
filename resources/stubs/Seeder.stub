@@ -1,0 +1,63 @@
+<?php
+
+use Illuminate\Database\Seeder;
+
+class {{modelNamePlural}}TableSeeder extends Seeder
+{
+
+    /**
+     * Auto generated seed file
+     *
+     * @return void
+     */
+    public function run()
+    {
+        
+
+        \DB::table('{{modelNamePluralLowerCase}}')->delete();
+        
+        \DB::table('{{modelNamePluralLowerCase}}')->insert(array (
+            0 => 
+            array (
+                'id' => 1,
+                'user_id' => 2,
+                'name' => 'First test',
+                'email' => 'first@test.com',
+                'status' => 1,
+                'views' => 10,
+                'published_at' => '2019-11-04 12:23:35',
+                'deleted_at' => NULL,
+                'created_at' => '2019-11-04 12:23:35',
+                'updated_at' => '2019-11-04 12:23:35',
+            ),
+            1 => 
+            array (
+                'id' => 2,
+                'user_id' => 2,
+                'name' => 'Second test',
+                'email' => 'second@test.com',
+                'status' => 2,
+                'views' => 10,
+                'published_at' => '2019-11-04 12:23:58',
+                'deleted_at' => NULL,
+                'created_at' => '2019-11-04 12:23:58',
+                'updated_at' => '2019-11-04 12:23:58',
+            ),
+            2 => 
+            array (
+                'id' => 3,
+                'user_id' => 3,
+                'name' => 'Third test',
+                'email' => 'third@test.com',
+                'status' => 3,
+                'views' => 0,
+                'published_at' => '2019-12-04 12:24:19',
+                'deleted_at' => NULL,
+                'created_at' => '2019-11-04 12:24:19',
+                'updated_at' => '2019-11-04 12:24:19',
+            ),
+        ));
+        
+        
+    }
+}

@@ -1,6 +1,6 @@
 <div class="card mb-2">
    <div class="card-header block_header p-2">
-      <i class="fab fa-apple"></i>
+      <i class="far fa-address-card fa-fw"></i>
       Popular Articles
    </div>
    <div class="card-body p-0 m-0">

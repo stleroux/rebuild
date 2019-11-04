@@ -1,26 +1,6 @@
-<a href="{{ Session::get('fromPage') }}"
-   class="btn btn-{{ $size }} btn-primary d-print-none"
+<a href="{{ (url()->full() == Session::get('fromPage')) ? route('admin.{{modelNamePluralLowerCase}}.index') : Session::get('fromPage') }}"
+   class="btn {{ $size ? 'btn-'.$size : '' }} btn-primary d-print-none"
    title="Back">
    <i class="{{ Config::get('buttons.back') }}"></i>
    {{ $btn_label ?? '' }}
 </a>
-
-{{-- <a href="{{ route('admin.{{modelNamePluralLowerCase}}.index') }}"
-   class="btn {{ $size ? 'btn-'.$size : '' }} btn-primary"
-   title="{{modelName}}">
-   <i class="{{ Config::get('buttons.back') }}"></i>
-</a> --}}
-
-{{-- @if(Session::get('fromPage')==='{{modelNameSingularLowerCase}}.index')
-   <a href="{{ route('admin.{{modelNameSingularLowerCase}}.index') }}"
-      class="btn btn-sm btn-primary"
-      title="{{modelName}}">
-      <i class="{{ Config::get('buttons.back') }}"></i>
-   </a>
-@elseif(Session::get('fromPage'))
-   <a href="{{ route(Session::get('fromPage')) }}"
-      class="btn btn-sm btn-primary"
-      title="Back">
-      <i class="{{ Config::get('buttons.back') }}"></i>
-   </a>
-@endif --}}

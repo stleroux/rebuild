@@ -2,3 +2,4 @@
 @include('blog.blocks.popular')
 @include('recipes.blocks.popular')
 @include('articles.blocks.popular')
+@include('tests.blocks.popular')

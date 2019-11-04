@@ -36,6 +36,8 @@ class Article extends Model
          3 => 'Blog',
          4 => 'Recipe',
          5 => 'Project',
+         6 => 'Testing',
+         7 => 'Carving'
       ];
    }
 

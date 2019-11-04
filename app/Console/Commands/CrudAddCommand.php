@@ -11,9 +11,9 @@ use DB;
 class CrudAddCommand extends Command
 {
 
-   // protected $signature = 'crud:generator {name : Class (singular), e.g.: User}';
+   protected $signature = 'crud:add {name : Class (Capitalized singular), e.g.: User}';
    // protected $signature = 'crud:generator';
-   protected $signature = 'crud:add {name}';
+   // protected $signature = 'crud:add {name}';
 
    protected $description = 'Create CRUD operations';
 
@@ -24,8 +24,7 @@ class CrudAddCommand extends Command
 
 
 
-// Add line to config/buttons for new icon
-// Seed DB with data
+// Ask if model needs to be publically available or if login is required to view ????
 
 
 
@@ -33,7 +32,7 @@ class CrudAddCommand extends Command
    {
       // Get the name of the argument
       // $name = $this->ask('What is the name of the model? (Must be Capitalized singular form: i.e.: User)');
-      $name = $this->argument('name');
+      $name = ucfirst($this->argument('name'));
 
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       // Folder structure
@@ -42,6 +41,7 @@ class CrudAddCommand extends Command
       $this->info('Frontend folders created');
       $this->createAdminFolders($name);
       $this->info('Admin folders created');
+
 
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       // Controllers
@@ -53,6 +53,7 @@ class CrudAddCommand extends Command
          $this->info('Admin controllers created');
       // }
 
+
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       // Model
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -60,6 +61,7 @@ class CrudAddCommand extends Command
          $this->model($name);
          $this->info('Model created');
       // }
+
 
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       // Views and buttons
@@ -95,7 +97,8 @@ class CrudAddCommand extends Command
       File::append(
          resource_path('views/homepage/blocks.blade.php'),
          '@include(\'' . strtolower(Str::plural($name)) . ".blocks.popular')\n");
-         
+
+
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       // Add a new icon to config/buttons.php
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -155,30 +158,46 @@ class CrudAddCommand extends Command
          $this->info('Base permissions added to database');
       }
 
+
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       // Routes
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       // if ($this->confirm('Do you wish to add related ROUTES?')) {
-         // File::append(base_path('routes/web.php'),'Route::get(\'' . strtolower(Str::plural($name)) . "/{test}/delete', '" . (Str::plural($name)) . "Controller@delete')->name('" . strtolower(Str::plural($name)) . ".delete');\n");
-         // File::append(base_path('routes/web.php'), 'Route::resource(\'' . strtolower(Str::plural($name)) . "', '" . (Str::plural($name)) . "Controller');\n");
          $this->addRoutes($name);
          $this->info('Route resource added to web.php routes file');
       // }
 
+
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       // Migration
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      if ($this->confirm('Do you wish to create the MIGRATION file?')) {
-         // Create migration file using artisan command
-         // \Artisan::call('make:migration', 
-         //     [
-         //         'name'=>'create_' . strtolower(Str::plural($name)) . '_table',
-         //         '--create'=>strtolower(Str::plural($name))
-         //     ]
-         // );
-         $this->makeMigration($name);
-         $this->info('Migration file created');
+      $this->makeMigration($name);
+      $this->info('Migration file created');
+
+      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      // Migrate
+      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      if ($this->confirm('Do you want to migrate the new migration?')) {
+         \Artisan::call('migrate');
+         $this->info('Database table created');
       }
+
+      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      // Seeder
+      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      if ($this->confirm('Do you want to create a Seeder file?')) {
+         $this->makeSeeder($name);
+         $this->info('Seeder file created');
+
+         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         // Seed
+         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         if ($this->confirm('Do you want to popultate the database table with sample records?')) {
+            \Artisan::call('db:seed --class=' . str::plural($name) . 'TableSeeder');
+            $this->info('Database table updated with sample records');
+         }
+      }
+      
 
 
       $this->info('╔════════════════════════════════════════════════════════════════════════════════╗');
@@ -210,6 +229,7 @@ class CrudAddCommand extends Command
          app_path("/Http/Controllers/" . Str::plural($name) . "/" . "FunctionsController.php"),
          $this->getTemplate('frontend/controllers/FunctionsController', $name));
    }
+
 
    protected function adminControllers($name)
    {
@@ -267,6 +287,7 @@ class CrudAddCommand extends Command
          resource_path("/views/".strtolower(Str::plural($name))."/show.blade.php"),
          $this->getTemplate('frontend/views/show', $name));
    }
+
 
    protected function addAdminViews($name)
    {
@@ -504,11 +525,21 @@ class CrudAddCommand extends Command
       );
    }
 
+
    protected function makeMigration($name)
    {
       file_put_contents(
          database_path("/migrations/". date('Y_m_d_His') . "_create_" .strtolower(Str::plural($name))."_table.php"),
          $this->getTemplate('Migration', $name)
+      );
+   }
+
+
+   protected function makeSeeder($name)
+   {
+      file_put_contents(
+         database_path("/seeds/" . Str::plural($name) . "TableSeeder.php"),
+         $this->getTemplate('Seeder', $name)
       );
    }
 

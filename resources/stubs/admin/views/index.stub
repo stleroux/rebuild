@@ -32,7 +32,6 @@
       </div>
 
 <!-- ALPHABET -->
-{{--
 <div class="text-center">
    <div class="btn-group p-1">
       <a href="{{ route('admin.{{modelNamePluralLowerCase}}.index') }}" class="{{ Request::is('admin/{{modelNamePluralLowerCase}}') ? "btn-secondary": "btn-primary" }} btn btn-sm">All</a>
@@ -41,7 +40,7 @@
       @endforeach
    </div>
 </div>
---}}
+
 
       <!--CARD BODY-->
       <div class="card-body section_body p-2">
@@ -53,7 +52,8 @@
                      <th>Name</th>
                      <th>Email</th>
                      <th>Status</th>
-                     {{-- Add more columns here --}}
+                     <!-- Add columns below for search purposes only -->
+                     <!-- Add columns above for search purposes only -->
                      <th>Created</th>
                      <th class="">Publish(ed) On</th>
                      <th data-orderable="false"></th>
@@ -65,14 +65,16 @@
                         <td><a href="{{ route('admin.{{modelNamePluralLowerCase}}.show', ${{modelNameSingularLowerCase}}->id) }}">{{ ${{modelNameSingularLowerCase}}->name }}</a></td>
                         <td>{{ ${{modelNameSingularLowerCase}}->email }}</td>
                         <td>{{ ${{modelNameSingularLowerCase}}->status }}</td>
-                        {{-- Add more columns here --}}
+                        <!-- Add columns below for search purposes only -->
+                        <!-- Add columns above for search purposes only -->
                         <td data-order="{{${{modelNameSingularLowerCase}}->created_at}}">{{${{modelNameSingularLowerCase}}->created_at}}</td>
                         <td class="{{ ${{modelNameSingularLowerCase}}->published_at >= Carbon\Carbon::now() ? 'font-italic text text-info' : '' }}">
                            @include('common.dateFormat', ['model'=>${{modelNameSingularLowerCase}}, 'field'=>'published_at'])
                         </td>
                         <td>
-                           <div class="text-center">
+                           <div class="float-right">
                               <div class="btn-group">
+                                 @include('admin.{{modelNamePluralLowerCase}}.buttons.publish', ['size'=>'xs'])
                                  @include('admin.{{modelNamePluralLowerCase}}.buttons.edit', ['size'=>'xs'])
                                  @include('admin.{{modelNamePluralLowerCase}}.buttons.delete', ['size'=>'xs'])
                               </div>

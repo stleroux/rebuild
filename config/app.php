@@ -183,7 +183,8 @@ return [
         App\Providers\ArticleServiceProvider::class,
         
         /* * Customer Service Providers */
-																																																																																																																																																												
+		App\Providers\TestServiceProvider::class,
+
     ],
 
     /*
