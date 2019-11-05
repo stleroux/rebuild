@@ -1,0 +1,7 @@
+@if(checkPerm('{{modelNameSingularLowerCase}}_delete', ${{modelNameSingularLowerCase}}))
+   <a href="{{ route('admin.{{modelNamePluralLowerCase}}.restore', ${{modelNameSingularLowerCase}}->id) }}"
+      class="btn btn-{{ $size }} btn-info text-light"
+      title="Restore {{modelName}}">
+      <i class="{{ Config::get('buttons.restore') }}"></i>
+   </a>
+@endif

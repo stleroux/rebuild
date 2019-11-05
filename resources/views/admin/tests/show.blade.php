@@ -20,8 +20,10 @@
          <i class="fa fa-plus-square"></i>
          Show Test
          <div class="float-right">
-            @include('admin.tests.buttons.help', ['size'=>'xs', 'model'=>'test', 'bookmark'=>'tests'])
-            @include('admin.tests.buttons.back', ['size'=>'xs', 'model'=>'category'])
+            <div class="btn-group">
+               @include('admin.tests.buttons.help', ['size'=>'xs', 'model'=>'test', 'bookmark'=>'tests'])
+               @include('admin.tests.buttons.back', ['size'=>'xs', 'model'=>'category'])
+            </div>
          </div>
       </div>
 

@@ -12,7 +12,7 @@
 
 @section('content')
 
-{!! Form::open(['method'=>'POST', 'route'=>['admin.tests.destroy', $test->id]]) !!}
+{!! Form::open(['route'=>['admin.tests.destroy', $test->id], 'method'=>'DELETE']) !!}
    {{ csrf_field() }}
 
    <div class="card">
@@ -25,11 +25,8 @@
       </div>
 
       <div class="card-body card_body text-center">
-            <input type="hidden" name="_method" value="DELETE" />
-
-            @include('admin.tests.buttons.back', ['size'=>'', 'btn_label'=>'No - Return To Previous Page'])
-            @include('admin.tests.buttons.btn_delete', ['size'=>'', 'btn_label'=>'Yes - Delete Permanently'])
-         {{ Form::close() }}
+         @include('admin.tests.buttons.back', ['size'=>'', 'btn_label'=>'No - Return To Previous Page'])
+         @include('admin.tests.buttons.btn_delete', ['size'=>'', 'btn_label'=>'Yes - Delete Permanently'])
       </div>
 
       <div class="card-footer pt-1 pb-1 pl-2">
@@ -37,5 +34,6 @@
       </div>
 
    </div>
+{{ Form::close() }}
 
 @endsection

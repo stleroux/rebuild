@@ -27,6 +27,7 @@
                <div class="btn-group">
                   @include('admin.{{modelNamePluralLowerCase}}.buttons.help', ['size'=>'xs', 'bookmark'=>''])
                   @include('admin.{{modelNamePluralLowerCase}}.buttons.unpublishAll', ['size'=>'xs'])
+                  @include('admin.{{modelNamePluralLowerCase}}.buttons.trashAll', ['size'=>'sm'])
                   @include('admin.{{modelNamePluralLowerCase}}.buttons.add', ['size'=>'xs'])
                </div>
             </div>
@@ -51,16 +52,17 @@
                      <tr>
                         <th><input type="checkbox" id="selectall" class="checked" /></th>
                         {{-- Add columns for search purposes only --}}
-                        <th class="d-none">English</th>
-                        <th class="d-none">French</th>
+                           {{-- <th class="d-none">English</th> --}}
+                           {{-- <th class="d-none">French</th> --}}
                         {{-- Add columns for search purposes only --}}
-
-                        <th><div>Name</div></th>
-                        <th class="hidden-xs">Category</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th class="hidden-xs">Status</th>
                         <th class="hidden-xs hidden-sm">Views</th>
                         <th class="hidden-xs">Author</th>
                         <th class="hidden-sm hidden-xs">Created On</th>
                         <th class="hidden-sm hidden-xs">Publish(ed) On</th>
+                        <th data-orderable="false"></th>
                      </tr>
                   </thead>
                   <tbody>
@@ -70,12 +72,12 @@
                               <input type="checkbox" onClick="checkbox_is_checked()" name="checked[]" value="{{${{modelNameSingularLowerCase}}->id}}" class="check-all">
                            </td>
                            {{-- Hide columns at all levels. Only needed because Datatables only searches for columns in the table --}}
-                           <td class="d-none">{{ ${{modelNameSingularLowerCase}}->description_eng }}</td>
-                           <td class="d-none">{{ ${{modelNameSingularLowerCase}}->description_fre }}</td>
+                              {{-- <td class="d-none">{{ ${{modelNameSingularLowerCase}}->description_eng }}</td> --}}
+                              {{-- <td class="d-none">{{ ${{modelNameSingularLowerCase}}->description_fre }}</td> --}}
                            {{-- Hide columns at all levels. Only needed because Datatables only searches for columns in the table --}}
-                           
                            <td><a href="{{ route('admin.{{modelNamePluralLowerCase}}.show', ${{modelNameSingularLowerCase}}->id) }}" class="">{{ ${{modelNameSingularLowerCase}}->name }}</a></td>
-                           <td class="hidden-xs">{{ ${{modelNameSingularLowerCase}}->category }}</td>
+                           <td>{{ ${{modelNameSingularLowerCase}}->email }}</td>
+                           <td>{{ ${{modelNameSingularLowerCase}}->status }}</td>
                            <td class="hidden-xs hidden-sm">{{ ${{modelNameSingularLowerCase}}->views }}</td>
                            <td class="hidden-xs">@include('common.authorFormat', ['model'=>${{modelNameSingularLowerCase}}, 'field'=>'user'])</td>
                            <td class="hidden-sm hidden-xs">@include('common.dateFormat', ['model'=>${{modelNameSingularLowerCase}}, 'field'=>'created_at'])</td>
@@ -84,6 +86,15 @@
                               {{ ${{modelNameSingularLowerCase}}->published_at == null ? 'text text-info' : '' }}
                            ">
                               @include('common.dateFormat', ['model'=>${{modelNameSingularLowerCase}}, 'field'=>'published_at'])
+                           </td>
+                           <td>
+                              <div class="float-right">
+                                 <div class="btn-group">
+                                    @include('admin.{{modelNamePluralLowerCase}}.buttons.publish', ['size'=>'xs'])
+                                    @include('admin.{{modelNamePluralLowerCase}}.buttons.edit', ['size'=>'xs'])
+                                    @include('admin.{{modelNamePluralLowerCase}}.buttons.trash', ['size'=>'xs'])
+                                 </div>
+                              </div>
                            </td>
                         </tr>
                      @endforeach

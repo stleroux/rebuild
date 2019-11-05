@@ -34,7 +34,7 @@
 			{{ $year }}
 			<div class="float-right">
             <div class="btn-group">
-               @include('admin.tests.buttons.back', ['size'=>'xs', 'btn_label'=>'Back'])
+               @include('admin.tests.buttons.back', ['size'=>'xs'])
             </div>
          </div>
 		</div>
@@ -44,20 +44,22 @@
 				<thead>
 					<tr>
 						<th>Name</th>
-						<th>Category</th>
+						<th>Status</th>
 						<th>Views</th>
 						<th>Author</th>
 						<th>Created On</th>
+						<th>Published On</th>
 					</tr>
 				</thead>
 				<tbody>
 					@foreach ($archives as $archive)
 						<tr>
 							<td><a href="{{ route('admin.tests.show', $archive->id) }}">{{ $archive->name }}</a></td>
-							<td>{{ $archive->category }}</td>
+							<td>{{ $archive->status }}</td>
 							<td>{{ $archive->views }}</td>
 							<td>@include('common.authorFormat', ['model'=>$archive, 'field'=>'user'])</td>
 							<td>@include('common.dateFormat', ['model'=>$archive, 'field'=>'created_at'])</td>
+							<td>@include('common.dateFormat', ['model'=>$archive, 'field'=>'published_at'])</td>
 						</tr>
 					@endforeach
 				</tbody>

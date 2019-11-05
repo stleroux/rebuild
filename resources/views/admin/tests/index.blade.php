@@ -26,7 +26,9 @@
          <div class="float-right">
             <div class="btn-group">
                @include('admin.tests.buttons.help', ['size'=>'xs', 'bookmark'=>'tests'])
-               @include('admin.tests.buttons.add', ['size'=>'xs', 'model'=>'test'])
+               @include('admin.tests.buttons.unpublishAll', ['size'=>'sm'])
+               @include('admin.tests.buttons.trashAll', ['size'=>'sm'])
+               @include('admin.tests.buttons.add', ['size'=>'xs'])
             </div>
          </div>
       </div>
@@ -49,9 +51,11 @@
             <table id="datatable" class="table table-hover table-sm">
                <thead>
                   <tr>
+                     <th><input type="checkbox" id="selectall" class="checked" /></th>
                      <th>Name</th>
                      <th>Email</th>
                      <th>Status</th>
+                     <th>Views</th>
                      <!-- Add columns below for search purposes only -->
                      <!-- Add columns above for search purposes only -->
                      <th>Created</th>
@@ -62,9 +66,11 @@
                <tbody>
                   @foreach ($tests as $test)
                      <tr>
+                        <td><input type="checkbox" onClick="checkbox_is_checked()" name="checked[]" value="{{$test->id}}" class="check-all"></td>
                         <td><a href="{{ route('admin.tests.show', $test->id) }}">{{ $test->name }}</a></td>
                         <td>{{ $test->email }}</td>
                         <td>{{ $test->status }}</td>
+                        <td>{{ $test->views }}</td>
                         <!-- Add columns below for search purposes only -->
                         <!-- Add columns above for search purposes only -->
                         <td data-order="{{$test->created_at}}">{{$test->created_at}}</td>
@@ -76,7 +82,7 @@
                               <div class="btn-group">
                                  @include('admin.tests.buttons.publish', ['size'=>'xs'])
                                  @include('admin.tests.buttons.edit', ['size'=>'xs'])
-                                 @include('admin.tests.buttons.delete', ['size'=>'xs'])
+                                 @include('admin.tests.buttons.trash', ['size'=>'xs'])
                               </div>
                            </div>
                         </td>

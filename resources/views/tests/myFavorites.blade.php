@@ -8,6 +8,7 @@
 @endsection
 
 @section('right_column')
+   @include('tests.blocks.popular')
    @include('tests.blocks.archives')
 @endsection
 

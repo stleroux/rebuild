@@ -90,29 +90,29 @@ class FunctionsController extends {{modelNamePlural}}Controller
    }
 
 
-##################################################################################################################
-# ██████╗ ███████╗██╗     ███████╗████████╗███████╗    ████████╗██████╗  █████╗ ███████╗██╗  ██╗███████╗██████╗ 
-# ██╔══██╗██╔════╝██║     ██╔════╝╚══██╔══╝██╔════╝    ╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██║  ██║██╔════╝██╔══██╗
-# ██║  ██║█████╗  ██║     █████╗     ██║   █████╗         ██║   ██████╔╝███████║███████╗███████║█████╗  ██║  ██║
-# ██║  ██║██╔══╝  ██║     ██╔══╝     ██║   ██╔══╝         ██║   ██╔══██╗██╔══██║╚════██║██╔══██║██╔══╝  ██║  ██║
-# ██████╔╝███████╗███████╗███████╗   ██║   ███████╗       ██║   ██║  ██║██║  ██║███████║██║  ██║███████╗██████╔╝
-# ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝       ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚═════╝ 
-// Remove the specified resource from storage - individual record
-##################################################################################################################
-   public static function deleteTrashed($id)
-   {
-      // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('{{modelNameSingularLowerCase}}_delete')) { abort(401, 'Unauthorized Access'); }
-      }
+// ##################################################################################################################
+// # ██████╗ ███████╗██╗     ███████╗████████╗███████╗    ████████╗██████╗  █████╗ ███████╗██╗  ██╗███████╗██████╗ 
+// # ██╔══██╗██╔════╝██║     ██╔════╝╚══██╔══╝██╔════╝    ╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██║  ██║██╔════╝██╔══██╗
+// # ██║  ██║█████╗  ██║     █████╗     ██║   █████╗         ██║   ██████╔╝███████║███████╗███████║█████╗  ██║  ██║
+// # ██║  ██║██╔══╝  ██║     ██╔══╝     ██║   ██╔══╝         ██║   ██╔══██╗██╔══██║╚════██║██╔══██║██╔══╝  ██║  ██║
+// # ██████╔╝███████╗███████╗███████╗   ██║   ███████╗       ██║   ██║  ██║██║  ██║███████║██║  ██║███████╗██████╔╝
+// # ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝       ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚═════╝ 
+// // Remove the specified resource from storage - individual record
+// ##################################################################################################################
+//    public static function deleteTrashed($id)
+//    {
+//       // Check if user has required permission
+//       if($this->enablePermissions) {
+//          if(!checkPerm('{{modelNameSingularLowerCase}}_delete')) { abort(401, 'Unauthorized Access'); }
+//       }
 
-      ${{modelNameSingularLowerCase}} = {{modelName}}::withTrashed()->findorFail($id);
+//       ${{modelNameSingularLowerCase}} = {{modelName}}::withTrashed()->findorFail($id);
 
-      ${{modelNameSingularLowerCase}}->forceDelete();
+//       ${{modelNameSingularLowerCase}}->forceDelete();
 
-      Session::flash ('success','The {{modelNameSingularLowerCase}} was deleted successfully');
-      return redirect()->route('admin.{{modelNamePluralLowerCase}}.trashed');
-   }
+//       Session::flash ('success','The {{modelNameSingularLowerCase}} was deleted successfully');
+//       return redirect()->route('admin.{{modelNamePluralLowerCase}}.trashed');
+//    }
 
 
 ##################################################################################################################
@@ -373,6 +373,27 @@ class FunctionsController extends {{modelNamePlural}}Controller
 
 
 ##################################################################################################################
+# ████████╗██████╗  █████╗ ███████╗██╗  ██╗
+# ╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██║  ██║
+#    ██║   ██████╔╝███████║███████╗███████║
+#    ██║   ██╔══██╗██╔══██║╚════██║██╔══██║
+#    ██║   ██║  ██║██║  ██║███████║██║  ██║
+#    ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
+##################################################################################################################
+   public function trash($id)
+   {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('{{modelNameSingularLowerCase}}_trash')) { abort(401, 'Unauthorized Access'); }
+      }
+
+      ${{modelNameSingularLowerCase}} = {{modelName}}::findOrFail($id);
+
+      return view('admin.{{modelNamePluralLowerCase}}.trash', compact('{{modelNameSingularLowerCase}}'));
+   }
+
+
+##################################################################################################################
 # ████████╗██████╗  █████╗ ███████╗██╗  ██╗     █████╗ ██╗     ██╗     
 # ╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██║  ██║    ██╔══██╗██║     ██║     
 #    ██║   ██████╔╝███████║███████╗███████║    ███████║██║     ██║     
@@ -404,6 +425,36 @@ class FunctionsController extends {{modelNamePlural}}Controller
       {{modelName}}::destroy($checked);
 
       Session::flash('success','The selected {{modelNamePluralLowerCase}} were trashed successfully');
+      return redirect()->back();
+   }
+
+
+##################################################################################################################
+# ████████╗██████╗  █████╗ ███████╗██╗  ██╗    ██████╗ ███████╗███████╗████████╗██████╗  ██████╗ ██╗   ██╗
+# ╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██║  ██║    ██╔══██╗██╔════╝██╔════╝╚══██╔══╝██╔══██╗██╔═══██╗╚██╗ ██╔╝
+#    ██║   ██████╔╝███████║███████╗███████║    ██║  ██║█████╗  ███████╗   ██║   ██████╔╝██║   ██║ ╚████╔╝ 
+#    ██║   ██╔══██╗██╔══██║╚════██║██╔══██║    ██║  ██║██╔══╝  ╚════██║   ██║   ██╔══██╗██║   ██║  ╚██╔╝  
+#    ██║   ██║  ██║██║  ██║███████║██║  ██║    ██████╔╝███████╗███████║   ██║   ██║  ██║╚██████╔╝   ██║   
+#    ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝    ╚═════╝ ╚══════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝    ╚═╝   
+// Remove the specified resource from storage
+// Used in the index page and trashAll action to soft delete multiple records
+##################################################################################################################
+   public function trashDestroy($id)
+   {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('{{modelNameSingularLowerCase}}_delete')) { abort(401, 'Unauthorized Access'); }
+      }
+
+      ${{modelNameSingularLowerCase}} = {{modelName}}::find($id);
+
+      // Delete this recipe's favorites
+      DB::table('favorites')->where('favoriteable_id', '=', $id)->delete();
+      // Delete the recipe
+      ${{modelNameSingularLowerCase}}->delete();
+
+      Session::flash('success', 'The {{modelNameSingularLowerCase}} was successfully trashed!');
+      // return redirect(Session::get('fromPage'));
       return redirect()->back();
    }
 

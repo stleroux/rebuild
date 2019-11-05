@@ -50,51 +50,103 @@ class TestsController extends Controller
 
 
 ##################################################################################################################
-# ██████╗ ███████╗███████╗████████╗██████╗  ██████╗ ██╗   ██╗
-# ██╔══██╗██╔════╝██╔════╝╚══██╔══╝██╔══██╗██╔═══██╗╚██╗ ██╔╝
-# ██║  ██║█████╗  ███████╗   ██║   ██████╔╝██║   ██║ ╚████╔╝ 
-# ██║  ██║██╔══╝  ╚════██║   ██║   ██╔══██╗██║   ██║  ╚██╔╝  
-# ██████╔╝███████╗███████║   ██║   ██║  ██║╚██████╔╝   ██║   
-# ╚═════╝ ╚══════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝    ╚═╝   
-// Remove the specified resource from storage
-// Used in the index page and trashAll action to soft delete multiple records
-##################################################################################################################
-    public function destroy(Test $test)
-    {
-        // Check if user has required permission
-        if($this->enablePermissions)
-        {
-            if(!checkPerm('test_delete')) { abort(401, 'Unauthorized Access'); }
-        }
-
-        $test->delete();
-
-        // Set flash data with success message
-        Session::flash('delete','The test was deleted successfully.');
-        // Redirect
-        return redirect()->route('admin.tests.index');
-    }
-
-
-##################################################################################################################
 # ██████╗ ███████╗██╗     ███████╗████████╗███████╗
 # ██╔══██╗██╔════╝██║     ██╔════╝╚══██╔══╝██╔════╝
 # ██║  ██║█████╗  ██║     █████╗     ██║   █████╗  
 # ██║  ██║██╔══╝  ██║     ██╔══╝     ██║   ██╔══╝  
 # ██████╔╝███████╗███████╗███████╗   ██║   ███████╗
 # ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝
-// Mass Delete selected rows - all selected records
+// 
 ##################################################################################################################
-    public function delete(Test $test)
-    {
-        // Check if user has required permission
-        if($this->enablePermissions)
-        {
-            if(!checkPerm('test_delete')) { abort(401, 'Unauthorized Access'); }
-        }
+   public function delete($id)
+   {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('test_trash')) { abort(401, 'Unauthorized Access'); }
+      }
 
-        return view('admin.tests.delete', compact('test'));
-    }
+      $test = Test::onlyTrashed()->findOrFail($id);
+
+      return view('admin.tests.delete', compact('test'));
+   }
+
+
+
+##################################################################################################################
+# ██████╗ ███████╗██╗     ███████╗████████╗███████╗    ██████╗ ███████╗███████╗████████╗██████╗  ██████╗ ██╗   ██╗
+# ██╔══██╗██╔════╝██║     ██╔════╝╚══██╔══╝██╔════╝    ██╔══██╗██╔════╝██╔════╝╚══██╔══╝██╔══██╗██╔═══██╗╚██╗ ██╔╝
+# ██║  ██║█████╗  ██║     █████╗     ██║   █████╗      ██║  ██║█████╗  ███████╗   ██║   ██████╔╝██║   ██║ ╚████╔╝ 
+# ██║  ██║██╔══╝  ██║     ██╔══╝     ██║   ██╔══╝      ██║  ██║██╔══╝  ╚════██║   ██║   ██╔══██╗██║   ██║  ╚██╔╝  
+# ██████╔╝███████╗███████╗███████╗   ██║   ███████╗    ██████╔╝███████╗███████║   ██║   ██║  ██║╚██████╔╝   ██║   
+# ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝    ╚═════╝ ╚══════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝    ╚═╝  
+// Remove the specified resource from storage
+// Used in the index page and trashAll action to soft delete multiple records
+##################################################################################################################
+   public function deleteDestroy($id)
+   {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('test_delete')) { abort(401, 'Unauthorized Access'); }
+      }
+
+      $test = Test::withTrashed()->findOrFail($id);
+
+      // Delete the associated image if any
+      File::delete('_tests/' . $test->image);
+
+      $test->forceDelete();
+
+      Session::flash('success', 'The test was successfully deleted!');
+      return redirect()->route('admin.tests.trashed');
+   }
+
+
+// ##################################################################################################################
+// # ██████╗ ███████╗███████╗████████╗██████╗  ██████╗ ██╗   ██╗
+// # ██╔══██╗██╔════╝██╔════╝╚══██╔══╝██╔══██╗██╔═══██╗╚██╗ ██╔╝
+// # ██║  ██║█████╗  ███████╗   ██║   ██████╔╝██║   ██║ ╚████╔╝ 
+// # ██║  ██║██╔══╝  ╚════██║   ██║   ██╔══██╗██║   ██║  ╚██╔╝  
+// # ██████╔╝███████╗███████║   ██║   ██║  ██║╚██████╔╝   ██║   
+// # ╚═════╝ ╚══════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝    ╚═╝   
+// // Remove the specified resource from storage
+// // Used in the index page and trashAll action to soft delete multiple records
+// ##################################################################################################################
+//     public function destroy(Test $test)
+//     {
+//         // Check if user has required permission
+//         if($this->enablePermissions)
+//         {
+//             if(!checkPerm('test_delete')) { abort(401, 'Unauthorized Access'); }
+//         }
+
+//         $test->delete();
+
+//         // Set flash data with success message
+//         Session::flash('delete','The test was deleted successfully.');
+//         // Redirect
+//         return redirect()->route('admin.tests.index');
+//     }
+
+
+// ##################################################################################################################
+// # ██████╗ ███████╗██╗     ███████╗████████╗███████╗
+// # ██╔══██╗██╔════╝██║     ██╔════╝╚══██╔══╝██╔════╝
+// # ██║  ██║█████╗  ██║     █████╗     ██║   █████╗  
+// # ██║  ██║██╔══╝  ██║     ██╔══╝     ██║   ██╔══╝  
+// # ██████╔╝███████╗███████╗███████╗   ██║   ███████╗
+// # ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝
+// // Mass Delete selected rows - all selected records
+// ##################################################################################################################
+//     public function delete(Test $test)
+//     {
+//         // Check if user has required permission
+//         if($this->enablePermissions)
+//         {
+//             if(!checkPerm('test_delete')) { abort(401, 'Unauthorized Access'); }
+//         }
+
+//         return view('admin.tests.delete', compact('test'));
+//     }
 
 
 ##################################################################################################################

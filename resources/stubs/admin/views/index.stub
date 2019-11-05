@@ -26,7 +26,9 @@
          <div class="float-right">
             <div class="btn-group">
                @include('admin.{{modelNamePluralLowerCase}}.buttons.help', ['size'=>'xs', 'bookmark'=>'{{modelNamePluralLowerCase}}'])
-               @include('admin.{{modelNamePluralLowerCase}}.buttons.add', ['size'=>'xs', 'model'=>'{{modelNameSingularLowerCase}}'])
+               @include('admin.{{modelNamePluralLowerCase}}.buttons.unpublishAll', ['size'=>'sm'])
+               @include('admin.{{modelNamePluralLowerCase}}.buttons.trashAll', ['size'=>'sm'])
+               @include('admin.{{modelNamePluralLowerCase}}.buttons.add', ['size'=>'xs'])
             </div>
          </div>
       </div>
@@ -49,9 +51,11 @@
             <table id="datatable" class="table table-hover table-sm">
                <thead>
                   <tr>
+                     <th><input type="checkbox" id="selectall" class="checked" /></th>
                      <th>Name</th>
                      <th>Email</th>
                      <th>Status</th>
+                     <th>Views</th>
                      <!-- Add columns below for search purposes only -->
                      <!-- Add columns above for search purposes only -->
                      <th>Created</th>
@@ -62,9 +66,11 @@
                <tbody>
                   @foreach (${{modelNamePluralLowerCase}} as ${{modelNameSingularLowerCase}})
                      <tr>
+                        <td><input type="checkbox" onClick="checkbox_is_checked()" name="checked[]" value="{{${{modelNameSingularLowerCase}}->id}}" class="check-all"></td>
                         <td><a href="{{ route('admin.{{modelNamePluralLowerCase}}.show', ${{modelNameSingularLowerCase}}->id) }}">{{ ${{modelNameSingularLowerCase}}->name }}</a></td>
                         <td>{{ ${{modelNameSingularLowerCase}}->email }}</td>
                         <td>{{ ${{modelNameSingularLowerCase}}->status }}</td>
+                        <td>{{ ${{modelNameSingularLowerCase}}->views }}</td>
                         <!-- Add columns below for search purposes only -->
                         <!-- Add columns above for search purposes only -->
                         <td data-order="{{${{modelNameSingularLowerCase}}->created_at}}">{{${{modelNameSingularLowerCase}}->created_at}}</td>
@@ -76,7 +82,7 @@
                               <div class="btn-group">
                                  @include('admin.{{modelNamePluralLowerCase}}.buttons.publish', ['size'=>'xs'])
                                  @include('admin.{{modelNamePluralLowerCase}}.buttons.edit', ['size'=>'xs'])
-                                 @include('admin.{{modelNamePluralLowerCase}}.buttons.delete', ['size'=>'xs'])
+                                 @include('admin.{{modelNamePluralLowerCase}}.buttons.trash', ['size'=>'xs'])
                               </div>
                            </div>
                         </td>

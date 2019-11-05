@@ -20,8 +20,10 @@
          <i class="fa fa-plus-square"></i>
          Show {{modelName}}
          <div class="float-right">
-            @include('admin.{{modelNamePluralLowerCase}}.buttons.help', ['size'=>'xs', 'model'=>'{{modelNameSingularLowerCase}}', 'bookmark'=>'{{modelNamePluralLowerCase}}'])
-            @include('admin.{{modelNamePluralLowerCase}}.buttons.back', ['size'=>'xs', 'model'=>'category'])
+            <div class="btn-group">
+               @include('admin.{{modelNamePluralLowerCase}}.buttons.help', ['size'=>'xs', 'model'=>'{{modelNameSingularLowerCase}}', 'bookmark'=>'{{modelNamePluralLowerCase}}'])
+               @include('admin.{{modelNamePluralLowerCase}}.buttons.back', ['size'=>'xs', 'model'=>'category'])
+            </div>
          </div>
       </div>
 

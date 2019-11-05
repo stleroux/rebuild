@@ -50,9 +50,7 @@
 						<tbody>
 							@foreach($recipes as $recipe)
 							<tr>
-								<td>
-									<input type="checkbox" onClick="checkbox_is_checked()" name="checked[]" value="{{$recipe->id}}" class="check-all">
-								</td>
+								<td><input type="checkbox" onClick="checkbox_is_checked()" name="checked[]" value="{{$recipe->id}}" class="check-all"></td>
 								<td>{{ ucwords($recipe->title) }}</td>
 								<td>{{ ucwords($recipe->category->name) }}</td>
 								<td>{{ $recipe->views }}</td>

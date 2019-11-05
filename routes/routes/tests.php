@@ -137,10 +137,10 @@ Route::prefix('admin/tests')->name('admin.tests.')->group(function() {
          'as' => 'trash'
       ]);
 
-   Route::get('delete',
+   Route::delete('{id}/trashDestroy',
       [
-         'uses' => 'Admin\Tests\FunctionsController@delete',
-         'as' => 'delete'
+         'uses' => 'Admin\Tests\FunctionsController@trashDestroy',
+         'as' => 'trashDestroy'
       ]);
 
    Route::post('deleteAll',
@@ -173,11 +173,11 @@ Route::prefix('admin/tests')->name('admin.tests.')->group(function() {
          'as' => 'publishAll'
       ]);
 
-   Route::delete('deleteTrashed/{id}',
-      [
-         'uses' => 'Admin\Tests\FunctionsController@deleteTrashed',
-         'as' => 'deleteTrashed'
-      ]);
+   // Route::delete('deleteTrashed/{id}',
+   //    [
+   //       'uses' => 'Admin\Tests\FunctionsController@deleteTrashed',
+   //       'as' => 'deleteTrashed'
+   //    ]);
 });
 
 // CRUD ROUTES

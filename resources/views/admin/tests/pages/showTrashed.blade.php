@@ -36,8 +36,8 @@
 				</div>
 				<div class="col-xs-4 col-sm-4 col-md-4">
 					<div class="form-group">
-						{{ Form::label('category_id', 'Category', ['class'=>'required']) }}
-						{{ Form::text('category_id', $test->category, ['class'=>'form-control form-control-sm', 'readonly']) }}
+						{{ Form::label('status', 'Status', ['class'=>'required']) }}
+						{{ Form::text('status', $test->status, ['class'=>'form-control form-control-sm', 'readonly']) }}
 					</div>
 				</div>
 			</div>

@@ -26,6 +26,7 @@
             		<div class="btn-group">
 							@include('admin.tests.buttons.help', ['size'=>'xs', 'bookmark'=>'tests'])
 							@include('admin.tests.buttons.unpublishAll', ['size'=>'xs'])
+							@include('admin.tests.buttons.trashAll', ['size'=>'sm'])
 							@include('admin.tests.buttons.add', ['size'=>'xs'])
 						</div>
 					</span>
@@ -49,16 +50,17 @@
 								<tr>
 									<th><input type="checkbox" id="selectall" class="checked" /></th>
 									{{-- Add columns for search purposes only --}}
-									<th class="d-none">English</th>
-									<th class="d-none">French</th>
+										{{-- <th class="d-none">English</th> --}}
+										{{-- <th class="d-none">French</th> --}}
 									{{-- Add columns for search purposes only --}}
-
-									<th><div>Name</div></th>
-									<th class="hidden-xs">Category</th>
+									<th>Name</th>
+									<th>Email</th>
+									<th class="hidden-xs">Status</th>
 									<th class="hidden-xs hidden-sm">Views</th>
 									<th class="hidden-xs">Author</th>
 									<th class="hidden-sm hidden-xs">Created On</th>
 									<th class="hidden-sm hidden-xs">Publish(ed) On</th>
+									<th data-orderable="false"></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -68,12 +70,12 @@
 											<input type="checkbox" onClick="checkbox_is_checked()" name="checked[]" value="{{$test->id}}" class="check-all">
 										</td>
 										{{-- Hide columns at all levels. Only needed because Datatables only searches for columns in the table --}}
-										<td class="d-none">{{ $test->description_eng }}</td>
-										<td class="d-none">{{ $test->description_fre }}</td>
+											{{-- <td class="d-none">{{ $test->description_eng }}</td> --}}
+											{{-- <td class="d-none">{{ $test->description_fre }}</td> --}}
 										{{-- Hide columns at all levels. Only needed because Datatables only searches for columns in the table --}}
-										
 										<td><a href="{{ route('admin.tests.show', $test->id) }}" class="">{{ $test->name }}</a></td>
-										<td class="hidden-xs">{{ $test->category }}</td>
+										<td>{{ $test->email }}</td>
+										<td>{{ $test->status }}</td>
 										<td class="hidden-xs hidden-sm">{{ $test->views }}</td>
 										<td class="hidden-xs">@include('common.authorFormat', ['model'=>$test, 'field'=>'user'])</td>
 										<td class="hidden-sm hidden-xs">@include('common.dateFormat', ['model'=>$test, 'field'=>'created_at'])</td>
@@ -82,6 +84,15 @@
 												{{ $test->published_at == null ? 'text text-info' : '' }}
 										">
 											@include('common.dateFormat', ['model'=>$test, 'field'=>'published_at'])
+										</td>
+										<td>
+											<div class="float-right">
+		                              <div class="btn-group">
+		                                 @include('admin.tests.buttons.publish', ['size'=>'xs'])
+		                                 @include('admin.tests.buttons.edit', ['size'=>'xs'])
+		                                 @include('admin.tests.buttons.trash', ['size'=>'xs'])
+		                              </div>
+		                           </div>
 										</td>
 									</tr>
 								@endforeach

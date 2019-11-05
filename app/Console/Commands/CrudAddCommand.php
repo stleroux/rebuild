@@ -304,6 +304,11 @@ class CrudAddCommand extends Command
          $this->getTemplate('admin/views/edit', $name));
 
       file_put_contents(
+         resource_path("/views/admin/".strtolower(Str::plural($name))."/form.blade.php"),
+         $this->getTemplate('admin/views/form', $name)
+      );
+
+      file_put_contents(
          resource_path("/views/admin/".strtolower(Str::plural($name))."/index.blade.php"),
          $this->getTemplate('admin/views/index', $name));
 
@@ -317,9 +322,8 @@ class CrudAddCommand extends Command
          $this->getTemplate('admin/views/show', $name));
 
       file_put_contents(
-         resource_path("/views/admin/".strtolower(Str::plural($name))."/form.blade.php"),
-         $this->getTemplate('admin/views/form', $name)
-      );
+         resource_path("/views/admin/".strtolower(Str::plural($name))."/trash.blade.php"),
+         $this->getTemplate('admin/views/trash', $name));
    }
 
 
@@ -412,6 +416,11 @@ class CrudAddCommand extends Command
       );
 
       file_put_contents(
+         resource_path("/views/admin/".strtolower(Str::plural($name))."/buttons/btn_delete.blade.php"),
+         $this->getTemplate('admin/buttons/btn_delete', $name)
+      );
+
+      file_put_contents(
          resource_path("/views/admin/".strtolower(Str::plural($name))."/buttons/delete.blade.php"),
          $this->getTemplate('admin/buttons/delete', $name)
       );
@@ -434,6 +443,16 @@ class CrudAddCommand extends Command
       file_put_contents(
          resource_path("/views/admin/".strtolower(Str::plural($name))."/buttons/publishAll.blade.php"),
          $this->getTemplate('admin/buttons/publishAll', $name)
+      );
+
+      file_put_contents(
+         resource_path("/views/admin/".strtolower(Str::plural($name))."/buttons/restore.blade.php"),
+         $this->getTemplate('admin/buttons/restore', $name)
+      );
+
+      file_put_contents(
+         resource_path("/views/admin/".strtolower(Str::plural($name))."/buttons/restoreAll.blade.php"),
+         $this->getTemplate('admin/buttons/restoreAll', $name)
       );
 
       file_put_contents(
