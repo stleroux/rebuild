@@ -454,8 +454,8 @@ class FunctionsController extends TestsController
       $test->delete();
 
       Session::flash('success', 'The test was successfully trashed!');
-      // return redirect(Session::get('fromPage'));
-      return redirect()->back();
+      return redirect(Session::get('fromPage'));
+      // return redirect()->back();
    }
 
 

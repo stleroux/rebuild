@@ -207,10 +207,16 @@ Route::prefix('admin/{{modelNamePluralLowerCase}}')->name('admin.{{modelNamePlur
          'as' => 'update'
       ]);
 
+   Route::get('{id}/delete',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\{{modelNamePlural}}Controller@delete',
+         'as' => 'delete'
+      ]);
+
    Route::delete('{id}',
       [
-         'uses' => 'Admin\{{modelNamePlural}}\{{modelNamePlural}}Controller@destroy',
-         'as' => 'destroy'
+         'uses' => 'Admin\{{modelNamePlural}}\{{modelNamePlural}}Controller@deleteDestroy',
+         'as' => 'deleteDestroy'
       ]);
 
    Route::get('{id}/show',

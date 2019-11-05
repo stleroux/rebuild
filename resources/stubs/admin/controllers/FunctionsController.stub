@@ -454,8 +454,8 @@ class FunctionsController extends {{modelNamePlural}}Controller
       ${{modelNameSingularLowerCase}}->delete();
 
       Session::flash('success', 'The {{modelNameSingularLowerCase}} was successfully trashed!');
-      // return redirect(Session::get('fromPage'));
-      return redirect()->back();
+      return redirect(Session::get('fromPage'));
+      // return redirect()->back();
    }
 
 

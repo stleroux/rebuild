@@ -43,6 +43,13 @@ return [
 	
 	
 	
+	'tests' => 'fas fa-fw fa-random',
+
+	
+	
+	
+	
+	
 	
 	
 	

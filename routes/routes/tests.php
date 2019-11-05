@@ -207,10 +207,16 @@ Route::prefix('admin/tests')->name('admin.tests.')->group(function() {
          'as' => 'update'
       ]);
 
+   Route::get('{id}/delete',
+      [
+         'uses' => 'Admin\Tests\TestsController@delete',
+         'as' => 'delete'
+      ]);
+
    Route::delete('{id}',
       [
-         'uses' => 'Admin\Tests\TestsController@destroy',
-         'as' => 'destroy'
+         'uses' => 'Admin\Tests\TestsController@deleteDestroy',
+         'as' => 'deleteDestroy'
       ]);
 
    Route::get('{id}/show',
@@ -243,16 +249,16 @@ Route::prefix('tests')->name('tests.')->group(function() {
          'as' => 'favoriteRemove'
       ]);
 
-   Route::get('myFavorites',
-      [
-         'uses' => 'Tests\ExtraViewsController@myFavorites',
-         'as' => 'myFavorites'
-      ]);
-
    Route::get('{id}/show',
       [
          'uses' => 'Tests\TestsController@show',
          'as' => 'show'
+      ]);
+
+   Route::get('myFavorites',
+      [
+         'uses' => 'Tests\ExtraViewsController@myFavorites',
+         'as' => 'myFavorites'
       ]);
 
    Route::get('{key?}',

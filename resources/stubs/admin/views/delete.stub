@@ -12,7 +12,7 @@
 
 @section('content')
 
-{!! Form::open(['route'=>['admin.{{modelNamePluralLowerCase}}.destroy', ${{modelNameSingularLowerCase}}->id], 'method'=>'DELETE']) !!}
+{!! Form::open(['route'=>['admin.{{modelNamePluralLowerCase}}.deleteDestroy', ${{modelNameSingularLowerCase}}->id], 'method'=>'DELETE']) !!}
    {{ csrf_field() }}
 
    <div class="card">
