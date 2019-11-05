@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Tests;
 
-// use App\Http\Requests\TestRequest;
 use App\Http\Controllers\Controller; // Required for validation // use Illuminate\Routing\Controller;
 use App\Models\Tests\Test;
 use App\Models\User;
@@ -80,7 +79,7 @@ class ExtraViewsController extends TestsController
 
       if(Auth::check()) {
          $user = Auth::user();
-         $tests = $user->favorite(Test::class)->sortBy('title');
+         $tests = $user->favorite(Test::class)->sortBy('name');
       }
 
       return view('tests.myFavorites', compact('tests'));

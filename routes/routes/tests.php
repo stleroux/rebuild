@@ -243,16 +243,16 @@ Route::prefix('tests')->name('tests.')->group(function() {
          'as' => 'favoriteRemove'
       ]);
 
-   Route::get('{id}/show',
-      [
-         'uses' => 'Tests\TestsController@show',
-         'as' => 'show'
-      ]);
-
    Route::get('myFavorites',
       [
          'uses' => 'Tests\ExtraViewsController@myFavorites',
          'as' => 'myFavorites'
+      ]);
+
+   Route::get('{id}/show',
+      [
+         'uses' => 'Tests\TestsController@show',
+         'as' => 'show'
       ]);
 
    Route::get('{key?}',
