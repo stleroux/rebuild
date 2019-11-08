@@ -36,15 +36,17 @@ return [
    'permissions'  => 'fas fa-fw fa-user-shield',
 
    /** CRUD Added **/
-	'tests' => 'fas fa-fw fa-random',
-
 	
 	
 	
 	
 	
-	'tests' => 'fas fa-fw fa-random',
-
+	
+	
+	
+	
+	
+	
 	
 	
 	

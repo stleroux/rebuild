@@ -38,44 +38,46 @@
 										<td>{{ $client->company_name }}</td>
 										<td>{{ $client->first_name }} {{ $client->last_name }}</td>
 										<td>{{ $client->email }}</td>
-										<td class="float-right">
-											{{-- @include('invoicer.invoices.buttons.add', ['size'=>'sm', 'btn_label'=>'Add Invoice']) --}}
-											{{-- <form action="{{ route('invoicer.clients.destroy',[$client->id]) }}" method="POST" 
-												onsubmit="return confirm('Do you really want to delete this client?');"
-												class="float-right"> --}}
-												{{-- <input type="hidden" name="_method" value="DELETE" /> --}}
-												{{-- @method('DELETE') --}}
-												{{-- {{ csrf_field() }} --}}
-												{{-- @csrf --}}
-												
-												@if(checkPerm('invoicer_client_show'))
-													<a href="{{ route('invoicer.invoices.create', $client->id) }}" class="btn btn-sm btn-outline-primary">
-														<i class="far fa-plus-square"></i>
-														New Invoice
-													</a>
-												@endif
+										<td>
+											<div class="float-right">
+												{{-- @include('invoicer.invoices.buttons.add', ['size'=>'sm', 'btn_label'=>'Add Invoice']) --}}
+												{{-- <form action="{{ route('invoicer.clients.destroy',[$client->id]) }}" method="POST" 
+													onsubmit="return confirm('Do you really want to delete this client?');"
+													class="float-right"> --}}
+													{{-- <input type="hidden" name="_method" value="DELETE" /> --}}
+													{{-- @method('DELETE') --}}
+													{{-- {{ csrf_field() }} --}}
+													{{-- @csrf --}}
+													
+													@if(checkPerm('invoicer_client_show'))
+														<a href="{{ route('invoicer.invoices.create', $client->id) }}" class="btn btn-sm btn-outline-primary">
+															<i class="far fa-plus-square"></i>
+															New Invoice
+														</a>
+													@endif
 
-												@if(checkPerm('invoicer_client_show'))
-													<a href="{{ route('invoicer.clients.show', $client->id) }}" class="btn btn-sm btn-outline-primary">
-														<i class="fa fa-eye" aria-hidden="true"></i>
-														View
-													</a>
-												@endif
-												
-												{{-- @if(checkPerm('invoicer_client_edit'))
-													<a href="{{ route('invoicer.clients.edit', $client->id) }}" class="btn btn-sm btn-primary">
-														<i class="fa fa-edit"></i>
-														Edit
-													</a>
-												@endif --}}
+													@if(checkPerm('invoicer_client_show'))
+														<a href="{{ route('invoicer.clients.show', $client->id) }}" class="btn btn-sm btn-outline-primary">
+															<i class="fa fa-eye" aria-hidden="true"></i>
+															View
+														</a>
+													@endif
+													
+													{{-- @if(checkPerm('invoicer_client_edit'))
+														<a href="{{ route('invoicer.clients.edit', $client->id) }}" class="btn btn-sm btn-primary">
+															<i class="fa fa-edit"></i>
+															Edit
+														</a>
+													@endif --}}
 
-												{{-- @if(checkPerm('invoicer_client_delete'))
-													<button type="submit" class="btn btn-sm btn-danger">
-														<i class="fa fa-trash-alt"></i>
-														Delete
-													</button>
-												@endif --}}
-											{{-- </form> --}}
+													{{-- @if(checkPerm('invoicer_client_delete'))
+														<button type="submit" class="btn btn-sm btn-danger">
+															<i class="fa fa-trash-alt"></i>
+															Delete
+														</button>
+													@endif --}}
+												{{-- </form> --}}
+											</div>
 										</td>
 									</tr>
 									@endforeach

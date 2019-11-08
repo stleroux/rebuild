@@ -28,6 +28,7 @@ class {{modelName}}ServiceProvider extends ServiceProvider
    {
       view()->composer('{{modelNamePluralLowerCase}}.blocks.popular', function ($view) {
          $popular = {{modelName}}::published()
+             // ->where('deleted_at', NULL)
              ->where('views', '>=', 10)
              ->orderBy('views', 'desc')
              ->take(setting('homepage_favorite_post_count'))
@@ -39,6 +40,7 @@ class {{modelName}}ServiceProvider extends ServiceProvider
          $archivesLinks = DB::table('{{modelNamePluralLowerCase}}')
             ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) archivesLinks_count'))
             ->where('published_at', '<=', Carbon::now())
+            ->where('deleted_at', NULL)
             ->groupBy('year')
             ->groupBy('month')
             ->orderBy('year', 'desc')
@@ -51,6 +53,7 @@ class {{modelName}}ServiceProvider extends ServiceProvider
          $archivesLinks = DB::table('{{modelNamePluralLowerCase}}')
             ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) archivesLinks_count'))
             ->where('published_at', '<=', Carbon::now())
+            ->where('deleted_at', NULL)
             ->groupBy('year')
             ->groupBy('month')
             ->orderBy('year', 'desc')

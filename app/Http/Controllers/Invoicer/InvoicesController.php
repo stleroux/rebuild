@@ -52,7 +52,7 @@ class InvoicesController extends Controller
 
 		$products = Product::all();
 		// $clients = Client::orderBy('company_name','asc')->pluck('company_name','id');
-		$clients = User::orderBy('company_name','asc')->pluck('company_name','id');
+		$clients = User::where('company_name', '!=', NULL)->orderBy('company_name','asc')->pluck('company_name','id');
 		// dd($clients);
 
 		if($id){

@@ -1,6 +1,6 @@
 @if(checkPerm('{{modelNameSingularLowerCase}}_create'))
    <a href="{{ route('admin.{{modelNamePluralLowerCase}}.create') }}"
-      class="btn {{ $size ? 'btn-'.$size : '' }} btn-success"
+      class="btn {{ $size ? 'btn-'.$size : '' }} btn-success text-light"
       title="Add {{modelName}}">
       <i class="{{ Config::get('buttons.add') }}"></i>
    </a>
