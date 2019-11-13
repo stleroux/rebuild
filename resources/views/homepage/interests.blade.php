@@ -1,14 +1,14 @@
 {{-- INTERESTS --}}
 <div class="card mb-2">
    <div class="card-header section_header p-2">
-      <i class="fas fa-glasses"></i>
+      <i class="fas fa-fw fa-glasses"></i>
       Sections of interest on the site
    </div>
    <div class="card-body section_body p-2">
       
       <div class="card mb-2">
          <div class="card_header p-2">
-            <i class="fab fa-pagelines"></i>
+            <i class="fab fa-fw fa-pagelines"></i>
             Wood Projects
          </div>
          <div class="card-body p-2">
@@ -19,7 +19,7 @@
       
       <div class="card mb-2">
          <div class="card-header card_header p-2">
-            <i class="far fa-address-card"></i>
+            <i class="fab fa-fw fa-apple"></i>
             Recipes
          </div>
          <div class="card-body p-2">
@@ -29,7 +29,7 @@
 
       <div class="card mb-2">
          <div class="card-header card_header p-2">
-            <i class="far fa-newspaper"></i>
+            <i class="fas fa-fw fa-blog"></i>
             The Blog
          </div>
          <div class="card-body p-2">

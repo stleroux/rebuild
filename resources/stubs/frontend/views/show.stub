@@ -27,7 +27,7 @@
       </div>
 
       <div class="card-body section_body p-2">
-         <p>{{ ${{modelNameSingularLowerCase}}->name }}</p>
+         <p>{{ ${{modelNameSingularLowerCase}}->title }}</p>
       </div>
 
    </div>

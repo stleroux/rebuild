@@ -31,7 +31,7 @@ class {{modelName}}ServiceProvider extends ServiceProvider
              // ->where('deleted_at', NULL)
              ->where('views', '>=', 10)
              ->orderBy('views', 'desc')
-             ->take(setting('homepage_favorite_post_count'))
+             ->take(setting('homepage_popular_count'))
              ->get();
          $view->with('popular', $popular);
       });

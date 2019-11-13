@@ -1,7 +1,7 @@
 @if($popular->count() > 0)
    <div class="card mb-2">
       <div class="card-header block_header p-2">
-         <i class="fab fa-apple"></i>
+         <i class="fab fa-fw fa-apple"></i>
          Popular Recipes
       </div>
       <div class="card-body p-0 m-0">
@@ -9,7 +9,7 @@
             @foreach ($popular as $r)
                <a class="list-group-item list-group-item-action p-1" href="{{ route('recipes.show', $r->id) }}" role="button" style="text-decoration: none">
                   <div class="text text-left">
-                     <i class="far fa-address-card fa-fw"></i>
+                     <i class="fab fa-fw fa-apple"></i>
                      {{ $r->title }}
                      <span class="badge badge-info text-dark float-right">{{ $r->views }}</span>
                   </div>

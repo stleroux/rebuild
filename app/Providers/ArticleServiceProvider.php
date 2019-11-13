@@ -28,38 +28,38 @@ class ArticleServiceProvider extends ServiceProvider
    {
       view()->composer('articles.blocks.popular', function ($view) {
          $popular = Article::published()
+             // ->where('deleted_at', NULL)
              ->where('views', '>=', 10)
              ->orderBy('views', 'desc')
-             ->take(setting('homepage_favorite_post_count'))
+             ->take(setting('homepage_popular_count'))
              ->get();
          $view->with('popular', $popular);
       });
 
-      view()->composer('articles.blocks.archives', function ($view) {
-         $links = DB::table('articles')
-            ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) article_count'))
+      view()->composer('admin.articles.blocks.archives', function ($view) {
+         $archivesLinks = DB::table('articles')
+            ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) archivesLinks_count'))
             ->where('published_at', '<=', Carbon::now())
-            //->where('created_at', '<=', Carbon::now()->subMonth(3))
+            ->where('deleted_at', NULL)
             ->groupBy('year')
             ->groupBy('month')
             ->orderBy('year', 'desc')
             ->orderBy('month', 'desc')
             ->get();
-         $view->with('links', $links);
+         $view->with('archivesLinks', $archivesLinks);
       });
 
-      // Admin
-      view()->composer('admin.articles.blocks.archives', function ($view) {
-         $links = DB::table('articles')
-            ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) article_count'))
+      view()->composer('articles.blocks.archives', function ($view) {
+         $archivesLinks = DB::table('articles')
+            ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) archivesLinks_count'))
             ->where('published_at', '<=', Carbon::now())
-            //->where('created_at', '<=', Carbon::now()->subMonth(3))
+            ->where('deleted_at', NULL)
             ->groupBy('year')
             ->groupBy('month')
             ->orderBy('year', 'desc')
             ->orderBy('month', 'desc')
             ->get();
-         $view->with('links', $links);
+         $view->with('archivesLinks', $archivesLinks);
       });
    }
 

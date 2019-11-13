@@ -55,13 +55,12 @@
                            {{-- <th class="d-none">English</th> --}}
                            {{-- <th class="d-none">French</th> --}}
                         {{-- Add columns for search purposes only --}}
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th class="hidden-xs">Status</th>
+                        <th>Title</th>
+                        <th class="hidden-xs">Category</th>
                         <th class="hidden-xs hidden-sm">Views</th>
                         <th class="hidden-xs">Author</th>
                         <th class="hidden-sm hidden-xs">Created On</th>
-                        <th class="hidden-sm hidden-xs">Publish(ed) On</th>
+                        <th class="hidden-sm hidden-xs">Publish On</th>
                         <th data-orderable="false"></th>
                      </tr>
                   </thead>
@@ -75,18 +74,12 @@
                               {{-- <td class="d-none">{{ ${{modelNameSingularLowerCase}}->description_eng }}</td> --}}
                               {{-- <td class="d-none">{{ ${{modelNameSingularLowerCase}}->description_fre }}</td> --}}
                            {{-- Hide columns at all levels. Only needed because Datatables only searches for columns in the table --}}
-                           <td><a href="{{ route('admin.{{modelNamePluralLowerCase}}.show', ${{modelNameSingularLowerCase}}->id) }}" class="">{{ ${{modelNameSingularLowerCase}}->name }}</a></td>
-                           <td>{{ ${{modelNameSingularLowerCase}}->email }}</td>
-                           <td>{{ ${{modelNameSingularLowerCase}}->status }}</td>
+                           <td><a href="{{ route('admin.{{modelNamePluralLowerCase}}.show', ${{modelNameSingularLowerCase}}->id) }}" class="">{{ ${{modelNameSingularLowerCase}}->title }}</a></td>
+                           <td>{{ ${{modelNameSingularLowerCase}}->category }}</td>
                            <td class="hidden-xs hidden-sm">{{ ${{modelNameSingularLowerCase}}->views }}</td>
                            <td class="hidden-xs">@include('common.authorFormat', ['model'=>${{modelNameSingularLowerCase}}, 'field'=>'user'])</td>
-                           <td class="hidden-sm hidden-xs">@include('common.dateFormat', ['model'=>${{modelNameSingularLowerCase}}, 'field'=>'created_at'])</td>
-                           <td class="hidden-sm hidden-xs 
-                              {{ ${{modelNameSingularLowerCase}}->published_at >= Carbon\Carbon::now() ? 'text text-warning' : '' }}
-                              {{ ${{modelNameSingularLowerCase}}->published_at == null ? 'text text-info' : '' }}
-                           ">
-                              @include('common.dateFormat', ['model'=>${{modelNameSingularLowerCase}}, 'field'=>'published_at'])
-                           </td>
+                           <td data-order="{{ ${{modelNameSingularLowerCase}}->created_at }}">{{ ${{modelNameSingularLowerCase}}->created_at }}</td>
+                           <td data-order="{{ ${{modelNameSingularLowerCase}}->published_at }}">{{ ${{modelNameSingularLowerCase}}->published_at }}</td>
                            <td>
                               <div class="float-right">
                                  <div class="btn-group">

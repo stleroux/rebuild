@@ -431,6 +431,11 @@ class CrudAddCommand extends Command
       );
 
       file_put_contents(
+         resource_path("/views/admin/".strtolower(Str::plural($name))."/buttons/deleteAll.blade.php"),
+         $this->getTemplate('admin/buttons/deleteAll', $name)
+      );
+
+      file_put_contents(
          resource_path("/views/admin/".strtolower(Str::plural($name))."/buttons/edit.blade.php"),
          $this->getTemplate('admin/buttons/edit', $name)
       );

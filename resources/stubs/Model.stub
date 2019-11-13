@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Auth;
 use Carbon\Carbon;
 use ChristianKuri\LaravelFavorite\Traits\Favoriteable;
+use App\Models\User;
 
 class {{modelName}} extends Model
 {
@@ -20,20 +21,25 @@ class {{modelName}} extends Model
 
    // Set the default value for the status field to 0
    protected $attributes = [
-      'status' => 0,
+      'category' => 0,
    ];
 
-   public function getStatusAttribute($attribute)
+   public function getCategoryAttribute($attribute)
    {
-      return $this->statusOptions()[$attribute];
+      return $this->categoriesOptions()[$attribute];
    }
 
-   public function statusOptions()
+   public function categoriesOptions()
    {
       return [
          1 => 'Active',
          0 => 'Inactive',
          2 => 'In-Progress',
+         3 => 'Three',
+         4 => 'Four',
+         5 => 'Five',
+         6 => 'Six',
+         7 => 'Seven',
       ];
    }
 
@@ -62,7 +68,7 @@ public function scopePublished($query)
 
    public function scopeMy{{modelNamePluralLowerCase}}($query)
    {
-      return $query->where('user_id', '=', Auth::user()->id)->orderBy('name','DESC');
+      return $query->where('user_id', '=', Auth::user()->id)->orderBy('title','DESC');
    }
 
    public function scopeUnpublished($query)
@@ -89,7 +95,7 @@ public function scopePublished($query)
    {
       return $query
          ->where('created_at', '>=' , Auth::user()->previous_login_date)
-         ->orderBy('name','DESC');
+         ->orderBy('title','DESC');
    }
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -116,5 +122,33 @@ public function scopePublished($query)
       
       return 'N/A';
    }
+
+   public function getPublishedAtAttribute($date)
+   {
+      if($date){
+         $date = new \Carbon\Carbon($date);
+         $date = $date->format(setting('dateFormat'));
+         return $date;
+      }
+      
+      return 'N/A';
+   }
+
+   // public function getUserIdAttribute($id)
+   // {
+   //    $author = User::find($id);
+
+   //    if(setting('authorFormat') == 'username'){
+   //       return ucfirst($author->username);
+   //    }
+   //    if(setting('authorFormat') == 'last_name, first_name'){
+   //       return ucfirst($author->last_name) . ', ' . ucfirst($author->first_name);
+   //    }
+   //    if(setting('authorFormat') == 'first_name last_name'){
+   //       return ucfirst($author->first_name) . ' ' . ucfirst($author->last_name);
+   //    }
+   // }
+
+
 
 }

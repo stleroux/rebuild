@@ -1,6 +1,6 @@
 @if(checkPerm('{{modelNameSingularLowerCase}}_index'))
    <a href="{{ route('admin.{{modelNamePluralLowerCase}}.index') }}"
-      class="list-group-item list-group-item-action p-1 {{ Route::is('admin.{{modelNamePluralLowerCase}}.*') ? 'menu_active' : '' }} text-warning">
+      class="list-group-item list-group-item-action p-1 {{ Route::is('admin.{{modelNamePluralLowerCase}}.*') ? 'menu_active' : '' }}">
       <i class="{{ Config::get('buttons.{{modelNamePluralLowerCase}}') }}"></i>
       {{modelNamePlural}}
    </a>

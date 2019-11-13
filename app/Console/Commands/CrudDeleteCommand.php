@@ -120,7 +120,8 @@ class CrudDeleteCommand extends Command
          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
          if(strpos(file_get_contents(resource_path("/views/homepage/blocks.blade.php")), '@include(\'' . strtolower(Str::plural($name)) . ".blocks.popular'") !== false) {
             $content = file_get_contents(resource_path("/views/homepage/blocks.blade.php"));
-            $content = str_replace("@include('tests.blocks.popular')\n", "", $content);
+            // $content = str_replace("@include('tests.blocks.popular')\n", "", $content);
+            $content = str_replace("@include('".strtolower(Str::plural($name)).".blocks.popular')\n", "", $content);
             file_put_contents(resource_path("/views/homepage/blocks.blade.php"), $content);
             $this->info('║ - Removed include line from block.blade.php                                    ║');
          }

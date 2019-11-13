@@ -1,18 +1,19 @@
 <div class="card mb-3 p-0 m-0">
    <div class="card-header block_header p-2 m-0">
-      <i class="fa fa-file-text-o" aria-hidden="true"></i>
+      <i class="{{ Config::get('buttons.archives') }}"></i>
       Article Archives
    </div>
    <div class="card-body card_body p-0">
-      @if(count($links) > 0)
+      @if(count($archivesLinks) > 0)
          <ul class="list-group">
-            @foreach($links as $link)
-               <a href="{{ route('articles.archive', ['year'=>$link->year, 'month'=>$link->month]) }}"
+            @foreach($archivesLinks as $alink)
+               <a href="{{ route('articles.archives', ['year'=>$alink->year, 'month'=>$alink->month]) }}"
                   class="list-group-item list-group-item-action p-1">
-                  {{ $link->month_name }} - {{ $link->year }}
-                  <span class="badge badge-secondary float-right">
-                     {{ $link->article_count }}
-                  </span>
+                  <i class="{{ Config::get('buttons.archive') }}"></i>
+                  {{ $alink->month_name }} - {{ $alink->year }}
+                  <div class="badge badge-secondary float-right p-1">
+                     {{ $alink->archivesLinks_count }}
+                  </div>
                </a>
             @endforeach
          </ul>

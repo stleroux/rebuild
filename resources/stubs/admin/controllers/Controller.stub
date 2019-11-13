@@ -194,7 +194,7 @@ class {{modelNamePlural}}Controller extends Controller
 
       //$alphas = range('A', 'Z');
       $alphas = DB::table('{{modelNamePluralLowerCase}}')
-         ->select(DB::raw('DISTINCT LEFT(name, 1) as letter'))
+         ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
          ->where('published_at','<', Carbon::Now())
          ->orderBy('letter')
          ->get();
@@ -207,8 +207,8 @@ class {{modelNamePlural}}Controller extends Controller
       // If $key value is passed
       if ($key) {
          ${{modelNamePluralLowerCase}} = {{modelName}}::with('user')->published()
-            ->where('name', 'like', $key . '%')
-            ->orderBy('name', 'asc')
+            ->where('title', 'like', $key . '%')
+            ->orderBy('title', 'asc')
             ->get();
          return view('admin.{{modelNamePluralLowerCase}}.index', compact('{{modelNamePluralLowerCase}}','letters', 'archivesLinks'));
       }

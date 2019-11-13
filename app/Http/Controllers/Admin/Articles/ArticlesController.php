@@ -3,28 +3,15 @@
 namespace App\Http\Controllers\Admin\Articles;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use App\Http\Controllers\Controller; // Required for validation
-use Illuminate\Support\Facades\Input;
-
+use App\Http\Controllers\Controller; // Required for validation // use Illuminate\Routing\Controller;
 use App\Models\Articles\Article;
-use App\Models\Category;
-use App\Models\Comment;
-use App\Models\User;
 use Carbon\Carbon;
-use Auth;
 use DB;
-use Excel;
-use Log;
-use Route;
+use File;
 use Session;
-use URL;
-
-use App\Http\Requests\CreateCommentRequest;
 
 class ArticlesController extends Controller
 {
-
 ##################################################################################################################
 #  ██████╗ ██████╗ ███╗   ██╗███████╗████████╗██████╗ ██╗   ██╗ ██████╗████████╗
 # ██╔════╝██╔═══██╗████╗  ██║██╔════╝╚══██╔══╝██╔══██╗██║   ██║██╔════╝╚══██╔══╝
@@ -33,10 +20,10 @@ class ArticlesController extends Controller
 # ╚██████╗╚██████╔╝██║ ╚████║███████║   ██║   ██║  ██║╚██████╔╝╚██████╗   ██║   
 #  ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝  ╚═════╝   ╚═╝   
 ##################################################################################################################
-   public function __construct() {
-      // only allow authenticated users to access these pages
+   public function __construct()
+   {
       $this->middleware('auth');
-      $this->enablePermissions = true;
+      $this->enablePermissions = false;
    }
 
 
@@ -49,48 +36,118 @@ class ArticlesController extends Controller
 #  ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝
 // Show the form for creating a new resource
 ##################################################################################################################
-   public function create()
+    public function create()
+    {
+        // Check if user has required permission
+        if($this->enablePermissions)
+        {
+            if(!checkPerm('article_create')) { abort(401, 'Unauthorized Access'); }
+        }
+
+        $article = New Article();
+
+        return view('admin.articles.create', compact('article'));
+    }
+
+
+##################################################################################################################
+# ██████╗ ███████╗██╗     ███████╗████████╗███████╗
+# ██╔══██╗██╔════╝██║     ██╔════╝╚══██╔══╝██╔════╝
+# ██║  ██║█████╗  ██║     █████╗     ██║   █████╗  
+# ██║  ██║██╔══╝  ██║     ██╔══╝     ██║   ██╔══╝  
+# ██████╔╝███████╗███████╗███████╗   ██║   ███████╗
+# ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝
+// 
+##################################################################################################################
+   public function delete($id)
    {
       // Check if user has required permission
       if($this->enablePermissions) {
-         if(!checkPerm('article_add')) { abort(401, 'Unauthorized Access'); }
+         if(!checkPerm('article_trash')) { abort(401, 'Unauthorized Access'); }
       }
 
-      $article = New Article();
-      return view('admin.articles.create', compact('article'));
+      $article = Article::onlyTrashed()->findOrFail($id);
+
+      return view('admin.articles.delete', compact('article'));
    }
 
 
+
 ##################################################################################################################
-# ██████╗ ███████╗███████╗████████╗██████╗  ██████╗ ██╗   ██╗
-# ██╔══██╗██╔════╝██╔════╝╚══██╔══╝██╔══██╗██╔═══██╗╚██╗ ██╔╝
-# ██║  ██║█████╗  ███████╗   ██║   ██████╔╝██║   ██║ ╚████╔╝ 
-# ██║  ██║██╔══╝  ╚════██║   ██║   ██╔══██╗██║   ██║  ╚██╔╝  
-# ██████╔╝███████╗███████║   ██║   ██║  ██║╚██████╔╝   ██║   
-# ╚═════╝ ╚══════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝    ╚═╝   
+# ██████╗ ███████╗██╗     ███████╗████████╗███████╗    ██████╗ ███████╗███████╗████████╗██████╗  ██████╗ ██╗   ██╗
+# ██╔══██╗██╔════╝██║     ██╔════╝╚══██╔══╝██╔════╝    ██╔══██╗██╔════╝██╔════╝╚══██╔══╝██╔══██╗██╔═══██╗╚██╗ ██╔╝
+# ██║  ██║█████╗  ██║     █████╗     ██║   █████╗      ██║  ██║█████╗  ███████╗   ██║   ██████╔╝██║   ██║ ╚████╔╝ 
+# ██║  ██║██╔══╝  ██║     ██╔══╝     ██║   ██╔══╝      ██║  ██║██╔══╝  ╚════██║   ██║   ██╔══██╗██║   ██║  ╚██╔╝  
+# ██████╔╝███████╗███████╗███████╗   ██║   ███████╗    ██████╔╝███████╗███████║   ██║   ██║  ██║╚██████╔╝   ██║   
+# ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝    ╚═════╝ ╚══════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝    ╚═╝  
 // Remove the specified resource from storage
 // Used in the index page and trashAll action to soft delete multiple records
 ##################################################################################################################
-   public function destroy($id)
+   public function deleteDestroy($id)
    {
       // Check if user has required permission
       if($this->enablePermissions) {
          if(!checkPerm('article_delete')) { abort(401, 'Unauthorized Access'); }
       }
 
-      $article = Article::findOrFail($id);
-         $article->published_at = Null;
-            // Delete related favorites
-            $favorites = DB::select('select * from article_user where article_id = '. $id, [1]);
-               foreach($favorites as $favorite) {
-                  $article->favorites()->detach($favorite);
-               }
-         $article->save();
-      $article->delete();
+      $article = Article::withTrashed()->findOrFail($id);
 
-      Session::flash('success','The article was trashed successfully.');
-      return redirect(Route( Session::get('backURL')));
+      // Delete the associated image if any
+      File::delete('_articles/' . $article->image);
+
+      $article->forceDelete();
+
+      Session::flash('success', 'The article was successfully deleted!');
+      return redirect()->route('admin.articles.trashed');
    }
+
+
+// ##################################################################################################################
+// # ██████╗ ███████╗███████╗████████╗██████╗  ██████╗ ██╗   ██╗
+// # ██╔══██╗██╔════╝██╔════╝╚══██╔══╝██╔══██╗██╔═══██╗╚██╗ ██╔╝
+// # ██║  ██║█████╗  ███████╗   ██║   ██████╔╝██║   ██║ ╚████╔╝ 
+// # ██║  ██║██╔══╝  ╚════██║   ██║   ██╔══██╗██║   ██║  ╚██╔╝  
+// # ██████╔╝███████╗███████║   ██║   ██║  ██║╚██████╔╝   ██║   
+// # ╚═════╝ ╚══════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝    ╚═╝   
+// // Remove the specified resource from storage
+// // Used in the index page and trashAll action to soft delete multiple records
+// ##################################################################################################################
+//     public function destroy(Article $article)
+//     {
+//         // Check if user has required permission
+//         if($this->enablePermissions)
+//         {
+//             if(!checkPerm('article_delete')) { abort(401, 'Unauthorized Access'); }
+//         }
+
+//         $article->delete();
+
+//         // Set flash data with success message
+//         Session::flash('delete','The article was deleted successfully.');
+//         // Redirect
+//         return redirect()->route('admin.articles.index');
+//     }
+
+
+// ##################################################################################################################
+// # ██████╗ ███████╗██╗     ███████╗████████╗███████╗
+// # ██╔══██╗██╔════╝██║     ██╔════╝╚══██╔══╝██╔════╝
+// # ██║  ██║█████╗  ██║     █████╗     ██║   █████╗  
+// # ██║  ██║██╔══╝  ██║     ██╔══╝     ██║   ██╔══╝  
+// # ██████╔╝███████╗███████╗███████╗   ██║   ███████╗
+// # ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝
+// // Mass Delete selected rows - all selected records
+// ##################################################################################################################
+//     public function delete(Article $article)
+//     {
+//         // Check if user has required permission
+//         if($this->enablePermissions)
+//         {
+//             if(!checkPerm('article_delete')) { abort(401, 'Unauthorized Access'); }
+//         }
+
+//         return view('admin.articles.delete', compact('article'));
+//     }
 
 
 ##################################################################################################################
@@ -102,17 +159,18 @@ class ArticlesController extends Controller
 # ╚══════╝╚═════╝ ╚═╝   ╚═╝   
 // Show the form for editing the specified resource
 ##################################################################################################################
-   public function edit(Article $article, $id)
-   {
-      // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('article_edit')) { abort(401, 'Unauthorized Access'); }
-      }
+    public function edit(Article $article, $id)
+    {
+        // Check if user has required permission
+        if($this->enablePermissions)
+        {
+            if(!checkPerm('article_edit')) { abort(401, 'Unauthorized Access'); }
+        }
 
-      // Find the article to edit
-      $article = Article::find($id);
-      return view('admin.articles.edit', compact('article'));
-   }
+        // Find the model to edit
+        $article = Article::find($id);
+        return view('admin.articles.edit', compact('article'));
+    }
 
 
 ##################################################################################################################
@@ -152,12 +210,12 @@ class ArticlesController extends Controller
             ->where('title', 'like', $key . '%')
             ->orderBy('title', 'asc')
             ->get();
-         return view('admin.articles.index', compact('articles','letters', 'articlelinks'));
+         return view('admin.articles.index', compact('articles','letters', 'archivesLinks'));
       }
 
       // No $key value is passed
       $articles = Article::with('user')->published()->get();
-      return view('admin.articles.index', compact('articles','letters', 'articlelinks'));
+      return view('admin.articles.index', compact('articles','letters', 'archivesLinks'));
    }
 
 
@@ -170,23 +228,24 @@ class ArticlesController extends Controller
 # ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝ 
 // Display the specified resource
 ##################################################################################################################
-   public function show($id)
-   {
-      // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('article_read')) { abort(401, 'Unauthorized Access'); }
-      }
+    public function show($id)
+    {
+        // Check if user has required permission
+        if($this->enablePermissions)
+        {
+            if(!checkPerm('article_show')) { abort(401, 'Unauthorized Access'); }
+        }
 
-      $article = Article::findOrFail($id);
+        $article = Article::findOrFail($id);
 
-      // get previous article id
-      $previous = Article::published()->where('id', '<', $article->id)->max('id');
+        // get previous article id
+        $previous = Article::published()->where('id', '<', $article->id)->max('id');
 
-      // get next article id
-      $next = Article::published()->where('id', '>', $article->id)->min('id');
+        // get next article id
+        $next = Article::published()->where('id', '>', $article->id)->min('id');
 
-      return view('admin.articles.show', compact('article','articlelinks','next','previous'));
-   }
+        return view('admin.articles.show', compact('article','articlelinks','next','previous'));
+    }
 
 
 ##################################################################################################################
@@ -248,13 +307,10 @@ class ArticlesController extends Controller
     private function validateRequest()
     {
         return request()->validate([
-            'title' => 'required',
-            'category' => 'required|min:0|not_in:0',
-            'published_at' => '',
-            'description_eng' => 'required',
-            'description_fre' => '',
+            'name' => 'required',
+            'email' => 'required',
+            'status' => 'required',
         ]);
     }
-
 
 }

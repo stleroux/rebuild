@@ -8,7 +8,7 @@
 @endsection
 
 @section('right_column')
-   {{-- @include('articles.sidebar') --}}
+   @include('articles.blocks.popular')
    @include('articles.blocks.archives')
 @endsection
 
@@ -19,7 +19,7 @@
 
          <div class="card mb-3">
             <div class="card-header section_header p-2">
-               <i class="fa fa-file-text-o"></i>
+               <i class="{{ Config::get('buttons.articles') }}"></i>
                My Favorite Articles
                <span class="float-right">
                   <div class="btn-group">
@@ -33,7 +33,6 @@
                   <table id="datatable" class="table table-hover table-sm searchHighlight">
                      <thead>
                         <tr>
-                           {{-- <th><input type="checkbox" id="selectall" class="checked" /></th> --}}
                            {{-- Add columns for search purposes only --}}
                            <th class="d-none">English</th>
                            <th class="d-none">French</th>
@@ -51,7 +50,6 @@
                      <tbody>
                         @foreach ($articles as $key => $article)
                            <tr>
-                              {{-- <td><input type="checkbox" onClick="checkbox_is_checked()" name="checked[]" value="{{$article->id}}" class="check-all"></td> --}}
                               {{-- Hide columns at all levels. Only needed because Datatables only searches for columns in the table --}}
                               <td class="d-none">{{ $article->description_eng }}</td>
                               <td class="d-none">{{ $article->description_fre }}</td>
@@ -63,11 +61,18 @@
                               <td class="">@include('common.authorFormat', ['model'=>$article, 'field'=>'user'])</td>
                               <td class="">@include('common.dateFormat', ['model'=>$article, 'field'=>'created_at'])</td>
                               <td class=" 
-                                 {{ $article->published_at >= Carbon\Carbon::now() ? 'text text-warning' : '' }}
+                                 {{ $article->published_at <= Carbon\Carbon::now() ? 'text text-warning' : '' }}
                                  {{ $article->published_at == null ? 'text text-info' : '' }}">
-                                 @include('common.dateFormat', ['model'=>$article, 'field'=>'published_at'])
+                                 {{-- @include('common.dateFormat', ['model'=>$article, 'field'=>'published_at']) --}}
+                                 {{ $article->published_at }}
                               </td>
-                              <td>@include('articles.buttons.favorite', ['size'=>'xs'])</td>
+                              <td>
+                                 <div class="float-right">
+                                    <div class="btn-group">
+                                       @include('articles.buttons.favorite', ['size'=>'xs'])
+                                    </div>
+                                 </div>
+                              </td>
                            </tr>
                         @endforeach
                      </tbody>

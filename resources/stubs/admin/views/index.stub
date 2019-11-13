@@ -52,14 +52,14 @@
                <thead>
                   <tr>
                      <th><input type="checkbox" id="selectall" class="checked" /></th>
-                     <th>Name</th>
-                     <th>Email</th>
-                     <th>Status</th>
+                     <th>Title</th>
+                     <th>Category</th>
                      <th>Views</th>
+                     <th>Author</th>
                      <!-- Add columns below for search purposes only -->
                      <!-- Add columns above for search purposes only -->
                      <th>Created</th>
-                     <th class="">Publish(ed) On</th>
+                     <th class="">Published</th>
                      <th data-orderable="false"></th>
                   </tr>
                </thead>
@@ -67,16 +67,14 @@
                   @foreach (${{modelNamePluralLowerCase}} as ${{modelNameSingularLowerCase}})
                      <tr>
                         <td><input type="checkbox" onClick="checkbox_is_checked()" name="checked[]" value="{{${{modelNameSingularLowerCase}}->id}}" class="check-all"></td>
-                        <td><a href="{{ route('admin.{{modelNamePluralLowerCase}}.show', ${{modelNameSingularLowerCase}}->id) }}">{{ ${{modelNameSingularLowerCase}}->name }}</a></td>
-                        <td>{{ ${{modelNameSingularLowerCase}}->email }}</td>
-                        <td>{{ ${{modelNameSingularLowerCase}}->status }}</td>
+                        <td><a href="{{ route('admin.{{modelNamePluralLowerCase}}.show', ${{modelNameSingularLowerCase}}->id) }}">{{ ${{modelNameSingularLowerCase}}->title }}</a></td>
+                        <td>{{ ${{modelNameSingularLowerCase}}->category }}</td>
                         <td>{{ ${{modelNameSingularLowerCase}}->views }}</td>
+                        <td>@include('common.authorFormat', ['model'=>${{modelNameSingularLowerCase}}, 'field'=>'user'])</td>
                         <!-- Add columns below for search purposes only -->
                         <!-- Add columns above for search purposes only -->
-                        <td data-order="{{${{modelNameSingularLowerCase}}->created_at}}">{{${{modelNameSingularLowerCase}}->created_at}}</td>
-                        <td class="{{ ${{modelNameSingularLowerCase}}->published_at >= Carbon\Carbon::now() ? 'font-italic text text-info' : '' }}">
-                           @include('common.dateFormat', ['model'=>${{modelNameSingularLowerCase}}, 'field'=>'published_at'])
-                        </td>
+                        <td data-order="{{ ${{modelNameSingularLowerCase}}->created_at }}">{{ ${{modelNameSingularLowerCase}}->created_at }}</td>
+                        <td data-order="{{ ${{modelNameSingularLowerCase}}->published_at }}">{{ ${{modelNameSingularLowerCase}}->published_at }}</td>
                         <td>
                            <div class="float-right">
                               <div class="btn-group">

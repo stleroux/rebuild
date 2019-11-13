@@ -1,14 +1,14 @@
-@if(checkPerm('article_edit'))
+@if(checkPerm('article_edit', $article))
    @if(!$article->published_at)
       <a href="{{ route('admin.articles.publish', $article->id) }}"
-         class="btn btn-{{ $size }} btn-primary text-light"
-         title="Publish Article">
+         class="btn {{ $size ? 'btn-'.$size : '' }} btn-primary text-light"
+         title="Publish {$name}">
          <i class="{{ Config::get('buttons.publish') }} text-success"></i>
       </a>
    @else
       <a href="{{ route('admin.articles.unpublish', $article->id) }}"
-         class="btn btn-{{ $size }} btn-primary text-light"
-         title="Unpublish Article">
+         class="btn {{ $size ? 'btn-'.$size : '' }} btn-primary text-light"
+         title="Unpublish {$name}">
          <i class="{{ Config::get('buttons.publish') }} text-danger"></i>
       </a>
    @endif

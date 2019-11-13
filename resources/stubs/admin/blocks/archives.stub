@@ -1,6 +1,6 @@
 <div class="card mb-3 p-0 m-0">
    <div class="card-header block_header p-2 m-0">
-      <i class="fa fa-file-text-o" aria-hidden="true"></i>
+      <i class="{{ Config::get('buttons.archives') }}"></i>
       {{modelName}} Archives
    </div>
    <div class="card-body card_body p-0">
@@ -9,6 +9,7 @@
             @foreach($archivesLinks as $alink)
                <a href="{{ route('admin.{{modelNamePluralLowerCase}}.archives', ['year'=>$alink->year, 'month'=>$alink->month]) }}"
                   class="list-group-item list-group-item-action p-1">
+                  <i class="{{ Config::get('buttons.archive') }}"></i>
                   {{ $alink->month_name }} - {{ $alink->year }}
                   <span class="badge badge-secondary float-right">
                      {{ $alink->archivesLinks_count }}

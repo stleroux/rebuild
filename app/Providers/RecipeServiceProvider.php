@@ -32,7 +32,7 @@ class RecipeServiceProvider extends ServiceProvider
 					->public()
 					->orderBy('views', 'desc')
 					->orderBy('title')            
-					->take(setting('homepage_favorite_recipe_count'))
+					->take(setting('homepage_popular_count'))
 					->get();
 			 $view->with('popular', $popular);
 		});

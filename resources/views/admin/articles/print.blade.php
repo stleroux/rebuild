@@ -1,46 +1,33 @@
 @extends ('common.layouts.print')
 
-@section ('title', 'Print article')
-
 @section ('stylesheets')
 	{{ Html::style('css/print.css') }}
-@stop
-
-{{-- @section('sectionSidebar')
-	@include('articles.frontend.sidebar')
-@stop --}}
-
-{{-- @section('breadcrumb')
-	<li><a href="/">Home</a></li>
-	<li class="active"><span>Articles</span></li>
-@stop --}}
+@endsection
 
 @section ('content')
 	<br />
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h3 class="panel-title">ARTICLE</h3>
-		</div>
-		<div class="panel-body">
+	<div class="card mb-3">
+		<div class="card-header section_header p-2">Articles</div>
+		<div class="card-body section_body p-2">
 			<div class="row">
 				<div class="col-xs-12 col-sm-8 col-md-9">
-					<div class="panel panel-default">
-						<div class="panel-heading">Title</div>
-						<div class="panel-body">{{ ucwords($article->title) }}</div>
+					<div class="card">
+						<div class="card-header">Title</div>
+						<div class="card-body">{{ ucwords($article->title) }}</div>
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-4 col-md-3">
-					<div class="panel panel-default">
-						<div class="panel-heading">Category</div>
-						<div class="panel-body">{!! $article->category->name !!}</div>
+					<div class="card mb-2">
+						<div class="card-header card_header p-2">Category</div>
+						<div class="card-body p-2">{!! $article->category->name !!}</div>
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-xs-12">
-					<div class="panel panel-default">
-						<div class="panel-heading">Description (En)</div>
-						<div class="panel-body">
+					<div class="card mb-2">
+						<div class="card-header card_header p-2">Description (En)</div>
+						<div class="card-body p-2">
 							@if($article->description_eng)
 								{!! $article->description_eng !!}
 							@else
@@ -52,9 +39,9 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-12">
-					<div class="panel panel-default">
-						<div class="panel-heading">Description (Fr)</div>
-						<div class="panel-body">
+					<div class="card mb-2">
+						<div class="card-header card_header p-2">Description (Fr)</div>
+						<div class="card-body p-2">
 							@if($article->description_fre)
 								{!! $article->description_fre !!}
 							@else
@@ -69,4 +56,4 @@
 			From the articles list at TheWoodBarn.ca
 		</div>
 	</div>
-@stop
+@endsection

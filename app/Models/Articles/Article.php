@@ -7,15 +7,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Auth;
 use Carbon\Carbon;
 use ChristianKuri\LaravelFavorite\Traits\Favoriteable;
+use App\Models\User;
 
 class Article extends Model
 {
-	use SoftDeletes;
+   use SoftDeletes;
    use Favoriteable;
 
    protected $guarded = [];
-   
-	protected $dates = ['deleted_at', 'published_at'];
+
+   protected $dates = [];
+
 
    // Set the default value for the status field to 0
    protected $attributes = [
@@ -30,101 +32,71 @@ class Article extends Model
    public function categoriesOptions()
    {
       return [
-         0 => 'Select One',
-         1 => 'Sites',
-         2 => 'General',
-         3 => 'Blog',
-         4 => 'Recipe',
-         5 => 'Project',
-         6 => 'Testing',
-         7 => 'Carving'
+         1 => 'Active',
+         0 => 'Inactive',
+         2 => 'In-Progress',
+         3 => 'Three',
+         4 => 'Four',
+         5 => 'Five',
+         6 => 'Six',
+         7 => 'Seven',
       ];
    }
-
-
 
 //////////////////////////////////////////////////////////////////////////////////////
 // RELATIONSHIPS
 //////////////////////////////////////////////////////////////////////////////////////
-   // public function parent() {
-   //    return $this->belongsTo(self::class, 'parent_id')->orderBy('name');
-   // }
-
-   // public function children() {
-   //    return $this->hasMany(self::class, 'parent_id')->orderBy('name');
-   // }
-
-	public function comments()
-	{
-		return $this->morphMany('\App\Models\Comment', 'commentable')->orderBy('id','desc');
-	}
-	
-	public function user()
-	{
-		return $this->belongsTo('App\Models\User');
-	}
-
-	// public function category()
-	// {
-	// 	return $this->belongsTo('App\Models\Category');
-	// }
-
-	// Used to display the Add/Remove links if item is in favorite list
-	// public function favorites()
-	// {
-	// 	return $this->belongsToMany('App\Models\User')->where('user_id','=',Auth::user()->id);
-	// }
+   public function comments()
+   {
+      return $this->morphMany('\App\Models\Comment', 'commentable')->orderBy('id','desc');
+   }
+   
+   public function user()
+   {
+      return $this->belongsTo('App\Models\User');
+   }
 
 //////////////////////////////////////////////////////////////////////////////////////
 // SCOPES
 //////////////////////////////////////////////////////////////////////////////////////
-	public function scopePublished($query)
-	{
-		return $query->where('published_at', '<', Carbon::now());
-	}
+public function scopePublished($query)
+   {
+      return $query
+         ->where('published_at', '<', Carbon::now())
+         ->where('deleted_at', NULL);
+   }
 
-	public function scopeMyArticles($query)
-	{
-		return $query->where('user_id', '=', Auth::user()->id)->orderBy('title','DESC');
-	}
+   public function scopeMyarticles($query)
+   {
+      return $query->where('user_id', '=', Auth::user()->id)->orderBy('title','DESC');
+   }
 
-	public function scopeUnpublished($query)
-	{
-		return $query->whereNull('published_at');
-	}
+   public function scopeUnpublished($query)
+   {
+      return $query->whereNull('published_at');
+   }
 
-	public function scopeFuture($query)
-	{
-		return $query->where('published_at', '>', Carbon::Now());
-	}
-	
-	public function scopeTrashed($query)
-	{
-		return $query->whereNotNull('deleted_at')->withTrashed();
-	}
+   public function scopeFuture($query)
+   {
+      return $query->where('published_at', '>', Carbon::Now());
+   }
+   
+   public function scopeTrashed($query)
+   {
+      return $query->whereNotNull('deleted_at')->withTrashed();
+   }
 
-	public function scopeTrashedCount($query)
-	{
-		return $query->whereNotNull('deleted_at')->withTrashed();
-	}
+   public function scopeTrashedCount($query)
+   {
+      return $query->whereNotNull('deleted_at')->withTrashed();
+   }
 
-   public function scopeNewArticles($query)
+   public function scopeNewarticles($query)
    {
       return $query
          ->where('created_at', '>=' , Auth::user()->previous_login_date)
          ->orderBy('title','DESC');
    }
-
-	// public function scopeMyFavorites($query)
-	// {
-	// 	return $query->whereHas('user', function($q) 
-	// 	{
-	// 		$q->where('user_id', '=', Auth::user()->id);
-	// 		dd($q);
-	// 	})->get();
-	// 	return $query->wherePivot('article_user', Auth::user()->id);
-	// }
-
 
 //////////////////////////////////////////////////////////////////////////////////////
 // ACCESSORS
@@ -150,6 +122,33 @@ class Article extends Model
       
       return 'N/A';
    }
+
+   public function getPublishedAtAttribute($date)
+   {
+      if($date){
+         $date = new \Carbon\Carbon($date);
+         $date = $date->format(setting('dateFormat'));
+         return $date;
+      }
+      
+      return 'N/A';
+   }
+
+   // public function getUserIdAttribute($id)
+   // {
+   //    $author = User::find($id);
+
+   //    if(setting('authorFormat') == 'username'){
+   //       return ucfirst($author->username);
+   //    }
+   //    if(setting('authorFormat') == 'last_name, first_name'){
+   //       return ucfirst($author->last_name) . ', ' . ucfirst($author->first_name);
+   //    }
+   //    if(setting('authorFormat') == 'first_name last_name'){
+   //       return ucfirst($author->first_name) . ' ' . ucfirst($author->last_name);
+   //    }
+   // }
+
 
 
 }

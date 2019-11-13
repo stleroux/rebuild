@@ -2,9 +2,12 @@
 
 return [
    'add'          => 'fa  fa-fw fa-plus-square',
+   'archive'      => 'far fa-fw fa-file-archive',
+   'archives'     => 'fa  fa-fw fa-archive',
    'back'         => 'fas fa-fw fa-angle-double-left',
    'edit'         => 'far fa-fw fa-edit',
    'delete'       => 'fas fa-fw fa-trash',
+   // 'dot'          => 'fas fa-fw fa-genderless',
    'favorite'     => 'fas fa-fw fa-heart',
    'favorites'    => 'fas fa-fw fa-heart',
    'finishes'     => 'fas fa-fw fa-brush',
@@ -15,13 +18,15 @@ return [
    'new'          => 'fas fa-fw fa-clipboard-list',
    'next'         => 'fas fa-fw fa-step-forward',
    'pdf'          => 'far fa-fw fa-file-pdf',
+   'permissions'  => 'fas fa-fw fa-user-shield',
+   // 'popular'      => 'fas fa-fw fa-chart-line',
+   'previous'     => 'fas fa-fw fa-step-backward',
    'print'        => 'fas fa-fw fa-print',
+   'private'      => 'fas fa-fw fa-lock',
    'projects'     => 'fas fa-fw fa-list-ol',
    'public'       => 'fas fa-fw fa-lock-open',
    'publish'      => 'far fa-fw fa-lightbulb',
    'published'    => 'far fa-fw fa-file-alt',
-   'previous'     => 'fas fa-fw fa-step-backward',
-   'private'      => 'fas fa-fw fa-lock',
    'recipes'      => 'fab fa-fw fa-apple',
    'reset'        => 'fas fa-fw fa-sync-alt',
    'restore'      => 'fas fa-fw fa-trash-restore-alt',
@@ -33,92 +38,12 @@ return [
    'unpublish'    => 'far fa-fw fa-lightbulb',
    'unpublished'  => 'fas fa-fw fa-ban',
    'update'       => 'fa  fa-fw fa-save',
-   'permissions'  => 'fas fa-fw fa-user-shield',
 
    /** CRUD Added **/
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	'articles' => 'fas fa-fw fa-random',
+
+	'articles' => 'fas fa-fw fa-address-card',
+
 	
 ];
 

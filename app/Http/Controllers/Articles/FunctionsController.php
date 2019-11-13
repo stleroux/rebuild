@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Articles;
 
-use App\Http\Controllers\Controller; // Required for validation
+use App\Http\Controllers\Controller; // Required for validation // use Illuminate\Routing\Controller;
+use App\Models\Articles\Article;
+
 use App\Http\Requests\CreateCommentRequest;
-// use App\Http\Requests\CreateRecipeRequest;
-// use App\Http\Requests\UpdateRecipeRequest;
-use App\Models\Category;
 use App\Models\Comment;
 use App\Models\User;
-use App\Models\Articles\Article;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;

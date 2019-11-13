@@ -1,6 +1,6 @@
 @if(checkPerm('article_edit'))
    <button
-      class="btn btn-{{ $size }} btn-primary text-light"
+      class="btn {{ $size ? 'btn-'.$size : '' }} btn-primary text-light"
       type="submit"
       formaction="{{ route('admin.articles.unpublishAll') }}"
       formmethod="POST"

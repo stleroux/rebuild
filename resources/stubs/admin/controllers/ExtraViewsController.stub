@@ -80,7 +80,7 @@ class ExtraViewsController extends {{modelNamePlural}}Controller
 
       //$alphas = range('A', 'Z');
       $alphas = DB::table('{{modelNamePluralLowerCase}}')
-         ->select(DB::raw('DISTINCT LEFT(name, 1) as letter'))
+         ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
          ->where('published_at','>', Carbon::Now())
          ->orderBy('letter')
          ->get();
@@ -93,8 +93,8 @@ class ExtraViewsController extends {{modelNamePlural}}Controller
       // If $key value is passed
       if ($key) {
          ${{modelNamePluralLowerCase}} = {{modelName}}::with('user')->future()
-            ->where('name', 'like', $key . '%')
-            ->orderBy('name', 'asc')
+            ->where('title', 'like', $key . '%')
+            ->orderBy('title', 'asc')
             ->get();
          return view('admin.{{modelNamePluralLowerCase}}.pages.future', compact('{{modelNamePluralLowerCase}}','letters'));
       }
@@ -126,7 +126,7 @@ class ExtraViewsController extends {{modelNamePlural}}Controller
 
       //$alphas = range('A', 'Z');
       $alphas = DB::table('{{modelNamePluralLowerCase}}')
-         ->select(DB::raw('DISTINCT LEFT(name, 1) as letter'))
+         ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
          ->where('user_id', '=', Auth::user()->id)
          ->where('deleted_at', '=', NULL)
          ->orderBy('letter')
@@ -140,7 +140,7 @@ class ExtraViewsController extends {{modelNamePlural}}Controller
       // If $key value is passed
       if ($key) {
          ${{modelNamePluralLowerCase}} = {{modelName}}::with('user')->my{{modelNamePlural}}()
-            ->where('name', 'like', $key . '%')
+            ->where('title', 'like', $key . '%')
             ->get();
          return view('admin.{{modelNamePluralLowerCase}}.pages.my{{modelNamePlural}}', compact('{{modelNamePluralLowerCase}}','letters'));
       }
@@ -171,7 +171,7 @@ class ExtraViewsController extends {{modelNamePlural}}Controller
 
       //$alphas = range('A', 'Z');
       $alphas = DB::table('{{modelNamePluralLowerCase}}')
-         ->select(DB::raw('DISTINCT LEFT(name, 1) as letter'))
+         ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
          ->where('created_at', '>=' , Auth::user()->previous_login_date)
          ->orderBy('letter')
          ->get();
@@ -184,7 +184,7 @@ class ExtraViewsController extends {{modelNamePlural}}Controller
       // If $key value is passed
       if ($key) {
          ${{modelNamePluralLowerCase}} = {{modelName}}::with('user')->new{{modelNamePlural}}()
-            ->where('name', 'like', $key . '%')
+            ->where('title', 'like', $key . '%')
             ->get();
          return view('admin.{{modelNamePluralLowerCase}}.pages.new{{modelNamePlural}}', compact('{{modelNamePluralLowerCase}}','letters'));
       }
@@ -230,7 +230,7 @@ class ExtraViewsController extends {{modelNamePlural}}Controller
 
       //$alphas = range('A', 'Z');
       $alphas = DB::table('{{modelNamePluralLowerCase}}')
-         ->select(DB::raw('DISTINCT LEFT(name, 1) as letter'))
+         ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
          ->where('published_at','<', Carbon::Now())
          ->where('deleted_at','=', Null)
          ->orderBy('letter')
@@ -244,8 +244,8 @@ class ExtraViewsController extends {{modelNamePlural}}Controller
       // If $key value is passed
       if ($key) {
          ${{modelNamePluralLowerCase}} = {{modelName}}::with('user')->published()
-            ->where('name', 'like', $key . '%')
-            ->orderBy('name', 'asc')
+            ->where('title', 'like', $key . '%')
+            ->orderBy('title', 'asc')
             ->get();
          return view('admin.{{modelNamePluralLowerCase}}.published', compact('{{modelNamePluralLowerCase}}','letters'));
       }
@@ -299,7 +299,7 @@ class ExtraViewsController extends {{modelNamePlural}}Controller
 
       //$alphas = range('A', 'Z');
       $alphas = DB::table('{{modelNamePluralLowerCase}}')
-         ->select(DB::raw('DISTINCT LEFT(name, 1) as letter'))
+         ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
          ->where('deleted_at','!=', Null)
          ->orderBy('letter')
          ->get();
@@ -336,7 +336,7 @@ class ExtraViewsController extends {{modelNamePlural}}Controller
 
       //$alphas = range('A', 'Z');
         $alphas = DB::table('{{modelNamePluralLowerCase}}')
-         ->select(DB::raw('DISTINCT LEFT(name, 1) as letter'))
+         ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
          ->where('published_at','=', null)
          ->where('deleted_at','=', null)
          ->orderBy('letter')
@@ -350,8 +350,8 @@ class ExtraViewsController extends {{modelNamePlural}}Controller
       // If $key value is passed
       if ($key) {
          ${{modelNamePluralLowerCase}} = {{modelName}}::with('user')->unpublished()
-            ->where('name', 'like', $key . '%')
-            ->orderBy('name', 'asc')
+            ->where('title', 'like', $key . '%')
+            ->orderBy('title', 'asc')
             ->get();
          return view('admin.{{modelNamePluralLowerCase}}.pages.unpublished', compact('{{modelNamePluralLowerCase}}','letters'));
       }

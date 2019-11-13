@@ -8,7 +8,6 @@ use App\Http\Controllers\Controller; // Required for validation
 use Illuminate\Support\Facades\Input;
 
 use App\Models\Articles\Article;
-use App\Models\Category;
 use App\Models\Comment;
 use App\Models\User;
 use Carbon\Carbon;
@@ -20,7 +19,7 @@ use Route;
 use Session;
 use URL;
 
-class FunctionsController extends Controller
+class FunctionsController extends ArticlesController
 {
 ##################################################################################################################
 #  ██████╗ ██████╗ ███╗   ██╗███████╗████████╗██████╗ ██╗   ██╗ ██████╗████████╗
@@ -57,7 +56,7 @@ class FunctionsController extends Controller
 
       $article->favorites()->sync([$user], false);
 
-      Session::flash ('success','The article was successfully added to your Favorites list');
+      Session::flash ('success','The article was successfully added to your favorites list');
       return redirect()->back();
    }
 
@@ -91,29 +90,29 @@ class FunctionsController extends Controller
    }
 
 
-##################################################################################################################
-# ██████╗ ███████╗██╗     ███████╗████████╗███████╗    ████████╗██████╗  █████╗ ███████╗██╗  ██╗███████╗██████╗ 
-# ██╔══██╗██╔════╝██║     ██╔════╝╚══██╔══╝██╔════╝    ╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██║  ██║██╔════╝██╔══██╗
-# ██║  ██║█████╗  ██║     █████╗     ██║   █████╗         ██║   ██████╔╝███████║███████╗███████║█████╗  ██║  ██║
-# ██║  ██║██╔══╝  ██║     ██╔══╝     ██║   ██╔══╝         ██║   ██╔══██╗██╔══██║╚════██║██╔══██║██╔══╝  ██║  ██║
-# ██████╔╝███████╗███████╗███████╗   ██║   ███████╗       ██║   ██║  ██║██║  ██║███████║██║  ██║███████╗██████╔╝
-# ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝       ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚═════╝ 
-// Remove the specified resource from storage - individual record
-##################################################################################################################
-   public static function deleteTrashed($id)
-   {
-      // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('article_delete')) { abort(401, 'Unauthorized Access'); }
-      }
+// ##################################################################################################################
+// # ██████╗ ███████╗██╗     ███████╗████████╗███████╗    ████████╗██████╗  █████╗ ███████╗██╗  ██╗███████╗██████╗ 
+// # ██╔══██╗██╔════╝██║     ██╔════╝╚══██╔══╝██╔════╝    ╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██║  ██║██╔════╝██╔══██╗
+// # ██║  ██║█████╗  ██║     █████╗     ██║   █████╗         ██║   ██████╔╝███████║███████╗███████║█████╗  ██║  ██║
+// # ██║  ██║██╔══╝  ██║     ██╔══╝     ██║   ██╔══╝         ██║   ██╔══██╗██╔══██║╚════██║██╔══██║██╔══╝  ██║  ██║
+// # ██████╔╝███████╗███████╗███████╗   ██║   ███████╗       ██║   ██║  ██║██║  ██║███████║██║  ██║███████╗██████╔╝
+// # ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝       ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚═════╝ 
+// // Remove the specified resource from storage - individual record
+// ##################################################################################################################
+//    public static function deleteTrashed($id)
+//    {
+//       // Check if user has required permission
+//       if($this->enablePermissions) {
+//          if(!checkPerm('article_delete')) { abort(401, 'Unauthorized Access'); }
+//       }
 
-      $article = Article::withTrashed()->findorFail($id);
+//       $article = Article::withTrashed()->findorFail($id);
 
-      $article->forceDelete();
+//       $article->forceDelete();
 
-      Session::flash ('success','The article was deleted successfully');
-      return redirect()->route('admin.articles.trashed');
-   }
+//       Session::flash ('success','The article was deleted successfully');
+//       return redirect()->route('admin.articles.trashed');
+//    }
 
 
 ##################################################################################################################
@@ -155,11 +154,6 @@ class FunctionsController extends Controller
 ##################################################################################################################
    public function makeprivate($id)
    {
-      // Check if user has required permission
-      // if($this->enablePermissions) {
-      //    if(!checkPerm('article_browse')) { abort(401, 'Unauthorized Access'); }
-      // }
-
       $article = Article::find($id);
          $article->personal = 1;
       $article->save();
@@ -247,7 +241,7 @@ class FunctionsController extends Controller
 
       $article->favorites()->detach($user);
 
-      Session::flash ('success','The article was successfully removed to your Favorites list');
+      Session::flash ('success','The article was successfully removed to your favorites list');
       return redirect()->back();
    }
 
@@ -379,6 +373,27 @@ class FunctionsController extends Controller
 
 
 ##################################################################################################################
+# ████████╗██████╗  █████╗ ███████╗██╗  ██╗
+# ╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██║  ██║
+#    ██║   ██████╔╝███████║███████╗███████║
+#    ██║   ██╔══██╗██╔══██║╚════██║██╔══██║
+#    ██║   ██║  ██║██║  ██║███████║██║  ██║
+#    ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
+##################################################################################################################
+   public function trash($id)
+   {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_trash')) { abort(401, 'Unauthorized Access'); }
+      }
+
+      $article = Article::findOrFail($id);
+
+      return view('admin.articles.trash', compact('article'));
+   }
+
+
+##################################################################################################################
 # ████████╗██████╗  █████╗ ███████╗██╗  ██╗     █████╗ ██╗     ██╗     
 # ╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██║  ██║    ██╔══██╗██║     ██║     
 #    ██║   ██████╔╝███████║███████╗███████║    ███████║██║     ██║     
@@ -401,8 +416,8 @@ class FunctionsController extends Controller
 
       $checked = $request->input('checked');
 
-      foreach($checked as $article) {
-         $article = Article::findOrFail($article);
+      foreach($checked as $item) {
+         $article = Article::findOrFail($item);
          $article->published_at = Null;
          $article->save();
       }
@@ -411,6 +426,36 @@ class FunctionsController extends Controller
 
       Session::flash('success','The selected articles were trashed successfully');
       return redirect()->back();
+   }
+
+
+##################################################################################################################
+# ████████╗██████╗  █████╗ ███████╗██╗  ██╗    ██████╗ ███████╗███████╗████████╗██████╗  ██████╗ ██╗   ██╗
+# ╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██║  ██║    ██╔══██╗██╔════╝██╔════╝╚══██╔══╝██╔══██╗██╔═══██╗╚██╗ ██╔╝
+#    ██║   ██████╔╝███████║███████╗███████║    ██║  ██║█████╗  ███████╗   ██║   ██████╔╝██║   ██║ ╚████╔╝ 
+#    ██║   ██╔══██╗██╔══██║╚════██║██╔══██║    ██║  ██║██╔══╝  ╚════██║   ██║   ██╔══██╗██║   ██║  ╚██╔╝  
+#    ██║   ██║  ██║██║  ██║███████║██║  ██║    ██████╔╝███████╗███████║   ██║   ██║  ██║╚██████╔╝   ██║   
+#    ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝    ╚═════╝ ╚══════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝    ╚═╝   
+// Remove the specified resource from storage
+// Used in the index page and trashAll action to soft delete multiple records
+##################################################################################################################
+   public function trashDestroy($id)
+   {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('article_delete')) { abort(401, 'Unauthorized Access'); }
+      }
+
+      $article = Article::find($id);
+
+      // Delete this recipe's favorites
+      DB::table('favorites')->where('favoriteable_id', '=', $id)->delete();
+      // Delete the recipe
+      $article->delete();
+
+      Session::flash('success', 'The article was successfully trashed!');
+      return redirect(Session::get('fromPage'));
+      // return redirect()->back();
    }
 
 
@@ -424,18 +469,14 @@ class FunctionsController extends Controller
 ##################################################################################################################
    public function unpublish($id)
    {
+      $article = Article::find($id);
+
       // Check if user has required permission
       if($this->enablePermissions) {
          if(!checkPerm('article_edit')) { abort(401, 'Unauthorized Access'); }
       }
 
-      $article = Article::find($id);
          $article->published_at = NULL;
-         // $favorites = DB::select('select * from article_user where article_id = '. $id, [1]);
-
-         // foreach($favorites as $favorite) {
-         //    $article->favorites()->detach($favorite);
-         // }
          DB::table('favorites')->where('favoriteable_id', '=', $article->id)->delete();
       $article->save();
 
@@ -469,16 +510,8 @@ class FunctionsController extends Controller
          $article = Article::withTrashed()->find($item);
             $article->published_at = Null;
             DB::table('favorites')->where('favoriteable_id', '=', $article->id)->delete();
-
-            // Delete related favorites
-            // $favorites = DB::select('select * from article_user where article_id = '. $article->id, [1]);
-            //    foreach($favorites as $favorite) {
-            //       $article->favorites()->detach($favorite);
-            //    }
-
          $article->save();
       }
-      
 
       Session::flash('success','The selected articles were unpublished successfully and all related favorites have been removed');
       return redirect()->back();

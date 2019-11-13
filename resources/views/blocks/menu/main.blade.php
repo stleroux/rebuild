@@ -1,6 +1,7 @@
 <div class="card mb-3 p-0 m-0">
 
    <div class="card-header block_header p-2 m-0">
+      <i class="fas fa-bars"></i>
       Main Menu
    </div>
 

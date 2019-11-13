@@ -2,24 +2,17 @@
 
 namespace App\Http\Controllers\Articles;
 
+// use App\Http\Requests\ArticleRequest;
 use App\Http\Controllers\Controller; // Required for validation // use Illuminate\Routing\Controller;
 use App\Models\Articles\Article;
-// use App\Models\Tag;
-use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Auth;
 use Carbon\Carbon;
 use DB;
-// use File;
-// use Image;
-// use Log;
-// use Purifier;
 use Route;
 use Session;
-// use Storage;
-// use URL;
 
 class ExtraViewsController extends ArticlesController
 {
@@ -47,7 +40,7 @@ class ExtraViewsController extends ArticlesController
 # ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝  ╚══════╝
 # Display the archived resources
 ##################################################################################################################
-   public function archive($year, $month)
+   public function archives($year, $month)
    {
       // Check if user has required permission
       if($this->enablePermissions) {
@@ -62,7 +55,7 @@ class ExtraViewsController extends ArticlesController
          ->where('published_at', '<=', Carbon::now())
          ->get();
 
-      return view('articles.archive', compact('archives','articlelinks'))->withYear($year)->withMonth($month);
+      return view('articles.archives', compact('archives','archivesLinks'))->withYear($year)->withMonth($month);
    }
 
 
@@ -81,6 +74,9 @@ class ExtraViewsController extends ArticlesController
       if($this->enablePermissions) {
          if(!checkPerm('article_browse')) { abort(401, 'Unauthorized Access'); }
       }
+
+      // Set the session to the current page route
+      Session::put('fromPage', url()->full());
 
       if(Auth::check()) {
          $user = Auth::user();

@@ -9,12 +9,6 @@
 
 @section('right_column')
    @include('blocks.popularItems')
-{{--    @include('projects.blocks.popular')
-   @include('blog.blocks.popular')
-   @include('recipes.blocks.popular')
-   @include('articles.blocks.popular')
-   @include('tests.blocks.popular') --}}
-   @include('homepage.blocks')
 @endsection
 
 @section('content')

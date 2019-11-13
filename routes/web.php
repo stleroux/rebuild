@@ -21,6 +21,10 @@ Route::get('/privacy', 'SiteController@privacy')->name('privacy');
 Route::view('/help', 'help.index');
 Route::view('/template', 'template');
 
+Route::prefix('admin/')->name('admin.')->group(function() {
+   Route::get('dashboard', 'Admin\DashboardController@dashboard')->name('dashboard');
+});
+
 foreach (File::allFiles(__DIR__ . '/routes') as $route_file) {
   require $route_file->getPathname();
 }

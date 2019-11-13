@@ -14,7 +14,7 @@ use DB;
 use Route;
 use Session;
 
-class ExtraViewsController extends Controller
+class ExtraViewsController extends ArticlesController
 {
 ##################################################################################################################
 #  ██████╗ ██████╗ ███╗   ██╗███████╗████████╗██████╗ ██╗   ██╗ ██████╗████████╗
@@ -40,19 +40,22 @@ class ExtraViewsController extends Controller
 # ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝  ╚══════╝
 # Display the archived resources
 ##################################################################################################################
-   public function archive($year, $month)
+   public function archives($year, $month)
    {
       // Check if user has required permission
       if($this->enablePermissions) {
          if(!checkPerm('article_read')) { abort(401, 'Unauthorized Access'); }
       }
 
+      // Set the session to the current page route
+      Session::put('fromPage', url()->full());
+
       $archives = Article::with('user')->whereYear('created_at','=', $year)
          ->whereMonth('created_at','=', $month)
          ->where('published_at', '<=', Carbon::now())
          ->get();
 
-      return view('admin.articles.pages.archive', compact('archives','articlelinks'))->withYear($year)->withMonth($month);
+      return view('admin.articles.pages.archives', compact('archives','archivesLinks'))->withYear($year)->withMonth($month);
    }
 
 
@@ -103,12 +106,12 @@ class ExtraViewsController extends Controller
 
 
 ##################################################################################################################
-# ███╗   ███╗██╗   ██╗     █████╗ ██████╗ ████████╗██╗ ██████╗██╗     ███████╗███████╗
-# ████╗ ████║╚██╗ ██╔╝    ██╔══██╗██╔══██╗╚══██╔══╝██║██╔════╝██║     ██╔════╝██╔════╝
-# ██╔████╔██║ ╚████╔╝     ███████║██████╔╝   ██║   ██║██║     ██║     █████╗  ███████╗
-# ██║╚██╔╝██║  ╚██╔╝      ██╔══██║██╔══██╗   ██║   ██║██║     ██║     ██╔══╝  ╚════██║
-# ██║ ╚═╝ ██║   ██║       ██║  ██║██║  ██║   ██║   ██║╚██████╗███████╗███████╗███████║
-# ╚═╝     ╚═╝   ╚═╝       ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝╚══════╝╚══════╝╚══════╝
+# ███╗   ███╗██╗   ██╗
+# ████╗ ████║╚██╗ ██╔╝
+# ██╔████╔██║ ╚████╔╝ 
+# ██║╚██╔╝██║  ╚██╔╝  
+# ██║ ╚═╝ ██║   ██║   
+# ╚═╝     ╚═╝   ╚═╝   
 // Display a listing of the resource that belong to a specific user.
 ##################################################################################################################
    public function myArticles(Request $request, $key=null)
@@ -148,12 +151,12 @@ class ExtraViewsController extends Controller
 
 
 ##################################################################################################################
-# ███╗   ██╗███████╗██╗    ██╗     █████╗ ██████╗ ████████╗██╗ ██████╗██╗     ███████╗███████╗
-# ████╗  ██║██╔════╝██║    ██║    ██╔══██╗██╔══██╗╚══██╔══╝██║██╔════╝██║     ██╔════╝██╔════╝
-# ██╔██╗ ██║█████╗  ██║ █╗ ██║    ███████║██████╔╝   ██║   ██║██║     ██║     █████╗  ███████╗
-# ██║╚██╗██║██╔══╝  ██║███╗██║    ██╔══██║██╔══██╗   ██║   ██║██║     ██║     ██╔══╝  ╚════██║
-# ██║ ╚████║███████╗╚███╔███╔╝    ██║  ██║██║  ██║   ██║   ██║╚██████╗███████╗███████╗███████║
-# ╚═╝  ╚═══╝╚══════╝ ╚══╝╚══╝     ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝╚══════╝╚══════╝╚══════╝
+# ███╗   ██╗███████╗██╗    ██╗
+# ████╗  ██║██╔════╝██║    ██║
+# ██╔██╗ ██║█████╗  ██║ █╗ ██║
+# ██║╚██╗██║██╔══╝  ██║███╗██║
+# ██║ ╚████║███████╗╚███╔███╔╝
+# ╚═╝  ╚═══╝╚══════╝ ╚══╝╚══╝ 
 // Display a listing of the resource that were created since the user's last login.
 ##################################################################################################################
    public function newArticles(Request $request, $key=null)
@@ -186,75 +189,8 @@ class ExtraViewsController extends Controller
          return view('admin.articles.pages.newArticles', compact('articles','letters'));
       }
 
-      $articles = Article::with('user')->newarticles()->get();
+      $articles = Article::with('user')->newArticles()->get();
       return view('admin.articles.pages.newArticles', compact('articles','letters'));
-   }
-
-
-##################################################################################################################
-# ██████╗ ██████╗ ███████╗    ██╗   ██╗██╗███████╗██╗    ██╗
-# ██╔══██╗██╔══██╗██╔════╝    ██║   ██║██║██╔════╝██║    ██║
-# ██████╔╝██║  ██║█████╗      ██║   ██║██║█████╗  ██║ █╗ ██║
-# ██╔═══╝ ██║  ██║██╔══╝      ╚██╗ ██╔╝██║██╔══╝  ██║███╗██║
-# ██║     ██████╔╝██║          ╚████╔╝ ██║███████╗╚███╔███╔╝
-# ╚═╝     ╚═════╝ ╚═╝           ╚═══╝  ╚═╝╚══════╝ ╚══╝╚══╝ 
-// 
-##################################################################################################################
-   // public function exportPDF()
-   // {
-   //   // if(!checkACL('manager')) {
-   //   //   return view('errors.403');
-   //   // }
-
-   //   $data = Article::get()->toArray();
-   //   return Excel::create('Articles_List', function($excel) use ($data) {
-   //     $excel->sheet('mySheet', function($sheet) use ($data)
-   //     {
-   //       $sheet->fromArray($data);
-   //     });
-   //   })->download("pdf");
-   // }
-
-   // public function downloadPDF()
-   // {
-   //   $pdf = PDF::loadView('backend.articles.pdfView');
-   //   return $pdf->download('articles.pdf');
-   // }
-
-   public function pdfview(Request $request)
-   {
-      if(!checkACL('manager')) {
-         return view('errors.403');
-      }
-
-      if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'articles.newArticles') {
-            $data = Article::newArticles()->get();
-      }
-      if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'articles.published') {
-            $data = Article::published()->get();
-      }
-      if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'articles.myArticles') {
-            $data = Article::myArticles()->get();
-      }
-      if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'articles.unpublished') {
-            $data = Article::unpublished()->get();
-      }
-      if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'articles.future') {
-            $data = Article::future()->get();
-      }
-      if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'articles.trashed') {
-            $data = Article::trashedCount()->get();
-      }
-
-      view()->share('articles',$data);
-
-      if($request->has('download')){
-         $pdf = PDF::loadView('articles.pdfDownload');
-         //$pdf->setPaper('A4', 'landscape');
-         return $pdf->download('articles.pdf');
-      }
-
-      return view('articles.pdfPreview');
    }
 
 
@@ -270,7 +206,7 @@ class ExtraViewsController extends Controller
    {
       $article = Article::find($id);
 
-      return view('articles.print')->withArticle($article);
+      return view('admin.articles.print', compact('article'));
    }
 
 
@@ -288,6 +224,9 @@ class ExtraViewsController extends Controller
       if($this->enablePermissions) {
          if(!checkPerm('article_edit')) { abort(401, 'Unauthorized Access'); }
       }
+
+      // Set the session to the current page route
+      Session::put('fromPage', url()->full());
 
       //$alphas = range('A', 'Z');
       $alphas = DB::table('articles')
@@ -308,12 +247,12 @@ class ExtraViewsController extends Controller
             ->where('title', 'like', $key . '%')
             ->orderBy('title', 'asc')
             ->get();
-         return view('articles.published', compact('articles','letters'));
+         return view('admin.articles.published', compact('articles','letters'));
       }
 
       // No $key value is passed
       $articles = Article::with('user')->published()->get();
-      return view('articles.published', compact('articles','letters'));
+      return view('admin.articles.published', compact('articles','letters'));
    }
 
 
@@ -419,7 +358,7 @@ class ExtraViewsController extends Controller
 
       // No $key value is passed
       $articles = Article::with('user')->unpublished()->get();
-      return view('admin.articles.pages.unpublished', compact('articles','letters', 'backURL'));
+      return view('admin.articles.pages.unpublished', compact('articles','letters'));
    }
 
 

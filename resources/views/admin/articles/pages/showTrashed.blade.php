@@ -17,7 +17,7 @@
 	<div class="card mb-3">
 		<div class="card-header section_header p-2">
 			<span class="text-danger font-weight-bold">
-				Article Details
+				{{$name}} Details
 			</span>
 			<span class="float-right">
             <div class="btn-group">
@@ -30,14 +30,14 @@
 			<div class="row">
 				<div class="col-xs-8 col-sm-8 col-md-8">
 					<div class="form-group">
-						{!! Form::label('title', 'Title') !!}
-						{!! Form::text('title', $article->title, ['class'=>'form-control form-control-sm', 'readonly']) !!}
+						{!! Form::label('name', 'Name') !!}
+						{!! Form::text('name', $article->name, ['class'=>'form-control form-control-sm', 'readonly']) !!}
 					</div>
 				</div>
 				<div class="col-xs-4 col-sm-4 col-md-4">
 					<div class="form-group">
-						{{ Form::label('category_id', 'Category', ['class'=>'required']) }}
-						{{ Form::text('category_id', $article->category, ['class'=>'form-control form-control-sm', 'readonly']) }}
+						{{ Form::label('status', 'Status', ['class'=>'required']) }}
+						{{ Form::text('status', $article->status, ['class'=>'form-control form-control-sm', 'readonly']) }}
 					</div>
 				</div>
 			</div>
