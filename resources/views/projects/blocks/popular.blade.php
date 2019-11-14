@@ -7,7 +7,7 @@
       @if($popular->count() > 0)
          <ul class="list-group px-0 py-0">
             @foreach ($popular as $p)
-               <a class="list-group-item list-group-item-action p-1" href="{{ route('admin.projects.show', $p->id) }}" role="button" style="text-decoration: none">
+               <a class="list-group-item list-group-item-action p-1" href="{{ route('projects.show', $p->id) }}" role="button" style="text-decoration: none">
                   <div class="text text-left">
                      <i class="fab fa-fw fa-pagelines"></i>
                      {{ ucwords($p->name) }}
