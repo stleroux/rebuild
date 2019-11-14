@@ -102,7 +102,8 @@ class Invoice extends Model
    public function formInvoicedAtAttribute($date)
    {
        // return Carbon::parse($date)->format(setting('dateFormat'));
-       return Carbon::parse($date)->format('m/d/y');
+       // return Carbon::parse($date)->format('m/d/y');
+       return Carbon::parse($date)->format(setting('dateFormat'));
    }
 
    public function getInvoicedAtAttribute($date)
