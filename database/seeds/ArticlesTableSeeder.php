@@ -21,7 +21,6 @@ class ArticlesTableSeeder extends Seeder
             array (
                 'id' => 1,
                 'user_id' => 2,
-                'status' => 2,
                 'category' => 7,
                 'title' => 'Add new user to RM Admin list LIST',
                 'description_eng' => '<p>Do not send e-mail to Darcy Halverson.</p>
@@ -39,7 +38,6 @@ class ArticlesTableSeeder extends Seeder
             array (
                 'id' => 2,
                 'user_id' => 2,
-                'status' => 0,
                 'category' => 7,
                 'title' => 'Adding multiple trustees to multiple documents',
                 'description_eng' => '<p>You can assign the rights you need to your documents by doing the following:</p>
@@ -65,7 +63,6 @@ class ArticlesTableSeeder extends Seeder
             array (
                 'id' => 3,
                 'user_id' => 2,
-                'status' => 0,
                 'category' => 7,
                 'title' => 'Adding new Sector - Directorate or Branch',
                 'description_eng' => '<p>Region -&gt; MECTS_REGION<br /> Sector -&gt; Mects Sector<br /> Directorate -&gt; MECTS RC DG<br /> Branch -&gt; MECTS RC DIR</p>
@@ -97,7 +94,6 @@ class ArticlesTableSeeder extends Seeder
             array (
                 'id' => 4,
                 'user_id' => 2,
-                'status' => 0,
                 'category' => 7,
                 'title' => 'Disabled Items',
                 'description_eng' => '
@@ -114,7 +110,6 @@ class ArticlesTableSeeder extends Seeder
             array (
                 'id' => 5,
                 'user_id' => 1,
-                'status' => 2,
                 'category' => 7,
                 'title' => 'Unable to connect to EKME',
             'description_eng' => '<p>Can you try the following : -&gt; Click on the Start button -&gt; Go to All Programs -&gt; click on Open Text -&gt; Click on DM Connection Wizard Server Name : VSONKENEDOCS01 If there is nothing listed in the Server Name box -&gt; Enter the server name above in the Server Name box -&gt; Click Next -&gt; Click Finish If the server(s) is/are listed in the Previously Connected DM section -&gt; Select the server for your region -&gt; Click Next -&gt; Click Finish</p>',
@@ -129,7 +124,6 @@ class ArticlesTableSeeder extends Seeder
             array (
                 'id' => 6,
                 'user_id' => 2,
-                'status' => 2,
                 'category' => 7,
                 'title' => 'Error code 9007',
                 'description_eng' => '<p>Run connection wizard --------------------------------------------- Start All Programs Open Text DM Connection Wizard Click Next Click Finish Try a Repair on EKME --------------------------------------------- Start -&gt; Control Panel -&gt; Programs and Features -&gt; Open Text eDOCS DM Click on Repair button in toolbar at top of screen</p>',
@@ -144,7 +138,6 @@ class ArticlesTableSeeder extends Seeder
             array (
                 'id' => 7,
                 'user_id' => 1,
-                'status' => 0,
                 'category' => 7,
                 'title' => 'File recovery to SSC',
                 'description_eng' => '
@@ -165,7 +158,6 @@ class ArticlesTableSeeder extends Seeder
             array (
                 'id' => 8,
                 'user_id' => 2,
-                'status' => 5,
                 'category' => 7,
                 'title' => 'Group name change in EKME',
                 'description_eng' => '<p>If a user requests to have some group names and IDs changed in EKME -&gt; OK to change group ID as long has users are informed they will have to update their default profile exec [docsadm].[sp_Transfer_Access] \'old_group_system_id\',\'new_group_system_id\'; Make sure to disable the old groups after the scripts are ran</p>',
@@ -180,7 +172,6 @@ class ArticlesTableSeeder extends Seeder
             array (
                 'id' => 9,
                 'user_id' => 2,
-                'status' => 4,
                 'category' => 7,
                 'title' => 'Missing CCM Enterprise menu',
                 'description_eng' => '<p>Can you check the following?</p>
@@ -201,7 +192,6 @@ class ArticlesTableSeeder extends Seeder
             array (
                 'id' => 10,
                 'user_id' => 1,
-                'status' => 0,
                 'category' => 7,
                 'title' => 'Invalid security token',
                 'description_eng' => '
@@ -234,7 +224,6 @@ ccm eDocs Client
             array (
                 'id' => 11,
                 'user_id' => 2,
-                'status' => 0,
                 'category' => 7,
                 'title' => 'Missing folders in Explorer',
                 'description_eng' => '
@@ -259,7 +248,6 @@ Open Windows Explorer DM Extensions and see if the EKME folders now show up
             array (
                 'id' => 12,
                 'user_id' => 2,
-                'status' => 0,
                 'category' => 7,
                 'title' => 'Missing Save button',
                 'description_eng' => '
@@ -292,7 +280,6 @@ Open Windows Explorer DM Extensions and see if the EKME folders now show up
             array (
                 'id' => 13,
                 'user_id' => 2,
-                'status' => 0,
                 'category' => 7,
                 'title' => 'Missing search options',
                 'description_eng' => '
@@ -315,7 +302,6 @@ If DOCS_USERS, only EKME Search will show up
             array (
                 'id' => 14,
                 'user_id' => 2,
-                'status' => 0,
                 'category' => 7,
                 'title' => 'Modify registry settings - document limits',
                 'description_eng' => '
@@ -335,7 +321,6 @@ If DOCS_USERS, only EKME Search will show up
             array (
                 'id' => 15,
                 'user_id' => 2,
-                'status' => 0,
                 'category' => 7,
                 'title' => 'Move to disposed',
                 'description_eng' => 'Get FileCode values from provided spreadsheet
@@ -375,7 +360,6 @@ Once script is completed, send to Julien to run
         array (
             'id' => 16,
             'user_id' => 2,
-            'status' => 0,
             'category' => 7,
             'title' => 'No mail client installed',
             'description_eng' => '
@@ -396,7 +380,6 @@ Add a new string value MAPI = 1
         array (
             'id' => 18,
             'user_id' => 2,
-            'status' => 0,
             'category' => 3,
             'title' => 'Delete Windows user profile',
             'description_eng' => '
@@ -420,7 +403,6 @@ Add a new string value MAPI = 1
         array (
             'id' => 19,
             'user_id' => 2,
-            'status' => 0,
             'category' => 7,
             'title' => 'Excel rotating screen when opening a document from EKME',
             'description_eng' => '
@@ -440,7 +422,6 @@ Add a new string value MAPI = 1
         array (
             'id' => 20,
             'user_id' => 2,
-            'status' => 0,
             'category' => 1,
             'title' => 'User not in license role',
             'description_eng' => '
