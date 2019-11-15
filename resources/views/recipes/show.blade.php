@@ -10,7 +10,7 @@
 
 @section('right_column')
 	@include('recipes.blocks.sidebar')
-	@include('recipes.blocks.popularRecipes')
+	@include('recipes.blocks.popular')
 	@include('recipes.blocks.archives')
 	@include('recipes.show.leave_comment')
 @endsection
@@ -26,24 +26,24 @@
 					</div>
 					<div class="col-sm-12 col-md-6 col-lg-4 px-0">
 						<div class="text-center">
-							<div class="btn-group">
+							{{-- <div class="btn-group"> --}}
 								@if($byCatName)
-									@include('recipes.buttons.previous', ['size'=>'xs', $previous, $byCatName])
-									@include('recipes.buttons.next', ['size'=>'xs', $next, $byCatName])
+									@include('recipes.buttons.previous', ['size'=>'xs', 'btn_label'=>'Previous', $previous, $byCatName])
+									@include('recipes.buttons.next', ['size'=>'xs', 'btn_label'=>'Next', $next, $byCatName])
 								@else
-									@include('recipes.buttons.previousAll', ['size'=>'xs', $previous])
-									@include('recipes.buttons.nextAll', ['size'=>'xs', $next])
+									@include('recipes.buttons.previousAll', ['size'=>'xs', 'btn_label'=>'Previous', $previous])
+									@include('recipes.buttons.nextAll', ['size'=>'xs', 'btn_label'=>'Next', $next])
 								@endif
-							</div>
+							{{-- </div> --}}
 						</div>
 					</div>
 					<div class="col-sm-12 col-md-6 col-lg-4 px-0">
 						<div class="text-right">
 							<div class="btn-group">
-								@include('recipes.buttons.back', ['size'=>'xs'])
-								@include('recipes.buttons.print', ['size'=>'xs'])
-								@include('recipes.buttons.printPDF', ['size'=>'xs'])
-								@include('recipes.buttons.favorite', ['size'=>'xs'])
+								@include('recipes.buttons.back', ['size'=>'xs', 'btn_label'=>'Back'])
+								@include('recipes.buttons.print', ['size'=>'xs', 'btn_label'=>'Print'])
+								@include('recipes.buttons.printPDF', ['size'=>'xs', 'btn_label'=>'Print PDF'])
+								@include('recipes.buttons.favorite', ['size'=>'xs', 'btn_label'=>'Favorite'])
 							</div>
 						</div>
 					</div>

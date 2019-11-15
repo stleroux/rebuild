@@ -47,6 +47,7 @@ class DatabaseSeeder extends Seeder
         $this->call(InvoicerInvoicesTableSeeder::class);
         $this->call(InvoicerInvoiceItemsTableSeeder::class);
 
+        $this->call(PasswordResetsTableSeeder::class);
     }
 }
 

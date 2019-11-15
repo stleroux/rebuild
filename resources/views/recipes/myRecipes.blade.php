@@ -10,7 +10,7 @@
 
 @section('right_column')
    @include('recipes.blocks.sidebar')
-   @include('recipes.blocks.popularRecipes')
+   @include('recipes.blocks.popular')
    @include('recipes.blocks.archives')
 @endsection
 

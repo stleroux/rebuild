@@ -9,5 +9,6 @@
       title="Unpublish Selected"
       onclick="return confirm('Are you sure you want to unpublish these articles?')">
       <i class="{{ Config::get('buttons.unpublish') }} text-danger"></i>
+      {{ $btn_label ?? '' }}
    </button>
 @endif

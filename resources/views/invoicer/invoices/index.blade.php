@@ -84,10 +84,10 @@
 							@if(Request::is('invoicer/invoices'))
 								<th>@sortablelink('status','Status')</th>
 							@endif
-							<th>Created</th>
-							<th>Invoiced</th>
-							<th>Paid</th>
-							<th>@sortablelink('client.company_name','Company Name')</th>
+							<th>@sortablelink('created_at','Created')</th>
+							<th>@sortablelink('invoiced_at','Invoiced')</th>
+							<th>@sortablelink('paid_at','Paid')</th>
+							<th>@sortablelink('user.company_name','Company Name')</th>
 							<th class="text-right">@sortablelink('amount_charged','Charged')</th>
 							<th class="text-right">@sortablelink('total','Net Total')</th>
 							<th></th>

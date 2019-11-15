@@ -9,10 +9,4 @@
       <i class="{{ Config::get('buttons.delete') }}"></i>
       {{ $btn_label ?? '' }}
    </button>
-{{--    <a href="{{ route('admin.comments.destroy', $comment->id) }}"
-      class="btn {{ $size ? 'btn-'.$size : '' }} btn-danger text-light"
-      title="Delete Comment">
-      <i class="{{ Config::get('buttons.delete') }}"></i>
-      {{ $btn_label ?? '' }}
-   </a> --}}
 @endif

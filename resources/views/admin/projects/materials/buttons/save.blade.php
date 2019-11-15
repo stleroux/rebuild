@@ -1,10 +1,9 @@
 @if(checkPerm('project_add'))
    <button
-      class="btn btn-{{ $size }} btn-success text-light"
+      class="btn {{ $size ? 'btn-'.$size : '' }} btn-success text-light"
       type="submit"
-      {{-- formaction="{{ route($model.'s'.'.store') }}" --}}
-      {{-- formmethod="POST" --}}
-      title="Save Test">
+      title="Save Material">
       <i class="{{ Config::get('buttons.save') }}"></i>
+      {{ $btn_label ?? '' }}
    </button>
 @endif

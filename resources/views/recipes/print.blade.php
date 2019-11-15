@@ -14,7 +14,7 @@
 			<span class="h3">{{ ucwords($recipe->title) }}</span>
 			<span class="float-right">
 				<div class="btn-group">
-					@include('recipes.buttons.back', ['size'=>'xs'])
+					@include('recipes.buttons.printPrevious', ['size'=>'xs'])
 					@include('recipes.buttons.print2', ['size'=>'xs'])
 				</div>
 			</span>
@@ -47,13 +47,15 @@
 				<div class="col-xs-12 col-sm-8">
 					<div class="card mb-2">
 						<div class="card-header">Methodology</div>
-						<div class="card-body">{!! $recipe->methodology !!}</div>
+						<div class="card-body">
+							{!! $methodology = str_replace(array('<p>','</p>'),array('','<br />'),$recipe->methodology) !!}<br />
+						</div>
 					</div>
 					<div class="card" style="margin-bottom: 0px">
 						<div class="card-header">Notes</div>
 						<div class="card-body">
 							@if ($recipe->public_notes) 
-								{!! $recipe->public_notes !!}
+								{!! $public_notes = str_replace(array('<p>','</p>'),array('','<br />'),$recipe->public_notes) !!}<br />
 							@else
 								N/A
 							@endif

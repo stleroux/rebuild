@@ -1,6 +1,6 @@
 @if(checkPerm('recipe_edit'))
    <button
-      class="btn btn-{{ $size }} btn-primary border border-light text-warning"
+      class="btn {{ $size ? 'btn-'.$size : '' }} btn-primary border border-light text-warning"
       type="submit"
       formaction="{{ route('admin.recipes.unpublishAll') }}"
       formmethod="POST"
@@ -9,5 +9,6 @@
       style="display:none;"
       onclick="return confirm('Are you sure you want to unpublish these recipes?')">
       <i class="{{ Config::get('buttons.publish') }}"></i>
+      {{ $btn_label ?? '' }}
    </button>
 @endif

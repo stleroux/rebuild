@@ -1,10 +1,10 @@
 @if(checkPerm('user_add'))
    <button
-      class="btn btn-{{ $size }} btn-success"
+      class="btn {{ $size ? 'btn-'.$size : '' }} btn-success"
       type="submit"
-      {{-- formaction="{{ route($model.'s'.'.store') }}" --}}
       formmethod="POST"
       title="Save User">
-      <i class="fa fa-save"></i>
+      <i class="{{ Config::get('buttons.save') }}"></i>
+      {{ $btn_label ?? '' }}
    </button>
 @endif

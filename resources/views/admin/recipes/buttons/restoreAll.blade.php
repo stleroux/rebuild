@@ -1,6 +1,6 @@
 @if(checkPerm('recipe_delete'))
    <button
-      class="btn btn-{{ $size }} btn-primary text-light"
+      class="btn {{ $size ? 'btn-'.$size : '' }} btn-primary text-light"
       type="submit"
       formaction="{{ route('admin.recipes.restoreAll') }}"
       formmethod="POST"
@@ -9,5 +9,6 @@
       style="display:none;"
       onclick="return confirm('Are you sure you want to restore all these recipes?')">
       <i class="{{ Config::get('buttons.restore') }}"></i>
+      {{ $btn_label ?? '' }}
    </button>
 @endif

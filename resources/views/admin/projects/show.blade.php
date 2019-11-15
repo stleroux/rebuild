@@ -24,8 +24,8 @@
                {{ ucwords($project->name) }} Project Information
             </div>
             <div class="col-sm-4 text-center">
-               @include('admin.projects.buttons.previous', ['size'=>'xs'])
-               @include('admin.projects.buttons.next', ['size'=>'xs'])
+               @include('admin.projects.buttons.previous', ['size'=>'xs', 'btn_label'=>'Prev'])
+               @include('admin.projects.buttons.next', ['size'=>'xs', 'btn_label'=>'Next'])
             </div>
             <div class="col-sm-4 text text-right">
                <div class="btn-group">

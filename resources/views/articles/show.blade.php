@@ -17,11 +17,20 @@
    <div class="card mb-3">
 
       <div class="card-header section_header p-2">
-         <i class="fa fa-plus-square"></i>
-         Show Article
-         <div class="float-right">
-            <div class="btn-group">
-               @include('articles.buttons.back', ['size'=>'xs', 'btn_label'=>'Back'])
+         <div class="row d-flex justify-content-center">
+            <div class="col-sm-4 float-left">
+               {{ ucwords($article->title) }}
+            </div>
+            <div class="col-sm-4 text-center">
+               @include('articles.buttons.previous', ['size'=>'xs', 'btn_label'=>'Previous'])
+               @include('articles.buttons.next', ['size'=>'xs', 'btn_label'=>'Next'])
+            </div>
+            <div class="col-sm-4 text text-right">
+               <div class="float-right">
+                  <div class="btn-group">
+                     @include('articles.buttons.back', ['size'=>'xs', 'btn_label'=>'Back'])
+                  </div>
+               </div>
             </div>
          </div>
       </div>

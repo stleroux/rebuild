@@ -1,8 +1,9 @@
 @if($next)
    <a href="{{ route('recipes.show', [$next, $byCatName]) }}"
-      class="btn btn-{{$size}} btn-primary text-light"
+      class="btn {{ $size ? 'btn-'.$size : '' }} btn-primary text-light col-sm-4"
       title="Next Recipe">
-      View Next
+      {{-- Next --}}
+      {{ $btn_label ?? '' }}
       <i class="{{ Config::get('buttons.next') }}"></i>
    </a>
 @endif

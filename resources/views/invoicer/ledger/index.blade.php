@@ -67,12 +67,12 @@
 								<th>@sortablelink('invoiced_at','Invoiced Date')</th>
 							@endif
 							@if(Request::is('invoicer/ledger/paid'))
-								<th>@sortablelink('paidd_at','Paid Date')</th>
+								<th>@sortablelink('paid_at','Paid Date')</th>
 							@endif
 							@if(Request::is('invoicer/ledger'))
 								<th>@sortablelink('status','Status')</th>
 							@endif
-							<th>@sortablelink('client.company_name','Company Name')</th>
+							<th>@sortablelink('user.company_name','Company Name')</th>
 							<th class="text-right">@sortablelink('amount_charged','Charge')</th>
 							<th class="d-none d-md-table-cell text-right">@sortablelink('hst','HST')</th>
 							<th class="d-none d-lg-table-cell text-right" title="SubTotal">@sortablelink('sub_total','SUB')</th>

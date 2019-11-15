@@ -7,12 +7,14 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use ChristianKuri\LaravelFavorite\Traits\Favoriteability;
+use Kyslik\ColumnSortable\Sortable;
 
 class User extends Authenticatable
 {
    use Favoriteability;
    use Notifiable;
    use SoftDeletes;
+   use Sortable;
 
    protected $dates = ['last_login_date'];
     

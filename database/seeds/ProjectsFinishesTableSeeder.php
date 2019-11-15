@@ -21,15 +21,15 @@ class ProjectsFinishesTableSeeder extends Seeder
             array (
                 'id' => 1,
                 'name' => 'Polyurethane',
-                'type' => '',
-                'color_name' => '',
-                'color_code' => '',
+                'type' => NULL,
+                'color_name' => NULL,
+                'color_code' => NULL,
                 'sheen' => '1',
-                'manufacturer' => '',
-                'upc' => '',
-                'notes' => '',
+                'manufacturer' => NULL,
+                'upc' => NULL,
+                'notes' => NULL,
                 'created_at' => NULL,
-                'updated_at' => NULL,
+                'updated_at' => '2019-09-15 09:34:15',
             ),
             1 => 
             array (

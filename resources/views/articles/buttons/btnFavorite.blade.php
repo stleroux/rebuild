@@ -5,6 +5,7 @@
          title="Add Favorite">
          <i class="{{ Config::get('buttons.favorite') }} text-success"></i>
          Add Favorite
+         {{-- {{ $btn_label ?? '' }} --}}
       </a>
    @else
       <a href="{{ route('articles.favoriteRemove', $article->id) }}"
@@ -12,6 +13,7 @@
          title="Remove Favorite">
          <i class="{{ Config::get('buttons.favorite') }} text-danger"></i>
          Remove Favorite
+         {{-- {{ $btn_label ?? '' }} --}}
       </a>
    @endif
 @endauth

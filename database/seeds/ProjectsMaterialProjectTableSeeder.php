@@ -25,6 +25,14 @@ class ProjectsMaterialProjectTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
+            1 => 
+            array (
+                'id' => 12,
+                'project_id' => 21,
+                'material_id' => 1,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
         ));
         
         

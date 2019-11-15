@@ -4,5 +4,6 @@
       type="submit"
       title="Update {$name}">
       <i class="{{ Config::get('buttons.update') }}"></i>
+      {{ $btn_label ?? '' }}
    </button>
 @endif

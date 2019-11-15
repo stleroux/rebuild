@@ -108,7 +108,7 @@ class ClientsController extends Controller
 	  if(!checkPerm('invoicer_client_index')) { abort(401, 'Unauthorized Access'); }
 
 	  // $clients = User::where('invoicer_client', 1)->paginate(Config::get('settings.rowsPerPage'));
-	  $clients = User::where('company_name', '!=', '')->paginate(Config::get('settings.rowsPerPage'));
+	  $clients = User::sortable()->where('company_name', '!=', '')->paginate(Config::get('settings.rowsPerPage'));
 
 		return view('invoicer.clients.index', compact('clients'));
 	}

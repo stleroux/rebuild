@@ -1,8 +1,8 @@
 @if($next)
    <a href="{{ route('admin.recipes.show', $next) }}"
-      class="btn btn-{{$size}} btn-primary text-light col-sm-5"
+      class="btn {{ $size ? 'btn-'.$size : '' }}btn-primary text-light col-sm-5"
       title="Next Recipe">
-      View Next
+      {{ $btn_label ?? '' }}
       <i class="{{ Config::get('buttons.next') }}"></i>
    </a>
 @endif

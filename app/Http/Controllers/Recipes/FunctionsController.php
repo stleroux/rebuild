@@ -209,44 +209,21 @@ class FunctionsController extends RecipesController
 ##################################################################################################################
 ##################################################################################################################
    public function printPDF($id)
-    {
-      // // This  $data array will be passed to our PDF blade
-      // // $data = [
-      // //    'title' => 'First PDF for Medium',
-      // //    'heading' => 'Hello from 99Points.info',
-      // //    'content' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'        
-      // // ];
-      // $recipe = Recipe::findOrFail($id);
-      // // dd($recipe);
+   {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_print')) { abort(401, 'Unauthorized Access'); }
+      }
+      
+      $recipe = Recipe::findOrFail($id);
+      $recipedata = ['recipe'=>$recipe];
+      $pdf = PDF::loadView('recipes.printPDF', array('recipedata'=>$recipedata));
+      $pdf->setOptions(['isPhpEnabled' => true,'isRemoteEnabled' => true]);
+      $filename = $recipe->title . ".pdf";
 
-      // // Increase the view count since this is viewed from the frontend
-      // // DB::table('recipes')->where('id','=',$recipe->id)->increment('views',1);
-
-      // // $categories = Category::where('parent_id',1)->get();
-
-      // // return view('recipes.show', compact('recipe','categories'));
-        
-      // // $pdf = PDF::loadView('recipes.printPDF', $data);
-      // $pdf = PDF::loadView('recipes.printPDF', $recipe);
-      // // dd($pdf);
-      // return $pdf->download('medium.pdf');
-
-
-
-$recipe = Recipe::findOrFail($id);
-// dd($recipe);
-$recipedata = ['recipe'=>$recipe];
-$pdf = PDF::loadView('recipes.print', array('recipedata'=>$recipedata));
-$pdf->setOptions(['isPhpEnabled' => true,'isRemoteEnabled' => true]);
-$filename = "generatepdf.pdf";
-// Save file to the directory
-// $pdf->save('generatepdf/'.$filename);
-//Download Pdf
-return $pdf->download('generatepdf.pdf');
-// Or return to view pdf
-//return view('pdfview');
-
-    }
+      //Download Pdf
+      return $pdf->download($filename);
+   }
 
 
 

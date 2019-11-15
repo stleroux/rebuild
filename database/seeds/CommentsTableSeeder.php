@@ -118,17 +118,6 @@ class CommentsTableSeeder extends Seeder
             ),
             9 => 
             array (
-                'id' => 10,
-                'user_id' => 2,
-                'comment' => 'Best Qwerty project ever built',
-                'approved' => 0,
-                'commentable_type' => 'App\\Models\\Projects\\Project',
-                'commentable_id' => 10,
-                'created_at' => '2019-07-21 08:17:53',
-                'updated_at' => '2019-07-21 08:17:53',
-            ),
-            10 => 
-            array (
                 'id' => 11,
                 'user_id' => 2,
                 'comment' => 'fdsfdsfds',
@@ -138,7 +127,7 @@ class CommentsTableSeeder extends Seeder
                 'created_at' => '2019-07-21 09:17:19',
                 'updated_at' => '2019-07-21 09:17:19',
             ),
-            11 => 
+            10 => 
             array (
                 'id' => 12,
                 'user_id' => 2,
@@ -149,26 +138,7 @@ class CommentsTableSeeder extends Seeder
                 'created_at' => '2019-07-21 10:20:22',
                 'updated_at' => '2019-07-21 10:20:22',
             ),
-            12 => 
-            array (
-                'id' => 13,
-                'user_id' => 2,
-                'comment' => '1
-2
-3
-4
-5
-6
-7
-8
-9',
-                'approved' => 0,
-                'commentable_type' => 'App\\Models\\Projects\\Project',
-                'commentable_id' => 11,
-                'created_at' => '2019-07-24 06:14:16',
-                'updated_at' => '2019-07-24 06:14:16',
-            ),
-            13 => 
+            11 => 
             array (
                 'id' => 14,
                 'user_id' => 2,
@@ -178,6 +148,83 @@ class CommentsTableSeeder extends Seeder
                 'commentable_id' => 2,
                 'created_at' => '2019-07-30 21:56:27',
                 'updated_at' => '2019-07-30 21:56:27',
+            ),
+            12 => 
+            array (
+                'id' => 15,
+                'user_id' => 2,
+                'comment' => 'Best banana loaf around bar none',
+                'approved' => 0,
+                'commentable_type' => 'App\\Models\\Recipes\\Recipe',
+                'commentable_id' => 4,
+                'created_at' => '2019-08-13 15:26:40',
+                'updated_at' => '2019-09-27 05:40:56',
+            ),
+            13 => 
+            array (
+                'id' => 16,
+                'user_id' => 2,
+                'comment' => 'Comment number 2',
+                'approved' => 0,
+                'commentable_type' => 'App\\Models\\Projects\\Project',
+                'commentable_id' => 11,
+                'created_at' => '2019-08-14 12:03:13',
+                'updated_at' => '2019-08-14 12:03:13',
+            ),
+            14 => 
+            array (
+                'id' => 18,
+                'user_id' => 3,
+                'comment' => 'First comment from Stacie\'s account',
+                'approved' => 0,
+                'commentable_type' => 'App\\Models\\Recipes\\Recipe',
+                'commentable_id' => 10,
+                'created_at' => '2019-08-14 12:34:37',
+                'updated_at' => '2019-08-14 12:34:37',
+            ),
+            15 => 
+            array (
+                'id' => 19,
+                'user_id' => 3,
+                'comment' => 'Comment number 1 Comment number 1 Comment number 1 Comment number 1 Comment number 1 Comment number 1',
+                'approved' => 0,
+                'commentable_type' => 'App\\Models\\Projects\\Project',
+                'commentable_id' => 14,
+                'created_at' => '2019-08-14 13:28:33',
+                'updated_at' => '2019-08-14 13:28:33',
+            ),
+            16 => 
+            array (
+                'id' => 20,
+                'user_id' => 3,
+                'comment' => '<p>adding a new comment to this post to test and make sure it is working as expected on this day</p>',
+                'approved' => 0,
+                'commentable_type' => 'App\\Models\\Post',
+                'commentable_id' => 23,
+                'created_at' => '2019-08-14 13:29:31',
+                'updated_at' => '2019-08-14 13:29:31',
+            ),
+            17 => 
+            array (
+                'id' => 21,
+                'user_id' => 3,
+                'comment' => '<p>Second blog comment</p>',
+                'approved' => 0,
+                'commentable_type' => 'App\\Models\\Posts\\Post',
+                'commentable_id' => 2,
+                'created_at' => '2019-09-27 15:13:09',
+                'updated_at' => '2019-09-27 15:13:09',
+            ),
+            18 => 
+            array (
+                'id' => 22,
+                'user_id' => 3,
+                'comment' => 'ssasadsad',
+                'approved' => 0,
+                'commentable_type' => 'App\\Models\\Projects\\Project',
+                'commentable_id' => 20,
+                'created_at' => '2019-10-07 14:06:32',
+                'updated_at' => '2019-10-07 14:06:32',
             ),
         ));
         

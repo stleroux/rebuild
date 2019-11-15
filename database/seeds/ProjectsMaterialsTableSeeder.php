@@ -72,6 +72,17 @@ class ProjectsMaterialsTableSeeder extends Seeder
                 'created_at' => '2019-07-11 21:04:29',
                 'updated_at' => '2019-07-11 21:04:29',
             ),
+            5 => 
+            array (
+                'id' => 7,
+                'name' => '_test',
+                'type' => 'qqqq',
+                'notes' => ';ldkf d;lkfd;lkf d;lskf;dslkfd;l fkl;dsfk d;slkf',
+                'manufacturer' => 'wwww',
+                'UPC' => 'eeee',
+                'created_at' => '2019-10-08 19:32:07',
+                'updated_at' => '2019-10-08 19:32:07',
+            ),
         ));
         
         

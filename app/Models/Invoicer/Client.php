@@ -48,9 +48,9 @@ class Client extends Model
 		return $this->hasMany('App\Models\Invoicer\Invoice')->orderBy('id','desc');
 	}
 	
-	public function user() { 
-		return $this->belongsTo('App\Models\User');
-	}
+	// public function user() { 
+	// 	return $this->belongsTo('App\Models\User');
+	// }
 
 
 //////////////////////////////////////////////////////////////////////////////////////
