@@ -5,13 +5,10 @@
 @endsection
 
 @section('left_column')
-   {{-- @include('blocks.main_menu') --}}
 @endsection
 
 @section('right_column')
    @include('admin.posts.sidebar')
-   @include('blog.blocks.popularPosts')
-   @include('blog.blocks.archives')
 @endsection
 
 @section('content')
@@ -66,7 +63,7 @@
                                     @endif
                                  </td>
                                  <td>{{ $post->id }}</td>
-                                 <td>{{ $post->title }}</td>
+                                 <td><a href="{{ route('admin.posts.show', $post->id) }}">{{ $post->title }}</a></td>
                                  <td>{{ ucwords($post->category->name) }}</td>
                                  <td>{{ $post->views }}</td>
                                  <td>@include('common.authorFormat', ['model'=>$post, 'field'=>'user'])</td>

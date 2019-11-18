@@ -49,6 +49,53 @@ class ExtraViewsController extends Controller
 # ╚═╝  ╚═══╝╚══════╝ ╚══╝╚══╝     ╚═╝      ╚═════╝ ╚══════╝   ╚═╝   ╚══════╝
 // Display a listing of the resource that were created since the user's last login.
 ##################################################################################################################
+   public function futurePosts(Request $request, $key=null)
+   {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('post_edit')) { abort(401, 'Unauthorized Access'); }
+      }
+
+      // Set the session to the current page route
+      Session::put('fromPage', url()->full());
+
+      //$alphas = range('A', 'Z');
+      $alphas = DB::table('posts')
+         ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
+         ->where('published_at', '>=' , Carbon::now())
+         ->orderBy('letter')
+         ->get();
+
+      $letters = [];
+      foreach($alphas as $alpha) {
+         $letters[] = $alpha->letter;
+      }
+
+      // If $key value is passed
+      if ($key) {
+         $posts = Post::futurePosts()
+            ->with('user','category')
+            ->where('title', 'like', $key . '%')
+            ->get();
+      } else {
+         $posts = Post::futurePosts()
+            ->with('user','category')
+            ->get();
+      }
+
+      return view('admin.posts.pages.futurePosts', compact('posts','letters'));
+   }
+
+
+##################################################################################################################
+# ███╗   ██╗███████╗██╗    ██╗    ██████╗  ██████╗ ███████╗████████╗███████╗
+# ████╗  ██║██╔════╝██║    ██║    ██╔══██╗██╔═══██╗██╔════╝╚══██╔══╝██╔════╝
+# ██╔██╗ ██║█████╗  ██║ █╗ ██║    ██████╔╝██║   ██║███████╗   ██║   ███████╗
+# ██║╚██╗██║██╔══╝  ██║███╗██║    ██╔═══╝ ██║   ██║╚════██║   ██║   ╚════██║
+# ██║ ╚████║███████╗╚███╔███╔╝    ██║     ╚██████╔╝███████║   ██║   ███████║
+# ╚═╝  ╚═══╝╚══════╝ ╚══╝╚══╝     ╚═╝      ╚═════╝ ╚══════╝   ╚═╝   ╚══════╝
+// Display a listing of the resource that were created since the user's last login.
+##################################################################################################################
    public function newPosts(Request $request, $key=null)
    {
       // Check if user has required permission

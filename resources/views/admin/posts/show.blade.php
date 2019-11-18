@@ -5,10 +5,10 @@
 @endsection
 
 @section('left_column')
-   {{-- @include('blocks.main_menu') --}}
 @endsection
 
 @section('right_column')
+   @include('admin.posts.sidebar')
 @endsection
 
 @section('content')
@@ -39,15 +39,9 @@
                      <div class="card mb-2">
                         <div class="card-header card_header p-1">Publish(ed) On</div>
                         <div class="card-body p-1">
-                           @if($post->published_at)
-                              @if($post->published_at > Carbon\Carbon::Now())
-                                 <div class="text-danger"><b>{{ $post->published_at }}</b></div>
-                              @else
+                           
                                  {{ $post->published_at }}
-                              @endif
-                           @else
-                              N/A
-                           @endif
+                              
                         </div>
                      </div>
                   </div>

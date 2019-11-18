@@ -22,10 +22,10 @@
 				Published Recipes
 				<span class="float-right">
 					<div class="btn-group">
-						@include('admin.recipes.buttons.help', ['size'=>'sm', 'bookmark'=>'recipes'])
-						@include('admin.recipes.buttons.unpublishAll', ['size'=>'sm'])
-						@include('admin.recipes.buttons.trashAll', ['size'=>'sm'])
-						@include('admin.recipes.buttons.add', ['size'=>'sm'])
+						@include('admin.recipes.buttons.help', ['size'=>'xs', 'bookmark'=>'recipes'])
+						@include('admin.recipes.buttons.unpublishAll', ['size'=>'xs'])
+						@include('admin.recipes.buttons.trashAll', ['size'=>'xs'])
+						@include('admin.recipes.buttons.add', ['size'=>'xs'])
 					</div>
 				</span>
 			</div>
@@ -51,7 +51,7 @@
 							@foreach($recipes as $recipe)
 							<tr>
 								<td><input type="checkbox" onClick="checkbox_is_checked()" name="checked[]" value="{{$recipe->id}}" class="check-all"></td>
-								<td>{{ ucwords($recipe->title) }}</td>
+								<td><a href="{{ route('admin.recipes.show', $recipe->id) }}">{{ ucwords($recipe->title) }}</a></td>
 								<td>{{ ucwords($recipe->category->name) }}</td>
 								<td>{{ $recipe->views }}</td>
 								<td>{{ \App\Models\Recipes\Recipe::withTrashed()->find($recipe->id)->favoritesCount }}</td>

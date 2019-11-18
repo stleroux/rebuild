@@ -17,7 +17,7 @@
    <div class="card mb-3">
 
       <div class="card-header section_header p-2">
-         <i class="fa fa-plus-square"></i>
+         <i class="fa fa-eye"></i>
          Show Article
          <div class="float-right">
             <div class="btn-group">
@@ -28,7 +28,8 @@
       </div>
 
       <div class="card-body section_body p-2">
-         <p>{{ $article->name }}</p>
+         {{-- <p>{{ $article->title }}</p> --}}
+         @include('admin.articles.form')
       </div>
 
    </div>

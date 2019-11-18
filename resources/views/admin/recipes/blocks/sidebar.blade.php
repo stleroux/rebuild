@@ -11,6 +11,7 @@
             <a href="{{ route('admin.recipes.index') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('admin.recipes.index') ? 'menu_active' : '' }}">
                <i class="{{ Config::get('buttons.published') }}"></i>
                Published Recipes
+               <span class="badge badge-secondary border float-right">{{ App\Models\Recipes\Recipe::published()->count() }}</span>
             </a>
          @endif
 
@@ -18,21 +19,25 @@
             <a href="{{ route('admin.recipes.unpublished') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('admin.recipes.unpublished') ? 'menu_active' : '' }}">
                <i class="{{ Config::get('buttons.unpublished') }}"></i>
                Unpublished Recipes
+               <span class="badge badge-secondary border float-right">{{ App\Models\Recipes\Recipe::unpublished()->count() }}</span>
             </a>
 
             <a href="{{ route('admin.recipes.newRecipes') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('admin.recipes.newRecipes') ? 'menu_active' : '' }}">
                <i class="{{ Config::get('buttons.new') }}"></i>
                New Recipes
+               <span class="badge badge-secondary border float-right">{{ App\Models\Recipes\Recipe::newRecipes()->count() }}</span>
             </a>
 
             <a href="{{ route('admin.recipes.future') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('admin.recipes.future') ? 'menu_active' : '' }}">
                <i class="{{ Config::get('buttons.future') }}"></i>
                Future Recipes
+               <span class="badge badge-secondary border float-right">{{ App\Models\Recipes\Recipe::future()->count() }}</span>
             </a>
 
             <a href="{{ route('admin.recipes.trashed') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('admin.recipes.trashed') ? 'menu_active' : '' }}">
                <i class="{{ Config::get('buttons.trashed') }}"></i>
                Trashed Recipes
+               <span class="badge badge-secondary border float-right">{{ App\Models\Recipes\Recipe::trashedCount()->count() }}</span>
             </a>
          @endif
 

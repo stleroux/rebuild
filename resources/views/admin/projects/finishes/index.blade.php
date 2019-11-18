@@ -5,11 +5,9 @@
 @endsection
 
 @section('left_column')
-   {{-- @include('blocks.main_menu') --}}
 @endsection
 
 @section('right_column')
-   @include('projects.blocks.popularProjects')
 @endsection
 
 @section('content')
@@ -55,7 +53,7 @@
                         @foreach ($finishes as $finish)
                            <tr>
                               <td>{{ $finish->id }}</td>
-                              <td>{{ $finish->name }}</td>
+                              <td><a href="{{ route('admin.projects.finishes.show', $finish->id) }}">{{ $finish->name }}</a></td>
                               <td>{{ $finish->type }}</td>
                               <td>{{ $finish->color_name }}</td>
                               <td>{{ $finish->sheen }}</td>

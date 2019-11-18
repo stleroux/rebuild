@@ -5,11 +5,9 @@
 @endsection
 
 @section('left_column')
-   {{-- @include('blocks.main_menu') --}}
 @endsection
 
 @section('right_column')
-   @include('projects.blocks.popularProjects')
 @endsection
 
 @section('content')
@@ -51,7 +49,7 @@
                         @foreach ($materials as $material)
                            <tr>
                               <td>{{ $material->id }}</td>
-                              <td>{{ $material->name }}</td>
+                              <td><a href="{{ route('admin.projects.materials.show', $material->id) }}">{{ $material->name }}</a></td>
                               <td>{{ $material->type }}</td>
                               {{-- Add more columns here --}}
                               <td data-order="{{ $material->created_at}}">{{ $material->created_at }}</td>

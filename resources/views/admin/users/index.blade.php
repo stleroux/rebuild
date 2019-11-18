@@ -9,9 +9,9 @@
 @endsection
 
 @section('right_column')
-	@include('admin.users.blocks.mostPermissions')
-	@include('admin.users.blocks.mostLogins')
-	@include('admin.users.blocks.mostAssignedPermissions')
+	{{-- @include('admin.users.blocks.totalPermissions') --}}
+	{{-- @include('admin.users.blocks.mostLogins') --}}
+	{{-- @include('admin.users.blocks.mostAssignedPermissions') --}}
 @endsection
 
 @section('content')
@@ -35,10 +35,12 @@
 					<table id="datatable" class="table table-hover table-sm">
 						<thead>
 							<tr>
-								<th>No</th>
+								<th>ID</th>
 								<th>Username</th>
 								<th>Email</th>
 								<th>Permissions</th>
+								<th>Logins</th>
+								<th>Last Login</th>
 								<th>Created</th>
 								<th class="no-sort"></th>
 							</tr>
@@ -47,8 +49,7 @@
 							@foreach ($users as $user)
 								<tr>
 									<td>{{ $user->id }}</td>
-									<td>
-										{{ $user->username }}
+									<td><a href="{{ route('admin.users.show', $user->id) }}">{{ $user->username }}</a>
 										@if(
 												$user->username === Setting('admin_user_account') ||
 												$user->username === 'lerouxs' ||
@@ -56,10 +57,11 @@
 											)
 											<small>(Super Admin)</small>
 										@endif
-										
 									</td>
 									<td>{{ $user->email }}</td>
 									<td>{{ $user->permissions->count() }}</td>
+									<td>{{ $user->login_count }}</td>
+									<td>{{ $user->last_login_date }}</td>
 									<td>{{ $user->created_at }}</td>
 									<td class="text-right">
 										<div class="btn-group">

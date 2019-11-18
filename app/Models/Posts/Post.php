@@ -99,6 +99,13 @@ class Post extends Model
          ->orderBy('title','DESC');
    }
 
+   public function scopeFuturePosts($query)
+   {
+      return $query
+         ->where('published_at', '>=' , Carbon::now())
+         ->orderBy('title','DESC');
+   }
+
    public function scopePublished($query)
    {
       return $query
@@ -121,6 +128,12 @@ class Post extends Model
    {
       return $query
          ->where('created_at', '>=' , Auth::user()->previous_login_date);
+   }
+
+   public function scopeFuturePostsCount($query)
+   {
+      return $query
+         ->where('published_at', '>=' , Carbon::now());
    }
 
    public function scopeTrashedCount($query)

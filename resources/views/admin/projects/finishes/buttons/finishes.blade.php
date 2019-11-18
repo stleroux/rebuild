@@ -1,4 +1,4 @@
-@if(checkPerm('project_index'))
+@if(checkPerm('project_browse'))
    <a href="{{ route('admin.projects.finishes.index') }}"
       class="btn {{ $size ? 'btn-'.$size : '' }} btn-{{ Route::is('admin.projects.finishes.index') ? 'secondary' : 'primary' }} text-light"
       title="Finishes">

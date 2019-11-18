@@ -307,9 +307,10 @@ class ArticlesController extends Controller
     private function validateRequest()
     {
         return request()->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'status' => 'required',
+            'title' => 'required',
+            'category' => 'required',
+            'description_eng' => 'required',
+            'description_fre' => 'required',
         ]);
     }
 

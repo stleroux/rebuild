@@ -4,6 +4,8 @@
       Most Assigned Permissions
    </div>
    <div class="card-body p-2">
-      <div class="text text-center">No Data Available</div>
+      <div class="text text-center">
+         {{ DB::table('permission_user')->groupBy('user_id')->count() }}
+      </div>
    </div>
 </div>

@@ -9,9 +9,9 @@
 @endsection
 
 @section('right_column')
-   @include('admin.users.blocks.mostPermissions')
-   @include('admin.users.blocks.mostLogins')
-   @include('admin.users.blocks.mostAssignedPermissions')
+   {{-- @include('admin.users.blocks.totalPermissions') --}}
+   {{-- @include('admin.users.blocks.mostLogins') --}}
+   {{-- @include('admin.users.blocks.mostAssignedPermissions') --}}
 @endsection
 
 @section('content')

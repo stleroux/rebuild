@@ -5,13 +5,10 @@
 @endsection
 
 @section('left_column')
-   {{-- @include('blocks.main_menu') --}}
 @endsection
 
 @section('right_column')
    @include('admin.posts.sidebar')
-   @include('blog.blocks.popularPosts')
-   @include('blog.blocks.archives')
 @endsection
 
 @section('content')
@@ -59,7 +56,7 @@
                                  <input type="checkbox" onClick="checkbox_is_checked()" name="checked[]" value="{{ $post->id }}" class="check-all">
                               </td>
                               <td>{{ $post->id }}</td>
-                              <td>{{ $post->title }}</td>
+                              <td><a href="{{ route('admin.posts.show', $post->id) }}">{{ $post->title }}</a></td>
                               <td>{{ $post->category->name }}</td>
                               {{-- <td>{{ $post->views }}</td> --}}
                               <td>{{ ucfirst($post->user->username) }}</td>

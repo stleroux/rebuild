@@ -32,6 +32,14 @@
                New Posts
                <span class="badge badge-secondary border float-right">{{ App\Models\Posts\Post::newPostsCount()->count() }}</span>
             </a>
+
+            <a href="{{ route('admin.posts.futurePosts') }}"
+               class="list-group-item list-group-item-action p-1 {{ Route::is('admin.posts.futurePosts') ? 'active' : '' }}"
+               data-parent="#sub_posts">
+               <i class="{{ Config::get('buttons.future') }}"></i>
+               Future Posts
+               <span class="badge badge-secondary border float-right">{{ App\Models\Posts\Post::futurePostsCount()->count() }}</span>
+            </a>
          @endif
 
          @if(checkPerm('post_delete'))

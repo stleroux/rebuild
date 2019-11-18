@@ -5,11 +5,9 @@
 @endsection
 
 @section('left_column')
-   {{-- @include('blocks.main_menu') --}}
 @endsection
 
 @section('right_column')
-   @include('projects.blocks.popular')
 @endsection
 
 @section('content')
@@ -53,7 +51,7 @@
                         @foreach ($projects as $project)
                            <tr>
                               {{-- <td>{{ $project->id }}</td> --}}
-                              <td>{{ $project->name }}</td>
+                              <td><a href="{{ route('admin.projects.show', $project->id) }}">{{ $project->name }}</a></td>
                               <td>{{ $project->category }}</td>
                               <td>{{ $project->views }}</td>
                               <td>{{ $project->images()->count() }}</td>

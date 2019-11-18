@@ -13,6 +13,7 @@
 Route::prefix('admin/posts')->name('admin.posts.')->group(function() {
    Route::get('newPosts/{key?}',                'Admin\Posts\ExtraViewsController@newPosts')            ->name('newPosts');
    Route::get('unpublished/{key?}',             'Admin\Posts\ExtraViewsController@unpublished')         ->name('unpublished');
+   Route::get('futurePosts/{key?}',             'Admin\Posts\ExtraViewsController@futurePosts')         ->name('futurePosts');
    Route::get('trashed/{key?}',                 'Admin\Posts\ExtraViewsController@trashed')             ->name('trashed');
    Route::get('showTrashed/{id}',               'Admin\Posts\ExtraViewsController@showTrashed')         ->name('showTrashed');
 // });
