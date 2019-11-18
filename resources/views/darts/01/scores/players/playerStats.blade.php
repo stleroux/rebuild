@@ -13,7 +13,8 @@
             </tr>
          </thead>
          <tbody>
-            @foreach(zeroOneAllPlayers($game) as $player)
+            {{-- @foreach(zeroOnePlayers($game->id) as $player) --}}
+            @foreach($players as $player)
                <tr class="text-center">
                   <td class="text-left">{{ $player->first_name }}</td>
                   <td>Remaining</td>

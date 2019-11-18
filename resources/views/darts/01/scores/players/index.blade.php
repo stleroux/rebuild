@@ -54,7 +54,7 @@
 
                <div class="card-body p-2">
                   <div class="form-row">
-                     @foreach(zeroOnePlayers($game) as $player)
+                     @foreach($players as $player)
                         @include('darts.01.scores.players.scoresheet', [$player])
                      @endforeach
                   </div>

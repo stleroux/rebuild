@@ -1,14 +1,14 @@
 	@if($game->type - zeroOneTeamScores($game, 1)->sum('score') == 0 )
-		<div class="panel panel-success">
+		<div class="card">
 	@elseif($game->type - zeroOneTeamScores($game, 2)->sum('score') == 0 )
-		<div class="panel panel-primary">
+		<div class="card">
 	@else
-		<div class="panel panel-{{ zeroOneTeamScores($game, 1)->count() <= zeroOneTeamScores($game, 2)->count() ? 'warning' : 'primary' }}">
+		<div class="card {{ zeroOneTeamScores($game, 1)->count() <= zeroOneTeamScores($game, 2)->count() ? 'warning' : 'primary' }}">
 	@endif
-	<div class="panel-heading">
-		<div class="panel-title">Team 1</div>
+	<div class="card-header">
+		<div class="card-title">Team 1</div>
 	</div>
-	<div class="panel-body">
+	<div class="card-body">
 		<div class="row">
 			{!! Form::open(['route' => 'darts.01.scores.teams.store']) !!}
 				{{ Form::hidden('game_id', $game->id, ['size'=>3]) }}
@@ -50,7 +50,7 @@
 			{{ Form::close() }}
 		</div>
 	</div>
-	<div class="panel-footer">
+	<div class="card-footer">
 		Select a player, enter the score and click Submit
 	</div>
 </div>

@@ -13,7 +13,7 @@
 @section('content')
 
    {!! Form::open(array('route'=>'darts.games.store'), ['class'=>'form-inline']) !!}
-      {{ Form::token() }}
+      {{-- {{ Form::token() }} --}}
 
       <div class="card">
          
@@ -36,7 +36,7 @@
                <div class="card-footer p-1">
                   Fields marked with an<span class="required"></span> are required.
                   <span class="float-right">
-                     {{ Form::submit ('Next Step', array('class'=>'btn btn-xs btn-primary')) }}
+                     {{ Form::submit ('Next Step', array('class'=>'btn btn-sm btn-primary')) }}
                   </span>
                </div>
             </div>

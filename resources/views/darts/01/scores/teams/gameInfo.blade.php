@@ -1,38 +1,40 @@
-<div class="panel-group">
-	<div class="panel panel-primary">
-		<div class="panel-heading">
-			<div class="panel-title">Game Info</div>
+{{-- <div class="card-group"> --}}
+	<div class="card mb-2">
+		<div class="card-header p-2">
+			Game Info
 		</div>
-		<div class="panel-body">
-			<div class="col-sm-4">
-				<div class="panel panel-primary">
-					<div class="panel-heading" style="padding-bottom: 0px; padding-top:0px">
-						<div class="panel-title">Remains</div>
-					</div>
-					<div class="panel-body text-center" style="background-color:{{ ($game->type - zeroOneTeamScores($game, 1)->sum('score') == 0 )?"green":"" }} ">
-						{{ $game->type - zeroOneTeamScores($game, 1)->sum('score') }}
-					</div>
-				</div>
-			</div>
-
-			<div class="col-sm-4">
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						<div class="panel-title text-center">Type</div>
-					</div>
-					<div class="panel-body text-center">
-						{{ $game->type }}
+		<div class="card-body p-0 m-0">
+			<div class="row p-1 m-0">
+				<div class="col-sm-4 p-0">
+					<div class="card mb-2">
+						<div class="card-header p-2 text-center" style="padding-bottom: 0px; padding-top:0px">
+							Remains
+						</div>
+						<div class="card-body text-center" style="background-color:{{ ($game->type - zeroOneTeamScores($game, 1)->sum('score') == 0 )?"green":"" }} ">
+							{{ $game->type - zeroOneTeamScores($game, 1)->sum('score') }}
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="col-sm-4">
-				<div class="panel panel-primary">
-					<div class="panel-heading" style="padding-bottom: 0px; padding-top:0px">
-						<div class="panel-title">Remains</div>
+				<div class="col-sm-4 p-0">
+					<div class="card mb-2">
+						<div class="card-header p-2 text-center">
+							Type
+						</div>
+						<div class="card-body text-center">
+							{{ $game->type }}
+						</div>
 					</div>
-					<div class="panel-body text-center" style="background-color:{{ ($game->type - zeroOneTeamScores($game, 2)->sum('score') == 0 )?"green":"" }} ">
-						{{ $game->type - zeroOneTeamScores($game, 2)->sum('score') }}
+				</div>
+
+				<div class="col-sm-4 p-0">
+					<div class="card mb-2">
+						<div class="card-header p-2 text-center" style="padding-bottom: 0px; padding-top:0px">
+							Remains
+						</div>
+						<div class="card-body text-center" style="background-color:{{ ($game->type - zeroOneTeamScores($game, 2)->sum('score') == 0 )?"green":"" }} ">
+							{{ $game->type - zeroOneTeamScores($game, 2)->sum('score') }}
+						</div>
 					</div>
 				</div>
 			</div>
@@ -48,4 +50,4 @@
 	@include('darts.01.scores.teams.messages')
 
 	
-</div>
+{{-- </div> --}}

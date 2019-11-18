@@ -39,7 +39,7 @@ class GamesController extends Controller
          $game->status = 'New';
       $game->save();
 
-      Session::flash('success','The game has been created.');
+      // Session::flash('success','The game has been created.');
       return redirect()->route('darts.games.selectTeamsOrPlayers', $game->id);
    }
 
@@ -66,7 +66,7 @@ class GamesController extends Controller
          }
       $game->save();
 
-      Session::flash('success','The game has been created.');
+      // Session::flash('success','The game has been created 1111111.');
       if($request->t_players) {
          return redirect()->route('darts.games.selectTeamPlayers', $game->id);
       } else {
@@ -76,10 +76,10 @@ class GamesController extends Controller
 
 
    // Select players when team play is selected
-   public function selectTeamPlayers($game_id)
+   public function selectTeamPlayers(Request $request, $game_id)
    {
       $game = Dart::find($game_id);
-      $players = User::with('profile')->where('id', '!=', 1)->orderby('username', 'asc')->get();
+      $players = User::where('id', '!=', 1)->orderby('username', 'asc')->get();
       return view('darts.games.selectTeamPlayers', compact('players','game'));
    }
 
@@ -119,7 +119,7 @@ class GamesController extends Controller
    public function selectPlayers($game_id)
    {
       $game = Dart::find($game_id);
-      $players = User::with('profile')->where('id', '!=', 1)->orderby('username', 'asc')->get();
+      $players = User::where('id', '!=', 1)->orderby('username', 'asc')->get();
       return view('darts.games.selectPlayers', compact('players','game'));
    }
 
@@ -146,6 +146,10 @@ class GamesController extends Controller
       // if(!checkACL('manager')) {
       //   return view('errors.403');
       // }
+
+      // Delete related entries
+      $users = DB::table('dartgame_user')->where('dartgame_id', $id)->delete();
+      $scores = DB::table('dartscores')->where('game_id', $id)->delete();
 
       $game = Dart::find($id);
       $game->delete();

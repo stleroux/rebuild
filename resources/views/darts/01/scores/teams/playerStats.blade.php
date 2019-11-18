@@ -1,8 +1,8 @@
-<div class="panel panel-primary">
-	<div class="panel-heading">
-		<div class="panel-title">Players Statistics</div>
+<div class="card">
+	<div class="card-header">
+		<div class="card-title">Players Statistics</div>
 	</div>
-	<div class="panel-body">
+	<div class="card-body">
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -14,7 +14,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				@foreach(zeroOneAllPlayers($game) as $player)
+				@foreach(zeroOnePlayers($game) as $player)
 					<tr class="text-center">
 						<td>{{ $player->team_id }}</td>
 						<td class="text-left">{{ $player->first_name }}</td>
@@ -26,7 +26,7 @@
 			</tbody>
 		</table>
 	</div>
-	{{-- <div class="panel-footer">
+	{{-- <div class="card-footer">
 		Footer
 	</div> --}}
 </div>

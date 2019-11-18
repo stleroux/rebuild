@@ -9,6 +9,7 @@ use Session;
 use App\Models\Darts\Dart;
 use App\Models\Darts\DartScore;
 use App\Models\User;
+use App\Helpers\ZeroOneDarts;
 
 
 class ScoresController extends Controller
@@ -16,8 +17,13 @@ class ScoresController extends Controller
 
    public function index($gameID)
    {
+      // dd($gameID);
       $game = Dart::find($gameID);
-      return view('darts.01.scores.players.index', compact('game'));
+      // dd($game);
+      $players = zeroOnePlayers($gameID);
+      // dd ($players);
+
+      return view('darts.01.scores.players.index', compact('game','players'));
    }
 
 

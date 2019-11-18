@@ -20,7 +20,7 @@
          <div class="row">
             <div class="col-md-5">
                {!! Form::open(array('route'=>'darts.games.storeTeamsOrPlayers'), ['class'=>'form-inline']) !!}
-               {{ Form::token() }}
+               {{-- {{ Form::token() }} --}}
                {{ Form::hidden('game_id', $game->id) }}
                   <div class="card mb-2">
                      <div class="card-header card_header p-2">N<sup>o</sup> Of Player(s) Per Team</div>
@@ -35,7 +35,7 @@
                      <div class="card-footer p-1">
                         &nbsp;
                         <span class="float-right">
-                           {{ Form::submit ('Next Step', array('class'=>'btn btn-xs btn-primary')) }}
+                           {{ Form::submit ('Next Step', array('class'=>'btn btn-sm btn-primary')) }}
                         </span>
                      </div>
                   </div>
@@ -53,7 +53,7 @@
 
             <div class="col-md-5">
                {!! Form::open(array('route'=>'darts.games.storeTeamsOrPlayers'), ['class'=>'form-inline']) !!}
-               {{ Form::token() }}
+               {{-- {{ Form::token() }} --}}
                {{ Form::hidden('game_id', $game->id) }}
                <div class="card mb-2">
                   <div class="card-header card_header p-2">N<sup>o</sup> Of Individual Player(s)</div>
@@ -69,7 +69,7 @@
                   <div class="card-footer p-1">
                      &nbsp;
                      <span class="float-right">
-                        {{ Form::submit ('Next Step', array('class'=>'btn btn-xs btn-primary')) }}
+                        {{ Form::submit ('Next Step', array('class'=>'btn btn-sm btn-primary')) }}
                      </span>
                   </div>
                </div>

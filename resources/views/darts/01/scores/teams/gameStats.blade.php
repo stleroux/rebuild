@@ -1,8 +1,8 @@
-<div class="panel panel-primary">
-	<div class="panel-heading">
-		<div class="panel-title">Game Statistics</div>
+<div class="card">
+	<div class="card-header">
+		<div class="card-title">Game Statistics</div>
 	</div>
-	<div class="panel-body">
+	<div class="card-body">
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -35,7 +35,7 @@
 			</tbody>
 		</table>
 	</div>
-	{{-- <div class="panel-footer">
+	{{-- <div class="card-footer">
 		Footer
 	</div> --}}
 </div>

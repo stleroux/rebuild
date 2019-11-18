@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
 use Session;
-use App\Dart;
-use App\DartScore;
-use App\User;
+use App\Models\Darts\Dart;
+use App\Models\Darts\DartScore;
+use App\models\User;
 
 
 class ScoresController extends Controller

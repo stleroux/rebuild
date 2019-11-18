@@ -50,47 +50,65 @@ function zeroOnePlayerBestScore($player) {
 
 
 function zeroOnePlayerScoreAvg($player) {
-	$shots = DB::table('dartscores')
+
+	$scoreAvg = DB::table('dartscores')
 		->where('game_id', $player->dartgame_id)
 		->where('team_id', $player->team_id)
 		->where('user_id', $player->id)
-		->count();
+		->avg('score');
+	// dd($totaluserscore);
+	return number_format($scoreAvg, 2);
+
+
+
+	// $shots = DB::table('dartscores')
+	// 	->where('game_id', $player->dartgame_id)
+	// 	->where('team_id', $player->team_id)
+	// 	->where('user_id', $player->id)
+	// 	->count();
 	
-	if($shots == 0)
-	{
-		return 'N/A';
-	}
+	// if($shots == 0)
+	// {
+	// 	return 'N/A';
+	// }
 
-	$totaluserscore = DB::table('dartscores')
-		->where('game_id', $player->dartgame_id)
-		->where('team_id', $player->team_id)
-		->where('user_id', $player->id)
-		->sum('score');
+	// $totaluserscore = DB::table('dartscores')
+	// 	->where('game_id', $player->dartgame_id)
+	// 	->where('team_id', $player->team_id)
+	// 	->where('user_id', $player->id)
+	// 	->sum('score');
 
-	$val = $totaluserscore / $shots;
+	// $val = $totaluserscore / $shots;
 
-	return number_format($val, 2);
+	// return number_format($val, 2);
 }
 
 
 function zeroOnePlayerDartAvg($player) {
-	$shots = DB::table('dartscores')
+	$scoreAvg = DB::table('dartscores')
 		->where('game_id', $player->dartgame_id)
 		->where('team_id', $player->team_id)
 		->where('user_id', $player->id)
-		->count();
+		->avg('score');
+	return number_format($scoreAvg / 3, 2);
 
-	if($shots == 0) { return 'N/A'; }
+	// $shots = DB::table('dartscores')
+	// 	->where('game_id', $player->dartgame_id)
+	// 	->where('team_id', $player->team_id)
+	// 	->where('user_id', $player->id)
+	// 	->count();
 
-	$totaluserscore = DB::table('dartscores')
-		->where('game_id', $player->dartgame_id)
-		->where('team_id', $player->team_id)
-		->where('user_id', $player->id)
-		->sum('score');
+	// if($shots == 0) { return 'N/A'; }
 
-	$val = ($totaluserscore / $shots) / 3;
+	// $totaluserscore = DB::table('dartscores')
+	// 	->where('game_id', $player->dartgame_id)
+	// 	->where('team_id', $player->team_id)
+	// 	->where('user_id', $player->id)
+	// 	->sum('score');
 
-	return number_format($val, 2);
+	// $val = ($totaluserscore / $shots) / 3;
+
+	// return number_format($val, 2);
 }
 
 
@@ -151,11 +169,11 @@ function zeroOneTeamPlayers($game, $team) {
 }
 
 
-function zeroOnePlayers($game) {
+function zeroOnePlayers($gameID) {
 	$players = DB::table('dartgame_user')
 		->join('users', 'dartgame_user.user_id', '=', 'users.id')
 		// ->join('profiles', 'dartgame_user.user_id', '=', 'profiles.user_id')
-		->where('dartgame_id', $game->id)
+		->where('dartgame_id', $gameID)
 		->orderBy('dartgame_user.id', 'asc')
 		->get();
 	// dd($players);
@@ -163,16 +181,16 @@ function zeroOnePlayers($game) {
 }
 
 
-function zeroOneAllPlayers($game) {
-	$allPlayers = DB::table('dartgame_user')
-		->join('users', 'dartgame_user.user_id', '=', 'users.id')
-		// ->join('profiles', 'dartgame_user.user_id', '=', 'profiles.user_id')
-		->where('dartgame_id', $game->id)
-		->orderBy('users.first_name', 'asc')
-		->get();
+// function zeroOneAllPlayers($game) {
+// 	$allPlayers = DB::table('dartgame_user')
+// 		->join('users', 'dartgame_user.user_id', '=', 'users.id')
+// 		// ->join('profiles', 'dartgame_user.user_id', '=', 'profiles.user_id')
+// 		->where('dartgame_id', $game->id)
+// 		->orderBy('users.first_name', 'asc')
+// 		->get();
 
-	return $allPlayers;
-}
+// 	return $allPlayers;
+// }
 
 
 function zeroOneGameWinner($game) {
@@ -250,14 +268,14 @@ function zeroOneNextShot($game) {
 }
 
 
-function zeroOnePlayerScore($game, $player) {
+function zeroOnePlayerScore($gameID, $playerID) {
 	// dd($game);
 	// dd($player);
 	$t = DB::table('dartscores')
 		->join('users', 'dartscores.user_id', '=', 'users.id')
 		// ->where('game_id', '=', $game->id)
-		->where('game_id', $game)
-		->where('dartscores.user_id', $player)
+		->where('game_id', $gameID)
+		->where('dartscores.user_id', $playerID)
 		->orderBy('dartscores.id','desc')
 		->get();
 	// dd($t);

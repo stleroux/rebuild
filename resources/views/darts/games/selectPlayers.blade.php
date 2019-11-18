@@ -51,7 +51,7 @@
          <div class="card-footer p-1">
             Fields marked with an<span class="required"></span> are required.
             <span class="float-right">
-               {{ Form::submit ('Create Game', array('class'=>'btn btn-xs btn-primary')) }}
+               {{ Form::submit ('Create Game', array('class'=>'btn btn-sm btn-primary')) }}
             </span>
          </div>
       </div>

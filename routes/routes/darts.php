@@ -4,14 +4,14 @@ Route::get('darts',													'Darts\DartsController@index')												->name
 
 Route::get('darts/games/board',									'Darts\DartsController@board')												->name('darts.games.board');
 
-Route::get('darts/games/selectTeamsOrPlayers/{gameID}',	'Darts\DartsController@selectTeamsOrPlayers')							->name('darts.games.selectTeamsOrPlayers');
-Route::post('darts/games/storeTeamsOrPlayers',				'Darts\DartsController@storeTeamsOrPlayers')								->name('darts.games.storeTeamsOrPlayers');
+Route::get('darts/games/selectTeamsOrPlayers/{gameID}',	'Darts\GamesController@selectTeamsOrPlayers')							->name('darts.games.selectTeamsOrPlayers');
+Route::post('darts/games/storeTeamsOrPlayers',				'Darts\GamesController@storeTeamsOrPlayers')								->name('darts.games.storeTeamsOrPlayers');
 
-Route::get('darts/games/selectTeamPlayers/{game_ID}',		'Darts\DartsController@selectTeamPlayers')								->name('darts.games.selectTeamPlayers');
-Route::post('darts/games/storeTeamPlayers',					'Darts\DartsController@storeTeamPlayers')									->name('darts.games.storeTeamPlayers');
+Route::get('darts/games/selectTeamPlayers/{game_ID}',		'Darts\GamesController@selectTeamPlayers')								->name('darts.games.selectTeamPlayers');
+Route::post('darts/games/storeTeamPlayers',					'Darts\GamesController@storeTeamPlayers')									->name('darts.games.storeTeamPlayers');
 
-Route::get('darts/games/selectPlayers/{game_ID}',			'Darts\DartsController@selectPlayers')										->name('darts.games.selectPlayers');
-Route::post('darts/games/storePlayers',						'Darts\DartsController@storePlayers')										->name('darts.games.storePlayers');
+Route::get('darts/games/selectPlayers/{game_ID}',			'Darts\GamesController@selectPlayers')										->name('darts.games.selectPlayers');
+Route::post('darts/games/storePlayers',						'Darts\GamesController@storePlayers')										->name('darts.games.storePlayers');
 
 Route::get('darts/games/create/',								'Darts\GamesController@create')										->name('darts.game.create');
 Route::post('darts/games/',										'Darts\GamesController@store')										->name('darts.games.store');

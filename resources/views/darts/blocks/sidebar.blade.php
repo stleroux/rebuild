@@ -6,7 +6,7 @@
 
       <a href="{{ route('darts.index') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('darts.index') ? 'active' : '' }}">
          <i class="fa fa-bullseye"></i>
-         Darts
+         Leader Board
       </a>
 
       <a href="{{ route('darts.game.create') }}"

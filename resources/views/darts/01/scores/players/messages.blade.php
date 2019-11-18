@@ -3,7 +3,7 @@
 @if(session('dart-success'))
    <div id="display-dart-success">
       <div class="card mb-2">
-         <div class="card-header p-2">{{ session('success') }}</div>
+         <div class="card-header p-2">{{ session('dart-success') }}</div>
       </div>
    </div>
 @endif
@@ -12,7 +12,7 @@
 @if (session('dart-error'))
    <div id="display-dart-danger">
       <div class="card mb-2">
-         <div class="card-header p-2">{{ session('error') }}</div>
+         <div class="card-header p-2">{{ session('dart-error') }}</div>
       </div>
    </div>
 @endif
