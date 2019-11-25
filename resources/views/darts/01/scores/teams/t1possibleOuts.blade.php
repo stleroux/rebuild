@@ -1,8 +1,9 @@
-<div class="card">
-	<div class="card-header">
-		<div class="card-title">Possible Outs</div>
-	</div>
-	<div class="card-body">
+<div class="card mb-2">
+
+	<div class="card-header p-2">Possible Outs</div>
+	
+   <div class="card-body p-2">
 		@include('darts.inc.possibleOuts', ['score'=>($game->type - zeroOneTeamScores($game, 1)->sum('score'))])
 	</div>
+
 </div>

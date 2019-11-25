@@ -13,7 +13,7 @@ class CreateDartGamesTable extends Migration
      */
     public function up()
     {
-        Schema::create('dartgames', function (Blueprint $table) {
+        Schema::create('dart__games', function (Blueprint $table) {
             $table->increments('id');
             $table->text('type');
             $table->integer('t1_players')->unsigned()->comment('Number of players on Team 1');
@@ -29,6 +29,6 @@ class CreateDartGamesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dartgames');
+        Schema::dropIfExists('dart__games');
     }
 }

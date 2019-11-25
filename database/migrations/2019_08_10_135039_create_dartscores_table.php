@@ -13,7 +13,7 @@ class CreateDartscoresTable extends Migration
      */
     public function up()
     {
-        Schema::create('dartscores', function (Blueprint $table) {
+        Schema::create('dart__scores', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('game_id')->unsigned();
             $table->integer('team_id')->unsigned();
@@ -31,6 +31,6 @@ class CreateDartscoresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dartscores');
+        Schema::dropIfExists('dart__scores');
     }
 }

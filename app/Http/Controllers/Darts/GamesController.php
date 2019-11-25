@@ -7,8 +7,8 @@ use App\Http\Controllers\Controller;
 use DB;
 use Session;
 use App\Models\User;
-use App\Models\Darts\Dart;
-use App\Models\Darts\DartScore;
+use App\Models\Darts\Game;
+use App\Models\Darts\Score;
 
 
 class GamesController extends Controller
@@ -34,7 +34,7 @@ class GamesController extends Controller
          'type' => 'required',
       ]);
 
-      $game = new Dart;
+      $game = new Game;
          $game->type = $request->type;
          $game->status = 'New';
       $game->save();
@@ -46,14 +46,14 @@ class GamesController extends Controller
 
    public function selectTeamsOrPlayers($game_id)
    {
-      $game = Dart::find($game_id);
+      $game = Game::find($game_id);
       return view('darts.games.selectTeamsOrPlayers', compact('game'));
    }
 
 
    public function storeTeamsOrPlayers(Request $request)
    {
-      $game = Dart::find($request->game_id);
+      $game = Game::find($request->game_id);
          if($request->t_players) {
             $game->t1_players = $request->t_players;
             $game->t2_players = $request->t_players;
@@ -78,7 +78,7 @@ class GamesController extends Controller
    // Select players when team play is selected
    public function selectTeamPlayers(Request $request, $game_id)
    {
-      $game = Dart::find($game_id);
+      $game = Game::find($game_id);
       $players = User::where('id', '!=', 1)->orderby('username', 'asc')->get();
       return view('darts.games.selectTeamPlayers', compact('players','game'));
    }
@@ -87,14 +87,14 @@ class GamesController extends Controller
    // Save players when team play is selected
    public function storeTeamPlayers(Request $request)
    {
-      $game = Dart::find($request->game_id);
+      $game = Game::find($request->game_id);
 
       if (isset($request->team1players))
       {
          $shotOrder = 1;
          foreach($request->team1players as $player)
          {
-            DB::insert('insert into dartgame_user (dartgame_id, team_id, user_id, shooting_order) values (?, ?, ?, ?)', [$game->id, 1, $player, $shotOrder]);
+            DB::insert('insert into dart__players (game_id, team_id, user_id, shooting_order) values (?, ?, ?, ?)', [$game->id, 1, $player, $shotOrder]);
             $shotOrder = $shotOrder + 2;
          }
       }
@@ -104,7 +104,7 @@ class GamesController extends Controller
          $shotOrder = 2;
          foreach($request->team2players as $player)
          {
-            DB::insert('insert into dartgame_user (dartgame_id, team_id, user_id, shooting_order) values (?, ?, ?, ?)', [$game->id, 2, $player, $shotOrder]);
+            DB::insert('insert into dart__players (game_id, team_id, user_id, shooting_order) values (?, ?, ?, ?)', [$game->id, 2, $player, $shotOrder]);
             $shotOrder = $shotOrder + 2;
          }
 
@@ -118,7 +118,7 @@ class GamesController extends Controller
    // Select individual players when no team play is selected
    public function selectPlayers($game_id)
    {
-      $game = Dart::find($game_id);
+      $game = Game::find($game_id);
       $players = User::where('id', '!=', 1)->orderby('username', 'asc')->get();
       return view('darts.games.selectPlayers', compact('players','game'));
    }
@@ -128,11 +128,11 @@ class GamesController extends Controller
    public function storePlayers(Request $request)
    {
 
-      $game = Dart::find($request->game_id);
+      $game = Game::find($request->game_id);
       $shotOrder = 1;
       foreach($request->players as $player)
       {
-         DB::insert('insert into dartgame_user (dartgame_id, user_id, shooting_order) values (?, ?, ?)', [$request->game_id, $player, $shotOrder]);
+         DB::insert('insert into dart__players (game_id, user_id, shooting_order) values (?, ?, ?)', [$request->game_id, $player, $shotOrder]);
          $shotOrder = $shotOrder + 1;
       }
       
@@ -148,10 +148,10 @@ class GamesController extends Controller
       // }
 
       // Delete related entries
-      $users = DB::table('dartgame_user')->where('dartgame_id', $id)->delete();
-      $scores = DB::table('dartscores')->where('game_id', $id)->delete();
+      $users = DB::table('dart__players')->where('game_id', $id)->delete();
+      $scores = DB::table('dart__scores')->where('game_id', $id)->delete();
 
-      $game = Dart::find($id);
+      $game = Game::find($id);
       $game->delete();
 
       // Save entry to log file using built-in Monolog
@@ -164,7 +164,7 @@ class GamesController extends Controller
 
    public function board()
    {
-      $games = Dart::orderby('id','desc')->get();
+      $games = Game::orderby('id','desc')->get();
       return view('darts.games.board', compact('games'));
    }
 

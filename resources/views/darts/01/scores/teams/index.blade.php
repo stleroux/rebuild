@@ -15,13 +15,26 @@
 	</style>
 @endsection
 
+@section('left_column')
+@endsection
+
+@section('right_column')
+   @include('darts.blocks.sidebar')
+@endsection
+
 @section('content')
 
-	@if(!($game->type - zeroOneTeamScores($game, 2)->sum('score') == 0) || ($game->type - zeroOneTeamScores($game, 1)->sum('score') == 0))
+{{-- {{ dd($game->type) }} --}}
+{{-- {{ dd(zeroOneTeamScores($game, 2)->sum('score')) }} --}}
+{{-- {{ dd(zeroOneTeamScores($game, 1)->sum('score')) }} --}}
+{{-- {{ dd($game->type - zeroOneTeamScores($game, 2)->sum('score')) }} --}}
+{{-- {{ dd($game->type - zeroOneTeamScores($game, 1)->sum('score')) }} --}}
+
+	@if((!$game->type - zeroOneTeamScores($game, 2)->sum('score') === 0) || (!$game->type - zeroOneTeamScores($game, 1)->sum('score') === 0))
 		@include('darts.inc.scoreboard')
 	@endif
-	{{-- @include('darts.01.scores.teams._scorePanel') --}}
 	
+	{{-- {!! Form::open(['route' => 'darts.01.scores.teams.store']) !!} --}}
 	<div class="row">
 		<div class="col-sm-4">
 			@include('darts.01.scores.teams.t1scorePanel')
@@ -35,11 +48,14 @@
 			@include('darts.01.scores.teams.t2scorePanel')
 		</div>
 	</div>
+	{{-- {{ Form::close() }} --}}
 
 	<div class="row">
 		<div class="col-sm-4">
 			@include('darts.01.scores.teams.t1scoresheet')
-			@include('darts.01.scores.teams.t1possibleOuts')
+			@if((!$game->type - zeroOneTeamScores($game, 2)->sum('score') === 0) || (!$game->type - zeroOneTeamScores($game, 1)->sum('score') === 0))
+				@include('darts.01.scores.teams.t1possibleOuts')
+			@endif
 		</div>
 
 		<div class="col-sm-4">
@@ -49,7 +65,9 @@
 
 		<div class="col-sm-4">
 			@include('darts.01.scores.teams.t2scoresheet')
-			@include('darts.01.scores.teams.t2possibleOuts')
+			@if((!$game->type - zeroOneTeamScores($game, 2)->sum('score') === 0) || (!$game->type - zeroOneTeamScores($game, 1)->sum('score') === 0))
+				@include('darts.01.scores.teams.t2possibleOuts')
+			@endif
 		</div>
 	</div>
 

@@ -13,9 +13,9 @@ class CreateDartGameUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('dartgame_user', function (Blueprint $table) {
+        Schema::create('dart_players', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('dartgame_id')->unsigned();
+            $table->integer('game_id')->unsigned();
             $table->integer('team_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->timestamps();
@@ -29,6 +29,6 @@ class CreateDartGameUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dartgame_user');
+        Schema::dropIfExists('dart_players');
     }
 }

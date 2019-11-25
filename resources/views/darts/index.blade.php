@@ -42,34 +42,24 @@
                </tr>
             </thead>
             <tbody>
-               <tr>
-                  <td>Stephane</td>
-                  <td>10</td>
-                  <td>7</td>
-                  <td>95</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>3</td>
-                  <td>2</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-               </tr>
-               <tr>
-                  <td>Stacie</td>
-                  <td>10</td>
-                  <td>3</td>
-                  <td>120</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>3</td>
-                  <td>1</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-               </tr>
+               @foreach($players as $player)
+                  <tr>
+                     <td>{{ $player->first_name }}</td>
+                     <td>
+                        {{ dd($player) }}
+                     </td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+               @endforeach
             </tbody>
          </table>
       </div>

@@ -37,7 +37,7 @@
 								<td>{{ $game->type }}</td>
 								<td>
 									@foreach(zeroOneTeamPlayers($game, 1) as $player)
-										{{ $player->username }}
+										{{ $player->first_name }}
 										@if (!$loop->last)
 											&nbsp;/&nbsp;
 										@endif
@@ -45,7 +45,7 @@
 								</td>
 								<td>
 									@foreach(zeroOneTeamPlayers($game, 2) as $player)
-										{{ $player->username }}
+										{{ $player->first_name }}
 										@if (!$loop->last)
 											&nbsp;/&nbsp;
 										@endif
@@ -54,7 +54,7 @@
 								<td>
 									@if($game->ind_players)
 										@foreach(zeroOnePlayers($game->id) as $player)
-											{{ $player->username }}
+											{{ $player->first_name }}
 											@if (!$loop->last)
 												&nbsp;/&nbsp;
 											@endif

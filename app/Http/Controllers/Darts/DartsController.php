@@ -7,15 +7,23 @@ use App\Http\Controllers\Controller;
 use DB;
 use Session;
 use App\Models\User;
-use App\Models\Darts\Dart;
-use App\Models\Darts\DartScore;
+use App\Models\Darts\Game;
+use App\Models\Darts\Score;
+use App\Models\Darts\Player;
 
 class DartsController extends Controller
 {
 
 	public function index()
 	{
-			return view('darts.index');
+		// $players = Player::with('games')->where('id','!=',1)->get();
+		// dd($players);
+		$games = Game::with('players')->where('id',25)->get();
+		dd($games);
+
+		// User::select('color', DB::raw('count(color) quantity'))->groupBy('color')->get();
+
+		return view('darts.index', compact('players'));
 	}
 
 
@@ -172,7 +180,7 @@ class DartsController extends Controller
 
 	public function board()
 	{
-		$games = Dart::orderby('id','desc')->get();
+		$games = Game::orderby('id','desc')->get();
 		return view('darts.games.board', compact('games'));
 	}
 

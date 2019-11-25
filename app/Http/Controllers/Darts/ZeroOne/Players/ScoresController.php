@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
 use Session;
-use App\Models\Darts\Dart;
-use App\Models\Darts\DartScore;
+use App\Models\Darts\Game;
+use App\Models\Darts\Score;
 use App\Models\User;
 use App\Helpers\ZeroOneDarts;
 
@@ -18,7 +18,7 @@ class ScoresController extends Controller
    public function index($gameID)
    {
       // dd($gameID);
-      $game = Dart::find($gameID);
+      $game = Game::find($gameID);
       // dd($game);
       $players = zeroOnePlayers($gameID);
       // dd ($players);
@@ -67,7 +67,7 @@ class ScoresController extends Controller
 
       // Would the entered score leave 1 remaining which is not possible
       if($request->remainingScore - $request->score == 1){
-         $score = new DartScore;
+         $score = new Score;
             $score->user_id = $request->user_id;
             // $score->team_id = $request->team_id;
             $score->game_id = $request->game_id;
@@ -81,7 +81,7 @@ class ScoresController extends Controller
 
       // Is the entered score greater than the remaining score?
       if($request->score > $request->remainingScore){
-         $score = new DartScore;
+         $score = new Score;
             $score->user_id = $request->user_id;
             // $score->team_id = $request->team_id;
             $score->game_id = $request->game_id;
@@ -94,7 +94,7 @@ class ScoresController extends Controller
       }
 
       // All checks passed, enter the score in the DB
-      $score = new DartScore;
+      $score = new Score;
          $score->user_id = $request->user_id;
          // $score->team_id = $request->team_id;
          $score->game_id = $request->game_id;
@@ -103,12 +103,12 @@ class ScoresController extends Controller
       $score->save();
 
       // Change the game status to In Progress 
-      $game = Dart::find($request->game_id);
+      $game = Game::find($request->game_id);
          $game->status = 'In Progress';
       $game->save();
 
       if(zeroOneGameWinner($game) == true) {
-         $game = Dart::find($request->game_id);
+         $game = Game::find($request->game_id);
             $game->status = 'Completed';
          $game->save();
          echo 'Qwerty';

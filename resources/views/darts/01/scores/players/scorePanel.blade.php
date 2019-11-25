@@ -4,21 +4,21 @@
    <div class="card-body p-2">
       {{-- <div class="row"> --}}
          {!! Form::open(['route' => 'darts.01.scores.players.store']) !!}
-            Game ID :
-            {{ Form::text('game_id', $game->id, ['size'=>3]) }}
-            <br />
+            {{-- Game ID : --}}
+            {{ Form::hidden('game_id', $game->id, ['size'=>3]) }}
+            {{-- <br /> --}}
             {{-- {{ Form::text('team_id', 1, ['size'=>3]) }} --}}
-            Game Type : 
-            {{ Form::text('game_type', $game->type, ['size'=>3]) }}
-            <br />
+            {{-- Game Type :  --}}
+            {{ Form::hidden('game_type', $game->type, ['size'=>3]) }}
+            {{-- <br /> --}}
             {{-- {{ Form::text('nextShot', zeroOneNextShot($game->id), ['size'=>3]) }} --}}
             @php
                $nextShot = zeroOneNextShot($game->id);
                // dd($nextShot);
             @endphp
-            Next Shot : 
-            {{ $nextShot }}
-            <br />
+            {{-- Next Shot :  --}}
+            {{-- {{ $nextShot }} --}}
+            {{-- <br /> --}}
 
             
             {{-- <div class="col-xs-12 border"> --}}
@@ -28,7 +28,7 @@
                   {{-- USER ID : {{ $user->user_id }} --}}
                   {{-- <br /> --}}
                      {{-- Remaining Score : --}}
-                     {{ Form::text('remainingScore', ($game->type - zeroOnePlayerScore($game->id, $player->user_id)->sum('score')), ['size'=>2]) }}
+                     {{ Form::hidden('remainingScore', ($game->type - zeroOnePlayerScore($game->id, $player->user_id)->sum('score')), ['size'=>2]) }}
                      {{-- <br /> --}}
                      {{-- Shooting Order : {{ $user->shooting_order }} --}}
                      {{-- <br /> --}}

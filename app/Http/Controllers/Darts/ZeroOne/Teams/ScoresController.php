@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
 use Session;
-use App\Models\Darts\Dart;
-use App\Models\Darts\DartScore;
+use App\Models\Darts\Game;
+use App\Models\Darts\Score;
 use App\models\User;
 
 
@@ -16,7 +16,12 @@ class ScoresController extends Controller
 
    public function index($gameID)
    {
-      $game = Dart::find($gameID);
+      $game = Game::find($gameID);
+      // dd($game);
+      // $players = zeroOneTeamPlayers($gameID);
+      // dd ($players);
+
+      // return view('darts.01.scores.teams.index', compact('game', 'players'));
       return view('darts.01.scores.teams.index', compact('game'));
    }
 
@@ -52,6 +57,8 @@ class ScoresController extends Controller
          'score2.max' => 'Score must be less than 181.',
       ]);
 
+// dd($request);
+
       // Determine which score box has data
       if($request->score1) {
          $whichScore = $request->score1;
@@ -61,13 +68,13 @@ class ScoresController extends Controller
 
       // Is the entered score less than 0?
       if($whichScore < 0){
-         Session::flash('error','Invalid Score! You need to enter a score above 0. Please try again.');
+         Session::flash('dart-error','Invalid Score! You need to enter a score above 0. Please try again.');
          return redirect()->route('darts.01.scoers.teams.index', $request->game_id);
       }
 
       // Is the entered score greater than 180?
       if($whichScore > 180){
-         Session::flash('error','Invalid Score! Total score cannot exceed 180. Please try again.');
+         Session::flash('dart-error','Invalid Score! Total score cannot exceed 180. Please try again.');
          return redirect()->route('darts.01.scores.teams.index', $request->game_id);
       }
 
@@ -81,7 +88,7 @@ class ScoresController extends Controller
             $score->remaining = $request->remainingScore;
          $score->save();
 
-         Session::flash('error','This score cannot be registered as it would leave an impossibility to finish with a Double Out. A value of 0 will be added to the scoresheet.');
+         Session::flash('dart-error','This score cannot be registered as it would leave an impossibility to finish with a Double Out. A value of 0 will be added to the scoresheet.');
          return redirect()->route('darts.01.scores.teams.index', $request->game_id);
       }
 
@@ -95,7 +102,7 @@ class ScoresController extends Controller
             $score->remaining = $request->remainingScore;
          $score->save();
 
-         Session::flash('error','The registered score is higher than the required score to finish. A value of 0 will be added to the scoresheet.');
+         Session::flash('dart-error','The registered score is higher than the required score to finish. A value of 0 will be added to the scoresheet.');
          return redirect()->route('darts.01.scores.teams.index', $request->game_id);
       }
 
@@ -109,12 +116,12 @@ class ScoresController extends Controller
       $score->save();
 
       // Change the game status to In Progress 
-      $game = Dart::find($request->game_id);
+      $game = Game::find($request->game_id);
          $game->status = 'In Progress';
       $game->save();
 
       if(zeroOneGameWinner($game) == true) {
-         $game = Dart::find($request->game_id);
+         $game = Game::find($request->game_id);
             $game->status = 'Completed';
          $game->save();
          echo 'Qwerty';
@@ -124,7 +131,7 @@ class ScoresController extends Controller
       // Save entry to log file using built-in Monolog
       //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") CREATED category (" . $category->id . ")\r\n", [$category = json_decode($category, true)]);
 
-      Session::flash('success','The scoresheet has been updated.');
+      Session::flash('dart-success','The scoresheet has been updated.');
       return redirect()->route('darts.01.scores.teams.index', $request->game_id);
    }
 
