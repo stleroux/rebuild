@@ -18,10 +18,11 @@ class DartsController extends Controller
 	{
 		// $players = Player::with('games')->where('id','!=',1)->get();
 		// dd($players);
-		$games = Game::with('players')->where('id',25)->get();
-		dd($games);
-
-		// User::select('color', DB::raw('count(color) quantity'))->groupBy('color')->get();
+		// $games = Game::with('players')->where('id',25)->get();
+		// dd($games);
+		$players = User::where('id','!=',1)->orderBy('first_name')->get();
+		// $playerBestScore = Score::max('score');
+		// dd($playerBestScore);
 
 		return view('darts.index', compact('players'));
 	}

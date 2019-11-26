@@ -7,6 +7,201 @@
 // ██████╔╝██║  ██║██║  ██║   ██║   ███████║
 // ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚══════╝
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Team games played
+function zeroOnePlayerTeamGamesPlayedStat($player) {
+	// dd($player->id);
+	$val = DB::table('dart__scores')
+		->join('dart__games', 'dart__scores.game_id', 'dart__games.id')
+		->where('dart__games.status', 'Completed')
+		->where('dart__scores.team_id', '!=', 0)
+		->where('dart__scores.user_id', $player->id)
+		->distinct('dart__scores.game_id')
+		->count('dart__scores.game_id');
+
+	if($val == 0)
+	{
+		return '';
+	}
+
+	return $val;
+}
+
+// Team games won
+function zeroOnePlayerTeamGamesWonStat($player) {
+
+	$val = DB::table('dart__scores')
+		->join('dart__games', 'dart__scores.game_id', 'dart__games.id')
+		->where('dart__games.status', 'Completed')
+		->where('dart__scores.team_id', '!=', 0)
+		->where('dart__scores.user_id', $player->id)
+		->where('dart__scores.remaining', 0)
+		->distinct('dart__scores.game_id')
+		->count('dart__scores.game_id');
+
+	if($val == 0)
+	{
+		return '';
+	}
+
+	return $val;
+}
+
+//// Team games lost
+function zeroOnePlayerTeamGamesLostStat($player) {
+
+	$val = DB::table('dart__scores')
+		->join('dart__games', 'dart__scores.game_id', 'dart__games.id')
+		->where('dart__games.status', 'Completed')
+		->where('dart__scores.team_id', '!=', 0)
+		->where('dart__scores.user_id', $player->id)
+		// ->where('dart__scores.remaining', '!=', 0)
+		->distinct('dart__scores.game_id')
+		->count('dart__scores.game_id');
+		// ->toSql();
+	// dd($val);
+
+	if($val == 0)
+	{
+		return '';
+	}
+
+	return $val;
+}
+
+// Best individual player score in a team game
+function zeroOnePlayerBestScoreTeamStat($player) {
+
+	$val = DB::table('dart__scores')
+		->join('dart__games', 'dart__scores.game_id', 'dart__games.id')
+		->where('dart__games.status', 'Completed')
+		->where('team_id', '!=', 0)
+		->where('user_id', $player->id)
+		->max('score');
+
+	if($val == 0)
+	{
+		return '';
+	}
+
+	return $val;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Individual games played
+function zeroOnePlayerIndividualGamesPlayedStat($player) {
+
+	$val = DB::table('dart__scores')
+		->join('dart__games', 'dart__scores.game_id', 'dart__games.id')
+		->where('dart__games.status', 'Completed')
+		->where('team_id', 0)
+		->where('user_id', $player->id)
+		->distinct('game_id')
+		->count('game_id');
+
+	if($val == 0)
+	{
+		return '';
+	}
+
+	return $val;
+}
+
+
+
+// Individual games won
+function zeroOnePlayerIndividualGamesWonStat($player) {
+
+	$val = DB::table('dart__scores')
+		->join('dart__games', 'dart__scores.game_id', 'dart__games.id')
+		->where('dart__games.status', 'Completed')
+		->where('team_id', 0)
+		->where('user_id', $player->id)
+		->where('remaining', "0")
+		->count();
+
+	if($val == 0)
+	{
+		return '';
+	}
+
+	return $val;
+}
+
+
+
+//// Individual games lost
+function zeroOnePlayerIndividualGamesLostStat($player) {
+
+	$val = DB::table('dart__scores')
+		->join('dart__games', 'dart__scores.game_id', 'dart__games.id')
+		->where('dart__games.status', 'Completed')
+		->where('team_id', 0)
+		->where('user_id', $player->id)
+		->where('remaining', '!=', 0)
+		// ->min('remaining')
+		// ->first()
+		->count('dart__scores.game_id')
+		;
+	// dd($val);
+
+	if($val == 0)
+	{
+		return '';
+	}
+
+	return $val;
+}
+
+// Best individual player score in an individual game
+function zeroOnePlayerBestScoreIndividualStat($player) {
+
+	$val = DB::table('dart__scores')
+		->join('dart__games', 'dart__scores.game_id', 'dart__games.id')
+		->where('dart__games.status', 'Completed')
+		->where('team_id', 0)
+		->where('user_id', $player->id)
+		->max('score');
+
+	if($val == 0)
+	{
+		return '';
+	}
+
+	return $val;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function zeroOnePlayerBestScore($player) {
 
