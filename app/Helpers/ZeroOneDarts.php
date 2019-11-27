@@ -288,7 +288,18 @@ function zeroOneGameWinner($game) {
 	{
 
 		if($winner->team_id) {
-			return "Team " . $winner->team_id;
+			// dd($winner->team_id);
+			// $winners = Players::where('game_id', $game->id)->get();
+			$winners = zeroOneTeamPlayers($game, $winner->team_id);
+			// dd($winners);
+			// return "Team " . $winner->team_id;
+			foreach ($winners as $winner) {
+				$user = App\Models\User::findOrFail($winner->id);
+				// var_dump($user);
+				$user .= $user . " / ";
+				var_dump($user);
+			}
+			return $user->first_name;
 		} else {
 			$user = App\Models\User::findOrFail($winner->user_id);
 			return $user->first_name;

@@ -18,7 +18,7 @@
          }
       );
 
-      $('#darts').DataTable( {
+      $('table.darts').DataTable( {
         "paging":   false,
         "ordering": true,
         "info":     false,

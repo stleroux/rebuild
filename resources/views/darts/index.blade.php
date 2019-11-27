@@ -21,7 +21,7 @@
             <div class="col">
                <div class="card">
                   <div class="card-header card_header p-2">01 Team Stats</div>
-                  <table class="table table-sm table-hover">
+                  <table class="darts table table-sm table-hover">
                      <thead>
                         <tr>
                            <th>Player Name</th>
@@ -48,7 +48,8 @@
             <div class="col">
                <div class="card mb-2">
                   <div class="card-header card_header p-2">01 Individual Stats</div>
-                  <table id="darts" class="table table-sm table-hover">
+                  <div class="card-body p-0 m-0">
+                  <table class="darts table table-sm table-hover">
                      <thead>
                         <tr>
                            <th>Player Name</th>
@@ -70,6 +71,7 @@
                         @endforeach
                      </tbody>
                   </table>
+                  </div>
                </div>
             </div>
          </div>
@@ -78,7 +80,7 @@
             <div class="col">
                <div class="card">
                   <div class="card-header card_header p-2">Cricket Team Stats</div>
-                  <table class="table table-sm table-hover">
+                  <table class="darts table table-sm table-hover">
                      <thead>
                         <tr>
                            <th>Player Name</th>
@@ -105,7 +107,7 @@
             <div class="col">
                <div class="card">
                   <div class="card-header card_header p-2">Cricket Individual Stats</div>
-                  <table class="table table-sm table-hover">
+                  <table class="darts table table-sm table-hover">
                      <thead>
                         <tr>
                            <th>Player Name</th>

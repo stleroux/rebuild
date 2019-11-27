@@ -80,7 +80,7 @@ class ScoresController extends Controller
 
       // Would the entered score leave 1 remaining which is not possible
       if($request->remainingScore - $whichScore == 1){
-         $score = new DartScore;
+         $score = new Score;
             $score->user_id = $request->user_id;
             $score->team_id = $request->team_id;
             $score->game_id = $request->game_id;
@@ -94,7 +94,7 @@ class ScoresController extends Controller
 
       // Is the entered score greater than the remaining score?
       if($whichScore > $request->remainingScore){
-         $score = new DartScore;
+         $score = new Score;
             $score->user_id = $request->user_id;
             $score->team_id = $request->team_id;
             $score->game_id = $request->game_id;
@@ -107,7 +107,7 @@ class ScoresController extends Controller
       }
 
       // All checks passed, enter the score in the DB
-      $score = new DartScore;
+      $score = new Score;
          $score->user_id = $request->user_id;
          $score->team_id = $request->team_id;
          $score->game_id = $request->game_id;
