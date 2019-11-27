@@ -19,10 +19,10 @@ class Player extends Model
 //////////////////////////////////////////////////////////////////////////////////////
 // RELATIONSHIPS
 //////////////////////////////////////////////////////////////////////////////////////
-   public function scores()
-   {
-     return $this->belongsTo(\App\Models\Darts\Score::class, 'dart__scores');
-   }
+   // public function scores()
+   // {
+   //   return $this->belongsTo(\App\Models\Darts\Score::class, 'dart__scores');
+   // }
 
    /**
    * Get the game that owns the player.

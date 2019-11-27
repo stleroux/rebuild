@@ -22,10 +22,10 @@ class Game extends Model
    /**
    * Get the players for the game.
    */
-   public function players()
-   {
-     return $this->hasMany(\App\Models\Darts\Player::class, 'dart__players');
-   }
+   // public function players()
+   // {
+   //   return $this->hasMany(\App\Models\Darts\Player::class, 'dart__players');
+   // }
 
    // public function scores()
    // {

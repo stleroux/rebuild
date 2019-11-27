@@ -1,5 +1,6 @@
 <script>
    $(document).ready( function () {
+
       $('#datatable').DataTable(
          {
             "order": [],
@@ -16,5 +17,13 @@
             }
          }
       );
+
+      $('#darts').DataTable( {
+        "paging":   false,
+        "ordering": true,
+        "info":     false,
+        "searching":   false
+    } );
+
    });
 </script>

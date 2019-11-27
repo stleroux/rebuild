@@ -48,7 +48,7 @@
             <div class="col">
                <div class="card mb-2">
                   <div class="card-header card_header p-2">01 Individual Stats</div>
-                  <table class="table table-sm table-hover">
+                  <table id="darts" class="table table-sm table-hover">
                      <thead>
                         <tr>
                            <th>Player Name</th>

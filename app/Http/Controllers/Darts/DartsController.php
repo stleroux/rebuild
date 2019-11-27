@@ -20,7 +20,7 @@ class DartsController extends Controller
 		// dd($players);
 		// $games = Game::with('players')->where('id',25)->get();
 		// dd($games);
-		$players = User::where('id','!=',1)->orderBy('first_name')->get();
+		$players = User::where('id','!=',1)->get();
 		// $playerBestScore = Score::max('score');
 		// dd($playerBestScore);
 
