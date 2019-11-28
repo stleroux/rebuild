@@ -8,7 +8,8 @@
 // ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚══════╝
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Team games played
-function zeroOnePlayerTeamGamesPlayedStat($player) {
+function zeroOneTeamGamesPlayedStat($player) {
+	// dd($player);
 	$val = DB::table('dart__scores')
 		->join('dart__games', 'dart__scores.game_id', 'dart__games.id')
 		->where('dart__games.status', 'Completed')
@@ -16,6 +17,7 @@ function zeroOnePlayerTeamGamesPlayedStat($player) {
 		->where('dart__scores.user_id', $player->id)
 		->distinct('dart__scores.game_id')
 		->count('dart__scores.game_id');
+	// dd($val);
 
 	if($val == 0)
 	{
@@ -26,15 +28,25 @@ function zeroOnePlayerTeamGamesPlayedStat($player) {
 }
 
 // Team games won
-function zeroOnePlayerTeamGamesWonStat($player) {
+function zeroOneTeamGamesWonStat($player) {
+
 	$val = DB::table('dart__scores')
 		->join('dart__games', 'dart__scores.game_id', 'dart__games.id')
 		->where('dart__games.status', 'Completed')
+
+		->join('dart__players', 'dart__scores.team_id', 'dart__players.team_id')
+
 		->where('dart__scores.team_id', '!=', 0)
 		->where('dart__scores.user_id', $player->id)
 		->where('dart__scores.remaining', 0)
-		->distinct('dart__scores.game_id')
-		->count('dart__scores.game_id');
+		// ->orWhere('dart__scores.')
+		
+		// ->distinct('dart__scores.user_id')
+		// ->count('dart__scores.game_id')
+		->toSql()
+		;
+	// var_dump($val);
+		dd($val);
 
 	if($val == 0)
 	{
@@ -45,8 +57,8 @@ function zeroOnePlayerTeamGamesWonStat($player) {
 }
 
 //// Team games lost
-function zeroOnePlayerTeamGamesLostStat($player) {
-	$val = (int)zeroOnePlayerTeamGamesPlayedStat($player) - (int)zeroOnePlayerTeamGamesWonStat($player);
+function zeroOneTeamGamesLostStat($player) {
+	$val = (int)zeroOneTeamGamesPlayedStat($player) - (int)zeroOneTeamGamesWonStat($player);
 
 	if($val == 0)
 	{
@@ -57,7 +69,7 @@ function zeroOnePlayerTeamGamesLostStat($player) {
 }
 
 // Best individual player score in a team game
-function zeroOnePlayerBestScoreTeamStat($player) {
+function zeroOneTeamBestScoreStat($player) {
 	$val = DB::table('dart__scores')
 		->join('dart__games', 'dart__scores.game_id', 'dart__games.id')
 		->where('dart__games.status', 'Completed')
@@ -288,18 +300,7 @@ function zeroOneGameWinner($game) {
 	{
 
 		if($winner->team_id) {
-			// dd($winner->team_id);
-			// $winners = Players::where('game_id', $game->id)->get();
-			$winners = zeroOneTeamPlayers($game, $winner->team_id);
-			// dd($winners);
-			// return "Team " . $winner->team_id;
-			foreach ($winners as $winner) {
-				$user = App\Models\User::findOrFail($winner->id);
-				// var_dump($user);
-				$user .= $user . " / ";
-				var_dump($user);
-			}
-			return $user->first_name;
+			return "Team " . $winner->team_id;
 		} else {
 			$user = App\Models\User::findOrFail($winner->user_id);
 			return $user->first_name;

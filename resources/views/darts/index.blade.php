@@ -35,10 +35,10 @@
                         @foreach($players as $player)
                            <tr>
                               <td>{{ $player->first_name }}</td>
-                              <td class="text-center">{{ zeroOnePlayerTeamGamesPlayedStat($player) }}</td>
-                              <td class="text-center">{{ zeroOnePlayerTeamGamesWonStat($player) }}</td>
-                              <td class="text-center">{{ zeroOnePlayerTeamGamesLostStat($player) }}</td>
-                              <td class="text-center">{{ zeroOnePlayerBestScoreTeamStat($player) }}</td>
+                              <td class="text-center">{{ zeroOneTeamGamesPlayedStat($player) }}</td>
+                              <td class="text-center">{{ zeroOneTeamGamesWonStat($player) }}</td>
+                              <td class="text-center">{{ zeroOneTeamGamesLostStat($player) }}</td>
+                              <td class="text-center">{{ zeroOneTeamBestScoreStat($player) }}</td>
                            </tr>
                         @endforeach
                      </tbody>
@@ -63,10 +63,10 @@
                         @foreach($players as $player)
                            <tr>
                               <td>{{ $player->first_name }}</td>
-                              <td class="text-center">{{ zeroOnePlayerindividualGamesPlayedStat($player) }}</td>
-                              <td class="text-center">{{ zeroOnePlayerindividualGamesWonStat($player) }}</td>
-                              <td class="text-center">{{ zeroOnePlayerindividualGamesLostStat($player) }}</td>
-                              <td class="text-center">{{ zeroOnePlayerBestScoreindividualStat($player) }}</td>
+                              <td class="text-center">{{ zeroOnePlayerIndividualGamesPlayedStat($player) }}</td>
+                              <td class="text-center">{{ zeroOnePlayerIndividualGamesWonStat($player) }}</td>
+                              <td class="text-center">{{ zeroOnePlayerIndividualGamesLostStat($player) }}</td>
+                              <td class="text-center">{{ zeroOnePlayerBestScoreIndividualStat($player) }}</td>
                            </tr>
                         @endforeach
                      </tbody>
