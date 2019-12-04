@@ -34,10 +34,10 @@
                      <tbody>
                         @foreach($players as $player)
                            <tr>
-                              <td>{{ $player->first_name }}</td>
+                              <td>{{ $player->first_name }} [{{ $player->id }}]</td>
                               <td class="text-center">{{ zeroOneTeamGamesPlayedStat($player) }}</td>
                               <td class="text-center">{{ zeroOneTeamGamesWonStat($player) }}</td>
-                              <td class="text-center">{{ zeroOneTeamGamesLostStat($player) }}</td>
+                              <td class="text-center">{{-- {{ zeroOneTeamGamesLostStat($player) }} --}}</td>
                               <td class="text-center">{{ zeroOneTeamBestScoreStat($player) }}</td>
                            </tr>
                         @endforeach

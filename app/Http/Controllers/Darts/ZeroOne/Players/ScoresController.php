@@ -9,21 +9,35 @@ use Session;
 use App\Models\Darts\Game;
 use App\Models\Darts\Score;
 use App\Models\User;
-// use App\Helpers\ZeroOneDarts;
-
 
 class ScoresController extends Controller
 {
-
    public function index($gameID)
    {
       // dd($gameID);
       $game = Game::find($gameID);
       // dd($game);
       $players = zeroOnePlayers($gameID);
-      // dd ($players);
+      // dd($players);
+      $nextShot = zeroOneNextShot($gameID);
+      // dd($nextShot);
+      $player = DB::table('dart__players')->where('game_id', $gameID)->where('shooting_order', $nextShot)->first();
+      // dd($player);
+      $remainingScore = $game->type - zeroOnePlayerScore($gameID, $player->user_id)->sum('score');
+      // dd($remainingScore);
 
-      return view('darts.01.scores.players.index', compact('game','players'));
+      // Check if any one of the players has won the game (remaining score = 0)
+      $gameOver = DB::table('dart__scores')->where('game_id', $gameID)->where('remaining', 0)->first();
+      
+      foreach($players as $p){
+         if ($gameOver){
+            $gameDone = 1;
+         } else {
+            $gameDone = 0;
+         }
+      }
+
+      return view('darts.01.scores.players.index', compact('game','nextShot','players','player','remainingScore','gameDone'));
    }
 
 
@@ -37,14 +51,12 @@ class ScoresController extends Controller
 ##################################################################################################################
    public function store(Request $request)
    {
-      // if(!checkACL('manager')) {
-      //   return view('errors.403');
-      // }
-
+      // dd($request);
       $this->validate($request, [
          'game_id' => 'required',
          'user_id' => 'required',
          'score' => 'required|integer|max:180',
+         'remainingScore*' => 'required',
       ],
       [
          'user_id.required' => 'Please select a player.',
@@ -56,13 +68,15 @@ class ScoresController extends Controller
       // Is the entered score less than 0?
       if($request->score < 0){
          Session::flash('dart-error','Invalid Score! You need to enter a score above 0. Please try again.');
-         return redirect()->route('darts.01.scores.players.index', $request->game_id);
+         // return redirect()->route('darts.01.scores.players.index', $request->game_id);
+         return redirect()->back();
       }
 
       // Is the entered score greater than 180?
       if($request->score > 180){
          Session::flash('dart-error','Invalid Score! Total score cannot exceed 180. Please try again.');
-         return redirect()->route('darts.01.scores.players.index', $request->game_id);
+         // return redirect()->route('darts.01.scores.players.index', $request->game_id);
+         return redirect()->back();
       }
 
       // Would the entered score leave 1 remaining which is not possible
@@ -76,7 +90,8 @@ class ScoresController extends Controller
          $score->save();
 
          Session::flash('dart-error','This score cannot be registered as it would leave an impossibility to finish with a Double Out. A value of 0 will be added to the scoresheet.');
-         return redirect()->route('darts.01.scores.players.index', $request->game_id);
+         // return redirect()->route('darts.01.scores.players.index', $request->game_id);
+         return redirect()->back();
       }
 
       // Is the entered score greater than the remaining score?
@@ -90,13 +105,13 @@ class ScoresController extends Controller
          $score->save();
 
          Session::flash('dart-error','The registered score is higher than the required score to finish. A value of 0 will be added to the scoresheet.');
-         return redirect()->route('darts.01.scores.players.index', $request->game_id);
+         // return redirect()->route('darts.01.scores.players.index', $request->game_id);
+         return redirect()->back();
       }
 
       // All checks passed, enter the score in the DB
       $score = new Score;
          $score->user_id = $request->user_id;
-         // $score->team_id = $request->team_id;
          $score->game_id = $request->game_id;
          $score->score = $request->score;
          $score->remaining = $request->remainingScore - $request->score;
@@ -111,7 +126,6 @@ class ScoresController extends Controller
          $game = Game::find($request->game_id);
             $game->status = 'Completed';
          $game->save();
-         echo 'Qwerty';
       }
 
 
@@ -119,7 +133,8 @@ class ScoresController extends Controller
       //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") CREATED category (" . $category->id . ")\r\n", [$category = json_decode($category, true)]);
 
       Session::flash('dart-success','The scoresheet has been updated.');
-      return redirect()->route('darts.01.scores.players.index', $request->game_id);
+      // return redirect()->route('darts.01.scores.players.index', $request->game_id);
+      return redirect()->back();
    }
 
 

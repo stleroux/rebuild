@@ -19,6 +19,11 @@ class Score extends Model
 //////////////////////////////////////////////////////////////////////////////////////
 // RELATIONSHIPS
 //////////////////////////////////////////////////////////////////////////////////////
+   public function player()
+   {
+     return $this->belongsTo(\App\Models\Darts\Player::class, 'dart__players');
+   }
+   
    // public function game()
    // {
    //    return $this->belongsTo(\App\Models\Darts\Game::class, 'dart__games');

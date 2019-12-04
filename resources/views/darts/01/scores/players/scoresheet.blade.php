@@ -1,6 +1,6 @@
 <div class="col-sm-6">
    <div class="card mb-2">
-      <div class="card-header p-2">{{ $player->first_name }}</div>
+      <div class="card-header p-2">{{ $player->first_name }} [{{ $player->user_id }}]</div>
       <div class="card-body p-2">
          {{-- {{ $game->id }} <br /> --}}
          {{-- {{ $player->user_id }} --}}
@@ -22,7 +22,10 @@
                   <tr>
                      <td>{{ $t1no }}</td>
                      <td class="text-center">{{ $score->score }}</td>
-                     <td class="text-center">{{ $score->remaining }}</td>
+                     <td class="text-center">
+                        {{ $score->remaining }}
+                        {{-- {{ $game->type - zeroOnePlayerScore($game->id, $player->user_id)->sum('score') }} --}}
+                     </td>
                   </tr>
                   @php
                      $t1no --;

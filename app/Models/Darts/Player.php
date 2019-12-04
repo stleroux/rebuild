@@ -21,7 +21,7 @@ class Player extends Model
 //////////////////////////////////////////////////////////////////////////////////////
    // public function scores()
    // {
-   //   return $this->belongsTo(\App\Models\Darts\Score::class, 'dart__scores');
+   //   return $this->hasMany(\App\Models\Darts\Score::class, 'dart__scores');
    // }
 
    /**
@@ -39,7 +39,7 @@ class Player extends Model
 
    // public function user()
    // {
-   //    return $this->belongsTo(\App\Models\User::class, 'users');
+   //    return $this->hasOne(\App\Models\User::class);
    // }
 
 }

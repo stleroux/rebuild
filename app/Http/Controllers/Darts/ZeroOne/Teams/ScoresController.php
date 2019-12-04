@@ -124,7 +124,6 @@ class ScoresController extends Controller
          $game = Game::find($request->game_id);
             $game->status = 'Completed';
          $game->save();
-         echo 'Qwerty';
       }
 
 
