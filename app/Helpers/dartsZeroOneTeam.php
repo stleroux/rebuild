@@ -21,7 +21,7 @@ function zeroOneTeamGamesPlayedStat($player) {
 
    if($val == 0)
    {
-      return '';
+      return '-';
    }
 
    return $val;
@@ -29,48 +29,37 @@ function zeroOneTeamGamesPlayedStat($player) {
 
 
 // Team games won
-// function zeroOneTeamGamesWonStat($player) {
 function zeroOneTeamGamesWonStat($player) {
-   
    // dd($player->id);
-
-   // $games = DB::table('dart__scores')
-   //    ->join('dart__games', 'dart__scores.game_id', 'dart__games.id')
-   //    ->where('dart__games.status', 'Completed')
-   //    ->where('user_id', $player->id)
-   //    // ->where('remaining', 0)
-   //    // ->orWhere()
-   //    ->groupBy('dart__scores.game_id')
-   //    ->get()
-   // ;
-   // dd($games);
-
-   $winners = DB::table('dart__scores')
+   $winner = DB::table('dart__scores')
       ->where('team_id', '!=' , 0)
       ->where('user_id', $player->id)
       ->where('remaining', 0)
-      // ->distinct('dart__scores.game_id')
       ->groupBy('game_id')
-      ->count ()
+      // ->count ()
       // ->get()
-      // ->first()
+      ->first()
    ;
-   // dd($winners);
+   // dd($winner);
+   // dd($winner->game_id);
+   // dd($winner->user_id);
 
-   // find winners teammates
-   // foreach($winners as $winner){
-   //    echo "WiNnEr";
-   // }
+   // $byAssoc = DB::table('dart__scores')
+   //    ->where('game_id', $winner[0]->game_id)
+   //    ->where('team_id', $winner[0]->team_id)
+   //    ->where('user_id', '!=',  $winner[0]->user_id)
+   //    ->get('user_id')
+   //    ;
+   // dd($byAssoc);
 
-   $teammates = DB::table('dart__players')
-   ;
 
-   if(!$winners){
-      return 0;
+   // if($winner[0]->user_id == $player->id || $byAssoc == $player->id){
+   if($winner){
+      return 5;
    }
    
-   return $winners;
-   // return "1";
+   // return $winner;
+   return 0;
    
    
 
@@ -83,7 +72,7 @@ function zeroOneTeamGamesLostStat($player) {
 
    if($val == 0)
    {
-      return '0';
+      return '-';
    }
 
    return $val;
@@ -109,7 +98,7 @@ function zeroOneTeamBestScoreStat($player) {
 
    if($val == 0)
    {
-      return '';
+      return '-';
    }
 
    return $val;

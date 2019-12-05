@@ -13,9 +13,11 @@
 @section('content')
 
    <div class="card mb-2">
+
       <div class="card-header section_header p-2">
          Dart Keeper
       </div>
+
       <div class="card-body section_body p-2">
          <div class="form-row">
             <div class="col">
@@ -37,7 +39,7 @@
                               <td>{{ $player->first_name }} [{{ $player->id }}]</td>
                               <td class="text-center">{{ zeroOneTeamGamesPlayedStat($player) }}</td>
                               <td class="text-center">{{ zeroOneTeamGamesWonStat($player) }}</td>
-                              <td class="text-center">{{-- {{ zeroOneTeamGamesLostStat($player) }} --}}</td>
+                              <td class="text-center">{{ zeroOneTeamGamesLostStat($player) }}</td>
                               <td class="text-center">{{ zeroOneTeamBestScoreStat($player) }}</td>
                            </tr>
                         @endforeach
@@ -132,6 +134,10 @@
                </div>
             </div>
          </div>
+      </div>
+
+      <div class="card-footer card_footer p-1">
+         Statistics do not include games listed as Practice in the Games Board
       </div>
    </div>
 

@@ -13,6 +13,8 @@ function zeroOnePlayerIndividualGamesPlayedStat($player) {
 	$val = DB::table('dart__scores')
 		->join('dart__games', 'dart__scores.game_id', 'dart__games.id')
 		->where('dart__games.status', 'Completed')
+		// ->join('dart__games', 'dart__scores.game_id', '=', 'dart__games.id')
+      ->where('dart__games.ind_players', '!=', 1)
 		->where('team_id', 0)
 		->where('user_id', $player->id)
 		->distinct('game_id')
@@ -32,6 +34,8 @@ function zeroOnePlayerIndividualGamesWonStat($player) {
 	$val = DB::table('dart__scores')
 		->join('dart__games', 'dart__scores.game_id', 'dart__games.id')
 		->where('dart__games.status', 'Completed')
+		// ->join('dart__games', 'dart__scores.game_id', '=', 'dart__games.id')
+      ->where('dart__games.ind_players', '!=', 1)
 		->where('team_id', 0)
 		->where('user_id', $player->id)
 		->where('remaining', 0)
@@ -50,7 +54,7 @@ function zeroOnePlayerIndividualGamesWonStat($player) {
 function zeroOnePlayerIndividualGamesLostStat($player) {
 	$val = (int)zeroOnePlayerIndividualGamesPlayedStat($player) - (int)zeroOnePlayerIndividualGamesWonStat($player);
 
-	if($val == 0)
+	if($val <= 0)
 	{
 		return '-';
 	}
@@ -63,6 +67,7 @@ function zeroOnePlayerIndividualGamesLostStat($player) {
 function zeroOnePlayerBestScoreIndividualStat($player) {
 	$val = DB::table('dart__scores')
 		->join('dart__games', 'dart__scores.game_id', 'dart__games.id')
+      ->where('dart__games.ind_players', '!=', 1)
 		->where('dart__games.status', 'Completed')
 		->where('team_id', 0)
 		->where('user_id', $player->id)

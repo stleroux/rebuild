@@ -4,6 +4,8 @@
 function zeroOneGameWinner($game) {
 
    if ($winner = DB::table('dart__scores')
+      ->join('dart__games', 'dart__scores.game_id', 'dart__games.id')
+      ->where('dart__games.ind_players', '!=', 1)
       ->where('game_id', $game->id)
       ->where('remaining', 0)
       ->first())
@@ -15,6 +17,17 @@ function zeroOneGameWinner($game) {
          $user = App\Models\User::findOrFail($winner->user_id);
          return $user->first_name;
       }
+   } elseif ($winner = DB::table('dart__scores')
+      ->join('dart__games', 'dart__scores.game_id', 'dart__games.id')
+      ->where('dart__games.ind_players', 1)
+      ->where('dart__games.status', 'Completed')
+      ->where('game_id', $game->id)
+      ->where('remaining', 0)
+      ->first())
+   {
+      return 'Practice';
+   } else {
+      return '';
    }
 }
 

@@ -13,7 +13,9 @@
 @section('content')
 
 	<div class="card">
+		
 		<div class="card-header section_header p-2">Dart Games</div>
+
 		<div class="card-body section_body p-2">
 			@if($games->count() > 0)
 				<table class="table table-sm table-hover table-striped">
@@ -127,6 +129,10 @@
 			@else
 				{{ setting('no_records_found') }}
 			@endif
+		</div>
+
+		<div class="card-footer card_footer p-1">
+			Games marked as practice are not accounted for in the Leader Board statistics
 		</div>
 	</div>
 
