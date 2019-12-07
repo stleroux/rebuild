@@ -1,3 +1,4 @@
+{{-- {{ $user }} --}}
 	@if($game->type - zeroOneTeamScores($game, 1)->sum('score') == 0 )
 		<div class="card mb-2">
 	@elseif($game->type - zeroOneTeamScores($game, 2)->sum('score') == 0 )
@@ -34,7 +35,7 @@
 						{{-- @foreach($players as $player) --}}
 							{{-- {{ $user->shooting_order }}
 							{!! nextShot($game) !!} --}}
-							<label class="btn btn-md btn-primary btn-block {{ ($player->shooting_order == $nextShot) ? 'active':'' }} p-2 mb-0">
+							<label class="btn btn-md btn-primary btn-block p-2 m-0 {{ ($player->shooting_order == $nextShot) ? 'btn-secondary':'' }}">
 								{{-- <label class="col p-2 m-0 btn btn-primary {{ ($player->shooting_order == $nextShot) ? 'active':'' }}"> --}}
 								@if($player->shooting_order == $nextShot)
 									{{ Form::radio('user_id', $player->user_id , true) }}
@@ -51,28 +52,43 @@
 					<div class="container pt-2">
 	               <div class="row justify-content-md-center">
 	                  <div class="col-xs-12 col-sm-6">
-								@if(($game->type - zeroOneTeamScores($game, 2)->sum('score') == 0) || ($game->type - zeroOneTeamScores($game, 1)->sum('score') == 0))
+								@if(!$teamGameDone)
+									<div class="form-group p-0 {{ $errors->has('score2') ? 'has-error' : '' }}" >
+										@if($nextShot % 2 == 0)
+											<input class="form-control form-control-lg p-0" type="text" name="score1" style="text-align: center" />
+										@else
+											<input class="form-control form-control-lg p-0" type="text" id ="score" name="score1" style="text-align: center" autofocus />
+										@endif
+									</div>
+									<input class="btn btn-lg btn-primary col p-1 border" type="submit" name="t2submit" value="Submit" />
+								@endif
+
+								{{-- @if(($game->type - zeroOneTeamScores($game, 2)->sum('score') == 0) || ($game->type - zeroOneTeamScores($game, 1)->sum('score') == 0))
 									<input class="form-control input-lg p-1 mb-2" type="text" name="score2" style="text-align: center" disabled>
 									<input class="btn btn-lg btn-primary col p-1 mb-0" type="submit" value="Submit" disabled />
 								@else
 									<div class="form-group {{ $errors->has('score2') ? 'has-error' : '' }}" >
-										{{-- {{ dd(zeroOneNextShot($game) % 2 == 0) }} --}}
-										{{-- @if(zeroOneNextShot($game) % 2 == 0) --}}
 										@if($nextShot % 2 == 0)
-											<input class="form-control input-lg p-1 mb-0 border" type="text" name="score1" style="text-align: center" />aaa
+											<input class="form-control input-lg p-1 mb-0 border" type="text" name="score1" style="text-align: center" />
 										@else
-											<input class="form-control input-lg p-1 mb-0 border" type="text" name="score1" style="text-align: center" autofocus />
+											<input class="form-control input-lg p-1 mb-0 border" type="text" id ="score" name="score1" style="text-align: center" autofocus />
 										@endif
 									</div>
 									<input class="btn btn-lg btn-primary col p-1 mb-0 border" type="submit" name="t2submit" value="Submit" />
-								@endif
+								@endif --}}
 							</div>
 						</div>
 					</div>
 			{{ Form::close() }}
 		</div>
-	{{-- </div> --}}
-	<div class="card-footer p-1">
-		Select a player, enter the score and click Submit
-	</div>
+	
+	@if(!$teamGameDone)
+		<div class="card-footer p-1">
+			Select a player, enter the score and click Submit
+		</div>
+	@endif
 </div>
+
+{{-- <script type="text/javascript">
+  $('#score').focus();
+</script> --}}

@@ -184,6 +184,7 @@ class ProfileController extends Controller
          $user->province = $request->input('province');
          $user->postal_code = $request->input('postal_code');
          $user->notes = $request->input('notes');
+         $user->dart_doubleOut = $request->input('dart_doubleOut');
 
          $user->action_buttons = $request->input('action_buttons');
          $user->alert_fade_time = $request->input('alert_fade_time');

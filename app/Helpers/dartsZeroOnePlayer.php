@@ -63,6 +63,18 @@ function zeroOnePlayerIndividualGamesLostStat($player) {
 }
 
 
+// Individual win percentage
+function zeroOnePlayerIndividualGamesWinPercentageStat($player) {
+	$val = number_format((int)zeroOnePlayerIndividualGamesWonStat($player) / (int)zeroOnePlayerIndividualGamesPlayedStat($player) * 100, 1);
+
+	if($val <= 0)
+	{
+		return '-';
+	}
+
+	return $val . "%";
+}
+
 // Best individual player score in an individual game
 function zeroOnePlayerBestScoreIndividualStat($player) {
 	$val = DB::table('dart__scores')

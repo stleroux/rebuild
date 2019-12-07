@@ -1,34 +1,30 @@
 <div style="padding-top: 5px"></div>
 
-@if(session('success'))
-   <div id="display-success">
-      <div class="panel panel-success">
-         <div class="panel-heading">
-            <div class="panel-title">{{ session('success') }}</div>
-         </div>
+@if(session('dart-success'))
+   <div id="display-dart-success">
+      <div class="card mb-2">
+         <div class="card-header p-2">{{ session('dart-success') }}</div>
       </div>
    </div>
 @endif
 
 
-@if (session('error'))
-   <div id="display-danger">
-      <div class="panel panel-danger">
-         <div class="panel-heading">
-            <div class="panel-title">{{ session('error') }}</div>
-         </div>
+@if (session('dart-error'))
+   <div id="display-dart-danger">
+      <div class="card mb-2">
+         <div class="card-header p-2">{{ session('dart-error') }}</div>
       </div>
    </div>
 @endif
 
 
 @if (count($errors) > 0)
-   <div id="display-error">
-      <div class="panel panel-danger">
-         <div class="panel-heading">
-            <div class="panel-title">@foreach ($errors->all() as $error)
-                  <li> {{ $error }} </li>
-               @endforeach</div>
+   <div id="display-dart-error">
+      <div class="card mb-2">
+         <div class="card-header p-2">
+            @foreach ($errors->all() as $error)
+               <li> {{ $error }} </li>
+            @endforeach
          </div>
       </div>
    </div>

@@ -1,4 +1,4 @@
-<table id="tbl" class="table table-condensed table-bordered text-center">
+<table id="tbl" class="table table-sm table-bordered text-center bg-info">
 	<colgroup></colgroup>
 	<colgroup></colgroup>
 	<colgroup></colgroup>

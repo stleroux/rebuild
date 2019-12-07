@@ -1,6 +1,6 @@
 <div class="card mb-2">
 
-	<div class="card-header p-2">Game Statistics</div>
+	<div class="card-header p-2">Team Statistics</div>
 
 	<table class="table table-sm table-hover">
 		<thead>

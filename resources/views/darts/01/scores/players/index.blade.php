@@ -22,7 +22,11 @@
 @endsection
 
 @section('content')
-
+{{-- {{ $user }} --}}
+   @if(!$gameDone)
+      @include('darts.inc.scoreboard')
+   @endif
+   
    <div class="col-xs-12">
       <div class="card mb-2">
          <div class="card-header p-2">
@@ -34,6 +38,7 @@
    
    <div class="form-row">
       <div class="col-sm-4">
+         {{-- @include('darts.01.scores.players.scorePanel', ['user'=>$user]) --}}
          @include('darts.01.scores.players.scorePanel')
       </div>
 
@@ -46,12 +51,11 @@
       </div>
    </div>
 
-   <div class="row">
+   <div class="form-row">
       <div class="col-sm-12">
          <div class="card-group">
             <div class="card mb-2">
                <div class="card-header p-2">Scoresheets</div>
-
                <div class="card-body p-2">
                   <div class="form-row">
                      @foreach($players as $player)
@@ -59,13 +63,26 @@
                      @endforeach
                   </div>
                </div>
-               <div class="card-footer p-1">
+               {{-- <div class="card-footer p-1">
                   Footer
-               </div>
+               </div> --}}
             </div>
          </div>
       </div>
    </div>
+
+{{--    <div class="form-row">
+      <div class="col-sm-12 col-md-4">
+         <div class="card-group">
+            <div class="card mb-1">
+               <div class="card-header p-2">Possible Outs</div>
+               <div class="card-body p-1">
+                  @include('darts.inc.possibleOuts', ['score' => $remainingScore])
+               </div>
+            </div>
+         </div>
+      </div>
+   </div> --}}
 
 @endsection
 

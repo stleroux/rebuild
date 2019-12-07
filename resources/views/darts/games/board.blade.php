@@ -34,7 +34,7 @@
 					</thead>
 					<tbody>
 						@foreach($games as $game)
-							<tr>
+							<tr class="text-light">
 								<td>{{ $game->id}}</td>
 								<td>{{ $game->type }}</td>
 								<td>
@@ -63,7 +63,7 @@
 										@endforeach
 									@endif
 								</td>
-								<td>{{ $game->created_at->format('D M d, Y') }}</td>
+								<td>{{ $game->created_at->format('M d, Y') }}</td>
 								<td>{{ (zeroOneGameWinner($game) == true ) ? zeroOneGameWinner($game) : 'N/A' }}</td>
 								<td>{{ $game->status }}</td>
 								<td class="text-right">
@@ -71,22 +71,22 @@
 										{{-- Individual player game --}}
 										@if($game->ind_players)
 											@if($game->status == 'New')
-												<a href="{{ route('darts.cricket.scores.players.index', $game->id) }}" class="btn btn-sm btn-success">Start</a>
+												<a href="{{ route('darts.cricket.scores.players.index', $game->id) }}" class="btn btn-sm btn-success col-xs-1 py-0 px-1">Start</a>
 											@elseif($game->status == 'In Progress')
-												<a href="{{ route('darts.cricket.scores.players.index', $game->id) }}" class="btn btn-sm btn-warning">Resume</a>
+												<a href="{{ route('darts.cricket.scores.players.index', $game->id) }}" class="btn btn-sm btn-warning col-xs-1 py-0 px-1">Resume</a>
 											@elseif($game->status == 'Completed')
-												<a href="{{ route('darts.cricket.scores.players.index', $game->id) }}" class="btn btn-sm btn-primary">Results</a>
+												<a href="{{ route('darts.cricket.scores.players.index', $game->id) }}" class="btn btn-sm btn-primary btn-block py-0 px-1">Results</a>
 											@else
 												N/A
 											@endif
-										{{-- Team game --}}
 										@else
+										{{-- Team game --}}
 											@if($game->status == 'New')
-												<a href="{{ route('darts.cricket.scores.teams.index', $game->id) }}" class="btn btn-sm btn-success">Start</a>
+												<a href="{{ route('darts.cricket.scores.teams.index', $game->id) }}" class="btn btn-sm btn-success btn-block py-0 px-1">Start</a>
 											@elseif($game->status == 'In Progress')
-												<a href="{{ route('darts.cricket.scores.teams.index', $game->id) }}" class="btn btn-sm btn-warning">Resume</a>
+												<a href="{{ route('darts.cricket.scores.teams.index', $game->id) }}" class="btn btn-sm btn-warning btn-block py-0 px-1">Resume</a>
 											@elseif($game->status == 'Completed')
-												<a href="{{ route('darts.cricket.scores.teams.index', $game->id) }}" class="btn btn-sm btn-primary">Results</a>
+												<a href="{{ route('darts.cricket.scores.teams.index', $game->id) }}" class="btn btn-sm btn-primary btn-block py-0 px-1">Results</a>
 											@else
 												N/A
 											@endif
@@ -94,38 +94,45 @@
 									@else
 										{{-- Individual player game --}}
 										@if($game->ind_players)
+											<div class="btn-group" role="group">
 											@if($game->status == 'New')
-												<a href="{{ route('darts.01.scores.players.index', $game->id) }}" class="btn btn-sm btn-success">Start</a>
+												<a href="{{ route('darts.01.scores.players.index', $game->id) }}" class="btn btn-success btn-sm py-0 px-1">Start</a>
 											@elseif($game->status == 'In Progress')
-												<a href="{{ route('darts.01.scores.players.index', $game->id) }}" class="btn btn-sm btn-warning">Resume</a>
+												<a href="{{ route('darts.01.scores.players.index', $game->id) }}" class="btn btn-warning btn-sm py-0 px-1">Resume</a>
 											@elseif($game->status == 'Completed')
-												<a href="{{ route('darts.01.scores.players.index', $game->id) }}" class="btn btn-sm btn-primary">Results</a>
+												<a href="{{ route('darts.01.scores.players.index', $game->id) }}" class="btn btn-primary btn-sm py-0 px-1">Results</a>
 											@else
 												N/A
 											@endif
-										{{-- Team game --}}
+											</div>
 										@else
+										{{-- Team game --}}
+										<div class="btn-group" role="group">
 											@if($game->status == 'New')
-												<a href="{{ route('darts.01.scores.teams.index', $game->id) }}" class="btn btn-sm btn-success">Start</a>
+												<a href="{{ route('darts.01.scores.teams.index', $game->id) }}" class="btn btn-success btn-sm py-0 px-1">Start</a>
 											@elseif($game->status == 'In Progress')
-												<a href="{{ route('darts.01.scores.teams.index', $game->id) }}" class="btn btn-sm btn-warning">Resume</a>
+												<a href="{{ route('darts.01.scores.teams.index', $game->id) }}" class="btn btn-warning btn-sm py-0 px-1">Resume</a>
 											@elseif($game->status == 'Completed')
-												<a href="{{ route('darts.01.scores.teams.index', $game->id) }}" class="btn btn-sm btn-primary">Results</a>
+												<a href="{{ route('darts.01.scores.teams.index', $game->id) }}" class="btn btn-primary btn-sm py-0 px-1">Results</a>
 											@else
 												N/A
 											@endif
 										@endif
+									</div>
 									@endif
 
-									{!! Form::open(['action' => ['Darts\GamesController@destroy', $game->id], 'method'=>'POST', 'style'=>'display:inline;', 'onsubmit' => 'return confirm("Are you sure you want to delete this game and all related entries?")']) !!}
-										{{ Form::hidden('_method', 'DELETE') }}
-										{!! Form::submit('Delete', ['class'=>'btn btn-sm btn-danger']) !!}
-									{!! Form::close() !!}
+									@if(checkPerm('dart_delete'))
+										{!! Form::open(['action' => ['Darts\GamesController@destroy', $game->id], 'method'=>'POST', 'style'=>'display:inline;', 'onsubmit' => 'return confirm("Are you sure you want to delete this game and all related entries?")']) !!}
+											{{ Form::hidden('_method', 'DELETE') }}
+											{!! Form::submit('Delete', ['class'=>'btn btn-danger btn-sm py-0 px-1']) !!}
+										{!! Form::close() !!}
+									@endif
 								</td>
 							</tr>
 						@endforeach
 					</tbody>
 				</table>
+				{{ $games->links() }}
 			@else
 				{{ setting('no_records_found') }}
 			@endif

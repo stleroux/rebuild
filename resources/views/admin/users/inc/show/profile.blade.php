@@ -113,6 +113,13 @@
                            <span><small>Required for user to show up in the Invoicer</small></span>
                         </div>
                      </div>
+                     <div class="col-md-2">
+                        <div class="form-group">
+                           <label for="dart_doubleOut">Dart Double Out</label>
+                           <input name="dart_doubleOut" type="text" class="form-control form-control-sm" value="{{ $user->dart_doubleOut }}" disabled />
+                           <span><small>Preferred double out for Dart games</small></span>
+                        </div>
+                     </div>
                   </div>
 
                </div>

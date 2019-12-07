@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Darts;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Auth;
 use DB;
 use Session;
 use App\Models\User;
@@ -13,9 +14,27 @@ use App\Models\Darts\Player;
 
 class DartsController extends Controller
 {
+##################################################################################################################
+#  ██████╗ ██████╗ ███╗   ██╗███████╗████████╗██████╗ ██╗   ██╗ ██████╗████████╗
+# ██╔════╝██╔═══██╗████╗  ██║██╔════╝╚══██╔══╝██╔══██╗██║   ██║██╔════╝╚══██╔══╝
+# ██║     ██║   ██║██╔██╗ ██║███████╗   ██║   ██████╔╝██║   ██║██║        ██║   
+# ██║     ██║   ██║██║╚██╗██║╚════██║   ██║   ██╔══██╗██║   ██║██║        ██║   
+# ╚██████╗╚██████╔╝██║ ╚████║███████║   ██║   ██║  ██║╚██████╔╝╚██████╗   ██║   
+#  ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝  ╚═════╝   ╚═╝   
+##################################################################################################################
+   public function __construct()
+   {
+      $this->middleware('auth');
+      $this->enablePermissions = true;
+   }
 
 	public function index()
 	{
+		// Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('dart_browse')) { abort(401, 'Unauthorized Access'); }
+      }
+
 		// $players = Player::with('games')->where('id','!=',1)->get();
 		// dd($players);
 		// $games = Game::with('players')->where('id',25)->get();
@@ -181,7 +200,12 @@ class DartsController extends Controller
 
 	public function board()
 	{
-		$games = Game::orderby('id','desc')->get();
+		// Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('dart_browse')) { abort(401, 'Unauthorized Access'); }
+      }
+      
+		$games = Game::orderby('id','desc')->paginate(15);
 		return view('darts.games.board', compact('games'));
 	}
 

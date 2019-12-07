@@ -1,15 +1,15 @@
+{{-- {{ $user }} --}}
 <?php
-      // $score = $_GET['score'];
-      // $score = $remainingScore;
-      // $finaldart = $_GET['out'] * 2;
-      $finaldart = 10 * 2;
+      if($user->dart_doubleOut){
+         $finaldart = $user->dart_doubleOut * 2;
+      } else {
+         $finaldart = 20 * 2;
+      }
 
       if ($score > 170 || $score <= 1 ) {
-         echo '<div class="panel panel-default">
-               <div class="panel-heading">
-                  <div class="panel-title">No Outs Possible</div>
-               </div></div>
-               ';
+         echo '<div class="card mb-1 bg-danger">
+               <div class="card-header p-1 bg-danger">No Outs Possible</div>
+               </div>';
       } else {
          for ($firstdart=60; $firstdart >= 0; $firstdart--) {
             if (
@@ -68,11 +68,11 @@
       if(!empty($finaldart)) {
          if(!empty($pouts)){
             echo '
-               <div class="panel panel-default">
-                  <div class="panel-heading">
-                     <div class="panel-title">Preferred Outs</div>
+               <div class="card mb-1">
+                  <div class="card-header p-1">
+                     Preferred Outs
                   </div>
-                  <table class="table table-hover">
+                  <table class="table table-hover table-sm">
             ';
             foreach($pouts as $out) {
                echo '<tr><td>'.$out.'</td></tr>';
@@ -80,30 +80,30 @@
             echo '</table></div>';
             
          } else { 
-            echo '<div class="panel panel-default">
-                  <div class="panel-heading">
-                     <div class="panel-title">No Preferred Outs Available</div>
+            echo '<div class="card mb-1 bg-danger">
+                  <div class="card-header p-1 bg-danger">
+                     No Preferred Outs Available
                   </div></div>
                   ';
          }
       }
 
       if(!empty($everyotherout)) {
-         echo '<div class="panel panel-default">
-               <div class="panel-heading">
-                  <div class="panel-title">Every Other Out</div>
+         echo '<div class="card mb-1">
+               <div class="card-header p-1">
+                  Every Other Out
                </div>
-               <table class="table table-hover">';
+               <table class="table table-hover table-sm">';
                   foreach($everyotherout as $out) {
                      echo '<tr><td>'.$out.'</td></tr>';
                   }
       } else if(empty($pouts)){
-         echo '<div class="panel panel-default">
-               <div class="panel-heading">
-                  <div class="panel-title">Every Other Out</div>
+         echo '<div class="card mb-1">
+               <div class="card-header p-1">
+                  Every Other Out
                </div>
-               <table class="table table-hover">';
-         echo '<tr><td>No outs available.</td></tr>';
+               <table class="table table-hover table-sm">';
+         echo '<tr><td class="text-danger">No outs available.</td></tr>';
       }
       echo '</table></div>';
    

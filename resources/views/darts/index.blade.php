@@ -30,16 +30,18 @@
                            <th class="text-center">Played</th>
                            <th class="text-center">Won</th>
                            <th class="text-center">Lost</th>
+                           <th class="text-center">Closed</th>
                            <th class="text-center">Best Score</th>
                         </tr>
                      </thead>
                      <tbody>
                         @foreach($players as $player)
-                           <tr>
-                              <td>{{ $player->first_name }} [{{ $player->id }}]</td>
+                           <tr class="text-light">
+                              <td>{{ $player->first_name }}</td>
                               <td class="text-center">{{ zeroOneTeamGamesPlayedStat($player) }}</td>
-                              <td class="text-center">{{ zeroOneTeamGamesWonStat($player) }}</td>
-                              <td class="text-center">{{ zeroOneTeamGamesLostStat($player) }}</td>
+                              <td class="text-center">{{-- {{ zeroOneTeamGamesWonStat($player) }} --}}</td>
+                              <td class="text-center">{{-- {{ zeroOneTeamGamesLostStat($player) }} --}}</td>
+                              <td class="text-center">{{ zeroOneTeamGamesClosedStat($player) }}</td>
                               <td class="text-center">{{ zeroOneTeamBestScoreStat($player) }}</td>
                            </tr>
                         @endforeach
@@ -58,16 +60,18 @@
                            <th class="text-center">Played</th>
                            <th class="text-center">Won</th>
                            <th class="text-center">Lost</th>
+                           <th class="text-center">Win%</th>                           
                            <th class="text-center">Best Score</th>
                         </tr>
                      </thead>
                      <tbody>
                         @foreach($players as $player)
-                           <tr>
+                           <tr class="text-light">
                               <td>{{ $player->first_name }}</td>
                               <td class="text-center">{{ zeroOnePlayerIndividualGamesPlayedStat($player) }}</td>
                               <td class="text-center">{{ zeroOnePlayerIndividualGamesWonStat($player) }}</td>
                               <td class="text-center">{{ zeroOnePlayerIndividualGamesLostStat($player) }}</td>
+                              <td class="text-center">{{ zeroOnePlayerIndividualGamesWinPercentageStat($player) }}</td>
                               <td class="text-center">{{ zeroOnePlayerBestScoreIndividualStat($player) }}</td>
                            </tr>
                         @endforeach
@@ -94,7 +98,7 @@
                      </thead>
                      <tbody>
                         @foreach($players as $player)
-                           <tr>
+                           <tr class="text-light">
                               <td>{{ $player->first_name }}</td>
                               <td class="text-center"></td>
                               <td class="text-center"></td>
@@ -121,7 +125,7 @@
                      </thead>
                      <tbody>
                         @foreach($players as $player)
-                           <tr>
+                           <tr class="text-light">
                               <td>{{ $player->first_name }}</td>
                               <td class="text-center"></td>
                               <td class="text-center"></td>

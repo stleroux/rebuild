@@ -12,6 +12,20 @@ use App\Models\User;
 
 class ScoresController extends Controller
 {
+##################################################################################################################
+#  ██████╗ ██████╗ ███╗   ██╗███████╗████████╗██████╗ ██╗   ██╗ ██████╗████████╗
+# ██╔════╝██╔═══██╗████╗  ██║██╔════╝╚══██╔══╝██╔══██╗██║   ██║██╔════╝╚══██╔══╝
+# ██║     ██║   ██║██╔██╗ ██║███████╗   ██║   ██████╔╝██║   ██║██║        ██║   
+# ██║     ██║   ██║██║╚██╗██║╚════██║   ██║   ██╔══██╗██║   ██║██║        ██║   
+# ╚██████╗╚██████╔╝██║ ╚████║███████║   ██║   ██║  ██║╚██████╔╝╚██████╗   ██║   
+#  ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝  ╚═════╝   ╚═╝   
+##################################################################################################################
+   public function __construct()
+   {
+      $this->middleware('auth');
+      $this->enablePermissions = false;
+   }
+
    public function index($gameID)
    {
       // dd($gameID);
@@ -23,6 +37,8 @@ class ScoresController extends Controller
       // dd($nextShot);
       $player = DB::table('dart__players')->where('game_id', $gameID)->where('shooting_order', $nextShot)->first();
       // dd($player);
+      $user = User::where('id', $player->user_id)->first();
+      // dd($user->username);
       $remainingScore = $game->type - zeroOnePlayerScore($gameID, $player->user_id)->sum('score');
       // dd($remainingScore);
 
@@ -37,7 +53,7 @@ class ScoresController extends Controller
          }
       }
 
-      return view('darts.01.scores.players.index', compact('game','nextShot','players','player','remainingScore','gameDone'));
+      return view('darts.01.scores.players.index', compact('game','nextShot','players','player','user','remainingScore','gameDone'));
    }
 
 

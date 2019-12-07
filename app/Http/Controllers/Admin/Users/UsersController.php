@@ -418,6 +418,7 @@ class UsersController extends Controller
          $user->province         = $request->province;
          $user->postal_code      = $request->postal_code;
          $user->notes            = $request->notes;
+         $user->dart_doubleOut   = $request->dart_doubleOut;
          // $user->invoicer_client  = $request->invoicer_client;
          $user->action_buttons   = $request->action_buttons;
          $user->alert_fade_time	= $request->alert_fade_time;
@@ -504,6 +505,7 @@ class UsersController extends Controller
          $user->province = $request->input('province');
          $user->postal_code = $request->input('postal_code');
          $user->notes = $request->input('notes');
+         $user->dart_doubleOut = $request->input('dart_doubleOut');
          // $user->action_buttons = $request->input('action_buttons');
          // $user->alert_fade_time = $request->input('alert_fade_time');
          // $user->author_format = $request->input('author_format');

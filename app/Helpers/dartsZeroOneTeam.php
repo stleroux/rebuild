@@ -7,9 +7,9 @@
 // ██████╔╝██║  ██║██║  ██║   ██║   ███████║
 // ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚══════╝
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // Team games played
 function zeroOneTeamGamesPlayedStat($player) {
-   // dd($player);
    $val = DB::table('dart__scores')
       ->join('dart__games', 'dart__scores.game_id', 'dart__games.id')
       ->where('dart__games.status', 'Completed')
@@ -17,52 +17,68 @@ function zeroOneTeamGamesPlayedStat($player) {
       ->where('dart__scores.user_id', $player->id)
       ->distinct('dart__scores.game_id')
       ->count('dart__scores.game_id');
-   // dd($val);
 
-   if($val == 0)
-   {
-      return '-';
-   }
+   if($val == 0) { return '-'; }
+   return $val;
+}
 
+
+// Team games closed by user
+function zeroOneTeamGamesClosedStat($player) {
+   
+   $val = DB::table('dart__scores')
+      ->where('team_id', '!=' , 0)
+      ->where('user_id', $player->id)
+      ->where('remaining', 0)
+      ->count();
+   
+   if($val == 0) { return '-'; }
    return $val;
 }
 
 
 // Team games won
 function zeroOneTeamGamesWonStat($player) {
-   // dd($player->id);
-   $winner = DB::table('dart__scores')
+   
+   // get count of team games won by current user
+   $winners = DB::table('dart__scores')
       ->where('team_id', '!=' , 0)
       ->where('user_id', $player->id)
       ->where('remaining', 0)
+      ->count();
+
+   $teamGames = DB::table('dart__players')
+      ->join('dart__games', 'dart__players.game_id', 'dart__games.id')
+      ->where('ind_players', 0)
       ->groupBy('game_id')
-      // ->count ()
-      // ->get()
-      ->first()
+      ->get('game_id')
+      ->toArray();
+
+   // get teammates of current user
+   $tmates = DB::table('dart__scores')
+      ->join('dart__games', 'dart__scores.game_id', 'dart__games.id')
+      ->where('dart__games.status', 'Completed')
+
+      ->join('dart__players', 'dart__scores.game_id', 'dart__players.game_id')
+      ->where('dart__players.user_id', '!=', $player->id)
+
+      ->where('dart__scores.team_id', '!=', 0)
+      
+      // ->where('dart__scores.user_id', '!=', $player->id)
+
+      // ->whereIn('dart__players.game_id', $teamGames)
+      
+      ->groupBy('dart__scores.game_id')
+      
+      ->get()
+      // ->count()
+      // ->first()
    ;
-   // dd($winner);
-   // dd($winner->game_id);
-   // dd($winner->user_id);
+   // dd($tmates);
+      
 
-   // $byAssoc = DB::table('dart__scores')
-   //    ->where('game_id', $winner[0]->game_id)
-   //    ->where('team_id', $winner[0]->team_id)
-   //    ->where('user_id', '!=',  $winner[0]->user_id)
-   //    ->get('user_id')
-   //    ;
-   // dd($byAssoc);
-
-
-   // if($winner[0]->user_id == $player->id || $byAssoc == $player->id){
-   if($winner){
-      return 5;
-   }
-   
-   // return $winner;
-   return 0;
-   
-   
-
+   if(!$winners) { return '-'; }   
+   return $winners;
 }
 
 
@@ -72,7 +88,7 @@ function zeroOneTeamGamesLostStat($player) {
 
    if($val == 0)
    {
-      return '-';
+      return '';
    }
 
    return $val;
@@ -98,7 +114,7 @@ function zeroOneTeamBestScoreStat($player) {
 
    if($val == 0)
    {
-      return '-';
+      return '';
    }
 
    return $val;

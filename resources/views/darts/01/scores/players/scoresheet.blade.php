@@ -1,9 +1,7 @@
-<div class="col-sm-6">
+<div class="col-sm-4">
    <div class="card mb-2">
-      <div class="card-header p-2">{{ $player->first_name }} [{{ $player->user_id }}]</div>
+      <div class="card-header p-2">{{ $player->first_name }}</div>
       <div class="card-body p-2">
-         {{-- {{ $game->id }} <br /> --}}
-         {{-- {{ $player->user_id }} --}}
          <table class="table table-sm table-hover">
             <thead>
                <tr>
@@ -15,17 +13,13 @@
             <tbody>
                @php
                   $t1no = zeroOnePlayerScore($game->id, $player->user_id)->count();
-                  // dd($t1no);
                @endphp
                
                @foreach(zeroOnePlayerScore($game->id, $player->user_id) as $score)
-                  <tr>
+                  <tr class="text-light">
                      <td>{{ $t1no }}</td>
                      <td class="text-center">{{ $score->score }}</td>
-                     <td class="text-center">
-                        {{ $score->remaining }}
-                        {{-- {{ $game->type - zeroOnePlayerScore($game->id, $player->user_id)->sum('score') }} --}}
-                     </td>
+                     <td class="text-center">{{ $score->remaining }}</td>
                   </tr>
                   @php
                      $t1no --;
@@ -34,8 +28,5 @@
             </tbody>
          </table>
       </div>
-      {{-- <div class="panel-footer">
-         Footer
-      </div> --}}
    </div>
 </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Darts;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Auth;
 use DB;
 use Session;
 use App\Models\User;
@@ -13,17 +14,40 @@ use App\Models\Darts\Score;
 
 class GamesController extends Controller
 {
+##################################################################################################################
+#  ██████╗ ██████╗ ███╗   ██╗███████╗████████╗██████╗ ██╗   ██╗ ██████╗████████╗
+# ██╔════╝██╔═══██╗████╗  ██║██╔════╝╚══██╔══╝██╔══██╗██║   ██║██╔════╝╚══██╔══╝
+# ██║     ██║   ██║██╔██╗ ██║███████╗   ██║   ██████╔╝██║   ██║██║        ██║   
+# ██║     ██║   ██║██║╚██╗██║╚════██║   ██║   ██╔══██╗██║   ██║██║        ██║   
+# ╚██████╗╚██████╔╝██║ ╚████║███████║   ██║   ██║  ██║╚██████╔╝╚██████╗   ██║   
+#  ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝  ╚═════╝   ╚═╝   
+##################################################################################################################
+   public function __construct()
+   {
+      $this->middleware('auth');
+      $this->enablePermissions = true;
+   }
 
    public function index()
    {
-         return view('darts.index');
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('dart_browse')) { abort(401, 'Unauthorized Access'); }
+      }
+
+      return view('darts.index');
    }
 
 
    public function create()
    {
-         $users = User::where('id', '!=', 1)->orderby('username','asc')->get();
-         return view('darts.games.create', compact('users'));
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('dart_add')) { abort(401, 'Unauthorized Access'); }
+      }
+
+      $users = User::where('id', '!=', 1)->orderby('username','asc')->get();
+      return view('darts.games.create', compact('users'));
    }
 
 
@@ -160,14 +184,5 @@ class GamesController extends Controller
       Session::flash('success', 'The game and related entries were successfully deleted!');
       return redirect()->route('darts.games.board');
    }
-
-
-   public function board()
-   {
-      $games = Game::orderby('id','desc')->get();
-      return view('darts.games.board', compact('games'));
-   }
-
-
    
 }
