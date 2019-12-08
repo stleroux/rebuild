@@ -32,6 +32,16 @@
 
 	{{-- @if(($game->type - zeroOneTeamScores($game, 2)->sum('score') != 0) || ($game->type - zeroOneTeamScores($game, 1)->sum('score') != 0)) --}}
 {{-- {{ $teamGameDone }} --}}
+
+   {{-- <div class="col-xs-12">
+      <div class="card mb-2">
+         <div class="card-header p-2">
+            Team Game
+            <div class="float-right">Game Type : {{ $game->type }}</div>
+         </div>
+      </div>
+   </div> --}}
+
    @isset($teamGameDone)
       @if(!$teamGameDone)
          @include('darts.inc.scoreboard')
@@ -42,33 +52,33 @@
 	<div class="form-row">
 		<div class="col-sm-4">
 			@include('darts.01.scores.teams.t1scorePanel')
+			@include('darts.01.scores.teams.t1scoresheet')
 		</div>
 
 		<div class="col-sm-4">
 			@include('darts.01.scores.teams.gameInfo')
+			@include('darts.01.scores.teams.teamStats')
+			@include('darts.01.scores.teams.playerStats')
 		</div>
 
 		<div class="col-sm-4">
 			@include('darts.01.scores.teams.t2scorePanel')
+			@include('darts.01.scores.teams.t2scoresheet')
 		</div>
 	</div>
 	{{-- {{ Form::close() }} --}}
 
 	<div class="form-row">
 		<div class="col-sm-4">
-			@include('darts.01.scores.teams.t1scoresheet')
 			{{-- @if(($game->type - zeroOneTeamScores($game, 2)->sum('score') != 0) || ($game->type - zeroOneTeamScores($game, 1)->sum('score') != 0))
 				@include('darts.01.scores.teams.t1possibleOuts')
 			@endif --}}
 		</div>
 
 		<div class="col-sm-4">
-			@include('darts.01.scores.teams.teamStats')
-			@include('darts.01.scores.teams.playerStats')
 		</div>
 
 		<div class="col-sm-4">
-			@include('darts.01.scores.teams.t2scoresheet')
 			{{-- @if(($game->type - zeroOneTeamScores($game, 2)->sum('score') != 0) || ($game->type - zeroOneTeamScores($game, 1)->sum('score') != 0))
 				@include('darts.01.scores.teams.t2possibleOuts')
 			@endif --}}

@@ -1,10 +1,11 @@
-	@if($game->type - zeroOneTeamScores($game, 2)->sum('score') == 0 )
+{{-- 	@if($game->type - zeroOneTeamScores($game, 2)->sum('score') == 0 )
 		<div class="card mb-2">
 	@elseif($game->type - zeroOneTeamScores($game, 1)->sum('score') == 0 )
 		<div class="card mb-2">
 	@else
-		<div class="card mb-2 {{ zeroOneTeamScores($game, 2)->count() < zeroOneTeamScores($game, 1)->count() ? 'warning' : 'primary' }}">
-	@endif
+		<div class="card mb-2 {{ zeroOneTeamScores($game, 2)->count() > zeroOneTeamScores($game, 1)->count() ? 'primary' : 'warning' }}">ewew
+	@endif --}}
+	<div class="card mb-2">
 	<div class="card-header p-2">Team 2</div>
 	<div class="card-body p-2">
 		{{-- <div class="row border"> --}}
@@ -14,6 +15,7 @@
 				{{-- <br /> --}}
 				{{-- Team ID :  --}}
 				{{ Form::hidden('team_id', 2, ['size'=>3]) }}
+				{{-- {{ $tID }} --}}
 				{{-- <br /> --}}
 				{{-- Remaining Score :  --}}
 				{{ Form::hidden('remainingScore', ($game->type - zeroOneTeamScores($game, 2)->sum('score')), ['size'=>3]) }}

@@ -22,19 +22,20 @@
 @endsection
 
 @section('content')
-{{-- {{ $user }} --}}
-   @if(!$gameDone)
-      @include('darts.inc.scoreboard')
-   @endif
-   
-   <div class="col-xs-12">
+
+{{--    <div class="col-xs-12">
       <div class="card mb-2">
          <div class="card-header p-2">
             Single Player Game
             <span class="float-right">Game Type : {{ $game->type }}</span>
          </div>
       </div>
-   </div>   
+   </div> --}}
+
+   @if(!$gameDone)
+      @include('darts.inc.scoreboard')
+   @endif
+   
    
    <div class="form-row">
       <div class="col-sm-4">
