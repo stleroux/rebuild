@@ -50,6 +50,27 @@ function zeroOnePlayerIndividualGamesWonStat($player) {
 }
 
 
+// Individual games won
+function zeroOnePlayerIndividualPracticeStat($player) {
+	$val = DB::table('dart__scores')
+		->join('dart__games', 'dart__scores.game_id', 'dart__games.id')
+		->where('dart__games.status', 'Completed')
+		// ->join('dart__games', 'dart__scores.game_id', '=', 'dart__games.id')
+      ->where('dart__games.ind_players', 1)
+		// ->where('team_id', 0)
+		->where('user_id', $player->id)
+		->where('remaining', 0)
+		->count('game_id');
+
+	if($val == 0)
+	{
+		return '-';
+	}
+
+	return $val;
+}
+
+
 // Individual games lost
 function zeroOnePlayerIndividualGamesLostStat($player) {
 	$val = (int)zeroOnePlayerIndividualGamesPlayedStat($player) - (int)zeroOnePlayerIndividualGamesWonStat($player);

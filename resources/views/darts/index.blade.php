@@ -60,6 +60,7 @@
                            <th class="text-center">Played</th>
                            <th class="text-center">Won</th>
                            <th class="text-center">Lost</th>
+                           <th class="text-center">Practice</th>
                            <th class="text-center">Win%</th>                           
                            <th class="text-center">Best Score</th>
                         </tr>
@@ -71,6 +72,7 @@
                               <td class="text-center">{{ zeroOnePlayerIndividualGamesPlayedStat($player) }}</td>
                               <td class="text-center">{{ zeroOnePlayerIndividualGamesWonStat($player) }}</td>
                               <td class="text-center">{{ zeroOnePlayerIndividualGamesLostStat($player) }}</td>
+                              <td class="text-center">{{ zeroOnePlayerIndividualPracticeStat($player) }}</td>
                               <td class="text-center">{{ zeroOnePlayerIndividualGamesWinPercentageStat($player) }}</td>
                               <td class="text-center">{{ zeroOnePlayerBestScoreIndividualStat($player) }}</td>
                            </tr>
