@@ -123,7 +123,7 @@
 									@endif
 
 									@if(checkPerm('dart_delete'))
-										{!! Form::open(['action' => ['Darts\GamesController@destroy', $game->id], 'method'=>'POST', 'style'=>'display:inline;', 'onsubmit' => 'return confirm("Are you sure you want to delete this game and all related entries?")']) !!}
+										{!! Form::open(['action' => ['Darts\ZeroOne\GamesController@destroy', $game->id], 'method'=>'POST', 'style'=>'display:inline;', 'onsubmit' => 'return confirm("Are you sure you want to delete this game and all related entries?")']) !!}
 											{{ Form::hidden('_method', 'DELETE') }}
 											{!! Form::submit('Delete', ['class'=>'btn btn-danger btn-sm py-0 px-1']) !!}
 										{!! Form::close() !!}

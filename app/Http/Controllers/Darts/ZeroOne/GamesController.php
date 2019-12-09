@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Darts;
+namespace App\Http\Controllers\Darts\ZeroOne;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

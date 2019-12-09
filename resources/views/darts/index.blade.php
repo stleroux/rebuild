@@ -1,4 +1,5 @@
 @extends ('layouts.master')
+{{-- @extends('darts.layouts.app') --}}
 
 @section ('stylesheets')
 @endsection
