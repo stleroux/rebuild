@@ -23,24 +23,6 @@
 @endsection
 
 @section('content')
-{{-- {{ $user }} --}}
-{{-- {{ dd($game->type) }} --}}
-{{-- {{ dd(zeroOneTeamScores($game, 2)->sum('score')) }} --}}
-{{-- {{ dd(zeroOneTeamScores($game, 1)->sum('score')) }} --}}
-{{-- {{ dd($game->type - zeroOneTeamScores($game, 2)->sum('score')) }} --}}
-{{-- {{ dd($game->type - zeroOneTeamScores($game, 1)->sum('score')) }} --}}
-
-	{{-- @if(($game->type - zeroOneTeamScores($game, 2)->sum('score') != 0) || ($game->type - zeroOneTeamScores($game, 1)->sum('score') != 0)) --}}
-{{-- {{ $teamGameDone }} --}}
-
-   {{-- <div class="col-xs-12">
-      <div class="card mb-2">
-         <div class="card-header p-2">
-            Team Game
-            <div class="float-right">Game Type : {{ $game->type }}</div>
-         </div>
-      </div>
-   </div> --}}
 
    @isset($teamGameDone)
       @if(!$teamGameDone)
@@ -48,7 +30,6 @@
       @endif
    @endisset
 	
-	{{-- {!! Form::open(['route' => 'darts.01.teams.store']) !!} --}}
 	<div class="form-row">
 		<div class="col-sm-4">
 			@include('darts.01.teams.t1scorePanel')
@@ -56,7 +37,9 @@
 		</div>
 
 		<div class="col-sm-4">
-			@include('darts.01.teams.gameInfo')
+         @include('darts.01.teams.messages')
+			@include('darts.01.teams.dartboard')
+         @include('darts.01.teams.gameInfo')
 			@include('darts.01.teams.teamStats')
 			@include('darts.01.teams.playerStats')
 		</div>
@@ -64,24 +47,6 @@
 		<div class="col-sm-4">
 			@include('darts.01.teams.t2scorePanel')
 			@include('darts.01.teams.t2scoresheet')
-		</div>
-	</div>
-	{{-- {{ Form::close() }} --}}
-
-	<div class="form-row">
-		<div class="col-sm-4">
-			{{-- @if(($game->type - zeroOneTeamScores($game, 2)->sum('score') != 0) || ($game->type - zeroOneTeamScores($game, 1)->sum('score') != 0))
-				@include('darts.01.teams.t1possibleOuts')
-			@endif --}}
-		</div>
-
-		<div class="col-sm-4">
-		</div>
-
-		<div class="col-sm-4">
-			{{-- @if(($game->type - zeroOneTeamScores($game, 2)->sum('score') != 0) || ($game->type - zeroOneTeamScores($game, 1)->sum('score') != 0))
-				@include('darts.01.teams.t2possibleOuts')
-			@endif --}}
 		</div>
 	</div>
 

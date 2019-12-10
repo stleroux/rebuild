@@ -14,7 +14,7 @@
 		</thead>
 		<tbody>
 			@foreach(zeroOnePlayers($game->id) as $player)
-				<tr class="text-center">
+				<tr class="text-center text-light">
 					<td>{{ $player->team_id }}</td>
 					<td class="text-left">{{ $player->first_name }}</td>
 					<td>{{ zeroOnePlayerBestScore($player) }}</td>

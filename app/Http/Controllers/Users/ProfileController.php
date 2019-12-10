@@ -214,7 +214,7 @@ class ProfileController extends Controller
 
       $user->save();
 
-      $user->permissions()->sync($request->input('permission'));
+      // $user->permissions()->sync($request->input('permission'));
 
       Session::flash('success','Your profile has been updated.');
       return view('profile.show', compact('user'));

@@ -15,7 +15,7 @@
 				$t1no = zeroOneTeamScores($game, 1)->count();
 			@endphp
 			@foreach(zeroOneTeamScores($game, 1) as $score)
-				<tr>
+				<tr class="text-light">
 					<td>{{ $t1no }}</td>
 					<td class="text-center">
 						{{ $score->first_name }}

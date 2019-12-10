@@ -9,32 +9,25 @@
          <input type="hidden" name="remainingScore" value="{{ $remainingScore }}" />
 
          @foreach($players as $player)
-            {{-- <label class="btn btn-md btn-primary btn-block p-2 m-0 {{ ($player->shooting_order == $nextShot) ? 'btn-secondary':'' }}"> --}}
-               {{-- {{ Form::radio('user_id', $player->user_id , ($player->shooting_order == $nextShot) ?? true) }} --}}
-               {{-- @if($player->shooting_order == $nextShot)
-                  {{ Form::radio('user_id', $player->user_id , true) }}
+
+            @if(!$gameDone)
+               @if($player->shooting_order == $nextShot)
+                  <label class="bg-secondary border btn-block p-2 m-0">
+                     {{ Form::radio('user_id', $player->user_id , true) }}
+                     {{ $player->first_name }} {{ $player->last_name }}
+                  </label>
                @else
-                  {{ Form::radio('user_id', $player->user_id , false, ['disabled']) }}
+                  <label class="bg-primary btn-block p-2 m-0">
+                     {{ Form::radio('user_id', $player->user_id , false, ['disabled']) }}
+                     {{ $player->first_name }} {{ $player->last_name }}
+                  </label>
                @endif
-               {{ $player->first_name }} {{ $player->last_name }}
-            </label> --}}
-
-
-@if($player->shooting_order == $nextShot)
-   <label class="btn btn-md btn-primary btn-block p-2 m-0 btn-secondary">
-{{-- {{ Form::radio('user_id', $player->user_id , ($player->shooting_order == $nextShot) ?? true) }} --}}
-      {{ Form::radio('user_id', $player->user_id , true) }}
-      {{ $player->first_name }} {{ $player->last_name }}
-   </label>
-@else
-   <label class="btn btn-md btn-primary btn-block p-2 m-0 btn-primary disabled">
-      {{ Form::radio('user_id', $player->user_id , false, ['disabled']) }}
-      {{ $player->first_name }} {{ $player->last_name }}
-   </label>
-@endif
-
-
-
+            @else
+               <label class="bg-primary btn-block p-2 m-0">
+                  {{ Form::radio('user_id', $player->user_id , false, ['disabled']) }}
+                  {{ $player->first_name }} {{ $player->last_name }}
+               </label>
+            @endif
 
          @endforeach
 

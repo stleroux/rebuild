@@ -1,4 +1,3 @@
-{{-- {{ $user }} --}}
 <?php
       if($user->dart_doubleOut){
          $finaldart = $user->dart_doubleOut * 2;
@@ -8,7 +7,7 @@
 
       if ($score > 170 || $score <= 1 ) {
          echo '<div class="card mb-1 bg-danger">
-               <div class="card-header p-1 bg-danger">No Outs Possible</div>
+               <div class="card-header p-1 bg-secondary">No Outs Possible</div>
                </div>';
       } else {
          for ($firstdart=60; $firstdart >= 0; $firstdart--) {
@@ -50,20 +49,6 @@
                }
             }
          }
-      }
-
-//      if(!empty($finaldart)) {
-//         if(!empty($pouts)){
-//            echo '<b>Preferred Outs</b>' . "<br />\n";
-//            foreach($pouts as $out) {
-//               echo $out;
-//            }
-//            echo "<br />\n" . '<b>Every Other Out</b>' . "<br />\n";
-//         } else { 
-//            echo 'No preferred outs avaliable.' . "<br /><br />\n";
-//         }
-//      }
-
 
       if(!empty($finaldart)) {
          if(!empty($pouts)){
@@ -75,13 +60,13 @@
                   <table class="table table-hover table-sm">
             ';
             foreach($pouts as $out) {
-               echo '<tr><td>'.$out.'</td></tr>';
+               echo '<tr class="text-light"><td>'.$out.'</td></tr>';
             }
             echo '</table></div>';
             
          } else { 
             echo '<div class="card mb-1 bg-danger">
-                  <div class="card-header p-1 bg-danger">
+                  <div class="card-header p-1 bg-secondary">
                      No Preferred Outs Available
                   </div></div>
                   ';
@@ -95,7 +80,7 @@
                </div>
                <table class="table table-hover table-sm">';
                   foreach($everyotherout as $out) {
-                     echo '<tr><td>'.$out.'</td></tr>';
+                     echo '<tr class="text-light"><td>'.$out.'</td></tr>';
                   }
       } else if(empty($pouts)){
          echo '<div class="card mb-1">
@@ -104,6 +89,7 @@
                </div>
                <table class="table table-hover table-sm">';
          echo '<tr><td class="text-danger">No outs available.</td></tr>';
+      }
       }
       echo '</table></div>';
    

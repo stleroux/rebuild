@@ -10,7 +10,6 @@ use App\Models\Darts\Game;
 use App\Models\Darts\Score;
 use App\Models\User;
 
-
 class TeamsController extends Controller
 {
 ##################################################################################################################
@@ -27,80 +26,52 @@ class TeamsController extends Controller
       $this->enablePermissions = false;
    }
 
-   // public function index($gameID)
-   // {
-   //    $game = Game::find($gameID);
-   //    // dd($game);
-   //    // $players = zeroOneTeamPlayers($gameID);
-   //    // dd ($players);
-
-   //    // return view('darts.01.teams.index', compact('game', 'players'));
-   //    return view('darts.01.teams.index', compact('game'));
-   // }
+##################################################################################################################
+# ██╗███╗   ██╗██████╗ ███████╗██╗  ██╗
+# ██║████╗  ██║██╔══██╗██╔════╝╚██╗██╔╝
+# ██║██╔██╗ ██║██║  ██║█████╗   ╚███╔╝ 
+# ██║██║╚██╗██║██║  ██║██╔══╝   ██╔██╗ 
+# ██║██║ ╚████║██████╔╝███████╗██╔╝ ██╗
+# ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝
+// Display a list of resources
+##################################################################################################################
    public function index($gameID, Request $request)
    {
-      // dd($gameID);
       $game = Game::find($gameID);
-      // dd($game);
 
-      // dd($request->tID);
-      // $teamID = 1;
       if(!$request->tID) {
          $tID = 1;
       }
 
-      if($request->tID == 2){
+      if($request->tID == 2) {
          $tID = 1;
       }
 
-      if($request->tID == 1){
+      if($request->tID == 1) {
          $tID = 2;
       }
 
-      $players = zeroOneTeamPlayers($game, $request->tID);
-      // dd($players);
-      
       $nextShot = zeroOneNextShot($gameID);
-      // dd($nextShot);
 
       $player = DB::table('dart__players')->where('game_id', $gameID)->where('shooting_order', $nextShot)->first();
-      // dd($player);
 
       $user = User::where('id', $player->user_id)->first();
-      // dd($user);
 
       $remainingScore = $game->type - zeroOneTeamScores($game, $tID)->sum('score');
-      // dd($remainingScore);
 
       // Check if any one of the players has won the game (remaining score = 0)
-      // dd($game->id);
-      // dd($tID);
       $teamGameOver = DB::table('dart__scores')
          ->where('game_id', $game->id)
-         // ->where('team_id', $tID)
          ->where('remaining', 0)
          ->first();
-      // dd($teamGameOver);
       
-      // foreach($players as $p){
-         if (!$teamGameOver){
-            $teamGameDone = 0;
-            // dd("Game not over yet");
-         } else {
-            $teamGameDone = 1;
-            // dd("Game over");
-         }
-      // }
+      if (!$teamGameOver){
+         $teamGameDone = 0;
+      } else {
+         $teamGameDone = 1;
+      }
 
-      // foreach($players as $p){
-      //    if ($teamGameOver){
-      //       $teamGameDone = 1;
-      //    } else {
-      //       $teamGameDone = 0;
-      //    }
-      // }
-
-      return view('darts.01.teams.index', compact('game','tID','nextShot','players','player','user','remainingScore','teamGameDone'));
+      return view('darts.01.teams.index', compact('game','tID','nextShot','player','user','remainingScore','teamGameDone'));
    }
 
 
@@ -135,8 +106,6 @@ class TeamsController extends Controller
          'score2.max' => 'Score must be less than 181.',
       ]);
 
-// dd($request);
-
       // Determine which score box has data
       if($request->score1) {
          $whichScore = $request->score1;
@@ -147,14 +116,12 @@ class TeamsController extends Controller
       // Is the entered score less than 0?
       if($whichScore < 0){
          Session::flash('dart-error','Invalid Score! You need to enter a score above 0. Please try again.');
-         // return redirect()->route('darts.01.scoers.teams.index', $request->game_id);
          return redirect()->back();
       }
 
       // Is the entered score greater than 180?
       if($whichScore > 180){
          Session::flash('dart-error','Invalid Score! Total score cannot exceed 180. Please try again.');
-         // return redirect()->route('darts.01.teams.index', $request->game_id);
          return redirect()->back();
       }
 
@@ -169,7 +136,6 @@ class TeamsController extends Controller
          $score->save();
 
          Session::flash('dart-error','This score cannot be registered as it would leave an impossibility to finish with a Double Out. A value of 0 will be added to the scoresheet.');
-         // return redirect()->route('darts.01.teams.index', $request->game_id);
          return redirect()->back();
       }
 
@@ -184,7 +150,6 @@ class TeamsController extends Controller
          $score->save();
 
          Session::flash('dart-error','The registered score is higher than the required score to finish. A value of 0 will be added to the scoresheet.');
-         // return redirect()->route('darts.01.teams.index', $request->game_id);
          return redirect()->back();
       }
 
@@ -209,38 +174,10 @@ class TeamsController extends Controller
       }
 
 
-      // Save entry to log file using built-in Monolog
-      //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") CREATED category (" . $category->id . ")\r\n", [$category = json_decode($category, true)]);
-
       Session::flash('dart-success','The scoresheet has been updated.');
-      // return redirect()->back();
       $gID = $request->game_id;
-      // dd($gID);
       $tID = $request->team_id;
-      // dd($tID);
-      // return redirect()->route('darts.01.teams.index', $request->game_id);
       return redirect()->route('darts.01.teams.index', compact('gID', 'tID'));
    }
-
-
-
-   public function edit($id)
-   {
-      //
-   }
-
-
-   public function update(Request $request, $id)
-   {
-      //
-   }
-
-
-   public function destroy($id)
-   {
-      //
-   }
-
-
 
 }

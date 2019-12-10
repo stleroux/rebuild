@@ -26,22 +26,24 @@ class PlayersController extends Controller
       $this->enablePermissions = false;
    }
 
+
+##################################################################################################################
+# ██╗███╗   ██╗██████╗ ███████╗██╗  ██╗
+# ██║████╗  ██║██╔══██╗██╔════╝╚██╗██╔╝
+# ██║██╔██╗ ██║██║  ██║█████╗   ╚███╔╝ 
+# ██║██║╚██╗██║██║  ██║██╔══╝   ██╔██╗ 
+# ██║██║ ╚████║██████╔╝███████╗██╔╝ ██╗
+# ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝
+// Display a list of resources
+##################################################################################################################
    public function index($gameID)
    {
-      // dd($gameID);
       $game = Game::find($gameID);
-      // dd($game);
       $players = zeroOnePlayers($gameID);
-      // dd($players);
       $nextShot = zeroOneNextShot($gameID);
-      // dd($gameID);
-      // dd($nextShot);
       $player = DB::table('dart__players')->where('game_id', $gameID)->where('shooting_order', $nextShot)->first();
-      // dd($player);
       $user = User::where('id', $player->user_id)->first();
-      // dd($user->username);
       $remainingScore = $game->type - zeroOnePlayerScore($gameID, $player->user_id)->sum('score');
-      // dd($remainingScore);
 
       // Check if any one of the players has won the game (remaining score = 0)
       $gameOver = DB::table('dart__scores')->where('game_id', $gameID)->where('remaining', 0)->first();
@@ -68,7 +70,6 @@ class PlayersController extends Controller
 ##################################################################################################################
    public function store(Request $request)
    {
-      // dd($request);
       $this->validate($request, [
          'game_id' => 'required',
          'user_id' => 'required',
@@ -85,14 +86,12 @@ class PlayersController extends Controller
       // Is the entered score less than 0?
       if($request->score < 0){
          Session::flash('dart-error','Invalid Score! You need to enter a score above 0. Please try again.');
-         // return redirect()->route('darts.01.players.index', $request->game_id);
          return redirect()->back();
       }
 
       // Is the entered score greater than 180?
       if($request->score > 180){
          Session::flash('dart-error','Invalid Score! Total score cannot exceed 180. Please try again.');
-         // return redirect()->route('darts.01.players.index', $request->game_id);
          return redirect()->back();
       }
 
@@ -100,14 +99,12 @@ class PlayersController extends Controller
       if($request->remainingScore - $request->score == 1){
          $score = new Score;
             $score->user_id = $request->user_id;
-            // $score->team_id = $request->team_id;
             $score->game_id = $request->game_id;
             $score->score = 0;
             $score->remaining = $request->remainingScore;
          $score->save();
 
          Session::flash('dart-error','This score cannot be registered as it would leave an impossibility to finish with a Double Out. A value of 0 will be added to the scoresheet.');
-         // return redirect()->route('darts.01.players.index', $request->game_id);
          return redirect()->back();
       }
 
@@ -115,14 +112,12 @@ class PlayersController extends Controller
       if($request->score > $request->remainingScore){
          $score = new Score;
             $score->user_id = $request->user_id;
-            // $score->team_id = $request->team_id;
             $score->game_id = $request->game_id;
             $score->score = 0;
             $score->remaining = $request->remainingScore;
          $score->save();
 
          Session::flash('dart-error','The registered score is higher than the required score to finish. A value of 0 will be added to the scoresheet.');
-         // return redirect()->route('darts.01.players.index', $request->game_id);
          return redirect()->back();
       }
 
@@ -145,34 +140,8 @@ class PlayersController extends Controller
          $game->save();
       }
 
-
-      // Save entry to log file using built-in Monolog
-      //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") CREATED category (" . $category->id . ")\r\n", [$category = json_decode($category, true)]);
-
       Session::flash('dart-success','The scoresheet has been updated.');
-      // return redirect()->route('darts.01.players.index', $request->game_id);
       return redirect()->back();
    }
-
-
-
-   public function edit($id)
-   {
-      //
-   }
-
-
-   public function update(Request $request, $id)
-   {
-      //
-   }
-
-
-   public function destroy($id)
-   {
-      //
-   }
-
-
 
 }

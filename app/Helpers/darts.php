@@ -23,7 +23,6 @@ function zeroOneGameWinner($game) {
    } elseif ($winner = DB::table('dart__scores')
       ->join('dart__games', 'dart__scores.game_id', 'dart__games.id')
       ->where('dart__games.ind_players', 1)
-      // ->where('dart__games.status', 'Completed')
       ->where('game_id', $game->id)
       ->where('remaining', 0)
       ->first())
@@ -36,7 +35,6 @@ function zeroOneGameWinner($game) {
 
 
 function zeroOneNextShot($game) {
-   // dd($game);
    // No one has shot yet so get the first shooter
    if (!DB::table('dart__scores')->where('game_id', $game)->first()) {
       $first = DB::table('dart__players')
@@ -47,16 +45,13 @@ function zeroOneNextShot($game) {
       dd("HERE");
    } else {
       // game is already started, get the next shooter
-
       // First find out who shot last
       $last = DB::table('dart__scores')
          ->join('dart__players', 'dart__scores.user_id', '=', 'dart__players.user_id')
          ->where('dart__players.game_id', $game)
-         // ->orderBy('dart__scores.id','desc')
          ->where('dart__scores.game_id', $game)
          ->orderBy('dart__scores.id','desc')
          ->first();
-      // dd($last);
 
       // Who's next to shoot
       // Get total players in the game
@@ -74,4 +69,3 @@ function zeroOneNextShot($game) {
       }
    }
 }
-

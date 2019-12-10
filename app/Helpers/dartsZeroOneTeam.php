@@ -18,7 +18,10 @@ function zeroOneTeamGamesPlayedStat($player) {
       ->distinct('dart__scores.game_id')
       ->count('dart__scores.game_id');
 
-   if($val == 0) { return '-'; }
+   if($val == 0) {
+      return '-';
+   }
+
    return $val;
 }
 
@@ -32,7 +35,10 @@ function zeroOneTeamGamesClosedStat($player) {
       ->where('remaining', 0)
       ->count();
    
-   if($val == 0) { return '-'; }
+   if($val == 0) {
+      return '-';
+   }
+
    return $val;
 }
 
@@ -58,26 +64,16 @@ function zeroOneTeamGamesWonStat($player) {
    $tmates = DB::table('dart__scores')
       ->join('dart__games', 'dart__scores.game_id', 'dart__games.id')
       ->where('dart__games.status', 'Completed')
-
       ->join('dart__players', 'dart__scores.game_id', 'dart__players.game_id')
       ->where('dart__players.user_id', '!=', $player->id)
-
       ->where('dart__scores.team_id', '!=', 0)
-      
-      // ->where('dart__scores.user_id', '!=', $player->id)
-
-      // ->whereIn('dart__players.game_id', $teamGames)
-      
       ->groupBy('dart__scores.game_id')
-      
-      ->get()
-      // ->count()
-      // ->first()
-   ;
-   // dd($tmates);
-      
+      ->get();
 
-   if(!$winners) { return '-'; }   
+   if(!$winners) {
+      return '-';
+   }
+
    return $winners;
 }
 
@@ -93,14 +89,6 @@ function zeroOneTeamGamesLostStat($player) {
 
    return $val;
 }
-
-
-
-
-
-
-
-
 
 
 // Best individual player score in a team game
@@ -129,7 +117,9 @@ function zeroOneTeamBestScore($game, $team) {
       ->where('dart__scores.team_id', $team)
       ->max('score');
 
-   if($val == 0) { return 'N/A'; }
+   if($val == 0) {
+      return 'N/A';
+   }
 
    return $val;
 }
@@ -143,7 +133,9 @@ function zeroOneTeamBestScoreBy($game, $team) {
       ->orderby('score','desc')
       ->first();
 
-   if(!$v1) { return 'N/A'; }
+   if(!$v1) {
+      return 'N/A';
+   }
 
    $val = DB::table('users')
       ->where('users.id', '=', $v1->user_id)
@@ -161,7 +153,6 @@ function zeroOneTeamScores($game, $team) {
       ->where('team_id', $team)
       ->orderBy('dart__scores.id','desc')
       ->get();
-   // dd($t);
 
    return $t;
 }

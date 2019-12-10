@@ -39,15 +39,4 @@
 			</div>
 		</div>
 	</div>
-	{{-- <div class="panel-footer">
-		<div class="row">
-			<div class="col-xs-6">Next to shoot : {{ nextShot($game) }}</div>
-			<div class="col-xs-6">Last to shoot : {{ lastShot($game) }}</div>
-		</div>
-	</div> --}}
 </div>
-
-@include('darts.01.teams.messages')
-
-	
-{{-- </div> --}}
