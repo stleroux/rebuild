@@ -21,13 +21,20 @@ Route::get('darts/games/{id}/edit',								'Darts\ZeroOne\GamesController@edit')
 Route::put('darts/games/{id}',									'Darts\ZeroOne\GamesController@update')							->name('darts.games.update');
 Route::delete('darts/games/{id}',								'Darts\ZeroOne\GamesController@destroy')							->name('darts.games.destroy');
 
-Route::get('darts/01/scores/teams/{id}',						'Darts\ZeroOne\Teams\ScoresController@index')					->name('darts.01.scores.teams.index');
-Route::post('darts/01/scores/teams/store',					'Darts\ZeroOne\Teams\ScoresController@store')					->name('darts.01.scores.teams.store');
+Route::get('darts/01/scores/teams/{id}',						'Darts\ZeroOne\TeamsController@index')		          			->name('darts.01.teams.index');
+Route::post('darts/01/scores/teams/store',					'Darts\ZeroOne\TeamsController@store')			           		->name('darts.01.teams.store');
 
-Route::get('darts/01/scores/players/{id}',					'Darts\ZeroOne\Players\ScoresController@index')					->name('darts.01.scores.players.index');
-Route::post('darts/01/scores/players/store',					'Darts\ZeroOne\Players\ScoresController@store')					->name('darts.01.scores.players.store');
+Route::get('darts/01/scores/players/{id}',					'Darts\ZeroOne\PlayersController@index')		               ->name('darts.01.players.index');
+Route::post('darts/01/scores/players/store',					'Darts\ZeroOne\PlayersController@store')	      				->name('darts.01.players.store');
 
 
-Route::get('darts/cricket/scores/teams/{id}',				'Darts\Cricket\Teams\ScoresController@cricketTeamIndex')		->name('darts.cricket.scores.teams.index');
-Route::get('darts/cricket/scores/players/{id}',				'Darts\Cricket\Players\ScoresController@etPlayerIndex')		->name('darts.cricket.scores.players.index');
+
+
+
+
+
+
+
+Route::get('darts/cricket/scores/teams/{id}',				'Darts\Cricket\TeamsController@cricketTeamIndex')		->name('darts.cricket.scores.teams.index');
+Route::get('darts/cricket/scores/players/{id}',				'Darts\Cricket\PlayersController@etPlayerIndex')		->name('darts.cricket.scores.players.index');
 

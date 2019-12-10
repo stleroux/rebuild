@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Darts\ZeroOne\Teams;
+namespace App\Http\Controllers\Darts\ZeroOne;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -10,8 +10,7 @@ use App\Models\Darts\Game;
 use App\Models\Darts\Score;
 use App\Models\User;
 
-
-class ScoresController extends Controller
+class PlayersController extends Controller
 {
 ##################################################################################################################
 #  ██████╗ ██████╗ ███╗   ██╗███████╗████████╗██████╗ ██╗   ██╗ ██████╗████████╗
@@ -27,80 +26,35 @@ class ScoresController extends Controller
       $this->enablePermissions = false;
    }
 
-   // public function index($gameID)
-   // {
-   //    $game = Game::find($gameID);
-   //    // dd($game);
-   //    // $players = zeroOneTeamPlayers($gameID);
-   //    // dd ($players);
-
-   //    // return view('darts.01.scores.teams.index', compact('game', 'players'));
-   //    return view('darts.01.scores.teams.index', compact('game'));
-   // }
-   public function index($gameID, Request $request)
+   public function index($gameID)
    {
       // dd($gameID);
       $game = Game::find($gameID);
       // dd($game);
-
-      // dd($request->tID);
-      // $teamID = 1;
-      if(!$request->tID) {
-         $tID = 1;
-      }
-
-      if($request->tID == 2){
-         $tID = 1;
-      }
-
-      if($request->tID == 1){
-         $tID = 2;
-      }
-
-      $players = zeroOneTeamPlayers($game, $request->tID);
+      $players = zeroOnePlayers($gameID);
       // dd($players);
-      
       $nextShot = zeroOneNextShot($gameID);
+      // dd($gameID);
       // dd($nextShot);
-
       $player = DB::table('dart__players')->where('game_id', $gameID)->where('shooting_order', $nextShot)->first();
       // dd($player);
-
       $user = User::where('id', $player->user_id)->first();
-      // dd($user);
-
-      $remainingScore = $game->type - zeroOneTeamScores($game, $tID)->sum('score');
+      // dd($user->username);
+      $remainingScore = $game->type - zeroOnePlayerScore($gameID, $player->user_id)->sum('score');
       // dd($remainingScore);
 
       // Check if any one of the players has won the game (remaining score = 0)
-      // dd($game->id);
-      // dd($tID);
-      $teamGameOver = DB::table('dart__scores')
-         ->where('game_id', $game->id)
-         // ->where('team_id', $tID)
-         ->where('remaining', 0)
-         ->first();
-      // dd($teamGameOver);
+      $gameOver = DB::table('dart__scores')->where('game_id', $gameID)->where('remaining', 0)->first();
       
-      // foreach($players as $p){
-         if (!$teamGameOver){
-            $teamGameDone = 0;
-            // dd("Game not over yet");
+      foreach($players as $p){
+         if ($gameOver){
+            $gameDone = 1;
          } else {
-            $teamGameDone = 1;
-            // dd("Game over");
+            $gameDone = 0;
          }
-      // }
+      }
 
-      // foreach($players as $p){
-      //    if ($teamGameOver){
-      //       $teamGameDone = 1;
-      //    } else {
-      //       $teamGameDone = 0;
-      //    }
-      // }
-
-      return view('darts.01.scores.teams.index', compact('game','tID','nextShot','players','player','user','remainingScore','teamGameDone'));
+      return view('darts.01.players.index', compact('game','nextShot','players','player','user','remainingScore','gameDone'));
    }
 
 
@@ -114,87 +68,70 @@ class ScoresController extends Controller
 ##################################################################################################################
    public function store(Request $request)
    {
-      // if(!checkACL('manager')) {
-      //   return view('errors.403');
-      // }
-
+      // dd($request);
       $this->validate($request, [
          'game_id' => 'required',
-         'team_id' => 'required',
          'user_id' => 'required',
-         'score1' => 'sometimes|required|integer|max:180',
-         'score2' => 'sometimes|required|integer|max:180'
+         'score' => 'required|integer|max:180',
+         'remainingScore*' => 'required',
       ],
       [
          'user_id.required' => 'Please select a player.',
-         'score1.required' => 'Please enter a score.',
-         'score1.integer' => 'Score must be a number.',
-         'score1.max' => 'Score must be less than 181.',
-         'score2.required' => 'Please enter a score.',
-         'score2.integer' => 'Score must be a number.',
-         'score2.max' => 'Score must be less than 181.',
+         'score.required' => 'Please enter a score.',
+         'score.integer' => 'Score must be a number.',
+         'score.max' => 'Score must be 180 or less.'
       ]);
 
-// dd($request);
-
-      // Determine which score box has data
-      if($request->score1) {
-         $whichScore = $request->score1;
-      }else{
-         $whichScore = $request->score2;
-      }
-
       // Is the entered score less than 0?
-      if($whichScore < 0){
+      if($request->score < 0){
          Session::flash('dart-error','Invalid Score! You need to enter a score above 0. Please try again.');
-         // return redirect()->route('darts.01.scoers.teams.index', $request->game_id);
+         // return redirect()->route('darts.01.players.index', $request->game_id);
          return redirect()->back();
       }
 
       // Is the entered score greater than 180?
-      if($whichScore > 180){
+      if($request->score > 180){
          Session::flash('dart-error','Invalid Score! Total score cannot exceed 180. Please try again.');
-         // return redirect()->route('darts.01.scores.teams.index', $request->game_id);
+         // return redirect()->route('darts.01.players.index', $request->game_id);
          return redirect()->back();
       }
 
       // Would the entered score leave 1 remaining which is not possible
-      if($request->remainingScore - $whichScore == 1){
+      if($request->remainingScore - $request->score == 1){
          $score = new Score;
             $score->user_id = $request->user_id;
-            $score->team_id = $request->team_id;
+            // $score->team_id = $request->team_id;
             $score->game_id = $request->game_id;
             $score->score = 0;
             $score->remaining = $request->remainingScore;
          $score->save();
 
          Session::flash('dart-error','This score cannot be registered as it would leave an impossibility to finish with a Double Out. A value of 0 will be added to the scoresheet.');
-         // return redirect()->route('darts.01.scores.teams.index', $request->game_id);
+         // return redirect()->route('darts.01.players.index', $request->game_id);
          return redirect()->back();
       }
 
       // Is the entered score greater than the remaining score?
-      if($whichScore > $request->remainingScore){
+      if($request->score > $request->remainingScore){
          $score = new Score;
             $score->user_id = $request->user_id;
-            $score->team_id = $request->team_id;
+            // $score->team_id = $request->team_id;
             $score->game_id = $request->game_id;
             $score->score = 0;
             $score->remaining = $request->remainingScore;
          $score->save();
 
          Session::flash('dart-error','The registered score is higher than the required score to finish. A value of 0 will be added to the scoresheet.');
-         // return redirect()->route('darts.01.scores.teams.index', $request->game_id);
+         // return redirect()->route('darts.01.players.index', $request->game_id);
          return redirect()->back();
       }
 
       // All checks passed, enter the score in the DB
       $score = new Score;
          $score->user_id = $request->user_id;
-         $score->team_id = $request->team_id;
          $score->game_id = $request->game_id;
-         $score->score = $whichScore;
-         $score->remaining = $request->remainingScore - $whichScore;
+         $score->score = $request->score;
+         $score->remaining = $request->remainingScore - $request->score;
       $score->save();
 
       // Change the game status to In Progress 
@@ -213,13 +150,8 @@ class ScoresController extends Controller
       //Log::info(Auth::user()->username . " (" . Auth::user()->id . ") CREATED category (" . $category->id . ")\r\n", [$category = json_decode($category, true)]);
 
       Session::flash('dart-success','The scoresheet has been updated.');
-      // return redirect()->back();
-      $gID = $request->game_id;
-      // dd($gID);
-      $tID = $request->team_id;
-      // dd($tID);
-      // return redirect()->route('darts.01.scores.teams.index', $request->game_id);
-      return redirect()->route('darts.01.scores.teams.index', compact('gID', 'tID'));
+      // return redirect()->route('darts.01.players.index', $request->game_id);
+      return redirect()->back();
    }
 
 

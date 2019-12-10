@@ -9,7 +9,7 @@
 	<div class="card-header p-2">Team 1</div>
 	<div class="card-body p-2">
 		{{-- <div class="row"> --}}
-			{!! Form::open(['route' => 'darts.01.scores.teams.store']) !!}
+			{!! Form::open(['route' => 'darts.01.teams.store']) !!}
 				{{-- Game ID :  --}}
 				{{ Form::hidden('game_id', $game->id, ['size'=>3]) }}
 				{{-- <br /> --}}
@@ -33,19 +33,26 @@
 				{{-- <div class="col border"> --}}
 					{{-- <div class="btn-group btn-group-vertical {{ $errors->has('user_id') ? 'has-error' : '' }}" data-toggle="buttons"> --}}
 						@foreach(zeroOneTeamPlayers($game, 1) as $player)
-						{{-- @foreach($players as $player) --}}
-							{{-- {{ $user->shooting_order }}
-							{!! nextShot($game) !!} --}}
-							<label class="btn btn-md btn-primary btn-block p-2 m-0 {{ ($player->shooting_order == $nextShot) ? 'btn-secondary':'' }}">
-								{{-- <label class="col p-2 m-0 btn btn-primary {{ ($player->shooting_order == $nextShot) ? 'active':'' }}"> --}}
+{{-- 							<label class="btn btn-md btn-primary btn-block p-2 m-0 {{ ($player->shooting_order == $nextShot) ? 'btn-secondary':'' }}">
 								@if($player->shooting_order == $nextShot)
 									{{ Form::radio('user_id', $player->user_id , true) }}
 								@else
 									{{ Form::radio('user_id', $player->user_id , false) }}
 								@endif
 								{{ $player->first_name }} {{ $player->last_name }}
-								{{-- [{{ $player->shooting_order }}] --}}
-							</label>
+							</label> --}}
+							@if($player->shooting_order == $nextShot)
+							   <label class="btn btn-md btn-primary btn-block p-2 m-0 btn-secondary">
+							{{-- {{ Form::radio('user_id', $player->user_id , ($player->shooting_order == $nextShot) ?? true) }} --}}
+							      {{ Form::radio('user_id', $player->user_id , true) }}
+							      {{ $player->first_name }} {{ $player->last_name }}
+							   </label>
+							@else
+							   <label class="btn btn-md btn-primary btn-block p-2 m-0 btn-primary disabled">
+							      {{ Form::radio('user_id', $player->user_id , false, ['disabled']) }}
+							      {{ $player->first_name }} {{ $player->last_name }}
+							   </label>
+							@endif
 						@endforeach
 					{{-- </div> --}}
 				{{-- </div> --}}

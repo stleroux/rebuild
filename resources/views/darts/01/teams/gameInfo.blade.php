@@ -47,7 +47,7 @@
 	</div> --}}
 </div>
 
-@include('darts.01.scores.teams.messages')
+@include('darts.01.teams.messages')
 
 	
 {{-- </div> --}}

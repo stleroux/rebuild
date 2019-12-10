@@ -48,22 +48,22 @@
       @endif
    @endisset
 	
-	{{-- {!! Form::open(['route' => 'darts.01.scores.teams.store']) !!} --}}
+	{{-- {!! Form::open(['route' => 'darts.01.teams.store']) !!} --}}
 	<div class="form-row">
 		<div class="col-sm-4">
-			@include('darts.01.scores.teams.t1scorePanel')
-			@include('darts.01.scores.teams.t1scoresheet')
+			@include('darts.01.teams.t1scorePanel')
+			@include('darts.01.teams.t1scoresheet')
 		</div>
 
 		<div class="col-sm-4">
-			@include('darts.01.scores.teams.gameInfo')
-			@include('darts.01.scores.teams.teamStats')
-			@include('darts.01.scores.teams.playerStats')
+			@include('darts.01.teams.gameInfo')
+			@include('darts.01.teams.teamStats')
+			@include('darts.01.teams.playerStats')
 		</div>
 
 		<div class="col-sm-4">
-			@include('darts.01.scores.teams.t2scorePanel')
-			@include('darts.01.scores.teams.t2scoresheet')
+			@include('darts.01.teams.t2scorePanel')
+			@include('darts.01.teams.t2scoresheet')
 		</div>
 	</div>
 	{{-- {{ Form::close() }} --}}
@@ -71,7 +71,7 @@
 	<div class="form-row">
 		<div class="col-sm-4">
 			{{-- @if(($game->type - zeroOneTeamScores($game, 2)->sum('score') != 0) || ($game->type - zeroOneTeamScores($game, 1)->sum('score') != 0))
-				@include('darts.01.scores.teams.t1possibleOuts')
+				@include('darts.01.teams.t1possibleOuts')
 			@endif --}}
 		</div>
 
@@ -80,7 +80,7 @@
 
 		<div class="col-sm-4">
 			{{-- @if(($game->type - zeroOneTeamScores($game, 2)->sum('score') != 0) || ($game->type - zeroOneTeamScores($game, 1)->sum('score') != 0))
-				@include('darts.01.scores.teams.t2possibleOuts')
+				@include('darts.01.teams.t2possibleOuts')
 			@endif --}}
 		</div>
 	</div>
@@ -101,20 +101,12 @@
 	</script>
 
    <script type="text/javascript">
-      // $(document).ready(function () {
-      //    window.setTimeout(function() {
-      //       $(".alert").fadeTo(1500, 0).slideUp(1500, function(){
-      //          $(this).remove(); 
-      //       });
-      //    }, 7000);
-      // });
-
-
-      $(document).ready(function(){
-         $('#display-dart-success').fadeIn().delay(4000).fadeOut();
-         $('#display-dart-error').fadeIn().delay(8000).fadeOut();
-         $('#display-dart-danger').fadeIn().delay(8000).fadeOut();
-      });
-
+      $('#display-dart-empty').hide();
+      setTimeout(function() {
+         $('#display-dart-success').remove();
+         // $('#display-dart-danger').remove();
+         $('#display-dart-error').remove();
+         $('#display-dart-empty').show();
+      }, 5000); // <-- time in milliseconds
    </script>
 @endsection

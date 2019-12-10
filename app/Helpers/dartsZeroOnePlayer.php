@@ -86,14 +86,17 @@ function zeroOnePlayerIndividualGamesLostStat($player) {
 
 // Individual win percentage
 function zeroOnePlayerIndividualGamesWinPercentageStat($player) {
-	$val = number_format((int)zeroOnePlayerIndividualGamesWonStat($player) / (int)zeroOnePlayerIndividualGamesPlayedStat($player) * 100, 1);
+	if(zeroOnePlayerIndividualGamesWonStat($player) > 0 ){
+		$val = number_format((int)zeroOnePlayerIndividualGamesWonStat($player) / (int)zeroOnePlayerIndividualGamesPlayedStat($player) * 100, 1);
 
-	if($val <= 0)
-	{
-		return '-';
+		if($val <= 0)
+		{
+			return '-';
+		}
+
+		return $val . "%";
 	}
-
-	return $val . "%";
+	return '-';
 }
 
 // Best individual player score in an individual game

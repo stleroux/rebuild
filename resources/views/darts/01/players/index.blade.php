@@ -39,16 +39,16 @@
    
    <div class="form-row">
       <div class="col-sm-4">
-         {{-- @include('darts.01.scores.players.scorePanel', ['user'=>$user]) --}}
-         @include('darts.01.scores.players.scorePanel')
+         {{-- @include('darts.01.players.scorePanel', ['user'=>$user]) --}}
+         @include('darts.01.players.scorePanel')
       </div>
 
       <div class="col-sm-4">
-         @include('darts.01.scores.players.gameInfo')
+         @include('darts.01.players.gameInfo')
       </div>
 
       <div class="col-sm-4">
-         @include('darts.01.scores.players.playerStats')
+         @include('darts.01.players.playerStats')
       </div>
    </div>
 
@@ -60,7 +60,7 @@
                <div class="card-body p-2">
                   <div class="form-row">
                      @foreach($players as $player)
-                        @include('darts.01.scores.players.scoresheet', [$player])
+                        @include('darts.01.players.scoresheet', [$player])
                      @endforeach
                   </div>
                </div>
@@ -110,11 +110,18 @@
       // });
 
 
-      $(document).ready(function(){
-         $('#display-dart-success').fadeIn().delay(4000).fadeOut();
-         $('#display-dart-error').fadeIn().delay(8000).fadeOut();
-         $('#display-dart-danger').fadeIn().delay(8000).fadeOut();
-      });
+      // $(document).ready(function(){
+      //    $('#display-dart-success').fadeIn().delay(4000).fadeOut();
+      //    $('#display-dart-error').fadeIn().delay(6000).fadeOut();
+      //    $('#display-dart-danger').fadeIn().delay(6000).fadeOut();
+      // });
 
+      $('#display-dart-empty').hide();
+      setTimeout(function() {
+         $('#display-dart-success').remove();
+         // $('#display-dart-danger').remove();
+         $('#display-dart-error').remove();
+         $('#display-dart-empty').show();
+      }, 5000); // <-- time in milliseconds
    </script>
 @endsection

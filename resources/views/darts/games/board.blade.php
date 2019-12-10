@@ -72,22 +72,22 @@
 										{{-- Individual player game --}}
 										@if($game->ind_players)
 											@if($game->status == 'New')
-												<a href="{{ route('darts.cricket.scores.players.index', $game->id) }}" class="btn btn-sm btn-success col-xs-1 py-0 px-1">Start</a>
+												<a href="{{ route('darts.cricket.players.index', $game->id) }}" class="btn btn-sm btn-success col-xs-1 py-0 px-1">Start</a>
 											@elseif($game->status == 'In Progress')
-												<a href="{{ route('darts.cricket.scores.players.index', $game->id) }}" class="btn btn-sm btn-warning col-xs-1 py-0 px-1">Resume</a>
+												<a href="{{ route('darts.cricket.players.index', $game->id) }}" class="btn btn-sm btn-warning col-xs-1 py-0 px-1">Resume</a>
 											@elseif($game->status == 'Completed')
-												<a href="{{ route('darts.cricket.scores.players.index', $game->id) }}" class="btn btn-sm btn-primary btn-block py-0 px-1">Results</a>
+												<a href="{{ route('darts.cricket.players.index', $game->id) }}" class="btn btn-sm btn-primary btn-block py-0 px-1">Results</a>
 											@else
 												N/A
 											@endif
 										@else
 										{{-- Team game --}}
 											@if($game->status == 'New')
-												<a href="{{ route('darts.cricket.scores.teams.index', $game->id) }}" class="btn btn-sm btn-success btn-block py-0 px-1">Start</a>
+												<a href="{{ route('darts.cricket.teams.index', $game->id) }}" class="btn btn-sm btn-success btn-block py-0 px-1">Start</a>
 											@elseif($game->status == 'In Progress')
-												<a href="{{ route('darts.cricket.scores.teams.index', $game->id) }}" class="btn btn-sm btn-warning btn-block py-0 px-1">Resume</a>
+												<a href="{{ route('darts.cricket.teams.index', $game->id) }}" class="btn btn-sm btn-warning btn-block py-0 px-1">Resume</a>
 											@elseif($game->status == 'Completed')
-												<a href="{{ route('darts.cricket.scores.teams.index', $game->id) }}" class="btn btn-sm btn-primary btn-block py-0 px-1">Results</a>
+												<a href="{{ route('darts.cricket.teams.index', $game->id) }}" class="btn btn-sm btn-primary btn-block py-0 px-1">Results</a>
 											@else
 												N/A
 											@endif
@@ -97,11 +97,11 @@
 										@if($game->ind_players)
 											<div class="btn-group" role="group">
 											@if($game->status == 'New')
-												<a href="{{ route('darts.01.scores.players.index', $game->id) }}" class="btn btn-success btn-sm py-0 px-1">Start</a>
+												<a href="{{ route('darts.01.players.index', $game->id) }}" class="btn btn-success btn-sm py-0 px-1">Start</a>
 											@elseif($game->status == 'In Progress')
-												<a href="{{ route('darts.01.scores.players.index', $game->id) }}" class="btn btn-warning btn-sm py-0 px-1">Resume</a>
+												<a href="{{ route('darts.01.players.index', $game->id) }}" class="btn btn-warning btn-sm py-0 px-1">Resume</a>
 											@elseif($game->status == 'Completed')
-												<a href="{{ route('darts.01.scores.players.index', $game->id) }}" class="btn btn-primary btn-sm py-0 px-1">Results</a>
+												<a href="{{ route('darts.01.players.index', $game->id) }}" class="btn btn-primary btn-sm py-0 px-1">Results</a>
 											@else
 												N/A
 											@endif
@@ -110,11 +110,11 @@
 										{{-- Team game --}}
 										<div class="btn-group" role="group">
 											@if($game->status == 'New')
-												<a href="{{ route('darts.01.scores.teams.index', $game->id) }}" class="btn btn-success btn-sm py-0 px-1">Start</a>
+												<a href="{{ route('darts.01.teams.index', $game->id) }}" class="btn btn-success btn-sm py-0 px-1">Start</a>
 											@elseif($game->status == 'In Progress')
-												<a href="{{ route('darts.01.scores.teams.index', $game->id) }}" class="btn btn-warning btn-sm py-0 px-1">Resume</a>
+												<a href="{{ route('darts.01.teams.index', $game->id) }}" class="btn btn-warning btn-sm py-0 px-1">Resume</a>
 											@elseif($game->status == 'Completed')
-												<a href="{{ route('darts.01.scores.teams.index', $game->id) }}" class="btn btn-primary btn-sm py-0 px-1">Results</a>
+												<a href="{{ route('darts.01.teams.index', $game->id) }}" class="btn btn-primary btn-sm py-0 px-1">Results</a>
 											@else
 												N/A
 											@endif
