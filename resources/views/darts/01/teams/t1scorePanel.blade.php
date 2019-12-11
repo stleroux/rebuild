@@ -32,7 +32,7 @@
             @endif
 
 			@endforeach
-
+{{ $tID }}
 			<div class="container pt-2">
             <div class="row justify-content-md-center">
                <div class="col-xs-12 col-sm-6">

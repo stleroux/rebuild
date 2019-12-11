@@ -37,10 +37,11 @@ class TeamsController extends Controller
 ##################################################################################################################
    public function index($gameID, Request $request)
    {
+      // dd($request);
       $game = Game::find($gameID);
 
       if(!$request->tID) {
-         $tID = 1;
+         $tID = 100;
       }
 
       if($request->tID == 2) {

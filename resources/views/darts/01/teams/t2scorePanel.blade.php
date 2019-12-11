@@ -37,7 +37,7 @@
             <div class="row justify-content-md-center">
                <div class="col-xs-12 col-sm-6">
                	@if(!$teamGameDone)
-                     <input class="form-control form-control-lg mb-2" type="text" id="score" name="score1" {{ ($tID == 1) ? 'disabled' : 'autofocus' }} style="text-align: center" />
+                     <input class="form-control form-control-lg mb-2" type="text" id="score" name="score2" {{ ($tID == 1) ? 'disabled' : 'autofocus' }} style="text-align: center" />
 							<input class="btn btn-lg btn-primary col p-1 border" type="submit" name="t2submit" value="Submit" {{ ($tID == 1) ? 'disabled="disabled"' : '' }} />
                	@endif
 					</div>
