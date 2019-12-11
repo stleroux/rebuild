@@ -37,8 +37,12 @@
 		</div>
 
 		<div class="col-sm-4">
-         @include('darts.01.teams.messages')
-			@include('darts.01.teams.dartboard')
+         @isset($teamGameDone)
+            @if(!$teamGameDone)
+               @include('darts.inc.messages')
+			      @include('darts.inc.dartboard')
+            @endif
+         @endisset
          @include('darts.01.teams.gameInfo')
 			@include('darts.01.teams.teamStats')
 			@include('darts.01.teams.playerStats')

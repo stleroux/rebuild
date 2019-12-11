@@ -35,9 +35,7 @@
             <div class="row justify-content-md-center">
                <div class="col-xs-12 col-sm-6">
                   @if(!$gameDone)
-                     <div class="form-group p-0 {{ $errors->has('score2') ? 'has-error' : '' }}" >
-                        <input class="form-control form-control-lg p-0" type="text" id="score" name="score" style="text-align: center" autofocus />
-                     </div>
+                     <input class="form-control form-control-lg mb-2" type="text" id="score" name="score" style="text-align: center" autofocus />
                      <input class="btn btn-lg btn-primaryary col p-1 border" type="submit" name="submit" value="Submit" />
                   @endif
                </div>

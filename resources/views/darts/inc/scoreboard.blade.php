@@ -1,4 +1,4 @@
-<table id="tbl" class="table table-sm table-bordered text-center bg-info">
+<table id="tbl" class="table table-sm text-center bg-info">
 	<colgroup></colgroup>
 	<colgroup></colgroup>
 	<colgroup></colgroup>
@@ -43,6 +43,7 @@
 			<th class="text-center">19</th>
 			<th class="text-center">20</th>
 			<th class="text-center"></th>
+			<th class="text-center"></th>						
 		</tr>
 	</thead>
 	<tbody>
@@ -68,7 +69,8 @@
 			<td class="rowcolSelected" onmouseover="changeImage('{{ asset('_darts/18.jpg') }}')" onmouseout="changeBack('{{ asset('_darts/0.jpg') }}')">18</td>
 			<td class="rowcolSelected" onmouseover="changeImage('{{ asset('_darts/19.jpg') }}')" onmouseout="changeBack('{{ asset('_darts/0.jpg') }}')">19</td>
 			<td class="rowcolSelected" onmouseover="changeImage('{{ asset('_darts/20.jpg') }}')" onmouseout="changeBack('{{ asset('_darts/0.jpg') }}')">20</td>
-			<th class="text-right">Single</th>
+			<td class=""></td>
+			<td class="rowcolSelected" onmouseover="changeImage('{{ asset('_darts/bull.jpg') }}')" onmouseout="changeBack('{{ asset('_darts/0.jpg') }}')">Bull</td>
 		</tr>
 		<tr>
 			<th>Double</th>
@@ -92,7 +94,8 @@
 			<td class="rowcolSelected" onmouseover="changeImage('{{ asset('_darts/d18.jpg') }}')" onmouseout="changeBack('{{ asset('_darts/0.jpg') }}')">36</td>
 			<td class="rowcolSelected" onmouseover="changeImage('{{ asset('_darts/d19.jpg') }}')" onmouseout="changeBack('{{ asset('_darts/0.jpg') }}')">38</td>
 			<td class="rowcolSelected" onmouseover="changeImage('{{ asset('_darts/d20.jpg') }}')" onmouseout="changeBack('{{ asset('_darts/0.jpg') }}')">40</td>
-			<th class="text-right">Double</th>
+			<td class=""></td>
+			<td class="rowcolSelected" onmouseover="changeImage('{{ asset('_darts/dbull.jpg') }}')" onmouseout="changeBack('{{ asset('_darts/0.jpg') }}')">2x Bull</td>
 		</tr>
 		<tr>
 			<th>Triple</th>
@@ -116,7 +119,8 @@
 			<td class="rowcolSelected" onmouseover="changeImage('{{ asset('_darts/t18.jpg') }}')" onmouseout="changeBack('{{ asset('_darts/0.jpg') }}')">54</td>
 			<td class="rowcolSelected" onmouseover="changeImage('{{ asset('_darts/t19.jpg') }}')" onmouseout="changeBack('{{ asset('_darts/0.jpg') }}')">57</td>
 			<td class="rowcolSelected" onmouseover="changeImage('{{ asset('_darts/t20.jpg') }}')" onmouseout="changeBack('{{ asset('_darts/0.jpg') }}')">60</td>
-			<th class="text-right">Triple</th>
+			<td class=""></td>
+			<td class=""></td>
 		</tr>
 	</tbody>
 </table>

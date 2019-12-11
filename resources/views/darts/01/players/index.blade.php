@@ -44,10 +44,16 @@
       </div>
 
       <div class="col-sm-4">
-         @include('darts.01.players.gameInfo')
+         @isset($gameDone)
+            @if(!$gameDone)
+               @include('darts.inc.messages')
+               @include('darts.inc.dartboard')
+            @endif
+         @endisset
       </div>
 
       <div class="col-sm-4">
+         @include('darts.01.players.gameInfo')
          @include('darts.01.players.playerStats')
       </div>
    </div>

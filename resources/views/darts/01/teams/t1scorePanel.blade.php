@@ -3,10 +3,11 @@
 	<div class="card-header p-2">Team 1</div>
 
 	<div class="card-body p-2">
+
 		{!! Form::open(['route' => 'darts.01.teams.store']) !!}
 			{{ Form::hidden('game_id', $game->id, ['size'=>3]) }}
-			{{ Form::hidden('game_type', $game->type, ['size'=>3]) }}
 			{{ Form::hidden('team_id', 1, ['size'=>3]) }}
+			{{ Form::hidden('game_type', $game->type, ['size'=>3]) }}
 			{{ Form::hidden('remainingScore', ($game->type - zeroOneTeamScores($game, 1)->sum('score')), ['size'=>3]) }}
 			
          @foreach(zeroOneTeamPlayers($game, 1) as $player)
@@ -36,20 +37,14 @@
             <div class="row justify-content-md-center">
                <div class="col-xs-12 col-sm-6">
 						@if(!$teamGameDone)
-							<div class="form-group p-0 {{ $errors->has('score2') ? 'has-error' : '' }}" >
-								@if($nextShot % 2 == 0)
-									<input class="form-control form-control-lg p-0" type="text" name="score1" style="text-align: center" />
-								@else
-									<input class="form-control form-control-lg p-0" type="text" id ="score" name="score1" style="text-align: center" autofocus />
-								@endif
-							</div>
-							<input class="btn btn-lg btn-primary col p-1 border" type="submit" name="t2submit" value="Submit" />
+							<input class="form-control form-control-lg mb-2" type="text" id="score" name="score1" {{ ($tID == 2) ? 'disabled' : 'autofocus' }} style="text-align: center" />
+							<input class="btn btn-lg btn-primary col p-1 border" type="submit" name="t1submit" value="Submit" {{ ($tID == 2) ? 'disabled="disabled"' : '' }} />
 						@endif
 					</div>
 				</div>
 			</div>
 
-	  {{ Form::close() }}
+      {{ Form::close() }}
 
    </div>
 	
