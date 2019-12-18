@@ -1,6 +1,5 @@
 <?php
 
-
 function zeroOneGameWinner($game) {
 
    // check if winner is part of a game

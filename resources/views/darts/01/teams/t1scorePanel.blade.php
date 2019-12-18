@@ -32,13 +32,22 @@
             @endif
 
 			@endforeach
-{{ $tID }}
+
 			<div class="container pt-2">
             <div class="row justify-content-md-center">
                <div class="col-xs-12 col-sm-6">
 						@if(!$teamGameDone)
-							<input class="form-control form-control-lg mb-2" type="text" id="score" name="score1" {{ ($tID == 2) ? 'disabled' : 'autofocus' }} style="text-align: center" />
-							<input class="btn btn-lg btn-primary col p-1 border" type="submit" name="t1submit" value="Submit" {{ ($tID == 2) ? 'disabled="disabled"' : '' }} />
+                     
+                     @if($tID == 1)
+                        <input class="form-control form-control-lg mb-2" type="text" id="score1" name="score1" autofocus autocomplete="off" style="text-align: center" />
+                        <input class="btn btn-lg btn-primary col p-1 border" type="submit" name="t1submit" value="Submit" />
+                     @endif
+
+                     @if($tID == 2)
+                        <input class="form-control form-control-lg mb-2" type="text" id="score1" name="score1" disabled style="text-align: center" />
+                        <input class="btn btn-lg btn-primary col p-1 border" type="submit" name="t1submit" value="Submit" disabled="disabled" />
+                     @endif
+
 						@endif
 					</div>
 				</div>

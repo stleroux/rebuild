@@ -35,7 +35,7 @@
             <div class="row justify-content-md-center">
                <div class="col-xs-12 col-sm-6">
                   @if(!$gameDone)
-                     <input class="form-control form-control-lg mb-2" type="text" id="score" name="score" style="text-align: center" autofocus />
+                     <input class="form-control form-control-lg mb-2" type="text" id="score" name="score" style="text-align: center" autofocus autocomplete="off" />
                      <input class="btn btn-lg btn-primaryary col p-1 border" type="submit" name="submit" value="Submit" />
                   @endif
                </div>

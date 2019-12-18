@@ -108,6 +108,19 @@ class PlayersController extends Controller
          return redirect()->back();
       }
 
+      // 0 score entered
+      if($request->score == 0){
+         $score = new Score;
+            $score->user_id = $request->user_id;
+            $score->game_id = $request->game_id;
+            $score->score = 0;
+            $score->remaining = $request->remainingScore;
+         $score->save();
+
+         Session::flash('dart-error','A score value of 0 has been added to the scoresheet.');
+         return redirect()->back();
+      }
+
       // Is the entered score greater than the remaining score?
       if($request->score > $request->remainingScore){
          $score = new Score;

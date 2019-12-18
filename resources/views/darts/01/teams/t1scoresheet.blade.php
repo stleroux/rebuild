@@ -17,10 +17,7 @@
 			@foreach(zeroOneTeamScores($game, 1) as $score)
 				<tr class="text-light">
 					<td>{{ $t1no }}</td>
-					<td class="text-center">
-						{{ $score->first_name }}
-						{{-- {{ $score->username }} --}}
-					</td>
+					<td class="text-center">{{ $score->first_name }}</td>
 					<td class="text-center">{{ $score->score }}</td>
 					<td class="text-center">{{ $score->remaining }}</td>
 				</tr>

@@ -37,24 +37,13 @@ class TeamsController extends Controller
 ##################################################################################################################
    public function index($gameID, Request $request)
    {
-      // dd($request);
       $game = Game::find($gameID);
-
-      if(!$request->tID) {
-         $tID = 100;
-      }
-
-      if($request->tID == 2) {
-         $tID = 1;
-      }
-
-      if($request->tID == 1) {
-         $tID = 2;
-      }
 
       $nextShot = zeroOneNextShot($gameID);
 
       $player = DB::table('dart__players')->where('game_id', $gameID)->where('shooting_order', $nextShot)->first();
+
+      $tID = $player->team_id;
 
       $user = User::where('id', $player->user_id)->first();
 
@@ -110,8 +99,10 @@ class TeamsController extends Controller
       // Determine which score box has data
       if($request->score1) {
          $whichScore = $request->score1;
-      }else{
+      }elseif($request->score2) {
          $whichScore = $request->score2;
+      }else{
+         $whichScore = 0;
       }
 
       // Is the entered score less than 0?

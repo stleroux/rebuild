@@ -37,8 +37,17 @@
             <div class="row justify-content-md-center">
                <div class="col-xs-12 col-sm-6">
                	@if(!$teamGameDone)
-                     <input class="form-control form-control-lg mb-2" type="text" id="score" name="score2" {{ ($tID == 1) ? 'disabled' : 'autofocus' }} style="text-align: center" />
-							<input class="btn btn-lg btn-primary col p-1 border" type="submit" name="t2submit" value="Submit" {{ ($tID == 1) ? 'disabled="disabled"' : '' }} />
+
+                     @if($tID == 1)
+                        <input class="form-control form-control-lg mb-2" type="text" id="score2" name="score2" disabled style="text-align: center" />
+                        <input class="btn btn-lg btn-primary col p-1 border" type="submit" name="t2submit" value="Submit" disabled="disabled" />
+                     @endif
+
+                     @if($tID == 2)
+                        <input class="form-control form-control-lg mb-2" type="text" id="score2" name="score2" autofocus autocomplete="off" style="text-align: center" />
+                        <input class="btn btn-lg btn-primary col p-1 border" type="submit" name="t2submit" value="Submit" />
+                     @endif
+
                	@endif
 					</div>
 				</div>
@@ -55,7 +64,3 @@
 	@endif
 	
 </div>
-
-<script type="text/javascript">
-  $('#score').focus();
-</script>
