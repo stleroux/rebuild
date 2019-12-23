@@ -46,10 +46,10 @@ class RecipesTableSeeder extends Seeder
                 'modified_by_id' => 3,
                 'last_viewed_by_id' => 3,
                 'last_viewed_on' => '2019-09-17 09:13:44',
-                'published_at' => '2019-09-17 09:14:06',
+                'published_at' => '2019-11-16 07:26:50',
                 'deleted_at' => NULL,
                 'created_at' => '2019-05-15 12:11:12',
-                'updated_at' => '2019-09-17 09:14:06',
+                'updated_at' => '2019-11-16 07:26:50',
             ),
             1 => 
             array (
@@ -845,7 +845,7 @@ class RecipesTableSeeder extends Seeder
                     'prep_time' => 50,
                     'cook_time' => 40,
                     'personal' => 0,
-                    'views' => 52,
+                    'views' => 53,
                     'source' => 'Mom\'s recipe book',
                     'private_notes' => '',
                     'public_notes' => '',

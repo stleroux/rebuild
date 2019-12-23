@@ -470,8 +470,8 @@ class PermissionsTableSeeder extends Seeder
             45 => 
             array (
                 'id' => 166,
-                'name' => 'projects_index',
-                'display_name' => 'index',
+                'name' => 'projects_browse',
+                'display_name' => 'browse',
                 'model' => 'project',
                 'description' => 'list projects',
                 'created_at' => NULL,
@@ -480,8 +480,8 @@ class PermissionsTableSeeder extends Seeder
             46 => 
             array (
                 'id' => 167,
-                'name' => 'projects_create',
-                'display_name' => 'create',
+                'name' => 'projects_add',
+                'display_name' => 'add',
                 'model' => 'project',
                 'description' => 'create projects',
                 'created_at' => NULL,
@@ -500,8 +500,8 @@ class PermissionsTableSeeder extends Seeder
             48 => 
             array (
                 'id' => 169,
-                'name' => 'projects_show',
-                'display_name' => 'show',
+                'name' => 'projects_read',
+                'display_name' => 'read',
                 'model' => 'project',
                 'description' => 'view projects',
                 'created_at' => NULL,
@@ -596,6 +596,56 @@ class PermissionsTableSeeder extends Seeder
                 'description' => 'delete article',
                 'created_at' => '2019-10-27 06:08:55',
                 'updated_at' => '2019-10-27 06:08:55',
+            ),
+            58 => 
+            array (
+                'id' => 200,
+                'name' => 'dart_browse',
+                'display_name' => 'Browse',
+                'model' => 'dart',
+                'description' => 'browse dart',
+                'created_at' => '2019-12-06 08:19:15',
+                'updated_at' => '2019-12-06 08:19:15',
+            ),
+            59 => 
+            array (
+                'id' => 201,
+                'name' => 'dart_read',
+                'display_name' => 'Read',
+                'model' => 'dart',
+                'description' => 'read dart',
+                'created_at' => '2019-12-06 08:19:15',
+                'updated_at' => '2019-12-06 08:19:15',
+            ),
+            60 => 
+            array (
+                'id' => 202,
+                'name' => 'dart_edit',
+                'display_name' => 'Edit',
+                'model' => 'dart',
+                'description' => 'edit dart',
+                'created_at' => '2019-12-06 08:19:15',
+                'updated_at' => '2019-12-06 08:19:15',
+            ),
+            61 => 
+            array (
+                'id' => 203,
+                'name' => 'dart_add',
+                'display_name' => 'Add',
+                'model' => 'dart',
+                'description' => 'add dart',
+                'created_at' => '2019-12-06 08:19:15',
+                'updated_at' => '2019-12-06 08:19:15',
+            ),
+            62 => 
+            array (
+                'id' => 204,
+                'name' => 'dart_delete',
+                'display_name' => 'Delete',
+                'model' => 'dart',
+                'description' => 'delete dart',
+                'created_at' => '2019-12-06 08:19:15',
+                'updated_at' => '2019-12-06 08:19:15',
             ),
         ));
         

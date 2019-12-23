@@ -21,19 +21,11 @@ class FavoritesTableSeeder extends Seeder
             array (
                 'user_id' => 2,
                 'favoriteable_type' => 'App\\Models\\Articles\\Article',
-                'favoriteable_id' => 1,
-                'created_at' => '2019-11-11 13:57:57',
-                'updated_at' => '2019-11-11 13:57:57',
-            ),
-            1 => 
-            array (
-                'user_id' => 2,
-                'favoriteable_type' => 'App\\Models\\Articles\\Article',
                 'favoriteable_id' => 4,
                 'created_at' => '2019-10-27 05:15:01',
                 'updated_at' => '2019-10-27 05:15:01',
             ),
-            2 => 
+            1 => 
             array (
                 'user_id' => 2,
                 'favoriteable_type' => 'App\\Models\\Articles\\Article',
@@ -41,7 +33,7 @@ class FavoritesTableSeeder extends Seeder
                 'created_at' => '2019-10-25 21:43:47',
                 'updated_at' => '2019-10-25 21:43:47',
             ),
-            3 => 
+            2 => 
             array (
                 'user_id' => 2,
                 'favoriteable_type' => 'Modules\\Recipes\\Entities\\Recipe',
@@ -49,7 +41,7 @@ class FavoritesTableSeeder extends Seeder
                 'created_at' => '2019-01-29 21:54:59',
                 'updated_at' => '2019-01-29 21:54:59',
             ),
-            4 => 
+            3 => 
             array (
                 'user_id' => 2,
                 'favoriteable_type' => 'Modules\\Recipes\\Entities\\Recipe',
@@ -57,7 +49,7 @@ class FavoritesTableSeeder extends Seeder
                 'created_at' => '2019-01-29 19:10:13',
                 'updated_at' => '2019-01-29 19:10:13',
             ),
-            5 => 
+            4 => 
             array (
                 'user_id' => 2,
                 'favoriteable_type' => 'App\\Models\\Recipes\\Recipe',
@@ -65,7 +57,7 @@ class FavoritesTableSeeder extends Seeder
                 'created_at' => '2019-11-15 08:58:42',
                 'updated_at' => '2019-11-15 08:58:42',
             ),
-            6 => 
+            5 => 
             array (
                 'user_id' => 3,
                 'favoriteable_type' => 'App\\Models\\Recipes\\Recipe',

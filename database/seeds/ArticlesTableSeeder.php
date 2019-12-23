@@ -21,6 +21,7 @@ class ArticlesTableSeeder extends Seeder
             array (
                 'id' => 1,
                 'user_id' => 2,
+                'status' => 2,
                 'category' => 7,
                 'title' => 'Add new user to RM Admin list LIST',
                 'description_eng' => '<p>Do not send e-mail to Darcy Halverson.</p>
@@ -38,6 +39,7 @@ class ArticlesTableSeeder extends Seeder
             array (
                 'id' => 2,
                 'user_id' => 2,
+                'status' => 0,
                 'category' => 7,
                 'title' => 'Adding multiple trustees to multiple documents',
                 'description_eng' => '<p>You can assign the rights you need to your documents by doing the following:</p>
@@ -63,6 +65,7 @@ class ArticlesTableSeeder extends Seeder
             array (
                 'id' => 3,
                 'user_id' => 2,
+                'status' => 0,
                 'category' => 7,
                 'title' => 'Adding new Sector - Directorate or Branch',
                 'description_eng' => '<p>Region -&gt; MECTS_REGION<br /> Sector -&gt; Mects Sector<br /> Directorate -&gt; MECTS RC DG<br /> Branch -&gt; MECTS RC DIR</p>
@@ -94,6 +97,7 @@ class ArticlesTableSeeder extends Seeder
             array (
                 'id' => 4,
                 'user_id' => 2,
+                'status' => 0,
                 'category' => 7,
                 'title' => 'Disabled Items',
                 'description_eng' => '
@@ -110,6 +114,7 @@ class ArticlesTableSeeder extends Seeder
             array (
                 'id' => 5,
                 'user_id' => 1,
+                'status' => 2,
                 'category' => 7,
                 'title' => 'Unable to connect to EKME',
             'description_eng' => '<p>Can you try the following : -&gt; Click on the Start button -&gt; Go to All Programs -&gt; click on Open Text -&gt; Click on DM Connection Wizard Server Name : VSONKENEDOCS01 If there is nothing listed in the Server Name box -&gt; Enter the server name above in the Server Name box -&gt; Click Next -&gt; Click Finish If the server(s) is/are listed in the Previously Connected DM section -&gt; Select the server for your region -&gt; Click Next -&gt; Click Finish</p>',
@@ -124,11 +129,12 @@ class ArticlesTableSeeder extends Seeder
             array (
                 'id' => 6,
                 'user_id' => 2,
+                'status' => 2,
                 'category' => 7,
                 'title' => 'Error code 9007',
                 'description_eng' => '<p>Run connection wizard --------------------------------------------- Start All Programs Open Text DM Connection Wizard Click Next Click Finish Try a Repair on EKME --------------------------------------------- Start -&gt; Control Panel -&gt; Programs and Features -&gt; Open Text eDOCS DM Click on Repair button in toolbar at top of screen</p>',
                 'description_fre' => NULL,
-                'views' => 3,
+                'views' => 4,
                 'created_at' => '2016-11-09 09:48:07',
                 'updated_at' => '2019-11-07 14:32:57',
                 'published_at' => '2019-11-07 14:32:57',
@@ -138,6 +144,7 @@ class ArticlesTableSeeder extends Seeder
             array (
                 'id' => 7,
                 'user_id' => 1,
+                'status' => 0,
                 'category' => 7,
                 'title' => 'File recovery to SSC',
                 'description_eng' => '
@@ -158,6 +165,7 @@ class ArticlesTableSeeder extends Seeder
             array (
                 'id' => 8,
                 'user_id' => 2,
+                'status' => 5,
                 'category' => 7,
                 'title' => 'Group name change in EKME',
                 'description_eng' => '<p>If a user requests to have some group names and IDs changed in EKME -&gt; OK to change group ID as long has users are informed they will have to update their default profile exec [docsadm].[sp_Transfer_Access] \'old_group_system_id\',\'new_group_system_id\'; Make sure to disable the old groups after the scripts are ran</p>',
@@ -172,6 +180,7 @@ class ArticlesTableSeeder extends Seeder
             array (
                 'id' => 9,
                 'user_id' => 2,
+                'status' => 4,
                 'category' => 7,
                 'title' => 'Missing CCM Enterprise menu',
                 'description_eng' => '<p>Can you check the following?</p>
@@ -192,31 +201,15 @@ class ArticlesTableSeeder extends Seeder
             array (
                 'id' => 10,
                 'user_id' => 1,
+                'status' => 0,
                 'category' => 7,
                 'title' => 'Invalid security token',
-                'description_eng' => '
-Can you try the following to resolve your EKME issue?
-
--	Close all open applications on the machine
--	Go to the Start menu
--	Click on Control Panel
--	Click on Programs and Features
--	Find OpenText eDOCS RM 5.3.1 Admin Tool and select it (if present)
--	Click on the Uninstall button
--	Find OpenText eDOCS DM 5.3.1 Patch 1 Extensions and select it
--	Click on the Uninstall button
--	Once uninstalled, log off/in to the machine
-
--	Go to the Application Catalog, and install EKME.
--	Follow the prompts to the completion and try EKME again
--	Let me know if that fixes your issue.
-
-ccm eDocs Client
-',
-                'description_fre' => '',
-                'views' => 1,
+                'description_eng' => '<p>Can you try the following to resolve your EKME issue?</p>
+<p>- Close all open applications on the machine<br />- Go to the Start menu<br />- Click on Control Panel<br />- Click on Programs and Features<br />- Find OpenText eDOCS RM 5.3.1 Admin Tool and select it (if present)<br />- Click on the Uninstall button<br />- Find OpenText eDOCS DM 5.3.1 Patch 1 Extensions and select it<br />- Click on the Uninstall button<br />- Once uninstalled, log off/in to the machine<br />- Go to the Application Catalog, and install EKME.<br />- Follow the prompts to the completion and try EKME again<br />- Let me know if that fixes your issue. ccm eDocs Client</p>',
+                'description_fre' => '<p>french</p>',
+                'views' => 2,
                 'created_at' => '2016-11-09 15:14:35',
-                'updated_at' => '2019-11-07 14:32:57',
+                'updated_at' => '2019-12-20 22:08:00',
                 'published_at' => '2019-11-07 14:32:57',
                 'deleted_at' => NULL,
             ),
@@ -224,6 +217,7 @@ ccm eDocs Client
             array (
                 'id' => 11,
                 'user_id' => 2,
+                'status' => 0,
                 'category' => 7,
                 'title' => 'Missing folders in Explorer',
                 'description_eng' => '
@@ -248,6 +242,7 @@ Open Windows Explorer DM Extensions and see if the EKME folders now show up
             array (
                 'id' => 12,
                 'user_id' => 2,
+                'status' => 0,
                 'category' => 7,
                 'title' => 'Missing Save button',
                 'description_eng' => '
@@ -280,6 +275,7 @@ Open Windows Explorer DM Extensions and see if the EKME folders now show up
             array (
                 'id' => 13,
                 'user_id' => 2,
+                'status' => 0,
                 'category' => 7,
                 'title' => 'Missing search options',
                 'description_eng' => '
@@ -292,7 +288,7 @@ Make sure that ZRM_USERS is the primary group in the user\'s profile
 If DOCS_USERS, only EKME Search will show up
 ',
                 'description_fre' => '',
-                'views' => 0,
+                'views' => 1,
                 'created_at' => '2016-11-14 11:10:48',
                 'updated_at' => '2019-11-07 14:32:57',
                 'published_at' => '2019-11-07 14:32:57',
@@ -302,6 +298,7 @@ If DOCS_USERS, only EKME Search will show up
             array (
                 'id' => 14,
                 'user_id' => 2,
+                'status' => 0,
                 'category' => 7,
                 'title' => 'Modify registry settings - document limits',
                 'description_eng' => '
@@ -321,6 +318,7 @@ If DOCS_USERS, only EKME Search will show up
             array (
                 'id' => 15,
                 'user_id' => 2,
+                'status' => 0,
                 'category' => 7,
                 'title' => 'Move to disposed',
                 'description_eng' => 'Get FileCode values from provided spreadsheet
@@ -360,6 +358,7 @@ Once script is completed, send to Julien to run
         array (
             'id' => 16,
             'user_id' => 2,
+            'status' => 0,
             'category' => 7,
             'title' => 'No mail client installed',
             'description_eng' => '
@@ -370,7 +369,7 @@ HKEY_LOCAL_MACHINE -> SOFTWARE ->Wow6432Node -> MICROSOFT -> Windows Messaging S
 Add a new string value MAPI = 1
 ',
             'description_fre' => '',
-            'views' => 1,
+            'views' => 2,
             'created_at' => '2016-11-14 11:13:07',
             'updated_at' => '2019-11-07 14:32:57',
             'published_at' => '2019-11-07 14:32:57',
@@ -380,6 +379,7 @@ Add a new string value MAPI = 1
         array (
             'id' => 18,
             'user_id' => 2,
+            'status' => 0,
             'category' => 3,
             'title' => 'Delete Windows user profile',
             'description_eng' => '
@@ -403,6 +403,7 @@ Add a new string value MAPI = 1
         array (
             'id' => 19,
             'user_id' => 2,
+            'status' => 0,
             'category' => 7,
             'title' => 'Excel rotating screen when opening a document from EKME',
             'description_eng' => '
@@ -422,6 +423,7 @@ Add a new string value MAPI = 1
         array (
             'id' => 20,
             'user_id' => 2,
+            'status' => 0,
             'category' => 1,
             'title' => 'User not in license role',
             'description_eng' => '

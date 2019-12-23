@@ -34,17 +34,42 @@ class PermissionUserTableSeeder extends Seeder
             ),
             3 => 
             array (
-                'permission_id' => 47,
-                'user_id' => 3,
+                'permission_id' => 203,
+                'user_id' => 2,
             ),
             4 => 
             array (
-                'permission_id' => 52,
-                'user_id' => 3,
+                'permission_id' => 200,
+                'user_id' => 2,
             ),
             5 => 
             array (
-                'permission_id' => 65,
+                'permission_id' => 204,
+                'user_id' => 2,
+            ),
+            6 => 
+            array (
+                'permission_id' => 202,
+                'user_id' => 2,
+            ),
+            7 => 
+            array (
+                'permission_id' => 201,
+                'user_id' => 2,
+            ),
+            8 => 
+            array (
+                'permission_id' => 203,
+                'user_id' => 3,
+            ),
+            9 => 
+            array (
+                'permission_id' => 200,
+                'user_id' => 3,
+            ),
+            10 => 
+            array (
+                'permission_id' => 204,
                 'user_id' => 3,
             ),
         ));

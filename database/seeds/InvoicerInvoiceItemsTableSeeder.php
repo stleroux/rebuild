@@ -91,9 +91,9 @@ class InvoicerInvoiceItemsTableSeeder extends Seeder
                 'quantity' => 1.0,
                 'price' => '450.00',
                 'total' => '450.00',
-                'work_date' => '2019-11-07 00:00:00',
+                'work_date' => '2019-11-21 00:00:00',
                 'created_at' => '2019-11-08 07:04:49',
-                'updated_at' => '2019-11-08 07:04:49',
+                'updated_at' => '2019-12-23 12:19:51',
             ),
             6 => 
             array (
@@ -114,12 +114,12 @@ class InvoicerInvoiceItemsTableSeeder extends Seeder
                 'invoice_id' => 6,
                 'product_id' => 3,
                 'notes' => 'Custom trim made from MDF with routed edges',
-                'quantity' => 100.0,
+                'quantity' => 10.0,
                 'price' => '2.25',
-                'total' => '225.00',
-                'work_date' => '2019-11-08 00:00:00',
+                'total' => '22.50',
+                'work_date' => '2019-12-20 00:00:00',
                 'created_at' => '2019-11-08 07:05:55',
-                'updated_at' => '2019-11-08 07:05:55',
+                'updated_at' => '2019-12-20 22:55:59',
             ),
         ));
         

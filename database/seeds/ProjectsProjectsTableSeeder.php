@@ -40,7 +40,7 @@ class ProjectsProjectsTableSeeder extends Seeder
                 'category' => 2,
                 'name' => 'Storage Bench',
                 'description' => 'Storage Bench',
-                'views' => 69,
+                'views' => 70,
                 'time_invested' => NULL,
                 'price' => NULL,
                 'width' => NULL,
