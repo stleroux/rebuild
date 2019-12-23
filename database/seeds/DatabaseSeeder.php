@@ -18,8 +18,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call(ArticlesTableSeeder::class);
         $this->call(CommentsTableSeeder::class);
-        $this->call(DartGamesTableSeeder::class);
+        
         $this->call(DartPlayersTableSeeder::class);
+        $this->call(DartGamesTableSeeder::class);
         $this->call(DartScoresTableSeeder::class);
         $this->call(FavoritesTableSeeder::class);
         
