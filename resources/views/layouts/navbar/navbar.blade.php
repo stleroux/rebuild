@@ -1,6 +1,9 @@
-{{-- <nav class="navbar navbar-expand-sm sticky-top my-0 mx-0 py-0 pl-2 pr-0 navbar-dark navbar_background"> --}}
-<nav class="navbar navbar-expand-sm sticky-top my-0 mx-0 py-0 pl-2 pr-0 navbar-dark bg-dark">
-   
+@if (env('APP_ENV')!='Production')
+   <nav class="navbar navbar-expand-sm sticky-top my-0 mx-0 py-0 pl-2 pr-0 navbar-danger bg-danger">
+@else
+   <nav class="navbar navbar-expand-sm sticky-top my-0 mx-0 py-0 pl-2 pr-0 navbar-dark bg-dark">
+@endif
+
    <a class="navbar-brand m-0 p-0" href="/">
       <h4 class="my-0 mx-0 py-0 px-0">{{ setting('app_name') }}</h4>
    </a>
