@@ -1,4 +1,4 @@
-<script type="text/javascript" src="/js/jquery.datetimepicker.full.min.js"></script>
+{{-- <script type="text/javascript" src="/js/jquery.datetimepicker.full.min.js"></script>
 
 <script>
    $("#datePicker").datetimepicker({
@@ -8,4 +8,4 @@
       buttonImageOnly: true,
       format:'Y-m-d H:i'+':00'
    });
-</script>
+</script> --}}

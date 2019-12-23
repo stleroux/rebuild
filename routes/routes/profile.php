@@ -1,8 +1,8 @@
 <?php
 
-Route::prefix('users/')->name('users.changePassword.')->group(function() {
-   Route::get('{id}/edit',                 'Users\ResetPasswordController@edit')                 ->name('edit');
-   Route::put('{id}',                      'Users\ResetPasswordController@update')               ->name('update');
+Route::namespace('Users')->prefix('users/')->name('users.changePassword.')->group(function() {
+   Route::get('{id}/edit',                 'ResetPasswordController@edit')                 ->name('edit');
+   Route::put('{id}',                      'ResetPasswordController@update')               ->name('update');
 });
 
 // Route::resource('resetPassword', 'Users\ResetPasswordController')->only(['edit','update']);

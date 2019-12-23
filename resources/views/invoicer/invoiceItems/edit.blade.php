@@ -2,9 +2,8 @@
 
 @section('content')
 
-	{!! Form::model($item, ['route'=>['invoiceItems.update', $item->id], 'method' => 'PUT']) !!}
-	{{-- {{ Form::token() }} --}}
-	{{ Form::hidden ('invoice_id', $item->invoice->id) }}
+	{!! Form::model($item, ['route'=>['invoicer.invoiceItems.update', $item->id], 'method' => 'PUT']) !!}
+		{{ Form::hidden ('invoice_id', $item->invoice->id) }}
 
 		<div class="card">
 			
@@ -63,8 +62,7 @@
 						<div class="form-group {{ $errors->has('work_date') ? 'has-error' : '' }}">
 							{{ Form::label ('work_date', 'Work Date:', ['class'=>'required'])}}
 							<div class="input-group">
-								{{-- {{ Form::date ('work_date', $item->work_date, array('class'=>'form-control')) }} --}}
-								{{ Form::input('date' , 'work_date' , null , ['class'=>'form-control']) }}
+								{{ Form::input('date', 'work_date', Carbon\Carbon::parse($item->work_date)->format('Y-m-d'), ['class'=>'datepicker']) }}
 								<div class="input-group-append">
 									<span class="input-group-text">
 										<i class="far fa-calendar-alt"></i>
@@ -75,7 +73,7 @@
 						</div>
 					</div>
 				</div>
-			</div> {{-- End of panel body --}}
+			</div>
 
 			<div class="card-footer">
 				Fields marked with an<span class="required"></span> are required.

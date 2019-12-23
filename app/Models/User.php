@@ -28,23 +28,23 @@ class User extends Authenticatable
       'password', 'remember_token',
    ];
 
-   // Set the default value for the status field to 0
-   protected $attributes = [
-      'invoicer_client' => 0,
-   ];
+   // // Set the default value for the status field to 0
+   // protected $attributes = [
+   //    'invoicer_client' => 0,
+   // ];
 
-   public function getInvoicerclientAttribute($attribute)
-   {
-      return $this->invoicerclientOptions()[$attribute];
-   }
+   // public function getInvoicerclientAttribute($attribute)
+   // {
+   //    return $this->invoicerclientOptions()[$attribute];
+   // }
 
-   public function invoicerclientOptions()
-   {
-      return [
-         0 => 'No',
-         1 => 'Yes',
-      ];
-   }
+   // public function invoicerclientOptions()
+   // {
+   //    return [
+   //       0 => 'No',
+   //       1 => 'Yes',
+   //    ];
+   // }
 
 //////////////////////////////////////////////////////////////////////////////////////
 // RELATIONSHIPS
@@ -95,16 +95,17 @@ class User extends Authenticatable
       return 'N/A';
    }
 
-   public function getLastLoginDateAttribute($date)
-   {
-      if($date){
-         $date = new \Carbon\Carbon($date);
-         $date = $date->format(setting('dateFormat'));
-         return $date;
-      }
+   // Cannot do this as it interferes with the LastLogin Listener
+   // public function getLastLoginDateAttribute($date)
+   // {
+   //    if($date){
+   //       $date = new \Carbon\Carbon($date);
+   //       $date = $date->format(setting('dateFormat'));
+   //       return $date;
+   //    }
       
-      return 'N/A';
-   }
+   //    return 'N/A';
+   // }
 
 
 

@@ -1,68 +1,63 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::prefix('invoicer')->namespace('Invoicer')->name('invoicer.')->group(function() {
 
-// Route::get('download/{filename}', function($filename)
-// {
-//     $file = public_path('invoices') . '/' . $filename . '.pdf'; // or wherever you have stored your PDF files
-//     return response()->download($file);
-// });
+   Route::get('/',                                    'InvoicerController@index')               ->name('index');
+   Route::get('dashboard',                            'DashboardController@index')              ->name('dashboard');
 
-Route::prefix('invoicer')->group(function() {
+   Route::get('ledger',                               'LedgerController@index')                 ->name('ledger');
+   Route::get('ledger/paid',                          'LedgerController@paid')                  ->name('ledger.paid');
+   Route::get('ledger/invoiced',                      'LedgerController@invoiced')              ->name('ledger.invoiced');
+   Route::get('ledger/logged',                        'LedgerController@logged')                ->name('ledger.logged');
+});
 
-   Route::get('/',                                    'Invoicer\InvoicerController@index')               ->name('invoicer');
-   Route::get('dashboard',                            'Invoicer\DashboardController@index')              ->name('invoicer.dashboard');
 
-   Route::get('ledger',                               'Invoicer\LedgerController@index')                 ->name('invoicer.ledger');
-   Route::get('ledger/paid',                          'Invoicer\LedgerController@paid')                  ->name('invoicer.ledger.paid');
-   Route::get('ledger/invoiced',                      'Invoicer\LedgerController@invoiced')              ->name('invoicer.ledger.invoiced');
-   Route::get('ledger/logged',                        'Invoicer\LedgerController@logged')                ->name('invoicer.ledger.logged');
 
-   Route::get('invoices/{inv_id}/downloadInvoice',    'Invoicer\InvoicesController@downloadInvoice')     ->name('invoices.downloadInvoice');
-   Route::get('invoices/{inv_id}/status_invoiced',    'Invoicer\InvoicesController@status_invoiced')     ->name('invoices.status_invoiced');
-   Route::get('invoices/{inv_id}/status_paid',        'Invoicer\InvoicesController@status_paid')         ->name('invoices.status_paid');
-   Route::get('invoices/status_invoiced_all',         'Invoicer\InvoicesController@status_invoiced_all') ->name('invoices.status_invoiced_all');
-   Route::get('invoices/status_paid_all',             'Invoicer\InvoicesController@status_paid_all')     ->name('invoices.status_paid_all');
-   Route::get('invoices/paid',                        'Invoicer\InvoicesController@paid')                ->name('invoices.paid');
-   Route::get('invoices/invoiced',                    'Invoicer\InvoicesController@invoiced')            ->name('invoices.invoiced');
-   Route::get('invoices/logged',                      'Invoicer\InvoicesController@logged')              ->name('invoices.logged');
+Route::prefix('invoicer')->namespace('Invoicer')->name('invoices.')->group(function() {
+   Route::get('invoices/{inv_id}/downloadInvoice',    'InvoicesController@downloadInvoice')     ->name('downloadInvoice');
+   Route::get('invoices/{inv_id}/status_invoiced',    'InvoicesController@status_invoiced')     ->name('status_invoiced');
+   Route::get('invoices/{inv_id}/status_paid',        'InvoicesController@status_paid')         ->name('status_paid');
+   Route::get('invoices/status_invoiced_all',         'InvoicesController@status_invoiced_all') ->name('status_invoiced_all');
+   Route::get('invoices/status_paid_all',             'InvoicesController@status_paid_all')     ->name('status_paid_all');
+   Route::get('invoices/paid',                        'InvoicesController@paid')                ->name('paid');
+   Route::get('invoices/invoiced',                    'InvoicesController@invoiced')            ->name('invoiced');
+   Route::get('invoices/logged',                      'InvoicesController@logged')              ->name('logged');
+});
 
-   Route::get('invoices',                             'Invoicer\InvoicesController@index')               ->name('invoicer.invoices');
-   Route::get('invoices/create/{id?}',                'Invoicer\InvoicesController@create')              ->name('invoicer.invoices.create');
-   Route::post('invoices/store',                      'Invoicer\InvoicesController@store')               ->name('invoicer.invoices.store');
-   Route::get('invoices/{id}',                        'Invoicer\InvoicesController@show')                ->name('invoicer.invoices.show');
-   Route::get('invoices/{id}/edit',                   'Invoicer\InvoicesController@edit')                ->name('invoicer.invoices.edit');
-   Route::put('invoices/{id}',                        'Invoicer\InvoicesController@update')              ->name('invoicer.invoices.update');
-   Route::delete('invoices/{id}',                     'Invoicer\InvoicesController@destroy')             ->name('invoicer.invoices.destroy');
+Route::prefix('invoicer')->namespace('Invoicer')->name('invoicer.')->group(function() {
+   Route::get('invoices',                             'InvoicesController@index')               ->name('invoices');
+   Route::get('invoices/create/{id?}',                'InvoicesController@create')              ->name('invoices.create');
+   Route::post('invoices/store',                      'InvoicesController@store')               ->name('invoices.store');
+   Route::get('invoices/{id}',                        'InvoicesController@show')                ->name('invoices.show');
+   Route::get('invoices/{id}/edit',                   'InvoicesController@edit')                ->name('invoices.edit');
+   Route::put('invoices/{id}',                        'InvoicesController@update')              ->name('invoices.update');
+   Route::delete('invoices/{id}',                     'InvoicesController@destroy')             ->name('invoices.destroy');
+});
 
-   Route::get('clients/search',                       'Invoicer\ClientsController@search')               ->name('invoicer.clients.search');
-   Route::get('clients',                              'Invoicer\ClientsController@index')                ->name('invoicer.clients');
-   Route::get('clients/create',                       'Invoicer\ClientsController@create')               ->name('invoicer.clients.create');
-   Route::post('clients/store',                       'Invoicer\ClientsController@store')                ->name('invoicer.clients.store');
-   Route::get('clients/{id}',                         'Invoicer\ClientsController@show')                 ->name('invoicer.clients.show');
-   Route::get('clients/{id}/edit',                    'Invoicer\ClientsController@edit')                 ->name('invoicer.clients.edit');
-   Route::put('clients/{id}',                         'Invoicer\ClientsController@update')               ->name('invoicer.clients.update');
-   Route::delete('clients/{id}',                      'Invoicer\ClientsController@destroy')              ->name('invoicer.clients.destroy');
 
-   Route::get('/invoiceItems/{inv_id}/create',        'Invoicer\InvoiceItemsController@create')          ->name('invoicer.invoiceItems.create');
-   Route::resource('/invoiceItems',                   'Invoicer\InvoiceItemsController',                 ['except' => ['create','show']]);
+Route::prefix('invoicer')->namespace('Invoicer')->name('invoicer.clients.')->group(function() {
+   Route::get('clients/search',                       'ClientsController@search')               ->name('search');
+   Route::get('clients',                              'ClientsController@index')                ->name('index');
+   Route::get('clients/create',                       'ClientsController@create')               ->name('create');
+   Route::post('clients/store',                       'ClientsController@store')                ->name('store');
+   Route::get('clients/{id}',                         'ClientsController@show')                 ->name('show');
+   Route::get('clients/{id}/edit',                    'ClientsController@edit')                 ->name('edit');
+   Route::put('clients/{id}',                         'ClientsController@update')               ->name('update');
+   Route::delete('clients/{id}',                      'ClientsController@destroy')              ->name('destroy');
+});
 
-   Route::get('products/search',                      'Invoicer\ProductsController@search')              ->name('invoicer.products.search');
-   Route::get('products',                             'Invoicer\ProductsController@index')               ->name('invoicer.products');
-   Route::get('products/create',                      'Invoicer\ProductsController@create')              ->name('invoicer.products.create');
-   Route::post('products/store',                      'Invoicer\ProductsController@store')               ->name('invoicer.products.store');
-   Route::get('products/{id}',                        'Invoicer\ProductsController@show')                ->name('invoicer.products.show');
-   Route::get('products/{id}/edit',                   'Invoicer\ProductsController@edit')                ->name('invoicer.products.edit');
-   Route::put('products/{id}',                        'Invoicer\ProductsController@update')              ->name('invoicer.products.update');
-   Route::delete('products/{id}',                     'Invoicer\ProductsController@destroy')             ->name('invoicer.products.destroy');
+
+Route::prefix('invoicer')->namespace('Invoicer')->name('invoicer.')->group(function() {
+   Route::get('/invoiceItems/{inv_id}/create',        'InvoiceItemsController@create')          ->name('invoiceItems.create');
+   Route::resource('/invoiceItems',                   'InvoiceItemsController',                 ['except' => ['create','show']]);
+
+   Route::get('products/search',                      'ProductsController@search')              ->name('products.search');
+   Route::get('products',                             'ProductsController@index')               ->name('products');
+   Route::get('products/create',                      'ProductsController@create')              ->name('products.create');
+   Route::post('products/store',                      'ProductsController@store')               ->name('products.store');
+   Route::get('products/{id}',                        'ProductsController@show')                ->name('products.show');
+   Route::get('products/{id}/edit',                   'ProductsController@edit')                ->name('products.edit');
+   Route::put('products/{id}',                        'ProductsController@update')              ->name('products.update');
+   Route::delete('products/{id}',                     'ProductsController@destroy')             ->name('products.destroy');
 
 });

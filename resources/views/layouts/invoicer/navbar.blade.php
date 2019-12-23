@@ -7,7 +7,7 @@
 			<div class="collapse navbar-collapse" id="navbarCollapse">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item {{ (Request::is('invoicer') ? 'active' : '') }}">
-						<a class="nav-link" href="{{ url('/invoicer') }}">
+						<a class="nav-link" href="{{ route('invoicer.index') }}">
 							<i class="far fa-money-bill-alt"></i>
 							Invoicer
 						</a>
@@ -44,7 +44,7 @@
 
 					@if(checkPerm('invoicer_client_index'))
 						<li class="nav-item {{ (Request::is('invoicer/clients*') ? 'active' : '') }}">
-							<a class="nav-link" href="{{ route('invoicer.clients') }}">
+							<a class="nav-link" href="{{ route('invoicer.clients.index') }}">
 								<i class="fas fa-users"></i>
 								Clients
 							</a>

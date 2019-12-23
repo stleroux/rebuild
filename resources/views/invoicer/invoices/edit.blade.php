@@ -181,13 +181,13 @@
 									<td class="text-right" nowrap="nowrap">{{ number_format($item->total, 2, '.', ' ') }}$</td>
 									@if($invoice->status == 'logged')
 										<td class="text-right" nowrap="nowrap">
-											<form action="{{ route('invoiceItems.destroy',[$item->id]) }}" method="POST" onsubmit="return confirm('Do you really want to delete this billable item?');"
+											<form action="{{ route('invoicer.invoiceItems.destroy',[$item->id]) }}" method="POST" onsubmit="return confirm('Do you really want to delete this billable item?');"
 												class="pull-right">
 												{{ csrf_field() }}
 												<input type="hidden" name="_method" value="DELETE" />
 
 												@if(checkPerm('invoicer_invoice_edit'))
-													<a href="{{ route('invoiceItems.edit', $item->id) }}" class="btn btn-sm btn-primary">
+													<a href="{{ route('invoicer.invoiceItems.edit', $item->id) }}" class="btn btn-sm btn-primary">
 														<i class="fa fa-edit"></i>
 														Edit
 													</a>

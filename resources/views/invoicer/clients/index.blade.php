@@ -125,7 +125,7 @@
 								<i class="fa fa-binoculars" aria-hidden="true"></i>
 								Filter
 							</button>
-							<a href="{{ route('invoicer.clients') }}" class="btn btn-sm btn-outline-secondary">
+							<a href="{{ route('invoicer.clients.index') }}" class="btn btn-sm btn-outline-secondary">
 								<i class="far fa-square"></i>
 								Reset
 							</a>

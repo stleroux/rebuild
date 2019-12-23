@@ -78,8 +78,9 @@ class InvoiceItem extends Model
 
    public function formWorkDateAttribute($date)
    {
-       // return Carbon::parse($date)->format('Y-m-d');
-       return Carbon::parse($date)->format(setting('dateFormat'));
+      // return Carbon::parse($date)->format('Y-m-d');
+      return Carbon::parse($date)->format(setting('dateFormat'));
+      // return $date->format(setting('dateFormat'));
    }
 
    public function getWorkDateAttribute($date)
