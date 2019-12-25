@@ -1,4 +1,3 @@
-{{-- @extends('darts.layouts.app') --}}
 @extends('layouts.master')
 
 @section('stylesheets')
@@ -6,7 +5,6 @@
 		.hover { background-color: grey; }
 		.thead tr th { color: yellow; }
 
-		/*tr.rowcolSelected{ background-color: #222222; }*/
 		td.rowcolSelected:hover{
 			background-color: red;
 			color: black;
@@ -24,6 +22,8 @@
 
 @section('content')
 
+{!! Form::open(['route' => 'darts.01.teams.store', 'class'=>'inline-form']) !!}
+
    @isset($teamGameDone)
       @if(!$teamGameDone)
          @include('darts.inc.scoreboard')
@@ -32,14 +32,14 @@
 	
 	<div class="form-row">
 		<div class="col-sm-4">
-			@include('darts.01.teams.t1scorePanel')
+			@include('darts.01.teams.t1playersPanel')
 			@include('darts.01.teams.t1scoresheet')
 		</div>
 
 		<div class="col-sm-4">
          @isset($teamGameDone)
             @if(!$teamGameDone)
-               @include('darts.inc.messages')
+               @include('darts.01.teams.scorePad')
 			      @include('darts.inc.dartboard')
             @endif
          @endisset
@@ -49,10 +49,12 @@
 		</div>
 
 		<div class="col-sm-4">
-			@include('darts.01.teams.t2scorePanel')
+			@include('darts.01.teams.t2playersPanel')
 			@include('darts.01.teams.t2scoresheet')
 		</div>
 	</div>
+
+{{ Form::close() }}
 
 @endsection
 
@@ -68,14 +70,4 @@
 			}
 		});
 	</script>
-
-   <script type="text/javascript">
-      $('#display-dart-empty').hide();
-      setTimeout(function() {
-         $('#display-dart-success').remove();
-         // $('#display-dart-danger').remove();
-         $('#display-dart-error').remove();
-         $('#display-dart-empty').show();
-      }, 5000); // <-- time in milliseconds
-   </script>
 @endsection

@@ -13,13 +13,10 @@
             </tr>
          </thead>
          <tbody>
-            {{-- @foreach(zeroOnePlayers($game->id) as $player) --}}
             @foreach($players as $player)
-               <tr class="text-center {{ ($game->type - zeroOnePlayerScore($game->id, $player->user_id)->sum('score') == 0) ? 'text-success' : 'text-light' }}">
+               <tr class="text-center text-light">
                   <td class="text-left">{{ $player->first_name }}</td>
-                  <td>
-                     {{ $game->type - zeroOnePlayerScore($game->id, $player->user_id)->sum('score') }}
-                  </td>
+                  <td>{{ $game->type - zeroOnePlayerScore($game->id, $player->user_id)->sum('score') }}</td>
                   <td>{{ zeroOnePlayerBestScore($player) }}</td>
                   <td>{{ zeroOnePlayerScoreAvg($player) }}</td>
                   <td>{{ zeroOnePlayerDartAvg($player) }}</td>
@@ -28,7 +25,4 @@
          </tbody>
       </table>
    </div>
-   {{-- <div class="panel-footer">
-      Footer
-   </div> --}}
 </div>

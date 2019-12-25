@@ -64,7 +64,6 @@
 									@endif
 								</td>
 								<td>{{ $game->created_at->format('M d, Y') }}</td>
-								{{-- <td>{{ (zeroOneGameWinner($game) == true ) ? zeroOneGameWinner($game) : 'N/A' }}</td> --}}
 								<td>{{ zeroOneGameWinner($game) }}</td>
 								<td>{{ $game->status }}</td>
 								<td class="text-right">

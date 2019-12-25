@@ -125,11 +125,10 @@ class FunctionsController extends Controller
          if(!checkPerm('post_edit')) { abort(401, 'Unauthorized Access'); }
       }
 
-      $post->published_at = Carbon::now();
-      if($post->deleted_at != Null) {
-         $post->deleted_at = Null;
-      }
-
+         $post->published_at = Carbon::now();
+         if($post->deleted_at != Null) {
+            $post->deleted_at = Null;
+         }
       $post->save();
 
       Session::flash ('success','The post was successfully published.');
@@ -183,10 +182,6 @@ class FunctionsController extends Controller
       }
 
       $post = Post::withTrashed()->findOrFail($id);
-
-      // Check if user has required permission
-      if(!checkPerm('post_edit', $post)) { abort(401, 'Unauthorized Access'); }
-
       $post->restore();
 
       Session::flash ('success','The post was successfully restored.');

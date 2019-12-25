@@ -16,16 +16,20 @@
             </div>
          </div>
       
-         {{-- <div class="col">
-            <div class="card mb-2">
-               <div class="card-header text-center p-2">Game ID</div>
-               <div class="card-body text-center p-2">
-                  {{ $game->id }}
+         @if($gameDone)
+            <div class="col">
+               <div class="card mb-2 border border-success">
+                  <div class="card-header text-center p-2 bg-success text-dark">Winner</div>
+                  <div class="card-body text-center p-2">
+                     @foreach($players as $player)
+                        @if($game->type - zeroOnePlayerScore($game->id, $player->user_id)->sum('score') == 0)
+                           {{ $player->first_name }}
+                        @endif
+                     @endforeach
+                  </div>
                </div>
             </div>
-         </div> --}}
+         @endif
       </div>
    </div>
 </div>
-
-{{-- @include('darts.01.players.messages') --}}

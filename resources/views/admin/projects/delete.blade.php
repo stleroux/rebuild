@@ -28,7 +28,7 @@
                {{-- @if(checkPerm('post_delete')) --}}
                   <button type="submit" class="btn btn-danger">
                      <i class="far fa-trash-alt"></i>
-                     Yes - Permanently Delete This Recipe
+                     Yes - Permanently Delete This Project
                   </button>
                {{-- @endif --}}
 

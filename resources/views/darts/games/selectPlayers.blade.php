@@ -13,7 +13,7 @@
 @section('content')
 
    {!! Form::open(array('route'=>'darts.games.storePlayers')) !!}
-      {{ Form::token() }}
+      {{-- {{ Form::token() }} --}}
       {{-- Game ID : --}}
       {{ Form::hidden('game_id', $game->id) }}
       {{-- No Of Players : --}}
@@ -54,6 +54,9 @@
                {{ Form::submit ('Create Game', array('class'=>'btn btn-sm btn-primary')) }}
             </span>
          </div>
+
       </div>
+
    {!! Form::close() !!}
+   
 @endsection

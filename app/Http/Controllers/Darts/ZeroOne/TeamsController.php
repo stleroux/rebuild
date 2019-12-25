@@ -78,47 +78,52 @@ class TeamsController extends Controller
       // if(!checkACL('manager')) {
       //   return view('errors.403');
       // }
+      // dd($request->team_id);
 
       $this->validate($request, [
          'game_id' => 'required',
          'team_id' => 'required',
          'user_id' => 'required',
-         'score1' => 'sometimes|required|integer|max:180',
-         'score2' => 'sometimes|required|integer|max:180'
+         // 'score1' => 'sometimes|required|integer|max:180',
+         // 'score2' => 'sometimes|required|integer|max:180'
+         'score' => 'sometimes|required|integer|max:180'
       ],
       [
          'user_id.required' => 'Please select a player.',
-         'score1.required' => 'Please enter a score.',
-         'score1.integer' => 'Score must be a number.',
-         'score1.max' => 'Score must be less than 181.',
-         'score2.required' => 'Please enter a score.',
-         'score2.integer' => 'Score must be a number.',
-         'score2.max' => 'Score must be less than 181.',
+         // 'score1.required' => 'Please enter a score.',
+         // 'score1.integer' => 'Score must be a number.',
+         // 'score1.max' => 'Score must be less than 181.',
+         // 'score2.required' => 'Please enter a score.',
+         // 'score2.integer' => 'Score must be a number.',
+         // 'score2.max' => 'Score must be less than 181.',
+         'score.required' => 'Please enter a score.',
+         'score.integer' => 'Score must be a number.',
+         'score.max' => 'Score must be less than 181.',
       ]);
 
       // Determine which score box has data
-      if($request->score1) {
-         $whichScore = $request->score1;
-      }elseif($request->score2) {
-         $whichScore = $request->score2;
-      }else{
-         $whichScore = 0;
-      }
+      // if($request->score1) {
+      //    $whichScore = $request->score1;
+      // }elseif($request->score2) {
+      //    $whichScore = $request->score2;
+      // }else{
+      //    $whichScore = 0;
+      // }
 
       // Is the entered score less than 0?
-      if($whichScore < 0){
+      if($request->score < 0){
          Session::flash('dart-error','Invalid Score! You need to enter a score above 0. Please try again.');
          return redirect()->back();
       }
 
       // Is the entered score greater than 180?
-      if($whichScore > 180){
+      if($request->score > 180){
          Session::flash('dart-error','Invalid Score! Total score cannot exceed 180. Please try again.');
          return redirect()->back();
       }
 
       // Would the entered score leave 1 remaining which is not possible
-      if($request->remainingScore - $whichScore == 1){
+      if($request->remainingScore - $request->score == 1){
          $score = new Score;
             $score->user_id = $request->user_id;
             $score->team_id = $request->team_id;
@@ -132,7 +137,7 @@ class TeamsController extends Controller
       }
 
       // Is the entered score greater than the remaining score?
-      if($whichScore > $request->remainingScore){
+      if($request->score > $request->remainingScore){
          $score = new Score;
             $score->user_id = $request->user_id;
             $score->team_id = $request->team_id;
@@ -150,8 +155,8 @@ class TeamsController extends Controller
          $score->user_id = $request->user_id;
          $score->team_id = $request->team_id;
          $score->game_id = $request->game_id;
-         $score->score = $whichScore;
-         $score->remaining = $request->remainingScore - $whichScore;
+         $score->score = $request->score;
+         $score->remaining = $request->remainingScore - $request->score;
       $score->save();
 
       // Change the game status to In Progress 

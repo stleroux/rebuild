@@ -189,6 +189,9 @@ class ExtraViewsController extends Controller
          if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
       }
 
+      // Set the session to the current page route
+      Session::put('fromPage', url()->full());
+
       //$alphas = range('A', 'Z');
       $alphas = DB::table('posts')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))

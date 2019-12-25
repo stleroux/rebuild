@@ -78,6 +78,9 @@
 					{{ Form::submit ('Create Game', array('class'=>'btn btn-sm btn-primary')) }}
 				</span>
 			</div>
+
 		</div>
+
 	{!! Form::close() !!}
+	
 @endsection

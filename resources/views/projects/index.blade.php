@@ -60,7 +60,7 @@
                                     <img src="/images/no_image.jpg" alt="No Image" height="150px" width="95%" />
                                  @endif
                               </a>
-                              <h4 class="text-light badge-dark p-1">{{ $project->name}}</h4>
+                              <h4 class="text-light badge-dark p-1">{{ ucwords($project->name) }}</h4>
                               <div class="text-dark"><strong>Category</strong> : {{ $project->category }}</div>
                               <div class="text-dark"><strong>Views</strong> : {{ $project->views }}</div>
                               <div class="text-dark"><strong>Comments</strong> : {{ $project->comments->count() }}</div>
