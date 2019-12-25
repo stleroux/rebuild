@@ -33,6 +33,41 @@ class RecipesController extends Controller
    {
       // Only allow authenticated users access to these functions
       $this->middleware('auth')->except('index','show');
+      $this->enablePermissions = false;
+   }
+
+
+##################################################################################################################
+#  █████╗ ██████╗  ██████╗██╗  ██╗██╗██╗   ██╗███████╗
+# ██╔══██╗██╔══██╗██╔════╝██║  ██║██║██║   ██║██╔════╝
+# ███████║██████╔╝██║     ███████║██║██║   ██║█████╗  
+# ██╔══██║██╔══██╗██║     ██╔══██║██║╚██╗ ██╔╝██╔══╝  
+# ██║  ██║██║  ██║╚██████╗██║  ██║██║ ╚████╔╝ ███████╗
+# ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝  ╚══════╝
+# Display the archived resources
+##################################################################################################################
+   public function archives($year, $month)
+   {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_future')) { abort(401, 'Unauthorized Access'); }
+      }
+
+      // Set the session to the current page route
+      Session::put('fromLocation', 'recipes.archives'); // Required for Alphabet listing
+      Session::put('fromPage', url()->full());
+
+      // Get all categories related to Recipe Category (id=>1)
+      $categories = Category::where('parent_id',1)->get();
+
+      $archives = Recipe::with('user', 'category')
+         ->whereYear('published_at','=', $year)
+         ->whereMonth('published_at','=', $month)
+         ->where('published_at', '<=', Carbon::now())
+         ->orderBy('title')
+         ->get();
+
+      return view('recipes.archives', compact('archives','year','month','categories'));
    }
 
 

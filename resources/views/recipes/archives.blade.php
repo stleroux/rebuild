@@ -11,7 +11,7 @@
 @section('right_column')
    @include('recipes.blocks.archives')
    @include('recipes.blocks.sidebar')
-   @include('recipes.blocks.popularRecipes')
+   @include('recipes.blocks.popular')
 @endsection
 
 @section('content')

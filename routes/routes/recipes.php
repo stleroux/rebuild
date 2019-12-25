@@ -53,4 +53,5 @@ Route::namespace('Recipes')->prefix('recipes')->name('recipes.')->group(function
    Route::get('myPrivateRecipes/{key?}',  'RecipesController@myPrivateRecipes')        ->name('myPrivateRecipes');
    Route::get('myRecipes/{key?}',         'RecipesController@myRecipes')               ->name('myRecipes');
    Route::get('{cat?}/{key?}',            'RecipesController@index')                   ->name('index');
+   Route::get('archives/{year}/{month}',  'RecipesController@archives')             ->name('archives');
 });
