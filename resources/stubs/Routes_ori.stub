@@ -1,0 +1,276 @@
+<?php
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// BACKEND ROUTES
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// EXTRA VIEWS ROUTES
+Route::prefix('admin/{{modelNamePluralLowerCase}}')->name('admin.{{modelNamePluralLowerCase}}.')->group(function() {
+
+   Route::get('new{{modelNamePlural}}/{key?}',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\ExtraViewsController@new{{modelNamePlural}}',
+         'as' => 'new{{modelNamePlural}}'
+      ]);
+   
+   Route::get('unpublished/{key?}',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\ExtraViewsController@unpublished',
+         'as' => 'unpublished'
+      ]);
+
+   Route::get('future/{key?}',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\ExtraViewsController@future',
+         'as' => 'future'
+      ]);
+
+   Route::get('showTrashed/{id}',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\ExtraViewsController@showTrashed',
+         'as' => 'showTrashed'
+      ]);
+
+   Route::get('trashed/{key?}',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\ExtraViewsController@trashed',
+         'as' => 'trashed'
+      ]);
+
+   Route::get('archives/{year}/{month}',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\ExtraViewsController@archives',
+         'as' => 'archives'
+      ]);
+
+   Route::get('my{{modelNamePlural}}/{key?}',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\ExtraViewsController@my{{modelNamePlural}}',
+         'as' => 'my{{modelNamePlural}}'
+      ]);
+});
+
+// FUNCTIONS ROUTES
+Route::prefix('admin/{{modelNamePluralLowerCase}}')->name('admin.{{modelNamePluralLowerCase}}.')->group(function() {
+   
+   Route::get('{id}/addFavorite',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\FunctionsController@addFavorite',
+         'as' => 'addFavorite'
+      ]);
+
+   Route::get('{id}/removeFavorite',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\FunctionsController@removeFavorite',
+         'as' => 'removeFavorite'
+      ]);
+
+   Route::get('{id}/duplicate',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\FunctionsController@duplicate',
+         'as' => 'duplicate'
+      ]);
+
+   Route::get('{id}/publish',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\FunctionsController@publish',
+         'as' => 'publish'
+      ]);
+
+   Route::get('{id}/unpublish',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\FunctionsController@unpublish',
+         'as' => 'unpublish'
+      ]);
+
+   Route::get('{id}/resetViews',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\FunctionsController@resetViews',
+         'as' => 'resetViews'
+      ]);
+
+   Route::get('print/{id}',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\FunctionsController@print',
+         'as' => 'print'
+      ]);
+
+   Route::get('import',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\FunctionsController@import',
+         'as' => 'import'
+      ]);
+
+   Route::get('downloadExcel/{type}',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\FunctionsController@downloadExcel',
+         'as' => 'downloadExcel'
+      ]);
+
+   Route::get('restore/{id}',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\FunctionsController@restore',
+         'as' => 'restore'
+      ]);
+
+   Route::get('pdfview',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\FunctionsController@pdfview',
+         'as' => 'pdfview'
+      ]);
+
+   Route::post('{id}/storeComment',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\FunctionsController@storeComment',
+         'as' => 'storeComment'
+      ]);
+
+   Route::post('trashAll',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\FunctionsController@trashAll',
+         'as' => 'trashAll'
+      ]);
+
+   Route::get('{id}/trash',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\FunctionsController@trash',
+         'as' => 'trash'
+      ]);
+
+   Route::delete('{id}/trashDestroy',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\FunctionsController@trashDestroy',
+         'as' => 'trashDestroy'
+      ]);
+
+   Route::post('deleteAll',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\FunctionsController@deleteAll',
+         'as' => 'deleteAll'
+      ]);
+
+   Route::post('restoreAll',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\FunctionsController@restoreAll',
+         'as' => 'restoreAll'
+      ]);
+
+   Route::post('importExcel',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\FunctionsController@importExcel',
+         'as' => 'importExport'
+      ]);
+
+   Route::post('unpublishAll',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\FunctionsController@unpublishAll',
+         'as' => 'unpublishAll'
+      ]);
+
+   Route::post('publishAll',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\FunctionsController@publishAll',
+         'as' => 'publishAll'
+      ]);
+
+   // Route::delete('deleteTrashed/{id}',
+   //    [
+   //       'uses' => 'Admin\{{modelNamePlural}}\FunctionsController@deleteTrashed',
+   //       'as' => 'deleteTrashed'
+   //    ]);
+});
+
+// CRUD ROUTES
+Route::prefix('admin/{{modelNamePluralLowerCase}}')->name('admin.{{modelNamePluralLowerCase}}.')->group(function() {
+   
+   Route::get('create',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\{{modelNamePlural}}Controller@create',
+         'as' => 'create'
+      ]);
+
+   Route::post('',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\{{modelNamePlural}}Controller@store',
+         'as' => 'store'
+      ]);
+
+   Route::get('{id}/edit',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\{{modelNamePlural}}Controller@edit',
+         'as' => 'edit'
+      ]);
+
+   Route::put('{id}',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\{{modelNamePlural}}Controller@update',
+         'as' => 'update'
+      ]);
+
+   Route::get('{id}/delete',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\{{modelNamePlural}}Controller@delete',
+         'as' => 'delete'
+      ]);
+
+   Route::delete('{id}',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\{{modelNamePlural}}Controller@deleteDestroy',
+         'as' => 'deleteDestroy'
+      ]);
+
+   Route::get('{id}/show',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\{{modelNamePlural}}Controller@show',
+         'as' => 'show'
+      ]);
+
+   Route::get('{key?}',
+      [
+         'uses' => 'Admin\{{modelNamePlural}}\{{modelNamePlural}}Controller@index',
+         'as' => 'index'
+      ]);
+});
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// FRONTEND ROUTES
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Route::prefix('{{modelNamePluralLowerCase}}')->name('{{modelNamePluralLowerCase}}.')->group(function() {
+   
+   Route::get('{id}/favoriteAdd',
+      [
+         'uses' => '{{modelNamePlural}}\FunctionsController@favoriteAdd',
+         'as' => 'favoriteAdd'
+      ]);
+
+   Route::get('{id}/favoriteRemove',
+      [
+         'uses' => '{{modelNamePlural}}\FunctionsController@favoriteRemove',
+         'as' => 'favoriteRemove'
+      ]);
+
+   Route::get('{id}/show',
+      [
+         'uses' => '{{modelNamePlural}}\{{modelNamePlural}}Controller@show',
+         'as' => 'show'
+      ]);
+
+   Route::get('myFavorites',
+      [
+         'uses' => '{{modelNamePlural}}\ExtraViewsController@myFavorites',
+         'as' => 'myFavorites'
+      ]);
+
+   Route::get('{key?}',
+      [
+         'uses' => '{{modelNamePlural}}\{{modelNamePlural}}Controller@index',
+         'as' => 'index'
+      ]);
+
+   Route::get('archives/{year}/{month}',
+      [
+         'uses' => '{{modelNamePlural}}\ExtraViewsController@archives',
+         'as' => 'archives'
+      ]);
+
+});

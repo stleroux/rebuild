@@ -57,12 +57,13 @@ class PostsController extends Controller
 			if(!checkPerm('post_add')) { abort(401, 'Unauthorized Access'); }
 		}
 
+		$post = new Post();
 		// Get all categories related to Posts Category
 		$cats = Category::where('name','posts')->first();
 		$categories = Category::where('parent_id', $cats->id)->get();
 		$tags = Tag::all();
 
-		return view('admin.posts.create', compact('categories','tags'));
+		return view('admin.posts.create', compact('categories','tags', 'post'));
 	}
 
 
@@ -291,6 +292,7 @@ class PostsController extends Controller
 			$post->title = $request->title;
 			// $post->slug = $request->slug; // slug is handled in the model
 			$post->category_id = $request->category_id;
+			$post->published_at = $request->published_at;
 			$post->body = $request->body;
 			// $post->body = Purifier::clean($request->body);
 			$post->user_id = Auth::user()->id;
@@ -346,6 +348,7 @@ class PostsController extends Controller
 			// Save the data to the database
 			$post->title = $request->input('title');
 			$post->category_id = $request->input('category_id');
+			$post->published_at = $request->input('published_at');
 			// $post->body = Purifier::clean($request->input('body'));
 			$post->body = $request->body;
 

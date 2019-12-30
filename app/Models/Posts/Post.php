@@ -95,7 +95,7 @@ class Post extends Model
    public function scopeNewPosts($query)
    {
       return $query
-         ->where('created_at', '>=' , Auth::user()->previous_login_date)
+         ->where('created_at', '>=' , Auth::user()->last_login_date)
          ->orderBy('title','DESC');
    }
 
@@ -127,7 +127,7 @@ class Post extends Model
    public function scopeNewPostsCount($query)
    {
       return $query
-         ->where('created_at', '>=' , Auth::user()->previous_login_date);
+         ->where('created_at', '>=' , Auth::user()->last_login_date);
    }
 
    public function scopeFuturePostsCount($query)
@@ -153,7 +153,7 @@ class Post extends Model
          return $date;
       }
       
-      return 'N/A';
+      // return 'N/A';
    }
 
    public function getUpdatedAtAttribute($date)
@@ -164,7 +164,7 @@ class Post extends Model
          return $date;
       }
       
-      return 'N/A';
+      // return 'N/A';
    }
 
    public function getPublishedAtAttribute($date)
@@ -175,7 +175,7 @@ class Post extends Model
          return $date;
       }
       
-      return 'N/A';
+      // return 'N/A';
    }
 
    public function getDeletedAtAttribute($date)
@@ -186,7 +186,7 @@ class Post extends Model
          return $date;
       }
       
-      return 'N/A';
+      // return 'N/A';
    }
 
 }

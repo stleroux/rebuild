@@ -7,13 +7,10 @@ use Illuminate\Support\Str;
 use File;
 use DB;
 
-// class CrudGeneratorCommand extends Command
 class CrudAddCommand extends Command
 {
 
-   protected $signature = 'crud:add {name : Class (Capitalized singular), e.g.: User}';
-   // protected $signature = 'crud:generator';
-   // protected $signature = 'crud:add {name}';
+   protected $signature = 'crud:add {name? : Class e.g.: User}';
 
    protected $description = 'Create CRUD operations';
 
@@ -22,87 +19,132 @@ class CrudAddCommand extends Command
       parent::__construct();
    }
 
-
-
-// Ask if model needs to be publically available or if login is required to view ????
-
-
-
    public function handle()
    {
       // Get the name of the argument
       // $name = $this->ask('What is the name of the model? (Must be Capitalized singular form: i.e.: User)');
       $name = ucfirst($this->argument('name'));
+      
+      if ($this->confirm('Are you sure you want to proceed?', false)) {
 
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      // Folder structure
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      $this->createFrontendFolders($name);
-      $this->info('Frontend folders created');
-      $this->createAdminFolders($name);
-      $this->info('Admin folders created');
+         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         // QUESTIONS
+         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         // Ask if model needs to be publically available or if login is required to view ????
+         $addPermissionsToDB = $this->confirm('Do you wish to add base PERMISSIONS to the database?', false);
+         $migrateData = $this->confirm('Do you want to migrate the new migration?', true);
+         $createSeeder = $this->confirm('Do you want to create a Seeder file?', true);
+         $populateDB = $this->confirm('Do you want to populate the database table with sample records?', true);
 
+         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         // ACTIONS
+         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         $this->addItemToMenuBlock($name);
+         $this->addIconToButtonsFile($name);
+         $this->addServiceProviderToAppFile($name);
 
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      // Controllers
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      // if ($this->confirm('Do you wish to create the CONTROLLERS?')) {
+         $this->createFrontendFolders($name);
+         $this->createAdminFolders($name);
          $this->frontendControllers($name);
-         $this->info('Frontend controllers created');
          $this->adminControllers($name);
-         $this->info('Admin controllers created');
-      // }
-
-
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      // Model
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      // if ($this->confirm('Do you wish to create the MODEL?')) {
          $this->model($name);
-         $this->info('Model created');
-      // }
-
-
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      // Views and buttons
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      // if ($this->confirm('Do you wish to create the VIEWS and ASSOCIATED FILES?')) {
          $this->addFrontendViews($name);
-            $this->info('Frontend views created');
          $this->addFrontendButtons($name);
-            $this->info('Frontend buttons added');
          $this->addFrontendBlocks($name);
-            $this->info('Frontend blocks added');
          $this->addFrontendExtraPages($name);
-            $this->info('Frontend extra pages added');
          $this->addFrontendMenuItem($name);
-            $this->info('Frontend menu item added');
-
-        $this->addAdminViews($name);
-            $this->info('Admin views created');
+         $this->addAdminViews($name);
          $this->addAdminButtons($name);
-            $this->info('Admn buttons added');
          $this->addAdminBlocks($name);
-            $this->info('Admn blocks added');
          $this->addAdminExtraPages($name);
-            $this->info('Admin extra pages added');
          $this->addAdminMenuItem($name);
-            $this->info('Admin menu item added');
+         $this->request($name);
+         $this->serviceProvider($name);
+         if ($addPermissionsToDB) {
+            $this->addPermissions($name);
+         }
+         $this->addRoutes($name);
+         $this->makeMigration($name);
+         if($migrateData) {
+            \Artisan::call('migrate');
+         }
+         if($createSeeder) {
+            $this->makeSeeder($name);
+            if($populateDB) {
+               // system('composer dump-autoload');
+               \Artisan::call('db:seed --class="' . str::plural($name) . 'TableSeeder"');
+            }
+         }
+
+         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         // INFORMATION
+         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         $this->info('╔═════════════════════════════════════════════════════════════════════════════════════════╗');
+         $this->info('║ Generating your code                                                                    ║');
+         $this->info('╠═════════════════════════════════════════════════════════════════════════════════════════╣');
+         $this->info('║ - Frontend folders created                                                              ║');
+         $this->info('║ - Admin folders created                                                                 ║');
+         $this->info('║ - Frontend controllers created                                                          ║');
+         $this->info('║ - Admin controllers created                                                             ║');
+         $this->info('║ - Model created                                                                         ║');
+         $this->info('║ - Frontend views created                                                                ║');
+         $this->info('║ - Frontend buttons added                                                                ║');
+         $this->info('║ - Frontend blocks added                                                                 ║');
+         $this->info('║ - Frontend extra pages added                                                            ║');
+         $this->info('║ - Frontend menu item added                                                              ║');
+         $this->info('║ - Admin views created                                                                   ║');
+         $this->info('║ - Admin buttons added                                                                   ║');
+         $this->info('║ - Admin blocks added                                                                    ║');
+         $this->info('║ - Admin extra pages added                                                               ║');
+         $this->info('║ - Admin menu item added                                                                 ║');
+         $this->info('║ - Request created                                                                       ║');
+         $this->info('║ - Request created                                                                       ║');
+         if ($addPermissionsToDB) {
+            $this->info('║ - Base permissions added to database                                                    ║');
+         }
+         $this->info('║ - Route resource added to web.php routes file                                           ║');
+         $this->info('║ - Migration file created                                                                ║');
+         if($migrateData) {
+            $this->info('║ - Database table created                                                                ║');
+         }
+         if($createSeeder) {
+            $this->makeSeeder($name);
+            $this->info('║ - Seeder file created                                                                   ║');
+            if($populateDB) {
+               \Artisan::call('db:seed --class="' . str::plural($name) . 'TableSeeder"');
+               $this->info('║ - Database table updated with sample records                                            ║');
+            }
+         }
+         $this->info('║                                                                                         ║');
+         $this->info('╠═════════════════════════════════════════════════════════════════════════════════════════╣');
+         $this->info('║ Done generating files! Happy coding.                                                    ║');
+         $this->info('╠═════════════════════════════════════════════════════════════════════════════════════════╣');
+         $this->info('║ NEXT STEPS:                                                                             ║');
+         $this->info('║   - Update the migration file                                                           ║');
+         $this->info('║   - Update the form for the Edit and Create page                                        ║');
+         $this->info('║                                                                                         ║');
+         $this->info('║ - Add the ServiceProvider class to config\app.php                                       ║');
+         $this->info('║                                                                                         ║');
+         $this->info('║                                                                                         ║');
+         $this->info('║ - Do not forget to :                                                                    ║');
+         $this->info('║   - run "php artisan migrate" if you haven\'t already migrated and seeded the database   ║');
+         $this->info('║                                                                                         ║');
+         $this->info('╚═════════════════════════════════════════════════════════════════════════════════════════╝');
+      }
+   }
 
 
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      // Write settings to files
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      // Add include line to homepage blocks
+   protected function addItemToMenuBlock($name)
+   {
       File::append(
          resource_path('views/homepage/blocks.blade.php'),
          '@include(\'' . strtolower(Str::plural($name)) . ".blocks.popular')\n");
+   }
 
 
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      // Add a new icon to config/buttons.php
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      $val = "'" . strtolower(str::plural($name)) . "' => 'fas fa-fw fa-random',\n";
+   protected function addIconToButtonsFile($name)
+   {
+      $val = "'" . strtolower(str::plural($name)) . "' => 'fab fa-fw fa-laravel',\n";
       $configFile = base_path().'/config/buttons.php';
       $file = file_get_contents($configFile);
       $searchFor = '/** CRUD Added **/'.PHP_EOL;
@@ -113,11 +155,10 @@ class CrudAddCommand extends Command
          // Save file
          file_put_contents($configFile, $newFile);
       }
+   }
 
 
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      // Register service provider in config/app.php
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   protected function addServiceProviderToAppFile($name) {
       $configFile = base_path().'/config/app.php';
       $file = file_get_contents($configFile);
       $searchFor = '/* * Customer Service Providers */'.PHP_EOL;
@@ -130,88 +171,6 @@ class CrudAddCommand extends Command
          // Save file
          file_put_contents($configFile, $newFile);
       }
-
-
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      // Request
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      // if ($this->confirm('Do you wish to create the REQUEST?')) {
-         $this->request($name);
-         $this->info('Request created');
-      // }
-
-
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      // Service Provider
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      // if ($this->confirm('Do you wish to create the SERVICE PROVIDER?')) {
-         $this->serviceProvider($name);
-         $this->info('Request created');
-      // }
-
-
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      // Permissions
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      if ($this->confirm('Do you wish to add base PERMISSIONS to the database?')) {
-         $this->addPermissions($name);
-         $this->info('Base permissions added to database');
-      }
-
-
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      // Routes
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      // if ($this->confirm('Do you wish to add related ROUTES?')) {
-         $this->addRoutes($name);
-         $this->info('Route resource added to web.php routes file');
-      // }
-
-
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      // Migration
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      $this->makeMigration($name);
-      $this->info('Migration file created');
-
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      // Migrate
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      if ($this->confirm('Do you want to migrate the new migration?')) {
-         \Artisan::call('migrate');
-         $this->info('Database table created');
-      }
-
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      // Seeder
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      if ($this->confirm('Do you want to create a Seeder file?')) {
-         $this->makeSeeder($name);
-         $this->info('Seeder file created');
-
-         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-         // Seed
-         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-         if ($this->confirm('Do you want to popultate the database table with sample records?')) {
-            \Artisan::call('db:seed --class=' . str::plural($name) . 'TableSeeder');
-            $this->info('Database table updated with sample records');
-         }
-      }
-      
-
-
-      $this->info('╔════════════════════════════════════════════════════════════════════════════════╗');
-      $this->info('║ Done! Happy coding.                                                            ║');
-      $this->info('╠════════════════════════════════════════════════════════════════════════════════╣');
-      $this->info('║ NEXT STEPS:                                                                    ║');
-      $this->info('║   - Update the migration file                                                  ║');
-      $this->info('║   - Update the form for the Edit and Create page                               ║');
-      $this->info('║                                                                                ║');
-      $this->info('║ - Add the ServiceProvider class to config\app.php                              ║');
-      $this->info('║                                                                                ║');
-      $this->info('║                                                                                ║');
-      $this->info('║   - Do not forget to run "php artisan migrate"                                 ║');
-      $this->info('╚════════════════════════════════════════════════════════════════════════════════╝');
    }
 
 

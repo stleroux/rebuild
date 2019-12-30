@@ -81,7 +81,7 @@ class User extends Authenticatable
          return $date;
       }
       
-      return 'N/A';
+      // return 'N/A';
    }
 
    public function getUpdatedAtAttribute($date)
@@ -92,7 +92,7 @@ class User extends Authenticatable
          return $date;
       }
       
-      return 'N/A';
+      // return 'N/A';
    }
 
    // Cannot do this as it interferes with the LastLogin Listener

@@ -14,7 +14,7 @@
    
    <div class="card mb-2">
       <div class="card-header card_header">
-         <i class="far fa-newspaper"></i>
+         <i class="far fa-newspaper"></i>///
          {{ ucwords($post->title) }}
          <span class="float-right">
             <div class="btn-group">

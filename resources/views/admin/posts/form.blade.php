@@ -32,6 +32,24 @@
          <div class="pl-1 bg-danger">{{ $errors->first('category_id') }}</div>
       </div>
    </div>
+
+<!-- PUBLISH DATE-->
+<div class="col-xs-12 col-sm-3 col-md-3">
+      <div class="form-group {{ $errors->has('published_at') ? 'has-error' : '' }}">
+         {{ Form::label('published_at', 'Publish(ed) On') }}
+         <div class="input-group input-group-sm">
+            <input type="date" name="published_at" value="{{ old('published_at') ?? $post->published_at }}" class="form-control form-control-sm" />
+            <div class="input-group-append">
+               <span class="input-group-text input-group-text-sm"><i class="far fa-calendar-alt"></i></span>
+            </div>
+         </div>
+         <div class="pl-1 bg-danger">{{ $errors->first('published_at') }}</div>
+      </div>
+   </div>
+
+
+
+
 </div>
 
 <div class="form-row">

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+// use DB;
 
 class {{modelNamePlural}}TableSeeder extends Seeder
 {
@@ -21,9 +22,9 @@ class {{modelNamePlural}}TableSeeder extends Seeder
             array (
                 'id' => 1,
                 'user_id' => 2,
-                'name' => 'First test',
+                'title' => 'First test',
                 'email' => 'first@test.com',
-                'status' => 1,
+                'category' => 1,
                 'views' => 10,
                 'published_at' => '2019-11-04 12:23:35',
                 'deleted_at' => NULL,
@@ -34,9 +35,9 @@ class {{modelNamePlural}}TableSeeder extends Seeder
             array (
                 'id' => 2,
                 'user_id' => 2,
-                'name' => 'Second test',
+                'title' => 'Second test',
                 'email' => 'second@test.com',
-                'status' => 2,
+                'category' => 2,
                 'views' => 10,
                 'published_at' => '2019-11-04 12:23:58',
                 'deleted_at' => NULL,
@@ -47,9 +48,9 @@ class {{modelNamePlural}}TableSeeder extends Seeder
             array (
                 'id' => 3,
                 'user_id' => 3,
-                'name' => 'Third test',
+                'title' => 'Third test',
                 'email' => 'third@test.com',
-                'status' => 3,
+                'category' => 3,
                 'views' => 0,
                 'published_at' => '2019-12-04 12:24:19',
                 'deleted_at' => NULL,

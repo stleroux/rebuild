@@ -19,6 +19,7 @@
       <div class="card mb-3">
 
          <div class="card-header section_header p-2">
+            <i class="{{ Config::get('buttons.trashed') }}"></i>
             Trashed {{modelNamePlural}}
             <div class="float-right">
                <div class="btn-group">

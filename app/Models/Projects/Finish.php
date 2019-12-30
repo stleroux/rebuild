@@ -51,7 +51,7 @@ class Finish extends Model
          return $date;
       }
       
-      return 'N/A';
+      // return 'N/A';
    }
 
    public function getUpdatedAtAttribute($date)
@@ -62,7 +62,7 @@ class Finish extends Model
          return $date;
       }
       
-      return 'N/A';
+      // return 'N/A';
    }
 
 

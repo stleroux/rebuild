@@ -22,8 +22,8 @@
          Blog
       </div>
 
-      @if(count($posts) > 0)
-         <div class="card-body section_body p-2">
+      <div class="card-body section_body p-2">
+         @if(count($posts) > 0)
             @foreach ($posts as $post)
                <div class="card mb-2">
 
@@ -54,7 +54,6 @@
                         </div>
                      
                      </div>
-
                   </div>
 
                   <div class="card-footer card_footer p-1">
@@ -69,12 +68,10 @@
                {{-- {{ $posts->links('vendor.pagination.simple-bootstrap-4') }} --}}
                {{ $posts->links() }}
             </div>
-         </div>
-      @else
-         <div class="card-body card_body p-2">
-            No Records Found
-         </div>
-      @endif
+         @else
+            {{ setting('no_records_found') }}
+         @endif
+      </div>
    </div>
 
 @endsection

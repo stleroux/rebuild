@@ -109,7 +109,7 @@ public function scopePublished($query)
          return $date;
       }
       
-      return 'N/A';
+      // return 'N/A';
    }
 
    public function getUpdatedAtAttribute($date)
@@ -120,7 +120,7 @@ public function scopePublished($query)
          return $date;
       }
       
-      return 'N/A';
+      // return 'N/A';
    }
 
    public function getPublishedAtAttribute($date)
@@ -131,7 +131,7 @@ public function scopePublished($query)
          return $date;
       }
       
-      return 'N/A';
+      // return 'N/A';
    }
 
    // public function getUserIdAttribute($id)

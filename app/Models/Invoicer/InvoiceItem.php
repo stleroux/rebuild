@@ -62,7 +62,7 @@ class InvoiceItem extends Model
          return $date;
       }
       
-      return 'N/A';
+      // return 'N/A';
    }
 
    public function getUpdatedAtAttribute($date)
@@ -73,7 +73,7 @@ class InvoiceItem extends Model
          return $date;
       }
       
-      return 'N/A';
+      // return 'N/A';
    }
 
    public function formWorkDateAttribute($date)
@@ -92,7 +92,7 @@ class InvoiceItem extends Model
          return $date;
       }
       
-      return 'N/A';
+      // return 'N/A';
    }
 
 

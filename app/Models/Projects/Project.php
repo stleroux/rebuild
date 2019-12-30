@@ -71,7 +71,7 @@ class Project extends Model
          return $date;
       }
       
-      return 'N/A';
+      // return 'N/A';
    }
 
    public function getUpdatedAtAttribute($date)
@@ -82,7 +82,7 @@ class Project extends Model
          return $date;
       }
       
-      return 'N/A';
+      // return 'N/A';
    }
 
 

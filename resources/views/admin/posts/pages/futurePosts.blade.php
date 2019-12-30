@@ -20,7 +20,8 @@
          <div class="col">
             <div class="card mb-2">
                <div class="card-header section_header p-2">
-                  <i class="{{ Config::get('buttons.new') }}"></i>
+                  {{-- <i class="{{ Config::get('buttons.new') }}"></i> --}}
+                  <i class="{{ Config::get('buttons.future') }}"></i>
                   Future Posts
                   <div class="float-right">
                      <div class="btn-group">

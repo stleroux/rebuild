@@ -74,7 +74,7 @@ class Category extends Model //implements AuditableContract
          return $date;
       }
       
-      return 'N/A';
+      // return 'N/A';
    }
 
    public function getUpdatedAtAttribute($date)
@@ -85,7 +85,7 @@ class Category extends Model //implements AuditableContract
          return $date;
       }
       
-      return 'N/A';
+      // return 'N/A';
    }
 
 	/**

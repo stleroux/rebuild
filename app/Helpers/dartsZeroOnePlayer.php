@@ -48,7 +48,7 @@ function zeroOnePlayerIndividualGamesWonStat($player) {
 }
 
 
-// Individual games won
+// Individual practice games
 function zeroOnePlayerIndividualPracticeStat($player) {
 	$val = DB::table('dart__scores')
 		->join('dart__games', 'dart__scores.game_id', 'dart__games.id')

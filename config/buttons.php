@@ -1,6 +1,7 @@
 <?php
 
 return [
+   'generic'      => 'fas fa-asterisk',
    'add'          => 'fa  fa-fw fa-plus-square',
    'archive'      => 'far fa-fw fa-file-archive',
    'archives'     => 'fa  fa-fw fa-archive',
@@ -40,6 +41,39 @@ return [
    'update'       => 'fa  fa-fw fa-save',
 
    /** CRUD Added **/
+	'tests' => 'fab fa-fw fa-laravel',
+
+	'tests' => 'fab fa-fw fa-laravel',
+
+	'tests' => 'fab fa-fw fa-laravel',
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	'articles' => 'fas fa-fw fa-random',
 
 	'articles' => 'fas fa-fw fa-address-card',

@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
 use Session;
-use App\Dart;
-use App\DartScore;
-use App\User;
+use App\Models\User;
+use App\Models\Darts\Game;
+use App\Models\Darts\Score;
 
 
 class TeamsController extends Controller
@@ -29,8 +29,8 @@ class TeamsController extends Controller
 
    public function index($gameID)
    {
-      $game = Dart::find($gameID);
-      return view('darts.cricket.scores.teams.index', compact('game'));
+      $game = Game::find($gameID);
+      return view('darts.cricket.teams.index', compact('game'));
    }
 
 }

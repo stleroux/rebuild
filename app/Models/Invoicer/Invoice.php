@@ -84,7 +84,7 @@ class Invoice extends Model
          return $date;
       }
       
-      return 'N/A';
+      // return 'N/A';
    }
 
 
@@ -96,7 +96,7 @@ class Invoice extends Model
          return $date;
       }
       
-      return 'N/A';
+      // return 'N/A';
    }
 
    public function formInvoicedAtAttribute($date)

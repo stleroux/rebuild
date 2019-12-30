@@ -1,12 +1,15 @@
 <div class="card mb-3 p-0 m-0">
 
-	<div class="card-header block_header p-2 m-0">{{modelNamePlural}} Menu</div>
+	<div class="card-header block_header p-2 m-0">
+		<i class="{{ Config::get('buttons.{{modelNamePluralLowerCase}}') }}"></i>
+		{{modelNamePlural}} Menu
+		</div>
 
 	<div class="list-group">
 
 		<a href="{{ route('admin.{{modelNamePluralLowerCase}}.index') }}" class="list-group-item list-group-item-action p-1
 			{{ Route::is('admin.{{modelNamePluralLowerCase}}.index') ? 'active' : '' }}">
-			<i class="fa fa-file-text-o" aria-hidden="true"></i>
+			<i class="{{ Config::get('buttons.{{modelNamePluralLowerCase}}') }}"></i>
 			{{modelNamePlural}}
 			<div class="badge badge-secondary float-right">
 				{{ App\Models\{{modelNamePlural}}\{{modelName}}::published()->count() }}
@@ -15,7 +18,7 @@
 
 		<a href="{{ route('admin.{{modelNamePluralLowerCase}}.new{{modelNamePlural}}') }}" class="list-group-item list-group-item-action p-1 
 			{{ Route::is('admin.{{modelNamePluralLowerCase}}.new{{modelNamePlural}}') ? 'active' : '' }}">
-			<i class="fa fa-file-text-o" aria-hidden="true"></i>
+			<i class="{{ Config::get('buttons.new') }}"></i>
 			New {{modelNamePlural}}
 			<div class="badge badge-secondary float-right">
 				{{ App\Models\{{modelNamePlural}}\{{modelName}}::new{{modelNamePlural}}()->count() }}
@@ -24,7 +27,7 @@
 
 		<a href="{{ route('admin.{{modelNamePluralLowerCase}}.my{{modelNamePlural}}') }}" class="list-group-item list-group-item-action p-1
 			{{ Route::is('admin.{{modelNamePluralLowerCase}}.my{{modelNamePlural}}') ? 'active' : '' }}">
-			<i class="fa fa-file-text-o" aria-hidden="true"></i>
+			<i class="{{ Config::get('buttons.mine') }}"></i>
 			Created By Me
 			<div class="badge badge-secondary float-right">
 				{{ App\Models\{{modelNamePlural}}\{{modelName}}::my{{modelNamePlural}}()->count() }}
@@ -33,7 +36,7 @@
 
 		<a href="{{ route('admin.{{modelNamePluralLowerCase}}.unpublished') }}" class="list-group-item list-group-item-action p-1
 			{{ Route::is('admin.{{modelNamePluralLowerCase}}.unpublished') ? 'active' : '' }}">
-			<i class="fa fa-file-text-o" aria-hidden="true"></i>
+			<i class="{{ Config::get('buttons.unpublished') }}"></i>
 			Unpublished
 			<div class="badge badge-secondary float-right">
 				{{ App\Models\{{modelNamePlural}}\{{modelName}}::unpublished()->count() }}
@@ -42,7 +45,7 @@
 
 		<a href="{{ route('admin.{{modelNamePluralLowerCase}}.future') }}" class="list-group-item list-group-item-action p-1
 			{{ Route::is('admin.{{modelNamePluralLowerCase}}.future') ? 'active' : '' }}">
-			<i class="fa fa-file-text-o" aria-hidden="true"></i>
+			<i class="{{ Config::get('buttons.future') }}"></i>
 			Future
 			<div class="badge badge-secondary float-right">
 				{{ App\Models\{{modelNamePlural}}\{{modelName}}::future()->count() }}
@@ -51,7 +54,7 @@
 
 		<a href="{{ route('admin.{{modelNamePluralLowerCase}}.trashed') }}" class="list-group-item list-group-item-action p-1
 			{{ Route::is('admin.{{modelNamePluralLowerCase}}.trashed') ? 'active' : '' }}">
-			<i class="fa fa-trash-o" aria-hidden="true"></i>
+			<i class="{{ Config::get('buttons.trashed') }}"></i>
 			Trashed
 			<div class="badge badge-secondary float-right">
 				{{ App\Models\{{modelNamePlural}}\{{modelName}}::trashedCount()->count() }}

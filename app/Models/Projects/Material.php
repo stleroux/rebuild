@@ -31,7 +31,7 @@ class Material extends Model
          return $date;
       }
       
-      return 'N/A';
+      // return 'N/A';
    }
 
    public function getUpdatedAtAttribute($date)
@@ -43,7 +43,7 @@ class Material extends Model
          return $date;
       }
       
-      return 'N/A';
+      // return 'N/A';
    }
 
 }

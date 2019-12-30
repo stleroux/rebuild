@@ -108,8 +108,6 @@ public function scopePublished($query)
          $date = $date->format(setting('dateFormat'));
          return $date;
       }
-      
-      return 'N/A';
    }
 
    public function getUpdatedAtAttribute($date)
@@ -119,8 +117,6 @@ public function scopePublished($query)
          $date = $date->format(setting('dateFormat'));
          return $date;
       }
-      
-      return 'N/A';
    }
 
    public function getPublishedAtAttribute($date)
@@ -130,25 +126,6 @@ public function scopePublished($query)
          $date = $date->format(setting('dateFormat'));
          return $date;
       }
-      
-      return 'N/A';
    }
-
-   // public function getUserIdAttribute($id)
-   // {
-   //    $author = User::find($id);
-
-   //    if(setting('authorFormat') == 'username'){
-   //       return ucfirst($author->username);
-   //    }
-   //    if(setting('authorFormat') == 'last_name, first_name'){
-   //       return ucfirst($author->last_name) . ', ' . ucfirst($author->first_name);
-   //    }
-   //    if(setting('authorFormat') == 'first_name last_name'){
-   //       return ucfirst($author->first_name) . ' ' . ucfirst($author->last_name);
-   //    }
-   // }
-
-
 
 }
