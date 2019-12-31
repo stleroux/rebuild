@@ -27,13 +27,47 @@ class PlayersController extends Controller
    //    $this->enablePermissions = false;
    // }
    
+// <i class="fas fa-times-circle"></i>
+// <i class="fas fa-plus-circle"></i>
+// <i class="fas fa-minus-circle"></i>
 
    public function index($gameID)
    {
       $game = Game::find($gameID);
       $players = cricketPlayers($gameID);
       // dd($players);
-      return view('darts.cricket.players.index', compact('game','players'));
+      $twenty_1_count_plus = Score::where('user_id',2)->where('score',20)->where('game_id',$game->id)->count();
+      $twenty_1_count_minus = Score::where('user_id',2)->where('score',-20)->where('game_id',$game->id)->count();
+      $twenty_1_count = $twenty_1_count_plus - $twenty_1_count_minus;
+      // $twenty_1_points = Score::where('user_id',2)->where('game_id',$game->id)->where('score',20)->sum('score')-60;
+      $twenty_1_points = $twenty_1_count * 20 - 60;
+      // dd($twenty_1_points);
+
+      $twenty_2_count_plus = Score::where('user_id',3)->where('score',20)->where('game_id',$game->id)->count();
+      $twenty_2_count_minus = Score::where('user_id',3)->where('score',-20)->where('game_id',$game->id)->count();
+      $twenty_2_count = $twenty_2_count_plus - $twenty_2_count_minus;
+      // $twenty_2_points = Score::where('user_id',3)->where('game_id',$game->id)->where('score',20)->sum('score')-60;
+      $twenty_2_points = $twenty_2_count * 20 - 60;
+
+      $nineteen_1_count_plus = Score::where('user_id',2)->where('score',19)->where('game_id',$game->id)->count();
+      $nineteen_1_count_minus = Score::where('user_id',2)->where('score',-19)->where('game_id',$game->id)->count();
+      $nineteen_1_count = $nineteen_1_count_plus - $nineteen_1_count_minus;
+      // $nineteen_1_points = Score::where('user_id',2)->where('game_id',$game->id)->sum('score')-57;
+      $nineteen_1_points = $nineteen_1_count * 19 - 57;
+
+      $nineteen_2_count_plus = Score::where('user_id',3)->where('score',19)->where('game_id',$game->id)->count();
+      $nineteen_2_count_minus = Score::where('user_id',3)->where('score',-19)->where('game_id',$game->id)->count();
+      $nineteen_2_count = $nineteen_2_count_plus - $nineteen_2_count_minus;
+      // $nineteen_2_points = Score::where('user_id',3)->where('game_id',$game->id)->sum('score')-57;
+      $nineteen_2_points = $nineteen_2_count * 19 - 57;
+
+      return view('darts.cricket.players.index', compact(
+         'game','players',
+         'twenty_1_count','twenty_1_points',
+         'twenty_2_count','twenty_2_points',
+         'nineteen_1_count','nineteen_1_points',
+         'nineteen_2_count','nineteen_2_points'
+      ));
    }
 
 

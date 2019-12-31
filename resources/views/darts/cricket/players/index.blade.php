@@ -11,390 +11,310 @@
 @endsection
 
 @section('content')
-<div class="container-fluid border">
-	<div class="row border">
-		<div class="col border">
+
+<div class="container-fluid">
+
+	<div class="row">
+
+		<div class="col">
 			1 of 3
 		</div>
-		<div class="col-7 border">
-			2 of 3 (wider)
-		</div>
-		<div class="col border">
-			3 of 3
-		</div>
-	</div>
-</div>
 
+		<div class="col-7">
 
-
-
-
-<hr>
-<hr>
-<hr>
-	<div class="col-6 mx-auto border">
-		<div class="row">
-			{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
-				<input type="text" name="user_id" value="2" size="3">
-				<input type="text" name="game_id" value="{{ $game->id }}" size="3">
-
-				<div class="col-4 border">
-					<div class="row">
-						<div class="col p-0">
-							<table class="table table-sm table-bordered">
-								<tr>
-									<td>
-										<button type="submit" name="score" value="20" class="btn btn-sm btn-success">
-											<i class="far fa-arrow-alt-circle-up"></i>
-										</button>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<button type="submit" name="score" value="19" class="btn btn-sm btn-success">
-											<i class="far fa-arrow-alt-circle-up"></i>
-										</button>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<button type="submit" name="score" value="18" class="btn btn-sm btn-success">
-											<i class="far fa-arrow-alt-circle-up"></i>
-										</button>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<button type="submit" name="score" value="17" class="btn btn-sm btn-success">
-											<i class="far fa-arrow-alt-circle-up"></i>
-										</button>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<button type="submit" name="score" value="16" class="btn btn-sm btn-success">
-											<i class="far fa-arrow-alt-circle-up"></i>
-										</button>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<button type="submit" name="score" value="15" class="btn btn-sm btn-success">
-											<i class="far fa-arrow-alt-circle-up"></i>
-										</button>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<button type="submit" name="score" value="50" class="btn btn-sm btn-success">
-											<i class="far fa-arrow-alt-circle-up"></i>
-										</button>
-									</td>
-								</tr>
-							</table>
-						</div>
-						<div class="col p-0 border">
-							ICONS                     
-						</div>
-						<div class="col p-0 border">
-							<table class="table table-sm table-bordered">
-								<tr>
-									<td>
-										<button type="submit" name="score" value="-20" class="btn btn-sm btn-danger">
-											<i class="far fa-arrow-alt-circle-down"></i>
-										</button>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<button type="submit" name="score" value="-19" class="btn btn-sm btn-danger">
-											<i class="far fa-arrow-alt-circle-down"></i>
-										</button>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<button type="submit" name="score" value="-18" class="btn btn-sm btn-danger">
-											<i class="far fa-arrow-alt-circle-down"></i>
-										</button>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<button type="submit" name="score" value="-17" class="btn btn-sm btn-danger">
-											<i class="far fa-arrow-alt-circle-down"></i>
-										</button>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<button type="submit" name="score" value="-16" class="btn btn-sm btn-danger">
-											<i class="far fa-arrow-alt-circle-down"></i>
-										</button>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<button type="submit" name="score" value="-15" class="btn btn-sm btn-danger">
-											<i class="far fa-arrow-alt-circle-down"></i>
-										</button>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<button type="submit" name="score" value="-50" class="btn btn-sm btn-danger">
-											<i class="far fa-arrow-alt-circle-down"></i>
-										</button>
-									</td>
-								</tr>
-							</table>
-						</div>
-					</div>
+			<div class="row">
+				<div class="col">
+					{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
+						<input type="text" name="user_id" value="2" size="3">
+						<input type="text" name="game_id" value="{{ $game->id }}" size="3">
+						{{-- <div class="col"> --}}
+							{{-- <div class="row"> --}}
+								{{-- <div class="col p-0"> --}}
+									<table class="table table-sm table-bordered">
+										<tr>
+											<td>
+												<button type="submit" name="score" value="20" class="btn btn-sm btn-success">
+													<i class="far fa-arrow-alt-circle-up"></i>
+												</button>
+											</td>
+											<td>
+												@if($twenty_1_count == 1)
+													<i class="fas fa-2x fa-minus-circle"></i>
+												@elseif($twenty_1_count == 2)
+													<i class="fas fa-2x fa-plus-circle"></i>
+												@elseif($twenty_1_count == 3)
+													<i class="fas fa-2x fa-times-circle"></i>
+												@elseif($twenty_1_count > 3)
+													{{ $twenty_1_points }}
+												@endif
+											</td>
+											<td>
+												<button type="submit" name="score" value="-20" class="btn btn-sm btn-danger">
+													<i class="far fa-arrow-alt-circle-down"></i>
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<button type="submit" name="score" value="19" class="btn btn-sm btn-success">
+													<i class="far fa-arrow-alt-circle-up"></i>
+												</button>
+											</td>
+											<td>
+												@if($nineteen_1_count == 1)
+													<i class="fas fa-2x fa-minus-circle"></i>
+												@elseif($nineteen_1_count == 2)
+													<i class="fas fa-2x fa-plus-circle"></i>
+												@elseif($nineteen_1_count == 3)
+													<i class="fas fa-2x fa-times-circle"></i>
+												@elseif($nineteen_1_count > 3)
+													{{ $nineteen_1_points }}
+												@endif
+											</td>
+											<td>
+												<button type="submit" name="score" value="-19" class="btn btn-sm btn-danger">
+													<i class="far fa-arrow-alt-circle-down"></i>
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<button type="submit" name="score" value="18" class="btn btn-sm btn-success">
+													<i class="far fa-arrow-alt-circle-up"></i>
+												</button>
+											</td>
+											<td></td>
+											<td>
+												<button type="submit" name="score" value="-18" class="btn btn-sm btn-danger">
+													<i class="far fa-arrow-alt-circle-down"></i>
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<button type="submit" name="score" value="17" class="btn btn-sm btn-success">
+													<i class="far fa-arrow-alt-circle-up"></i>
+												</button>
+											</td>
+											<td></td>
+											<td>
+												<button type="submit" name="score" value="-17" class="btn btn-sm btn-danger">
+													<i class="far fa-arrow-alt-circle-down"></i>
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<button type="submit" name="score" value="16" class="btn btn-sm btn-success">
+													<i class="far fa-arrow-alt-circle-up"></i>
+												</button>
+											</td>
+											<td></td>
+											<td>
+												<button type="submit" name="score" value="-16" class="btn btn-sm btn-danger">
+													<i class="far fa-arrow-alt-circle-down"></i>
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<button type="submit" name="score" value="15" class="btn btn-sm btn-success">
+													<i class="far fa-arrow-alt-circle-up"></i>
+												</button>
+											</td>
+											<td></td>
+											<td>
+												<button type="submit" name="score" value="-15" class="btn btn-sm btn-danger">
+													<i class="far fa-arrow-alt-circle-down"></i>
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<button type="submit" name="score" value="50" class="btn btn-sm btn-success">
+													<i class="far fa-arrow-alt-circle-up"></i>
+												</button>
+											</td>
+											<td></td>
+											<td>
+												<button type="submit" name="score" value="-50" class="btn btn-sm btn-danger">
+													<i class="far fa-arrow-alt-circle-down"></i>
+												</button>
+											</td>
+										</tr>
+									</table>
+								{{-- </div> --}}
+							{{-- </div> --}}
+						{{-- </div> --}}
+					{{ Form::close() }}
 				</div>
-			{{ Form::close() }}
-				{{-- <div class="col-4 bg-secondary">SCORES</div> --}}
-				{{-- <div class="col-4 bg-secondary">3</div> --}}
-		</div>
-	</div>
-
-
-
-
-
-
-{{-- {!! Form::open(['route'=>'darts.cricket.players.store']) !!} --}}
-
-	<div class="card mb-2">
-		<div class="card-header card_header p-2">
-			CRICKET - PLAYER GAME
-			<span class="float-right">Game ID : {{ $game->id }}</span>
-		</div>
-		<div class="card-body card_body p-2">
-				<div class="col-6 mx-auto">
+				<div class="col bg-warning">
 					<table class="table table-sm table-bordered">
-						<thead align="center">
-							<tr class="h3">
-								<th></th>
-								<th>Stephane</th>
-								<th></th>
-								<th>Score</th>
-								<th></th>
-								<th>Stacie</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody align="center">
-<!------------------------------------------------------------------------------------------>
-
-
-							<tr>
-								<td>
-									{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
-										<input type="text" name="user_id" value="2">
-										<input type="text" name="game_id" value="{{ $game->id }}">
-										<button type="submit" name="score" value="20" class="btn btn-sm btn-success">
-											<i class="far fa-arrow-alt-circle-up"></i>
-										</button>
-									{{ Form::close() }}
-								</td>
-<td>
-Return twenty_1_total result
-</td>
-								<td>
-									<button type="submit" name="action" value="twenty_1_minus" class="btn btn-sm btn-danger">
-										<i class="far fa-arrow-alt-circle-down"></i>
-									</button>
-								</td>
-								<th class="h1">20</th>
-								<td>
-									<button type="submit" name="action" value="twenty_2_minus" class="btn btn-sm btn-danger">
-										<i class="far fa-arrow-alt-circle-down"></i>
-									</button>
-								</td>
-<td></td>
-								<td>
-									<button type="submit" name="action" value="twenty_2_plus" class="btn btn-sm btn-success">
-										<i class="far fa-arrow-alt-circle-up"></i>
-									</button>
-								</td>
-							</tr>
-
-
-
-<!------------------------------------------------------------------------------------------>
-							<tr>
-								<td>
-									{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
-										<input type="text" name="user_id" value="2">
-										<input type="text" name="game_id" value="{{ $game->id }}">
-										<button type="submit" name="score" value="19" class="btn btn-sm btn-success">
-											<i class="far fa-arrow-alt-circle-up"></i>
-										</button>
-									{{ Form::close() }}
-								</td>
-<td></td>
-								<td>
-									<a href="#" class="btn btn-sm btn-danger">
-										<i class="far fa-arrow-alt-circle-down"></i>
-									</a>
-								</td>
-								<th class="h1">19</th>
-								<td>
-									<a href="#" class="btn btn-sm btn-danger">
-										<i class="far fa-arrow-alt-circle-down"></i>
-									</a>
-								</td>
-<td></td>
-								<td>
-									<a href="#" class="btn btn-sm btn-success">
-										<i class="far fa-arrow-alt-circle-up"></i>
-									</a>
-								</td>
-							</tr>
-<!------------------------------------------------------------------------------------------>
-							<tr>
-								<td>
-									<a href="#" class="btn btn-sm btn-success">
-										<i class="far fa-arrow-alt-circle-up"></i>
-									</a>
-								</td>
-<td></td>
-								<td>
-									<a href="#" class="btn btn-sm btn-danger">
-										<i class="far fa-arrow-alt-circle-down"></i>
-									</a>
-								</td>
-								<th class="h1">18</th>
-								<td>
-									<a href="#" class="btn btn-sm btn-danger">
-										<i class="far fa-arrow-alt-circle-down"></i>
-									</a>
-								</td>
-<td></td>
-								<td>
-									<a href="#" class="btn btn-sm btn-success">
-										<i class="far fa-arrow-alt-circle-up"></i>
-									</a>
-								</td>
-							</tr>
-<!------------------------------------------------------------------------------------------>
-							<tr>
-								<td>
-									<a href="#" class="btn btn-sm btn-success">
-										<i class="far fa-arrow-alt-circle-up"></i>
-									</a>
-								</td>
-<td></td>
-								<td>
-									<a href="#" class="btn btn-sm btn-danger">
-										<i class="far fa-arrow-alt-circle-down"></i>
-									</a>
-								</td>
-								<th class="h1">17</th>
-								<td>
-									<a href="#" class="btn btn-sm btn-danger">
-										<i class="far fa-arrow-alt-circle-down"></i>
-									</a>
-								</td>
-<td></td>
-								<td>
-									<a href="#" class="btn btn-sm btn-success">
-										<i class="far fa-arrow-alt-circle-up"></i>
-									</a>
-								</td>
-							</tr>
-<!------------------------------------------------------------------------------------------>
-							<tr>
-								<td>
-									<a href="#" class="btn btn-sm btn-success">
-										<i class="far fa-arrow-alt-circle-up"></i>
-									</a>
-								</td>
-<td></td>
-								<td>
-									<a href="#" class="btn btn-sm btn-danger">
-										<i class="far fa-arrow-alt-circle-down"></i>
-									</a>
-								</td>
-								<th class="h1">16</th>
-								<td>
-									<a href="#" class="btn btn-sm btn-danger">
-										<i class="far fa-arrow-alt-circle-down"></i>
-									</a>
-								</td>
-<td></td>
-								<td>
-									<a href="#" class="btn btn-sm btn-success">
-										<i class="far fa-arrow-alt-circle-up"></i>
-									</a>
-								</td>
-							</tr>
-<!------------------------------------------------------------------------------------------>
-							<tr>
-								<td>
-									<a href="#" class="btn btn-sm btn-success">
-										<i class="far fa-arrow-alt-circle-up"></i>
-									</a>
-								</td>
-<td></td>
-								<td>
-									<a href="#" class="btn btn-sm btn-danger">
-										<i class="far fa-arrow-alt-circle-down"></i>
-									</a>
-								</td>
-								<th class="h1">15</th>
-								<td>
-									<a href="#" class="btn btn-sm btn-danger">
-										<i class="far fa-arrow-alt-circle-down"></i>
-									</a>
-								</td>
-<td></td>
-								<td>
-									<a href="#" class="btn btn-sm btn-success">
-										<i class="far fa-arrow-alt-circle-up"></i>
-									</a>
-								</td>
-							</tr>
-<!------------------------------------------------------------------------------------------>
-							<tr>
-								<td>
-									<a href="#" class="btn btn-sm btn-success">
-										<i class="far fa-arrow-alt-circle-up"></i>
-									</a>
-								</td>
-<td></td>
-								<td>
-									<a href="#" class="btn btn-sm btn-danger">
-										<i class="far fa-arrow-alt-circle-down"></i>
-									</a>
-								</td>
-								<th class="h1">BULL</th>
-								<td>
-									<a href="#" class="btn btn-sm btn-danger">
-										<i class="far fa-arrow-alt-circle-down"></i>
-									</a>
-								</td>
-<td></td>
-								<td>
-									<a href="#" class="btn btn-sm btn-success">
-										<i class="far fa-arrow-alt-circle-up"></i>
-									</a>
-								</td>
-							</tr>
-<!------------------------------------------------------------------------------------------>
-							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<th class="h1">TOTAL</th>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-						</tbody>
+						<tr>
+							<td>HEADER</td>
+						</tr>
+						<tr>
+							<td class="h4">20</td>
+						</tr>
+						<tr>
+							<td class="h4">19</td>
+						</tr>
+						<tr>
+							<td class="h4">18</td>
+						</tr>
+						<tr>
+							<td class="h4">17</td>
+						</tr>
+						<tr>
+							<td class="h4">16</td>
+						</tr>
+						<tr>
+							<td class="h4">15</td>
+						</tr>
+						<tr>
+							<td class="h4">Bull</td>
+						</tr>
 					</table>
 				</div>
+				<div class="col">
+					
+					{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
+						<input type="text" name="user_id" value="3" size="3">
+						<input type="text" name="game_id" value="{{ $game->id }}" size="3">
+						{{-- <div class="col"> --}}
+							{{-- <div class="row"> --}}
+								{{-- <div class="col p-0"> --}}
+									<table class="table table-sm table-bordered">
+										<tr>
+											<td>
+												<button type="submit" name="score" value="20" class="btn btn-sm btn-success">
+													<i class="far fa-arrow-alt-circle-up"></i>
+												</button>
+											</td>
+											<td>
+												@if($twenty_2_count == 1)
+													<i class="fas fa-2x fa-minus-circle"></i>
+												@elseif($twenty_2_count == 2)
+													<i class="fas fa-2x fa-plus-circle"></i>
+												@elseif($twenty_2_count == 3)
+													<i class="fas fa-2x fa-times-circle"></i>
+												@elseif($twenty_2_count > 3)
+													popopo
+												@endif
+											</td>
+											<td>
+												<button type="submit" name="score" value="-20" class="btn btn-sm btn-danger">
+													<i class="far fa-arrow-alt-circle-down"></i>
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<button type="submit" name="score" value="19" class="btn btn-sm btn-success">
+													<i class="far fa-arrow-alt-circle-up"></i>
+												</button>
+											</td>
+											<td>
+												@if($nineteen_2_count == 1)
+													<i class="fas fa-2x fa-minus-circle"></i>
+												@elseif($nineteen_2_count == 2)
+													<i class="fas fa-2x fa-plus-circle"></i>
+												@elseif($nineteen_2_count == 3)
+													<i class="fas fa-2x fa-times-circle"></i>
+												@endif
+											</td>
+											<td>
+												<button type="submit" name="score" value="-19" class="btn btn-sm btn-danger">
+													<i class="far fa-arrow-alt-circle-down"></i>
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<button type="submit" name="score" value="18" class="btn btn-sm btn-success">
+													<i class="far fa-arrow-alt-circle-up"></i>
+												</button>
+											</td>
+											<td></td>
+											<td>
+												<button type="submit" name="score" value="-18" class="btn btn-sm btn-danger">
+													<i class="far fa-arrow-alt-circle-down"></i>
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<button type="submit" name="score" value="17" class="btn btn-sm btn-success">
+													<i class="far fa-arrow-alt-circle-up"></i>
+												</button>
+											</td>
+											<td></td>
+											<td>
+												<button type="submit" name="score" value="-17" class="btn btn-sm btn-danger">
+													<i class="far fa-arrow-alt-circle-down"></i>
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<button type="submit" name="score" value="16" class="btn btn-sm btn-success">
+													<i class="far fa-arrow-alt-circle-up"></i>
+												</button>
+											</td>
+											<td></td>
+											<td>
+												<button type="submit" name="score" value="-16" class="btn btn-sm btn-danger">
+													<i class="far fa-arrow-alt-circle-down"></i>
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<button type="submit" name="score" value="15" class="btn btn-sm btn-success">
+													<i class="far fa-arrow-alt-circle-up"></i>
+												</button>
+											</td>
+											<td></td>
+											<td>
+												<button type="submit" name="score" value="-15" class="btn btn-sm btn-danger">
+													<i class="far fa-arrow-alt-circle-down"></i>
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<button type="submit" name="score" value="50" class="btn btn-sm btn-success">
+													<i class="far fa-arrow-alt-circle-up"></i>
+												</button>
+											</td>
+											<td></td>
+											<td>
+												<button type="submit" name="score" value="-50" class="btn btn-sm btn-danger">
+													<i class="far fa-arrow-alt-circle-down"></i>
+												</button>
+											</td>
+										</tr>
+									</table>
+								{{-- </div> --}}
+							{{-- </div> --}}
+						{{-- </div> --}}
+					{{ Form::close() }}
+
+				</div>
+			</div>
 		</div>
+		
+		<div class="col">
+			3 of 3
+		</div>
+
+	</div> <!-- Enf of main row -->
+
+</div> <!-- End of fluid container -->
+
+
+
+	
 		<div class="card-footer p-1">
 			<i class="far fa-arrow-alt-circle-up"></i>
 			<i class="far fa-arrow-alt-circle-down"></i>
@@ -402,7 +322,7 @@ Return twenty_1_total result
 			<i class="fas fa-plus-circle"></i>
 			<i class="fas fa-minus-circle"></i>
 		</div>
-	</div>
+	
 
 {{-- {{ Form::close() }} --}}
 
