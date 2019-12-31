@@ -212,7 +212,7 @@ class GamesController extends Controller
    public function selectPlayers($game_id)
    {
       $game = Game::find($game_id);
-      $players = User::where('id', '!=', 1)->orderby('username', 'asc')->get();
+      $players = User::where('id', '!=', 1)->whereNotNull('first_name')->whereNotNull('last_name')->orderby('username', 'asc')->get();
       return view('darts.games.selectPlayers', compact('players','game'));
    }
 
