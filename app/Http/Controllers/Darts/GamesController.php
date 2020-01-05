@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Darts\ZeroOne;
+namespace App\Http\Controllers\Darts;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -157,7 +157,8 @@ class GamesController extends Controller
    public function selectTeamPlayers(Request $request, $game_id)
    {
       $game = Game::find($game_id);
-      $players = User::where('id', '!=', 1)->orderby('username', 'asc')->get();
+      $players = User::where('id', '!=', 1)->whereNotNull('first_name')->whereNotNull('last_name')->orderby('last_name', 'asc')->get();
+      // dd($players);
       return view('darts.games.selectTeamPlayers', compact('players','game'));
    }
 
@@ -212,7 +213,7 @@ class GamesController extends Controller
    public function selectPlayers($game_id)
    {
       $game = Game::find($game_id);
-      $players = User::where('id', '!=', 1)->whereNotNull('first_name')->whereNotNull('last_name')->orderby('username', 'asc')->get();
+      $players = User::where('id', '!=', 1)->whereNotNull('first_name')->whereNotNull('last_name')->orderby('last_name', 'asc')->get();
       return view('darts.games.selectPlayers', compact('players','game'));
    }
 
