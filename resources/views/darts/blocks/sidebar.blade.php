@@ -33,7 +33,7 @@
 
 @isset($gameDone)
    @if(!$gameDone)
-      @include('darts.inc.possibleOuts', ['score'=>$remainingScore, 'user'=>$user])
+      @include('darts.01.inc.possibleOuts', ['score'=>$remainingScore, 'user'=>$user])
    @endif
 @endisset
 
@@ -62,7 +62,7 @@
 @isset($teamGameDone)
    @if(!$teamGameDone)
       {{-- @include('darts.01.scores.teams.t1possibleOuts', ['user'=>$user]) --}}
-      @include('darts.inc.possibleOuts', ['score'=>$remainingScore, 'user'=>$user])
+      @include('darts.01.inc.possibleOuts', ['score'=>$remainingScore, 'user'=>$user])
    @endif
 @endisset
 

@@ -24,7 +24,7 @@
 @section('content')
 
    @if(!$gameDone)
-      @include('darts.inc.scoreboard')
+      @include('darts.01.inc.scoreboard')
    @endif
    
    
@@ -36,7 +36,7 @@
       @isset($gameDone)
          @if(!$gameDone)
             <div class="col-sm-4">
-               @include('darts.inc.dartboard')
+               @include('darts.01.inc.dartboard')
             </div>
 
             <div class="col-sm-4">

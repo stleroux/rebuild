@@ -7,523 +7,134 @@
 @endsection
 
 @section('right_column')
-	@include('darts.blocks.sidebar')
+   @include('darts.blocks.sidebar')
 @endsection
 
 @section('content')
 
+   <div class="card mb-2">
 
-	<div class="card mb-2">
-		<div class="card-header card_header p-2">
-			CRICKET - PLAYER GAME
-			<span class="float-right">Game ID : {{ $game->id }}</span>
-		</div>
-		<div class="card-body card_body p-2">
-				<div class="col-6 mx-auto">
-					<table class="table table-sm table-bordered">
-						<thead align="center">
-							<tr class="h3">
-								<th></th>
-								<th>Team 1</th>
-								<th></th>
-								<th>Score</th>
-								<th></th>
-								<th>Team 2</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody align="center" class="bg-secondary">
+      <div class="card-header card_header p-2">
+         CRICKET - MULTI PLAYER GAME
+         <span class="float-right">Game ID : {{ $game->id }}</span>
+      </div>
+      
+      <div class="card-body card_body p-2">
+         <table class="table table-sm">
+            <thead align="center">
+               <tr class="h3">
+                  <th class="h1 bg-dark">Player</th>
+                  @foreach($possibleScores as $pScore)
+                     <th class="h1 bg-dark">
+                        @if($loop->last)
+                           Bull
+                        @else
+                           {{ $pScore }}
+                        @endif
+                     </th>
+                  @endforeach
+                  <th class="h1 bg-dark">Total</th>
+               </tr>
+            </thead>
+            <tbody align="center">
 
+               @foreach($players as $p)
+                  <tr class="text-light">
+                     <td class="h2 align-middle">{{ $players->get($loop->index)->first_name }}</td>
 
-<!------------------------------------------------------------------------------------------>
-							<tr>
-								<td class="align-middle">
-									{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
-										<input type="hidden" name="team_id" value="1">
-										<input type="hidden" name="game_id" value="{{ $game->id }}">
-										<button type="submit" name="score" value="20" class="btn btn-sm btn-success">
-											<i class="far fa-2x fa-arrow-alt-circle-up"></i>
-										</button>
-									{{ Form::close() }}
-								</td>
-								<td class="align-middle">
-									@if($twenty_1_count == 1)
-										<i class="fas fa-2x fa-minus-circle"></i>
-									@elseif($twenty_1_count == 2)
-										<i class="fas fa-2x fa-plus-circle"></i>
-									@elseif($twenty_1_count == 3)
-										<i class="fas fa-2x fa-times-circle"></i>
-									@elseif($twenty_1_count > 3)
-										<h2 class="pt-1">{{ $twenty_1_points }}</h2>
-									@endif
-								</td>
-								<td class="align-middle">
-									{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
-										<input type="hidden" name="team_id" value="1">
-										<input type="hidden" name="game_id" value="{{ $game->id }}">
-										<button type="submit" name="score" value="-20" class="btn btn-sm btn-danger">
-											<i class="far fa-2x fa-arrow-alt-circle-down	"></i>
-										</button>
-									{{ Form::close() }}
-								</td>
+                     @foreach($possibleScores as $pScore)
+                        <td class="p-0">
+                           <table width="100%" class="table table-bordered p-0 m-0">
+                              <tr class="">
+                                 <td class="">
+                                    {!! Form::open(['route'=>'darts.cricket.players.store']) !!}
+                                       <input type="hidden" name="user_id" value="{{ $players->get($loop->parent->index)->id }}">
+                                       <input type="hidden" name="game_id" value="{{ $game->id }}">
+                                       <button type="submit" name="score" value="{{ $pScore }}" class="btn btn-sm btn-block btn-success" {{ ($game->status == 'Completed') ? 'disabled' : '' }}>
+                                          <i class="far fa-arrow-alt-circle-up"></i>
+                                       </button>
+                                    {{ Form::close() }}
+                                 </td>
+                                 <td class="">
+                                    {!! Form::open(['route'=>'darts.cricket.players.store']) !!}
+                                       <input type="hidden" name="user_id" value="{{ $players->get($loop->parent->index)->id }}">
+                                       <input type="hidden" name="game_id" value="{{ $game->id }}">
+                                       <button type="submit" name="score" value="-{{ $pScore }}" class="btn btn-sm btn-block btn-danger" {{ ($game->status == 'Completed') ? 'disabled' : '' }}>
+                                          <i class="far fa-arrow-alt-circle-down "></i>
+                                       </button>
+                                    {{ Form::close() }}
+                                 </td>
+                              </tr>
+                              <tr class="">
+                                 <td colspan="2" class="text-center p-1">
+                                    @php
+                                       $count = DB::table('dart__scores')->where('user_id', $players->get($loop->parent->index)->id)->where('score',$pScore)->where('game_id',$game->id)->count() 
+                                                -
+                                                DB::table('dart__scores')->where('user_id', $players->get($loop->parent->index)->id)->where('score',-$pScore)->where('game_id',$game->id)->count();
 
-								<th class="h1 bg-dark">20</th>
+                                       $points = ($count * $pScore) - ($pScore * 3);
 
-								<td class="align-middle">
-									{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
-										<input type="hidden" name="team_id" value="2">
-										<input type="hidden" name="game_id" value="{{ $game->id }}">
-										<button type="submit" name="score" value="-20" class="btn btn-sm btn-danger">
-											<i class="far fa-2x fa-arrow-alt-circle-down	"></i>
-										</button>
-									{{ Form::close() }}
-								</td>
-								<td class="align-middle">
-									@if($twenty_2_count == 1)
-										<i class="fas fa-2x fa-minus-circle"></i>
-									@elseif($twenty_2_count == 2)
-										<i class="fas fa-2x fa-plus-circle"></i>
-									@elseif($twenty_2_count == 3)
-										<i class="fas fa-2x fa-times-circle"></i>
-									@elseif($twenty_2_count > 3)
-										<h2 class="pt-1">{{ $twenty_2_points }}</h2>
-									@endif
-								</td>
-								<td class="align-middle">
-									{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
-										<input type="hidden" name="team_id" value="2">
-										<input type="hidden" name="game_id" value="{{ $game->id }}">
-										<button type="submit" name="score" value="20" class="btn btn-sm btn-success">
-											<i class="far fa-2x fa-arrow-alt-circle-up"></i>
-										</button>
-									{{ Form::close() }}
-								</td>
-							</tr>
-<!------------------------------------------------------------------------------------------>
-							<tr>
-								<td class="align-middle">
-									{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
-										<input type="hidden" name="team_id" value="1">
-										<input type="hidden" name="game_id" value="{{ $game->id }}">
-										<button type="submit" name="score" value="19" class="btn btn-sm btn-success">
-											<i class="far fa-2x fa-arrow-alt-circle-up"></i>
-										</button>
-									{{ Form::close() }}
-								</td>
-								<td class="align-middle">
-									@if($nineteen_1_count == 1)
-										<i class="fas fa-2x fa-minus-circle"></i>
-									@elseif($nineteen_1_count == 2)
-										<i class="fas fa-2x fa-plus-circle"></i>
-									@elseif($nineteen_1_count == 3)
-										<i class="fas fa-2x fa-times-circle"></i>
-									@elseif($nineteen_1_count > 3)
-										<h2 class="pt-1">{{ $nineteen_1_points }}</h2>
-									@endif
-								</td>
-								<td class="align-middle">
-									{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
-										<input type="hidden" name="team_id" value="1">
-										<input type="hidden" name="game_id" value="{{ $game->id }}">
-										<button type="submit" name="score" value="-19" class="btn btn-sm btn-danger">
-											<i class="far fa-2x fa-arrow-alt-circle-down	"></i>
-										</button>
-									{{ Form::close() }}
-								</td>
+                                       if($count == 1) {
+                                          echo '<h2 class="pt-1 pb-0"><i class="fas fa-minus-circle"></i></h2>';
+                                       }
+                                       elseif($count == 2) {
+                                          echo '<h2 class="pt-1 pb-0"><i class="fas fa-plus-circle"></i></h2>';
+                                       }
+                                       elseif($count == 3) {
+                                          echo '<h2 class="pt-1 pb-0"><i class="fas fa-times-circle"></i></h2>';
+                                       }
+                                       elseif($count > 3) {
+                                          echo '<h2 class="pt-1 pb-0">' . $points .'</h2>';
+                                       } else {
+                                          echo "<h2 class='pt-1 pb-0'>&nbsp;</h2>";
+                                       }
+                                    @endphp
+                                 </td>
+                              </tr>
+                           </table>
+                        </td>
+                     @endforeach
+                     <td class="h2 align-middle">
+                        <?php
+                           $fifteen = DB::table('dart__scores')->where('user_id', $p->id)->where('score',15)->where('game_id',$game->id)->sum('score');
+                           if($fifteen > 45) { $fifteen = $fifteen - 45; } else { $fifteen = 0; }
 
-								<th class="h1 bg-dark">19</th>
+                           $sixteen = DB::table('dart__scores')->where('user_id', $p->id)->where('score',16)->where('game_id',$game->id)->sum('score');
+                           if($sixteen > 48) { $sixteen = $sixteen - 48; } else { $sixteen = 0; }
 
-								<td class="align-middle">
-									{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
-										<input type="hidden" name="team_id" value="2">
-										<input type="hidden" name="game_id" value="{{ $game->id }}">
-										<button type="submit" name="score" value="-19" class="btn btn-sm btn-danger">
-											<i class="far fa-2x fa-arrow-alt-circle-down	"></i>
-										</button>
-									{{ Form::close() }}
-								</td>
-								<td class="align-middle">
-									@if($nineteen_2_count == 1)
-										<i class="fas fa-2x fa-minus-circle"></i>
-									@elseif($nineteen_2_count == 2)
-										<i class="fas fa-2x fa-plus-circle"></i>
-									@elseif($nineteen_2_count == 3)
-										<i class="fas fa-2x fa-times-circle"></i>
-									@elseif($nineteen_2_count > 3)
-										<h2 class="pt-1">{{ $nineteen_2_points }}</h2>
-									@endif
-								</td>
-								<td class="align-middle">
-									{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
-										<input type="hidden" name="team_id" value="2">
-										<input type="hidden" name="game_id" value="{{ $game->id }}">
-										<button type="submit" name="score" value="19" class="btn btn-sm btn-success">
-											<i class="far fa-2x fa-arrow-alt-circle-up"></i>
-										</button>
-									{{ Form::close() }}
-								</td>
-							</tr>
-<!------------------------------------------------------------------------------------------>
-							<tr>
-								<td class="align-middle">
-									{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
-										<input type="hidden" name="team_id" value="1">
-										<input type="hidden" name="game_id" value="{{ $game->id }}">
-										<button type="submit" name="score" value="18" class="btn btn-sm btn-success">
-											<i class="far fa-2x fa-arrow-alt-circle-up"></i>
-										</button>
-									{{ Form::close() }}
-								</td>
-								<td class="align-middle">
-									@if($eighteen_1_count == 1)
-										<i class="fas fa-2x fa-minus-circle"></i>
-									@elseif($eighteen_1_count == 2)
-										<i class="fas fa-2x fa-plus-circle"></i>
-									@elseif($eighteen_1_count == 3)
-										<i class="fas fa-2x fa-times-circle"></i>
-									@elseif($eighteen_1_count > 3)
-										<h2 class="pt-1">{{ $eighteen_1_points }}</h2>
-									@endif
-								</td>
-								<td class="align-middle">
-									{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
-										<input type="hidden" name="team_id" value="1">
-										<input type="hidden" name="game_id" value="{{ $game->id }}">
-										<button type="submit" name="score" value="-18" class="btn btn-sm btn-danger">
-											<i class="far fa-2x fa-arrow-alt-circle-down	"></i>
-										</button>
-									{{ Form::close() }}
-								</td>
+                           $seventeen = DB::table('dart__scores')->where('user_id', $p->id)->where('score',17)->where('game_id',$game->id)->sum('score');
+                           if($seventeen > 51) { $seventeen = $seventeen - 51; } else { $seventeen = 0; }
 
-								<th class="h1 bg-dark">18</th>
+                           $eighteen = DB::table('dart__scores')->where('user_id', $p->id)->where('score',18)->where('game_id',$game->id)->sum('score');
+                           if($eighteen > 54) { $eighteen = $eighteen - 54; } else { $eighteen = 0; }
 
-								<td class="align-middle">
-									{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
-										<input type="hidden" name="team_id" value="2">
-										<input type="hidden" name="game_id" value="{{ $game->id }}">
-										<button type="submit" name="score" value="-18" class="btn btn-sm btn-danger">
-											<i class="far fa-2x fa-arrow-alt-circle-down	"></i>
-										</button>
-									{{ Form::close() }}
-								</td>
-								<td class="align-middle">
-									@if($eighteen_2_count == 1)
-										<i class="fas fa-2x fa-minus-circle"></i>
-									@elseif($eighteen_2_count == 2)
-										<i class="fas fa-2x fa-plus-circle"></i>
-									@elseif($eighteen_2_count == 3)
-										<i class="fas fa-2x fa-times-circle"></i>
-									@elseif($eighteen_2_count > 3)
-										<h2 class="pt-1">{{ $eighteen_2_points }}</h2>
-									@endif
-								</td>
-								<td class="align-middle">
-									{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
-										<input type="hidden" name="team_id" value="2">
-										<input type="hidden" name="game_id" value="{{ $game->id }}">
-										<button type="submit" name="score" value="18" class="btn btn-sm btn-success">
-											<i class="far fa-2x fa-arrow-alt-circle-up"></i>
-										</button>
-									{{ Form::close() }}
-								</td>
-							</tr>
-<!------------------------------------------------------------------------------------------>
-							<tr>
-								<td class="align-middle">
-									{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
-										<input type="hidden" name="team_id" value="1">
-										<input type="hidden" name="game_id" value="{{ $game->id }}">
-										<button type="submit" name="score" value="17" class="btn btn-sm btn-success">
-											<i class="far fa-2x fa-arrow-alt-circle-up"></i>
-										</button>
-									{{ Form::close() }}
-								</td>
-								<td class="align-middle">
-									@if($seventeen_1_count == 1)
-										<i class="fas fa-2x fa-minus-circle"></i>
-									@elseif($seventeen_1_count == 2)
-										<i class="fas fa-2x fa-plus-circle"></i>
-									@elseif($seventeen_1_count == 3)
-										<i class="fas fa-2x fa-times-circle"></i>
-									@elseif($seventeen_1_count > 3)
-										<h2 class="pt-1">{{ $seventeen_1_points }}</h2>
-									@endif
-								</td>
-								<td class="align-middle">
-									{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
-										<input type="hidden" name="team_id" value="1">
-										<input type="hidden" name="game_id" value="{{ $game->id }}">
-										<button type="submit" name="score" value="-17" class="btn btn-sm btn-danger">
-											<i class="far fa-2x fa-arrow-alt-circle-down	"></i>
-										</button>
-									{{ Form::close() }}
-								</td>
+                           $nineteen = DB::table('dart__scores')->where('user_id', $p->id)->where('score',19)->where('game_id',$game->id)->sum('score');
+                           if($nineteen > 57) { $nineteen = $nineteen - 57; } else { $nineteen = 0; }
 
-								<th class="h1 bg-dark">17</th>
+                           $twenty = DB::table('dart__scores')->where('user_id', $p->id)->where('score',20)->where('game_id',$game->id)->sum('score');
+                           if($twenty > 60) { $twenty = $twenty - 60; } else { $twenty = 0; }
 
-								<td class="align-middle">
-									{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
-										<input type="hidden" name="team_id" value="2">
-										<input type="hidden" name="game_id" value="{{ $game->id }}">
-										<button type="submit" name="score" value="-17" class="btn btn-sm btn-danger">
-											<i class="far fa-2x fa-arrow-alt-circle-down	"></i>
-										</button>
-									{{ Form::close() }}
-								</td>
-								<td class="align-middle">
-									@if($seventeen_2_count == 1)
-										<i class="fas fa-2x fa-minus-circle"></i>
-									@elseif($seventeen_2_count == 2)
-										<i class="fas fa-2x fa-plus-circle"></i>
-									@elseif($seventeen_2_count == 3)
-										<i class="fas fa-2x fa-times-circle"></i>
-									@elseif($seventeen_2_count > 3)
-										<h2 class="pt-1">{{ $seventeen_2_points }}</h2>
-									@endif
-								</td>
-								<td class="align-middle">
-									{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
-										<input type="hidden" name="team_id" value="2">
-										<input type="hidden" name="game_id" value="{{ $game->id }}">
-										<button type="submit" name="score" value="17" class="btn btn-sm btn-success">
-											<i class="far fa-2x fa-arrow-alt-circle-up"></i>
-										</button>
-									{{ Form::close() }}
-								</td>
-							</tr>
-<!------------------------------------------------------------------------------------------>
-							<tr>
-								<td class="align-middle">
-									{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
-										<input type="hidden" name="team_id" value="1">
-										<input type="hidden" name="game_id" value="{{ $game->id }}">
-										<button type="submit" name="score" value="16" class="btn btn-sm btn-success">
-											<i class="far fa-2x fa-arrow-alt-circle-up"></i>
-										</button>
-									{{ Form::close() }}
-								</td>
-								<td class="align-middle">
-									@if($sixteen_1_count == 1)
-										<i class="fas fa-2x fa-minus-circle"></i>
-									@elseif($sixteen_1_count == 2)
-										<i class="fas fa-2x fa-plus-circle"></i>
-									@elseif($sixteen_1_count == 3)
-										<i class="fas fa-2x fa-times-circle"></i>
-									@elseif($sixteen_1_count > 3)
-										<h2 class="pt-1">{{ $sixteen_1_points }}</h2>
-									@endif
-								</td>
-								<td class="align-middle">
-									{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
-										<input type="hidden" name="team_id" value="1">
-										<input type="hidden" name="game_id" value="{{ $game->id }}">
-										<button type="submit" name="score" value="-16" class="btn btn-sm btn-danger">
-											<i class="far fa-2x fa-arrow-alt-circle-down	"></i>
-										</button>
-									{{ Form::close() }}
-								</td>
+                           $bull = DB::table('dart__scores')->where('user_id', $p->id)->where('score',25)->where('game_id',$game->id)->sum('score');
+                           if($bull > 75) { $bull = $bull - 75; } else { $bull = 0; }
 
-								<th class="h1 bg-dark">16</th>
+                           echo $total = $fifteen + $sixteen + $seventeen + $eighteen + $nineteen + $twenty + $bull;
+                        ?>
+                     </td>
 
-								<td class="align-middle">
-									{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
-										<input type="hidden" name="team_id" value="2">
-										<input type="hidden" name="game_id" value="{{ $game->id }}">
-										<button type="submit" name="score" value="-16" class="btn btn-sm btn-danger">
-											<i class="far fa-2x fa-arrow-alt-circle-down	"></i>
-										</button>
-									{{ Form::close() }}
-								</td>
-								<td class="align-middle">
-									@if($sixteen_2_count == 1)
-										<i class="fas fa-2x fa-minus-circle"></i>
-									@elseif($sixteen_2_count == 2)
-										<i class="fas fa-2x fa-plus-circle"></i>
-									@elseif($sixteen_2_count == 3)
-										<i class="fas fa-2x fa-times-circle"></i>
-									@elseif($sixteen_2_count > 3)
-										<h2 class="pt-1">{{ $sixteen_2_points }}</h2>
-									@endif
-								</td>
-								<td class="align-middle">
-									{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
-										<input type="hidden" name="team_id" value="2">
-										<input type="hidden" name="game_id" value="{{ $game->id }}">
-										<button type="submit" name="score" value="16" class="btn btn-sm btn-success">
-											<i class="far fa-2x fa-arrow-alt-circle-up"></i>
-										</button>
-									{{ Form::close() }}
-								</td>
-							</tr>
-<!------------------------------------------------------------------------------------------>
-							<tr>
-								<td class="align-middle">
-									{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
-										<input type="hidden" name="team_id" value="1">
-										<input type="hidden" name="game_id" value="{{ $game->id }}">
-										<button type="submit" name="score" value="15" class="btn btn-sm btn-success">
-											<i class="far fa-2x fa-arrow-alt-circle-up"></i>
-										</button>
-									{{ Form::close() }}
-								</td>
-								<td class="align-middle">
-									@if($fifteen_1_count == 1)
-										<i class="fas fa-2x fa-minus-circle"></i>
-									@elseif($fifteen_1_count == 2)
-										<i class="fas fa-2x fa-plus-circle"></i>
-									@elseif($fifteen_1_count == 3)
-										<i class="fas fa-2x fa-times-circle"></i>
-									@elseif($fifteen_1_count > 3)
-										<h2 class="pt-1">{{ $fifteen_1_points }}</h2>
-									@endif
-								</td>
-								<td class="align-middle">
-									{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
-										<input type="hidden" name="team_id" value="1">
-										<input type="hidden" name="game_id" value="{{ $game->id }}">
-										<button type="submit" name="score" value="-15" class="btn btn-sm btn-danger">
-											<i class="far fa-2x fa-arrow-alt-circle-down	"></i>
-										</button>
-									{{ Form::close() }}
-								</td>
+                  </tr>
+               @endforeach
 
-								<th class="h1 bg-dark">15</th>
+            </tbody>
+         </table>
 
-								<td class="align-middle">
-									{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
-										<input type="hidden" name="team_id" value="2">
-										<input type="hidden" name="game_id" value="{{ $game->id }}">
-										<button type="submit" name="score" value="-15" class="btn btn-sm btn-danger">
-											<i class="far fa-2x fa-arrow-alt-circle-down	"></i>
-										</button>
-									{{ Form::close() }}
-								</td>
-								<td class="align-middle">
-									@if($fifteen_2_count == 1)
-										<i class="fas fa-2x fa-minus-circle"></i>
-									@elseif($fifteen_2_count == 2)
-										<i class="fas fa-2x fa-plus-circle"></i>
-									@elseif($fifteen_2_count == 3)
-										<i class="fas fa-2x fa-times-circle"></i>
-									@elseif($fifteen_2_count > 3)
-										<h2 class="pt-1">{{ $fifteen_2_points }}</h2>
-									@endif
-								</td>
-								<td class="align-middle">
-									{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
-										<input type="hidden" name="team_id" value="2">
-										<input type="hidden" name="game_id" value="{{ $game->id }}">
-										<button type="submit" name="score" value="15" class="btn btn-sm btn-success">
-											<i class="far fa-2x fa-arrow-alt-circle-up"></i>
-										</button>
-									{{ Form::close() }}
-								</td>
-							</tr>
-<!------------------------------------------------------------------------------------------>
-							<tr>
-								<td class="align-middle">
-									{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
-										<input type="hidden" name="team_id" value="1">
-										<input type="hidden" name="game_id" value="{{ $game->id }}">
-										<button type="submit" name="score" value="25" class="btn btn-sm btn-success">
-											<i class="far fa-2x fa-arrow-alt-circle-up"></i>
-										</button>
-									{{ Form::close() }}
-								</td>
-								<td class="align-middle">
-									@if($bull_1_count == 1)
-										<i class="fas fa-2x fa-minus-circle"></i>
-									@elseif($bull_1_count == 2)
-										<i class="fas fa-2x fa-plus-circle"></i>
-									@elseif($bull_1_count == 3)
-										<i class="fas fa-2x fa-times-circle"></i>
-									@elseif($bull_1_count > 3)
-										<h2 class="pt-1">{{ $bull_1_points }}</h2>
-									@endif
-								</td>
-								<td class="align-middle">
-									{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
-										<input type="hidden" name="team_id" value="1">
-										<input type="hidden" name="game_id" value="{{ $game->id }}">
-										<button type="submit" name="score" value="-25" class="btn btn-sm btn-danger">
-											<i class="far fa-2x fa-arrow-alt-circle-down	"></i>
-										</button>
-									{{ Form::close() }}
-								</td>
+         @if($game->status != 'Completed')
+            <a href="{{ route('darts.cricket.players.completed', $game->id) }}" class="btn btn-sm btn-outline-info float-right">Mark Game As Completed</a>
+         @endif
 
-								<th class="h1 bg-dark">Bull</th>
+      </div>
+      
+      @include('darts.cricket.inc.footer')
 
-								<td class="align-middle">
-									{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
-										<input type="hidden" name="team_id" value="2">
-										<input type="hidden" name="game_id" value="{{ $game->id }}">
-										<button type="submit" name="score" value="-25" class="btn btn-sm btn-danger">
-											<i class="far fa-2x fa-arrow-alt-circle-down	"></i>
-										</button>
-									{{ Form::close() }}
-								</td>
-								<td class="align-middle">
-									@if($bull_2_count == 1)
-										<i class="fas fa-2x fa-minus-circle"></i>
-									@elseif($bull_2_count == 2)
-										<i class="fas fa-2x fa-plus-circle"></i>
-									@elseif($bull_2_count == 3)
-										<i class="fas fa-2x fa-times-circle"></i>
-									@elseif($bull_2_count > 3)
-										<h2 class="pt-1">{{ $bull_2_points }}</h2>
-									@endif
-								</td>
-								<td class="align-middle">
-									{!! Form::open(['route'=>'darts.cricket.players.store']) !!}
-										<input type="hidden" name="team_id" value="2">
-										<input type="hidden" name="game_id" value="{{ $game->id }}">
-										<button type="submit" name="score" value="25" class="btn btn-sm btn-success">
-											<i class="far fa-2x fa-arrow-alt-circle-up"></i>
-										</button>
-									{{ Form::close() }}
-								</td>
-							</tr>
-<!------------------------------------------------------------------------------------------>
-							<tr class="bg-dark">
-								<td></td>
-								<td class="h1">{{ $team_1_total_points }}</td>
-								<td></td>
-								<th class="h1 bg-dark align-center">TOTAL</th>
-								<td></td>
-								<td class="h1">{{ $team_2_total_points }}</td>
-								<td></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-		</div>
-		<div class="card-footer p-1">
-			<i class="far fa-arrow-alt-circle-up"></i>
-			<i class="far fa-arrow-alt-circle-down"></i>
-			<i class="fas fa-times-circle"></i>
-			<i class="fas fa-plus-circle"></i>
-			<i class="fas fa-minus-circle"></i>
-		</div>
-	</div>
+   </div>
 
-{{-- {{ Form::close() }} --}}
-
-{{-- 
-bull  => b
-15    => f
-16    => si
-17    => se
-18    => e
-19    => n
-20    => t
-
-
-twenty_1_plus
-twenty_1_minus
-twenty_1_total
-
-twenty_2_plus
-twenty_2_minus
-twenty_2_total
- --}}
 @endsection

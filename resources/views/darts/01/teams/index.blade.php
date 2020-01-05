@@ -26,7 +26,7 @@
 
    @isset($teamGameDone)
       @if(!$teamGameDone)
-         @include('darts.inc.scoreboard')
+         @include('darts.01.inc.scoreboard')
       @endif
    @endisset
 	
@@ -40,7 +40,7 @@
          @isset($teamGameDone)
             @if(!$teamGameDone)
                @include('darts.01.teams.scorePad')
-			      @include('darts.inc.dartboard')
+			      @include('darts.01.inc.dartboard')
             @endif
          @endisset
          @include('darts.01.teams.gameInfo')

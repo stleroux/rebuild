@@ -1,35 +1,54 @@
 <?php
+use App\Models\Darts\Score;
 
 function cricketGameWinner($game) {
 
-   // check if winner is part of a game
-   if ($winner = DB::table('dart__scores')
-      ->join('dart__games', 'dart__scores.game_id', 'dart__games.id')
-      ->where('dart__games.ind_players', '!=', 1)
-      ->where('game_id', $game->id)
-      ->where('remaining', 0)
-      ->first())
-   {
+   // // check if winner is part of a game
+   // if ($winner = DB::table('dart__scores')
+   //    ->join('dart__games', 'dart__scores.game_id', 'dart__games.id')
+   //    ->where('dart__games.ind_players', '!=', 1)
+   //    ->where('game_id', $game->id)
+   //    ->where('remaining', 0)
+   //    ->first())
+   // {
 
-      if($winner->team_id) {
-         return "Team " . $winner->team_id;
-      } else {
-         $user = App\Models\User::findOrFail($winner->user_id);
-         return $user->first_name;
-      }
+   //    if($winner->team_id) {
+   //       return "Team " . $winner->team_id;
+   //    } else {
+   //       $user = App\Models\User::findOrFail($winner->user_id);
+   //       return $user->first_name;
+   //    }
 
-   // 
-   } elseif ($winner = DB::table('dart__scores')
-      ->join('dart__games', 'dart__scores.game_id', 'dart__games.id')
-      ->where('dart__games.ind_players', 1)
-      ->where('game_id', $game->id)
-      ->where('remaining', 0)
-      ->first())
+   // // 
+   // } elseif ($winner = DB::table('dart__scores')
+   //    ->join('dart__games', 'dart__scores.game_id', 'dart__games.id')
+   //    ->where('dart__games.ind_players', 1)
+   //    ->where('game_id', $game->id)
+   //    ->where('remaining', 0)
+   //    ->first())
+   // {
+   //    return 'Practice';
+   // } else {
+   //    return '';
+   // }
+   // dd($game->id);
+   $t1_score = Score::where('team_id',1)->where('game_id',$game->id)->sum('score');
+   // dd($t1_score);
+   $t2_score = Score::where('team_id',2)->where('game_id',$game->id)->sum('score');
+   // dd($t2_score);
+   if($t1_score > $t2_score && $game->status == 'Completed')
    {
-      return 'Practice';
-   } else {
-      return '';
+      return "Team 1";
    }
+   if($t1_score < $t2_score && $game->status == 'Completed')
+   {
+      return "Team 2";
+   }
+   if($t1_score == 0 || $t2_score == 0)
+   {
+      return "";
+   }
+
 }
 
 

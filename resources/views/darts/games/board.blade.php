@@ -64,7 +64,13 @@
 									@endif
 								</td>
 								<td>{{ $game->created_at->format('M d, Y') }}</td>
-								<td>{{ zeroOneGameWinner($game) }}</td>
+								<td>
+									@if($game->type == '301' || $game->type == '501' || $game->type == '701' || $game->type == '1001')
+										{{ zeroOneGameWinner($game) }}
+									@elseif($game->type == 'cricket')
+										{{ cricketGameWinner($game) }}
+									@endif
+								</td>
 								<td>{{ $game->status }}</td>
 								<td class="text-right">
 									@if($game->type == 'cricket')
