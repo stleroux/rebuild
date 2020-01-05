@@ -65,8 +65,7 @@ class GamesController extends Controller
          if(!checkPerm('dart_add')) { abort(401, 'Unauthorized Access'); }
       }
 
-      $users = User::where('id', '!=', 1)->orderby('username','asc')->get();
-      return view('darts.games.create', compact('users'));
+      return view('darts.games.create');
    }
 
 
@@ -91,7 +90,6 @@ class GamesController extends Controller
          $game->status = 'New';
       $game->save();
 
-      // Session::flash('success','The game has been created.');
       return redirect()->route('darts.games.selectTeamsOrPlayers', $game->id);
    }
 

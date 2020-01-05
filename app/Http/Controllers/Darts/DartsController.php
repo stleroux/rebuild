@@ -45,7 +45,7 @@ class DartsController extends Controller
          if(!checkPerm('dart_browse')) { abort(401, 'Unauthorized Access'); }
       }
 
-		$players = User::where('id','!=',1)->get();
+		$players = User::where('id','!=',1)->whereNotNull('first_name')->whereNotNull('last_name')->orderby('last_name', 'asc')->get();
 
 		return view('darts.index', compact('players'));
 	}
