@@ -22,8 +22,8 @@
 				<div class="float-right">
                <div class="btn-group">
    					@include('admin.posts.buttons.back', ['size'=>'xs'])
-	  			      @include('admin.posts.buttons.reset', ['size'=>'xs'])
-		 			   @include('admin.posts.buttons.save', ['size'=>'xs'])
+	  			    @include('admin.posts.buttons.reset', ['size'=>'xs'])
+		 			@include('admin.posts.buttons.save', ['size'=>'xs'])
                </div>
 		  		</div>
 			</div>

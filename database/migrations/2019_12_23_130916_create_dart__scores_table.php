@@ -18,7 +18,7 @@ class CreateDartScoresTable extends Migration {
 			$table->integer('game_id')->unsigned();
 			$table->integer('team_id')->unsigned();
 			$table->integer('user_id')->unsigned();
-			$table->integer('score')->unsigned()->nullable()->default(0);
+			$table->integer('score')->nullable()->default(0);
 			$table->integer('remaining')->unsigned();
 			$table->timestamps();
 		});

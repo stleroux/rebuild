@@ -182,7 +182,10 @@ return [
         // App\Providers\ArticleServiceProvider::class,
         
         /* * Customer Service Providers */
+		App\Providers\MovieServiceProvider::class,
 		App\Providers\ArticleServiceProvider::class,
+        Orchestra\Parser\XmlServiceProvider::class,
+        Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
 
     ],
 
@@ -232,7 +235,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'XmlParser' => Orchestra\Parser\Xml\Facade::class,
     ],
 
 ];

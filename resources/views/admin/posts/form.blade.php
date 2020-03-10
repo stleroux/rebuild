@@ -1,4 +1,5 @@
 <div class="form-row">
+
    <!-- TITLE -->
    <div class="col-6">
       <div class="form-group">
@@ -7,7 +8,8 @@
          <div class="pl-1 bg-danger">{{ $errors->first('title') }}</div>
       </div>
    </div>
-   <!-- CATEGORY -->
+
+   <!-- CATEGORY -->   
    <div class="col-12 col-sm-6 col-md-3">
       <div class="form-group">
          {!! Form::label('category_id', 'Category', ['class'=>'required']) !!}
@@ -33,12 +35,12 @@
       </div>
    </div>
 
-<!-- PUBLISH DATE-->
-<div class="col-xs-12 col-sm-3 col-md-3">
+   <!-- PUBLISH DATE-->
+   <div class="col-xs-12 col-sm-3 col-md-3">
       <div class="form-group {{ $errors->has('published_at') ? 'has-error' : '' }}">
          {{ Form::label('published_at', 'Publish(ed) On') }}
          <div class="input-group input-group-sm">
-            <input type="date" name="published_at" value="{{ old('published_at') ?? $post->published_at }}" class="form-control form-control-sm" />
+            <input type="text" name="published_at" value="{{ old('published_at') ?? $post->published_at }}" class="form-control form-control-sm" id="datePicker" />
             <div class="input-group-append">
                <span class="input-group-text input-group-text-sm"><i class="far fa-calendar-alt"></i></span>
             </div>
@@ -47,12 +49,10 @@
       </div>
    </div>
 
-
-
-
 </div>
 
 <div class="form-row">
+
    <!-- BODY -->
    <div class="col-md-12">
       <div class="form-group">
@@ -61,9 +61,11 @@
          <div class="pl-1 bg-danger">{{ $errors->first('body') }}</div>
       </div>
    </div>
+
 </div>
 
 <div class="form-row">
+   
    <!-- TAGS -->
    <div class="col">
       <div class="form-group">
@@ -82,9 +84,11 @@
          <div class="pl-1 bg-danger">{{ $errors->first('tag') }}</div>
       </div>
    </div>
+
 </div>
 
 <div class="form-row">
+   
    <!-- CURRENT IMAGE -->
    <div class="col-xs-6 col-sm-2">
       <table width="100%" class="table-bordered">
@@ -102,6 +106,7 @@
          </tr>
       </table>
    </div>
+
    <!-- UPLOAD\UPDATE IMAGE -->
    <div class="col-md-3">
       <div class="form-group">
@@ -113,4 +118,5 @@
          @endif
       </div>
    </div>
+   
 </div>

@@ -10,7 +10,8 @@ use DB;
 class CrudAddCommand extends Command
 {
 
-   protected $signature = 'crud:add {name? : Class e.g.: User}';
+   // protected $signature = 'crud:add {name? : Class e.g.: User}';
+   protected $signature = 'crud:add';
 
    protected $description = 'Create CRUD operations';
 
@@ -22,8 +23,10 @@ class CrudAddCommand extends Command
    public function handle()
    {
       // Get the name of the argument
-      // $name = $this->ask('What is the name of the model? (Must be Capitalized singular form: i.e.: User)');
-      $name = ucfirst($this->argument('name'));
+      $name = $this->ask('What is the name of the model? (Must be singular form: i.e.: user)');
+      // $name = ucfirst($this->argument('name'));
+      $name = ucfirst($name);
+
       
       if ($this->confirm('Are you sure you want to proceed?', false)) {
 
@@ -622,35 +625,35 @@ class CrudAddCommand extends Command
       DB::table('permissions')->insert([
          [
             // Browse permission (Index)
-            'name' => strtolower(Str::plural($name)).'_browse',
+            'name' => strtolower($name).'_browse',
             'display_name' => 'browse',
             'model' => strtolower($name),
             'description' => 'List '.strtolower($name)
          ],
          [
             // Read permission (Show)
-            'name' => strtolower(Str::plural($name)).'_read',
+            'name' => strtolower($name).'_read',
             'display_name' => 'read',
             'model' => strtolower($name),
             'description' => 'View '.strtolower($name)
          ],
          [
             // Edit permission
-            'name' => strtolower(Str::plural($name)).'_edit',
+            'name' => strtolower($name).'_edit',
             'display_name' => 'edit',
             'model' => strtolower($name),
             'description' => 'Edit '.strtolower($name)
          ],
          [
             // Add permission (Create)
-            'name' => strtolower(Str::plural($name)).'_add',
+            'name' => strtolower($name).'_add',
             'display_name' => 'add',
             'model' => strtolower($name),
             'description' => 'Add '.strtolower($name)
          ],
          [
             // Delete permission
-            'name' => strtolower(Str::plural($name)).'_delete',
+            'name' => strtolower($name).'_delete',
             'display_name' => 'delete',
             'model' => strtolower($name),
             'description' => 'Delete '.strtolower($name)

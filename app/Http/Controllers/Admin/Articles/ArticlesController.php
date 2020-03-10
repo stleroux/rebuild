@@ -20,11 +20,11 @@ class ArticlesController extends Controller
 # ╚██████╗╚██████╔╝██║ ╚████║███████║   ██║   ██║  ██║╚██████╔╝╚██████╗   ██║   
 #  ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝  ╚═════╝   ╚═╝   
 ##################################################################################################################
-   public function __construct()
-   {
-      $this->middleware('auth');
-      $this->enablePermissions = false;
-   }
+	public function __construct()
+	{
+		$this->middleware('auth');
+		$this->enablePermissions = true;
+	}
 
 
 ##################################################################################################################
@@ -36,18 +36,17 @@ class ArticlesController extends Controller
 #  ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝
 // Show the form for creating a new resource
 ##################################################################################################################
-    public function create()
-    {
-        // Check if user has required permission
-        if($this->enablePermissions)
-        {
-            if(!checkPerm('article_create')) { abort(401, 'Unauthorized Access'); }
-        }
+	public function create()
+	{
+		// Check if user has required permission
+		if($this->enablePermissions) {
+				if(!checkPerm('article_add')) { abort(401, 'Unauthorized Access'); }
+		}
 
-        $article = New Article();
+		$article = New Article();
 
-        return view('admin.articles.create', compact('article'));
-    }
+		return view('admin.articles.create', compact('article'));
+	}
 
 
 ##################################################################################################################
@@ -59,17 +58,17 @@ class ArticlesController extends Controller
 # ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝
 // 
 ##################################################################################################################
-   public function delete($id)
-   {
-      // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('article_trash')) { abort(401, 'Unauthorized Access'); }
-      }
+	public function delete($id)
+	{
+		// Check if user has required permission
+		if($this->enablePermissions) {
+			if(!checkPerm('article_delete')) { abort(401, 'Unauthorized Access'); }
+		}
 
-      $article = Article::onlyTrashed()->findOrFail($id);
+		$article = Article::onlyTrashed()->findOrFail($id);
 
-      return view('admin.articles.delete', compact('article'));
-   }
+		return view('admin.articles.delete', compact('article'));
+	}
 
 
 
@@ -83,23 +82,23 @@ class ArticlesController extends Controller
 // Remove the specified resource from storage
 // Used in the index page and trashAll action to soft delete multiple records
 ##################################################################################################################
-   public function deleteDestroy($id)
-   {
-      // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('article_delete')) { abort(401, 'Unauthorized Access'); }
-      }
+	public function deleteDestroy($id)
+	{
+		// Check if user has required permission
+		if($this->enablePermissions) {
+			if(!checkPerm('article_delete')) { abort(401, 'Unauthorized Access'); }
+		}
 
-      $article = Article::withTrashed()->findOrFail($id);
+		$article = Article::withTrashed()->findOrFail($id);
 
-      // Delete the associated image if any
-      File::delete('_articles/' . $article->image);
+		// Delete the associated image if any
+		File::delete('_articles/' . $article->image);
 
-      $article->forceDelete();
+		$article->forceDelete();
 
-      Session::flash('success', 'The article was successfully deleted!');
-      return redirect()->route('admin.articles.trashed');
-   }
+		Session::flash('success', 'The article was successfully deleted!');
+		return redirect()->route('admin.articles.trashed');
+	}
 
 
 // ##################################################################################################################
@@ -159,18 +158,17 @@ class ArticlesController extends Controller
 # ╚══════╝╚═════╝ ╚═╝   ╚═╝   
 // Show the form for editing the specified resource
 ##################################################################################################################
-    public function edit(Article $article, $id)
-    {
-        // Check if user has required permission
-        if($this->enablePermissions)
-        {
-            if(!checkPerm('article_edit')) { abort(401, 'Unauthorized Access'); }
-        }
+	public function edit(Article $article, $id)
+	{
+		// Check if user has required permission
+		if($this->enablePermissions) {
+			if(!checkPerm('article_edit')) { abort(401, 'Unauthorized Access'); }
+		}
 
-        // Find the model to edit
-        $article = Article::find($id);
-        return view('admin.articles.edit', compact('article'));
-    }
+		// Find the model to edit
+		$article = Article::find($id);
+		return view('admin.articles.edit', compact('article'));
+	}
 
 
 ##################################################################################################################
@@ -182,41 +180,41 @@ class ArticlesController extends Controller
 # ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝
 // Display a list of resources
 ##################################################################################################################
-   public function index(Request $request, $key=null)
-   {
-      // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('article_browse')) { abort(401, 'Unauthorized Access'); }
-      }
+	public function index(Request $request, $key=null)
+	{
+		// Check if user has required permission
+		if($this->enablePermissions) {
+			if(!checkPerm('article_browse')) { abort(401, 'Unauthorized Access'); }
+		}
 
-      // Set the session to the current page route
-      Session::put('fromPage', url()->full());
+		// Set the session to the current page route
+		Session::put('fromPage', url()->full());
 
-      //$alphas = range('A', 'Z');
-      $alphas = DB::table('articles')
-         ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
-         ->where('published_at','<', Carbon::Now())
-         ->orderBy('letter')
-         ->get();
+		//$alphas = range('A', 'Z');
+		$alphas = DB::table('articles')
+			->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
+			->where('published_at','<', Carbon::Now())
+			->orderBy('letter')
+			->get();
 
-      $letters = [];
-      foreach($alphas as $alpha) {
-         $letters[] = $alpha->letter;
-      }
+		$letters = [];
+		foreach($alphas as $alpha) {
+			$letters[] = $alpha->letter;
+		}
 
-      // If $key value is passed
-      if ($key) {
-         $articles = Article::with('user')->published()
-            ->where('title', 'like', $key . '%')
-            ->orderBy('title', 'asc')
-            ->get();
-         return view('admin.articles.index', compact('articles','letters', 'archivesLinks'));
-      }
+		// If $key value is passed
+		if ($key) {
+			$articles = Article::with('user')->published()
+				->where('title', 'like', $key . '%')
+				->orderBy('title', 'asc')
+				->get();
+			return view('admin.articles.index', compact('articles','letters'));
+		}
 
-      // No $key value is passed
-      $articles = Article::with('user')->published()->get();
-      return view('admin.articles.index', compact('articles','letters', 'archivesLinks'));
-   }
+		// No $key value is passed
+		$articles = Article::with('user')->published()->get();
+		return view('admin.articles.index', compact('articles','letters'));
+	}
 
 
 ##################################################################################################################
@@ -228,24 +226,35 @@ class ArticlesController extends Controller
 # ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝ 
 // Display the specified resource
 ##################################################################################################################
-    public function show($id)
-    {
-        // Check if user has required permission
-        if($this->enablePermissions)
-        {
-            if(!checkPerm('article_show')) { abort(401, 'Unauthorized Access'); }
-        }
+	public function show($id)
+	{
+		// Check if user has required permission
+		if($this->enablePermissions) {
+			if(!checkPerm('article_read')) { abort(401, 'Unauthorized Access'); }
+		}
 
-        $article = Article::findOrFail($id);
+		$article = Article::findOrFail($id);
 
-        // get previous article id
-        $previous = Article::published()->where('id', '<', $article->id)->max('id');
+		// get the title of the next article
+		$nextTitle = Article::published()->where('title', '>', $article->title)->orderBy('title','desc')->min('title');
 
-        // get next article id
-        $next = Article::published()->where('id', '>', $article->id)->min('id');
+		if($nextTitle){
+			$next = Article::published()->where('title', $nextTitle)->first();
+			$next = $next->id;
+		}
 
-        return view('admin.articles.show', compact('article','articlelinks','next','previous'));
-    }
+		// get the title of the previous article
+		$previousTitle = Article::published()->where('title', '<', $article->title)->orderBy('title','asc')->max('title');
+
+		if($previousTitle){
+			$previous = Article::published()->where('title', $previousTitle)->first();
+			$previous = $previous->id;
+		} else {
+         $previous = "";
+      }
+
+		return view('admin.articles.show', compact('article','next','previous'));
+	}
 
 
 ##################################################################################################################
@@ -257,18 +266,18 @@ class ArticlesController extends Controller
 # ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝
 // Store a newly created resource in storage
 ##################################################################################################################
-   public function store()
-   {
-      // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('article_add')) { abort(401, 'Unauthorized Access'); }
-      }
+	public function store()
+	{
+		// Check if user has required permission
+		if($this->enablePermissions) {
+			if(!checkPerm('article_add')) { abort(401, 'Unauthorized Access'); }
+		}
 
-      Article::create($this->validateRequest());
+		Article::create($this->validateRequest());
 
-      Session::flash('success','The article has been created successfully!');
-      return redirect()->route('admin.articles.index');
-   }
+		Session::flash('success','The article has been created successfully!');
+		return redirect()->route('admin.articles.index');
+	}
 
 
 ##################################################################################################################
@@ -280,19 +289,19 @@ class ArticlesController extends Controller
 #  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
 // UPDATE :: Update the specified resource in storage
 ##################################################################################################################
-   public function update(Article $article, $id)
-   {
-      // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('article_edit')) { abort(401, 'Unauthorized Access'); }
-      }
+	public function update(Article $article, $id)
+	{
+		// Check if user has required permission
+		if($this->enablePermissions) {
+			if(!checkPerm('article_edit')) { abort(401, 'Unauthorized Access'); }
+		}
 
-      $article = Article::findOrFail($id);
-      $article->update($this->validateRequest());
-      
-      Session::flash('success','The article has been updated successfully.');
-      return redirect(Session::get('fromPage'));
-   }
+		$article = Article::findOrFail($id);
+		$article->update($this->validateRequest());
+		
+		Session::flash('success','The article has been updated successfully.');
+		return redirect(Session::get('fromPage'));
+	}
 
 
 ##################################################################################################################
@@ -303,15 +312,23 @@ class ArticlesController extends Controller
 # ╚████╔╝ ██║  ██║███████╗██║██████╔╝██║  ██║   ██║   ███████╗    ██║  ██║███████╗╚██████╔╝╚██████╔╝███████╗███████║   ██║   
 #  ╚═══╝  ╚═╝  ╚═╝╚══════╝╚═╝╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝    ╚═╝  ╚═╝╚══════╝ ╚══▀▀═╝  ╚═════╝ ╚══════╝╚══════╝   ╚═╝   
 ##################################################################################################################
+	private function validateRequest()
+	{
+		return request()->validate([
+			'title' => 'required',
+			'category' => 'required|not_in:0',
+         'published_at' => '',
+			'description_eng' => 'required',
+			'description_fre' => '',
+         'status' => '',
+         'user_id' => '',
+      ],
+      [
+         'title.required' => 'Title is required',
+         'category.not_in' => 'Category is required',
+         'description_eng.required' => 'Description (En) is required',
+      ]);
+	}
 
-    private function validateRequest()
-    {
-        return request()->validate([
-            'title' => 'required',
-            'category' => 'required',
-            'description_eng' => 'required',
-            'description_fre' => 'required',
-        ]);
-    }
 
 }

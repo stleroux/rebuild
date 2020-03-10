@@ -7,7 +7,7 @@ return [
     */
     'columns'                       => [
         'alpha'   => [
-            'rows'  => ['description', 'email', 'name', 'slug'],
+            'rows'  => ['description', 'email', 'name', 'slug', 'title'],
             'class' => 'fa fa-sort-alpha',
         ],
         'amount'  => [
@@ -15,7 +15,7 @@ return [
             'class' => 'fa fa-sort-amount',
         ],
         'numeric' => [
-            'rows'  => ['created_at', 'updated_at', 'level', 'id', 'phone_number'],
+            'rows'  => ['created_at', 'updated_at', 'level', 'id', 'phone_number', 'col_no', 'views', 'running_time', 'category'],
             'class' => 'fa fa-sort-numeric',
         ],
     ],

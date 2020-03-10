@@ -9,24 +9,15 @@
 	<table class="table table-hover table-sm">
 		<tr>
 			<td><a href="{{ route('invoices.logged') }}">Logged</a></td>
-			<td class="text-right">
-				{{-- {{ App\Modules\Invoicer\Entities\Invoice::where('status', 'logged')->count() }} --}}
-				{{ $invoicesLogged->count() }}
-			</td>
+			<td class="text-right">{{ $invoicesLogged->count() }}</td>
 		</tr>
 		<tr>
 			<td><a href="{{ route('invoices.invoiced') }}">Invoiced</a></td>
-			<td class="text-right">
-				{{-- {{ App\Modules\Invoicer\Models\Invoice::where('status', 'invoiced')->count() }} --}}
-				{{ $invoicesInvoiced->count() }}
-			</td>
+			<td class="text-right">{{ $invoicesInvoiced->count() }}</td>
 		</tr>
 		<tr>
 			<td><a href="{{ route('invoices.paid') }}">Paid</a></td>
-			<td class="text-right">
-				{{-- {{ App\Modules\Invoicer\Models\Invoice::where('status', 'paid')->count() }} --}}
-				{{ $invoicesPaid->count() }}
-			</td>
+			<td class="text-right">{{ $invoicesPaid->count() }}</td>
 		</tr>
 	</table>
 

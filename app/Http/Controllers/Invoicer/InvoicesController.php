@@ -103,9 +103,10 @@ class InvoicesController extends Controller
 
 	public function downloadInvoice($id)
 	{
-		// 
-		$file = public_path('invoices') . '\\' . $id . '.pdf'; // or wherever you have stored your PDF files
-   	return response()->download($file);
+		$invoice = Invoice::find($id);
+		$pdf = PDF::loadView('invoicer.invoices.invoicedPDF', compact('invoice'));
+		
+		return $pdf->download('Invoice '.$id.'.pdf');
 	}
 
 

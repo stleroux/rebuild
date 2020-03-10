@@ -23,8 +23,8 @@
             <div class="float-right">
                <div class="btn-group">
                   @include('admin.articles.buttons.help', ['size'=>'xs', 'bookmark'=>''])
-                  @include('admin.articles.buttons.trashAll', ['size'=>'sm'])
-                  @include('admin.articles.buttons.restoreAll', ['size'=>'sm'])
+                  @include('admin.articles.buttons.deleteAll', ['size'=>'xs'])
+                  @include('admin.articles.buttons.restoreAll', ['size'=>'xs'])
                </div>
             </div>
          </div>

@@ -13,7 +13,7 @@
    </tr>
 </table> --}}
 <p>
-   Hello {{ $invoice->client['contact_name'] }},
+   Hello {{-- {{ $invoice->client['contact_name'] }} --}},
 </p>
 
 <p>

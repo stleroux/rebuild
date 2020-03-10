@@ -16,8 +16,9 @@
          @if($loop->first)
             <span class="float-right">
                <div class="btn-group">
-                  @include('recipes.buttons.previous')
-                  @include('recipes.buttons.print2')
+                  {{-- @include('recipes.buttons.back', ['size'=>'sm', 'label'=>'']) --}}
+                  @include('recipes.buttons.back', ['size'=>'xs', 'btn_label'=>'Back'])
+                  @include('recipes.buttons.print2', ['size'=>'xs', 'btn_label'=>'Print'])
                </div>
             </span>
          @endif
@@ -86,14 +87,14 @@
                         </tr>
                         <tr>
                            <th>Created By</th>
-                           <td>{{ $recipe->user->profile->first_name }} {{ $recipe->user->profile->last_name }}</td>
+                           <td>{{ $recipe->user->first_name }} {{ $recipe->user->last_name }}</td>
                         </tr>
                         <tr>
                            <th>Created On</th>
       
                            <td>
                               {{-- @include('recipes.dateFormat', ['dateFormat'=>Auth::user()->dateFormat, 'model'=>$recipe, 'field'=>'created_at']) --}}
-                              @include('recipes.dateFormat', ['model'=>$recipe, 'field'=>'created_at'])
+                              {{-- @include('recipes.dateFormat', ['model'=>$recipe, 'field'=>'created_at']) --}}
                            </td>
                         </tr>
                         <tr>

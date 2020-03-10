@@ -14,136 +14,43 @@
 
    <div class="card mb-2">
 
-      <div class="card-header section_header p-2">
-         Dart Keeper
+      <div class="card-header section_header p-2 d-flex justify-content-between">
+         <div>
+            <i class="fas fa-bullseye fa-fw"></i>
+            Dart Keeper
+         </div>
+         <div class="text text-danger">
+            Statistics module not completed
+         </div>
       </div>
 
       <div class="card-body section_body p-2">
          <div class="form-row">
             <div class="col">
-               <div class="card">
-                  <div class="card-header card_header p-2">01 Team Stats</div>
-                  <table class="darts table table-sm table-hover">
-                     <thead>
-                        <tr>
-                           <th>Player Name</th>
-                           <th class="text-center">Played</th>
-                           <th class="text-center">Won</th>
-                           <th class="text-center">Lost</th>
-                           <th class="text-center">Closed</th>
-                           <th class="text-center">Best Score</th>
-                        </tr>
-                     </thead>
-                     <tbody>
-                        @foreach($players as $player)
-                           <tr class="text-light">
-                              <td>{{ $player->first_name }}</td>
-                              <td class="text-center">{{ zeroOneTeamGamesPlayedStat($player) }}</td>
-                              <td class="text-center">{{-- {{ zeroOneTeamGamesWonStat($player) }} --}}</td>
-                              <td class="text-center">{{-- {{ zeroOneTeamGamesLostStat($player) }} --}}</td>
-                              <td class="text-center">{{ zeroOneTeamGamesClosedStat($player) }}</td>
-                              <td class="text-center">{{ zeroOneTeamBestScoreStat($player) }}</td>
-                           </tr>
-                        @endforeach
-                     </tbody>
-                  </table>
-               </div>
+               @include('darts.statistics.zeroOneTeams')
             </div>
             <div class="col">
-               <div class="card mb-2">
-                  <div class="card-header card_header p-2">01 Individual Stats</div>
-                  <div class="card-body p-0 m-0">
-                  <table class="darts table table-sm table-hover">
-                     <thead>
-                        <tr>
-                           <th>Player Name</th>
-                           <th class="text-center">Played</th>
-                           <th class="text-center">Won</th>
-                           <th class="text-center">Lost</th>
-                           <th class="text-center">Practice</th>
-                           <th class="text-center">Win%</th>                           
-                           <th class="text-center">Best Score</th>
-                        </tr>
-                     </thead>
-                     <tbody>
-                        @foreach($players as $player)
-                           <tr class="text-light">
-                              <td>{{ $player->first_name }}</td>
-                              <td class="text-center">{{ zeroOnePlayerIndividualGamesPlayedStat($player) }}</td>
-                              <td class="text-center">{{ zeroOnePlayerIndividualGamesWonStat($player) }}</td>
-                              <td class="text-center">{{ zeroOnePlayerIndividualGamesLostStat($player) }}</td>
-                              <td class="text-center">{{ zeroOnePlayerIndividualPracticeStat($player) }}</td>
-                              <td class="text-center">{{ zeroOnePlayerIndividualGamesWinPercentageStat($player) }}</td>
-                              <td class="text-center">{{ zeroOnePlayerBestScoreIndividualStat($player) }}</td>
-                           </tr>
-                        @endforeach
-                     </tbody>
-                  </table>
-                  </div>
-               </div>
+               @include('darts.statistics.zeroOneIndividuals')
             </div>
          </div>
 
          <div class="form-row">
             <div class="col">
-               <div class="card">
-                  <div class="card-header card_header p-2">Cricket Team Stats</div>
-                  <table class="darts table table-sm table-hover">
-                     <thead>
-                        <tr>
-                           <th>Player Name</th>
-                           <th class="text-center">Played</th>
-                           <th class="text-center">Won</th>
-                           <th class="text-center">Lost</th>
-                           <th class="text-center">Best Score</th>
-                        </tr>
-                     </thead>
-                     <tbody>
-                        @foreach($players as $player)
-                           <tr class="text-light">
-                              <td>{{ $player->first_name }}</td>
-                              <td class="text-center"></td>
-                              <td class="text-center"></td>
-                              <td class="text-center"></td>
-                              <td class="text-center"></td>
-                           </tr>
-                        @endforeach
-                     </tbody>
-                  </table>
-               </div>
+               @include('darts.statistics.cricketTeams')
             </div>
             <div class="col">
-               <div class="card">
-                  <div class="card-header card_header p-2">Cricket Individual Stats</div>
-                  <table class="darts table table-sm table-hover">
-                     <thead>
-                        <tr>
-                           <th>Player Name</th>
-                           <th class="text-center">Played</th>
-                           <th class="text-center">Won</th>
-                           <th class="text-center">Lost</th>
-                           <th class="text-center">Best Score</th>
-                        </tr>
-                     </thead>
-                     <tbody>
-                        @foreach($players as $player)
-                           <tr class="text-light">
-                              <td>{{ $player->first_name }}</td>
-                              <td class="text-center"></td>
-                              <td class="text-center"></td>
-                              <td class="text-center"></td>
-                              <td class="text-center"></td>
-                           </tr>
-                        @endforeach
-                     </tbody>
-                  </table>
-               </div>
+               @include('darts.statistics.cricketIndividuals')               
             </div>
          </div>
       </div>
 
-      <div class="card-footer card_footer p-1">
-         Statistics do not include games listed as Practice in the Games Board
+      <div class="card-footer card_footer p-1 d-flex justify-content-between">
+         <div>
+            Statistics do not include games listed as Practice in the Games Board
+         </div>
+         <div>
+            Statistics only accounts for Completed games
+         </div>
       </div>
    </div>
 

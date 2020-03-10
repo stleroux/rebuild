@@ -39,6 +39,11 @@ class Project extends Model
 //////////////////////////////////////////////////////////////////////////////////////
 // RELATIONSHIPS
 //////////////////////////////////////////////////////////////////////////////////////
+   // public function category()
+   // {
+   //    return $this->hasOne(\App\Models\Category::class);
+   // }
+
    public function finishes()
    {
       return $this->belongsToMany(\App\Models\Projects\Finish::class, 'projects__finish_project');

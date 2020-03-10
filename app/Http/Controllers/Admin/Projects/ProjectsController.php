@@ -31,7 +31,7 @@ class ProjectsController extends Controller
    public function __construct()
    {
       $this->middleware('auth')->except('index','show');
-      $this->enablePermissions = false;
+      $this->enablePermissions = true;
    }
 
 
@@ -49,7 +49,7 @@ class ProjectsController extends Controller
       // Check if user has required permission
       if($this->enablePermissions)
       {
-         if(!checkPerm('projects_create')) { abort(401, 'Unauthorized Access'); }
+         if(!checkPerm('project_add')) { abort(401, 'Unauthorized Access'); }
       }
 
       $project = New Project();
@@ -72,7 +72,7 @@ class ProjectsController extends Controller
         // Check if user has required permission
         if($this->enablePermissions)
         {
-            if(!checkPerm('projects_delete')) { abort(401, 'Unauthorized Access'); }
+            if(!checkPerm('project_delete')) { abort(401, 'Unauthorized Access'); }
         }
 
         return view('admin.projects.delete', compact('project'));
@@ -94,7 +94,7 @@ class ProjectsController extends Controller
         // Check if user has required permission
         if($this->enablePermissions)
         {
-            if(!checkPerm('projects_delete')) { abort(401, 'Unauthorized Access'); }
+            if(!checkPerm('project_delete')) { abort(401, 'Unauthorized Access'); }
         }
 
         // Delete images from file system
@@ -151,7 +151,7 @@ class ProjectsController extends Controller
         // Check if user has required permission
         if($this->enablePermissions)
         {
-            if(!checkPerm('projects_edit')) { abort(401, 'Unauthorized Access'); }
+            if(!checkPerm('project_edit')) { abort(401, 'Unauthorized Access'); }
         }
 
         $project = Project::with('finishes')->with('materials')->with('images')->find($project->id);
@@ -177,7 +177,7 @@ class ProjectsController extends Controller
     //     // Check if user has required permission
     //     if($this->enablePermissions)
     //     {
-    //         if(!checkPerm('projects_index')) { abort(401, 'Unauthorized Access'); }
+    //         if(!checkPerm('project_index')) { abort(401, 'Unauthorized Access'); }
     //     }
 
     //     // Set the session to the current page route
@@ -215,7 +215,7 @@ class ProjectsController extends Controller
         // Check if user has required permission
         if($this->enablePermissions)
         {
-            if(!checkPerm('projects_list')) { abort(401, 'Unauthorized Access'); }
+            if(!checkPerm('project_browse')) { abort(401, 'Unauthorized Access'); }
         }
 
         // Set the session to the current page route
@@ -238,6 +238,12 @@ class ProjectsController extends Controller
 ##################################################################################################################
     public function store()
     {
+      // Check if user has required permission
+        if($this->enablePermissions)
+        {
+            if(!checkPerm('project_add')) { abort(401, 'Unauthorized Access'); }
+        }
+
         Project::create($this->validateRequest());
 
         return redirect()->route('admin.projects.index');
@@ -258,7 +264,7 @@ class ProjectsController extends Controller
         // Check if user has required permission
         if($this->enablePermissions)
         {
-            if(!checkPerm('projects_show')) { abort(401, 'Unauthorized Access'); }
+            if(!checkPerm('project_read')) { abort(401, 'Unauthorized Access'); }
         }
 
         // Increase the view count if viewed from the frontend
@@ -298,6 +304,12 @@ class ProjectsController extends Controller
 ##################################################################################################################
     public function update(Project $project)
     {
+         // Check if user has required permission
+        if($this->enablePermissions)
+        {
+            if(!checkPerm('project_edit')) { abort(401, 'Unauthorized Access'); }
+        }
+
         $project->update($this->validateRequest());
 
         return redirect()->route('admin.projects.index');

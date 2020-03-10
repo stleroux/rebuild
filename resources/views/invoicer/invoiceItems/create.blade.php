@@ -2,7 +2,7 @@
 
 @section('content')
 
-	{!! Form::open(array('route'=>'invoiceItems.store')) !!}
+	{!! Form::open(array('route'=>'invoicer.invoiceItems.store')) !!}
 		{{ Form::token() }}
 		{{ Form::hidden ('invoice_id', $invoice->id) }}
 

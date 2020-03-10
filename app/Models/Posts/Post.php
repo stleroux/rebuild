@@ -115,12 +115,15 @@ class Post extends Model
 
    public function scopeUnpublished($query)
    {
-      return $query->whereNull('published_at');
+      return $query
+         ->whereNull('published_at');
    }
 
    public function scopeTrashed($query)
    {
-      return $query->where('deleted_at', '!=', NULL)->withTrashed();
+      return $query
+         ->where('deleted_at', '!=', NULL)
+         ->withTrashed();
    }
 
 
@@ -138,55 +141,57 @@ class Post extends Model
 
    public function scopeTrashedCount($query)
    {
-      return $query->where('deleted_at', '!=', NULL)->withTrashed();
+      return $query
+         ->where('deleted_at', '!=', NULL)
+         ->withTrashed();
    }
 
 
 //////////////////////////////////////////////////////////////////////////////////////
 // ACCESSORS
 //////////////////////////////////////////////////////////////////////////////////////
-   public function getCreatedAtAttribute($date)
-   {
-      if($date){
-         $date = new \Carbon\Carbon($date);
-         $date = $date->format(setting('dateFormat'));
-         return $date;
-      }
+   // public function getCreatedAtAttribute($date)
+   // {
+   //    if($date){
+   //       $date = new \Carbon\Carbon($date);
+   //       $date = $date->format(setting('dateFormat'));
+   //       return $date;
+   //    }
       
-      // return 'N/A';
-   }
+   //    // return 'N/A';
+   // }
 
-   public function getUpdatedAtAttribute($date)
-   {
-      if($date){
-         $date = new \Carbon\Carbon($date);
-         $date = $date->format(setting('dateFormat'));
-         return $date;
-      }
+   // public function getUpdatedAtAttribute($date)
+   // {
+   //    if($date){
+   //       $date = new \Carbon\Carbon($date);
+   //       $date = $date->format(setting('dateFormat'));
+   //       return $date;
+   //    }
       
-      // return 'N/A';
-   }
+   //    // return 'N/A';
+   // }
 
-   public function getPublishedAtAttribute($date)
-   {
-      if($date){
-         $date = new \Carbon\Carbon($date);
-         $date = $date->format(setting('dateFormat'));
-         return $date;
-      }
+   // public function getPublishedAtAttribute($date)
+   // {
+   //    if($date){
+   //       $date = new \Carbon\Carbon($date);
+   //       $date = $date->format(setting('dateFormat'));
+   //       return $date;
+   //    }
       
-      // return 'N/A';
-   }
+   //    // return 'N/A';
+   // }
 
-   public function getDeletedAtAttribute($date)
-   {
-      if($date){
-         $date = new \Carbon\Carbon($date);
-         $date = $date->format(setting('dateFormat'));
-         return $date;
-      }
+   // public function getDeletedAtAttribute($date)
+   // {
+   //    if($date){
+   //       $date = new \Carbon\Carbon($date);
+   //       $date = $date->format(setting('dateFormat'));
+   //       return $date;
+   //    }
       
-      // return 'N/A';
-   }
+   //    // return 'N/A';
+   // }
 
 }

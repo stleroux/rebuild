@@ -109,8 +109,13 @@ class User extends Authenticatable
 
 
 
+// Not sur eif this is still being used
+   // public function getContactNameAttribute()
+   // {
+   //     return "{$this->first_name} {$this->last_name}";
+   // }
 
-   public function getContactNameAttribute()
+   public function getFullNameAttribute()
    {
        return "{$this->first_name} {$this->last_name}";
    }

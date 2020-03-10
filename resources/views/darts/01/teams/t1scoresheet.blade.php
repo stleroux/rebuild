@@ -8,6 +8,7 @@
 				<th class="text-center">Player</th>
 				<th class="text-center">Score</th>
 				<th class="text-center">Remaining</th>
+            {{-- <th></th> --}}
 			</tr>
 		</thead>
 		<tbody>
@@ -20,6 +21,7 @@
 					<td class="text-center">{{ $score->first_name }}</td>
 					<td class="text-center">{{ $score->score }}</td>
 					<td class="text-center">{{ $score->remaining }}</td>
+               {{-- <td class="p-0 m-0"><small><i class="fas fa-pencil-alt"></i></small></td> --}}
 				</tr>
 				@php
 					$t1no --;

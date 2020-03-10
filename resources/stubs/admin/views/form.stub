@@ -23,7 +23,7 @@
       <div class="form-group {{ $errors->has('published_at') ? 'has-error' : '' }}">
          {{ Form::label('published_at', 'Publish(ed) On') }}
          <div class="input-group input-group-sm">
-            <input type="text" name="published_at" value="{{ old('published_at') ?? ${{modelNameSingularLowerCase}}->published_at }}" class="form-control form-control-sm" id="datePicker" />
+            <input type="date" name="published_at" value="{{ old('published_at') ?? ${{modelNameSingularLowerCase}}->published_at }}" class="form-control form-control-sm" id="datePicker" />
             <div class="input-group-append">
                <span class="input-group-text input-group-text-sm"><i class="far fa-calendar-alt"></i></span>
             </div>

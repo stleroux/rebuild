@@ -24,9 +24,9 @@
             </tr>
          </table> --}}
          <div class="col-sm-12">
-            <h3 class="text-center">
+            <div class="text-center" style="font-size: 16pt">
                {{ Setting('invoicer.companyName') }}
-            </h3>
+            </div>
          </div>
          <div class="row">
             <div class="col-sm-12 text-center">

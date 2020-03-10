@@ -1,6 +1,6 @@
 @if(checkPerm('article_delete'))
    <button
-      class="btn {{ $size ? 'btn-'.$size : '' }} btn-primary border border-light text-warning"
+      class="btn {{ $size ? 'btn-'.$size : '' }} btn-danger"
       type="submit"
       formaction="{{ route('admin.articles.deleteAll') }}"
       formmethod="POST"

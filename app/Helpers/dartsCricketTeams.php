@@ -11,3 +11,21 @@ function cricketTeamsPlayers($gameID, $teamID) {
 
    return $players;
 }
+
+// Team games played
+function cricketTeamGamesPlayedStat($player) {
+   $val = DB::table('dart__scores')
+      ->join('dart__games', 'dart__scores.game_id', 'dart__games.id')
+      ->where('dart__games.status', 'Completed')
+      ->where('dart__games.type', 'cricket')
+      ->where('dart__scores.team_id', '!=', 0)
+      ->where('dart__scores.user_id', $player->id)
+      ->distinct('dart__scores.game_id')
+      ->count('dart__scores.game_id');
+
+   if($val == 0) {
+      return '-';
+   }
+
+   return $val;
+}

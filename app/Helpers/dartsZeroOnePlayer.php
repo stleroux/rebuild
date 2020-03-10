@@ -14,6 +14,7 @@ function zeroOnePlayerIndividualGamesPlayedStat($player) {
 		->join('dart__games', 'dart__scores.game_id', 'dart__games.id')
 		->where('dart__games.status', 'Completed')
       ->where('dart__games.ind_players', '!=', 1)
+      ->where('dart__games.type', '!=', 'cricket')
 		->where('team_id', 0)
 		->where('user_id', $player->id)
 		->distinct('game_id')
@@ -34,6 +35,7 @@ function zeroOnePlayerIndividualGamesWonStat($player) {
 		->join('dart__games', 'dart__scores.game_id', 'dart__games.id')
 		->where('dart__games.status', 'Completed')
       ->where('dart__games.ind_players', '!=', 1)
+      ->where('dart__games.type', '!=', 'cricket')
 		->where('team_id', 0)
 		->where('user_id', $player->id)
 		->where('remaining', 0)
@@ -54,6 +56,7 @@ function zeroOnePlayerIndividualPracticeStat($player) {
 		->join('dart__games', 'dart__scores.game_id', 'dart__games.id')
 		->where('dart__games.status', 'Completed')
       ->where('dart__games.ind_players', 1)
+      ->where('dart__games.type', '!=', 'cricket')
 		->where('user_id', $player->id)
 		->where('remaining', 0)
 		->count('game_id');

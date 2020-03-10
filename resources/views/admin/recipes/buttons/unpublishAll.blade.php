@@ -1,6 +1,6 @@
 @if(checkPerm('recipe_edit'))
    <button
-      class="btn {{ $size ? 'btn-'.$size : '' }} btn-primary border border-light text-warning"
+      class="btn {{ $size ? 'btn-'.$size : '' }} btn-primary text-danger"
       type="submit"
       formaction="{{ route('admin.recipes.unpublishAll') }}"
       formmethod="POST"

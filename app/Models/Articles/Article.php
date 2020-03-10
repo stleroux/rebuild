@@ -4,24 +4,31 @@ namespace App\Models\Articles;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\User;
 use Auth;
 use Carbon\Carbon;
 use ChristianKuri\LaravelFavorite\Traits\Favoriteable;
-use App\Models\User;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Article extends Model
 {
    use SoftDeletes;
    use Favoriteable;
+   use LogsActivity;
 
    protected $guarded = [];
 
-   protected $dates = [];
+   protected $dates = ['published_at'];
+
+   protected static $logAttributes = ['*'];
+
+   // protected $revisionCreationsEnabled = true;
 
 
-   // Set the default value for the status field to 0
+   // Set the default value for the category field to 0
    protected $attributes = [
       'category' => 0,
+      'status' => 0,
    ];
 
    public function getCategoryAttribute($attribute)
@@ -30,6 +37,31 @@ class Article extends Model
    }
 
    public function categoriesOptions()
+   {
+      return [
+         0 => '',
+         1 => 'EKME',
+         2 => 'GCCMS',
+         3 => 'DFO-Forms',
+         4 => 'AEM',
+         5 => 'Windows',
+         6 => 'Office',
+         7 => 'Other',
+         8 => 'RM Admin'
+      ];
+   }
+
+      // Set the default value for the status field to 0
+   // protected $attributes = [
+   //    'status' => 0,
+   // ];
+
+   public function getStatusAttribute($attribute)
+   {
+      return $this->statusesOptions()[$attribute];
+   }
+
+   public function statusesOptions()
    {
       return [
          1 => 'Active',
@@ -68,27 +100,35 @@ public function scopePublished($query)
 
    public function scopeMyarticles($query)
    {
-      return $query->where('user_id', '=', Auth::user()->id)->orderBy('title','DESC');
+      return $query
+         ->where('user_id', '=', Auth::user()->id)
+         ->orderBy('title','DESC');
    }
 
    public function scopeUnpublished($query)
    {
-      return $query->whereNull('published_at');
+      return $query
+         ->whereNull('published_at');
    }
 
    public function scopeFuture($query)
    {
-      return $query->where('published_at', '>', Carbon::Now());
+      return $query
+         ->where('published_at', '>', Carbon::Now());
    }
    
    public function scopeTrashed($query)
    {
-      return $query->whereNotNull('deleted_at')->withTrashed();
+      return $query
+         ->whereNotNull('deleted_at')
+         ->withTrashed();
    }
 
    public function scopeTrashedCount($query)
    {
-      return $query->whereNotNull('deleted_at')->withTrashed();
+      return $query
+         ->whereNotNull('deleted_at')
+         ->withTrashed();
    }
 
    public function scopeNewarticles($query)
@@ -101,38 +141,38 @@ public function scopePublished($query)
 //////////////////////////////////////////////////////////////////////////////////////
 // ACCESSORS
 //////////////////////////////////////////////////////////////////////////////////////
-   public function getCreatedAtAttribute($date)
-   {
-      if($date){
-         $date = new \Carbon\Carbon($date);
-         $date = $date->format(setting('dateFormat'));
-         return $date;
-      }
+   // public function getCreatedAtAttribute($date)
+   // {
+   //    if($date){
+   //       $date = new \Carbon\Carbon($date);
+   //       $date = $date->format(setting('dateFormat'));
+   //       return $date;
+   //    }
       
-      // return 'N/A';
-   }
+   //    // return 'N/A';
+   // }
 
-   public function getUpdatedAtAttribute($date)
-   {
-      if($date){
-         $date = new \Carbon\Carbon($date);
-         $date = $date->format(setting('dateFormat'));
-         return $date;
-      }
+   // public function getUpdatedAtAttribute($date)
+   // {
+   //    if($date){
+   //       $date = new \Carbon\Carbon($date);
+   //       $date = $date->format(setting('dateFormat'));
+   //       return $date;
+   //    }
       
-      // return 'N/A';
-   }
+   //    // return 'N/A';
+   // }
 
-   public function getPublishedAtAttribute($date)
-   {
-      if($date){
-         $date = new \Carbon\Carbon($date);
-         $date = $date->format(setting('dateFormat'));
-         return $date;
-      }
+   // public function getPublishedAtAttribute($date)
+   // {
+   //    if($date){
+   //       $date = new \Carbon\Carbon($date);
+   //       $date = $date->format(setting('dateFormat'));
+   //       return $date;
+   //    }
       
-      // return 'N/A';
-   }
+   //    // return 'N/A';
+   // }
 
    // public function getUserIdAttribute($id)
    // {

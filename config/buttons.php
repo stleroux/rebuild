@@ -5,6 +5,7 @@ return [
    'add'          => 'fa  fa-fw fa-plus-square',
    'archive'      => 'far fa-fw fa-file-archive',
    'archives'     => 'fa  fa-fw fa-archive',
+   'audits'       => 'fas fa-fw fa-list-ol',
    'back'         => 'fas fa-fw fa-angle-double-left',
    'edit'         => 'far fa-fw fa-edit',
    'delete'       => 'fas fa-fw fa-trash',
@@ -41,44 +42,10 @@ return [
    'update'       => 'fa  fa-fw fa-save',
 
    /** CRUD Added **/
+   'articles' => 'fas fa-fw fa-newspaper',
+	'movies' => 'fas fa-fw fa-film',
 	'tests' => 'fab fa-fw fa-laravel',
 
-	'tests' => 'fab fa-fw fa-laravel',
-
-	'tests' => 'fab fa-fw fa-laravel',
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	'articles' => 'fas fa-fw fa-random',
-
-	'articles' => 'fas fa-fw fa-address-card',
-
-	
 ];
 
 // <i class="{{ Config::get('buttons.') }}"></i>

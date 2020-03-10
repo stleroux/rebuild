@@ -45,7 +45,7 @@
 					</div>
 				</td>
 			</tr>
-			@endforeach
+		@endforeach
 	</table>
 
 	<div class="card-footer text-center">

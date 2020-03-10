@@ -28,3 +28,4 @@ Route::prefix('admin/')->name('admin.')->group(function() {
 foreach (File::allFiles(__DIR__ . '/routes') as $route_file) {
   require $route_file->getPathname();
 }
+

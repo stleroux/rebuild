@@ -2,7 +2,7 @@
    <button
       class="btn {{ $size ? 'btn-'.$size : '' }} btn-success text-light"
       type="submit"
-      title="Save {$name}">
+      title="Save {{modelName}}">
       <i class="{{ Config::get('buttons.save') }}"></i>
       {{ $btn_label ?? '' }}
    </button>

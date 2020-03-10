@@ -26,8 +26,8 @@
          <div class="float-right">
             <div class="btn-group">
                @include('admin.articles.buttons.help', ['size'=>'xs', 'bookmark'=>'articles'])
-               @include('admin.articles.buttons.unpublishAll', ['size'=>'sm'])
-               @include('admin.articles.buttons.trashAll', ['size'=>'sm'])
+               @include('admin.articles.buttons.unpublishAll', ['size'=>'xs'])
+               @include('admin.articles.buttons.trashAll', ['size'=>'xs'])
                @include('admin.articles.buttons.add', ['size'=>'xs'])
             </div>
          </div>
@@ -78,6 +78,7 @@
                         <td>
                            <div class="float-right">
                               <div class="btn-group">
+                                 @include('admin.articles.buttons.audits', ['size'=>'xs'])
                                  @include('admin.articles.buttons.publish', ['size'=>'xs'])
                                  @include('admin.articles.buttons.edit', ['size'=>'xs'])
                                  @include('admin.articles.buttons.trash', ['size'=>'xs'])

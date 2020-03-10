@@ -1,3 +1,5 @@
+<input type="hidden" name="user_id" value="{{ auth()->user()->id }}" />
+
 <div class="form-row">
    <div class="col-xs-12 col-sm-6 col-md-6">
       <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
@@ -23,7 +25,7 @@
       <div class="form-group {{ $errors->has('published_at') ? 'has-error' : '' }}">
          {{ Form::label('published_at', 'Publish(ed) On') }}
          <div class="input-group input-group-sm">
-            <input type="text" name="published_at" value="{{ old('published_at') ?? $article->published_at }}" class="form-control form-control-sm" id="datePicker" />
+            <input type="text" name="published_at" value="{{ old('published_at') ?? $article->published_at }}" class="form-control form-control-sm" id="datePicker" autocomplete="off" />
             <div class="input-group-append">
                <span class="input-group-text input-group-text-sm"><i class="far fa-calendar-alt"></i></span>
             </div>

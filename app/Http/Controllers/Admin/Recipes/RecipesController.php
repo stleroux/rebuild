@@ -57,8 +57,11 @@ class RecipesController extends Controller
          if(!checkPerm('recipe_create')) { abort(401, 'Unauthorized Access'); }
       }
 
-      // Get all categories related to Recipe Category (id=>1)
-      $categories = Category::where('parent_id',1)->get();
+      // Get id of specified category
+      $pcat = Category::where('name','recipes')->first();
+      
+      // Get all related categories
+      $categories = Category::where('parent_id', $pcat->id)->with('children')->get();
 
       return view('admin.recipes.create', compact('categories'));
    }
@@ -218,15 +221,16 @@ class RecipesController extends Controller
       Session::put('fromPage', url()->full());
 
       // Get all categories related to Recipe Category (id=>1)
-      $categories = Category::where('parent_id',1)->get();
+      // $categories = Category::where('parent_id',1)->get();
+      $categories = [];
 
-     $alphas = DB::table('recipes')
-      ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
-      ->where('published_at','<', Carbon::Now())
-      ->where('deleted_at','=', Null)
-      ->where('personal', '!=', 1)
-      ->orderBy('letter')
-      ->get();
+      $alphas = DB::table('recipes')
+         ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
+         ->where('published_at','<', Carbon::Now())
+         ->where('deleted_at','=', Null)
+         ->where('personal', '!=', 1)
+         ->orderBy('letter')
+         ->get();
 
       $letters = [];
       foreach($alphas as $alpha) {
@@ -246,10 +250,12 @@ class RecipesController extends Controller
          $recipes = Recipe::with('user','category')
             ->published()
             ->public()
+            ->orderBy('title', 'asc')
             ->get();
       }
 
-      return view('admin.recipes.index', compact('recipes','letters','categories'));
+      // return view('admin.recipes.index', compact('recipes','letters','categories'));
+      return view('admin.recipes.index', compact('recipes','letters'));
    }
 
 
@@ -264,6 +270,11 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function show($id)
    {
+      // Check if user has required permission
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_show')) { abort(401, 'Unauthorized Access'); }
+      }
+
       $recipe = Recipe::withTrashed()->findOrFail($id);
 
       // Increase the view count since this is viewed from the frontend
@@ -424,9 +435,9 @@ class RecipesController extends Controller
    public function view($id)
    {
       // Check if user has required permission
-      // if($this->enablePermissions) {
-      //    if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
-      // }
+      if($this->enablePermissions) {
+         if(!checkPerm('recipe_show')) { abort(401, 'Unauthorized Access'); }
+      }
 
       $recipe = Recipe::withTrashed()->find($id);
 

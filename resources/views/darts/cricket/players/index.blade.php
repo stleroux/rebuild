@@ -15,7 +15,7 @@
    <div class="card mb-2">
 
       <div class="card-header card_header p-2">
-         CRICKET - MULTI PLAYER GAME
+         CRICKET - @if($players->count() > 1) MULTI @else INDIVIDUAL @endif PLAYER GAME
          <span class="float-right">Game ID : {{ $game->id }}</span>
       </div>
       
@@ -68,11 +68,27 @@
                               <tr class="">
                                  <td colspan="2" class="text-center p-1">
                                     @php
-                                       $count = DB::table('dart__scores')->where('user_id', $players->get($loop->parent->index)->id)->where('score',$pScore)->where('game_id',$game->id)->count() 
-                                                -
-                                                DB::table('dart__scores')->where('user_id', $players->get($loop->parent->index)->id)->where('score',-$pScore)->where('game_id',$game->id)->count();
+                                       // dd('Player ID : ' . $players->get($loop->parent->index)->id);
+                                       // dd('Score : ' . $pScore);
+                                       // dd('Game ID : ' . $game->id);
 
-                                       $points = ($count * $pScore) - ($pScore * 3);
+                                       $positiveCount = DB::table('dart__scores')->where('user_id', $players->get($loop->parent->index)->id)->where('score',$pScore)->where('game_id',$game->id)->count(); 
+                                       // dd('Positive count : ' .$positiveCount);
+                                                // -
+                                       $negativeCount = DB::table('dart__scores')->where('user_id', $players->get($loop->parent->index)->id)->where('score',-$pScore)->where('game_id',$game->id)->count();
+                                       // dd('Negative Count : ' . $negativeCount);
+                                       
+                                       $count = $positiveCount - $negativeCount;
+                                       // dd('Total Count : ' . $count);
+
+                                       // if($count > 3) {
+                                          $points = ($count * $pScore) - ($pScore * 3);
+                                       //    dd($points);
+                                       // }
+
+                                       // if($count < 1) {
+                                       //    echo '<h2 class="pt-1 pb-0"><i class=""></i>NA</h2>';
+                                       // }
 
                                        if($count == 1) {
                                           echo '<h2 class="pt-1 pb-0"><i class="fas fa-minus-circle"></i></h2>';
@@ -83,7 +99,7 @@
                                        elseif($count == 3) {
                                           echo '<h2 class="pt-1 pb-0"><i class="fas fa-times-circle"></i></h2>';
                                        }
-                                       elseif($count > 3) {
+                                       elseif($count >= 4) {
                                           echo '<h2 class="pt-1 pb-0">' . $points .'</h2>';
                                        } else {
                                           echo "<h2 class='pt-1 pb-0'>&nbsp;</h2>";
@@ -95,30 +111,44 @@
                         </td>
                      @endforeach
                      <td class="h2 align-middle">
-                        <?php
-                           $fifteen = DB::table('dart__scores')->where('user_id', $p->id)->where('score',15)->where('game_id',$game->id)->sum('score');
+                        @php
+                           $positiveFifteen = DB::table('dart__scores')->where('user_id', $p->id)->where('score',15)->where('game_id',$game->id)->sum('score');
+                           $negativeFifteen = DB::table('dart__scores')->where('user_id', $p->id)->where('score',-15)->where('game_id',$game->id)->sum('score');
+                           $fifteen = $positiveFifteen + $negativeFifteen;
                            if($fifteen > 45) { $fifteen = $fifteen - 45; } else { $fifteen = 0; }
 
-                           $sixteen = DB::table('dart__scores')->where('user_id', $p->id)->where('score',16)->where('game_id',$game->id)->sum('score');
+                           $positiveSixteen = DB::table('dart__scores')->where('user_id', $p->id)->where('score',16)->where('game_id',$game->id)->sum('score');
+                           $negativeSixteen = DB::table('dart__scores')->where('user_id', $p->id)->where('score',-16)->where('game_id',$game->id)->sum('score');
+                           $sixteen = $positiveSixteen + $negativeSixteen;
                            if($sixteen > 48) { $sixteen = $sixteen - 48; } else { $sixteen = 0; }
 
-                           $seventeen = DB::table('dart__scores')->where('user_id', $p->id)->where('score',17)->where('game_id',$game->id)->sum('score');
+                           $positiveSeventeen = DB::table('dart__scores')->where('user_id', $p->id)->where('score',17)->where('game_id',$game->id)->sum('score');
+                           $negativeSeventeen = DB::table('dart__scores')->where('user_id', $p->id)->where('score',-17)->where('game_id',$game->id)->sum('score');
+                           $seventeen = $positiveSeventeen + $negativeSeventeen;
                            if($seventeen > 51) { $seventeen = $seventeen - 51; } else { $seventeen = 0; }
 
-                           $eighteen = DB::table('dart__scores')->where('user_id', $p->id)->where('score',18)->where('game_id',$game->id)->sum('score');
+                           $positiveEighteen = DB::table('dart__scores')->where('user_id', $p->id)->where('score',18)->where('game_id',$game->id)->sum('score');
+                           $negativeEighteen = DB::table('dart__scores')->where('user_id', $p->id)->where('score',-18)->where('game_id',$game->id)->sum('score');
+                           $eighteen = $positiveEighteen + $negativeEighteen;
                            if($eighteen > 54) { $eighteen = $eighteen - 54; } else { $eighteen = 0; }
 
-                           $nineteen = DB::table('dart__scores')->where('user_id', $p->id)->where('score',19)->where('game_id',$game->id)->sum('score');
+                           $positiveNineteen = DB::table('dart__scores')->where('user_id', $p->id)->where('score',19)->where('game_id',$game->id)->sum('score');
+                           $negativeNineteen = DB::table('dart__scores')->where('user_id', $p->id)->where('score',-19)->where('game_id',$game->id)->sum('score');
+                           $nineteen = $positiveNineteen + $negativeNineteen;
                            if($nineteen > 57) { $nineteen = $nineteen - 57; } else { $nineteen = 0; }
 
-                           $twenty = DB::table('dart__scores')->where('user_id', $p->id)->where('score',20)->where('game_id',$game->id)->sum('score');
+                           $positiveTwenty = DB::table('dart__scores')->where('user_id', $p->id)->where('score',20)->where('game_id',$game->id)->sum('score');
+                           $negativeTwenty = DB::table('dart__scores')->where('user_id', $p->id)->where('score',-20)->where('game_id',$game->id)->sum('score');
+                           $twenty = $positiveTwenty + $negativeTwenty;
                            if($twenty > 60) { $twenty = $twenty - 60; } else { $twenty = 0; }
 
-                           $bull = DB::table('dart__scores')->where('user_id', $p->id)->where('score',25)->where('game_id',$game->id)->sum('score');
+                           $positiveBull = DB::table('dart__scores')->where('user_id', $p->id)->where('score',25)->where('game_id',$game->id)->sum('score');
+                           $negativeBull = DB::table('dart__scores')->where('user_id', $p->id)->where('score',-25)->where('game_id',$game->id)->sum('score');
+                           $bull = $positiveBull + $negativeBull;
                            if($bull > 75) { $bull = $bull - 75; } else { $bull = 0; }
 
                            echo $total = $fifteen + $sixteen + $seventeen + $eighteen + $nineteen + $twenty + $bull;
-                        ?>
+                        @endphp
                      </td>
 
                   </tr>

@@ -24,12 +24,26 @@ class Category extends Model //implements AuditableContract
 //////////////////////////////////////////////////////////////////////////////////////
 // RELATIONSHIPS
 //////////////////////////////////////////////////////////////////////////////////////
-	public function parent() {
+	// public function categories()
+ //   {
+ //      return $this->hasMany(Category::class);
+ //   }
+
+ //   public function childrenCategories()
+ //   {
+ //      return $this->hasMany(Category::class)->with('categories');
+ //   }
+  // public function children()
+  //  {
+  //     return $this->hasMany(Category::class)->with('categories');
+  //  }
+
+   public function parent() {
 		return $this->belongsTo(self::class, 'parent_id')->orderBy('name');
 	}
 
 	public function children() {
-		return $this->hasMany(self::class, 'parent_id')->orderBy('name');
+		return $this->hasMany(Category::class, 'parent_id')->orderBy('name');
 	}
 
 	// 1 category has many posts

@@ -37,31 +37,8 @@
    @endif
 @endisset
 
-{{-- @if(($game->type - zeroOneTeamScores($game, 2)->sum('score') != 0) || ($game->type - zeroOneTeamScores($game, 1)->sum('score') != 0)) --}}
-{{-- @if($game->type - zeroOneTeamScores($game, $teamID)->sum('score') != 0) --}}
-   {{-- @include('darts.01.scores.teams.t'.$player->team_id.'1possibleOuts') --}}
-   {{-- @include('darts.01.scores.teams.possibleOuts', ['teamID'=>$teamID]) --}}
-   {{-- @include('darts.inc.possibleOuts', ['score' => $remainingScore]) --}}
-{{-- @endif --}}
-
-{{-- @if(($game->type - zeroOneTeamScores($game, 2)->sum('score') == 0) || ($game->type - zeroOneTeamScores($game, 1)->sum('score') == 0)) --}}
-{{-- @isset($teamGameDone)
-   @if(!$teamGameDone) --}}
-{{-- @isset($teamGameDone) --}}
-      {{-- @if($teamGameDone) --}}
-      {{-- @include('darts.01.scores.teams.t1possibleOuts', ['user'=>$user]) --}}
-{{-- @if(($game->type - zeroOneTeamScores($game, 2)->sum('score') == 0) || ($game->type - zeroOneTeamScores($game, 1)->sum('score') == 0))
-      @include('darts.inc.possibleOuts', ['score'=>$remainingScore, 'user'=>$user]) --}}
-   {{-- @else
-      @include('darts.01.scores.teams.t2possibleOuts') --}}
-   {{-- @endif --}}
-{{-- @endif --}}
-
-
-{{-- TeamGameOver : {{$teamGameDone}} --}}
 @isset($teamGameDone)
    @if(!$teamGameDone)
-      {{-- @include('darts.01.scores.teams.t1possibleOuts', ['user'=>$user]) --}}
       @include('darts.01.inc.possibleOuts', ['score'=>$remainingScore, 'user'=>$user])
    @endif
 @endisset

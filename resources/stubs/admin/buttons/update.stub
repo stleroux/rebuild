@@ -2,7 +2,7 @@
    <button
       class="btn {{ $size ? 'btn-'.$size : '' }} btn-info text-light"
       type="submit"
-      title="Update {$name}">
+      title="Update {{modelName}}">
       <i class="{{ Config::get('buttons.update') }}"></i>
    </button>
 @endif

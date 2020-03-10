@@ -14,7 +14,8 @@
 @section('content')
 
 	<form style="display:inline;">
-		{!! csrf_field() !!}
+		{{-- {!! csrf_field() !!} --}}
+		@crsrf
 		
 		<div class="card mb-2">
 			<div class="card-header section_header p-2">
@@ -54,7 +55,7 @@
 								<td><a href="{{ route('admin.recipes.show', $recipe->id) }}">{{ ucwords($recipe->title) }}</a></td>
 								<td>{{ ucwords($recipe->category->name) }}</td>
 								<td>{{ $recipe->views }}</td>
-								<td>{{ \App\Models\Recipes\Recipe::withTrashed()->find($recipe->id)->favoritesCount }}</td>
+								<td>{{ $recipe->favoritesCount }}</td>
 								<td>@include('common.authorFormat', ['model'=>$recipe, 'field'=>'user'])</td>
 								<td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'created_at'])</td>
 								<td>@include('common.dateFormat', ['model'=>$recipe, 'field'=>'published_at'])</td>

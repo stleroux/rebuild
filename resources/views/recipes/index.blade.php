@@ -28,7 +28,7 @@
 				<div class="btn-group">
 					@include('recipes.buttons.recipes', ['size'=>'sm', 'btn_label'=>'All Recipes'])
 					@include('recipes.dropdown', ['size'=>'sm'])
-					@include('recipes.buttons.printAll', ['size'=>'sm'])
+					@include('recipes.buttons.printAll', ['size'=>'sm', 'btn_label'=>'Print All'])
 					{{-- @include('admin.recipes.buttons.add', ['size'=>'sm']) --}}
 				</div>
 			</span>
@@ -70,7 +70,10 @@
 										<span class="badge badge-light text-dark" title="Times Viewed">{{ $recipe->views }} Views</span>
 										<span class="badge badge-light text-dark" title="Comments">{{ $recipe->comments->count() }} Comments</span>
 										<br />
-										<span class="badge badge-light text-dark" title="Times Favorited">{{ \App\Models\Recipes\Recipe::find($recipe->id)->favoritesCount }} Favorited</span>
+										<span class="badge badge-light text-dark" title="Times Favorited">
+                                 {{-- {{ \App\Models\Recipes\Recipe::find($recipe->id)->favoritesCount }} --}} 
+                                 {{ $recipe->favoritesCount }} Favorited
+                              </span>
 									</p>
 								</div>	
 							</div>

@@ -27,7 +27,7 @@
                <div class="btn-group">
                   @include('admin.articles.buttons.help', ['size'=>'xs', 'bookmark'=>''])
                   @include('admin.articles.buttons.unpublishAll', ['size'=>'xs'])
-                  @include('admin.articles.buttons.trashAll', ['size'=>'sm'])
+                  @include('admin.articles.buttons.trashAll', ['size'=>'xs'])
                   @include('admin.articles.buttons.add', ['size'=>'xs'])
                </div>
             </div>

@@ -31,7 +31,7 @@
          </div>
 
          <div class="card-body section_body p-2">
-            @include('admin.articles.form')            
+            @include('admin.articles.form')
          </div>
 
       </div>

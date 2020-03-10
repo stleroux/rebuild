@@ -4,28 +4,28 @@
 	<div class="card-body py-0">
 		<div class="row">
 			<div class="col-sm-3">
-				<p class="text-center mb-0">
+				{{-- <p class="text-center mb-0">
 					FOOTER 1<br />
 					Line 1<br />
-				</p>
+				</p> --}}
 			</div>
 			<div class="col-sm-3">
-				<p class="text-center mb-0">
+				{{-- <p class="text-center mb-0">
 					FOOTER 2<br />
 					Line 2
-				</p>
+				</p> --}}
 			</div>
 			<div class="col-sm-3">
-				<p class="text-center mb-0">
+				{{-- <p class="text-center mb-0">
 					FOOTER 3<br />
 					Line 3
-				</p>
+				</p> --}}
 			</div>
 			<div class="col-sm-3">
-				<p class="text-center mb-0">
+				{{-- <p class="text-center mb-0">
 					FOOTER 4<br />
 					Line 4
-				</p>
+				</p> --}}
 			</div>
 		</div>
 		<div class="row">
@@ -33,7 +33,7 @@
 				<p class="text-center mb-0">
 					<a href="{{ route('terms') }}">Terms &amp; Conditions</a> | <a href="{{ route('privacy') }}">Privacy Policy</a>
 					<br />
-					Copyright &copy; TheWoodBarn.ca 2019
+					Copyright &copy; TheWoodBarn.ca 2020
 				</p>
 			</div>
 		</div>

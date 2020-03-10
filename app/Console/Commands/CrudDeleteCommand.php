@@ -13,7 +13,8 @@ use Schema;
 class CrudDeleteCommand extends Command
 {
 
-   protected $signature = 'crud:delete {name : Class e.g.: User}';
+   // protected $signature = 'crud:delete {name : Class e.g.: User}';
+   protected $signature = 'crud:delete';
 
    protected $description = 'Delete CRUD operations';
 
@@ -32,7 +33,11 @@ class CrudDeleteCommand extends Command
    {
       // Get the name of the argument
       // $name = $this->ask('What is the name of the model to DELETE? (Must be Capitalized singular form: i.e.: User)');
-      $name = ucfirst($this->argument('name'));
+      // $name = ucfirst($this->argument('name'));
+      // Get the name of the argument
+      $name = $this->ask('What is the name of the model? (Must be singular form: i.e.: user)');
+      // $name = ucfirst($this->argument('name'));
+      $name = ucfirst($name);
 
       if ($this->confirm('Are you sure you wish to delete ALL related files?')) {
 

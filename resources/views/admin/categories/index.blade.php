@@ -8,6 +8,7 @@
 @endsection
 
 @section('right_column')
+   {{-- @include('admin.categories.blocks.tree_list') --}}
 @endsection
 
 @section('content')
@@ -30,7 +31,6 @@
             <!--CARD BODY-->               
             @if($categories->count() > 0)
                <div class="card-body section_body p-2">
-                  {{-- @include('common.alphabet', ['model'=>'category', 'page'=>'index']) --}}
                   <table id="datatable" class="table table-hover table-sm">
                      <thead>
                         <tr>
@@ -47,7 +47,9 @@
                            <tr>
                               <td>{{ $category->id }}</td>
                               <td>{{ ucfirst($category->name) }}</td>
-                              <td>{{ $category->parent_id ? ucfirst($category->parent->name) : '' }} <small>(Parent:{{ $category->parent_id }})</small></td>
+                              <td>
+                                 {{ $category->parent_id ? ucfirst($category->parent->name) : '' }} <small>(Parent:{{ $category->parent_id }})</small>
+                              </td>
                               <td>{{ $category->value }}</td>
                               <td data-order="{{ $category->created_at}}">{{ $category->created_at }}</td>
                               <td class="text-right">
@@ -59,6 +61,7 @@
                               </td>
                            </tr>
                         @endforeach
+
                      </tbody>
                   </table>
                </div>

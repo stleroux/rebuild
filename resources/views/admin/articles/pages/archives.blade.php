@@ -43,8 +43,9 @@
 			<table id="datatable" class="table table-hover table-sm">
 				<thead>
 					<tr>
-						<th>Name</th>
+						<th>Title</th>
 						<th>Status</th>
+						<th>Category</th>
 						<th>Views</th>
 						<th>Author</th>
 						<th>Created On</th>
@@ -54,8 +55,9 @@
 				<tbody>
 					@foreach ($archives as $archive)
 						<tr>
-							<td><a href="{{ route('admin.articles.show', $archive->id) }}">{{ $archive->name }}</a></td>
+							<td><a href="{{ route('admin.articles.show', $archive->id) }}">{{ $archive->title }}</a></td>
 							<td>{{ $archive->status }}</td>
+							<td>{{ $archive->category }}</td>
 							<td>{{ $archive->views }}</td>
 							<td>@include('common.authorFormat', ['model'=>$archive, 'field'=>'user'])</td>
 							<td>@include('common.dateFormat', ['model'=>$archive, 'field'=>'created_at'])</td>

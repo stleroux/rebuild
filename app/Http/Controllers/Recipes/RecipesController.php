@@ -94,7 +94,8 @@ class RecipesController extends Controller
       $categories = Category::where('parent_id',1)->get();
       $byCatName = Category::where('name', $request->cat)->first();
 
-      if($request->cat == 'all'){
+      if($request->cat == 'all') {
+
          $alphas = DB::table('recipes')
             ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
             ->where('published_at', '<=', Carbon::now())
@@ -103,21 +104,24 @@ class RecipesController extends Controller
             ->orderBy('letter')
             ->get();
 
-         $recipes = Recipe::with('user','category')
-            ->published()
-            ->public()
-            ->orderBy('title', 'asc')
-            ->paginate(15);
-
-         if($request->key){
+         if($request->key) {
             $recipes = Recipe::with('user','category')
                ->published()
                ->public()
                ->where('title', 'like', $request->key . '%')
                ->orderBy('title', 'asc')
                ->paginate(15);
+         } else {
+
+            $recipes = Recipe::with('user','category')
+               ->published()
+               ->public()
+               ->orderBy('title', 'asc')
+               ->paginate(15);
          }
+      
       } else {
+
          if($byCatName->parent_id != 1) {
             $alphas = DB::table('recipes')
                ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
@@ -128,14 +132,7 @@ class RecipesController extends Controller
                ->orderBy('letter')
                ->get();
 
-            $recipes = Recipe::with('user','category')
-               ->published()
-               ->public()
-               ->where('category_id', '=', $byCatName->id)
-               ->orderBy('title', 'asc')
-               ->paginate(15);
-
-            if($request->key){
+            if($request->key) {
                $recipes = Recipe::with('user','category')
                   ->published()
                   ->public()
@@ -144,7 +141,16 @@ class RecipesController extends Controller
                   ->orderBy('title', 'asc')
                   ->paginate(15);
             }
+
+            $recipes = Recipe::with('user','category')
+               ->published()
+               ->public()
+               ->where('category_id', '=', $byCatName->id)
+               ->orderBy('title', 'asc')
+               ->paginate(15);
+         
          } else {
+
             $allc = Category::where('parent_id', $byCatName->id)->pluck('id');
             
             $alphas = DB::table('recipes')
@@ -156,15 +162,8 @@ class RecipesController extends Controller
                ->orderBy('letter')
                ->get();
 
-            $recipes = Recipe::with('user','category')
-               ->published()
-               ->public()
-               ->whereIn('category_id', $allc)
-               ->orderBy('title', 'asc')
-               ->paginate(15);
-
-            if($request->key){
-               $recipes = Recipe::with('user','category')
+            if($request->key) {
+               $recipes = Recipe::with('user','category','comments')
                   ->published()
                   ->public()
                   ->whereIn('category_id', $allc)
@@ -172,6 +171,13 @@ class RecipesController extends Controller
                   ->orderBy('title', 'asc')
                   ->paginate(15);
             }
+
+            $recipes = Recipe::with('user','category')
+               ->published()
+               ->public()
+               ->whereIn('category_id', $allc)
+               ->orderBy('title', 'asc')
+               ->paginate(15);
          }
       }
 
@@ -348,14 +354,11 @@ class RecipesController extends Controller
    public function show(Request $request, $id, $previous=null, $next=null)
    {
       $byCatName = $request->byCatName;
-      // dd($byCatName);
-
-      $recipe = Recipe::findOrFail($id);
+      $recipe = Recipe::with('user', 'category', 'comments')->findOrFail($id);
+      $categories = Category::where('parent_id',1)->get();
 
       // Increase the view count since this is viewed from the frontend
       DB::table('recipes')->where('id','=',$recipe->id)->increment('views',1);
-
-      $categories = Category::where('parent_id',1)->get();
 
       // GET PREVIOUS RECIPE //
       // If a sub category has been selected
@@ -398,8 +401,8 @@ class RecipesController extends Controller
       // If no sub category has been selected
       } else {
          $next = Recipe::where('title', '>', $recipe->title)
-         ->orderBy('title','desc')
-         ->min('title');
+            ->orderBy('title','desc')
+            ->min('title');
       }
 
       // if a next record exists
@@ -407,8 +410,8 @@ class RecipesController extends Controller
          // If a sub category has been selected
          if($byCatName) {
             $n = Recipe::where('title',$next)
-            ->where('category_id', $byCatName)
-            ->get();
+               ->where('category_id', $byCatName)
+               ->get();
             // return only the ID of the next record
             $next = $n[0]->id;
          // If no sub category has been selected

@@ -47,7 +47,16 @@
                <div class="bg-danger">{{ $errors->first('message') }}</div>
             </div>
 
-            @include('common.reCaptcha')
+            {{-- @include('common.reCaptcha') --}}
+
+            {{-- From : https://itnext.io/stopping-form-spam-in-laravel-76760bf84bd --}}
+            <div class="form-group" style="display: none;">
+            {{-- <div class="form-group"> --}}
+               <label for="faxonly">Fax Only
+                  <input type="checkbox" name="faxonly" id="faxonly" />
+               </label>
+            </div>
+            {{-- From : https://itnext.io/stopping-form-spam-in-laravel-76760bf84bd --}}
 
             <div class="text-center">
                <input type="submit" value="Send Message" class="btn btn-sm btn-primary">

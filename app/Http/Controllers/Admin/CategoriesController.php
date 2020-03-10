@@ -61,6 +61,8 @@ class CategoriesController extends Controller
 		}
 
 		$categories = Category::with('children')->where('parent_id','=',0)->orderBy('name')->get();
+      // $categories = Category::whereNull('category_id')->with('childrenCategories')->get();
+
 		
 		return view('admin.categories.create', compact('categories'));
 	}
@@ -243,28 +245,34 @@ class CategoriesController extends Controller
 			if(!checkPerm('category_browse')) { abort(401, 'Unauthorized Access'); }
 		}
 
-		$alphas = DB::table('categories')
-			->select(DB::raw('DISTINCT LEFT(name, 1) as letter'))
-         ->where('deleted_at', '=', null)
-			->orderBy('letter')
-			->get();
+		// $alphas = DB::table('categories')
+		// 	->select(DB::raw('DISTINCT LEFT(name, 1) as letter'))
+  //        ->where('deleted_at', '=', null)
+		// 	->orderBy('letter')
+		// 	->get();
 
-		$letters = [];
-		foreach($alphas as $alpha) {
-			$letters[] = $alpha->letter;
-		}
+		// $letters = [];
+		// foreach($alphas as $alpha) {
+		// 	$letters[] = $alpha->letter;
+		// }
 
 		// If $key value is passed
-		if ($key) {
-			$categories = Category::with('parent','children')->where('name', 'like', $key . '%')
-				->orderBy('name', 'asc')
-				->get();
-		} else {
+		// if ($key) {
+		// 	$categories = Category::with('parent','children')->where('name', 'like', $key . '%')
+		// 		->orderBy('name', 'asc')
+		// 		->get();
+		// } else {
    		// No $key value is passed
    		$categories = Category::with('parent','children')->orderBy('name', 'asc')->get();
-      }
+         // dd($categories);
 
-		return view('admin.categories.index', compact('categories','letters'));
+         $categoriesList = Category::with('children')->where('parent_id', 0)->get();
+         // $categoriesList = Category::with('children')->get();
+         // dd($categoriesList);
+      // }
+         // $categories = Category::all()->sortBy('name');
+
+		return view('admin.categories.index', compact('categories','categoriesList'));
 	}
 
 

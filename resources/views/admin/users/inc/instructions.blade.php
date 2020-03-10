@@ -107,9 +107,9 @@
             <tr class="d-flex">
                <td class="col-2">Trash Own</td>
                <td class="col-5">TRASH authored records</td>
-               <td class="col-1 text-center text-secondary"><i class="fas fa-fw fa-check-square"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
+               <td class="col-1 text-center text-info"><i class="fas fa-fw fa-check-square"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
             </tr>
@@ -125,9 +125,9 @@
             <tr class="d-flex">
                <td class="col-2">Private \ Public Own</td>
                <td class="col-5">PRIVATIZE or PUBLICIZE authored records</td>
-               <td class="col-1 text-center text-secondary"><i class="fas fa-fw fa-check-square"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
+               <td class="col-1 text-center text-info"><i class="fas fa-fw fa-check-square"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
             </tr>
@@ -138,7 +138,7 @@
                <td class="col-2">Print</td>
                <td class="col-5">PRINT records</td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
-               <td class="col-1 text-center text-info"><i class="fas fa-fw fa-check-square"></i></td>
+               <td class="col-1 text-center text-secondary"><i class="fas fa-fw fa-check-square"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
                <td class="col-1 text-center text-danger"><i class="fas fa-fw fa-ban"></i></td>
