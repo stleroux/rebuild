@@ -18,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // cache settings for database table
         // https://stackoverflow.com/questions/32824781/laravel-load-settings-from-database
-        Cache::forever('setting', Setting::all());
+        // Cache::forever('setting', Setting::all());
     }
 
     /**

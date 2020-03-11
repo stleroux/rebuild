@@ -21,7 +21,7 @@ class CreateCategoriesTable extends Migration {
 			$table->text('description', 65535)->nullable();
 			$table->timestamps();
 			$table->softDeletes();
-         $table->foreign('category_id')->references('id')->on('categories');
+         // $table->foreign('category_id')->references('id')->on('categories');
 		});
 	}
 
