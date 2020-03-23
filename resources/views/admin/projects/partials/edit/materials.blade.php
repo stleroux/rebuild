@@ -3,7 +3,6 @@
 
    <div class="card-header p-1 {{ ($errors->first('material')) ? 'bg-danger' : 'card_header' }}" id="showAddMaterial">
       Materials Information
-{{--       <a class="btn btn-xs float-right"><i class="{{ Config::get('buttons.add') }}"></i></a> --}}
       <a class="btn btn-xs float-right">
          <i id="icon" class="fas fa-sort-down"></i>
       </a>
@@ -19,7 +18,6 @@
                <div class="card-body p-2">
                   <form action="{{ route('projects.material.store', $project->id) }}" method="post">
                      <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-                     
 
                      <div class="form-group pb-2 mb-0">
                         <select name="material" id="material" class="form-control form-control-sm p-0">
@@ -56,7 +54,7 @@
                            <td>{{$key+1}}</td>
                            <td>{{$value->name}}</td>
                            <td>
-                              <form action="{{ route('projects.material.delete', $value->id) }}" method="POST" class="float-right">
+                              <form action="{{ route('projects.material.delete', $value->id) }}" method="POST" class="float-right m-0 p-0">
                                  {{csrf_field()}}
                                  {{ method_field('DELETE') }}
                                  <input type="hidden" value="{{ $project->id }}" name="project_id">

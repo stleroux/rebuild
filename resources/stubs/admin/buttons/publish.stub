@@ -2,13 +2,13 @@
    @if(!${{modelNameSingularLowerCase}}->published_at)
       <a href="{{ route('admin.{{modelNamePluralLowerCase}}.publish', ${{modelNameSingularLowerCase}}->id) }}"
          class="btn {{ $size ? 'btn-'.$size : '' }} btn-primary text-light"
-         title="Publish {{$modelName}}">
+         title="Publish {{modelName}}">
          <i class="{{ Config::get('buttons.publish') }} text-success"></i>
       </a>
    @else
       <a href="{{ route('admin.{{modelNamePluralLowerCase}}.unpublish', ${{modelNameSingularLowerCase}}->id) }}"
          class="btn {{ $size ? 'btn-'.$size : '' }} btn-primary text-light"
-         title="Unpublish {{$modelName}}">
+         title="Unpublish {{modelName}}">
          <i class="{{ Config::get('buttons.publish') }} text-danger"></i>
       </a>
    @endif

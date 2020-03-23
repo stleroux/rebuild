@@ -14,8 +14,8 @@ Route::namespace('Admin\Articles')->prefix('admin/articles')->name('admin.articl
 	Route::get('trashed/{key?}',				'ExtraViewsController@trashed')			->name('trashed');
 	Route::get('archives/{year}/{month}', 	'ExtraViewsController@archives')			->name('archives');
 	Route::get('myArticles/{key?}',			'ExtraViewsController@myArticles')		->name('myArticles');
-   Route::get('audit/{key}',              'ExtraViewsController@audit')          ->name('audit');
-   Route::get('audits/{key}',             'ExtraViewsController@audits')         ->name('audits');
+   // Route::get('audit/{key}',              'ExtraViewsController@audit')          ->name('audit');
+   // Route::get('audits/{key}',             'ExtraViewsController@audits')         ->name('audits');
 });
 
 // FUNCTIONS ROUTES

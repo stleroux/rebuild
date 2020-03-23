@@ -49,7 +49,7 @@
             Statistics do not include games listed as Practice in the Games Board
          </div>
          <div>
-            Statistics only accounts for Completed games
+            Statistics only account for Completed games
          </div>
       </div>
    </div>

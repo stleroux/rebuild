@@ -223,42 +223,42 @@ class ExtraViewsController extends ArticlesController
 # ██║     ╚██████╔╝██████╔╝███████╗██║███████║██║  ██║███████╗██████╔╝
 # ╚═╝      ╚═════╝ ╚═════╝ ╚══════╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚═════╝ 
 ##################################################################################################################
-	public function published(Request $request, $key=null)
-	{
-		// Check if user has required permission
-		if($this->enablePermissions) {
-			if(!checkPerm('article_edit')) { abort(401, 'Unauthorized Access'); }
-		}
+	// public function published(Request $request, $key=null)
+	// {
+	// 	// Check if user has required permission
+	// 	if($this->enablePermissions) {
+	// 		if(!checkPerm('article_edit')) { abort(401, 'Unauthorized Access'); }
+	// 	}
 
-		// Set the session to the current page route
-		Session::put('fromPage', url()->full());
+	// 	// Set the session to the current page route
+	// 	Session::put('fromPage', url()->full());
 
-		//$alphas = range('A', 'Z');
-		$alphas = DB::table('articles')
-			->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
-			->where('published_at','<', Carbon::Now())
-			->where('deleted_at','=', Null)
-			->orderBy('letter')
-			->get();
+	// 	//$alphas = range('A', 'Z');
+	// 	$alphas = DB::table('articles')
+	// 		->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
+	// 		->where('published_at','<', Carbon::Now())
+	// 		->where('deleted_at','=', NULL)
+	// 		->orderBy('letter')
+	// 		->get();
 
-		$letters = [];
-		foreach($alphas as $alpha) {
-		  $letters[] = $alpha->letter;
-		}
+	// 	$letters = [];
+	// 	foreach($alphas as $alpha) {
+	// 	  $letters[] = $alpha->letter;
+	// 	}
 
-		// If $key value is passed
-		if ($key) {
-			$articles = Article::with('user')->published()
-				->where('title', 'like', $key . '%')
-				->orderBy('title', 'asc')
-				->get();
-			return view('admin.articles.published', compact('articles','letters'));
-		}
+	// 	// If $key value is passed
+	// 	if ($key) {
+	// 		$articles = Article::with('user')->published()
+	// 			->where('title', 'like', $key . '%')
+	// 			->orderBy('title', 'asc')
+	// 			->get();
+	// 		return view('admin.articles.published', compact('articles','letters'));
+	// 	}
 
-		// No $key value is passed
-		$articles = Article::with('user')->published()->get();
-		return view('admin.articles.published', compact('articles','letters'));
-	}
+	// 	// No $key value is passed
+	// 	$articles = Article::with('user')->published()->get();
+	// 	return view('admin.articles.published', compact('articles','letters'));
+	// }
 
 
 ##################################################################################################################

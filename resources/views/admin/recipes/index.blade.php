@@ -14,9 +14,7 @@
 @section('content')
 
 	<form style="display:inline;">
-		{{-- {!! csrf_field() !!} --}}
-		@crsrf
-		
+
 		<div class="card mb-2">
 			<div class="card-header section_header p-2">
 				<i class="{{ Config::get('buttons.published') }}"></i>

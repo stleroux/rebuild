@@ -14,14 +14,13 @@
 
 @section('content')
 
-@section('content')
-
    <form style="display:inline;">
       {!! csrf_field() !!}
 
       <div class="card mb-3">
 
          <div class="card-header section_header p-2">
+            <i class="{{ Config::get('buttons.future') }}"></i>
             Future Articles
             <div class="float-right">
                <div class="btn-group">

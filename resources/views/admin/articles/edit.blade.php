@@ -14,7 +14,9 @@
 
 @section ('content')
    
-   {!! Form::model($article, ['route'=>['admin.articles.update', $article->id], 'method' => 'PUT', 'files' => true]) !!}
+   <form action="{{ route('admin.articles.update', $article->id) }}" method="POST" eenctype="multipart/form-data">
+      @csrf
+      @method("PUT")
       
       <div class="card mb-3">
          
@@ -31,11 +33,11 @@
          </div>
 
          <div class="card-body section_body p-2">
-            @include('admin.articles.form')
+            @include('admin.articles.forms.form', ['showFields'=>'edit'])
          </div>
 
       </div>
 
-   {!! Form::Close() !!}
+   </form>
 
 @endsection

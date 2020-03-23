@@ -14,8 +14,9 @@
 
 @section('content')
    
-   {!! Form::open(['route' => 'admin.articles.store', 'files'=>'true']) !!}
-   
+   <form action="{{ route('admin.articles.store') }}" enctype="multipart/form-data" method="POST">
+      @csrf
+
       <div class="card mb-3">
 
          <div class="card-header section_header p-2">
@@ -31,11 +32,11 @@
          </div>
 
          <div class="card-body section_body p-2">
-            @include('admin.articles.form')
+            @include('admin.articles.forms.form', ['showFields'=>'add'])
          </div>
 
       </div>
    
-   {!! Form::close() !!}
+   </form>
 
 @endsection

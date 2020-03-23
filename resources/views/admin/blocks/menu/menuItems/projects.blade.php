@@ -9,7 +9,7 @@
          Route::is('admin.projects.finishes*') ||
          Route::is('admin.projects.materials*')
       ) ? 'menu_active' : '' }}">
-      <i class="fas fa-list-ol fa-fw"></i>
+      <i class="fab fa-pagelines fa-fw"></i>
       Projects
    </a>
 @endif

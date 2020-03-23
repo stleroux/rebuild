@@ -110,8 +110,6 @@
             </div>
             <div class="pl-1 bg-danger">{{ $errors->first('time_invested') }}</div>
          </div>
-
-
          
       </div>
 

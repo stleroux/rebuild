@@ -31,6 +31,16 @@ class ExtraViewsController extends ArticlesController
    }
 
 
+
+public function test()
+{
+   $articles = Article::all();
+
+   return view('articles.test', compact('articles'));
+}
+
+
+
 ##################################################################################################################
 #  █████╗ ██████╗  ██████╗██╗  ██╗██╗██╗   ██╗███████╗
 # ██╔══██╗██╔══██╗██╔════╝██║  ██║██║██║   ██║██╔════╝

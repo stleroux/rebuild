@@ -21,6 +21,9 @@ class Article extends Model
    protected $dates = ['published_at'];
 
    protected static $logAttributes = ['*'];
+   protected static $logName = 'article';
+   //events will get logged automatically
+   protected static $recordEvents = ['created','updated','deleted'];
 
    // protected $revisionCreationsEnabled = true;
 
@@ -101,8 +104,7 @@ public function scopePublished($query)
    public function scopeMyarticles($query)
    {
       return $query
-         ->where('user_id', '=', Auth::user()->id)
-         ->orderBy('title','DESC');
+         ->where('user_id', '=', Auth::user()->id);
    }
 
    public function scopeUnpublished($query)
@@ -134,8 +136,7 @@ public function scopePublished($query)
    public function scopeNewarticles($query)
    {
       return $query
-         ->where('created_at', '>=' , Auth::user()->previous_login_date)
-         ->orderBy('title','DESC');
+         ->where('created_at', '>=' , Auth::user()->previous_login_date);
    }
 
 //////////////////////////////////////////////////////////////////////////////////////

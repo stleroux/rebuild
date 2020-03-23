@@ -33,15 +33,15 @@
          </div>
       </div>
 
-<!-- ALPHABET -->
-<div class="text-center">
-   <div class="btn-group p-1">
-      <a href="{{ route('admin.articles.index') }}" class="{{ Request::is('admin/articles') ? "btn-secondary": "btn-primary" }} btn btn-sm">All</a>
-      @foreach($letters as $value)
-         <a href="{{ route('admin.articles.index', $value) }}" class="{{ Request::is('admin/articles/'.$value) ? "btn-secondary": "btn-primary" }} btn btn-sm">{{ strtoupper($value) }}</a>
-      @endforeach
-   </div>
-</div>
+      <!-- ALPHABET -->
+      <div class="text-center">
+         <div class="btn-group p-1">
+            <a href="{{ route('admin.articles.index') }}" class="{{ Request::is('admin/articles') ? "btn-secondary": "btn-primary" }} btn btn-sm">All</a>
+            @foreach($letters as $value)
+               <a href="{{ route('admin.articles.index', $value) }}" class="{{ Request::is('admin/articles/'.$value) ? "btn-secondary": "btn-primary" }} btn btn-sm">{{ strtoupper($value) }}</a>
+            @endforeach
+         </div>
+      </div>
 
 
       <!--CARD BODY-->
@@ -51,7 +51,7 @@
             <table id="datatable" class="table table-hover table-sm">
                <thead>
                   <tr>
-                     <th><input type="checkbox" id="selectall" class="checked" /></th>
+                     <th class="no-sort"><input type="checkbox" id="selectall" class="checked" /></th>
                      <th>Title</th>
                      <th>Category</th>
                      <th>Views</th>
@@ -59,8 +59,8 @@
                      <!-- Add columns below for search purposes only -->
                      <!-- Add columns above for search purposes only -->
                      <th>Created</th>
-                     <th class="">Published</th>
-                     <th data-orderable="false"></th>
+                     <th>Published</th>
+                     <th class="no-sort"></th>
                   </tr>
                </thead>
                <tbody>
@@ -78,7 +78,6 @@
                         <td>
                            <div class="float-right">
                               <div class="btn-group">
-                                 @include('admin.articles.buttons.audits', ['size'=>'xs'])
                                  @include('admin.articles.buttons.publish', ['size'=>'xs'])
                                  @include('admin.articles.buttons.edit', ['size'=>'xs'])
                                  @include('admin.articles.buttons.trash', ['size'=>'xs'])

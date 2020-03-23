@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Articles;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller; // Required for validation // use Illuminate\Routing\Controller;
 use App\Models\Articles\Article;
 use Carbon\Carbon;
 use DB;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Session;
 
 class ArticlesController extends Controller
@@ -57,9 +58,13 @@ class ArticlesController extends Controller
 		$letters[] = $alpha->letter;
 	}
 
+   // Log an activity
+   activity('article')->causedBy(Auth::user())->log('Viewed articles list');
+
 	// If $key value is passed
 	if ($key) {
-		$articles = Article::with('user')->published()
+		$articles = Article::with('user')
+         ->published()
 			->where('title', 'like', $key . '%')
 			->orderBy('title', 'asc')
 			->get();
@@ -67,7 +72,10 @@ class ArticlesController extends Controller
 	 }
 
 	// No $key value is passed
-	$articles = Article::with('user')->published()->get();
+	$articles = Article::with('user')
+      ->published()
+      ->orderBy('title', 'desc')
+      ->get();
 	return view('articles.index', compact('articles','letters'));
   }
 

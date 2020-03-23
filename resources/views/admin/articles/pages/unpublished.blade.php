@@ -19,6 +19,7 @@
       <div class="card">
 
          <div class="card-header section_header p-2">
+            <i class="{{ Config::get('buttons.unpublished') }}"></i>
             Unpublished Articles
             <span class="float-right">
                <div class="btn-group">

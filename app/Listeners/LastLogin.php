@@ -21,10 +21,7 @@ class LastLogin
       // Update user when logging in
       $event->user->update(['last_login_date' => Carbon::now()]);
       $event->user->increment('login_count');
-      // activity()->log('User logged in');
-      activity()
-         // ->causedBy($event->user)
-         ->performedOn($event->user)
-         ->log('Login');
+      // Log login activity
+      activity('access')->causedBy($event->user)->performedOn($event->user)->log('Login');
    }
 }

@@ -12,6 +12,7 @@
 @endsection
 
 @section('content')
+   {{-- <example-component></example-component> --}}
    @include('homepage.greeting')
    @include('homepage.warning')
    @include('homepage.newUser')

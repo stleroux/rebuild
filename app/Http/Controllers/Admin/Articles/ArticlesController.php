@@ -194,6 +194,7 @@ class ArticlesController extends Controller
 		$alphas = DB::table('articles')
 			->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
 			->where('published_at','<', Carbon::Now())
+         ->where('deleted_at','=', NULL)
 			->orderBy('letter')
 			->get();
 

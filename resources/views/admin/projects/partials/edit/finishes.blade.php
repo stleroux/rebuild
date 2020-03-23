@@ -19,7 +19,6 @@
                   <form action="{{ route('projects.finish.store', $project->id) }}" method="post">
                      <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
                      
-                     
                      <div class="form-group pb-2 mb-0">
                         <select name="finish" id="finish" class="form-control form-control-sm">
                            <option value="">Select</option>

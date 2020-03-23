@@ -13,9 +13,10 @@
 
 @section('content')
 
-{!! Form::open(['method'=>'DELETE', 'route'=>['admin.articles.trashDestroy', $article->id]]) !!}
-   {{-- {{ csrf_field() }} --}}
-   {{-- <input type="hidden" name="_method" value="DELETE" /> --}}
+{{-- {!! Form::open(['method'=>'DELETE', 'route'=>['admin.articles.trashDestroy', $article->id]]) !!} --}}
+<form action="{{ route('admin.articles.trashDestroy', $article->id) }}" method="POST" >
+   @csrf
+   @method("DELETE")
 
    <div class="card">
       <div class="card-header section_header text-center p-2">
@@ -44,6 +45,7 @@
 
    </div>
 
-{{ Form::close() }}
+{{-- {{ Form::close() }} --}}
+</form>
 
 @endsection
