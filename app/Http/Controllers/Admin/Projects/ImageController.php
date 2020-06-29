@@ -101,12 +101,18 @@ class ImageController extends Controller
             $filename = time() . '.' . $image->getClientOriginalExtension();
             
             $image_location = public_path('_projects/' . $id . '/' . $filename);
+            $fs_image_location = public_path('_projects/' . $id . '/full_size/' . $filename);
             $thumb_location = public_path('_projects/' . $id . '/thumbs/' . $filename);
 
             if (!file_exists('_projects/' . $id)) {
                 mkdir('_projects/' . $id, 0777, true);
             }
             
+            // Check if full_size folder exists under the project's ID
+            if (!file_exists('_projects/' . $id . '/full_size/')) {
+               mkdir('_projects/' . $id . '/full_size/', 0777, true);
+            }
+
             // Check if Thumbs folder exists under the project's ID
             if (!file_exists('_projects/' . $id . '/thumbs/')) {
                mkdir('_projects/' . $id . '/thumbs/', 0777, true);
@@ -114,6 +120,7 @@ class ImageController extends Controller
 
             Img::make($image)->resize(800, 400)->save($image_location);
             Img::make($image)->resize(240, 160)->save($thumb_location);
+            Img::make($image)->save($fs_image_location);
         }
 
         $img = New Image();

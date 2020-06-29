@@ -35,10 +35,6 @@
          </div>
       </div>
 
-      {{-- <div class="card-body section_body p-2">
-         <p>{{ $article->title }}</p>
-      </div> --}}
-
       <div class="card-body section_body p-2">
          @include('admin.articles.forms.form', ['showFields'=>'show'])
       </div>

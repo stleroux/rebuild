@@ -11,28 +11,27 @@
 				</a>
 			@endif
 		@endif
-		
 
-
-
-		<a href="{{ route('invoices.downloadInvoice', $invoice->id) }}" class="btn btn-sm btn-outline-secondary d-print-none">
+{{-- 		<a href="{{ route('invoices.downloadPDFInvoice', $invoice->id) }}" class="btn btn-sm btn-outline-secondary d-print-none">
 			<i class="fa fa-list"></i>
-			Download PDF
-		</a>
-		
-		{{-- <a href="{{ asset('download/' . $invoice->id) }}">Download File</a> --}}
+			Download as PDF
+		</a> --}}
 
+      <a href="{{ route('invoices.PDF', $invoice->id) }}" class="btn btn-sm btn-outline-secondary d-print-none">
+         <i class="fa fa-list"></i>
+         Generate PDF
+      </a>
 
-
-
-		<button onClick="window.print()" class="btn btn-sm btn-outline-secondary d-print-none">
+		<a href="#" onClick="javascript:window.print()" class="btn btn-sm btn-outline-secondary d-print-none">
 			<i class="fa fa-print"></i>
 			Print this page
-		</button>
+		</a>
+
 		<a href="{{ route('invoicer.invoices') }}" class="btn btn-sm btn-primary d-print-none">
 			<i class="fa fa-list"></i>
 			Invoices List
 		</a>
+
 		<br /><br />
 	</div>
 

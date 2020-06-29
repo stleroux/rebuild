@@ -17,7 +17,7 @@
 		<li class="nav-item">
 			<a class="nav-link {{ (Request::is('invoicer/ledger') ? 'active' : '') }}" href="{{ route('invoicer.ledger') }}">
 				<i class="fas fa-list"></i>
-				All
+				All Invoices
 				<span class="badge badge-info text-right">{{ App\Models\Invoicer\Invoice::all()->count() }}</span>
 			</a>
 		</li>
@@ -42,6 +42,13 @@
 				<span class="badge badge-info text-right">{{ App\Models\Invoicer\Invoice::where('status', 'paid')->count() }}</span>
 			</a>
 		</li>
+      <li class="nav-item">
+         <a class="nav-link {{ (Request::is('invoicer/ledger/unpaid') ? 'active' : '') }}" href="{{ route('invoicer.ledger.unpaid') }}">
+            <i class="fas fa-ban"></i>
+            Un-Paid
+            <span class="badge badge-info text-right">{{ App\Models\Invoicer\Invoice::where('status', '!=', 'paid')->count() }}</span>
+         </a>
+      </li>
 	</ul>
 					
 
@@ -84,7 +91,7 @@
 					</thead>
 					<tfoot>
 						<tr class="bg-info">
-							<td colspan="3" class="text-right"><b>Totals This Page :&nbsp;</b></td>
+							<td colspan="{{ (Request::is('invoicer/ledger/unpaid') ? '2' : '3') }}" class="text-right"><b>Totals This Page :&nbsp;</b></td>
 							<td class="text-right">{{ number_format($invoices->sum('amount_charged'), 2, '.', ', ') }}$</td>
 							<td class="d-none d-md-table-cell text-right">{{ number_format($invoices->sum('hst'), 2, '.', ', ') }}$</td>
 							<td class="d-none d-lg-table-cell text-right">{{ number_format($invoices->sum('sub_total'), 2, '.', ', ') }}$</td>
@@ -94,7 +101,7 @@
 							<td class="text-right">{{ number_format($invoices->sum('total'), 2, '.', ', ') }}$</td>
 						</tr>
 						<tr class="bg-info">
-							<td colspan="3" class="text-right"><b>Overall Totals :&nbsp;</b></td>
+							<td colspan="{{ (Request::is('invoicer/ledger/unpaid') ? '2' : '3') }}" class="text-right"><b>Overall Totals :&nbsp;</b></td>
 							<td class="text-right">{{ number_format($totalAmountCharged, 2, '.', ', ') }}$</td>
 							<td class="d-none d-md-table-cell text-right">{{ number_format($totalHST, 2, '.', ', ') }}$</td>
 							<td class="d-none d-lg-table-cell text-right">{{ number_format($totalSubTotal, 2, '.', ', ') }}$</td>

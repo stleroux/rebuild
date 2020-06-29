@@ -1,28 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <title>Document</title>
+</head>
+<body>
+
 <table width="100%" cellspacing="0" cellpadding="0" border="0">
    <tr>
       <td colspan="6" width="50%"><h1>INVOICE</h1></td>
       <td colspan="6">
-{{--          <table>
-            <tr align="center">
-               <td colspan="3"><h3 style="margin-top: 0px;margin-bottom: 0px">{{ Setting('invoicer.companyName') }}</h3></td>
-            </tr>
-            <tr>
-               <td align="right" width="50%">{{ Setting('invoicer.telephone') }}&nbsp;</td>
-               <td>&nbsp;{{ Setting('invoicer.address_1') }}</td>
-            </tr>
-            <tr>
-               <td align="right">{{ Setting('invoicer.email') }}&nbsp;</td>
-               <td>&nbsp;{{ Setting('invoicer.address_2') }}</td>
-            </tr>
-            <tr>
-               <td align="right">WSIB N<sup>o</sup>: {{ Setting('invoicer.wsibNo') }}&nbsp;</td>
-               <td>&nbsp;{{ Setting('invoicer.city') }}, {{ Setting('invoicer.state') }}</td>
-            </tr>
-            <tr>
-               <td align="right">HST N<sup>o</sup>: {{ Setting('invoicer.hstNo') }}&nbsp;</td>
-               <td>&nbsp;{{ Setting('invoicer.zip') }}</td>
-            </tr>
-         </table> --}}
          <div class="col-sm-12">
             <div class="text-center" style="font-size: 16pt">
                {{ Setting('invoicer.companyName') }}
@@ -72,7 +59,9 @@
       <td colspan="12">&nbsp;</td>
    </tr>
    <tr>
-      <td colspan="12"><h3 style="margin-top: 0px;margin-bottom: 0px; background-color: #c0c0c0">Invoice Information</h3></td>
+      <th colspan="12">
+         <h3 style="margin-top: 0px;margin-bottom: 0px; background-color: #c0c0c0">Invoice Information</h3>
+      </th>
    </tr>
    <tr>
       <td colspan="6">
@@ -188,3 +177,6 @@
       </td>
    </tr>
 </table>
+
+</body>
+</html>

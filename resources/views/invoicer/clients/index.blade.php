@@ -20,6 +20,7 @@
 							<th>@sortablelink('company_name','Company Name')</th>
 							<th>@sortablelink('last_name','Contact Name')</th>
 							<th>@sortablelink('email','Contact Email')</th>
+                     <th>Invoices</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -30,6 +31,7 @@
 							<td>{{ $client->company_name }}</td>
 							<td>{{ $client->first_name }} {{ $client->last_name }}</td>
 							<td>{{ $client->email }}</td>
+                     <td>{{ $client->invoices->count() }}</td>
 							<td>
 								<div class="float-right">
 									@if(checkPerm('invoicer_client_show'))

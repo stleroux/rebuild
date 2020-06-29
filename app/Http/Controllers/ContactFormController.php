@@ -45,6 +45,8 @@ class ContactFormController extends Controller
          'subject' => 'required',
          'message' => 'required',
          // 'g-recaptcha-response' => new Captcha(),
+         'my_name' => 'honeypot', // https://github.com/msurguy/Honeypot/
+         'my_time' => 'required|honeytime:5'
       ]);
 
       // From : https://itnext.io/stopping-form-spam-in-laravel-76760bf84bd

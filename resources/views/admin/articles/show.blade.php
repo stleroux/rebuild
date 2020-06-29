@@ -22,7 +22,7 @@
          <div class="float-right">
             <div class="btn-group">
                @include('admin.articles.buttons.help', ['size'=>'xs', 'model'=>'article', 'bookmark'=>'articles'])
-               @include('admin.articles.buttons.back', ['size'=>'xs', 'model'=>'category'])
+               @include('admin.articles.buttons.back', ['size'=>'xs', 'model'=>'article'])
             </div>
          </div>
       </div>

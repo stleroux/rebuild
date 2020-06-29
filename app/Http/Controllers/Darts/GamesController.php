@@ -106,7 +106,8 @@ class GamesController extends Controller
    public function selectTeamsOrPlayers($game_id)
    {
       $game = Game::find($game_id);
-      return view('darts.games.selectTeamsOrPlayers', compact('game'));
+      $gameTypes = ['cricket','baseball','around'];
+      return view('darts.games.selectTeamsOrPlayers', compact('game','gameTypes'));
    }
 
 

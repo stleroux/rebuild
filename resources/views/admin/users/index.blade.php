@@ -37,6 +37,7 @@
 							<tr>
 								<th>ID</th>
 								<th>Username</th>
+                        <th>Status</th>
 								<th>Email</th>
 								<th>Permissions</th>
 								<th>Logins</th>
@@ -58,6 +59,13 @@
 											<small>(Super Admin)</small>
 										@endif
 									</td>
+                           <td>
+                              @if($user->approved)
+                                 <span class="badge badge-success">Active</span>
+                              @else
+                                 <span class="badge badge-danger">InActive</span>
+                              @endif
+                           </td>
 									<td>{{ $user->email }}</td>
 									<td>{{ $user->permissions->count() }}</td>
 									<td>{{ $user->login_count }}</td>

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
-use App\Profile;
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Notifications\AdminNewUserNotification;
+use App\Profile;
+use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
+
 
 class RegisterController extends Controller
 {
@@ -70,7 +72,16 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        $user->profile()->save(new Profile);
+        // getlist of administrators on the site
+        $administrators = User::where('id',2)->get();
+        //dd($administrators);
+
+        //
+        foreach ($administrators as $adminitrator){
+            $adminitrator->notify(new AdminNewUserNotification($user));
+        }
+
+        //$user->profile()->save(new Profile);
         return $user;
     }
 }

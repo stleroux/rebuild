@@ -18,9 +18,11 @@
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.4.0",
         "mavinoo/laravel-batch": "dev-master",
+        "msurguy/honeypot": "^1.1",
         "nesbot/carbon": "^1.39",
         "orangehill/iseed": "^2.6",
         "orchestra/parser": "^3.8",
+        "owen-it/laravel-auditing": "^10.0",
         "phpunit/phpunit": "^7.4",
         "spatie/laravel-activitylog": "3.9.1"
     },

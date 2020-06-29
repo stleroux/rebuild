@@ -17,14 +17,27 @@
 					@foreach($project->images as $image)
 					<div class="carousel-item {{ ($loop->first) ? 'active' : '' }} text-center">
 						
-						<a href="" data-toggle="modal" data-target="#imageModal{{ $image->id }}">
+                  @if(auth::check())
+                  <a href="/_projects/{{ $project->id }}/{{ $image->name }}" target="_blank">
+                     <img class="w-100" src="/_projects/{{ $project->id }}/thumbs/{{ $image->name }}" alt="{{ $image->name }}">
+                  </a>
+                  <a href="/_projects/{{ $project->id }}/full_size/{{ $image->name }}" target="_blank">
+                     View Full Size
+                  </a>
+                  @else
+                     <img class="w-100" src="/_projects/{{ $project->id }}/thumbs/{{ $image->name }}" alt="{{ $image->name }}">
+                  @endauth
+
+{{-- <a href="" data-toggle="modal" data-target="#imageModal{{ $image->id }}_XL" class="btn btn-sm btn-block btn-primary">View Larger</a> --}}
+
+						{{-- <a href="" data-toggle="modal" data-target="#imageModal{{ $image->id }}">
 							<img class="w-100" src="/_projects/{{ $project->id }}/thumbs/{{ $image->name }}" alt="{{ $image->name }}">
 						</a>
 						
-						<a href="" data-toggle="modal" data-target="#imageModal{{ $image->id }}_XL" class="btn btn-sm btn-block btn-primary">View Larger</a>
+						<a href="" data-toggle="modal" data-target="#imageModal{{ $image->id }}_XL" class="btn btn-sm btn-block btn-primary">View Larger</a> --}}
 						
 
-						<div class="modal fade" id="imageModal{{ $image->id }}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel">
+						{{-- <div class="modal fade" id="imageModal{{ $image->id }}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel">
 							<div class="modal-dialog modal-lg" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
@@ -41,9 +54,9 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> --}}
 
-						<div class="modal fade" id="imageModal{{ $image->id }}_XL" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel">
+						{{-- <div class="modal fade" id="imageModal{{ $image->id }}_XL" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel">
 							<div class="modal-dialog modal-xl" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
@@ -60,7 +73,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> --}}
 
 					</div>
 					@endforeach

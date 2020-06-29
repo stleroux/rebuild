@@ -24,6 +24,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     {{-- <link href="{{ asset('css/bootstrap_4/bootstrap.css') }}" rel="stylesheet"> --}}
     <link href="{{ asset('css/invoicer.css') }}" rel="stylesheet">
+    @yield('stylesheets')
 </head>
 
 <body>

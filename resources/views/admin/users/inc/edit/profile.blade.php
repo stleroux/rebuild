@@ -44,6 +44,13 @@
                               <input type="text" class="form-control form-control-sm" value="{{ $user->permissions->count() }}" disabled>
                            </div>
                         </div>
+                        <div class="col-md-2">
+                           <div class="form-group">
+                              <label for="approved">Approved</label>
+                              {{-- <i class="far fa-question-circle float-right" data-toggle="tooltip" data-placement="top" title=""></i> --}}
+                              {{ Form::select('approved', ['No','Yes'], $user->approved, ['class'=>'form-control form-control-sm']) }}
+                           </div>
+                        </div>
                         {{-- <div class="col-md-2">
                            <div class="form-group">
                               <label for="status">Invoicer Client</label>

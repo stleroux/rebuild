@@ -21,17 +21,14 @@ Route::get('darts/games/{id}/edit',                      'Darts\GamesController@
 Route::put('darts/games/{id}',                           'Darts\GamesController@update')                             ->name('darts.games.update');
 Route::delete('darts/games/{id}',                        'Darts\GamesController@destroy')                            ->name('darts.games.destroy');
 
+
+
+
 Route::get('darts/01/teams/{id}',                        'Darts\ZeroOne\TeamsController@index')                      ->name('darts.01.teams.index');
 Route::post('darts/01/teams/store',                      'Darts\ZeroOne\TeamsController@store')                      ->name('darts.01.teams.store');
 
 Route::get('darts/01/players/{id}',                      'Darts\ZeroOne\PlayersController@index')                    ->name('darts.01.players.index');
 Route::post('darts/01/players/store',                    'Darts\ZeroOne\PlayersController@store')                    ->name('darts.01.players.store');
-
-
-
-
-
-
 
 
 
@@ -43,3 +40,13 @@ Route::get('darts/cricket/players/{id}',          'Darts\Cricket\PlayersControll
 Route::get('darts/cricket/players/completed/{id}','Darts\Cricket\PlayersController@completed')     ->name('darts.cricket.players.completed');
 Route::post('darts/cricket/players/store',        'Darts\Cricket\PlayersController@store')         ->name('darts.cricket.players.store');
 
+
+
+Route::get('darts/baseball/players/{id}',          'Darts\Baseball\PlayersController@index')         ->name('darts.baseball.players.index');
+Route::get('darts/baseball/players/completed/{id}','Darts\Baseball\PlayersController@completed')     ->name('darts.baseball.players.completed');
+// Route::post('darts/baseball/players/store',        'Darts\Baseball\PlayersController@store')         ->name('darts.baseball.players.store');
+
+
+Route::get('darts/around/players/{id}',          'Darts\Around\PlayersController@index')         ->name('darts.around.players.index');
+Route::get('darts/around/players/completed/{id}','Darts\Around\PlayersController@completed')     ->name('darts.around.players.completed');
+//Route::post('darts/around/players/store',        'Darts\Around\PlayersController@store')         ->name('darts.around.players.store');

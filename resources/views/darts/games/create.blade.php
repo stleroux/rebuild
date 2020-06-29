@@ -23,10 +23,18 @@
                <div class="card-header card_header p-2">
                   Select Game Type
                </div>
-               <div class="card-body section_body p-2">
+               <div class="card-body card_body pb-1">
                   <div class="col-sm-3">
                      <div class="form-group {{ $errors->has('type') ? 'has-error' : '' }}">
-                        {{ Form::select('type', ['301'=>'301', '501'=>'501', '701'=>'701', '1001'=>'1001', 'cricket'=>'Cricket'], null, ['placeholder'=>'Pick one...', 'class'=>'form-control form-control-sm']) }}
+                        {{ Form::select('type', [
+                                                   '301'=>'301',
+                                                   '501'=>'501',
+                                                   '701'=>'701',
+                                                   '1001'=>'1001',
+                                                   'cricket'=>'Cricket',
+                                                   'baseball'=>'Baseball',
+                                                   'around'=>'Around the World'
+                                                ], null, ['placeholder'=>'Pick one...', 'class'=>'form-control form-control-sm']) }}
                         <div class="pl-1 bg-danger">{{ $errors->first('type') }}</div>
                      </div>
                   </div>

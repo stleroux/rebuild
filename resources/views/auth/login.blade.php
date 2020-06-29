@@ -22,6 +22,12 @@
 					<form method="POST" action="{{ route('login') }}">
 						@csrf
 
+@if(session()->has('message'))
+   <p class="alert alert-info">
+      {{ session()->get('message') }}
+   </p>
+@endif
+
 						<div class="form-group row">
 							<label for="login" class="col-sm-4 col-form-label col-form-label-sm text-md-right">
 								{{ __('Username or Email') }}

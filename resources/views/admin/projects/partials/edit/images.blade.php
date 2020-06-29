@@ -66,7 +66,7 @@
                            <td>{{$key+1}}</td>
                            <td>{{ $image->name }}</td>
                            <td>
-                              <form action="{{ route('projects.image.delete', $image->id) }}" method="POST" class="float-right">
+                              <form action="{{ route('projects.image.delete', $image->id) }}" method="POST" class="float-right m-0 p-0">
                                  {{csrf_field()}}
                                  {{ method_field('DELETE') }}
                                  <div class="btn-group">

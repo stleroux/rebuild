@@ -31,6 +31,13 @@
 				<span class="badge badge-info text-right">{{ App\Models\Invoicer\Invoice::where('status', 'paid')->count() }}</span>
 			</a>
 		</li>
+      <li class="nav-item">
+         <a class="nav-link {{ (Request::is('invoicer/invoices/unpaid') ? 'active' : '') }}" href="{{ route('invoices.unpaid') }}">
+            <i class="fas fa-ban"></i>
+            Un-Paid
+            <span class="badge badge-info text-right">{{ App\Models\Invoicer\Invoice::where('status', '!=', 'paid')->count() }}</span>
+         </a>
+      </li>
 	</ul>
 
 	<div class="card">

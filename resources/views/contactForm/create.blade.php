@@ -21,6 +21,10 @@
    
             @csrf
             
+            {{-- https://github.com/msurguy/Honeypot/ --}}
+            {!! Honeypot::generate('my_name', 'my_time') !!}
+            {{-- https://github.com/msurguy/Honeypot/ --}}
+
             <div class="form-group py-0">
                {{ Form::label('subject', 'Subject', ['class'=>'required']) }}
                <input id="subject" name="subject" class="form-control form-control-sm" autofocus="autofocus" value="{{ old('subject') }}">

@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers\Admin\Users;
 
+use App\Http\Controllers\Controller;
+use App\Models\Permission;
+use App\Models\User;
+use App\Notifications\UserApprovedNotification;
 use Artisan;
 use DB;
 use File;
 use Hash;
+use Illuminate\Http\Request;
 use Image;
 use Route;
 use Session;
-use App\Http\Controllers\Controller; 
-use App\Models\Permission;
-use App\Models\User;
-use Illuminate\Http\Request;
 
 
 class UsersController extends Controller
@@ -479,6 +480,7 @@ class UsersController extends Controller
 			}
 
 		$user = User::findOrFail($id);
+      $approved = $user->approved;
 			// dd($user);
 
 		$this->validate($request, [
@@ -506,6 +508,7 @@ class UsersController extends Controller
 			$user->postal_code = $request->input('postal_code');
 			$user->notes = $request->input('notes');
 			$user->dart_doubleOut = $request->input('dart_doubleOut');
+         $user->approved = $request->input('approved');
 			// $user->action_buttons = $request->input('action_buttons');
 			// $user->alert_fade_time = $request->input('alert_fade_time');
 			// $user->author_format = $request->input('author_format');
@@ -533,6 +536,11 @@ class UsersController extends Controller
 			}
 
 		$user->save();
+
+      // email user when the account is approved
+      if($approved == 0 && $user->approved == 1) {
+         $user->notify(new UserApprovedNotification());
+      }
 
 		$user->permissions()->sync($request->input('permission'));
 

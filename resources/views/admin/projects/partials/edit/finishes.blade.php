@@ -54,7 +54,7 @@
                            <td>{{ $key+1 }}</td>
                            <td>{{ $value->name }} - {{ $value->sheen }}</td>
                            <td>
-                              <form action="{{ route('projects.finish.delete', $value->id) }}" method="POST" class="float-right">
+                              <form action="{{ route('projects.finish.delete', $value->id) }}" method="POST" class="float-right m-0 p-0">
                                  {{csrf_field()}}
                                  {{ method_field('DELETE') }}
                                  <input type="hidden" value="{{ $project->id }}" name="project_id">

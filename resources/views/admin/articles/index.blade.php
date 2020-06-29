@@ -78,6 +78,7 @@
                         <td>
                            <div class="float-right">
                               <div class="btn-group">
+                                 @include('admin.articles.buttons.audits', ['size'=>'xs'])
                                  @include('admin.articles.buttons.publish', ['size'=>'xs'])
                                  @include('admin.articles.buttons.edit', ['size'=>'xs'])
                                  @include('admin.articles.buttons.trash', ['size'=>'xs'])

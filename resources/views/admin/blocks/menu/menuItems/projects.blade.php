@@ -1,4 +1,4 @@
-@if(checkPerm('projects_browse'))
+@if(checkPerm('project_browse'))
    <a href="{{ route('admin.projects.index') }}"
       class="list-group-item list-group-item-action p-1 {{
       (

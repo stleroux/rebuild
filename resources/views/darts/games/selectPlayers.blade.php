@@ -13,17 +13,14 @@
 @section('content')
 
    {!! Form::open(array('route'=>'darts.games.storePlayers')) !!}
-      {{-- {{ Form::token() }} --}}
-      {{-- Game ID : --}}
       {{ Form::hidden('game_id', $game->id) }}
-      {{-- No Of Players : --}}
       {{ Form::hidden('players', $game->ind_players) }}
 
       <div class="card mb-2">
          
          <div class="card-header section_header p-2">Select The Player(s) For This Game</div>
          
-         <div class="card-body card_body p-2">
+         <div class="card-body section_body p-2">
             <div class="row">
                <div class="col-md-6">
                   <div class="card mb-2">

@@ -254,7 +254,10 @@ class ArticlesController extends Controller
          $previous = "";
       }
 
-		return view('admin.articles.show', compact('article','next','previous'));
+      $audits = Article::find($id)->audits;
+      // dd($audits);
+
+		return view('admin.articles.show', compact('article','next','previous','audits'));
 	}
 
 

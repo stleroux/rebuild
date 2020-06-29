@@ -190,11 +190,11 @@ div.sticky {
   /* Adding the above code also adds it to the author modal window causing the modal to look weird */
   /*background-repeat: no-repeat;*/
   /*background-size: 100% 100%;*/
-  color: yellow;
+  color: black;
 }
 
 .table-hover tbody tr:hover a, .table-hover tbody tr:hover td a:hover {
-  color: yellow;
+  color: black;
 }
 
 .table thead {

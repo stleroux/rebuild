@@ -7,6 +7,7 @@ Route::prefix('invoicer')->namespace('Invoicer')->name('invoicer.')->group(funct
 
    Route::get('ledger',                               'LedgerController@index')                 ->name('ledger');
    Route::get('ledger/paid',                          'LedgerController@paid')                  ->name('ledger.paid');
+   Route::get('ledger/unpaid',                        'LedgerController@unpaid')                ->name('ledger.unpaid');
    Route::get('ledger/invoiced',                      'LedgerController@invoiced')              ->name('ledger.invoiced');
    Route::get('ledger/logged',                        'LedgerController@logged')                ->name('ledger.logged');
 });
@@ -14,12 +15,14 @@ Route::prefix('invoicer')->namespace('Invoicer')->name('invoicer.')->group(funct
 
 
 Route::prefix('invoicer')->namespace('Invoicer')->name('invoices.')->group(function() {
-   Route::get('invoices/{inv_id}/downloadInvoice',    'InvoicesController@downloadInvoice')     ->name('downloadInvoice');
+   // Route::get('invoices/{inv_id}/downloadPDFInvoice', 'InvoicesController@downloadPDFInvoice')  ->name('downloadPDFInvoice');
+   Route::get('invoices/{inv_id}/PDF',                'InvoicesController@PDF')                 ->name('PDF');
    Route::get('invoices/{inv_id}/status_invoiced',    'InvoicesController@status_invoiced')     ->name('status_invoiced');
    Route::get('invoices/{inv_id}/status_paid',        'InvoicesController@status_paid')         ->name('status_paid');
    Route::get('invoices/status_invoiced_all',         'InvoicesController@status_invoiced_all') ->name('status_invoiced_all');
    Route::get('invoices/status_paid_all',             'InvoicesController@status_paid_all')     ->name('status_paid_all');
    Route::get('invoices/paid',                        'InvoicesController@paid')                ->name('paid');
+   Route::get('invoices/unpaid',                      'InvoicesController@unpaid')              ->name('unpaid');
    Route::get('invoices/invoiced',                    'InvoicesController@invoiced')            ->name('invoiced');
    Route::get('invoices/logged',                      'InvoicesController@logged')              ->name('logged');
 });

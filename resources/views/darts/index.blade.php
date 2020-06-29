@@ -1,4 +1,5 @@
 @extends ('layouts.master')
+{{-- @extends ('layouts.backend') --}}
 
 @section ('stylesheets')
 @endsection
@@ -11,6 +12,7 @@
 @endsection
 
 @section('content')
+   {{-- @include('darts.blocks.topbar') --}}
 
    <div class="card mb-2">
 

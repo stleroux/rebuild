@@ -101,13 +101,31 @@ class InvoicesController extends Controller
 # ╚═════╝  ╚═════╝  ╚══╝╚══╝ ╚═╝  ╚═══╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═════╝     ╚═╝     ╚═════╝ ╚═╝     
 ##################################################################################################################
 
-	public function downloadInvoice($id)
-	{
-		$invoice = Invoice::find($id);
-		$pdf = PDF::loadView('invoicer.invoices.invoicedPDF', compact('invoice'));
+	// public function downloadPDFInvoice($id)
+	// {
+	// 	$invoice = Invoice::find($id);
+	// 	$pdf = PDF::loadView('invoicer.invoices.invoicedPDF', compact('invoice'));
 		
-		return $pdf->download('Invoice '.$id.'.pdf');
-	}
+	// 	return $pdf->download('Invoice '.$id.'.pdf');
+	// }
+
+
+##################################################################################################################
+# ██████╗  ██████╗ ██╗    ██╗███╗   ██╗██╗      ██████╗  █████╗ ██████╗     ██████╗ ██████╗ ███████╗
+# ██╔══██╗██╔═══██╗██║    ██║████╗  ██║██║     ██╔═══██╗██╔══██╗██╔══██╗    ██╔══██╗██╔══██╗██╔════╝
+# ██║  ██║██║   ██║██║ █╗ ██║██╔██╗ ██║██║     ██║   ██║███████║██║  ██║    ██████╔╝██║  ██║█████╗  
+# ██║  ██║██║   ██║██║███╗██║██║╚██╗██║██║     ██║   ██║██╔══██║██║  ██║    ██╔═══╝ ██║  ██║██╔══╝  
+# ██████╔╝╚██████╔╝╚███╔███╔╝██║ ╚████║███████╗╚██████╔╝██║  ██║██████╔╝    ██║     ██████╔╝██║     
+# ╚═════╝  ╚═════╝  ╚══╝╚══╝ ╚═╝  ╚═══╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═════╝     ╚═╝     ╚═════╝ ╚═╝     
+##################################################################################################################
+
+   public function PDF($id)
+   {
+      $invoice = Invoice::find($id);
+      $pdf = PDF::loadView('invoicer.invoices.invoicedPDF', compact('invoice'));
+      
+      return $pdf->stream('Invoice '.$id.'.pdf');
+   }
 
 
 ##################################################################################################################
@@ -149,7 +167,7 @@ class InvoicesController extends Controller
 		// Check if user has required permission
 		if(!checkPerm('invoicer_invoice_index')) { abort(401, 'Unauthorized Access'); }
 
-		$invoices = Invoice::sortable()->orderBy('id','desc')->paginate(Config::get('settings.rowsPerPage'));
+		$invoices = Invoice::sortable()->with('user')->orderBy('id','desc')->paginate(Config::get('settings.rowsPerPage'));
 
 		return view('invoicer.invoices.index', compact('invoices'));
 	}
@@ -219,6 +237,28 @@ class InvoicesController extends Controller
 
 		return view('invoicer.invoices.index', compact('invoices'));
 	}
+
+
+##################################################################################################################
+# ██╗   ██╗ ███╗   ██╗  ██████╗  █████╗ ██╗██████╗ 
+# ██╗   ██╗ ████╗  ██║ ██╔══██╗██╔══██╗██║██╔══██╗
+# ██╗   ██╗ ██╔██╗ ██║ ██████╔╝███████║██║██║  ██║
+# ██╗   ██╗ ██║╚██╗██║ ██╔═══╝ ██╔══██║██║██║  ██║
+# ╚██████╔╝ ██║ ╚████║ ██║     ██║  ██║██║██████╔╝
+#  ╚═════╝  ╚═╝  ╚═══╝ ╚═╝     ╚═╝  ╚═╝╚═╝╚═════╝ 
+##################################################################################################################
+   public function unpaid()
+   {
+      // Check if user has required permission
+     if(!checkPerm('invoicer_invoice_index')) { abort(401, 'Unauthorized Access'); }
+
+      $invoices = Invoice::sortable()
+         ->where('status','!=','paid')
+         ->orderBy('id','desc')
+         ->paginate(Config::get('settings.rowsPerPage'));
+
+      return view('invoicer.invoices.index', compact('invoices'));
+   }
 
 
 ##################################################################################################################

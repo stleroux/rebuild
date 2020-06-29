@@ -15,6 +15,7 @@
 @section('content')
 
    <div class="card mb-3">
+
       <!--CARD HEADER-->
       <div class="card-header section_header p-2">
          <i class="{{ Config::get('buttons.articles') }}"></i>
@@ -37,14 +38,17 @@
       <!--CARD BODY-->
       <div class="card-body section_body p-2">
          @if($articles->count() > 0)
-            {{-- @include('common.alphabet', ['model'=>'article', 'page'=>'index']) --}}
             <table id="datatable" class="table table-hover table-sm">
                <thead>
                   <tr>
                      <th>ID</th>
                      <th>Name</th>
                      <th>Category</th>
-                     {{-- Add more columns here --}}
+                     <th>Views</th>
+                     <!-- Add columns below for search purposes only -->
+                     <th class="d-none"></th>
+                     <th class="d-none"></th>
+                     <!-- Add columns above for search purposes only -->
                      <th>Author</th>
                      <th>Created</th>
                      <th data-orderable="false"></th>
@@ -56,7 +60,11 @@
                         <td>{{ $article->id }}</td>
                         <td><a href="{{ route('articles.show', $article->id) }}">{{ $article->title }}</a></td>
                         <td>{{ $article->category }}</td>
-                        {{-- Add more columns here --}}
+                        <td>{{ $article->views }}</td>
+                           <!-- Add columns below for search purposes only -->
+                           <td class="d-none">{{ $article->description_eng }}</td>
+                           <td class="d-none">{{ $article->description_fre }}</td>
+                           <!-- Add columns above for search purposes only -->
                         <td>@include('common.authorFormat', ['model'=>$article, 'field'=>'user'])</td>
                         <td data-order="{{ $article->created_at}}">{{ $article->created_at }}</td>
                         <td>

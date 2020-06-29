@@ -8,22 +8,24 @@ use App\Models\User;
 use Auth;
 use Carbon\Carbon;
 use ChristianKuri\LaravelFavorite\Traits\Favoriteable;
-use Spatie\Activitylog\Traits\LogsActivity;
+use OwenIt\Auditing\Contracts\Auditable;
+// use Spatie\Activitylog\Traits\LogsActivity;
 
-class Article extends Model
+class Article extends Model implements Auditable
 {
    use SoftDeletes;
    use Favoriteable;
-   use LogsActivity;
+   use \OwenIt\Auditing\Auditable;
+   // use LogsActivity;
 
    protected $guarded = [];
 
    protected $dates = ['published_at'];
 
-   protected static $logAttributes = ['*'];
-   protected static $logName = 'article';
+   // protected static $logAttributes = ['*'];
+   // protected static $logName = 'article';
    //events will get logged automatically
-   protected static $recordEvents = ['created','updated','deleted'];
+   // protected static $recordEvents = ['created','updated','deleted'];
 
    // protected $revisionCreationsEnabled = true;
 

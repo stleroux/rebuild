@@ -6,13 +6,15 @@ use App\Http\Controllers\Controller; // Required for validation // use Illuminat
 use App\Models\Articles\Article;
 use App\Models\Category;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Auth;
 use Carbon\Carbon;
 use DB;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Route;
 use Session;
+use Spatie\Activitylog\Models\Activity;
+
 
 class ExtraViewsController extends ArticlesController
 {
@@ -382,5 +384,45 @@ class ExtraViewsController extends ArticlesController
 		return view('admin.articles.pages.unpublished', compact('articles','letters'));
 	}
 
+
+   public function audits($id)
+   {
+      // Check if user has required permission
+      //if($this->enablePermissions) {
+      //   if(!checkPerm('article_edit')) { abort(401, 'Unauthorized Access'); }
+      //}
+
+      // Set the session to the current page route
+      Session::put('fromPage', url()->full());
+
+      //$alphas = range('A', 'Z');
+      // $alphas = DB::table('articles')
+      //    ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
+      //    ->where('published_at','<', Carbon::Now())
+      //    ->where('deleted_at','=', NULL)
+      //    ->orderBy('letter')
+      //    ->get();
+
+      // $letters = [];
+      // foreach($alphas as $alpha) {
+      //   $letters[] = $alpha->letter;
+      // }
+
+      // If $key value is passed
+      // if ($key) {
+      //    $articles = Article::with('user')->published()
+      //       ->where('title', 'like', $key . '%')
+      //       ->orderBy('title', 'asc')
+      //       ->get();
+      //    return view('admin.articles.published', compact('articles','letters'));
+      // }
+
+      // No $key value is passed
+      // $articles = Article::with('user')->published()->get();
+      // $audits = Activity::where('subject_type', 'App\Models\Articles\Article')->where('subject_id', $id)->get();
+      $audits = Article::find($id)->audits;
+      // dd($audits);
+      return view('admin.articles.pages.audits', compact('audits'));
+   }
 
 }

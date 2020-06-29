@@ -40,7 +40,7 @@ class LedgerController extends Controller
 		// Check if user has required permission
 	  if(!checkPerm('invoicer_ledger')) { abort(401, 'Unauthorized Access'); }
 
-		$invoices = Invoice::sortable()->orderBy('id','desc')->paginate(Config::get('settings.rowsPerPage'));
+		$invoices = Invoice::sortable()->with('user')->orderBy('id','desc')->paginate(Config::get('settings.rowsPerPage'));
 		$totalAmountCharged = DB::table('invoicer__invoices')->sum('amount_charged');
 		$totalHST = DB::table('invoicer__invoices')->sum('hst');
 		$totalSubTotal = DB::table('invoicer__invoices')->sum('sub_total');
@@ -50,6 +50,7 @@ class LedgerController extends Controller
 		$totalTotal = DB::table('invoicer__invoices')->sum('total');
 
 		return view('invoicer.ledger.index', compact('invoices','totalHST','totalAmountCharged','totalSubTotal', 'totalWSIB', 'totalIncomeTaxes','totalTotalDeductions', 'totalTotal'));
+      // return view('invoicer.ledger.index', compact('invoices'));
 	}
 
 
@@ -129,6 +130,32 @@ class LedgerController extends Controller
 
 		return view('invoicer.ledger.index', compact('invoices','totalHST','totalAmountCharged','totalSubTotal', 'totalWSIB', 'totalIncomeTaxes','totalTotalDeductions', 'totalTotal'));
 	}
+
+
+##################################################################################################################
+# ██╗   ██╗ ███╗   ██╗  ██████╗  █████╗ ██╗██████╗ 
+# ██╗   ██╗ ████╗  ██║ ██╔══██╗██╔══██╗██║██╔══██╗
+# ██╗   ██╗ ██╔██╗ ██║ ██████╔╝███████║██║██║  ██║
+# ██╗   ██╗ ██║╚██╗██║ ██╔═══╝ ██╔══██║██║██║  ██║
+# ╚██████╔╝ ██║ ╚████║ ██║     ██║  ██║██║██████╔╝
+#  ╚═════╝  ╚═╝  ╚═══╝ ╚═╝     ╚═╝  ╚═╝╚═╝╚═════╝ 
+##################################################################################################################
+   public function unpaid()
+   {
+      // Check if user has required permission
+     if(!checkPerm('invoicer_ledger')) { abort(401, 'Unauthorized Access'); }
+
+      $invoices = Invoice::sortable()->where('status','!=','paid')->orderBy('id','desc')->paginate(Config::get('settings.rowsPerPage'));
+      $totalAmountCharged = DB::table('invoicer__invoices')->where('status','=','paid')->sum('amount_charged');
+      $totalHST = DB::table('invoicer__invoices')->where('status','=','paid')->sum('hst');
+      $totalSubTotal = DB::table('invoicer__invoices')->where('status','=','paid')->sum('sub_total');
+      $totalWSIB = DB::table('invoicer__invoices')->where('status','=','paid')->sum('wsib');
+      $totalIncomeTaxes = DB::table('invoicer__invoices')->where('status','=','paid')->sum('income_taxes');
+      $totalTotalDeductions = DB::table('invoicer__invoices')->where('status','=','paid')->sum('total_deductions');
+      $totalTotal = DB::table('invoicer__invoices')->where('status','=','paid')->sum('total');
+
+      return view('invoicer.ledger.index', compact('invoices','totalHST','totalAmountCharged','totalSubTotal', 'totalWSIB', 'totalIncomeTaxes','totalTotalDeductions', 'totalTotal'));
+   }
 
 
 }

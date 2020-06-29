@@ -1,0 +1,54 @@
+<div class="card">
+   <div class="card-header card_header p-2">
+      BASEBALL - 
+      @if($players->count() > 1) MULTI @else INDIVIDUAL @endif 
+      PLAYER GAME
+      <span class="float-right">Game ID : {{ $game->id }}</span>
+   </div>
+
+   <div class="card-body">
+      <div class="row text-center border">
+         <div class="col">
+            Innings
+         </div>
+      </div>
+      <div class="row text-center" style="font-size: 20px">
+         <div class="col-2 border border p-1">Player Name</div>
+         <div class="col border">1</div>
+         <div class="col border">2</div>
+         <div class="col border">3</div>
+         <div class="col border">4</div>
+         <div class="col border">5</div>
+         <div class="col border">6</div>
+         <div class="col border">7</div>
+         <div class="col border">8</div>
+         <div class="col border">9</div>
+         <div class="col border">Total</div>
+      </div>
+         <form action="{{ route('darts.baseball.players.store') }}" method="POST">
+         @csrf
+
+         @foreach($players as $p)
+         <div class="row p-1 border">
+            <div class="col-2 p-1 border" style="font-size: 20pt">{{ $players->get($loop->index)->first_name }}</div>
+            @foreach($innings as $inning)
+               {{-- <div class="row"> --}}
+                  <div class="col form-group_{{$p->id}} input-group p-1 border">
+                     <select class="custom-select prc" id="" name="player_{{$p->id}}[]">
+                        <option class="" value="0">0</option>
+                        @foreach($scores as $score)
+                           <option class="" value="{{ $score }}">{{ $score }}</option>
+                        @endforeach
+                     </select>
+                  </div>
+               {{-- </div> --}}
+            @endforeach
+            <div class="col text-center" id="result_{{$p->id}}" style="font-size: 24pt"></div>
+         </div>
+         @endforeach
+            <button type="submit" class="btn btn-secondary">Save</button>
+         </form>
+   </div>
+</div>
+
+<br /><br /><br /><br />
